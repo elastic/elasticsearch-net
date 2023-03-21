@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,100 +25,70 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class DynamicProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_phrases")]
 	public bool? IndexPhrases { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_prefixes")]
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
-
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public Elastic.Clients.Elasticsearch.FieldValue? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
-
 	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
-
 	[JsonInclude, JsonPropertyName("precision_step")]
 	public int? PrecisionStep { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
-
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -128,74 +100,43 @@ public sealed partial class DynamicProperty : IProperty
 public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableDescriptor<DynamicPropertyDescriptor<TDocument>>, IBuildableDescriptor<DynamicProperty>
 {
 	internal DynamicPropertyDescriptor(Action<DynamicPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DynamicPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private bool? IndexPhrasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-
 	private int? PositionIncrementGapValue { get; set; }
-
 	private int? PrecisionStepValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public DynamicPropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -697,74 +638,43 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<DynamicPropertyDescriptor>, IBuildableDescriptor<DynamicProperty>
 {
 	internal DynamicPropertyDescriptor(Action<DynamicPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public DynamicPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private bool? IndexPhrasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-
 	private int? PositionIncrementGapValue { get; set; }
-
 	private int? PrecisionStepValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public DynamicPropertyDescriptor Analyzer(string? analyzer)

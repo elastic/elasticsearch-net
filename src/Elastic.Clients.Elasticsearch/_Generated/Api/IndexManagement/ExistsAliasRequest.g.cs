@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,19 +27,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class ExistsAliasRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
@@ -53,17 +52,17 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
@@ -71,6 +70,7 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDescriptor<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasRequestParameters>
 {
 	internal ExistsAliasRequestDescriptor(Action<ExistsAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
@@ -84,12 +84,16 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+
 	public ExistsAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names name)
 	{
 		RouteValues.Required("name", name);
@@ -110,6 +114,7 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<ExistsAliasRequestDescriptor, ExistsAliasRequestParameters>
 {
 	internal ExistsAliasRequestDescriptor(Action<ExistsAliasRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
@@ -123,12 +128,16 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsAliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
+
 	public ExistsAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
 	{
 		RouteValues.Required("name", name);

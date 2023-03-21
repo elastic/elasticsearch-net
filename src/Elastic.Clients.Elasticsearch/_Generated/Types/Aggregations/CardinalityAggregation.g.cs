@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class CardinalityAggregationConverter : JsonConverter<CardinalityAggregation>
 {
 	public override CardinalityAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -191,46 +193,35 @@ public sealed partial class CardinalityAggregation : SearchAggregation
 {
 	public CardinalityAggregation(string name, Field field) : this(name) => Field = field;
 	public CardinalityAggregation(string name) => Name = name;
+
 	internal CardinalityAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public int? PrecisionThreshold { get; set; }
-
 	public bool? Rehash { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class CardinalityAggregationDescriptor<TDocument> : SerializableDescriptor<CardinalityAggregationDescriptor<TDocument>>
 {
 	internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CardinalityAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private int? PrecisionThresholdValue { get; set; }
-
 	private bool? RehashValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
@@ -336,22 +327,17 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 public sealed partial class CardinalityAggregationDescriptor : SerializableDescriptor<CardinalityAggregationDescriptor>
 {
 	internal CardinalityAggregationDescriptor(Action<CardinalityAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public CardinalityAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHintValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private int? PrecisionThresholdValue { get; set; }
-
 	private bool? RehashValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)

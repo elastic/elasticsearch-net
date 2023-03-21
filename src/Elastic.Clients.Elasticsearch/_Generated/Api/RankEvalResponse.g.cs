@@ -15,22 +15,22 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class RankEvalResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
-
 	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
-
 	[JsonInclude, JsonPropertyName("metric_score")]
 	public double MetricScore { get; init; }
 }

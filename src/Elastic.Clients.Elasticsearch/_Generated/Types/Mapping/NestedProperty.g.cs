@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class NestedProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("include_in_parent")]
 	public bool? IncludeInParent { get; set; }
-
 	[JsonInclude, JsonPropertyName("include_in_root")]
 	public bool? IncludeInRoot { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -68,30 +60,21 @@ public sealed partial class NestedProperty : IProperty
 public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDescriptor<NestedPropertyDescriptor<TDocument>>, IBuildableDescriptor<NestedProperty>
 {
 	internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public NestedPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IncludeInParentValue { get; set; }
-
 	private bool? IncludeInRootValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public NestedPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -281,30 +264,21 @@ public sealed partial class NestedPropertyDescriptor<TDocument> : SerializableDe
 public sealed partial class NestedPropertyDescriptor : SerializableDescriptor<NestedPropertyDescriptor>, IBuildableDescriptor<NestedProperty>
 {
 	internal NestedPropertyDescriptor(Action<NestedPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public NestedPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IncludeInParentValue { get; set; }
-
 	private bool? IncludeInRootValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public NestedPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)

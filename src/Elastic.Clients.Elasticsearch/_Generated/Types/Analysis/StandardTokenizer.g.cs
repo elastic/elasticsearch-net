@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class StandardTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("max_token_length")]
@@ -33,6 +35,7 @@ public sealed partial class StandardTokenizer : ITokenizer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "standard";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class StandardTokenizer : ITokenizer
 public sealed partial class StandardTokenizerDescriptor : SerializableDescriptor<StandardTokenizerDescriptor>, IBuildableDescriptor<StandardTokenizer>
 {
 	internal StandardTokenizerDescriptor(Action<StandardTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public StandardTokenizerDescriptor() : base()
 	{
 	}
 
 	private int? MaxTokenLengthValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public StandardTokenizerDescriptor MaxTokenLength(int? maxTokenLength)

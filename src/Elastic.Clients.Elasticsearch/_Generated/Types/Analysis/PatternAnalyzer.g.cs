@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PatternAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("flags")]
 	public string? Flags { get; set; }
-
 	[JsonInclude, JsonPropertyName("lowercase")]
 	public bool? Lowercase { get; set; }
-
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
@@ -43,6 +42,7 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -50,18 +50,15 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<PatternAnalyzerDescriptor>, IBuildableDescriptor<PatternAnalyzer>
 {
 	internal PatternAnalyzerDescriptor(Action<PatternAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public PatternAnalyzerDescriptor() : base()
 	{
 	}
 
 	private string? FlagsValue { get; set; }
-
 	private bool? LowercaseValue { get; set; }
-
 	private string PatternValue { get; set; }
-
 	private ICollection<string>? StopwordsValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PatternAnalyzerDescriptor Flags(string? flags)

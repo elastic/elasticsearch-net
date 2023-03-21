@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class DeleteByQueryRethrottleRequestParameters : RequestParameters
 {
 	[JsonIgnore]
@@ -40,8 +42,11 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQueryRethrottle;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
@@ -49,6 +54,7 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDescriptor<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleRequestParameters>
 {
 	internal DeleteByQueryRethrottleRequestDescriptor(Action<DeleteByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
+
 	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId task_id) : base(r => r.Required("task_id", task_id))
 	{
 	}
@@ -58,9 +64,13 @@ public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQueryRethrottle;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
+
 	public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId task_id)
 	{
 		RouteValues.Required("task_id", task_id);

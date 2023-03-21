@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class PutIndexTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
@@ -40,29 +42,25 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
 	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
-
 	[JsonInclude, JsonPropertyName("composed_of")]
 	public ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOf { get; set; }
-
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
-
 	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
-
 	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 }
@@ -70,6 +68,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateRequestParameters>
 {
 	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -79,9 +78,13 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
+
 	public PutIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);
@@ -89,25 +92,15 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-
 	private IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
-
 	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-
 	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-
 	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-
 	private int? PriorityValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
@@ -260,6 +253,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescriptor<PutIndexTemplateRequestDescriptor, PutIndexTemplateRequestParameters>
 {
 	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -269,9 +263,13 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
+
 	public PutIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);
@@ -279,25 +277,15 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-
 	private IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
-
 	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-
 	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-
 	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-
 	private int? PriorityValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)

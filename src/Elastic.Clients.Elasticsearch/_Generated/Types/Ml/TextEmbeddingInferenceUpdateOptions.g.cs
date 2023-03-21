@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class TextEmbeddingInferenceUpdateOptions
 {
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
@@ -39,16 +40,14 @@ public sealed partial class TextEmbeddingInferenceUpdateOptions
 public sealed partial class TextEmbeddingInferenceUpdateOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceUpdateOptionsDescriptor>
 {
 	internal TextEmbeddingInferenceUpdateOptionsDescriptor(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public TextEmbeddingInferenceUpdateOptionsDescriptor() : base()
 	{
 	}
 
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
-
 	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public TextEmbeddingInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 {
 	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string> Labels { get; set; }
-
 	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 
@@ -45,20 +44,16 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 public sealed partial class ZeroShotClassificationInferenceUpdateOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceUpdateOptionsDescriptor>
 {
 	internal ZeroShotClassificationInferenceUpdateOptionsDescriptor(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> LabelsValue { get; set; }
-
 	private bool? MultiLabelValue { get; set; }
-
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
-
 	private NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public ZeroShotClassificationInferenceUpdateOptionsDescriptor Labels(ICollection<string> labels)

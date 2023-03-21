@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 [JsonConverter(typeof(ConflictsConverter))]
 public enum Conflicts
 {
@@ -46,8 +48,7 @@ internal sealed class ConflictsConverter : JsonConverter<Conflicts>
 				return Conflicts.Abort;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Conflicts value, JsonSerializerOptions options)
@@ -92,8 +93,7 @@ internal sealed class DFIIndependenceMeasureConverter : JsonConverter<DFIIndepen
 				return DFIIndependenceMeasure.Chisquared;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFIIndependenceMeasure value, JsonSerializerOptions options)
@@ -141,8 +141,7 @@ internal sealed class DFRAfterEffectConverter : JsonConverter<DFRAfterEffect>
 				return DFRAfterEffect.b;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFRAfterEffect value, JsonSerializerOptions options)
@@ -206,8 +205,7 @@ internal sealed class DFRBasicModelConverter : JsonConverter<DFRBasicModel>
 				return DFRBasicModel.Be;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFRBasicModel value, JsonSerializerOptions options)
@@ -291,8 +289,7 @@ internal sealed class DistanceUnitConverter : JsonConverter<DistanceUnit>
 				return DistanceUnit.Centimeters;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DistanceUnit value, JsonSerializerOptions options)
@@ -366,8 +363,7 @@ internal sealed class ExpandWildcardConverter : JsonConverter<ExpandWildcard>
 				return ExpandWildcard.All;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ExpandWildcard value, JsonSerializerOptions options)
@@ -425,8 +421,7 @@ internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNum
 				return FieldSortNumericType.Date;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldSortNumericType value, JsonSerializerOptions options)
@@ -473,8 +468,7 @@ internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
 				return GeoDistanceType.Arc;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoDistanceType value, JsonSerializerOptions options)
@@ -523,8 +517,7 @@ internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation
 				return GeoShapeRelation.Contains;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoShapeRelation value, JsonSerializerOptions options)
@@ -578,8 +571,7 @@ internal sealed class HealthStatusConverter : JsonConverter<HealthStatus>
 				return HealthStatus.Green;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HealthStatus value, JsonSerializerOptions options)
@@ -623,8 +615,7 @@ internal sealed class IBDistributionConverter : JsonConverter<IBDistribution>
 				return IBDistribution.Ll;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IBDistribution value, JsonSerializerOptions options)
@@ -665,8 +656,7 @@ internal sealed class IBLambdaConverter : JsonConverter<IBLambda>
 				return IBLambda.Df;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IBLambda value, JsonSerializerOptions options)
@@ -711,8 +701,7 @@ internal sealed class LevelConverter : JsonConverter<Level>
 				return Level.Cluster;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Level value, JsonSerializerOptions options)
@@ -804,8 +793,7 @@ internal sealed class NodeRoleConverter : JsonConverter<NodeRole>
 				return NodeRole.Client;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, NodeRole value, JsonSerializerOptions options)
@@ -894,8 +882,7 @@ internal sealed class NormalizationConverter : JsonConverter<Normalization>
 				return Normalization.H1;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Normalization value, JsonSerializerOptions options)
@@ -957,8 +944,7 @@ internal sealed class ResultConverter : JsonConverter<Result>
 				return Result.Created;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Result value, JsonSerializerOptions options)
@@ -990,18 +976,22 @@ internal sealed class ResultConverter : JsonConverter<Result>
 public readonly partial struct ScriptLanguage
 {
 	public ScriptLanguage(string value) => Value = value;
-	public readonly string Value { get; }
 
+	public readonly string Value { get; }
 	public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
 	public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
 	public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
 	public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
+
 	public override string ToString() => Value ?? string.Empty;
+
 	public static implicit operator string(ScriptLanguage scriptLanguage) => scriptLanguage.Value;
 	public static implicit operator ScriptLanguage(string value) => new(value);
+
 	public override int GetHashCode() => Value.GetHashCode();
 	public override bool Equals(object obj) => obj is ScriptLanguage other && this.Equals(other);
 	public bool Equals(ScriptLanguage other) => Value == other.Value;
+
 	public static bool operator ==(ScriptLanguage a, ScriptLanguage b) => a.Equals(b);
 	public static bool operator !=(ScriptLanguage a, ScriptLanguage b) => !(a == b);
 }
@@ -1032,8 +1022,7 @@ internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
 				return ScriptSortType.Number;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ScriptSortType value, JsonSerializerOptions options)
@@ -1077,8 +1066,7 @@ internal sealed class SearchTypeConverter : JsonConverter<SearchType>
 				return SearchType.DfsQueryThenFetch;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SearchType value, JsonSerializerOptions options)
@@ -1115,8 +1103,7 @@ internal sealed class SlicesCalculationConverter : JsonConverter<SlicesCalculati
 				return SlicesCalculation.Auto;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SlicesCalculation value, JsonSerializerOptions options)
@@ -1166,8 +1153,7 @@ internal sealed class SortModeConverter : JsonConverter<SortMode>
 				return SortMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SortMode value, JsonSerializerOptions options)
@@ -1217,8 +1203,7 @@ internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 				return SortOrder.Asc;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SortOrder value, JsonSerializerOptions options)
@@ -1263,8 +1248,7 @@ internal sealed class SuggestModeConverter : JsonConverter<SuggestMode>
 				return SuggestMode.Always;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SuggestMode value, JsonSerializerOptions options)
@@ -1328,8 +1312,7 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 				return TimeUnit.Days;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TimeUnit value, JsonSerializerOptions options)
@@ -1393,8 +1376,7 @@ internal sealed class VersionTypeConverter : JsonConverter<VersionType>
 				return VersionType.External;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, VersionType value, JsonSerializerOptions options)
@@ -1457,8 +1439,7 @@ internal sealed class WaitForEventsConverter : JsonConverter<WaitForEvents>
 				return WaitForEvents.High;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, WaitForEvents value, JsonSerializerOptions options)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,16 +27,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class SplitIndexRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
@@ -46,20 +46,19 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
@@ -67,6 +66,7 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDescriptor<SplitIndexRequestDescriptor<TDocument>, SplitIndexRequestParameters>
 {
 	internal SplitIndexRequestDescriptor(Action<SplitIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SplitIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 	{
 	}
@@ -76,11 +76,15 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public SplitIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public SplitIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public SplitIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -94,7 +98,6 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public SplitIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
@@ -131,6 +134,7 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
 {
 	internal SplitIndexRequestDescriptor(Action<SplitIndexRequestDescriptor> configure) => configure.Invoke(this);
+
 	public SplitIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 	{
 	}
@@ -140,11 +144,15 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public SplitIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public SplitIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public SplitIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -158,7 +166,6 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public SplitIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)

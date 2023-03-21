@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggregation>
 {
 	public override TopHitsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -353,92 +355,58 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 {
 	public TopHitsAggregation(string name, Field field) : this(name) => Field = field;
 	public TopHitsAggregation(string name) => Name = name;
+
 	internal TopHitsAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
-
 	public bool? Explain { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public int? From { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-
 	public bool? SeqNoPrimaryTerm { get; set; }
-
 	public int? Size { get; set; }
-
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-
 	public bool? TrackScores { get; set; }
-
 	public bool? Version { get; set; }
 }
 
 public sealed partial class TopHitsAggregationDescriptor<TDocument> : SerializableDescriptor<TopHitsAggregationDescriptor<TDocument>>
 {
 	internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TopHitsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-
 	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
@@ -733,50 +701,31 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 public sealed partial class TopHitsAggregationDescriptor : SerializableDescriptor<TopHitsAggregationDescriptor>
 {
 	internal TopHitsAggregationDescriptor(Action<TopHitsAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public TopHitsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)

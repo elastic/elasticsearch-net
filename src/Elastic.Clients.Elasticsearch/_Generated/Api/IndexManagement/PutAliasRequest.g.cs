@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,13 +27,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class PutAliasRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -43,26 +44,23 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
-
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
@@ -70,6 +68,7 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescriptor<PutAliasRequestDescriptor<TDocument>, PutAliasRequestParameters>
 {
 	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 	{
 	}
@@ -79,10 +78,14 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public PutAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -96,17 +99,11 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
 	public PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -207,6 +204,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAliasRequestDescriptor, PutAliasRequestParameters>
 {
 	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor> configure) => configure.Invoke(this);
+
 	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 	{
 	}
@@ -216,10 +214,14 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public PutAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -233,17 +235,11 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
 	public PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)

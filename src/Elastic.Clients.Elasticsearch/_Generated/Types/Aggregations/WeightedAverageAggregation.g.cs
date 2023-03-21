@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class WeightedAverageAggregationConverter : JsonConverter<WeightedAverageAggregation>
 {
 	public override WeightedAverageAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -154,46 +156,35 @@ internal sealed class WeightedAverageAggregationConverter : JsonConverter<Weight
 public sealed partial class WeightedAverageAggregation : SearchAggregation
 {
 	public WeightedAverageAggregation(string name) => Name = name;
+
 	internal WeightedAverageAggregation()
 	{
 	}
 
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 }
 
 public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : SerializableDescriptor<WeightedAverageAggregationDescriptor<TDocument>>
 {
 	internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public WeightedAverageAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? ValueValue { get; set; }
-
 	private WeightedAverageValueDescriptor<TDocument> ValueDescriptor { get; set; }
-
 	private Action<WeightedAverageValueDescriptor<TDocument>> ValueDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? WeightValue { get; set; }
-
 	private WeightedAverageValueDescriptor<TDocument> WeightDescriptor { get; set; }
-
 	private Action<WeightedAverageValueDescriptor<TDocument>> WeightDescriptorAction { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	public WeightedAverageAggregationDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
@@ -325,26 +316,19 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 public sealed partial class WeightedAverageAggregationDescriptor : SerializableDescriptor<WeightedAverageAggregationDescriptor>
 {
 	internal WeightedAverageAggregationDescriptor(Action<WeightedAverageAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public WeightedAverageAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? ValueValue { get; set; }
-
 	private WeightedAverageValueDescriptor ValueDescriptor { get; set; }
-
 	private Action<WeightedAverageValueDescriptor> ValueDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? WeightValue { get; set; }
-
 	private WeightedAverageValueDescriptor WeightDescriptor { get; set; }
-
 	private Action<WeightedAverageValueDescriptor> WeightDescriptorAction { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	public WeightedAverageAggregationDescriptor Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)

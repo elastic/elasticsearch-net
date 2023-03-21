@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class DutchAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("stopwords")]
@@ -39,6 +41,7 @@ public sealed partial class DutchAnalyzer : IAnalyzer
 public sealed partial class DutchAnalyzerDescriptor : SerializableDescriptor<DutchAnalyzerDescriptor>, IBuildableDescriptor<DutchAnalyzer>
 {
 	internal DutchAnalyzerDescriptor(Action<DutchAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public DutchAnalyzerDescriptor() : base()
 	{
 	}

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PatternReplaceCharFilter : ICharFilter
 {
 	[JsonInclude, JsonPropertyName("flags")]
 	public string? Flags { get; set; }
-
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
-
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "pattern_replace";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -46,16 +47,14 @@ public sealed partial class PatternReplaceCharFilter : ICharFilter
 public sealed partial class PatternReplaceCharFilterDescriptor : SerializableDescriptor<PatternReplaceCharFilterDescriptor>, IBuildableDescriptor<PatternReplaceCharFilter>
 {
 	internal PatternReplaceCharFilterDescriptor(Action<PatternReplaceCharFilterDescriptor> configure) => configure.Invoke(this);
+
 	public PatternReplaceCharFilterDescriptor() : base()
 	{
 	}
 
 	private string? FlagsValue { get; set; }
-
 	private string PatternValue { get; set; }
-
 	private string? ReplacementValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PatternReplaceCharFilterDescriptor Flags(string? flags)

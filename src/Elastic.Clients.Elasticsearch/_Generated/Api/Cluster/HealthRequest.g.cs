@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,40 +27,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
 public sealed class HealthRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
-
 	[JsonIgnore]
 	public Union<string?, int?>? WaitForNodes { get => Q<Union<string?, int?>?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
-
 	[JsonIgnore]
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 }
@@ -74,38 +66,31 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
-
 	[JsonIgnore]
 	public Union<string?, int?>? WaitForNodes { get => Q<Union<string?, int?>?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
-
 	[JsonIgnore]
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
 }
@@ -113,13 +98,17 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescriptor<HealthRequestDescriptor<TDocument>, HealthRequestParameters>
 {
 	internal HealthRequestDescriptor(Action<HealthRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public HealthRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public HealthRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public HealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
 	public HealthRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
@@ -131,6 +120,7 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 	public HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 	public HealthRequestDescriptor<TDocument> WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+
 	public HealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -145,13 +135,17 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRequestDescriptor, HealthRequestParameters>
 {
 	internal HealthRequestDescriptor(Action<HealthRequestDescriptor> configure) => configure.Invoke(this);
+
 	public HealthRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public HealthRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public HealthRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
 	public HealthRequestDescriptor Local(bool? local = true) => Qs("local", local);
@@ -163,6 +157,7 @@ public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRe
 	public HealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 	public HealthRequestDescriptor WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
+
 	public HealthRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);

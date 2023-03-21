@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class FieldAndFormat
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("include_unmapped")]
 	public bool? IncludeUnmapped { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class FieldAndFormat
 public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDescriptor<FieldAndFormatDescriptor<TDocument>>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FieldAndFormatDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private bool? IncludeUnmappedValue { get; set; }
 
 	public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
@@ -98,14 +97,13 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<FieldAndFormatDescriptor>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
+
 	public FieldAndFormatDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private bool? IncludeUnmappedValue { get; set; }
 
 	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)

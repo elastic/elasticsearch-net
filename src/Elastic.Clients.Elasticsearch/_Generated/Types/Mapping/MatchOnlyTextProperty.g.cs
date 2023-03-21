@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class MatchOnlyTextProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 
@@ -44,14 +44,13 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptor<MatchOnlyTextPropertyDescriptor<TDocument>>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
 	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MatchOnlyTextPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
 
 	public MatchOnlyTextPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -123,14 +122,13 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
 	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public MatchOnlyTextPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
 
 	public MatchOnlyTextPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,16 +27,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
+
 public sealed class EqlSearchRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
@@ -46,56 +46,43 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
-
 	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Field? EventCategoryField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tiebreaker_field")]
 	public Elastic.Clients.Elasticsearch.Field? TiebreakerField { get; set; }
-
 	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
-
 	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
-
 	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("result_position")]
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
-
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
@@ -103,6 +90,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
 {
 	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -112,11 +100,15 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+
 	public EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -124,43 +116,24 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-
 	private bool? CaseSensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
-
 	private int? FetchSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
 	private bool? KeepOnCompletionValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	public EqlSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
@@ -461,6 +434,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
 {
 	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor> configure) => configure.Invoke(this);
+
 	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -470,11 +444,15 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public EqlSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public EqlSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public EqlSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+
 	public EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -482,43 +460,24 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-
 	private bool? CaseSensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
-
 	private int? FetchSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
 	private bool? KeepOnCompletionValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	public EqlSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)

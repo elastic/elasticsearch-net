@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
+
 public sealed partial class TemplateConfig
 {
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
-
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
-
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class TemplateConfig
 public sealed partial class TemplateConfigDescriptor : SerializableDescriptor<TemplateConfigDescriptor>
 {
 	internal TemplateConfigDescriptor(Action<TemplateConfigDescriptor> configure) => configure.Invoke(this);
+
 	public TemplateConfigDescriptor() : base()
 	{
 	}
 
 	private bool? ExplainValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private bool? ProfileValue { get; set; }
-
 	private string? SourceValue { get; set; }
 
 	public TemplateConfigDescriptor Explain(bool? explain = true)

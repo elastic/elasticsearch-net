@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class NlpRobertaTokenizationConfig
 {
 	[JsonInclude, JsonPropertyName("add_prefix_space")]
 	public bool? AddPrefixSpace { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_sequence_length")]
 	public int? MaxSequenceLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
-
 	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
-
 	[JsonInclude, JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
 
@@ -48,18 +46,15 @@ public sealed partial class NlpRobertaTokenizationConfig
 public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>
 {
 	internal NlpRobertaTokenizationConfigDescriptor(Action<NlpRobertaTokenizationConfigDescriptor> configure) => configure.Invoke(this);
+
 	public NlpRobertaTokenizationConfigDescriptor() : base()
 	{
 	}
 
 	private bool? AddPrefixSpaceValue { get; set; }
-
 	private int? MaxSequenceLengthValue { get; set; }
-
 	private int? SpanValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? TruncateValue { get; set; }
-
 	private bool? WithSpecialTokensValue { get; set; }
 
 	public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)

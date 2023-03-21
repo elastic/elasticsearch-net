@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,34 +27,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class IndicesStatsRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
-
 	[JsonIgnore]
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
-
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
-
 	[JsonIgnore]
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
@@ -76,32 +70,27 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? CompletionFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("completion_fields"); set => Q("completion_fields", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? FielddataFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fielddata_fields"); set => Q("fielddata_fields", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
-
 	[JsonIgnore]
 	public bool? ForbidClosedIndices { get => Q<bool?>("forbid_closed_indices"); set => Q("forbid_closed_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Groups { get => Q<ICollection<string>?>("groups"); set => Q("groups", value); }
-
 	[JsonIgnore]
 	public bool? IncludeSegmentFileSizes { get => Q<bool?>("include_segment_file_sizes"); set => Q("include_segment_file_sizes", value); }
-
 	[JsonIgnore]
 	public bool? IncludeUnloadedSegments { get => Q<bool?>("include_unloaded_segments"); set => Q("include_unloaded_segments", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 }
@@ -109,6 +98,7 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDescriptor<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsRequestParameters>
 {
 	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IndicesStatsRequestDescriptor()
 	{
 	}
@@ -122,8 +112,11 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public IndicesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public IndicesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
@@ -133,6 +126,7 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 	public IndicesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public IndicesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
+
 	public IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		RouteValues.Optional("metric", metric);
@@ -153,6 +147,7 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<IndicesStatsRequestDescriptor, IndicesStatsRequestParameters>
 {
 	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor> configure) => configure.Invoke(this);
+
 	public IndicesStatsRequestDescriptor()
 	{
 	}
@@ -166,8 +161,11 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public IndicesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public IndicesStatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public IndicesStatsRequestDescriptor FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
@@ -177,6 +175,7 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 	public IndicesStatsRequestDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
+
 	public IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		RouteValues.Optional("metric", metric);

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,19 +27,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class RolloverRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
@@ -53,29 +52,25 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("conditions")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? Conditions { get; set; }
-
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
@@ -83,6 +78,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>
 {
 	internal RolloverRequestDescriptor(Action<RolloverRequestDescriptor> configure) => configure.Invoke(this);
+
 	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
 	{
 	}
@@ -96,12 +92,16 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public RolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public RolloverRequestDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias alias)
 	{
 		RouteValues.Required("alias", alias);
@@ -115,19 +115,12 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions? ConditionsValue { get; set; }
-
 	private RolloverConditionsDescriptor ConditionsDescriptor { get; set; }
-
 	private Action<RolloverConditionsDescriptor> ConditionsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	public RolloverRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)

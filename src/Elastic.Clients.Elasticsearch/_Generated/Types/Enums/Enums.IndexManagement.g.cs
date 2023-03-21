@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 [JsonConverter(typeof(FeatureConverter))]
 public enum Feature
 {
@@ -50,8 +52,7 @@ internal sealed class FeatureConverter : JsonConverter<Feature>
 				return Feature.Aliases;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Feature value, JsonSerializerOptions options)
@@ -99,8 +100,7 @@ internal sealed class IndexCheckOnStartupConverter : JsonConverter<IndexCheckOnS
 				return IndexCheckOnStartup.Checksum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IndexCheckOnStartup value, JsonSerializerOptions options)
@@ -144,8 +144,7 @@ internal sealed class IndexMetadataStateConverter : JsonConverter<IndexMetadataS
 				return IndexMetadataState.Close;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IndexMetadataState value, JsonSerializerOptions options)
@@ -194,8 +193,7 @@ internal sealed class IndexRoutingAllocationOptionsConverter : JsonConverter<Ind
 				return IndexRoutingAllocationOptions.All;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationOptions value, JsonSerializerOptions options)
@@ -250,8 +248,7 @@ internal sealed class IndexRoutingRebalanceOptionsConverter : JsonConverter<Inde
 				return IndexRoutingRebalanceOptions.All;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IndexRoutingRebalanceOptions value, JsonSerializerOptions options)
@@ -298,8 +295,7 @@ internal sealed class NumericFielddataFormatConverter : JsonConverter<NumericFie
 				return NumericFielddataFormat.Array;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, NumericFielddataFormat value, JsonSerializerOptions options)
@@ -340,8 +336,7 @@ internal sealed class SegmentSortMissingConverter : JsonConverter<SegmentSortMis
 				return SegmentSortMissing.First;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SegmentSortMissing value, JsonSerializerOptions options)
@@ -384,8 +379,7 @@ internal sealed class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
 				return SegmentSortMode.Max;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SegmentSortMode value, JsonSerializerOptions options)
@@ -428,8 +422,7 @@ internal sealed class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder
 				return SegmentSortOrder.Asc;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SegmentSortOrder value, JsonSerializerOptions options)
@@ -478,8 +471,7 @@ internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingSta
 				return ShardRoutingState.Initializing;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ShardRoutingState value, JsonSerializerOptions options)
@@ -508,18 +500,22 @@ internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingSta
 public readonly partial struct StorageType
 {
 	public StorageType(string value) => Value = value;
-	public readonly string Value { get; }
 
+	public readonly string Value { get; }
 	public static StorageType Niofs { get; } = new StorageType("niofs");
 	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
 	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
 	public static StorageType Fs { get; } = new StorageType("fs");
+
 	public override string ToString() => Value ?? string.Empty;
+
 	public static implicit operator string(StorageType storageType) => storageType.Value;
 	public static implicit operator StorageType(string value) => new(value);
+
 	public override int GetHashCode() => Value.GetHashCode();
 	public override bool Equals(object obj) => obj is StorageType other && this.Equals(other);
 	public bool Equals(StorageType other) => Value == other.Value;
+
 	public static bool operator ==(StorageType a, StorageType b) => a.Equals(b);
 	public static bool operator !=(StorageType a, StorageType b) => !(a == b);
 }
@@ -548,8 +544,7 @@ internal sealed class TranslogDurabilityConverter : JsonConverter<TranslogDurabi
 				return TranslogDurability.Async;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TranslogDurability value, JsonSerializerOptions options)

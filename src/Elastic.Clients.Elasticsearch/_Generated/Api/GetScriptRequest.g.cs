@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class GetScriptRequestParameters : RequestParameters
 {
 	[JsonIgnore]
@@ -40,8 +42,11 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
@@ -49,6 +54,7 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescriptor<GetScriptRequestDescriptor<TDocument>, GetScriptRequestParameters>
 {
 	internal GetScriptRequestDescriptor(Action<GetScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GetScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -58,9 +64,13 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public GetScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -75,6 +85,7 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetScriptRequestDescriptor, GetScriptRequestParameters>
 {
 	internal GetScriptRequestDescriptor(Action<GetScriptRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -84,9 +95,13 @@ public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetSc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public GetScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettings
 {
 	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-
 	[JsonInclude, JsonPropertyName("depth")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? Depth { get; set; }
-
 	[JsonInclude, JsonPropertyName("dimension_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? DimensionFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("field_name_length")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-
 	[JsonInclude, JsonPropertyName("nested_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("nested_objects")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjects { get; set; }
-
 	[JsonInclude, JsonPropertyName("total_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
@@ -55,48 +50,30 @@ public sealed partial class MappingLimitSettings
 public sealed partial class MappingLimitSettingsDescriptor : SerializableDescriptor<MappingLimitSettingsDescriptor>
 {
 	internal MappingLimitSettingsDescriptor(Action<MappingLimitSettingsDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsDescriptor() : base()
 	{
 	}
 
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? DepthValue { get; set; }
-
 	private MappingLimitSettingsDepthDescriptor DepthDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsDepthDescriptor> DepthDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? DimensionFieldsValue { get; set; }
-
 	private MappingLimitSettingsDimensionFieldsDescriptor DimensionFieldsDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsDimensionFieldsDescriptor> DimensionFieldsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLengthValue { get; set; }
-
 	private MappingLimitSettingsFieldNameLengthDescriptor FieldNameLengthDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsFieldNameLengthDescriptor> FieldNameLengthDescriptorAction { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFieldsValue { get; set; }
-
 	private MappingLimitSettingsNestedFieldsDescriptor NestedFieldsDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsNestedFieldsDescriptor> NestedFieldsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjectsValue { get; set; }
-
 	private MappingLimitSettingsNestedObjectsDescriptor NestedObjectsDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsNestedObjectsDescriptor> NestedObjectsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFieldsValue { get; set; }
-
 	private MappingLimitSettingsTotalFieldsDescriptor TotalFieldsDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsTotalFieldsDescriptor> TotalFieldsDescriptorAction { get; set; }
 
 	public MappingLimitSettingsDescriptor Coerce(bool? coerce = true)

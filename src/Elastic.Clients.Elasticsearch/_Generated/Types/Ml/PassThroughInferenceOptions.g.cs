@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class PassThroughInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -39,16 +40,14 @@ public sealed partial class PassThroughInferenceOptions
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
 {
 	internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public PassThroughInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
-
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)

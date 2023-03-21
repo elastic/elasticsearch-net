@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class GeoIpNodeDatabases
 {
 	[JsonInclude, JsonPropertyName("databases")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; init; }
-
 	[JsonInclude, JsonPropertyName("files_in_temp")]
 	public IReadOnlyCollection<string> FilesInTemp { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettings>
 {
 	public override IndexSettings Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -752,332 +754,175 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 public sealed partial class IndexSettings
 {
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? Analysis { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? Analyze { get; set; }
-
 	public string? AutoExpandReplicas { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? Blocks { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartup { get; set; }
-
 	public string? Codec { get; set; }
-
 	[JsonConverter(typeof(StringifiedLongConverter))]
 	public long? CreationDate { get; set; }
-
 	public DateTimeOffset? CreationDateString { get; set; }
-
 	public string? DefaultPipeline { get; set; }
-
 	public string? FinalPipeline { get; set; }
-
 	public Union<string?, int?>? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Duration? GcDeletes { get; set; }
-
 	public Union<bool?, string?>? Hidden { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? Highlight { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Index { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlog { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
-
 	public bool? LoadFixedBitsetFiltersEagerly { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? Mapping { get; set; }
-
 	public int? MaxDocvalueFieldsSearch { get; set; }
-
 	public int? MaxInnerResultWindow { get; set; }
-
 	public int? MaxNgramDiff { get; set; }
-
 	public int? MaxRefreshListeners { get; set; }
-
 	public int? MaxRegexLength { get; set; }
-
 	public int? MaxRescoreWindow { get; set; }
-
 	public int? MaxResultWindow { get; set; }
-
 	public int? MaxScriptFields { get; set; }
-
 	public int? MaxShingleDiff { get; set; }
-
 	public int? MaxSlicesPerScroll { get; set; }
-
 	public int? MaxTermsCount { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.Merge? Merge { get; set; }
-
 	public string? Mode { get; set; }
-
 	public Union<int?, string?>? NumberOfReplicas { get; set; }
-
 	public int? NumberOfRoutingShards { get; set; }
-
 	public Union<int?, string?>? NumberOfShards { get; set; }
-
 	public IDictionary<string, object> OtherSettings { get; set; }
-
 	public Union<int?, string?>? Priority { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Name? ProvidedName { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.Queries? Queries { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryString { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Duration? RefreshInterval { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
-
 	public int? RoutingPartitionSize { get; set; }
-
 	public ICollection<string>? RoutingPath { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? Search { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
-
 	public int? Shards { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? Similarity { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletes { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? Sort { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.Storage? Store { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeries { get; set; }
-
 	public int? TopMetricsMaxSize { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.Translog? Translog { get; set; }
-
 	public string? Uuid { get; set; }
-
 	public Union<bool?, string?>? VerifiedBeforeClose { get; set; }
-
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? Version { get; set; }
 }
 
 public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDescriptor<IndexSettingsDescriptor<TDocument>>
 {
 	internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IndexSettingsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
-
 	private IndexSettingsDescriptor<TDocument> IndexDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; set; }
-
 	private IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
-
 	private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
-
 	private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? AnalyzeValue { get; set; }
-
 	private SettingsAnalyzeDescriptor AnalyzeDescriptor { get; set; }
-
 	private Action<SettingsAnalyzeDescriptor> AnalyzeDescriptorAction { get; set; }
-
 	private string? AutoExpandReplicasValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; set; }
-
 	private IndexSettingBlocksDescriptor BlocksDescriptor { get; set; }
-
 	private Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; set; }
-
 	private string? CodecValue { get; set; }
-
 	private long? CreationDateValue { get; set; }
-
 	private DateTimeOffset? CreationDateStringValue { get; set; }
-
 	private string? DefaultPipelineValue { get; set; }
-
 	private string? FinalPipelineValue { get; set; }
-
 	private Union<string?, int?>? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? GcDeletesValue { get; set; }
-
 	private Union<bool?, string?>? HiddenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
-
 	private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
-
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
-
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
-
 	private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
-
 	private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
-
 	private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
-
 	private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
-
 	private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingValue { get; set; }
-
 	private MappingLimitSettingsDescriptor MappingDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsDescriptor> MappingDescriptorAction { get; set; }
-
 	private int? MaxDocvalueFieldsSearchValue { get; set; }
-
 	private int? MaxInnerResultWindowValue { get; set; }
-
 	private int? MaxNgramDiffValue { get; set; }
-
 	private int? MaxRefreshListenersValue { get; set; }
-
 	private int? MaxRegexLengthValue { get; set; }
-
 	private int? MaxRescoreWindowValue { get; set; }
-
 	private int? MaxResultWindowValue { get; set; }
-
 	private int? MaxScriptFieldsValue { get; set; }
-
 	private int? MaxShingleDiffValue { get; set; }
-
 	private int? MaxSlicesPerScrollValue { get; set; }
-
 	private int? MaxTermsCountValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; set; }
-
 	private MergeDescriptor MergeDescriptor { get; set; }
-
 	private Action<MergeDescriptor> MergeDescriptorAction { get; set; }
-
 	private string? ModeValue { get; set; }
-
 	private Union<int?, string?>? NumberOfReplicasValue { get; set; }
-
 	private int? NumberOfRoutingShardsValue { get; set; }
-
 	private Union<int?, string?>? NumberOfShardsValue { get; set; }
-
 	private IDictionary<string, object> OtherSettingsValue { get; set; }
-
 	private Union<int?, string?>? PriorityValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; set; }
-
 	private QueriesDescriptor QueriesDescriptor { get; set; }
-
 	private Action<QueriesDescriptor> QueriesDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryStringValue { get; set; }
-
 	private SettingsQueryStringDescriptor QueryStringDescriptor { get; set; }
-
 	private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? RefreshIntervalValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
-
 	private IndexRoutingDescriptor RoutingDescriptor { get; set; }
-
 	private Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; set; }
-
 	private int? RoutingPartitionSizeValue { get; set; }
-
 	private ICollection<string>? RoutingPathValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
-
 	private SettingsSearchDescriptor SearchDescriptor { get; set; }
-
 	private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
-
 	private int? ShardsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
-
 	private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
-
 	private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
-
 	private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
-
 	private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Storage? StoreValue { get; set; }
-
 	private StorageDescriptor StoreDescriptor { get; set; }
-
 	private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
-
 	private IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; set; }
-
 	private Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; set; }
-
 	private int? TopMetricsMaxSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; set; }
-
 	private TranslogDescriptor TranslogDescriptor { get; set; }
-
 	private Action<TranslogDescriptor> TranslogDescriptorAction { get; set; }
-
 	private string? UuidValue { get; set; }
-
 	private Union<bool?, string?>? VerifiedBeforeCloseValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; set; }
-
 	private IndexVersioningDescriptor VersionDescriptor { get; set; }
-
 	private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
 
 	public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)
@@ -2405,212 +2250,112 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<IndexSettingsDescriptor>
 {
 	internal IndexSettingsDescriptor(Action<IndexSettingsDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSettingsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? IndexValue { get; set; }
-
 	private IndexSettingsDescriptor IndexDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor> IndexDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort? SortValue { get; set; }
-
 	private IndexSegmentSortDescriptor SortDescriptor { get; set; }
-
 	private Action<IndexSegmentSortDescriptor> SortDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
-
 	private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
-
 	private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? AnalyzeValue { get; set; }
-
 	private SettingsAnalyzeDescriptor AnalyzeDescriptor { get; set; }
-
 	private Action<SettingsAnalyzeDescriptor> AnalyzeDescriptorAction { get; set; }
-
 	private string? AutoExpandReplicasValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks? BlocksValue { get; set; }
-
 	private IndexSettingBlocksDescriptor BlocksDescriptor { get; set; }
-
 	private Action<IndexSettingBlocksDescriptor> BlocksDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? CheckOnStartupValue { get; set; }
-
 	private string? CodecValue { get; set; }
-
 	private long? CreationDateValue { get; set; }
-
 	private DateTimeOffset? CreationDateStringValue { get; set; }
-
 	private string? DefaultPipelineValue { get; set; }
-
 	private string? FinalPipelineValue { get; set; }
-
 	private Union<string?, int?>? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? GcDeletesValue { get; set; }
-
 	private Union<bool?, string?>? HiddenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
-
 	private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
-
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
-
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
-
 	private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
-
 	private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
-
 	private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
-
 	private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
-
 	private bool? LoadFixedBitsetFiltersEagerlyValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings? MappingValue { get; set; }
-
 	private MappingLimitSettingsDescriptor MappingDescriptor { get; set; }
-
 	private Action<MappingLimitSettingsDescriptor> MappingDescriptorAction { get; set; }
-
 	private int? MaxDocvalueFieldsSearchValue { get; set; }
-
 	private int? MaxInnerResultWindowValue { get; set; }
-
 	private int? MaxNgramDiffValue { get; set; }
-
 	private int? MaxRefreshListenersValue { get; set; }
-
 	private int? MaxRegexLengthValue { get; set; }
-
 	private int? MaxRescoreWindowValue { get; set; }
-
 	private int? MaxResultWindowValue { get; set; }
-
 	private int? MaxScriptFieldsValue { get; set; }
-
 	private int? MaxShingleDiffValue { get; set; }
-
 	private int? MaxSlicesPerScrollValue { get; set; }
-
 	private int? MaxTermsCountValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Merge? MergeValue { get; set; }
-
 	private MergeDescriptor MergeDescriptor { get; set; }
-
 	private Action<MergeDescriptor> MergeDescriptorAction { get; set; }
-
 	private string? ModeValue { get; set; }
-
 	private Union<int?, string?>? NumberOfReplicasValue { get; set; }
-
 	private int? NumberOfRoutingShardsValue { get; set; }
-
 	private Union<int?, string?>? NumberOfShardsValue { get; set; }
-
 	private IDictionary<string, object> OtherSettingsValue { get; set; }
-
 	private Union<int?, string?>? PriorityValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name? ProvidedNameValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Queries? QueriesValue { get; set; }
-
 	private QueriesDescriptor QueriesDescriptor { get; set; }
-
 	private Action<QueriesDescriptor> QueriesDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryStringValue { get; set; }
-
 	private SettingsQueryStringDescriptor QueryStringDescriptor { get; set; }
-
 	private Action<SettingsQueryStringDescriptor> QueryStringDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? RefreshIntervalValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? RoutingValue { get; set; }
-
 	private IndexRoutingDescriptor RoutingDescriptor { get; set; }
-
 	private Action<IndexRoutingDescriptor> RoutingDescriptorAction { get; set; }
-
 	private int? RoutingPartitionSizeValue { get; set; }
-
 	private ICollection<string>? RoutingPathValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? SearchValue { get; set; }
-
 	private SettingsSearchDescriptor SearchDescriptor { get; set; }
-
 	private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
-
 	private int? ShardsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
-
 	private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
-
 	private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
-
 	private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
-
 	private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Storage? StoreValue { get; set; }
-
 	private StorageDescriptor StoreDescriptor { get; set; }
-
 	private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries? TimeSeriesValue { get; set; }
-
 	private IndexSettingsTimeSeriesDescriptor TimeSeriesDescriptor { get; set; }
-
 	private Action<IndexSettingsTimeSeriesDescriptor> TimeSeriesDescriptorAction { get; set; }
-
 	private int? TopMetricsMaxSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.Translog? TranslogValue { get; set; }
-
 	private TranslogDescriptor TranslogDescriptor { get; set; }
-
 	private Action<TranslogDescriptor> TranslogDescriptorAction { get; set; }
-
 	private string? UuidValue { get; set; }
-
 	private Union<bool?, string?>? VerifiedBeforeCloseValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning? VersionValue { get; set; }
-
 	private IndexVersioningDescriptor VersionDescriptor { get; set; }
-
 	private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
 
 	public IndexSettingsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? index)

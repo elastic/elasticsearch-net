@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,49 +25,36 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class TokenCountProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("enable_position_increments")]
 	public bool? EnablePositionIncrements { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public double? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -77,36 +66,24 @@ public sealed partial class TokenCountProperty : IProperty
 public sealed partial class TokenCountPropertyDescriptor<TDocument> : SerializableDescriptor<TokenCountPropertyDescriptor<TDocument>>, IBuildableDescriptor<TokenCountProperty>
 {
 	internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TokenCountPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnablePositionIncrementsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private double? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public TokenCountPropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -335,36 +312,24 @@ public sealed partial class TokenCountPropertyDescriptor<TDocument> : Serializab
 public sealed partial class TokenCountPropertyDescriptor : SerializableDescriptor<TokenCountPropertyDescriptor>, IBuildableDescriptor<TokenCountProperty>
 {
 	internal TokenCountPropertyDescriptor(Action<TokenCountPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public TokenCountPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnablePositionIncrementsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private double? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public TokenCountPropertyDescriptor Analyzer(string? analyzer)

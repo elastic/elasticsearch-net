@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,26 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class StopTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("remove_trailing")]
 	public bool? RemoveTrailing { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "stop";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -50,18 +50,15 @@ public sealed partial class StopTokenFilter : ITokenFilter
 public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<StopTokenFilterDescriptor>, IBuildableDescriptor<StopTokenFilter>
 {
 	internal StopTokenFilterDescriptor(Action<StopTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public StopTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? IgnoreCaseValue { get; set; }
-
 	private bool? RemoveTrailingValue { get; set; }
-
 	private ICollection<string>? StopwordsValue { get; set; }
-
 	private string? StopwordsPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)

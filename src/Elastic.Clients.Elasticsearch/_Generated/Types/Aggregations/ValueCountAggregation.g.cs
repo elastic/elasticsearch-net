@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class ValueCountAggregationConverter : JsonConverter<ValueCountAggregation>
 {
 	public override ValueCountAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,38 +157,31 @@ public sealed partial class ValueCountAggregation : SearchAggregation
 {
 	public ValueCountAggregation(string name, Field field) : this(name) => Field = field;
 	public ValueCountAggregation(string name) => Name = name;
+
 	internal ValueCountAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class ValueCountAggregationDescriptor<TDocument> : SerializableDescriptor<ValueCountAggregationDescriptor<TDocument>>
 {
 	internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ValueCountAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public ValueCountAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -268,18 +263,15 @@ public sealed partial class ValueCountAggregationDescriptor<TDocument> : Seriali
 public sealed partial class ValueCountAggregationDescriptor : SerializableDescriptor<ValueCountAggregationDescriptor>
 {
 	internal ValueCountAggregationDescriptor(Action<ValueCountAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public ValueCountAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public ValueCountAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

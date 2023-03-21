@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,91 +27,64 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class DeleteByQueryRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
 	[JsonIgnore]
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
-
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
@@ -121,98 +96,71 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
 	[JsonIgnore]
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
-
 	[JsonIgnore]
 	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
-
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
 	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 }
@@ -220,6 +168,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestDescriptor<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryRequestParameters>
 {
 	internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -229,8 +178,11 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -259,6 +211,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	public DeleteByQueryRequestDescriptor<TDocument> Version(bool? version = true) => Qs("version", version);
 	public DeleteByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public DeleteByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+
 	public DeleteByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -266,17 +219,11 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-
 	private long? MaxDocsValue { get; set; }
 
 	public DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -381,6 +328,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<DeleteByQueryRequestDescriptor, DeleteByQueryRequestParameters>
 {
 	internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor> configure) => configure.Invoke(this);
+
 	public DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -390,8 +338,11 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public DeleteByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -420,6 +371,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	public DeleteByQueryRequestDescriptor Version(bool? version = true) => Qs("version", version);
 	public DeleteByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public DeleteByQueryRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+
 	public DeleteByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -427,17 +379,11 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-
 	private long? MaxDocsValue { get; set; }
 
 	public DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)

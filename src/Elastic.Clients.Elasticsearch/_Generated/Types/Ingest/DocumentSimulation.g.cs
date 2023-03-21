@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 internal sealed partial class DocumentSimulationConverter : JsonConverter<DocumentSimulation>
 {
 	public override DocumentSimulation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -92,17 +94,7 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 			}
 		}
 
-		return new DocumentSimulation
-		{
-			Id = id,
-			Index = index,
-			Ingest = ingest,
-			Routing = routing,
-			Source = source,
-			Version = version,
-			VersionType = versionType,
-			Metadata = additionalProperties
-		};
+		return new DocumentSimulation { Id = id, Index = index, Ingest = ingest, Routing = routing, Source = source, Version = version, VersionType = versionType, Metadata = additionalProperties };
 	}
 
 	public override void Write(Utf8JsonWriter writer, DocumentSimulation value, JsonSerializerOptions options)
@@ -115,19 +107,12 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 public sealed partial class DocumentSimulation
 {
 	public string Id { get; init; }
-
 	public string Index { get; init; }
-
 	public Elastic.Clients.Elasticsearch.Ingest.IngestInfo Ingest { get; init; }
-
 	public string? Routing { get; init; }
-
 	public IReadOnlyDictionary<string, object> Source { get; init; }
-
 	[JsonConverter(typeof(StringifiedLongConverter))]
 	public long? Version { get; init; }
-
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; init; }
-
 	public IReadOnlyDictionary<string, string> Metadata { get; init; }
 }

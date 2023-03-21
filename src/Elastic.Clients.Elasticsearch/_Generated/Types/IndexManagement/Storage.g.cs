@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class Storage
 {
 	[JsonInclude, JsonPropertyName("allow_mmap")]
 	public bool? AllowMmap { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class Storage
 public sealed partial class StorageDescriptor : SerializableDescriptor<StorageDescriptor>
 {
 	internal StorageDescriptor(Action<StorageDescriptor> configure) => configure.Invoke(this);
+
 	public StorageDescriptor() : base()
 	{
 	}
 
 	private bool? AllowMmapValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.StorageType TypeValue { get; set; }
 
 	public StorageDescriptor AllowMmap(bool? allowMmap = true)

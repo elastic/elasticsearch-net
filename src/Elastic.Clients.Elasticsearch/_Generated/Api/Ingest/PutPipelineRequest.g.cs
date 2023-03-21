@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,16 +27,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed class PutPipelineRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
 }
@@ -46,29 +46,25 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
-
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("processors")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
@@ -76,6 +72,7 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDescriptor<PutPipelineRequestDescriptor<TDocument>, PutPipelineRequestParameters>
 {
 	internal PutPipelineRequestDescriptor(Action<PutPipelineRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -85,11 +82,15 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutPipelineRequestDescriptor<TDocument> IfVersion(long? ifVersion) => Qs("if_version", ifVersion);
 	public PutPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutPipelineRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public PutPipelineRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -97,25 +98,15 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> ProcessorsDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PutPipelineRequestDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -298,6 +289,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<PutPipelineRequestDescriptor, PutPipelineRequestParameters>
 {
 	internal PutPipelineRequestDescriptor(Action<PutPipelineRequestDescriptor> configure) => configure.Invoke(this);
+
 	public PutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -307,11 +299,15 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutPipelineRequestDescriptor IfVersion(long? ifVersion) => Qs("if_version", ifVersion);
 	public PutPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutPipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public PutPipelineRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -319,25 +315,15 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-
 	private ProcessorDescriptor ProcessorsDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PutPipelineRequestDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

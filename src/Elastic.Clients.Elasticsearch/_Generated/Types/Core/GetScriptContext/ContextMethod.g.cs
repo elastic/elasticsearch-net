@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
+
 public sealed partial class ContextMethod
 {
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
-
 	[JsonInclude, JsonPropertyName("params")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> Params { get; init; }
-
 	[JsonInclude, JsonPropertyName("return_type")]
 	public string ReturnType { get; init; }
 }

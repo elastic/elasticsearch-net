@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,22 +27,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class GetFieldMappingRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
@@ -56,20 +54,19 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
@@ -77,6 +74,7 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : RequestDescriptor<GetFieldMappingRequestDescriptor<TDocument>, GetFieldMappingRequestParameters>
 {
 	internal GetFieldMappingRequestDescriptor(Action<GetFieldMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 	{
 	}
@@ -90,13 +88,17 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetFieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetFieldMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetFieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetFieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public GetFieldMappingRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+
 	public GetFieldMappingRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		RouteValues.Required("fields", fields);
@@ -117,6 +119,7 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor<GetFieldMappingRequestDescriptor, GetFieldMappingRequestParameters>
 {
 	internal GetFieldMappingRequestDescriptor(Action<GetFieldMappingRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 	{
 	}
@@ -130,13 +133,17 @@ public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetFieldMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetFieldMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetFieldMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetFieldMappingRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public GetFieldMappingRequestDescriptor Local(bool? local = true) => Qs("local", local);
+
 	public GetFieldMappingRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		RouteValues.Required("fields", fields);

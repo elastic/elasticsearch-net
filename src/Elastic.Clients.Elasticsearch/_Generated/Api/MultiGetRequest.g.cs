@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,31 +27,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class MultiGetRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 }
@@ -65,35 +60,29 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? Docs { get; set; }
-
 	[JsonInclude, JsonPropertyName("ids")]
 	public Elastic.Clients.Elasticsearch.Ids? Ids { get; set; }
 }
@@ -101,13 +90,17 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescriptor<MultiGetRequestDescriptor<TDocument>, MultiGetRequestParameters>
 {
 	internal MultiGetRequestDescriptor(Action<MultiGetRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MultiGetRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public MultiGetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -116,6 +109,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	public MultiGetRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public MultiGetRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public MultiGetRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+
 	public MultiGetRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		RouteValues.Optional("index", index);
@@ -123,13 +117,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
-
 	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
-
 	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
-
 	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
 	public MultiGetRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)
@@ -221,13 +211,17 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiGetRequestDescriptor, MultiGetRequestParameters>
 {
 	internal MultiGetRequestDescriptor(Action<MultiGetRequestDescriptor> configure) => configure.Invoke(this);
+
 	public MultiGetRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public MultiGetRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -236,6 +230,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	public MultiGetRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public MultiGetRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public MultiGetRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields) => Qs("stored_fields", storedFields);
+
 	public MultiGetRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		RouteValues.Optional("index", index);
@@ -243,13 +238,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
-
 	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
-
 	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
-
 	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ids? IdsValue { get; set; }
 
 	public MultiGetRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation>? docs)

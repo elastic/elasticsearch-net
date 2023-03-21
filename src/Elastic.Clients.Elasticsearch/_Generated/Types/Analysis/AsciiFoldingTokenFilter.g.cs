@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("preserve_original")]
@@ -33,6 +35,7 @@ public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "asciifolding";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDescriptor<AsciiFoldingTokenFilterDescriptor>, IBuildableDescriptor<AsciiFoldingTokenFilter>
 {
 	internal AsciiFoldingTokenFilterDescriptor(Action<AsciiFoldingTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public AsciiFoldingTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? PreserveOriginalValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)

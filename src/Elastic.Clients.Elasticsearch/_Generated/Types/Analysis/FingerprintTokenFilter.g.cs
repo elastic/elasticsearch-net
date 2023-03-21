@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class FingerprintTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int? MaxOutputSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "fingerprint";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +45,13 @@ public sealed partial class FingerprintTokenFilter : ITokenFilter
 public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescriptor<FingerprintTokenFilterDescriptor>, IBuildableDescriptor<FingerprintTokenFilter>
 {
 	internal FingerprintTokenFilterDescriptor(Action<FingerprintTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public FingerprintTokenFilterDescriptor() : base()
 	{
 	}
 
 	private int? MaxOutputSizeValue { get; set; }
-
 	private string? SeparatorValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize)

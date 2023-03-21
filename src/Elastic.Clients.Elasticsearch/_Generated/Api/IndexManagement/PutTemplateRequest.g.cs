@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,19 +27,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class PutTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -49,35 +48,29 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_patterns"), SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? IndexPatterns { get; set; }
-
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("order")]
 	public int? Order { get; set; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
@@ -85,6 +78,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<PutTemplateRequestDescriptor, PutTemplateRequestParameters>
 {
 	internal PutTemplateRequestDescriptor(Action<PutTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public PutTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -94,12 +88,16 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public PutTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);
@@ -107,19 +105,12 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-
 	private ICollection<string>? IndexPatternsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 	private int? OrderValue { get; set; }
-
 	private IDictionary<string, object>? SettingsValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PutTemplateRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)

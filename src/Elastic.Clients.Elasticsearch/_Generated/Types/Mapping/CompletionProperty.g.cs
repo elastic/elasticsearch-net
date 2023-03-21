@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,52 +25,38 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class CompletionProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("contexts")]
 	public ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_input_length")]
 	public int? MaxInputLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_position_increments")]
 	public bool? PreservePositionIncrements { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_separators")]
 	public bool? PreserveSeparators { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
@@ -80,44 +68,28 @@ public sealed partial class CompletionProperty : IProperty
 public sealed partial class CompletionPropertyDescriptor<TDocument> : SerializableDescriptor<CompletionPropertyDescriptor<TDocument>>, IBuildableDescriptor<CompletionProperty>
 {
 	internal CompletionPropertyDescriptor(Action<CompletionPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CompletionPropertyDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
-
 	private SuggestContextDescriptor<TDocument> ContextsDescriptor { get; set; }
-
 	private Action<SuggestContextDescriptor<TDocument>> ContextsDescriptorAction { get; set; }
-
 	private Action<SuggestContextDescriptor<TDocument>>[] ContextsDescriptorActions { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private int? MaxInputLengthValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? PreservePositionIncrementsValue { get; set; }
-
 	private bool? PreserveSeparatorsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public CompletionPropertyDescriptor<TDocument> Contexts(ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)
@@ -414,44 +386,28 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 public sealed partial class CompletionPropertyDescriptor : SerializableDescriptor<CompletionPropertyDescriptor>, IBuildableDescriptor<CompletionProperty>
 {
 	internal CompletionPropertyDescriptor(Action<CompletionPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public CompletionPropertyDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? ContextsValue { get; set; }
-
 	private SuggestContextDescriptor ContextsDescriptor { get; set; }
-
 	private Action<SuggestContextDescriptor> ContextsDescriptorAction { get; set; }
-
 	private Action<SuggestContextDescriptor>[] ContextsDescriptorActions { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private int? MaxInputLengthValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? PreservePositionIncrementsValue { get; set; }
-
 	private bool? PreserveSeparatorsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public CompletionPropertyDescriptor Contexts(ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? contexts)

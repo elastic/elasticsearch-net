@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsDepth
 {
 	[JsonInclude, JsonPropertyName("limit")]
@@ -34,6 +36,7 @@ public sealed partial class MappingLimitSettingsDepth
 public sealed partial class MappingLimitSettingsDepthDescriptor : SerializableDescriptor<MappingLimitSettingsDepthDescriptor>
 {
 	internal MappingLimitSettingsDepthDescriptor(Action<MappingLimitSettingsDepthDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsDepthDescriptor() : base()
 	{
 	}

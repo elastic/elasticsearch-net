@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class UaxEmailUrlTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("max_token_length")]
@@ -33,6 +35,7 @@ public sealed partial class UaxEmailUrlTokenizer : ITokenizer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "uax_url_email";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class UaxEmailUrlTokenizer : ITokenizer
 public sealed partial class UaxEmailUrlTokenizerDescriptor : SerializableDescriptor<UaxEmailUrlTokenizerDescriptor>, IBuildableDescriptor<UaxEmailUrlTokenizer>
 {
 	internal UaxEmailUrlTokenizerDescriptor(Action<UaxEmailUrlTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public UaxEmailUrlTokenizerDescriptor() : base()
 	{
 	}
 
 	private int? MaxTokenLengthValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public UaxEmailUrlTokenizerDescriptor MaxTokenLength(int? maxTokenLength)

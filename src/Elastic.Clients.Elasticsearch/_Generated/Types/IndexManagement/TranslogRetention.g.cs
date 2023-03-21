@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class TranslogRetention
 {
 	[JsonInclude, JsonPropertyName("age")]
 	public Elastic.Clients.Elasticsearch.Duration? Age { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class TranslogRetention
 public sealed partial class TranslogRetentionDescriptor : SerializableDescriptor<TranslogRetentionDescriptor>
 {
 	internal TranslogRetentionDescriptor(Action<TranslogRetentionDescriptor> configure) => configure.Invoke(this);
+
 	public TranslogRetentionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Duration? AgeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? SizeValue { get; set; }
 
 	public TranslogRetentionDescriptor Age(Elastic.Clients.Elasticsearch.Duration? age)

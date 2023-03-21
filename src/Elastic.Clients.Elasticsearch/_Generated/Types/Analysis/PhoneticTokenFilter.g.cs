@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,27 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PhoneticTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Encoder { get; set; }
-
 	[JsonInclude, JsonPropertyName("languageset")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> Languageset { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_code_len")]
 	public int? MaxCodeLen { get; set; }
-
 	[JsonInclude, JsonPropertyName("name_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType NameType { get; set; }
-
 	[JsonInclude, JsonPropertyName("replace")]
 	public bool? Replace { get; set; }
-
 	[JsonInclude, JsonPropertyName("rule_type")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleType { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "phonetic";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -55,22 +53,17 @@ public sealed partial class PhoneticTokenFilter : ITokenFilter
 public sealed partial class PhoneticTokenFilterDescriptor : SerializableDescriptor<PhoneticTokenFilterDescriptor>, IBuildableDescriptor<PhoneticTokenFilter>
 {
 	internal PhoneticTokenFilterDescriptor(Action<PhoneticTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public PhoneticTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder EncoderValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> LanguagesetValue { get; set; }
-
 	private int? MaxCodeLenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType NameTypeValue { get; set; }
-
 	private bool? ReplaceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType RuleTypeValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PhoneticTokenFilterDescriptor Encoder(Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder encoder)

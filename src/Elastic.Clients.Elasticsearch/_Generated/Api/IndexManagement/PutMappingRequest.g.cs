@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,25 +27,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class PutMappingRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 }
@@ -55,56 +52,43 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
-
 	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
-
 	[JsonInclude, JsonPropertyName("_field_names")]
 	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
-
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("_routing")]
 	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
-
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
@@ -112,6 +96,7 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
 {
 	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -121,14 +106,18 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public PutMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public PutMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public PutMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutMappingRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public PutMappingRequestDescriptor<TDocument> WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
+
 	public PutMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -136,37 +125,21 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-
 	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-
 	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-
 	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-
 	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-
 	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-
 	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-
 	private bool? DateDetectionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
-
 	private bool? NumericDetectionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
 	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)
@@ -409,6 +382,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
 {
 	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor> configure) => configure.Invoke(this);
+
 	public PutMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
@@ -418,14 +392,18 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public PutMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public PutMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public PutMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public PutMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutMappingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public PutMappingRequestDescriptor WriteIndexOnly(bool? writeIndexOnly = true) => Qs("write_index_only", writeIndexOnly);
+
 	public PutMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -433,37 +411,21 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-
 	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-
 	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-
 	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-
 	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-
 	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-
 	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-
 	private bool? DateDetectionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
-
 	private bool? NumericDetectionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
 
 	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? fieldNames)

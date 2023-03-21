@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class IcuAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("method")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
-
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
 
@@ -41,12 +42,12 @@ public sealed partial class IcuAnalyzer : IAnalyzer
 public sealed partial class IcuAnalyzerDescriptor : SerializableDescriptor<IcuAnalyzerDescriptor>, IBuildableDescriptor<IcuAnalyzer>
 {
 	internal IcuAnalyzerDescriptor(Action<IcuAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public IcuAnalyzerDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType MethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode ModeValue { get; set; }
 
 	public IcuAnalyzerDescriptor Method(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType method)

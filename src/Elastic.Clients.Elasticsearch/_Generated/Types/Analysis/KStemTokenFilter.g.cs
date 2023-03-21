@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KStemTokenFilter : ITokenFilter
 {
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kstem";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -37,6 +40,7 @@ public sealed partial class KStemTokenFilter : ITokenFilter
 public sealed partial class KStemTokenFilterDescriptor : SerializableDescriptor<KStemTokenFilterDescriptor>, IBuildableDescriptor<KStemTokenFilter>
 {
 	internal KStemTokenFilterDescriptor(Action<KStemTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KStemTokenFilterDescriptor() : base()
 	{
 	}

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,27 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class ShingleTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("filler_token")]
 	public string? FillerToken { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_shingle_size")]
 	public Union<int?, string?>? MaxShingleSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_shingle_size")]
 	public Union<int?, string?>? MinShingleSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("output_unigrams")]
 	public bool? OutputUnigrams { get; set; }
-
 	[JsonInclude, JsonPropertyName("output_unigrams_if_no_shingles")]
 	public bool? OutputUnigramsIfNoShingles { get; set; }
-
 	[JsonInclude, JsonPropertyName("token_separator")]
 	public string? TokenSeparator { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "shingle";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -55,22 +53,17 @@ public sealed partial class ShingleTokenFilter : ITokenFilter
 public sealed partial class ShingleTokenFilterDescriptor : SerializableDescriptor<ShingleTokenFilterDescriptor>, IBuildableDescriptor<ShingleTokenFilter>
 {
 	internal ShingleTokenFilterDescriptor(Action<ShingleTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public ShingleTokenFilterDescriptor() : base()
 	{
 	}
 
 	private string? FillerTokenValue { get; set; }
-
 	private Union<int?, string?>? MaxShingleSizeValue { get; set; }
-
 	private Union<int?, string?>? MinShingleSizeValue { get; set; }
-
 	private bool? OutputUnigramsValue { get; set; }
-
 	private bool? OutputUnigramsIfNoShinglesValue { get; set; }
-
 	private string? TokenSeparatorValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public ShingleTokenFilterDescriptor FillerToken(string? fillerToken)

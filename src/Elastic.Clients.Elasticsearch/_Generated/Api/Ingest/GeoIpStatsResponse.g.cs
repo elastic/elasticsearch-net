@@ -15,19 +15,20 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Id, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
-
 	[JsonInclude, JsonPropertyName("stats")]
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; init; }
 }

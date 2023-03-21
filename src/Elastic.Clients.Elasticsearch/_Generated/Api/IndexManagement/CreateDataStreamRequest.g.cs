@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class CreateDataStreamRequestParameters : RequestParameters
 {
 }
@@ -38,13 +40,16 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => false;
 }
 
 public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptor<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
 {
 	internal CreateDataStreamRequestDescriptor(Action<CreateDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+
 	public CreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 	{
 	}
@@ -54,8 +59,11 @@ public sealed partial class CreateDataStreamRequestDescriptor : RequestDescripto
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => false;
+
 	public CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamName name)
 	{
 		RouteValues.Required("name", name);

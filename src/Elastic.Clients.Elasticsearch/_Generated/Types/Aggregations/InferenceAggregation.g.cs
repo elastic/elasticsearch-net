@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAggregation>
 {
 	public override InferenceAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -150,42 +152,33 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 public sealed partial class InferenceAggregation : SearchAggregation
 {
 	public InferenceAggregation(string name) => Name = name;
+
 	internal InferenceAggregation()
 	{
 	}
 
 	public string? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
-
 	public override string? Name { get; internal set; }
 }
 
 public sealed partial class InferenceAggregationDescriptor<TDocument> : SerializableDescriptor<InferenceAggregationDescriptor<TDocument>>
 {
 	internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
-
 	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-
 	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
 	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)
@@ -285,22 +278,17 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 public sealed partial class InferenceAggregationDescriptor : SerializableDescriptor<InferenceAggregationDescriptor>
 {
 	internal InferenceAggregationDescriptor(Action<InferenceAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
-
 	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-
 	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
 	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)

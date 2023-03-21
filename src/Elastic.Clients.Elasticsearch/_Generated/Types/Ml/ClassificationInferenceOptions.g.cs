@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class ClassificationInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
-
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public string? TopClassesResultsField { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class ClassificationInferenceOptions
 public sealed partial class ClassificationInferenceOptionsDescriptor : SerializableDescriptor<ClassificationInferenceOptionsDescriptor>
 {
 	internal ClassificationInferenceOptionsDescriptor(Action<ClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public ClassificationInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopClassesValue { get; set; }
-
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private string? PredictionFieldTypeValue { get; set; }
-
 	private string? ResultsFieldValue { get; set; }
-
 	private string? TopClassesResultsFieldValue { get; set; }
 
 	public ClassificationInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)

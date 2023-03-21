@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KeepTypesTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("mode")]
@@ -33,9 +35,9 @@ public sealed partial class KeepTypesTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keep_types";
+
 	[JsonInclude, JsonPropertyName("types")]
 	public ICollection<string>? Types { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +45,13 @@ public sealed partial class KeepTypesTokenFilter : ITokenFilter
 public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescriptor<KeepTypesTokenFilterDescriptor>, IBuildableDescriptor<KeepTypesTokenFilter>
 {
 	internal KeepTypesTokenFilterDescriptor(Action<KeepTypesTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KeepTypesTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? ModeValue { get; set; }
-
 	private ICollection<string>? TypesValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? mode)

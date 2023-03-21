@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed class ProcessorGrokRequestParameters : RequestParameters
 {
 }
@@ -34,20 +36,26 @@ public sealed class ProcessorGrokRequestParameters : RequestParameters
 public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
 }
 
 public sealed partial class ProcessorGrokRequestDescriptor : RequestDescriptor<ProcessorGrokRequestDescriptor, ProcessorGrokRequestParameters>
 {
 	internal ProcessorGrokRequestDescriptor(Action<ProcessorGrokRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ProcessorGrokRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

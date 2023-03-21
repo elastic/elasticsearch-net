@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class HtmlStripCharFilter : ICharFilter
 {
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "html_strip";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -37,6 +40,7 @@ public sealed partial class HtmlStripCharFilter : ICharFilter
 public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptor<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>
 {
 	internal HtmlStripCharFilterDescriptor(Action<HtmlStripCharFilterDescriptor> configure) => configure.Invoke(this);
+
 	public HtmlStripCharFilterDescriptor() : base()
 	{
 	}

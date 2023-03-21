@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,13 +27,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class SimulateIndexTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
@@ -43,35 +44,29 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_patterns")]
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
-
 	[JsonInclude, JsonPropertyName("composed_of")]
 	public ICollection<string>? ComposedOf { get; set; }
-
 	[JsonInclude, JsonPropertyName("template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? Template { get; set; }
-
 	[JsonInclude, JsonPropertyName("data_stream")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStream { get; set; }
-
 	[JsonInclude, JsonPropertyName("priority")]
 	public int? Priority { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-
 	[JsonInclude, JsonPropertyName("_meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 }
@@ -79,6 +74,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateRequestParameters>
 {
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -88,10 +84,14 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);
@@ -99,27 +99,16 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-
 	private IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
-
 	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private bool? AllowAutoCreateValue { get; set; }
-
 	private ICollection<string>? ComposedOfValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-
 	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-
 	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-
 	private int? PriorityValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)
@@ -284,6 +273,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDescriptor<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateRequestParameters>
 {
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -293,10 +283,14 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public SimulateIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);
@@ -304,27 +298,16 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-
 	private IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
-
 	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private bool? AllowAutoCreateValue { get; set; }
-
 	private ICollection<string>? ComposedOfValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-
 	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-
 	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
-
 	private int? PriorityValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public SimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? template)

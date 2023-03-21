@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class ZeroShotClassificationInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string> ClassificationLabels { get; set; }
-
 	[JsonInclude, JsonPropertyName("hypothesis_template")]
 	public string? HypothesisTemplate { get; set; }
-
 	[JsonInclude, JsonPropertyName("labels")]
 	public ICollection<string>? Labels { get; set; }
-
 	[JsonInclude, JsonPropertyName("multi_label")]
 	public bool? MultiLabel { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -51,24 +48,18 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
 {
 	internal ZeroShotClassificationInferenceOptionsDescriptor(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public ZeroShotClassificationInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> ClassificationLabelsValue { get; set; }
-
 	private string? HypothesisTemplateValue { get; set; }
-
 	private ICollection<string>? LabelsValue { get; set; }
-
 	private bool? MultiLabelValue { get; set; }
-
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
-
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string> classificationLabels)

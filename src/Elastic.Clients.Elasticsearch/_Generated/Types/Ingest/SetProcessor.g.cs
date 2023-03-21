@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class SetProcessor
 {
 	[JsonInclude, JsonPropertyName("copy_from")]
 	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
-
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_empty_value")]
 	public bool? IgnoreEmptyValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("media_type")]
 	public string? MediaType { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("value")]
 	public object? Value { get; set; }
 
@@ -66,36 +58,24 @@ public sealed partial class SetProcessor
 public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDescriptor<SetProcessorDescriptor<TDocument>>
 {
 	internal SetProcessorDescriptor(Action<SetProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SetProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? CopyFromValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreEmptyValueValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? MediaTypeValue { get; set; }
-
 	private bool? OverrideValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private object? ValueValue { get; set; }
 
 	public SetProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -303,36 +283,24 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetProcessorDescriptor>
 {
 	internal SetProcessorDescriptor(Action<SetProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public SetProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? CopyFromValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreEmptyValueValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? MediaTypeValue { get; set; }
-
 	private bool? OverrideValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private object? ValueValue { get; set; }
 
 	public SetProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

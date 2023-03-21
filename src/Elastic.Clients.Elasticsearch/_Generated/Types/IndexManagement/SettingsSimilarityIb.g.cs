@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarityIb
 {
 	[JsonInclude, JsonPropertyName("distribution")]
 	public Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
-
 	[JsonInclude, JsonPropertyName("lambda")]
 	public Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
-
 	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
@@ -44,14 +44,13 @@ public sealed partial class SettingsSimilarityIb
 public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescriptor<SettingsSimilarityIbDescriptor>
 {
 	internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityIbDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IBDistribution DistributionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IBLambda LambdaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
 
 	public SettingsSimilarityIbDescriptor Distribution(Elastic.Clients.Elasticsearch.IBDistribution distribution)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class TextClassificationInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("classification_labels")]
 	public ICollection<string>? ClassificationLabels { get; set; }
-
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -45,20 +44,16 @@ public sealed partial class TextClassificationInferenceOptions
 public sealed partial class TextClassificationInferenceOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceOptionsDescriptor>
 {
 	internal TextClassificationInferenceOptionsDescriptor(Action<TextClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public TextClassificationInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? ClassificationLabelsValue { get; set; }
-
 	private int? NumTopClassesValue { get; set; }
-
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
-
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public TextClassificationInferenceOptionsDescriptor ClassificationLabels(ICollection<string>? classificationLabels)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class ElisionTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("articles")]
 	public ICollection<string>? Articles { get; set; }
-
 	[JsonInclude, JsonPropertyName("articles_case")]
 	public bool? ArticlesCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "elision";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -46,16 +47,14 @@ public sealed partial class ElisionTokenFilter : ITokenFilter
 public sealed partial class ElisionTokenFilterDescriptor : SerializableDescriptor<ElisionTokenFilterDescriptor>, IBuildableDescriptor<ElisionTokenFilter>
 {
 	internal ElisionTokenFilterDescriptor(Action<ElisionTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public ElisionTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? ArticlesValue { get; set; }
-
 	private bool? ArticlesCaseValue { get; set; }
-
 	private string? ArticlesPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public ElisionTokenFilterDescriptor Articles(ICollection<string>? articles)

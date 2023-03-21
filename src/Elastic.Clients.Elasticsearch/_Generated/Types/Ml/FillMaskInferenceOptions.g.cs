@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class FillMaskInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
@@ -42,18 +42,15 @@ public sealed partial class FillMaskInferenceOptions
 public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDescriptor<FillMaskInferenceOptionsDescriptor>
 {
 	internal FillMaskInferenceOptionsDescriptor(Action<FillMaskInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public FillMaskInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopClassesValue { get; set; }
-
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
-
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	public FillMaskInferenceOptionsDescriptor NumTopClasses(int? numTopClasses)

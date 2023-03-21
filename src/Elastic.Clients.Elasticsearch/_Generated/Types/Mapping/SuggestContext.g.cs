@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class SuggestContext
 {
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
-
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-
 	[JsonInclude, JsonPropertyName("precision")]
 	public Union<int?, string?>? Precision { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 }
@@ -43,16 +42,14 @@ public sealed partial class SuggestContext
 public sealed partial class SuggestContextDescriptor<TDocument> : SerializableDescriptor<SuggestContextDescriptor<TDocument>>
 {
 	internal SuggestContextDescriptor(Action<SuggestContextDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SuggestContextDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
 	private Union<int?, string?>? PrecisionValue { get; set; }
-
 	private string TypeValue { get; set; }
 
 	public SuggestContextDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
@@ -111,16 +108,14 @@ public sealed partial class SuggestContextDescriptor<TDocument> : SerializableDe
 public sealed partial class SuggestContextDescriptor : SerializableDescriptor<SuggestContextDescriptor>
 {
 	internal SuggestContextDescriptor(Action<SuggestContextDescriptor> configure) => configure.Invoke(this);
+
 	public SuggestContextDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
 	private Union<int?, string?>? PrecisionValue { get; set; }
-
 	private string TypeValue { get; set; }
 
 	public SuggestContextDescriptor Name(Elastic.Clients.Elasticsearch.Name name)

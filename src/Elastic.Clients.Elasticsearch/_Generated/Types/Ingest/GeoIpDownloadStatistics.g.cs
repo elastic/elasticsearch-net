@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class GeoIpDownloadStatistics
 {
 	[JsonInclude, JsonPropertyName("database_count")]
 	public int DatabaseCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("failed_downloads")]
 	public int FailedDownloads { get; init; }
-
 	[JsonInclude, JsonPropertyName("skipped_updates")]
 	public int SkippedUpdates { get; init; }
-
 	[JsonInclude, JsonPropertyName("successful_downloads")]
 	public int SuccessfulDownloads { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_download_time")]
 	public long TotalDownloadTime { get; init; }
 }

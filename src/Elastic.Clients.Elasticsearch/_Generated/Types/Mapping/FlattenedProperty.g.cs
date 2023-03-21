@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,49 +25,36 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class FlattenedProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("depth_limit")]
 	public int? DepthLimit { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
 	public bool? SplitQueriesOnWhitespace { get; set; }
 
@@ -77,36 +66,24 @@ public sealed partial class FlattenedProperty : IProperty
 public sealed partial class FlattenedPropertyDescriptor<TDocument> : SerializableDescriptor<FlattenedPropertyDescriptor<TDocument>>, IBuildableDescriptor<FlattenedProperty>
 {
 	internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FlattenedPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private int? DepthLimitValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 
 	public FlattenedPropertyDescriptor<TDocument> Boost(double? boost)
@@ -335,36 +312,24 @@ public sealed partial class FlattenedPropertyDescriptor<TDocument> : Serializabl
 public sealed partial class FlattenedPropertyDescriptor : SerializableDescriptor<FlattenedPropertyDescriptor>, IBuildableDescriptor<FlattenedProperty>
 {
 	internal FlattenedPropertyDescriptor(Action<FlattenedPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public FlattenedPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private int? DepthLimitValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 
 	public FlattenedPropertyDescriptor Boost(double? boost)

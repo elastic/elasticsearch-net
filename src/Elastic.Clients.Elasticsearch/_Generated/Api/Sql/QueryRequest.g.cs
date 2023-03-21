@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
+
 public sealed class QueryRequestParameters : RequestParameters
 {
 }
@@ -34,53 +36,41 @@ public sealed class QueryRequestParameters : RequestParameters
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonInclude, JsonPropertyName("catalog")]
 	public string? Catalog { get; set; }
-
 	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
-
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; set; }
-
 	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("request_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("page_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
-
 	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
 	public bool? FieldMultiValueLeniency { get; set; }
-
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_using_frozen")]
 	public bool? IndexUsingFrozen { get; set; }
 }
@@ -88,47 +78,34 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescriptor<QueryRequestDescriptor<TDocument>, QueryRequestParameters>
 {
 	internal QueryRequestDescriptor(Action<QueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public QueryRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private string? CatalogValue { get; set; }
-
 	private bool? ColumnarValue { get; set; }
-
 	private string? CursorValue { get; set; }
-
 	private int? FetchSizeValue { get; set; }
-
 	private bool? FieldMultiValueLeniencyValue { get; set; }
-
 	private bool? IndexUsingFrozenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
 	private bool? KeepOnCompletionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private string? QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -361,47 +338,34 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequestDescriptor, QueryRequestParameters>
 {
 	internal QueryRequestDescriptor(Action<QueryRequestDescriptor> configure) => configure.Invoke(this);
+
 	public QueryRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private string? CatalogValue { get; set; }
-
 	private bool? ColumnarValue { get; set; }
-
 	private string? CursorValue { get; set; }
-
 	private int? FetchSizeValue { get; set; }
-
 	private bool? FieldMultiValueLeniencyValue { get; set; }
-
 	private bool? IndexUsingFrozenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-
 	private bool? KeepOnCompletionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private string? QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)

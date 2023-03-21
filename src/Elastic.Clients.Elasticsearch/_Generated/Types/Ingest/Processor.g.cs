@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 [JsonConverter(typeof(ProcessorConverter))]
 public sealed partial class Processor
 {
@@ -41,7 +43,6 @@ public sealed partial class Processor
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static Processor Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor appendProcessor) => new Processor("append", appendProcessor);
@@ -444,20 +445,17 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescriptor<ProcessorDescriptor<TDocument>>
 {
 	internal ProcessorDescriptor(Action<ProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ProcessorDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ProcessorDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ProcessorDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -541,6 +539,7 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Urldecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor<TDocument> UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor<TDocument> UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -566,20 +565,17 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 public sealed partial class ProcessorDescriptor : SerializableDescriptor<ProcessorDescriptor>
 {
 	internal ProcessorDescriptor(Action<ProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public ProcessorDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ProcessorDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ProcessorDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -696,6 +692,7 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor UserAgent(Action<UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
 	public ProcessorDescriptor UserAgent<TDocument>(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

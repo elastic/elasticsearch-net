@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class KnnQuery
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("k")]
 	public long k { get; set; }
-
 	[JsonInclude, JsonPropertyName("num_candidates")]
 	public long NumCandidates { get; set; }
-
 	[JsonInclude, JsonPropertyName("query_vector")]
 	public ICollection<double> QueryVector { get; set; }
 }
@@ -49,26 +46,19 @@ public sealed partial class KnnQuery
 public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescriptor<KnnQueryDescriptor<TDocument>>
 {
 	internal KnnQueryDescriptor(Action<KnnQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public KnnQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private long kValue { get; set; }
-
 	private long NumCandidatesValue { get; set; }
-
 	private ICollection<double> QueryVectorValue { get; set; }
 
 	public KnnQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
@@ -196,26 +186,19 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQueryDescriptor>
 {
 	internal KnnQueryDescriptor(Action<KnnQueryDescriptor> configure) => configure.Invoke(this);
+
 	public KnnQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private long kValue { get; set; }
-
 	private long NumCandidatesValue { get; set; }
-
 	private ICollection<double> QueryVectorValue { get; set; }
 
 	public KnnQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)

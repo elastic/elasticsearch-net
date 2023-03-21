@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexRoutingAllocation
 {
 	[JsonInclude, JsonPropertyName("disk")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? Disk { get; set; }
-
 	[JsonInclude, JsonPropertyName("enable")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? Enable { get; set; }
-
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? Include { get; set; }
-
 	[JsonInclude, JsonPropertyName("initial_recovery")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecovery { get; set; }
 }
@@ -43,28 +42,20 @@ public sealed partial class IndexRoutingAllocation
 public sealed partial class IndexRoutingAllocationDescriptor : SerializableDescriptor<IndexRoutingAllocationDescriptor>
 {
 	internal IndexRoutingAllocationDescriptor(Action<IndexRoutingAllocationDescriptor> configure) => configure.Invoke(this);
+
 	public IndexRoutingAllocationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? DiskValue { get; set; }
-
 	private IndexRoutingAllocationDiskDescriptor DiskDescriptor { get; set; }
-
 	private Action<IndexRoutingAllocationDiskDescriptor> DiskDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? EnableValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude? IncludeValue { get; set; }
-
 	private IndexRoutingAllocationIncludeDescriptor IncludeDescriptor { get; set; }
-
 	private Action<IndexRoutingAllocationIncludeDescriptor> IncludeDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery? InitialRecoveryValue { get; set; }
-
 	private IndexRoutingAllocationInitialRecoveryDescriptor InitialRecoveryDescriptor { get; set; }
-
 	private Action<IndexRoutingAllocationInitialRecoveryDescriptor> InitialRecoveryDescriptorAction { get; set; }
 
 	public IndexRoutingAllocationDescriptor Disk(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk? disk)

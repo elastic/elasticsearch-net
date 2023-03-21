@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class RankEvalRequestItem
 {
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
-
 	[JsonInclude, JsonPropertyName("ratings")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
-
 	[JsonInclude, JsonPropertyName("request")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? Request { get; set; }
-
 	[JsonInclude, JsonPropertyName("template_id")]
 	public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 }
@@ -46,28 +44,20 @@ public sealed partial class RankEvalRequestItem
 public sealed partial class RankEvalRequestItemDescriptor<TDocument> : SerializableDescriptor<RankEvalRequestItemDescriptor<TDocument>>
 {
 	internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RankEvalRequestItemDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-
 	private RankEvalQueryDescriptor<TDocument> RequestDescriptor { get; set; }
-
 	private Action<RankEvalQueryDescriptor<TDocument>> RequestDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
-
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
-
 	private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
-
 	private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
 
 	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? request)
@@ -219,28 +209,20 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 public sealed partial class RankEvalRequestItemDescriptor : SerializableDescriptor<RankEvalRequestItemDescriptor>
 {
 	internal RankEvalRequestItemDescriptor(Action<RankEvalRequestItemDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalRequestItemDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-
 	private RankEvalQueryDescriptor RequestDescriptor { get; set; }
-
 	private Action<RankEvalQueryDescriptor> RequestDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> RatingsValue { get; set; }
-
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
-
 	private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
-
 	private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id? TemplateIdValue { get; set; }
 
 	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? request)

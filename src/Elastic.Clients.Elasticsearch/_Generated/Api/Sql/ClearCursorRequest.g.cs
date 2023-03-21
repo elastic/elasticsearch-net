@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Sql;
+
 public sealed class ClearCursorRequestParameters : RequestParameters
 {
 }
@@ -34,8 +36,11 @@ public sealed class ClearCursorRequestParameters : RequestParameters
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string Cursor { get; set; }
 }
@@ -43,13 +48,17 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<ClearCursorRequestDescriptor, ClearCursorRequestParameters>
 {
 	internal ClearCursorRequestDescriptor(Action<ClearCursorRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ClearCursorRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	private string CursorValue { get; set; }
 
 	public ClearCursorRequestDescriptor Cursor(string cursor)

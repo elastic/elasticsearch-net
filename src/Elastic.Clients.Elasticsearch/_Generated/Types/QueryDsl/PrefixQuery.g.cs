@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 {
 	public override PrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -131,15 +133,10 @@ public sealed partial class PrefixQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public bool? CaseInsensitive { get; set; }
-
 	public string? Rewrite { get; set; }
-
 	public string Value { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(PrefixQuery prefixQuery) => QueryDsl.Query.Prefix(prefixQuery);
@@ -148,6 +145,7 @@ public sealed partial class PrefixQuery : SearchQuery
 public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
 {
 	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal PrefixQueryDescriptor() : base()
 	{
 	}
@@ -167,15 +165,10 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string ValueValue { get; set; }
 
 	public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -261,6 +254,7 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<PrefixQueryDescriptor>
 {
 	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal PrefixQueryDescriptor() : base()
 	{
 	}
@@ -273,15 +267,10 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string ValueValue { get; set; }
 
 	public PrefixQueryDescriptor QueryName(string? queryName)

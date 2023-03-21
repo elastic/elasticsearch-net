@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class TotalHits
 {
 	[JsonInclude, JsonPropertyName("relation")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; init; }
-
 	[JsonInclude, JsonPropertyName("value")]
 	public long Value { get; init; }
 }

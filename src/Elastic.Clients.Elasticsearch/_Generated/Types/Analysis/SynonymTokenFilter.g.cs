@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,29 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class SynonymTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("expand")]
 	public bool? Expand { get; set; }
-
 	[JsonInclude, JsonPropertyName("format")]
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
-
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public ICollection<string>? Synonyms { get; set; }
-
 	[JsonInclude, JsonPropertyName("synonyms_path")]
 	public string? SynonymsPath { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string? Tokenizer { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "synonym";
+
 	[JsonInclude, JsonPropertyName("updateable")]
 	public bool? Updateable { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -58,24 +55,18 @@ public sealed partial class SynonymTokenFilter : ITokenFilter
 public sealed partial class SynonymTokenFilterDescriptor : SerializableDescriptor<SynonymTokenFilterDescriptor>, IBuildableDescriptor<SynonymTokenFilter>
 {
 	internal SynonymTokenFilterDescriptor(Action<SynonymTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public SynonymTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? ExpandValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? FormatValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private ICollection<string>? SynonymsValue { get; set; }
-
 	private string? SynonymsPathValue { get; set; }
-
 	private string? TokenizerValue { get; set; }
-
 	private bool? UpdateableValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public SynonymTokenFilterDescriptor Expand(bool? expand = true)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SoftDeletes
 {
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("retention_lease")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLease { get; set; }
 }
@@ -37,16 +38,14 @@ public sealed partial class SoftDeletes
 public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftDeletesDescriptor>
 {
 	internal SoftDeletesDescriptor(Action<SoftDeletesDescriptor> configure) => configure.Invoke(this);
+
 	public SoftDeletesDescriptor() : base()
 	{
 	}
 
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; set; }
-
 	private RetentionLeaseDescriptor RetentionLeaseDescriptor { get; set; }
-
 	private Action<RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
 
 	public SoftDeletesDescriptor Enabled(bool? enabled = true)

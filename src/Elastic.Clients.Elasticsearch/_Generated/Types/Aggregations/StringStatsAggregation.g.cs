@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class StringStatsAggregationConverter : JsonConverter<StringStatsAggregation>
 {
 	public override StringStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,38 +157,31 @@ public sealed partial class StringStatsAggregation : SearchAggregation
 {
 	public StringStatsAggregation(string name, Field field) : this(name) => Field = field;
 	public StringStatsAggregation(string name) => Name = name;
+
 	internal StringStatsAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	public bool? ShowDistribution { get; set; }
 }
 
 public sealed partial class StringStatsAggregationDescriptor<TDocument> : SerializableDescriptor<StringStatsAggregationDescriptor<TDocument>>
 {
 	internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public StringStatsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private bool? ShowDistributionValue { get; set; }
 
 	public StringStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -268,18 +263,15 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 public sealed partial class StringStatsAggregationDescriptor : SerializableDescriptor<StringStatsAggregationDescriptor>
 {
 	internal StringStatsAggregationDescriptor(Action<StringStatsAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public StringStatsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private bool? ShowDistributionValue { get; set; }
 
 	public StringStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

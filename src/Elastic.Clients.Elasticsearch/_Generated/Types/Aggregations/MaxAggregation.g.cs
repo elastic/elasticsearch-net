@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class MaxAggregationConverter : JsonConverter<MaxAggregation>
 {
 	public override MaxAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,38 +157,31 @@ public sealed partial class MaxAggregation : SearchAggregation
 {
 	public MaxAggregation(string name, Field field) : this(name) => Field = field;
 	public MaxAggregation(string name) => Name = name;
+
 	internal MaxAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDescriptor<MaxAggregationDescriptor<TDocument>>
 {
 	internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MaxAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MaxAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -268,18 +263,15 @@ public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDe
 public sealed partial class MaxAggregationDescriptor : SerializableDescriptor<MaxAggregationDescriptor>
 {
 	internal MaxAggregationDescriptor(Action<MaxAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public MaxAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MaxAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

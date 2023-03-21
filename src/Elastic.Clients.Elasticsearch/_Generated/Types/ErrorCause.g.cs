@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 {
 	public override ErrorCause Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -85,16 +87,7 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 			}
 		}
 
-		return new ErrorCause
-		{
-			CausedBy = causedBy,
-			Reason = reason,
-			RootCause = rootCause,
-			StackTrace = stackTrace,
-			Suppressed = suppressed,
-			Type = type,
-			Metadata = additionalProperties
-		};
+		return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
 	}
 
 	public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
@@ -107,16 +100,10 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
-
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
-
 	public string? Reason { get; init; }
-
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
-
 	public string? StackTrace { get; init; }
-
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
-
 	public string Type { get; init; }
 }

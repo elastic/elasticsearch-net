@@ -15,25 +15,24 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class DeleteByQueryRethrottleResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("node_failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; init; }
-
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; init; }
-
 	[JsonInclude, JsonPropertyName("task_failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; init; }
-
 	[JsonInclude, JsonPropertyName("tasks")]
 	public Elastic.Clients.Elasticsearch.Tasks.TaskInfos? Tasks { get; init; }
 }

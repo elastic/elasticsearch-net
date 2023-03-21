@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexSettingsLifecycle
 {
 	[JsonInclude, JsonPropertyName("indexing_complete")]
 	public bool? IndexingComplete { get; set; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
-
 	[JsonInclude, JsonPropertyName("origination_date")]
 	public long? OriginationDate { get; set; }
-
 	[JsonInclude, JsonPropertyName("parse_origination_date")]
 	public bool? ParseOriginationDate { get; set; }
-
 	[JsonInclude, JsonPropertyName("rollover_alias")]
 	public string? RolloverAlias { get; set; }
-
 	[JsonInclude, JsonPropertyName("step")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? Step { get; set; }
 }
@@ -49,24 +46,18 @@ public sealed partial class IndexSettingsLifecycle
 public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescriptor<IndexSettingsLifecycleDescriptor>
 {
 	internal IndexSettingsLifecycleDescriptor(Action<IndexSettingsLifecycleDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSettingsLifecycleDescriptor() : base()
 	{
 	}
 
 	private bool? IndexingCompleteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-
 	private long? OriginationDateValue { get; set; }
-
 	private bool? ParseOriginationDateValue { get; set; }
-
 	private string? RolloverAliasValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? StepValue { get; set; }
-
 	private IndexSettingsLifecycleStepDescriptor StepDescriptor { get; set; }
-
 	private Action<IndexSettingsLifecycleStepDescriptor> StepDescriptorAction { get; set; }
 
 	public IndexSettingsLifecycleDescriptor IndexingComplete(bool? indexingComplete = true)

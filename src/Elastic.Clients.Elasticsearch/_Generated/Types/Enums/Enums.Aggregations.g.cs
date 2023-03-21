@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(CalendarIntervalConverter))]
 public enum CalendarInterval
 {
@@ -78,8 +80,7 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 				return CalendarInterval.Day;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
@@ -150,8 +151,7 @@ internal sealed class CardinalityExecutionModeConverter : JsonConverter<Cardinal
 				return CardinalityExecutionMode.Direct;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
@@ -205,8 +205,7 @@ internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
 				return GapPolicy.InsertZeros;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
@@ -266,8 +265,7 @@ internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
 				return MinimumInterval.Day;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
@@ -324,8 +322,7 @@ internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 				return MissingOrder.Default;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, MissingOrder value, JsonSerializerOptions options)
@@ -369,8 +366,7 @@ internal sealed class RateModeConverter : JsonConverter<RateMode>
 				return RateMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
@@ -411,8 +407,7 @@ internal sealed class TermsAggregationCollectModeConverter : JsonConverter<Terms
 				return TermsAggregationCollectMode.BreadthFirst;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsAggregationCollectMode value, JsonSerializerOptions options)
@@ -461,8 +456,7 @@ internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<Ter
 				return TermsAggregationExecutionHint.GlobalOrdinals;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsAggregationExecutionHint value, JsonSerializerOptions options)
@@ -513,8 +507,7 @@ internal sealed class TTestTypeConverter : JsonConverter<TTestType>
 				return TTestType.Heteroscedastic;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
@@ -590,8 +583,7 @@ internal sealed class ValueTypeConverter : JsonConverter<ValueType>
 				return ValueType.Boolean;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ValueType value, JsonSerializerOptions options)

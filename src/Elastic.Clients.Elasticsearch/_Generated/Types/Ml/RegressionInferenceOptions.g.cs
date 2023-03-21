@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class RegressionInferenceOptions
 {
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class RegressionInferenceOptions
 public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : SerializableDescriptor<RegressionInferenceOptionsDescriptor<TDocument>>
 {
 	internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RegressionInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	public RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
@@ -85,12 +86,12 @@ public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : Se
 public sealed partial class RegressionInferenceOptionsDescriptor : SerializableDescriptor<RegressionInferenceOptionsDescriptor>
 {
 	internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public RegressionInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	public RegressionInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)

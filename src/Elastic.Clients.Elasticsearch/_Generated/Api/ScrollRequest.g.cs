@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class ScrollRequestParameters : RequestParameters
 {
 	[JsonIgnore]
@@ -36,14 +38,15 @@ public sealed class ScrollRequestParameters : RequestParameters
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-
 	[JsonInclude, JsonPropertyName("scroll")]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
-
 	[JsonInclude, JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 }
@@ -51,16 +54,20 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRequestDescriptor, ScrollRequestParameters>
 {
 	internal ScrollRequestDescriptor(Action<ScrollRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ScrollRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-	internal override bool SupportsBody => true;
-	public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
+	internal override bool SupportsBody => true;
+
+	public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
+
+	private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScrollId ScrollIdValue { get; set; }
 
 	public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)

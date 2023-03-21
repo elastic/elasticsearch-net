@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class TermsEnumRequestParameters : RequestParameters
 {
 }
@@ -38,26 +40,23 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("case_insensitive")]
 	public bool? CaseInsensitive { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("string")]
 	public string? String { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_after")]
 	public string? SearchAfter { get; set; }
 }
@@ -65,6 +64,7 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescriptor<TermsEnumRequestDescriptor<TDocument>, TermsEnumRequestParameters>
 {
 	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
@@ -78,8 +78,11 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -87,21 +90,13 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? SearchAfterValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private string? StringValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)
@@ -228,6 +223,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<TermsEnumRequestDescriptor, TermsEnumRequestParameters>
 {
 	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor> configure) => configure.Invoke(this);
+
 	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
@@ -237,8 +233,11 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -246,21 +245,13 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? SearchAfterValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private string? StringValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 
 	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? indexFilter)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("stoptags")]
@@ -33,6 +35,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "kuromoji_part_of_speech";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : ITokenFilter
 public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : SerializableDescriptor<KuromojiPartOfSpeechTokenFilterDescriptor>, IBuildableDescriptor<KuromojiPartOfSpeechTokenFilter>
 {
 	internal KuromojiPartOfSpeechTokenFilterDescriptor(Action<KuromojiPartOfSpeechTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KuromojiPartOfSpeechTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> StoptagsValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KuromojiPartOfSpeechTokenFilterDescriptor Stoptags(ICollection<string> stoptags)

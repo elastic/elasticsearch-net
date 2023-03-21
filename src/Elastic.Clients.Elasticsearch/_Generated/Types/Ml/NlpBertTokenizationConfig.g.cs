@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class NlpBertTokenizationConfig
 {
 	[JsonInclude, JsonPropertyName("do_lower_case")]
 	public bool? DoLowerCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_sequence_length")]
 	public int? MaxSequenceLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("span")]
 	public int? Span { get; set; }
-
 	[JsonInclude, JsonPropertyName("truncate")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? Truncate { get; set; }
-
 	[JsonInclude, JsonPropertyName("with_special_tokens")]
 	public bool? WithSpecialTokens { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class NlpBertTokenizationConfig
 public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDescriptor<NlpBertTokenizationConfigDescriptor>
 {
 	internal NlpBertTokenizationConfigDescriptor(Action<NlpBertTokenizationConfigDescriptor> configure) => configure.Invoke(this);
+
 	public NlpBertTokenizationConfigDescriptor() : base()
 	{
 	}
 
 	private bool? DoLowerCaseValue { get; set; }
-
 	private int? MaxSequenceLengthValue { get; set; }
-
 	private int? SpanValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationTruncate? TruncateValue { get; set; }
-
 	private bool? WithSpecialTokensValue { get; set; }
 
 	public NlpBertTokenizationConfigDescriptor DoLowerCase(bool? doLowerCase = true)

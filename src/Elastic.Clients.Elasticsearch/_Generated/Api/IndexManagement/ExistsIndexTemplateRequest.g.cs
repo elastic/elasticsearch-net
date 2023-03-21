@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class ExistsIndexTemplateRequestParameters : RequestParameters
 {
 	[JsonIgnore]
@@ -40,8 +42,11 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
@@ -49,6 +54,7 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptor<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>
 {
 	internal ExistsIndexTemplateRequestDescriptor(Action<ExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ExistsIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -58,9 +64,13 @@ public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescri
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);

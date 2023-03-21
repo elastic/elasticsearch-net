@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class SnowballTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("language")]
@@ -33,6 +35,7 @@ public sealed partial class SnowballTokenFilter : ITokenFilter
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "snowball";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class SnowballTokenFilter : ITokenFilter
 public sealed partial class SnowballTokenFilterDescriptor : SerializableDescriptor<SnowballTokenFilterDescriptor>, IBuildableDescriptor<SnowballTokenFilter>
 {
 	internal SnowballTokenFilterDescriptor(Action<SnowballTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public SnowballTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public SnowballTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage language)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,8 +27,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class GetScriptLanguagesRequestParameters : RequestParameters
 {
 }
@@ -34,20 +36,26 @@ public sealed class GetScriptLanguagesRequestParameters : RequestParameters
 public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLanguagesRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
 }
 
 public sealed partial class GetScriptLanguagesRequestDescriptor : RequestDescriptor<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesRequestParameters>
 {
 	internal GetScriptLanguagesRequestDescriptor(Action<GetScriptLanguagesRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetScriptLanguagesRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

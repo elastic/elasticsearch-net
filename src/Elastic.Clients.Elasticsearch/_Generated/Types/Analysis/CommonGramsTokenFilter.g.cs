@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,23 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class CommonGramsTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("common_words")]
 	public ICollection<string>? CommonWords { get; set; }
-
 	[JsonInclude, JsonPropertyName("common_words_path")]
 	public string? CommonWordsPath { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("query_mode")]
 	public bool? QueryMode { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "common_grams";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -49,18 +49,15 @@ public sealed partial class CommonGramsTokenFilter : ITokenFilter
 public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescriptor<CommonGramsTokenFilterDescriptor>, IBuildableDescriptor<CommonGramsTokenFilter>
 {
 	internal CommonGramsTokenFilterDescriptor(Action<CommonGramsTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public CommonGramsTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? CommonWordsValue { get; set; }
-
 	private string? CommonWordsPathValue { get; set; }
-
 	private bool? IgnoreCaseValue { get; set; }
-
 	private bool? QueryModeValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public CommonGramsTokenFilterDescriptor CommonWords(ICollection<string>? commonWords)

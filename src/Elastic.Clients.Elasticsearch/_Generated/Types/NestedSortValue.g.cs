@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class NestedSortValue
 {
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
-
 	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
 }
@@ -43,24 +42,18 @@ public sealed partial class NestedSortValue
 public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableDescriptor<NestedSortValueDescriptor<TDocument>>
 {
 	internal NestedSortValueDescriptor(Action<NestedSortValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public NestedSortValueDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-
 	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-
 	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-
 	private int? MaxChildrenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -179,24 +172,18 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<NestedSortValueDescriptor>
 {
 	internal NestedSortValueDescriptor(Action<NestedSortValueDescriptor> configure) => configure.Invoke(this);
+
 	public NestedSortValueDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-
 	private NestedSortValueDescriptor NestedDescriptor { get; set; }
-
 	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-
 	private int? MaxChildrenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStatsAggregation>
 {
 	public override MatrixStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -136,34 +138,29 @@ internal sealed class MatrixStatsAggregationConverter : JsonConverter<MatrixStat
 public sealed partial class MatrixStatsAggregation : SearchAggregation
 {
 	public MatrixStatsAggregation(string name) => Name = name;
+
 	internal MatrixStatsAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
-
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-
 	public override string? Name { get; internal set; }
 }
 
 public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : SerializableDescriptor<MatrixStatsAggregationDescriptor<TDocument>>
 {
 	internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MatrixStatsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 	public MatrixStatsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
@@ -227,16 +224,14 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescriptor<MatrixStatsAggregationDescriptor>
 {
 	internal MatrixStatsAggregationDescriptor(Action<MatrixStatsAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public MatrixStatsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, double>? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 
 	public MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class DateRangeAggregationConverter : JsonConverter<DateRangeAggregation>
 {
 	public override DateRangeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -189,56 +191,40 @@ internal sealed class DateRangeAggregationConverter : JsonConverter<DateRangeAgg
 public sealed partial class DateRangeAggregation : SearchAggregation
 {
 	public DateRangeAggregation(string name) => Name = name;
+
 	internal DateRangeAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
 	public override string? Name { get; internal set; }
-
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
-
 	public string? TimeZone { get; set; }
 }
 
 public sealed partial class DateRangeAggregationDescriptor<TDocument> : SerializableDescriptor<DateRangeAggregationDescriptor<TDocument>>
 {
 	internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DateRangeAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
-
 	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
-
 	private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
-
 	private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
-
 	private string? TimeZoneValue { get; set; }
 
 	public DateRangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -427,32 +413,22 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 public sealed partial class DateRangeAggregationDescriptor : SerializableDescriptor<DateRangeAggregationDescriptor>
 {
 	internal DateRangeAggregationDescriptor(Action<DateRangeAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public DateRangeAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
-
 	private DateRangeExpressionDescriptor RangesDescriptor { get; set; }
-
 	private Action<DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
-
 	private Action<DateRangeExpressionDescriptor>[] RangesDescriptorActions { get; set; }
-
 	private string? TimeZoneValue { get; set; }
 
 	public DateRangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

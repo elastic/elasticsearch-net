@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class RankEvalMetricPrecision
 {
 	[JsonInclude, JsonPropertyName("ignore_unlabeled")]
 	public bool? IgnoreUnlabeled { get; set; }
-
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
-
 	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class RankEvalMetricPrecision
 public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptor<RankEvalMetricPrecisionDescriptor>
 {
 	internal RankEvalMetricPrecisionDescriptor(Action<RankEvalMetricPrecisionDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricPrecisionDescriptor() : base()
 	{
 	}
 
 	private bool? IgnoreUnlabeledValue { get; set; }
-
 	private int? kValue { get; set; }
-
 	private int? RelevantRatingThresholdValue { get; set; }
 
 	public RankEvalMetricPrecisionDescriptor IgnoreUnlabeled(bool? ignoreUnlabeled = true)

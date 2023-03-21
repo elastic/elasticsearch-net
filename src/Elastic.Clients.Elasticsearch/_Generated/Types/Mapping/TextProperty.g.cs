@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,73 +25,52 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class TextProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-
 	[JsonInclude, JsonPropertyName("fielddata")]
 	public bool? Fielddata { get; set; }
-
 	[JsonInclude, JsonPropertyName("fielddata_frequency_filter")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_phrases")]
 	public bool? IndexPhrases { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_prefixes")]
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
-
 	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
@@ -101,60 +82,36 @@ public sealed partial class TextProperty : IProperty
 public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDescriptor<TextPropertyDescriptor<TDocument>>, IBuildableDescriptor<TextProperty>
 {
 	internal TextPropertyDescriptor(Action<TextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TextPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private bool? FielddataValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilterValue { get; set; }
-
 	private IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
-
 	private Action<IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private bool? IndexPhrasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private int? PositionIncrementGapValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public TextPropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -591,60 +548,36 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 public sealed partial class TextPropertyDescriptor : SerializableDescriptor<TextPropertyDescriptor>, IBuildableDescriptor<TextProperty>
 {
 	internal TextPropertyDescriptor(Action<TextPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public TextPropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private bool? FielddataValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilterValue { get; set; }
-
 	private IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
-
 	private Action<IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private bool? IndexPhrasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-
 	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-
 	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private int? PositionIncrementGapValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public TextPropertyDescriptor Analyzer(string? analyzer)

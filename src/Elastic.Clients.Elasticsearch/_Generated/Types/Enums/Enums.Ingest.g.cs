@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 [JsonConverter(typeof(ConvertTypeConverter))]
 public enum ConvertType
 {
@@ -66,8 +68,7 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 				return ConvertType.Auto;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ConvertType value, JsonSerializerOptions options)
@@ -123,8 +124,7 @@ internal sealed class JsonProcessorConflictStrategyConverter : JsonConverter<Jso
 				return JsonProcessorConflictStrategy.Merge;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, JsonProcessorConflictStrategy value, JsonSerializerOptions options)
@@ -165,8 +165,7 @@ internal sealed class ShapeTypeConverter : JsonConverter<ShapeType>
 				return ShapeType.GeoShape;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ShapeType value, JsonSerializerOptions options)
@@ -239,8 +238,7 @@ internal sealed class UserAgentPropertyConverter : JsonConverter<UserAgentProper
 				return UserAgentProperty.Build;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, UserAgentProperty value, JsonSerializerOptions options)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class StandardAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
@@ -42,12 +43,12 @@ public sealed partial class StandardAnalyzer : IAnalyzer
 public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<StandardAnalyzerDescriptor>, IBuildableDescriptor<StandardAnalyzer>
 {
 	internal StandardAnalyzerDescriptor(Action<StandardAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public StandardAnalyzerDescriptor() : base()
 	{
 	}
 
 	private int? MaxTokenLengthValue { get; set; }
-
 	private ICollection<string>? StopwordsValue { get; set; }
 
 	public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)

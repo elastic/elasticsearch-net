@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SlowlogTresholds
 {
 	[JsonInclude, JsonPropertyName("fetch")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Fetch { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Query { get; set; }
 }
@@ -40,26 +40,19 @@ public sealed partial class SlowlogTresholds
 public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<SlowlogTresholdsDescriptor>
 {
 	internal SlowlogTresholdsDescriptor(Action<SlowlogTresholdsDescriptor> configure) => configure.Invoke(this);
+
 	public SlowlogTresholdsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? FetchValue { get; set; }
-
 	private SlowlogTresholdLevelsDescriptor FetchDescriptor { get; set; }
-
 	private Action<SlowlogTresholdLevelsDescriptor> FetchDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? IndexValue { get; set; }
-
 	private SlowlogTresholdLevelsDescriptor IndexDescriptor { get; set; }
-
 	private Action<SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? QueryValue { get; set; }
-
 	private SlowlogTresholdLevelsDescriptor QueryDescriptor { get; set; }
-
 	private Action<SlowlogTresholdLevelsDescriptor> QueryDescriptorAction { get; set; }
 
 	public SlowlogTresholdsDescriptor Fetch(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? fetch)

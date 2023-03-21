@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class DocumentRating
 {
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("rating")]
 	public int Rating { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class DocumentRating
 public sealed partial class DocumentRatingDescriptor : SerializableDescriptor<DocumentRatingDescriptor>
 {
 	internal DocumentRatingDescriptor(Action<DocumentRatingDescriptor> configure) => configure.Invoke(this);
+
 	public DocumentRatingDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-
 	private int RatingValue { get; set; }
 
 	public DocumentRatingDescriptor Id(Elastic.Clients.Elasticsearch.Id id)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class MultiplexerTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("filters")]
 	public ICollection<string> Filters { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "multiplexer";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +45,13 @@ public sealed partial class MultiplexerTokenFilter : ITokenFilter
 public sealed partial class MultiplexerTokenFilterDescriptor : SerializableDescriptor<MultiplexerTokenFilterDescriptor>, IBuildableDescriptor<MultiplexerTokenFilter>
 {
 	internal MultiplexerTokenFilterDescriptor(Action<MultiplexerTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public MultiplexerTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> FiltersValue { get; set; }
-
 	private bool? PreserveOriginalValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public MultiplexerTokenFilterDescriptor Filters(ICollection<string> filters)

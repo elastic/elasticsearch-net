@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,23 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("keywords")]
 	public ICollection<string>? Keywords { get; set; }
-
 	[JsonInclude, JsonPropertyName("keywords_path")]
 	public string? KeywordsPath { get; set; }
-
 	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keyword_marker";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -49,18 +49,15 @@ public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDescriptor<KeywordMarkerTokenFilterDescriptor>, IBuildableDescriptor<KeywordMarkerTokenFilter>
 {
 	internal KeywordMarkerTokenFilterDescriptor(Action<KeywordMarkerTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KeywordMarkerTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? IgnoreCaseValue { get; set; }
-
 	private ICollection<string>? KeywordsValue { get; set; }
-
 	private string? KeywordsPathValue { get; set; }
-
 	private string? KeywordsPatternValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)

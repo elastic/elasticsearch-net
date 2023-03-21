@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KeywordTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
@@ -33,6 +35,7 @@ public sealed partial class KeywordTokenizer : ITokenizer
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "keyword";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +43,12 @@ public sealed partial class KeywordTokenizer : ITokenizer
 public sealed partial class KeywordTokenizerDescriptor : SerializableDescriptor<KeywordTokenizerDescriptor>, IBuildableDescriptor<KeywordTokenizer>
 {
 	internal KeywordTokenizerDescriptor(Action<KeywordTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public KeywordTokenizerDescriptor() : base()
 	{
 	}
 
 	private int BufferSizeValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KeywordTokenizerDescriptor BufferSize(int bufferSize)

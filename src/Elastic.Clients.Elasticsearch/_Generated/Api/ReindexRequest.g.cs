@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,31 +27,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class ReindexRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
@@ -57,47 +52,37 @@ public sealed class ReindexRequestParameters : RequestParameters
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-
 	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
-
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
@@ -105,13 +90,17 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
 {
 	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ReindexRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
@@ -120,24 +109,16 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-
 	private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-
 	private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-
 	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-
 	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-
 	private long? MaxDocsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private long? SizeValue { get; set; }
 
 	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
@@ -278,13 +259,17 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
 {
 	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ReindexRequestDescriptor()
 	{
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 	public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
@@ -293,24 +278,16 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
+
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-
 	private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-
 	private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-
 	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-
 	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-
 	private long? MaxDocsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private long? SizeValue { get; set; }
 
 	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)

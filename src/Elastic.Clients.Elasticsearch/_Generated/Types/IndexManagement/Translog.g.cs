@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class Translog
 {
 	[JsonInclude, JsonPropertyName("durability")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? Durability { get; set; }
-
 	[JsonInclude, JsonPropertyName("flush_threshold_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("retention")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? Retention { get; set; }
-
 	[JsonInclude, JsonPropertyName("sync_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? SyncInterval { get; set; }
 }
@@ -43,20 +42,16 @@ public sealed partial class Translog
 public sealed partial class TranslogDescriptor : SerializableDescriptor<TranslogDescriptor>
 {
 	internal TranslogDescriptor(Action<TranslogDescriptor> configure) => configure.Invoke(this);
+
 	public TranslogDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? FlushThresholdSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.TranslogRetention? RetentionValue { get; set; }
-
 	private TranslogRetentionDescriptor RetentionDescriptor { get; set; }
-
 	private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? SyncIntervalValue { get; set; }
 
 	public TranslogDescriptor Durability(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? durability)

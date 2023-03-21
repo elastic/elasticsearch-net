@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,58 +25,45 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("adjust_offsets")]
 	public bool? AdjustOffsets { get; set; }
-
 	[JsonInclude, JsonPropertyName("catenate_all")]
 	public bool? CatenateAll { get; set; }
-
 	[JsonInclude, JsonPropertyName("catenate_numbers")]
 	public bool? CatenateNumbers { get; set; }
-
 	[JsonInclude, JsonPropertyName("catenate_words")]
 	public bool? CatenateWords { get; set; }
-
 	[JsonInclude, JsonPropertyName("generate_number_parts")]
 	public bool? GenerateNumberParts { get; set; }
-
 	[JsonInclude, JsonPropertyName("generate_word_parts")]
 	public bool? GenerateWordParts { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_keywords")]
 	public bool? IgnoreKeywords { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
-
 	[JsonInclude, JsonPropertyName("protected_words")]
 	public ICollection<string>? ProtectedWords { get; set; }
-
 	[JsonInclude, JsonPropertyName("protected_words_path")]
 	public string? ProtectedWordsPath { get; set; }
-
 	[JsonInclude, JsonPropertyName("split_on_case_change")]
 	public bool? SplitOnCaseChange { get; set; }
-
 	[JsonInclude, JsonPropertyName("split_on_numerics")]
 	public bool? SplitOnNumerics { get; set; }
-
 	[JsonInclude, JsonPropertyName("stem_english_possessive")]
 	public bool? StemEnglishPossessive { get; set; }
 
 	[JsonInclude]
 	[JsonPropertyName("type")]
 	public string Type => "word_delimiter_graph";
+
 	[JsonInclude, JsonPropertyName("type_table")]
 	public ICollection<string>? TypeTable { get; set; }
-
 	[JsonInclude, JsonPropertyName("type_table_path")]
 	public string? TypeTablePath { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -82,40 +71,26 @@ public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 public sealed partial class WordDelimiterGraphTokenFilterDescriptor : SerializableDescriptor<WordDelimiterGraphTokenFilterDescriptor>, IBuildableDescriptor<WordDelimiterGraphTokenFilter>
 {
 	internal WordDelimiterGraphTokenFilterDescriptor(Action<WordDelimiterGraphTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public WordDelimiterGraphTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? AdjustOffsetsValue { get; set; }
-
 	private bool? CatenateAllValue { get; set; }
-
 	private bool? CatenateNumbersValue { get; set; }
-
 	private bool? CatenateWordsValue { get; set; }
-
 	private bool? GenerateNumberPartsValue { get; set; }
-
 	private bool? GenerateWordPartsValue { get; set; }
-
 	private bool? IgnoreKeywordsValue { get; set; }
-
 	private bool? PreserveOriginalValue { get; set; }
-
 	private ICollection<string>? ProtectedWordsValue { get; set; }
-
 	private string? ProtectedWordsPathValue { get; set; }
-
 	private bool? SplitOnCaseChangeValue { get; set; }
-
 	private bool? SplitOnNumericsValue { get; set; }
-
 	private bool? StemEnglishPossessiveValue { get; set; }
-
 	private ICollection<string>? TypeTableValue { get; set; }
-
 	private string? TypeTablePathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public WordDelimiterGraphTokenFilterDescriptor AdjustOffsets(bool? adjustOffsets = true)

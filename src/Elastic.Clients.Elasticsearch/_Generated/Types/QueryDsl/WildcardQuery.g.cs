@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQuery>
 {
 	public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -147,17 +149,11 @@ public sealed partial class WildcardQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public bool? CaseInsensitive { get; set; }
-
 	public string? Rewrite { get; set; }
-
 	public string? Value { get; set; }
-
 	public string? Wildcard { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(WildcardQuery wildcardQuery) => QueryDsl.Query.Wildcard(wildcardQuery);
@@ -166,6 +162,7 @@ public sealed partial class WildcardQuery : SearchQuery
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal WildcardQueryDescriptor() : base()
 	{
 	}
@@ -185,17 +182,11 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string? ValueValue { get; set; }
-
 	private string? WildcardValue { get; set; }
 
 	public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -297,6 +288,7 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<WildcardQueryDescriptor>
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal WildcardQueryDescriptor() : base()
 	{
 	}
@@ -309,17 +301,11 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string? ValueValue { get; set; }
-
 	private string? WildcardValue { get; set; }
 
 	public WildcardQueryDescriptor QueryName(string? queryName)

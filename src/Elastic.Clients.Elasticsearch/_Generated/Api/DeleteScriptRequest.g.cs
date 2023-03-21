@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,13 +27,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class DeleteScriptRequestParameters : RequestParameters
 {
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -43,11 +44,13 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -55,6 +58,7 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDescriptor<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptRequestParameters>
 {
 	internal DeleteScriptRequestDescriptor(Action<DeleteScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DeleteScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -64,10 +68,14 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public DeleteScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public DeleteScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -82,6 +90,7 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<DeleteScriptRequestDescriptor, DeleteScriptRequestParameters>
 {
 	internal DeleteScriptRequestDescriptor(Action<DeleteScriptRequestDescriptor> configure) => configure.Invoke(this);
+
 	public DeleteScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -91,10 +100,14 @@ public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<De
 	}
 
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public DeleteScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public DeleteScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
