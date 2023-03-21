@@ -83,6 +83,12 @@ internal static class ApiUrlsLookups
 	internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "/_aliases" });
 	internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "/{index}/_doc/{id}", "/{index}/_doc" });
 	internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "/" });
+	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
+	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "/_ingest/geoip/stats" });
+	internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "/_ingest/pipeline", "/_ingest/pipeline/{id}" });
+	internal static ApiUrls IngestProcessorGrok = new ApiUrls(new[] { "/_ingest/processor/grok" });
+	internal static ApiUrls IngestPutPipeline = new ApiUrls(new[] { "/_ingest/pipeline/{id}" });
+	internal static ApiUrls IngestSimulate = new ApiUrls(new[] { "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate" });
 	internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
 	internal static ApiUrls NoNamespaceMsearch = new ApiUrls(new[] { "/_msearch", "/{index}/_msearch" });
 	internal static ApiUrls NoNamespaceMsearchTemplate = new ApiUrls(new[] { "/_msearch/template", "/{index}/_msearch/template" });
