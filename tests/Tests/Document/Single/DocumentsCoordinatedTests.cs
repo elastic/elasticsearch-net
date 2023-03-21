@@ -10,7 +10,7 @@ using Tests.Domain;
 
 namespace Tests.Document.Single;
 
-// TODO: This test could become brittle as test runner order is not neccesarily gaurunteed
+// TODO: This test could become brittle as test runner order is not necessarily guaranteed
 // We should review this and support attributes to order which test case is called first.
 public class DocumentsCoordinatedTests : CoordinatedIntegrationTestBase<WritableCluster>
 {

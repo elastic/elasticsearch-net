@@ -138,6 +138,12 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
+		if (DocValue is not null)
+		{
+			writer.WritePropertyName("doc");
+			JsonSerializer.Serialize(writer, DocValue, options);
+		}
+
 		if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -256,6 +262,12 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 		{
 			writer.WritePropertyName("_index");
 			JsonSerializer.Serialize(writer, IndexValue, options);
+		}
+
+		if (DocValue is not null)
+		{
+			writer.WritePropertyName("doc");
+			JsonSerializer.Serialize(writer, DocValue, options);
 		}
 
 		if (FieldsValue is not null)
