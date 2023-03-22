@@ -59,8 +59,10 @@ namespace Tests.Framework.EndpointTests
 		[U]
 		protected virtual async Task VerifyInitializerJson()
 		{
+			var json = SerializeUsingClient(Initializer);
+
 			if (VerifyJson)
-				await Verifier.VerifyJson(SerializeUsingClient(Initializer));
+				await Verifier.VerifyJson(json);
 		}
 
 		[U]

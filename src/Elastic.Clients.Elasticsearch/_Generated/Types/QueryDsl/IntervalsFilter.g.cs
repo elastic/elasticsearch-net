@@ -69,7 +69,11 @@ internal sealed partial class IntervalsFilterConverter : JsonConverter<Intervals
 	public override void Write(Utf8JsonWriter writer, IntervalsFilter value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
+		if (value.VariantName is not null & value.Variant is not null)
+		{
+			writer.WritePropertyName(value.VariantName);
+		}
+
 		writer.WriteEndObject();
 	}
 }

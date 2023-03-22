@@ -156,18 +156,21 @@ internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSugge
 			writer.WriteStringValue(value.Text);
 		}
 
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "completion":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester)value.Variant, options);
-				break;
-			case "phrase":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)value.Variant, options);
-				break;
-			case "term":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "completion":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester)value.Variant, options);
+					break;
+				case "phrase":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)value.Variant, options);
+					break;
+				case "term":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>(writer, (Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
@@ -236,12 +239,6 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
 		if (!string.IsNullOrEmpty(PrefixValue))
 		{
@@ -261,15 +258,19 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(TextValue);
 		}
 
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -339,12 +340,6 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
 		if (!string.IsNullOrEmpty(PrefixValue))
 		{
@@ -364,15 +359,19 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 			writer.WriteStringValue(TextValue);
 		}
 
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
