@@ -42,6 +42,18 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 		{
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
+				if (reader.ValueTextEquals("buckets_path"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.BucketsPath = value;
+					}
+
+					continue;
+				}
+
 				if (reader.ValueTextEquals("format"))
 				{
 					reader.Read();
@@ -117,6 +129,12 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 		writer.WriteStartObject();
 		writer.WritePropertyName("inference");
 		writer.WriteStartObject();
+		if (value.BucketsPath is not null)
+		{
+			writer.WritePropertyName("buckets_path");
+			JsonSerializer.Serialize(writer, value.BucketsPath, options);
+		}
+
 		if (!string.IsNullOrEmpty(value.Format))
 		{
 			writer.WritePropertyName("format");
@@ -157,6 +175,7 @@ public sealed partial class InferenceAggregation : SearchAggregation
 	{
 	}
 
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
@@ -176,6 +195,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
 	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
@@ -202,6 +222,12 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	{
+		BucketsPathValue = bucketsPath;
 		return Self;
 	}
 
@@ -250,6 +276,12 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
+		if (BucketsPathValue is not null)
+		{
+			writer.WritePropertyName("buckets_path");
+			JsonSerializer.Serialize(writer, BucketsPathValue, options);
+		}
+
 		if (!string.IsNullOrEmpty(FormatValue))
 		{
 			writer.WritePropertyName("format");
@@ -286,6 +318,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
 	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
@@ -312,6 +345,12 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	{
+		BucketsPathValue = bucketsPath;
 		return Self;
 	}
 
@@ -358,6 +397,12 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("inference_config");
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+		}
+
+		if (BucketsPathValue is not null)
+		{
+			writer.WritePropertyName("buckets_path");
+			JsonSerializer.Serialize(writer, BucketsPathValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(FormatValue))

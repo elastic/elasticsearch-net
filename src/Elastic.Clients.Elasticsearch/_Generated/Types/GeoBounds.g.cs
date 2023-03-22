@@ -30,6 +30,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <summary>
+/// <para>A geo bounding box. It can be represented in various ways:<br/>- as 4 top/bottom/left/right coordinates<br/>- as 2 top_left / bottom_right points<br/>- as 2 top_right / bottom_left points<br/>- as a WKT bounding box</para>
+/// </summary>
 [JsonConverter(typeof(GeoBoundsConverter))]
 public sealed partial class GeoBounds : IComplexUnion<GeoBounds.Kind>
 {

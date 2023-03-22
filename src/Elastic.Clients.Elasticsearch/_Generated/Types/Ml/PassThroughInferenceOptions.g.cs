@@ -43,6 +43,8 @@ public sealed partial class PassThroughInferenceOptions
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
+	[JsonInclude, JsonPropertyName("vocabulary")]
+	public Elastic.Clients.Elasticsearch.Ml.Vocabulary? Vocabulary { get; set; }
 
 	public static implicit operator InferenceConfigCreate(PassThroughInferenceOptions passThroughInferenceOptions) => Ml.InferenceConfigCreate.PassThrough(passThroughInferenceOptions);
 }
@@ -62,6 +64,9 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Ml.Vocabulary? VocabularyValue { get; set; }
+	private VocabularyDescriptor VocabularyDescriptor { get; set; }
+	private Action<VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
@@ -99,6 +104,30 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		return Self;
 	}
 
+	public PassThroughInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.Ml.Vocabulary? vocabulary)
+	{
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = null;
+		VocabularyValue = vocabulary;
+		return Self;
+	}
+
+	public PassThroughInferenceOptionsDescriptor Vocabulary(VocabularyDescriptor descriptor)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptorAction = null;
+		VocabularyDescriptor = descriptor;
+		return Self;
+	}
+
+	public PassThroughInferenceOptionsDescriptor Vocabulary(Action<VocabularyDescriptor> configure)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -122,6 +151,22 @@ public sealed partial class PassThroughInferenceOptionsDescriptor : Serializable
 		{
 			writer.WritePropertyName("tokenization");
 			JsonSerializer.Serialize(writer, TokenizationValue, options);
+		}
+
+		if (VocabularyDescriptor is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyDescriptor, options);
+		}
+		else if (VocabularyDescriptorAction is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, new VocabularyDescriptor(VocabularyDescriptorAction), options);
+		}
+		else if (VocabularyValue is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyValue, options);
 		}
 
 		writer.WriteEndObject();

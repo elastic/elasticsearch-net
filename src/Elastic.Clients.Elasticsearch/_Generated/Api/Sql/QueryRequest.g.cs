@@ -49,6 +49,10 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("catalog")]
 	public string? Catalog { get; set; }
+
+	/// <summary>
+	/// <para>If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 	[JsonInclude, JsonPropertyName("cursor")]
@@ -205,6 +209,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
 	{
 		ColumnarValue = columnar;
@@ -510,6 +517,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.</para>
+	/// </summary>
 	public QueryRequestDescriptor Columnar(bool? columnar = true)
 	{
 		ColumnarValue = columnar;
