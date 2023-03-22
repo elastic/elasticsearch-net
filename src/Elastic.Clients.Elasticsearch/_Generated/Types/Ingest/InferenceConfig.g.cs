@@ -86,15 +86,18 @@ internal sealed partial class InferenceConfigConverter : JsonConverter<Inference
 	public override void Write(Utf8JsonWriter writer, InferenceConfig value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "classification":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification)value.Variant, options);
-				break;
-			case "regression":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "classification":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification)value.Variant, options);
+					break;
+				case "regression":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
