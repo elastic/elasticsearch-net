@@ -26,7 +26,7 @@ jobs:
       matrix:
         branch: ${{ fromJson(needs.active-branches.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: "${{ matrix.branch }}"
       - run: "./.ci/make.sh codegen ${{ matrix.branch }}"
