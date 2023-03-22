@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,113 +27,199 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class UpdateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Only perform the operation if the document has this primary term.</para>
+	/// </summary>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
+	/// </summary>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The script language.</para>
+	/// </summary>
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If 'true', Elasticsearch refreshes the affected shards to make this operation<br/>visible to search, if 'wait_for' then wait for a refresh to make this operation<br/>visible to search, if 'false' do nothing with refreshes.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If true, the destination must be an index alias.</para>
+	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify how many times should the operation be retried when a conflict occurs.</para>
+	/// </summary>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the source fields you want to exclude.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the source fields you want to retrieve.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 }
 
+/// <summary>
+/// <para>Updates a document with a script or partial document.</para>
+/// </summary>
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequest<UpdateRequestParameters>
 {
 	public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>Only perform the operation if the document has this primary term.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
+	/// <summary>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
+	/// <summary>
+	/// <para>The script language.</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
+	/// <summary>
+	/// <para>If 'true', Elasticsearch refreshes the affected shards to make this operation<br/>visible to search, if 'wait_for' then wait for a refresh to make this operation<br/>visible to search, if 'false' do nothing with refreshes.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
+	/// <summary>
+	/// <para>If true, the destination must be an index alias.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
+	/// <summary>
+	/// <para>Specify how many times should the operation be retried when a conflict occurs.</para>
+	/// </summary>
 	[JsonIgnore]
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
+	/// <summary>
+	/// <para>Specify the source fields you want to exclude.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
+	/// <summary>
+	/// <para>Specify the source fields you want to retrieve.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
+	/// <summary>
+	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("detect_noop")]
 	public bool? DetectNoop { get; set; }
 
+	/// <summary>
+	/// <para>A partial update to an existing document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
 	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
 
+	/// <summary>
+	/// <para>Set to true to use the contents of 'doc' as the value of 'upsert'</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc_as_upsert")]
 	public bool? DocAsUpsert { get; set; }
 
+	/// <summary>
+	/// <para>Script to execute to update the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
+	/// <summary>
+	/// <para>Set to true to execute the script whether or not the document exists.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scripted_upsert")]
 	public bool? ScriptedUpsert { get; set; }
 
+	/// <summary>
+	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
+	/// <summary>
+	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("upsert")]
 	[SourceConverter]
 	public TDocument? Upsert { get; set; }
 }
 
+/// <summary>
+/// <para>Updates a document with a script or partial document.</para>
+/// </summary>
 public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptor<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 {
 	internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
+
 	public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
@@ -160,9 +248,12 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
@@ -174,6 +265,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -187,55 +279,70 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private bool? DetectNoopValue { get; set; }
-
 	private TPartialDocument? DocValue { get; set; }
-
 	private bool? DocAsUpsertValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private bool? ScriptedUpsertValue { get; set; }
-
 	private TDocument? UpsertValue { get; set; }
 
+	/// <summary>
+	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DetectNoop(bool? detectNoop = true)
 	{
 		DetectNoopValue = detectNoop;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A partial update to an existing document.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument? doc)
 	{
 		DocValue = doc;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to true to use the contents of 'doc' as the value of 'upsert'</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true)
 	{
 		DocAsUpsertValue = docAsUpsert;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Script to execute to update the document.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to true to execute the script whether or not the document exists.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool? scriptedUpsert = true)
 	{
 		ScriptedUpsertValue = scriptedUpsert;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
+	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert)
 	{
 		UpsertValue = upsert;

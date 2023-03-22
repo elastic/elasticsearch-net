@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 [JsonConverter(typeof(ActionConverter))]
 public sealed partial class Action
 {
@@ -41,7 +43,6 @@ public sealed partial class Action
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static Action Add(Elastic.Clients.Elasticsearch.IndexManagement.AddAction addAction) => new Action("add", addAction);
@@ -114,20 +115,17 @@ internal sealed partial class ActionConverter : JsonConverter<Action>
 public sealed partial class ActionDescriptor<TDocument> : SerializableDescriptor<ActionDescriptor<TDocument>>
 {
 	internal ActionDescriptor(Action<ActionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ActionDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ActionDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ActionDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -151,6 +149,7 @@ public sealed partial class ActionDescriptor<TDocument> : SerializableDescriptor
 	public ActionDescriptor<TDocument> Remove(Action<RemoveActionDescriptor> configure) => Set(configure, "remove");
 	public ActionDescriptor<TDocument> RemoveIndex(RemoveIndexAction removeIndexAction) => Set(removeIndexAction, "remove_index");
 	public ActionDescriptor<TDocument> RemoveIndex(Action<RemoveIndexActionDescriptor> configure) => Set(configure, "remove_index");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -176,20 +175,17 @@ public sealed partial class ActionDescriptor<TDocument> : SerializableDescriptor
 public sealed partial class ActionDescriptor : SerializableDescriptor<ActionDescriptor>
 {
 	internal ActionDescriptor(Action<ActionDescriptor> configure) => configure.Invoke(this);
+
 	public ActionDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ActionDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ActionDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -214,6 +210,7 @@ public sealed partial class ActionDescriptor : SerializableDescriptor<ActionDesc
 	public ActionDescriptor Remove(Action<RemoveActionDescriptor> configure) => Set(configure, "remove");
 	public ActionDescriptor RemoveIndex(RemoveIndexAction removeIndexAction) => Set(removeIndexAction, "remove_index");
 	public ActionDescriptor RemoveIndex(Action<RemoveIndexActionDescriptor> configure) => Set(configure, "remove_index");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

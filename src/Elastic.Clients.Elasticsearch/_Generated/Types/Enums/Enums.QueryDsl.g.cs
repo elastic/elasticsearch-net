@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(ChildScoreModeConverter))]
 public enum ChildScoreMode
 {
@@ -58,8 +60,7 @@ internal sealed class ChildScoreModeConverter : JsonConverter<ChildScoreMode>
 				return ChildScoreMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ChildScoreMode value, JsonSerializerOptions options)
@@ -109,8 +110,7 @@ internal sealed class CombinedFieldsOperatorConverter : JsonConverter<CombinedFi
 				return CombinedFieldsOperator.And;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CombinedFieldsOperator value, JsonSerializerOptions options)
@@ -151,8 +151,7 @@ internal sealed class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedF
 				return CombinedFieldsZeroTerms.All;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CombinedFieldsZeroTerms value, JsonSerializerOptions options)
@@ -225,8 +224,7 @@ internal sealed class FieldValueFactorModifierConverter : JsonConverter<FieldVal
 				return FieldValueFactorModifier.Ln;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldValueFactorModifier value, JsonSerializerOptions options)
@@ -307,8 +305,7 @@ internal sealed class FunctionBoostModeConverter : JsonConverter<FunctionBoostMo
 				return FunctionBoostMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FunctionBoostMode value, JsonSerializerOptions options)
@@ -377,8 +374,7 @@ internal sealed class FunctionScoreModeConverter : JsonConverter<FunctionScoreMo
 				return FunctionScoreMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FunctionScoreMode value, JsonSerializerOptions options)
@@ -435,8 +431,7 @@ internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidation
 				return GeoValidationMethod.Coerce;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoValidationMethod value, JsonSerializerOptions options)
@@ -482,8 +477,7 @@ internal sealed class OperatorConverter : JsonConverter<Operator>
 				return Operator.And;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Operator value, JsonSerializerOptions options)
@@ -528,8 +522,7 @@ internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
 				return RangeRelation.Contains;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, RangeRelation value, JsonSerializerOptions options)
@@ -589,8 +582,7 @@ internal sealed class TextQueryTypeConverter : JsonConverter<TextQueryType>
 				return TextQueryType.BestFields;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TextQueryType value, JsonSerializerOptions options)
@@ -643,8 +635,7 @@ internal sealed class ZeroTermsQueryConverter : JsonConverter<ZeroTermsQuery>
 				return ZeroTermsQuery.All;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ZeroTermsQuery value, JsonSerializerOptions options)

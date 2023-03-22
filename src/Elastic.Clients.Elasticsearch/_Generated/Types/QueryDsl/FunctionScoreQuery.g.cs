@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class FunctionScoreQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
-
 	[JsonInclude, JsonPropertyName("functions")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? Functions { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_boost")]
 	public double? MaxBoost { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
@@ -57,34 +52,23 @@ public sealed partial class FunctionScoreQuery : SearchQuery
 public sealed partial class FunctionScoreQueryDescriptor<TDocument> : SerializableDescriptor<FunctionScoreQueryDescriptor<TDocument>>
 {
 	internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FunctionScoreQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
-
 	private FunctionScoreDescriptor<TDocument> FunctionsDescriptor { get; set; }
-
 	private Action<FunctionScoreDescriptor<TDocument>> FunctionsDescriptorAction { get; set; }
-
 	private Action<FunctionScoreDescriptor<TDocument>>[] FunctionsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
-
 	private double? MaxBoostValue { get; set; }
-
 	private double? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
 	public FunctionScoreQueryDescriptor<TDocument> Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? functions)
@@ -276,34 +260,23 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 public sealed partial class FunctionScoreQueryDescriptor : SerializableDescriptor<FunctionScoreQueryDescriptor>
 {
 	internal FunctionScoreQueryDescriptor(Action<FunctionScoreQueryDescriptor> configure) => configure.Invoke(this);
+
 	public FunctionScoreQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
-
 	private FunctionScoreDescriptor FunctionsDescriptor { get; set; }
-
 	private Action<FunctionScoreDescriptor> FunctionsDescriptorAction { get; set; }
-
 	private Action<FunctionScoreDescriptor>[] FunctionsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
-
 	private double? MaxBoostValue { get; set; }
-
 	private double? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
 	public FunctionScoreQueryDescriptor Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? functions)

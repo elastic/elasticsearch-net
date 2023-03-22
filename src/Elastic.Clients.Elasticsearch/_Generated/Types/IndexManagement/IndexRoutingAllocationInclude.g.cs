@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexRoutingAllocationInclude
 {
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("_tier_preference")]
 	public string? TierPreference { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class IndexRoutingAllocationInclude
 public sealed partial class IndexRoutingAllocationIncludeDescriptor : SerializableDescriptor<IndexRoutingAllocationIncludeDescriptor>
 {
 	internal IndexRoutingAllocationIncludeDescriptor(Action<IndexRoutingAllocationIncludeDescriptor> configure) => configure.Invoke(this);
+
 	public IndexRoutingAllocationIncludeDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private string? TierPreferenceValue { get; set; }
 
 	public IndexRoutingAllocationIncludeDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQuery>
 {
 	public override WildcardQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -147,17 +149,27 @@ public sealed partial class WildcardQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public bool? CaseInsensitive { get; set; }
 
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public string? Rewrite { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public string? Value { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public string? Wildcard { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(WildcardQuery wildcardQuery) => QueryDsl.Query.Wildcard(wildcardQuery);
@@ -166,6 +178,7 @@ public sealed partial class WildcardQuery : SearchQuery
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal WildcardQueryDescriptor() : base()
 	{
 	}
@@ -185,17 +198,11 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string? ValueValue { get; set; }
-
 	private string? WildcardValue { get; set; }
 
 	public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -210,6 +217,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -228,18 +238,27 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Value(string? value)
 	{
 		ValueValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Wildcard(string? wildcard)
 	{
 		WildcardValue = wildcard;
@@ -297,6 +316,7 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<WildcardQueryDescriptor>
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal WildcardQueryDescriptor() : base()
 	{
 	}
@@ -309,17 +329,11 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string? ValueValue { get; set; }
-
 	private string? WildcardValue { get; set; }
 
 	public WildcardQueryDescriptor QueryName(string? queryName)
@@ -334,6 +348,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public WildcardQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -358,18 +375,27 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query</para>
+	/// </summary>
 	public WildcardQueryDescriptor Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when wildcard is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor Value(string? value)
 	{
 		ValueValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
+	/// </summary>
 	public WildcardQueryDescriptor Wildcard(string? wildcard)
 	{
 		WildcardValue = wildcard;

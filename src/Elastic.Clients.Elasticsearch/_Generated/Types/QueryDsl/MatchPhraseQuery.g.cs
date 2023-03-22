@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class MatchPhraseQueryConverter : JsonConverter<MatchPhraseQuery>
 {
 	public override MatchPhraseQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -143,17 +145,11 @@ public sealed partial class MatchPhraseQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public string? Analyzer { get; set; }
-
 	public float? Boost { get; set; }
-
 	public string Query { get; set; }
-
 	public int? Slop { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(MatchPhraseQuery matchPhraseQuery) => QueryDsl.Query.MatchPhrase(matchPhraseQuery);
@@ -162,6 +158,7 @@ public sealed partial class MatchPhraseQuery : SearchQuery
 public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhraseQueryDescriptor<TDocument>>
 {
 	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal MatchPhraseQueryDescriptor() : base()
 	{
 	}
@@ -181,17 +178,11 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchPhraseQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -289,6 +280,7 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<MatchPhraseQueryDescriptor>
 {
 	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal MatchPhraseQueryDescriptor() : base()
 	{
 	}
@@ -301,17 +293,11 @@ public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchPhraseQueryDescriptor QueryName(string? queryName)

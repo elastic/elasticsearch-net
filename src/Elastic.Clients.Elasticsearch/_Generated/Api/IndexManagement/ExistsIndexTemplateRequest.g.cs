@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,30 +27,45 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class ExistsIndexTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsIndexTemplateRequestParameters>
 {
 	public ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptor<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>
 {
 	internal ExistsIndexTemplateRequestDescriptor(Action<ExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ExistsIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
@@ -57,10 +74,14 @@ public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsIndexTemplate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		RouteValues.Required("name", name);

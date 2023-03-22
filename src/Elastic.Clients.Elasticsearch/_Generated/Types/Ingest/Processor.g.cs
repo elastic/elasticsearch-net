@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 [JsonConverter(typeof(ProcessorConverter))]
 public sealed partial class Processor
 {
@@ -41,7 +43,6 @@ public sealed partial class Processor
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static Processor Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor appendProcessor) => new Processor("append", appendProcessor);
@@ -75,7 +76,7 @@ public sealed partial class Processor
 	public static Processor Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor splitProcessor) => new Processor("split", splitProcessor);
 	public static Processor Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor trimProcessor) => new Processor("trim", trimProcessor);
 	public static Processor Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor uppercaseProcessor) => new Processor("uppercase", uppercaseProcessor);
-	public static Processor Urldecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
+	public static Processor UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
 	public static Processor UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor userAgentProcessor) => new Processor("user_agent", userAgentProcessor);
 }
 
@@ -444,20 +445,17 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescriptor<ProcessorDescriptor<TDocument>>
 {
 	internal ProcessorDescriptor(Action<ProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ProcessorDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ProcessorDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ProcessorDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -537,10 +535,11 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Trim(Action<TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
 	public ProcessorDescriptor<TDocument> Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor<TDocument> Uppercase(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor<TDocument> Urldecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor<TDocument> Urldecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor<TDocument> UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor<TDocument> UrlDecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor<TDocument> UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor<TDocument> UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -566,20 +565,17 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 public sealed partial class ProcessorDescriptor : SerializableDescriptor<ProcessorDescriptor>
 {
 	internal ProcessorDescriptor(Action<ProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public ProcessorDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private ProcessorDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private ProcessorDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -690,12 +686,13 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor Uppercase(Action<UppercaseProcessorDescriptor> configure) => Set(configure, "uppercase");
 	public ProcessorDescriptor Uppercase<TDocument>(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor Urldecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor Urldecode(Action<UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
-	public ProcessorDescriptor Urldecode<TDocument>(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor UrlDecode(Action<UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor UrlDecode<TDocument>(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor UserAgent(Action<UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
 	public ProcessorDescriptor UserAgent<TDocument>(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

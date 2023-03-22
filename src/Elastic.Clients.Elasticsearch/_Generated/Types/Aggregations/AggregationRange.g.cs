@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class AggregationRange
 {
 	[JsonInclude, JsonPropertyName("from")]
 	public object? From { get; set; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
-
 	[JsonInclude, JsonPropertyName("to")]
 	public object? To { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class AggregationRange
 public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<AggregationRangeDescriptor>
 {
 	internal AggregationRangeDescriptor(Action<AggregationRangeDescriptor> configure) => configure.Invoke(this);
+
 	public AggregationRangeDescriptor() : base()
 	{
 	}
 
 	private object? FromValue { get; set; }
-
 	private string? KeyValue { get; set; }
-
 	private object? ToValue { get; set; }
 
 	public AggregationRangeDescriptor From(object? from)

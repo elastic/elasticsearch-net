@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,51 +27,77 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class CreateIndexRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
 {
 	public CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
+	/// <summary>
+	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 {
 	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
@@ -82,12 +110,16 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public CreateIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public CreateIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -95,19 +127,16 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
 		MappingsDescriptor = null;
@@ -207,9 +236,13 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 {
 	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor> configure) => configure.Invoke(this);
+
 	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
@@ -218,12 +251,16 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+
 	internal override bool SupportsBody => true;
+
 	public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
+
 	public CreateIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -231,19 +268,16 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
+	/// <summary>
+	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
 		MappingsDescriptor = null;

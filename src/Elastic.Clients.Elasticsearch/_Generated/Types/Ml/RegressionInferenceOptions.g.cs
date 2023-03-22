@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 public sealed partial class RegressionInferenceOptions
 {
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
@@ -37,26 +45,35 @@ public sealed partial class RegressionInferenceOptions
 public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : SerializableDescriptor<RegressionInferenceOptionsDescriptor<TDocument>>
 {
 	internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RegressionInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
@@ -85,32 +102,44 @@ public sealed partial class RegressionInferenceOptionsDescriptor<TDocument> : Se
 public sealed partial class RegressionInferenceOptionsDescriptor : SerializableDescriptor<RegressionInferenceOptionsDescriptor>
 {
 	internal RegressionInferenceOptionsDescriptor(Action<RegressionInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public RegressionInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public RegressionInferenceOptionsDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 	{
 		ResultsFieldValue = resultsField;

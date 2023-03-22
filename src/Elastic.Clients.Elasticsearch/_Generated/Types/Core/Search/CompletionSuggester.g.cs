@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class CompletionSuggester
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("contexts")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
-
 	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
@@ -57,28 +52,20 @@ public sealed partial class CompletionSuggester
 public sealed partial class CompletionSuggesterDescriptor<TDocument> : SerializableDescriptor<CompletionSuggesterDescriptor<TDocument>>
 {
 	internal CompletionSuggesterDescriptor(Action<CompletionSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CompletionSuggesterDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-
 	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-
 	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-
 	private string? PrefixValue { get; set; }
-
 	private string? RegexValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private bool? SkipDuplicatesValue { get; set; }
 
 	public CompletionSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
@@ -217,28 +204,20 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 public sealed partial class CompletionSuggesterDescriptor : SerializableDescriptor<CompletionSuggesterDescriptor>
 {
 	internal CompletionSuggesterDescriptor(Action<CompletionSuggesterDescriptor> configure) => configure.Invoke(this);
+
 	public CompletionSuggesterDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-
 	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-
 	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-
 	private string? PrefixValue { get; set; }
-
 	private string? RegexValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private bool? SkipDuplicatesValue { get; set; }
 
 	public CompletionSuggesterDescriptor Analyzer(string? analyzer)

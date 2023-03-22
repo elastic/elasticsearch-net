@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class DynamicTemplate
 {
 	[JsonInclude, JsonPropertyName("mapping")]
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty? Mapping { get; set; }
-
 	[JsonInclude, JsonPropertyName("match")]
 	public string? Match { get; set; }
-
 	[JsonInclude, JsonPropertyName("match_mapping_type")]
 	public string? MatchMappingType { get; set; }
-
 	[JsonInclude, JsonPropertyName("match_pattern")]
 	public Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPattern { get; set; }
-
 	[JsonInclude, JsonPropertyName("path_match")]
 	public string? PathMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("path_unmatch")]
 	public string? PathUnmatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("unmatch")]
 	public string? Unmatch { get; set; }
 }
@@ -52,22 +48,17 @@ public sealed partial class DynamicTemplate
 public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<DynamicTemplateDescriptor>
 {
 	internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor> configure) => configure.Invoke(this);
+
 	public DynamicTemplateDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.IProperty? MappingValue { get; set; }
-
 	private string? MatchValue { get; set; }
-
 	private string? MatchMappingTypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPatternValue { get; set; }
-
 	private string? PathMatchValue { get; set; }
-
 	private string? PathUnmatchValue { get; set; }
-
 	private string? UnmatchValue { get; set; }
 
 	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? mapping)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(GlobalAggregateConverter))]
 public sealed partial class GlobalAggregate : AggregateDictionary, IAggregate
 {
@@ -34,7 +36,6 @@ public sealed partial class GlobalAggregate : AggregateDictionary, IAggregate
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }
@@ -45,7 +46,7 @@ internal sealed class GlobalAggregateConverter : JsonConverter<GlobalAggregate>
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		IReadOnlyDictionary<string, object>? meta = default;
 		while (reader.Read())
@@ -54,7 +55,7 @@ internal sealed class GlobalAggregateConverter : JsonConverter<GlobalAggregate>
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -77,11 +78,7 @@ internal sealed class GlobalAggregateConverter : JsonConverter<GlobalAggregate>
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new GlobalAggregate(subAggs)
-		{
-			DocCount = docCount,
-			Meta = meta
-		};
+		return new GlobalAggregate(subAggs) { DocCount = docCount, Meta = meta };
 	}
 
 	public override void Write(Utf8JsonWriter writer, GlobalAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();

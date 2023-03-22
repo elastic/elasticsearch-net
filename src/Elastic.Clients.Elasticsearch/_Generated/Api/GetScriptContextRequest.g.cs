@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,29 +27,41 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class GetScriptContextRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns all script contexts.</para>
+/// </summary>
 public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptContextRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptContext;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns all script contexts.</para>
+/// </summary>
 public sealed partial class GetScriptContextRequestDescriptor : RequestDescriptor<GetScriptContextRequestDescriptor, GetScriptContextRequestParameters>
 {
 	internal GetScriptContextRequestDescriptor(Action<GetScriptContextRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetScriptContextRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptContext;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

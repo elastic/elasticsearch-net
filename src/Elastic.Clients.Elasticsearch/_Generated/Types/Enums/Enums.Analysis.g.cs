@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 [JsonConverter(typeof(DelimitedPayloadEncodingConverter))]
 public enum DelimitedPayloadEncoding
 {
@@ -50,8 +52,7 @@ internal sealed class DelimitedPayloadEncodingConverter : JsonConverter<Delimite
 				return DelimitedPayloadEncoding.Float;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DelimitedPayloadEncoding value, JsonSerializerOptions options)
@@ -95,8 +96,7 @@ internal sealed class EdgeNGramSideConverter : JsonConverter<EdgeNGramSide>
 				return EdgeNGramSide.Back;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, EdgeNGramSide value, JsonSerializerOptions options)
@@ -137,8 +137,7 @@ internal sealed class IcuCollationAlternateConverter : JsonConverter<IcuCollatio
 				return IcuCollationAlternate.NonIgnorable;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuCollationAlternate value, JsonSerializerOptions options)
@@ -179,8 +178,7 @@ internal sealed class IcuCollationCaseFirstConverter : JsonConverter<IcuCollatio
 				return IcuCollationCaseFirst.Lower;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuCollationCaseFirst value, JsonSerializerOptions options)
@@ -221,8 +219,7 @@ internal sealed class IcuCollationDecompositionConverter : JsonConverter<IcuColl
 				return IcuCollationDecomposition.Identical;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuCollationDecomposition value, JsonSerializerOptions options)
@@ -275,8 +272,7 @@ internal sealed class IcuCollationStrengthConverter : JsonConverter<IcuCollation
 				return IcuCollationStrength.Identical;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuCollationStrength value, JsonSerializerOptions options)
@@ -326,8 +322,7 @@ internal sealed class IcuNormalizationModeConverter : JsonConverter<IcuNormaliza
 				return IcuNormalizationMode.Compose;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuNormalizationMode value, JsonSerializerOptions options)
@@ -372,8 +367,7 @@ internal sealed class IcuNormalizationTypeConverter : JsonConverter<IcuNormaliza
 				return IcuNormalizationType.Nfc;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuNormalizationType value, JsonSerializerOptions options)
@@ -417,8 +411,7 @@ internal sealed class IcuTransformDirectionConverter : JsonConverter<IcuTransfor
 				return IcuTransformDirection.Forward;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IcuTransformDirection value, JsonSerializerOptions options)
@@ -459,8 +452,7 @@ internal sealed class KeepTypesModeConverter : JsonConverter<KeepTypesMode>
 				return KeepTypesMode.Exclude;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, KeepTypesMode value, JsonSerializerOptions options)
@@ -505,8 +497,7 @@ internal sealed class KuromojiTokenizationModeConverter : JsonConverter<Kuromoji
 				return KuromojiTokenizationMode.Extended;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, KuromojiTokenizationMode value, JsonSerializerOptions options)
@@ -678,8 +669,7 @@ internal sealed class LanguageConverter : JsonConverter<Language>
 				return Language.Arabic;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Language value, JsonSerializerOptions options)
@@ -820,8 +810,7 @@ internal sealed class NoriDecompoundModeConverter : JsonConverter<NoriDecompound
 				return NoriDecompoundMode.Discard;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, NoriDecompoundMode value, JsonSerializerOptions options)
@@ -905,8 +894,7 @@ internal sealed class PhoneticEncoderConverter : JsonConverter<PhoneticEncoder>
 				return PhoneticEncoder.BeiderMorse;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PhoneticEncoder value, JsonSerializerOptions options)
@@ -1017,8 +1005,7 @@ internal sealed class PhoneticLanguageConverter : JsonConverter<PhoneticLanguage
 				return PhoneticLanguage.Any;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PhoneticLanguage value, JsonSerializerOptions options)
@@ -1093,8 +1080,7 @@ internal sealed class PhoneticNameTypeConverter : JsonConverter<PhoneticNameType
 				return PhoneticNameType.Ashkenazi;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PhoneticNameType value, JsonSerializerOptions options)
@@ -1138,8 +1124,7 @@ internal sealed class PhoneticRuleTypeConverter : JsonConverter<PhoneticRuleType
 				return PhoneticRuleType.Approx;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PhoneticRuleType value, JsonSerializerOptions options)
@@ -1260,8 +1245,7 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return SnowballLanguage.Armenian;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SnowballLanguage value, JsonSerializerOptions options)
@@ -1362,8 +1346,7 @@ internal sealed class SynonymFormatConverter : JsonConverter<SynonymFormat>
 				return SynonymFormat.Solr;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SynonymFormat value, JsonSerializerOptions options)
@@ -1420,8 +1403,7 @@ internal sealed class TokenCharConverter : JsonConverter<TokenChar>
 				return TokenChar.Custom;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TokenChar value, JsonSerializerOptions options)

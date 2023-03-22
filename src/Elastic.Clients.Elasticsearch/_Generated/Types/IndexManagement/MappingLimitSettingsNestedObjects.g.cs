@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsNestedObjects
 {
+	/// <summary>
+	/// <para>The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps<br/>to prevent out of memory errors when a document contains too many nested objects.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class MappingLimitSettingsNestedObjects
 public sealed partial class MappingLimitSettingsNestedObjectsDescriptor : SerializableDescriptor<MappingLimitSettingsNestedObjectsDescriptor>
 {
 	internal MappingLimitSettingsNestedObjectsDescriptor(Action<MappingLimitSettingsNestedObjectsDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsNestedObjectsDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The maximum number of nested JSON objects that a single document can contain across all nested types. This limit helps<br/>to prevent out of memory errors when a document contains too many nested objects.</para>
+	/// </summary>
 	public MappingLimitSettingsNestedObjectsDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

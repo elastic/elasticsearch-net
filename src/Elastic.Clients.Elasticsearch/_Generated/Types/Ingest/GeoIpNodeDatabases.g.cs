@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
+/// <summary>
+/// <para>Downloaded databases for the node. The field key is the node ID.</para>
+/// </summary>
 public sealed partial class GeoIpNodeDatabases
 {
+	/// <summary>
+	/// <para>Downloaded databases for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("databases")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; init; }
 
+	/// <summary>
+	/// <para>Downloaded database files, including related license files. Elasticsearch stores these files in the node’s temporary directory: $ES_TMPDIR/geoip-databases/<node_id>.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("files_in_temp")]
 	public IReadOnlyCollection<string> FilesInTemp { get; init; }
 }
