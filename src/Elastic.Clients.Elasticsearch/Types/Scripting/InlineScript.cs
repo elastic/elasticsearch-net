@@ -12,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class InlineScript : ISelfTwoWaySerializable
 {
-	// This type is ISelfTwoWaySerializable because it potentially uses the source serialiser for params serialisation
+	// This type is ISelfTwoWaySerializable because it potentially uses the source serializer for params serialisation
 
 	public InlineScript(string source) => Source = source;
 
