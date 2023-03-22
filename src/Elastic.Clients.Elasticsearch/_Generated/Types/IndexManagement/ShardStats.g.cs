@@ -47,6 +47,8 @@ public sealed partial class ShardStats
 	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
+	[JsonInclude, JsonPropertyName("mappings")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingStats? Mappings { get; init; }
 	[JsonInclude, JsonPropertyName("merges")]
 	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; init; }
 	[JsonInclude, JsonPropertyName("query_cache")]
@@ -70,7 +72,8 @@ public sealed partial class ShardStats
 	[JsonInclude, JsonPropertyName("shard_path")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardPath? ShardPath { get; init; }
 	[JsonInclude, JsonPropertyName("shards")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? Shards { get; init; }
+	[ReadOnlyIndexNameDictionaryConverter(typeof(object))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, object>? Shards { get; init; }
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; init; }
 	[JsonInclude, JsonPropertyName("translog")]

@@ -41,7 +41,7 @@ public sealed partial class NodeAttributes
 	[JsonInclude, JsonPropertyName("ephemeral_id")]
 	public string EphemeralId { get; init; }
 	[JsonInclude, JsonPropertyName("external_id")]
-	public string ExternalId { get; init; }
+	public string? ExternalId { get; init; }
 
 	/// <summary>
 	/// <para>The unique identifier of the node.</para>
