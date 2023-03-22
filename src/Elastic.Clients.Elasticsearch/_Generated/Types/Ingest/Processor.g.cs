@@ -334,108 +334,111 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 	public override void Write(Utf8JsonWriter writer, Processor value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "append":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor)value.Variant, options);
-				break;
-			case "attachment":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor)value.Variant, options);
-				break;
-			case "bytes":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)value.Variant, options);
-				break;
-			case "circle":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)value.Variant, options);
-				break;
-			case "convert":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor)value.Variant, options);
-				break;
-			case "csv":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor)value.Variant, options);
-				break;
-			case "date":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor)value.Variant, options);
-				break;
-			case "date_index_name":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor)value.Variant, options);
-				break;
-			case "dissect":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor)value.Variant, options);
-				break;
-			case "dot_expander":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor)value.Variant, options);
-				break;
-			case "drop":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DropProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor)value.Variant, options);
-				break;
-			case "enrich":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor)value.Variant, options);
-				break;
-			case "fail":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.FailProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor)value.Variant, options);
-				break;
-			case "foreach":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)value.Variant, options);
-				break;
-			case "geoip":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)value.Variant, options);
-				break;
-			case "grok":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor)value.Variant, options);
-				break;
-			case "gsub":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor)value.Variant, options);
-				break;
-			case "inference":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor)value.Variant, options);
-				break;
-			case "join":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor)value.Variant, options);
-				break;
-			case "json":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor)value.Variant, options);
-				break;
-			case "kv":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor)value.Variant, options);
-				break;
-			case "lowercase":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor)value.Variant, options);
-				break;
-			case "pipeline":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)value.Variant, options);
-				break;
-			case "remove":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)value.Variant, options);
-				break;
-			case "rename":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor)value.Variant, options);
-				break;
-			case "set":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor)value.Variant, options);
-				break;
-			case "set_security_user":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor)value.Variant, options);
-				break;
-			case "sort":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SortProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor)value.Variant, options);
-				break;
-			case "split":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor)value.Variant, options);
-				break;
-			case "trim":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor)value.Variant, options);
-				break;
-			case "uppercase":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor)value.Variant, options);
-				break;
-			case "urldecode":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor)value.Variant, options);
-				break;
-			case "user_agent":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "append":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AppendProcessor)value.Variant, options);
+					break;
+				case "attachment":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor)value.Variant, options);
+					break;
+				case "bytes":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)value.Variant, options);
+					break;
+				case "circle":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CircleProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)value.Variant, options);
+					break;
+				case "convert":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor)value.Variant, options);
+					break;
+				case "csv":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.CsvProcessor)value.Variant, options);
+					break;
+				case "date":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateProcessor)value.Variant, options);
+					break;
+				case "date_index_name":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor)value.Variant, options);
+					break;
+				case "dissect":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DissectProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DissectProcessor)value.Variant, options);
+					break;
+				case "dot_expander":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor)value.Variant, options);
+					break;
+				case "drop":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.DropProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.DropProcessor)value.Variant, options);
+					break;
+				case "enrich":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor)value.Variant, options);
+					break;
+				case "fail":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.FailProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.FailProcessor)value.Variant, options);
+					break;
+				case "foreach":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)value.Variant, options);
+					break;
+				case "geoip":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)value.Variant, options);
+					break;
+				case "grok":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GrokProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GrokProcessor)value.Variant, options);
+					break;
+				case "gsub":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.GsubProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.GsubProcessor)value.Variant, options);
+					break;
+				case "inference":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor)value.Variant, options);
+					break;
+				case "join":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JoinProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JoinProcessor)value.Variant, options);
+					break;
+				case "json":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.JsonProcessor)value.Variant, options);
+					break;
+				case "kv":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor)value.Variant, options);
+					break;
+				case "lowercase":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor)value.Variant, options);
+					break;
+				case "pipeline":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)value.Variant, options);
+					break;
+				case "remove":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)value.Variant, options);
+					break;
+				case "rename":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.RenameProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.RenameProcessor)value.Variant, options);
+					break;
+				case "set":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetProcessor)value.Variant, options);
+					break;
+				case "set_security_user":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor)value.Variant, options);
+					break;
+				case "sort":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SortProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SortProcessor)value.Variant, options);
+					break;
+				case "split":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.SplitProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.SplitProcessor)value.Variant, options);
+					break;
+				case "trim":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.TrimProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.TrimProcessor)value.Variant, options);
+					break;
+				case "uppercase":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor)value.Variant, options);
+					break;
+				case "urldecode":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor)value.Variant, options);
+					break;
+				case "user_agent":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor>(writer, (Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
