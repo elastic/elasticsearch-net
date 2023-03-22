@@ -63,7 +63,13 @@ public sealed partial class KnnQuery
 	/// <para>The query vector</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector")]
-	public ICollection<double> QueryVector { get; set; }
+	public ICollection<float>? QueryVector { get; set; }
+
+	/// <summary>
+	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("query_vector_builder")]
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 }
 
 public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescriptor<KnnQueryDescriptor<TDocument>>
@@ -82,7 +88,10 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private long kValue { get; set; }
 	private long NumCandidatesValue { get; set; }
-	private ICollection<double> QueryVectorValue { get; set; }
+	private ICollection<float>? QueryVectorValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
+	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
+	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -171,9 +180,36 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	/// <summary>
 	/// <para>The query vector</para>
 	/// </summary>
-	public KnnQueryDescriptor<TDocument> QueryVector(ICollection<double> queryVector)
+	public KnnQueryDescriptor<TDocument> QueryVector(ICollection<float>? queryVector)
 	{
 		QueryVectorValue = queryVector;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? queryVectorBuilder)
+	{
+		QueryVectorBuilderDescriptor = null;
+		QueryVectorBuilderDescriptorAction = null;
+		QueryVectorBuilderValue = queryVectorBuilder;
+		return Self;
+	}
+
+	public KnnQueryDescriptor<TDocument> QueryVectorBuilder(QueryVectorBuilderDescriptor descriptor)
+	{
+		QueryVectorBuilderValue = null;
+		QueryVectorBuilderDescriptorAction = null;
+		QueryVectorBuilderDescriptor = descriptor;
+		return Self;
+	}
+
+	public KnnQueryDescriptor<TDocument> QueryVectorBuilder(Action<QueryVectorBuilderDescriptor> configure)
+	{
+		QueryVectorBuilderValue = null;
+		QueryVectorBuilderDescriptor = null;
+		QueryVectorBuilderDescriptorAction = configure;
 		return Self;
 	}
 
@@ -221,8 +257,28 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		writer.WriteNumberValue(kValue);
 		writer.WritePropertyName("num_candidates");
 		writer.WriteNumberValue(NumCandidatesValue);
-		writer.WritePropertyName("query_vector");
-		JsonSerializer.Serialize(writer, QueryVectorValue, options);
+		if (QueryVectorValue is not null)
+		{
+			writer.WritePropertyName("query_vector");
+			JsonSerializer.Serialize(writer, QueryVectorValue, options);
+		}
+
+		if (QueryVectorBuilderDescriptor is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, QueryVectorBuilderDescriptor, options);
+		}
+		else if (QueryVectorBuilderDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, new QueryVectorBuilderDescriptor(QueryVectorBuilderDescriptorAction), options);
+		}
+		else if (QueryVectorBuilderValue is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -243,7 +299,10 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private long kValue { get; set; }
 	private long NumCandidatesValue { get; set; }
-	private ICollection<double> QueryVectorValue { get; set; }
+	private ICollection<float>? QueryVectorValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
+	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
+	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -341,9 +400,36 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	/// <summary>
 	/// <para>The query vector</para>
 	/// </summary>
-	public KnnQueryDescriptor QueryVector(ICollection<double> queryVector)
+	public KnnQueryDescriptor QueryVector(ICollection<float>? queryVector)
 	{
 		QueryVectorValue = queryVector;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The query vector builder. You must provide a query_vector_builder or query_vector, but not both.</para>
+	/// </summary>
+	public KnnQueryDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? queryVectorBuilder)
+	{
+		QueryVectorBuilderDescriptor = null;
+		QueryVectorBuilderDescriptorAction = null;
+		QueryVectorBuilderValue = queryVectorBuilder;
+		return Self;
+	}
+
+	public KnnQueryDescriptor QueryVectorBuilder(QueryVectorBuilderDescriptor descriptor)
+	{
+		QueryVectorBuilderValue = null;
+		QueryVectorBuilderDescriptorAction = null;
+		QueryVectorBuilderDescriptor = descriptor;
+		return Self;
+	}
+
+	public KnnQueryDescriptor QueryVectorBuilder(Action<QueryVectorBuilderDescriptor> configure)
+	{
+		QueryVectorBuilderValue = null;
+		QueryVectorBuilderDescriptor = null;
+		QueryVectorBuilderDescriptorAction = configure;
 		return Self;
 	}
 
@@ -391,8 +477,28 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		writer.WriteNumberValue(kValue);
 		writer.WritePropertyName("num_candidates");
 		writer.WriteNumberValue(NumCandidatesValue);
-		writer.WritePropertyName("query_vector");
-		JsonSerializer.Serialize(writer, QueryVectorValue, options);
+		if (QueryVectorValue is not null)
+		{
+			writer.WritePropertyName("query_vector");
+			JsonSerializer.Serialize(writer, QueryVectorValue, options);
+		}
+
+		if (QueryVectorBuilderDescriptor is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, QueryVectorBuilderDescriptor, options);
+		}
+		else if (QueryVectorBuilderDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, new QueryVectorBuilderDescriptor(QueryVectorBuilderDescriptorAction), options);
+		}
+		else if (QueryVectorBuilderValue is not null)
+		{
+			writer.WritePropertyName("query_vector_builder");
+			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
