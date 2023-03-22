@@ -53,6 +53,9 @@ public sealed partial class FillMaskInferenceOptions
 	public static implicit operator InferenceConfigCreate(FillMaskInferenceOptions fillMaskInferenceOptions) => Ml.InferenceConfigCreate.FillMask(fillMaskInferenceOptions);
 }
 
+/// <summary>
+/// <para>Fill mask inference options</para>
+/// </summary>
 public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDescriptor<FillMaskInferenceOptionsDescriptor>
 {
 	internal FillMaskInferenceOptionsDescriptor(Action<FillMaskInferenceOptionsDescriptor> configure) => configure.Invoke(this);

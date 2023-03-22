@@ -33,6 +33,9 @@ public sealed class CreateDataStreamRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Creates a data stream</para>
+/// </summary>
 public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStreamRequestParameters>
 {
 	public CreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
@@ -46,6 +49,9 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Creates a data stream</para>
+/// </summary>
 public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptor<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
 {
 	internal CreateDataStreamRequestDescriptor(Action<CreateDataStreamRequestDescriptor> configure) => configure.Invoke(this);

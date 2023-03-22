@@ -31,18 +31,35 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class OpenPointInTimeRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specific the time to live for the point in time</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>A search request by default executes against the most recent visible data of the target indices,<br/>which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the<br/>state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple<br/>search requests using the same point in time. For example, if refreshes happen between<br/>`search_after` requests, then the results of those requests might not be consistent as changes happening<br/>between searches are only visible to the more recent point in time.</para>
+/// </summary>
 public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTimeRequestParameters>
 {
 	public OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -55,18 +72,40 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Specific the time to live for the point in time</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>A search request by default executes against the most recent visible data of the target indices,<br/>which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the<br/>state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple<br/>search requests using the same point in time. For example, if refreshes happen between<br/>`search_after` requests, then the results of those requests might not be consistent as changes happening<br/>between searches are only visible to the more recent point in time.</para>
+/// </summary>
 public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : RequestDescriptor<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeRequestParameters>
 {
 	internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -102,6 +141,9 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	}
 }
 
+/// <summary>
+/// <para>A search request by default executes against the most recent visible data of the target indices,<br/>which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the<br/>state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple<br/>search requests using the same point in time. For example, if refreshes happen between<br/>`search_after` requests, then the results of those requests might not be consistent as changes happening<br/>between searches are only visible to the more recent point in time.</para>
+/// </summary>
 public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor<OpenPointInTimeRequestDescriptor, OpenPointInTimeRequestParameters>
 {
 	internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor> configure) => configure.Invoke(this);

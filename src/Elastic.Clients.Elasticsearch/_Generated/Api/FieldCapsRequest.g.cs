@@ -31,22 +31,45 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class FieldCapsRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If false, the request returns an error if any wildcard expression, index alias,<br/>or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If true, unmapped fields are included in the response.</para>
+	/// </summary>
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// </summary>
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Only return results for fields that have one of the types in the list</para>
+	/// </summary>
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 }
 
+/// <summary>
+/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// </summary>
 public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestParameters>
 {
 	public FieldCapsRequest()
@@ -63,18 +86,45 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>If false, the request returns an error if any wildcard expression, index alias,<br/>or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
+
+	/// <summary>
+	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>If true, unmapped fields are included in the response.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
+
+	/// <summary>
+	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+
+	/// <summary>
+	/// <para>Only return results for fields that have one of the types in the list</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Types { get => Q<ICollection<string>?>("types"); set => Q("types", value); }
 
@@ -91,6 +141,9 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
+/// <summary>
+/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// </summary>
 public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescriptor<FieldCapsRequestDescriptor<TDocument>, FieldCapsRequestParameters>
 {
 	internal FieldCapsRequestDescriptor(Action<FieldCapsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -189,6 +242,9 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	}
 }
 
+/// <summary>
+/// <para>The field capabilities API returns the information about the capabilities of fields among multiple indices.<br/>The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type<br/>of keyword is returned as any other field that belongs to the `keyword` family.</para>
+/// </summary>
 public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<FieldCapsRequestDescriptor, FieldCapsRequestParameters>
 {
 	internal FieldCapsRequestDescriptor(Action<FieldCapsRequestDescriptor> configure) => configure.Invoke(this);

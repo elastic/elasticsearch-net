@@ -33,6 +33,9 @@ public sealed class DeleteAsyncRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.</para>
+/// </summary>
 public sealed partial class DeleteAsyncRequest : PlainRequest<DeleteAsyncRequestParameters>
 {
 	public DeleteAsyncRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -46,6 +49,9 @@ public sealed partial class DeleteAsyncRequest : PlainRequest<DeleteAsyncRequest
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.</para>
+/// </summary>
 public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncRequestParameters>
 {
 	internal DeleteAsyncRequestDescriptor(Action<DeleteAsyncRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -75,6 +81,9 @@ public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.</para>
+/// </summary>
 public sealed partial class DeleteAsyncRequestDescriptor : RequestDescriptor<DeleteAsyncRequestDescriptor, DeleteAsyncRequestParameters>
 {
 	internal DeleteAsyncRequestDescriptor(Action<DeleteAsyncRequestDescriptor> configure) => configure.Invoke(this);

@@ -33,6 +33,9 @@ public sealed class GetScriptContextRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns all script contexts.</para>
+/// </summary>
 public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptContextRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptContext;
@@ -42,6 +45,9 @@ public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptCont
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns all script contexts.</para>
+/// </summary>
 public sealed partial class GetScriptContextRequestDescriptor : RequestDescriptor<GetScriptContextRequestDescriptor, GetScriptContextRequestParameters>
 {
 	internal GetScriptContextRequestDescriptor(Action<GetScriptContextRequestDescriptor> configure) => configure.Invoke(this);

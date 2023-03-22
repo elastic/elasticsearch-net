@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class DeleteAliasRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit timestamp for the document</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes an alias.</para>
+/// </summary>
 public sealed partial class DeleteAliasRequest : PlainRequest<DeleteAliasRequestParameters>
 {
 	public DeleteAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
@@ -49,12 +57,22 @@ public sealed partial class DeleteAliasRequest : PlainRequest<DeleteAliasRequest
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit timestamp for the document</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes an alias.</para>
+/// </summary>
 public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDescriptor<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasRequestParameters>
 {
 	internal DeleteAliasRequestDescriptor(Action<DeleteAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -93,6 +111,9 @@ public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Deletes an alias.</para>
+/// </summary>
 public sealed partial class DeleteAliasRequestDescriptor : RequestDescriptor<DeleteAliasRequestDescriptor, DeleteAliasRequestParameters>
 {
 	internal DeleteAliasRequestDescriptor(Action<DeleteAliasRequestDescriptor> configure) => configure.Invoke(this);

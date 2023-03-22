@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed class PutPipelineRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Required version for optimistic concurrency control for pipeline updates</para>
+	/// </summary>
 	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
 }
 
+/// <summary>
+/// <para>Creates or updates a pipeline.</para>
+/// </summary>
 public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequestParameters>
 {
 	public PutPipelineRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -51,10 +62,21 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Required version for optimistic concurrency control for pipeline updates</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
 
@@ -89,6 +111,9 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 	public long? Version { get; set; }
 }
 
+/// <summary>
+/// <para>Creates or updates a pipeline.</para>
+/// </summary>
 public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDescriptor<PutPipelineRequestDescriptor<TDocument>, PutPipelineRequestParameters>
 {
 	internal PutPipelineRequestDescriptor(Action<PutPipelineRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -321,6 +346,9 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Creates or updates a pipeline.</para>
+/// </summary>
 public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<PutPipelineRequestDescriptor, PutPipelineRequestParameters>
 {
 	internal PutPipelineRequestDescriptor(Action<PutPipelineRequestDescriptor> configure) => configure.Invoke(this);

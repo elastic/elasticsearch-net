@@ -31,24 +31,50 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class DeleteRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>only perform the delete operation if the last operation that has changed the document has the specified primary term</para>
+	/// </summary>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>only perform the delete operation if the last operation that has changed the document has the specified sequence number</para>
+	/// </summary>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Removes a document from the index.</para>
+/// </summary>
 public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 {
 	public DeleteRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
@@ -61,24 +87,58 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>only perform the delete operation if the last operation that has changed the document has the specified primary term</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+	/// <summary>
+	/// <para>only perform the delete operation if the last operation that has changed the document has the specified sequence number</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Removes a document from the index.</para>
+/// </summary>
 public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptor<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
 {
 	internal DeleteRequestDescriptor(Action<DeleteRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -143,6 +203,9 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 	}
 }
 
+/// <summary>
+/// <para>Removes a document from the index.</para>
+/// </summary>
 public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRequestDescriptor, DeleteRequestParameters>
 {
 	internal DeleteRequestDescriptor(Action<DeleteRequestDescriptor> configure) => configure.Invoke(this);

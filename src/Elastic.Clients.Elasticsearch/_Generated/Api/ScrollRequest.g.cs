@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class ScrollRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>
+	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 }
 
+/// <summary>
+/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
+/// </summary>
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
@@ -43,6 +48,9 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
@@ -59,6 +67,9 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 	public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 }
 
+/// <summary>
+/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
+/// </summary>
 public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRequestDescriptor, ScrollRequestParameters>
 {
 	internal ScrollRequestDescriptor(Action<ScrollRequestDescriptor> configure) => configure.Invoke(this);

@@ -31,16 +31,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class RolloverRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</para>
+	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Updates an alias to point to a new index when the existing index<br/>is considered to be too large or too old.</para>
+/// </summary>
 public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParameters>
 {
 	public RolloverRequest(Elastic.Clients.Elasticsearch.IndexAlias alias) : base(r => r.Required("alias", alias))
@@ -57,12 +71,27 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the newly created rollover index before the operation returns.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonInclude, JsonPropertyName("aliases")]
@@ -75,6 +104,9 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
+/// <summary>
+/// <para>Updates an alias to point to a new index when the existing index<br/>is considered to be too large or too old.</para>
+/// </summary>
 public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>
 {
 	internal RolloverRequestDescriptor(Action<RolloverRequestDescriptor> configure) => configure.Invoke(this);

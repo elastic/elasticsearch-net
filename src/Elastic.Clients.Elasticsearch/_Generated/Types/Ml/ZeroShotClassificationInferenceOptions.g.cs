@@ -71,6 +71,9 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 	public static implicit operator InferenceConfigCreate(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Ml.InferenceConfigCreate.ZeroShotClassification(zeroShotClassificationInferenceOptions);
 }
 
+/// <summary>
+/// <para>Zero shot classification configuration options</para>
+/// </summary>
 public sealed partial class ZeroShotClassificationInferenceOptionsDescriptor : SerializableDescriptor<ZeroShotClassificationInferenceOptionsDescriptor>
 {
 	internal ZeroShotClassificationInferenceOptionsDescriptor(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);

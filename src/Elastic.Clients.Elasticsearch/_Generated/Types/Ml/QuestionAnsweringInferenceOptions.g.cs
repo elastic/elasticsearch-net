@@ -59,6 +59,9 @@ public sealed partial class QuestionAnsweringInferenceOptions
 	public static implicit operator InferenceConfigCreate(QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => Ml.InferenceConfigCreate.QuestionAnswering(questionAnsweringInferenceOptions);
 }
 
+/// <summary>
+/// <para>Question answering inference options</para>
+/// </summary>
 public sealed partial class QuestionAnsweringInferenceOptionsDescriptor : SerializableDescriptor<QuestionAnsweringInferenceOptionsDescriptor>
 {
 	internal QuestionAnsweringInferenceOptionsDescriptor(Action<QuestionAnsweringInferenceOptionsDescriptor> configure) => configure.Invoke(this);

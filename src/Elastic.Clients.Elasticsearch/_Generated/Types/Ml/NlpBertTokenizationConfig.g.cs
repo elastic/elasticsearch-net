@@ -63,6 +63,9 @@ public sealed partial class NlpBertTokenizationConfig
 	public bool? WithSpecialTokens { get; set; }
 }
 
+/// <summary>
+/// <para>BERT and MPNet tokenization configuration options</para>
+/// </summary>
 public sealed partial class NlpBertTokenizationConfigDescriptor : SerializableDescriptor<NlpBertTokenizationConfigDescriptor>
 {
 	internal NlpBertTokenizationConfigDescriptor(Action<NlpBertTokenizationConfigDescriptor> configure) => configure.Invoke(this);

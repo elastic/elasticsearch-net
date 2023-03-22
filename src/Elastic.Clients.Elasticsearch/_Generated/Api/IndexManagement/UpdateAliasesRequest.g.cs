@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class UpdateAliasesRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Request timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
@@ -45,14 +53,24 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Request timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? Actions { get; set; }
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestDescriptor<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesRequestParameters>
 {
 	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -149,6 +167,9 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	}
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
 {
 	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor> configure) => configure.Invoke(this);

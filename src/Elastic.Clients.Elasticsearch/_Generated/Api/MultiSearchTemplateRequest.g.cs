@@ -33,18 +33,35 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class MultiSearchTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</para>
+	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Controls the maximum number of concurrent searches the multi search api will execute</para>
+	/// </summary>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</para>
+	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
+/// <summary>
+/// <para>Runs multiple templated searches with a single request.</para>
+/// </summary>
 public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
 	public MultiSearchTemplateRequest()
@@ -61,14 +78,33 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+	/// <summary>
+	/// <para>Controls the maximum number of concurrent searches the multi search api will execute</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>Indicates whether hits.total should be rendered as an integer or an object in the rest search response</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public List<Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
@@ -96,6 +132,9 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	}
 }
 
+/// <summary>
+/// <para>Runs multiple templated searches with a single request.</para>
+/// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -157,6 +196,9 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	}
 }
 
+/// <summary>
+/// <para>Runs multiple templated searches with a single request.</para>
+/// </summary>
 public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);

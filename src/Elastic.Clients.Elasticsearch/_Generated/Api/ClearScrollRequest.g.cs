@@ -33,6 +33,9 @@ public sealed class ClearScrollRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Explicitly clears the search context for a scroll.</para>
+/// </summary>
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
@@ -45,6 +48,9 @@ public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequest
 	public Elastic.Clients.Elasticsearch.ScrollIds? ScrollId { get; set; }
 }
 
+/// <summary>
+/// <para>Explicitly clears the search context for a scroll.</para>
+/// </summary>
 public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<ClearScrollRequestDescriptor, ClearScrollRequestParameters>
 {
 	internal ClearScrollRequestDescriptor(Action<ClearScrollRequestDescriptor> configure) => configure.Invoke(this);

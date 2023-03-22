@@ -33,6 +33,9 @@ public sealed class InfoRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns basic information about the cluster.</para>
+/// </summary>
 public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
@@ -42,6 +45,9 @@ public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns basic information about the cluster.</para>
+/// </summary>
 public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoRequestDescriptor, InfoRequestParameters>
 {
 	internal InfoRequestDescriptor(Action<InfoRequestDescriptor> configure) => configure.Invoke(this);

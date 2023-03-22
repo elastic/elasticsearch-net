@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class ExistsIndexTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsIndexTemplateRequestParameters>
 {
 	public ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -47,10 +52,16 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescriptor<ExistsIndexTemplateRequestDescriptor, ExistsIndexTemplateRequestParameters>
 {
 	internal ExistsIndexTemplateRequestDescriptor(Action<ExistsIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);

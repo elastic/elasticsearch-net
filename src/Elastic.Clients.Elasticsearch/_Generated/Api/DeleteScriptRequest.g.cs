@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class DeleteScriptRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes a script.</para>
+/// </summary>
 public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptRequestParameters>
 {
 	public DeleteScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -49,12 +57,22 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes a script.</para>
+/// </summary>
 public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDescriptor<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptRequestParameters>
 {
 	internal DeleteScriptRequestDescriptor(Action<DeleteScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -87,6 +105,9 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	}
 }
 
+/// <summary>
+/// <para>Deletes a script.</para>
+/// </summary>
 public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<DeleteScriptRequestDescriptor, DeleteScriptRequestParameters>
 {
 	internal DeleteScriptRequestDescriptor(Action<DeleteScriptRequestDescriptor> configure) => configure.Invoke(this);

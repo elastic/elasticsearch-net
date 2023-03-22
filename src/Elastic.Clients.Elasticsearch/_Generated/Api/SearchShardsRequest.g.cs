@@ -31,20 +31,40 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class SearchShardsRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 }
 
+/// <summary>
+/// <para>Returns information about the indices and shards that a search request would be executed against.</para>
+/// </summary>
 public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsRequestParameters>
 {
 	public SearchShardsRequest()
@@ -61,20 +81,46 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 }
 
+/// <summary>
+/// <para>Returns information about the indices and shards that a search request would be executed against.</para>
+/// </summary>
 public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDescriptor<SearchShardsRequestDescriptor<TDocument>, SearchShardsRequestParameters>
 {
 	internal SearchShardsRequestDescriptor(Action<SearchShardsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -107,6 +153,9 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 	}
 }
 
+/// <summary>
+/// <para>Returns information about the indices and shards that a search request would be executed against.</para>
+/// </summary>
 public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<SearchShardsRequestDescriptor, SearchShardsRequestParameters>
 {
 	internal SearchShardsRequestDescriptor(Action<SearchShardsRequestDescriptor> configure) => configure.Invoke(this);

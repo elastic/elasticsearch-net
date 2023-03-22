@@ -33,6 +33,9 @@ public sealed class ClearCursorRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Clears the SQL cursor</para>
+/// </summary>
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
@@ -45,6 +48,9 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 	public string Cursor { get; set; }
 }
 
+/// <summary>
+/// <para>Clears the SQL cursor</para>
+/// </summary>
 public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<ClearCursorRequestDescriptor, ClearCursorRequestParameters>
 {
 	internal ClearCursorRequestDescriptor(Action<ClearCursorRequestDescriptor> configure) => configure.Invoke(this);

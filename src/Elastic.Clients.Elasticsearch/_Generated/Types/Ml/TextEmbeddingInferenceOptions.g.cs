@@ -47,6 +47,9 @@ public sealed partial class TextEmbeddingInferenceOptions
 	public static implicit operator InferenceConfigCreate(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Ml.InferenceConfigCreate.TextEmbedding(textEmbeddingInferenceOptions);
 }
 
+/// <summary>
+/// <para>Text embedding inference options</para>
+/// </summary>
 public sealed partial class TextEmbeddingInferenceOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceOptionsDescriptor>
 {
 	internal TextEmbeddingInferenceOptionsDescriptor(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => configure.Invoke(this);

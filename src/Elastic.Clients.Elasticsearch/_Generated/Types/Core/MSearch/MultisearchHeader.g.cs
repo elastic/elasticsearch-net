@@ -57,6 +57,9 @@ public sealed partial class MultisearchHeader
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 }
 
+/// <summary>
+/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
+/// </summary>
 public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor<MultisearchHeaderDescriptor>
 {
 	internal MultisearchHeaderDescriptor(Action<MultisearchHeaderDescriptor> configure) => configure.Invoke(this);

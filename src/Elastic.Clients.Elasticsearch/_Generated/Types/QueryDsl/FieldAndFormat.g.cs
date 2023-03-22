@@ -47,6 +47,9 @@ public sealed partial class FieldAndFormat
 	public bool? IncludeUnmapped { get; set; }
 }
 
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDescriptor<FieldAndFormatDescriptor<TDocument>>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -113,6 +116,9 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	}
 }
 
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<FieldAndFormatDescriptor>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);

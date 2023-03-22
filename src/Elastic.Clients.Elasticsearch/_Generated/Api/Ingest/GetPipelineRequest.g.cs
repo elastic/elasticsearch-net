@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed class GetPipelineRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// </summary>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequestParameters>
 {
 	public GetPipelineRequest()
@@ -53,12 +61,22 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDescriptor<GetPipelineRequestDescriptor<TDocument>, GetPipelineRequestParameters>
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -87,6 +105,9 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<GetPipelineRequestDescriptor, GetPipelineRequestParameters>
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor> configure) => configure.Invoke(this);

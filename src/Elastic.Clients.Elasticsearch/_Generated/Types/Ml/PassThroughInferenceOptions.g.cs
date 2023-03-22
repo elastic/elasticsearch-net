@@ -47,6 +47,9 @@ public sealed partial class PassThroughInferenceOptions
 	public static implicit operator InferenceConfigCreate(PassThroughInferenceOptions passThroughInferenceOptions) => Ml.InferenceConfigCreate.PassThrough(passThroughInferenceOptions);
 }
 
+/// <summary>
+/// <para>Pass through configuration options</para>
+/// </summary>
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
 {
 	internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);

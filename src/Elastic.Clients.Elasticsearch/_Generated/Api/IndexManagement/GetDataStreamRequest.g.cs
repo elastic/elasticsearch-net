@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class GetDataStreamRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>Returns data streams.</para>
+/// </summary>
 public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamRequestParameters>
 {
 	public GetDataStreamRequest()
@@ -51,10 +56,16 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>Returns data streams.</para>
+/// </summary>
 public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<GetDataStreamRequestDescriptor, GetDataStreamRequestParameters>
 {
 	internal GetDataStreamRequestDescriptor(Action<GetDataStreamRequestDescriptor> configure) => configure.Invoke(this);

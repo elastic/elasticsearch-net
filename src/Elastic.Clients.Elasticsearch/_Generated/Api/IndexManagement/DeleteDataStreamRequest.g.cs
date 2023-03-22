@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class DeleteDataStreamRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>Deletes a data stream.</para>
+/// </summary>
 public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
 {
 	public DeleteDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
@@ -47,10 +52,16 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
+/// <summary>
+/// <para>Deletes a data stream.</para>
+/// </summary>
 public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
 {
 	internal DeleteDataStreamRequestDescriptor(Action<DeleteDataStreamRequestDescriptor> configure) => configure.Invoke(this);

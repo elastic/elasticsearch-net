@@ -31,22 +31,46 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class CreateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Creates a new document in the index.</para>
+/// <para>Returns a 409 response when a document with a same ID already exists in the index.</para>
+/// </summary>
 public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateRequestParameters>
 {
 	public CreateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
@@ -61,22 +85,54 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	[JsonIgnore]
 	public TDocument Document { get; set; }
+
+	/// <summary>
+	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Creates a new document in the index.</para>
+/// <para>Returns a 409 response when a document with a same ID already exists in the index.</para>
+/// </summary>
 public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptor<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
 {
 	internal CreateRequestDescriptor(Action<CreateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);

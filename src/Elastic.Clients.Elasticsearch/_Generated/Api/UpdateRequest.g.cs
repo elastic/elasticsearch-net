@@ -31,30 +31,65 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class UpdateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Only perform the operation if the document has this primary term.</para>
+	/// </summary>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
+	/// </summary>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The script language.</para>
+	/// </summary>
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If 'true', Elasticsearch refreshes the affected shards to make this operation<br/>visible to search, if 'wait_for' then wait for a refresh to make this operation<br/>visible to search, if 'false' do nothing with refreshes.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If true, the destination must be an index alias.</para>
+	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify how many times should the operation be retried when a conflict occurs.</para>
+	/// </summary>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the source fields you want to exclude.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the source fields you want to retrieve.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 }
 
+/// <summary>
+/// <para>Updates a document with a script or partial document.</para>
+/// </summary>
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequest<UpdateRequestParameters>
 {
 	public UpdateRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
@@ -67,26 +102,69 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Only perform the operation if the document has this primary term.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
+
+	/// <summary>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>The script language.</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
+
+	/// <summary>
+	/// <para>If 'true', Elasticsearch refreshes the affected shards to make this operation<br/>visible to search, if 'wait_for' then wait for a refresh to make this operation<br/>visible to search, if 'false' do nothing with refreshes.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>If true, the destination must be an index alias.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>Specify how many times should the operation be retried when a conflict occurs.</para>
+	/// </summary>
 	[JsonIgnore]
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
+
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	/// <summary>
+	/// <para>Specify the source fields you want to exclude.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>Specify the source fields you want to retrieve.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
@@ -135,6 +213,9 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	public TDocument? Upsert { get; set; }
 }
 
+/// <summary>
+/// <para>Updates a document with a script or partial document.</para>
+/// </summary>
 public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptor<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 {
 	internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);

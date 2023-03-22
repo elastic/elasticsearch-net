@@ -53,6 +53,9 @@ public sealed partial class NerInferenceOptions
 	public static implicit operator InferenceConfigCreate(NerInferenceOptions nerInferenceOptions) => Ml.InferenceConfigCreate.Ner(nerInferenceOptions);
 }
 
+/// <summary>
+/// <para>Named entity recognition options</para>
+/// </summary>
 public sealed partial class NerInferenceOptionsDescriptor : SerializableDescriptor<NerInferenceOptionsDescriptor>
 {
 	internal NerInferenceOptionsDescriptor(Action<NerInferenceOptionsDescriptor> configure) => configure.Invoke(this);

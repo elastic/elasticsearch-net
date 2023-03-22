@@ -33,6 +33,9 @@ public sealed class MigrateToDataStreamRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Migrates an alias to a data stream</para>
+/// </summary>
 public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToDataStreamRequestParameters>
 {
 	public MigrateToDataStreamRequest(Elastic.Clients.Elasticsearch.IndexName name) : base(r => r.Required("name", name))
@@ -46,6 +49,9 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Migrates an alias to a data stream</para>
+/// </summary>
 public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptor<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
 {
 	internal MigrateToDataStreamRequestDescriptor(Action<MigrateToDataStreamRequestDescriptor> configure) => configure.Invoke(this);

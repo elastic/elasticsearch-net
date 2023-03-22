@@ -42,6 +42,9 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 	public int MaximumRelevance { get; set; }
 }
 
+/// <summary>
+/// <para>Expected Reciprocal Rank (ERR)</para>
+/// </summary>
 public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricExpectedReciprocalRankDescriptor>
 {
 	internal RankEvalMetricExpectedReciprocalRankDescriptor(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure) => configure.Invoke(this);

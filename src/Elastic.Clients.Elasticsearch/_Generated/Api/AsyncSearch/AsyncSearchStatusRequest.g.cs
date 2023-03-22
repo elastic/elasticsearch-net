@@ -33,6 +33,9 @@ public sealed class AsyncSearchStatusRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchStatusRequestParameters>
 {
 	public AsyncSearchStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -46,6 +49,9 @@ public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchS
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : RequestDescriptor<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusRequestParameters>
 {
 	internal AsyncSearchStatusRequestDescriptor(Action<AsyncSearchStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -75,6 +81,9 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 	}
 }
 
+/// <summary>
+/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescriptor<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequestParameters>
 {
 	internal AsyncSearchStatusRequestDescriptor(Action<AsyncSearchStatusRequestDescriptor> configure) => configure.Invoke(this);

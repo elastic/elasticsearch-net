@@ -33,6 +33,9 @@ public sealed class ClosePointInTimeRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Close a point in time</para>
+/// </summary>
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
@@ -45,6 +48,9 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
 
+/// <summary>
+/// <para>Close a point in time</para>
+/// </summary>
 public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptor<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
 {
 	internal ClosePointInTimeRequestDescriptor(Action<ClosePointInTimeRequestDescriptor> configure) => configure.Invoke(this);

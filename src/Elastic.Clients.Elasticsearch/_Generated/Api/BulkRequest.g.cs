@@ -31,26 +31,55 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class BulkRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Sets require_alias for all incoming documents. Defaults to unset (false)</para>
+	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
+/// <summary>
+/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
+/// </summary>
 public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 {
 	public BulkRequest()
@@ -67,26 +96,64 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
+
+	/// <summary>
+	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
+
+	/// <summary>
+	/// <para>Default list of fields to exclude from the returned _source field, can be overridden on each sub-request</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>Default list of fields to extract and return from the _source field, can be overridden on each sub-request</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	/// <summary>
+	/// <para>Sets require_alias for all incoming documents. Defaults to unset (false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
+/// <summary>
+/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
+/// </summary>
 public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor<BulkRequestDescriptor<TDocument>, BulkRequestParameters>
 {
 	internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -122,6 +189,9 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 	}
 }
 
+/// <summary>
+/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
+/// </summary>
 public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkRequestDescriptor, BulkRequestParameters>
 {
 	internal BulkRequestDescriptor(Action<BulkRequestDescriptor> configure) => configure.Invoke(this);

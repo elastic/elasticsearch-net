@@ -50,6 +50,9 @@ public sealed partial class MappingLimitSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
 
+/// <summary>
+/// <para>Mapping Limit Settings</para>
+/// </summary>
 public sealed partial class MappingLimitSettingsDescriptor : SerializableDescriptor<MappingLimitSettingsDescriptor>
 {
 	internal MappingLimitSettingsDescriptor(Action<MappingLimitSettingsDescriptor> configure) => configure.Invoke(this);

@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class PutAliasRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit timestamp for the document</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Creates or updates an alias.</para>
+/// </summary>
 public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParameters>
 {
 	public PutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
@@ -49,8 +57,15 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit timestamp for the document</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonInclude, JsonPropertyName("filter")]
@@ -65,6 +80,9 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
 
+/// <summary>
+/// <para>Creates or updates an alias.</para>
+/// </summary>
 public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescriptor<PutAliasRequestDescriptor<TDocument>, PutAliasRequestParameters>
 {
 	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -201,6 +219,9 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 }
 
+/// <summary>
+/// <para>Creates or updates an alias.</para>
+/// </summary>
 public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAliasRequestDescriptor, PutAliasRequestParameters>
 {
 	internal PutAliasRequestDescriptor(Action<PutAliasRequestDescriptor> configure) => configure.Invoke(this);

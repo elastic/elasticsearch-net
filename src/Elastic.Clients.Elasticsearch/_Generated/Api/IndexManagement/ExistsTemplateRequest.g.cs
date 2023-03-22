@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class ExistsTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Return settings in flat format (default: false)</para>
+	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateRequestParameters>
 {
 	public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
@@ -51,14 +62,28 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Return settings in flat format (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a particular index template exists.</para>
+/// </summary>
 public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<ExistsTemplateRequestDescriptor, ExistsTemplateRequestParameters>
 {
 	internal ExistsTemplateRequestDescriptor(Action<ExistsTemplateRequestDescriptor> configure) => configure.Invoke(this);

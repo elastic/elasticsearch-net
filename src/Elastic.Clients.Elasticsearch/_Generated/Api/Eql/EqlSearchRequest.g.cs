@@ -31,14 +31,18 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public sealed class EqlSearchRequestParameters : RequestParameters
 {
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
+/// <summary>
+/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// </summary>
 public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
 {
 	public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -55,6 +59,10 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>If true, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
@@ -119,6 +127,9 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
+/// <summary>
+/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// </summary>
 public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
 {
 	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -496,6 +507,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 }
 
+/// <summary>
+/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
+/// </summary>
 public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
 {
 	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor> configure) => configure.Invoke(this);

@@ -33,6 +33,9 @@ public sealed class QueryRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Executes a SQL request</para>
+/// </summary>
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
@@ -130,6 +133,9 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	public bool? IndexUsingFrozen { get; set; }
 }
 
+/// <summary>
+/// <para>Executes a SQL request</para>
+/// </summary>
 public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescriptor<QueryRequestDescriptor<TDocument>, QueryRequestParameters>
 {
 	internal QueryRequestDescriptor(Action<QueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -432,6 +438,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	}
 }
 
+/// <summary>
+/// <para>Executes a SQL request</para>
+/// </summary>
 public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequestDescriptor, QueryRequestParameters>
 {
 	internal QueryRequestDescriptor(Action<QueryRequestDescriptor> configure) => configure.Invoke(this);

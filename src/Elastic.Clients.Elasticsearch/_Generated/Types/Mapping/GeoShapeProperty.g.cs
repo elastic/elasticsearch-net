@@ -65,6 +65,9 @@ public sealed partial class GeoShapeProperty : IProperty
 	public string Type => "geo_shape";
 }
 
+/// <summary>
+/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// </summary>
 public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptor<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
 {
 	internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -311,6 +314,9 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	};
 }
 
+/// <summary>
+/// <para>The `geo_shape` data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles<br/>and polygons.</para>
+/// </summary>
 public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
 {
 	internal GeoShapePropertyDescriptor(Action<GeoShapePropertyDescriptor> configure) => configure.Invoke(this);

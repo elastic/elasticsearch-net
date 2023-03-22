@@ -31,64 +31,150 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class DeleteByQueryRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>What to do when the delete by query hits version conflicts?</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Starting offset (default: 0)</para>
+	/// </summary>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Should the affected indexes be refreshed?</para>
+	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to index level setting</para>
+	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The throttle for this request in sub-requests per second. -1 means no throttle.</para>
+	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify how long a consistent view of the index should be maintained for scrolled search</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Size on the scroll request powering the delete by query</para>
+	/// </summary>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit timeout for each search request. Defaults to no timeout.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>A comma-separated list of <field>:<direction> pairs</para>
+	/// </summary>
 	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specific 'tag' of the request for logging and statistical purposes</para>
+	/// </summary>
 	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</para>
+	/// </summary>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Time each individual bulk request should wait for shards that are unavailable.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether to return document version as part of a hit</para>
+	/// </summary>
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Should the request should block until the delete by query is complete.</para>
+	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+/// <summary>
+/// <para>Deletes documents matching the provided query.</para>
+/// </summary>
 public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryRequestParameters>
 {
 	public DeleteByQueryRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -101,60 +187,171 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+	/// <summary>
+	/// <para>What to do when the delete by query hits version conflicts?</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
+
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
+
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Starting offset (default: 0)</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>Should the affected indexes be refreshed?</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to index level setting</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+
+	/// <summary>
+	/// <para>The throttle for this request in sub-requests per second. -1 means no throttle.</para>
+	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
+	/// <para>Specify how long a consistent view of the index should be maintained for scrolled search</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
+
+	/// <summary>
+	/// <para>Size on the scroll request powering the delete by query</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
+
+	/// <summary>
+	/// <para>Explicit timeout for each search request. Defaults to no timeout.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
+
+	/// <summary>
+	/// <para>A comma-separated list of <field>:<direction> pairs</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Sort { get => Q<ICollection<string>?>("sort"); set => Q("sort", value); }
+
+	/// <summary>
+	/// <para>Specific 'tag' of the request for logging and statistical purposes</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Stats { get => Q<ICollection<string>?>("stats"); set => Q("stats", value); }
+
+	/// <summary>
+	/// <para>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+
+	/// <summary>
+	/// <para>Time each individual bulk request should wait for shards that are unavailable.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Specify whether to return document version as part of a hit</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
+
+	/// <summary>
+	/// <para>Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	/// <summary>
+	/// <para>Should the request should block until the delete by query is complete.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 	[JsonInclude, JsonPropertyName("max_docs")]
@@ -165,6 +362,9 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 }
 
+/// <summary>
+/// <para>Deletes documents matching the provided query.</para>
+/// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestDescriptor<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryRequestParameters>
 {
 	internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -325,6 +525,9 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	}
 }
 
+/// <summary>
+/// <para>Deletes documents matching the provided query.</para>
+/// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<DeleteByQueryRequestDescriptor, DeleteByQueryRequestParameters>
 {
 	internal DeleteByQueryRequestDescriptor(Action<DeleteByQueryRequestDescriptor> configure) => configure.Invoke(this);

@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed class GetScriptRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns a script.</para>
+/// </summary>
 public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestParameters>
 {
 	public GetScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -47,10 +52,16 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns a script.</para>
+/// </summary>
 public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescriptor<GetScriptRequestDescriptor<TDocument>, GetScriptRequestParameters>
 {
 	internal GetScriptRequestDescriptor(Action<GetScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -82,6 +93,9 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	}
 }
 
+/// <summary>
+/// <para>Returns a script.</para>
+/// </summary>
 public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetScriptRequestDescriptor, GetScriptRequestParameters>
 {
 	internal GetScriptRequestDescriptor(Action<GetScriptRequestDescriptor> configure) => configure.Invoke(this);

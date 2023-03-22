@@ -33,6 +33,9 @@ public sealed class DeleteAsyncSearchRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncSearchRequestParameters>
 {
 	public DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -46,6 +49,9 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchRequestParameters>
 {
 	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -75,6 +81,9 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptor<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
 {
 	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);

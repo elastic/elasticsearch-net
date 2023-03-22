@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class GetIndexTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>If true, returns settings in flat format.</para>
+	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about one or more index templates.</para>
+/// </summary>
 public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTemplateRequestParameters>
 {
 	public GetIndexTemplateRequest()
@@ -55,14 +66,28 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>If true, returns settings in flat format.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns information about one or more index templates.</para>
+/// </summary>
 public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescriptor<GetIndexTemplateRequestDescriptor, GetIndexTemplateRequestParameters>
 {
 	internal GetIndexTemplateRequestDescriptor(Action<GetIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);

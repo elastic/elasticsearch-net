@@ -33,6 +33,9 @@ public sealed class GetScriptLanguagesRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns available script types, languages and contexts</para>
+/// </summary>
 public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLanguagesRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
@@ -42,6 +45,9 @@ public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLa
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns available script types, languages and contexts</para>
+/// </summary>
 public sealed partial class GetScriptLanguagesRequestDescriptor : RequestDescriptor<GetScriptLanguagesRequestDescriptor, GetScriptLanguagesRequestParameters>
 {
 	internal GetScriptLanguagesRequestDescriptor(Action<GetScriptLanguagesRequestDescriptor> configure) => configure.Invoke(this);

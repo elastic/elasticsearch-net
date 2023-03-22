@@ -31,18 +31,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class DeleteIndexRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Ignore if a wildcard expression resolves to no concrete indices (default: false)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open, closed, or hidden indices</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Ignore unavailable indexes (default: false)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes an index.</para>
+/// </summary>
 public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequestParameters>
 {
 	public DeleteIndexRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -55,18 +72,40 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Ignore if a wildcard expression resolves to no concrete indices (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Whether wildcard expressions should get expanded to open, closed, or hidden indices</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Ignore unavailable indexes (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Deletes an index.</para>
+/// </summary>
 public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDescriptor<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexRequestParameters>
 {
 	internal DeleteIndexRequestDescriptor(Action<DeleteIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -102,6 +141,9 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Deletes an index.</para>
+/// </summary>
 public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<DeleteIndexRequestDescriptor, DeleteIndexRequestParameters>
 {
 	internal DeleteIndexRequestDescriptor(Action<DeleteIndexRequestDescriptor> configure) => configure.Invoke(this);

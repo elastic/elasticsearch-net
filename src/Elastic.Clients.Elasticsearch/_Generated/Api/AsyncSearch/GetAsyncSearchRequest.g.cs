@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed class GetAsyncSearchRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
+/// <summary>
+/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchRequestParameters>
 {
 	public GetAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -51,14 +62,28 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Specify the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
+/// <summary>
+/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncSearchRequestDescriptor<TDocument>, GetAsyncSearchRequestParameters>
 {
 	internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -92,6 +117,9 @@ public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : Request
 	}
 }
 
+/// <summary>
+/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
+/// </summary>
 public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptor<GetAsyncSearchRequestDescriptor, GetAsyncSearchRequestParameters>
 {
 	internal GetAsyncSearchRequestDescriptor(Action<GetAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);

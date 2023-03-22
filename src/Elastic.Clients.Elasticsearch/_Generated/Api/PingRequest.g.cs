@@ -33,6 +33,9 @@ public sealed class PingRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns whether the cluster is running.</para>
+/// </summary>
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
@@ -42,6 +45,9 @@ public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns whether the cluster is running.</para>
+/// </summary>
 public sealed partial class PingRequestDescriptor : RequestDescriptor<PingRequestDescriptor, PingRequestParameters>
 {
 	internal PingRequestDescriptor(Action<PingRequestDescriptor> configure) => configure.Invoke(this);

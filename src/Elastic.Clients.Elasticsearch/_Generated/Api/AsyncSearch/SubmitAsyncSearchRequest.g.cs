@@ -31,69 +31,144 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// </summary>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Indicate if an error should be returned if there is a partial search failure or timeout</para>
+	/// </summary>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// </summary>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</para>
+	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	[JsonIgnore]
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
+	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specifies which field to use for suggestions.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify suggest mode</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>How many suggestions to return in response</para>
+	/// </summary>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>The source text for which the suggestions should be returned.</para>
+	/// </summary>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
@@ -506,6 +581,9 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 }
 
 [JsonConverter(typeof(SubmitAsyncSearchRequestConverter))]
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncSearchRequestParameters>
 {
 	public SubmitAsyncSearchRequest()
@@ -522,68 +600,175 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
+
+	/// <summary>
+	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+	/// <summary>
+	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Indicate if an error should be returned if there is a partial search failure or timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
+
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
+
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
+
+	/// <summary>
+	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
+
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
+
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
+
+	/// <summary>
+	/// <para>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 	[JsonIgnore]
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
+
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
+
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>Specifies which field to use for suggestions.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
+
+	/// <summary>
+	/// <para>Specify suggest mode</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
+
+	/// <summary>
+	/// <para>How many suggestions to return in response</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
+
+	/// <summary>
+	/// <para>The source text for which the suggestions should be returned.</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
+
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 	[JsonInclude, JsonPropertyName("aggregations")]
@@ -740,6 +925,9 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public ICollection<string>? Stats { get; set; }
 }
 
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchRequestParameters>
 {
 	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -1781,6 +1969,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 }
 
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescriptor<SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters>
 {
 	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);

@@ -31,12 +31,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class SimulateIndexTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If `true`, the template passed in the body is only used if no existing<br/>templates match the same index patterns. If `false`, the simulation uses<br/>the template with the highest priority. Note that the template is not<br/>permanently added or updated in either case; it is only used for the<br/>simulation.</para>
+	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received<br/>before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Simulate matching the given index name against the index templates in the system</para>
+/// </summary>
 public sealed partial class SimulateIndexTemplateRequest : PlainRequest<SimulateIndexTemplateRequestParameters>
 {
 	public SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -49,8 +57,15 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>If `true`, the template passed in the body is only used if no existing<br/>templates match the same index patterns. If `false`, the simulation uses<br/>the template with the highest priority. Note that the template is not<br/>permanently added or updated in either case; it is only used for the<br/>simulation.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received<br/>before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	[JsonInclude, JsonPropertyName("allow_auto_create")]
@@ -71,6 +86,9 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	public IDictionary<string, object>? Meta { get; set; }
 }
 
+/// <summary>
+/// <para>Simulate matching the given index name against the index templates in the system</para>
+/// </summary>
 public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<SimulateIndexTemplateRequestDescriptor<TDocument>, SimulateIndexTemplateRequestParameters>
 {
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -270,6 +288,9 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	}
 }
 
+/// <summary>
+/// <para>Simulate matching the given index name against the index templates in the system</para>
+/// </summary>
 public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDescriptor<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateRequestParameters>
 {
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);

@@ -33,6 +33,9 @@ public sealed class TermsEnumRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.</para>
+/// </summary>
 public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestParameters>
 {
 	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
@@ -84,6 +87,9 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	public string? SearchAfter { get; set; }
 }
 
+/// <summary>
+/// <para>The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.</para>
+/// </summary>
 public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescriptor<TermsEnumRequestDescriptor<TDocument>, TermsEnumRequestParameters>
 {
 	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -264,6 +270,9 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	}
 }
 
+/// <summary>
+/// <para>The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.</para>
+/// </summary>
 public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<TermsEnumRequestDescriptor, TermsEnumRequestParameters>
 {
 	internal TermsEnumRequestDescriptor(Action<TermsEnumRequestDescriptor> configure) => configure.Invoke(this);

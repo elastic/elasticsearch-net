@@ -42,6 +42,9 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 	public bool? Normalize { get; set; }
 }
 
+/// <summary>
+/// <para>Discounted cumulative gain (DCG)</para>
+/// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptor<RankEvalMetricDiscountedCumulativeGainDescriptor>
 {
 	internal RankEvalMetricDiscountedCumulativeGainDescriptor(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure) => configure.Invoke(this);

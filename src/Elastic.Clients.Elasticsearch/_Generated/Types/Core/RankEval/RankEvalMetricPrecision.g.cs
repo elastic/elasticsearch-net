@@ -43,6 +43,9 @@ public sealed partial class RankEvalMetricPrecision
 	public int? RelevantRatingThreshold { get; set; }
 }
 
+/// <summary>
+/// <para>Precision at K (P@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptor<RankEvalMetricPrecisionDescriptor>
 {
 	internal RankEvalMetricPrecisionDescriptor(Action<RankEvalMetricPrecisionDescriptor> configure) => configure.Invoke(this);

@@ -38,6 +38,9 @@ public sealed partial class RankEvalMetricMeanReciprocalRank
 	public int? RelevantRatingThreshold { get; set; }
 }
 
+/// <summary>
+/// <para>Mean Reciprocal Rank</para>
+/// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricMeanReciprocalRankDescriptor>
 {
 	internal RankEvalMetricMeanReciprocalRankDescriptor(Action<RankEvalMetricMeanReciprocalRankDescriptor> configure) => configure.Invoke(this);

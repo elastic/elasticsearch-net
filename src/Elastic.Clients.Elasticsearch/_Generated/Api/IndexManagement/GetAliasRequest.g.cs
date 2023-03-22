@@ -31,16 +31,30 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class GetAliasRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParameters>
 {
 	public GetAliasRequest()
@@ -65,16 +79,34 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescriptor<GetAliasRequestDescriptor<TDocument>, GetAliasRequestParameters>
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -119,6 +151,9 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAliasRequestDescriptor, GetAliasRequestParameters>
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor> configure) => configure.Invoke(this);

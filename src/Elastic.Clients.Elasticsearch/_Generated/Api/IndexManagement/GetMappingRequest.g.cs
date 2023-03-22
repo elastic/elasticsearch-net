@@ -31,18 +31,35 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class GetMappingRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns mappings for one or more indices.</para>
+/// </summary>
 public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestParameters>
 {
 	public GetMappingRequest()
@@ -59,18 +76,40 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 
 	internal override bool SupportsBody => false;
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Returns mappings for one or more indices.</para>
+/// </summary>
 public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDescriptor<GetMappingRequestDescriptor<TDocument>, GetMappingRequestParameters>
 {
 	internal GetMappingRequestDescriptor(Action<GetMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -102,6 +141,9 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 }
 
+/// <summary>
+/// <para>Returns mappings for one or more indices.</para>
+/// </summary>
 public sealed partial class GetMappingRequestDescriptor : RequestDescriptor<GetMappingRequestDescriptor, GetMappingRequestParameters>
 {
 	internal GetMappingRequestDescriptor(Action<GetMappingRequestDescriptor> configure) => configure.Invoke(this);

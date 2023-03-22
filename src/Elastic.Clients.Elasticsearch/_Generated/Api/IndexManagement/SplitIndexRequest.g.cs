@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class SplitIndexRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the shrunken index before the operation returns.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// </summary>
 public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestParameters>
 {
 	public SplitIndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
@@ -51,10 +62,21 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the shrunken index before the operation returns.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonInclude, JsonPropertyName("aliases")]
@@ -63,6 +85,9 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
+/// <summary>
+/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// </summary>
 public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDescriptor<SplitIndexRequestDescriptor<TDocument>, SplitIndexRequestParameters>
 {
 	internal SplitIndexRequestDescriptor(Action<SplitIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -131,6 +156,9 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 }
 
+/// <summary>
+/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// </summary>
 public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
 {
 	internal SplitIndexRequestDescriptor(Action<SplitIndexRequestDescriptor> configure) => configure.Invoke(this);

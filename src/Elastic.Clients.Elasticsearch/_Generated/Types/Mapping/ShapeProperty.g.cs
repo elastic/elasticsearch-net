@@ -63,6 +63,9 @@ public sealed partial class ShapeProperty : IProperty
 	public string Type => "shape";
 }
 
+/// <summary>
+/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// </summary>
 public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptor<ShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<ShapeProperty>
 {
 	internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -295,6 +298,9 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 	};
 }
 
+/// <summary>
+/// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// </summary>
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
 {
 	internal ShapePropertyDescriptor(Action<ShapePropertyDescriptor> configure) => configure.Invoke(this);

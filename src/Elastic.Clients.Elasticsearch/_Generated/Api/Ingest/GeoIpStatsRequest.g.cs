@@ -33,6 +33,9 @@ public sealed class GeoIpStatsRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns statistical information about geoip databases</para>
+/// </summary>
 public sealed partial class GeoIpStatsRequest : PlainRequest<GeoIpStatsRequestParameters>
 {
 	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
@@ -42,6 +45,9 @@ public sealed partial class GeoIpStatsRequest : PlainRequest<GeoIpStatsRequestPa
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns statistical information about geoip databases</para>
+/// </summary>
 public sealed partial class GeoIpStatsRequestDescriptor : RequestDescriptor<GeoIpStatsRequestDescriptor, GeoIpStatsRequestParameters>
 {
 	internal GeoIpStatsRequestDescriptor(Action<GeoIpStatsRequestDescriptor> configure) => configure.Invoke(this);

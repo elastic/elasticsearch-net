@@ -59,6 +59,9 @@ public sealed partial class TextClassificationInferenceOptions
 	public static implicit operator InferenceConfigCreate(TextClassificationInferenceOptions textClassificationInferenceOptions) => Ml.InferenceConfigCreate.TextClassification(textClassificationInferenceOptions);
 }
 
+/// <summary>
+/// <para>Text classification configuration options</para>
+/// </summary>
 public sealed partial class TextClassificationInferenceOptionsDescriptor : SerializableDescriptor<TextClassificationInferenceOptionsDescriptor>
 {
 	internal TextClassificationInferenceOptionsDescriptor(Action<TextClassificationInferenceOptionsDescriptor> configure) => configure.Invoke(this);

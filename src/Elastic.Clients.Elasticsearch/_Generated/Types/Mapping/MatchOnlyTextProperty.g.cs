@@ -54,6 +54,9 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 	public string Type => "match_only_text";
 }
 
+/// <summary>
+/// <para>A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field<br/>effectively stores data the same way as a text field that only indexes documents (index_options: docs) and<br/>disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries<br/>that need positions such as the match_phrase query perform slower as they need to look at the _source document<br/>to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.</para>
+/// </summary>
 public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : SerializableDescriptor<MatchOnlyTextPropertyDescriptor<TDocument>>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
 	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -147,6 +150,9 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 	};
 }
 
+/// <summary>
+/// <para>A variant of text that trades scoring and efficiency of positional queries for space efficiency. This field<br/>effectively stores data the same way as a text field that only indexes documents (index_options: docs) and<br/>disables norms (norms: false). Term queries perform as fast if not faster as on text fields, however queries<br/>that need positions such as the match_phrase query perform slower as they need to look at the _source document<br/>to verify whether a phrase matches. All queries return constant scores that are equal to 1.0.</para>
+/// </summary>
 public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescriptor<MatchOnlyTextPropertyDescriptor>, IBuildableDescriptor<MatchOnlyTextProperty>
 {
 	internal MatchOnlyTextPropertyDescriptor(Action<MatchOnlyTextPropertyDescriptor> configure) => configure.Invoke(this);

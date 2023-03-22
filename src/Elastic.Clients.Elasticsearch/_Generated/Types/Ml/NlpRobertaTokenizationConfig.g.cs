@@ -65,6 +65,9 @@ public sealed partial class NlpRobertaTokenizationConfig
 	public static implicit operator TokenizationConfig(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Ml.TokenizationConfig.Roberta(nlpRobertaTokenizationConfig);
 }
 
+/// <summary>
+/// <para>RoBERTa tokenization configuration options</para>
+/// </summary>
 public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>
 {
 	internal NlpRobertaTokenizationConfigDescriptor(Action<NlpRobertaTokenizationConfigDescriptor> configure) => configure.Invoke(this);

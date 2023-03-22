@@ -31,20 +31,40 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class PutMappingRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>When true, applies mappings only to the write index of an alias or data stream</para>
+	/// </summary>
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 }
 
+/// <summary>
+/// <para>Updates the index mappings.</para>
+/// </summary>
 public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
 {
 	public PutMappingRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
@@ -57,16 +77,39 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>When true, applies mappings only to the write index of an alias or data stream</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? WriteIndexOnly { get => Q<bool?>("write_index_only"); set => Q("write_index_only", value); }
 
@@ -138,6 +181,9 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
 }
 
+/// <summary>
+/// <para>Updates the index mappings.</para>
+/// </summary>
 public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
 {
 	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -466,6 +512,9 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 }
 
+/// <summary>
+/// <para>Updates the index mappings.</para>
+/// </summary>
 public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
 {
 	internal PutMappingRequestDescriptor(Action<PutMappingRequestDescriptor> configure) => configure.Invoke(this);

@@ -31,10 +31,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class PutIndexTemplateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether the index template should only be added if new or can also replace an existing one</para>
+	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
+/// <summary>
+/// <para>Creates or updates an index template.</para>
+/// </summary>
 public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTemplateRequestParameters>
 {
 	public PutIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
@@ -47,6 +52,9 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Whether the index template should only be added if new or can also replace an existing one</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	[JsonInclude, JsonPropertyName("index_patterns")]
@@ -65,6 +73,9 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	public IDictionary<string, object>? Meta { get; set; }
 }
 
+/// <summary>
+/// <para>Creates or updates an index template.</para>
+/// </summary>
 public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateRequestParameters>
 {
 	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -250,6 +261,9 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	}
 }
 
+/// <summary>
+/// <para>Creates or updates an index template.</para>
+/// </summary>
 public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescriptor<PutIndexTemplateRequestDescriptor, PutIndexTemplateRequestParameters>
 {
 	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);

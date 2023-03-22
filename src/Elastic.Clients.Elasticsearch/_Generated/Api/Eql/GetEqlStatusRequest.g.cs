@@ -33,6 +33,9 @@ public sealed class GetEqlStatusRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+/// </summary>
 public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusRequestParameters>
 {
 	public GetEqlStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -46,6 +49,9 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+/// </summary>
 public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDescriptor<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusRequestParameters>
 {
 	internal GetEqlStatusRequestDescriptor(Action<GetEqlStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -75,6 +81,9 @@ public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDe
 	}
 }
 
+/// <summary>
+/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+/// </summary>
 public sealed partial class GetEqlStatusRequestDescriptor : RequestDescriptor<GetEqlStatusRequestDescriptor, GetEqlStatusRequestParameters>
 {
 	internal GetEqlStatusRequestDescriptor(Action<GetEqlStatusRequestDescriptor> configure) => configure.Invoke(this);

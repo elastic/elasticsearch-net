@@ -38,6 +38,9 @@ public sealed partial class RankEvalMetricRecall
 	public int? RelevantRatingThreshold { get; set; }
 }
 
+/// <summary>
+/// <para>Recall at K (R@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricRecallDescriptor : SerializableDescriptor<RankEvalMetricRecallDescriptor>
 {
 	internal RankEvalMetricRecallDescriptor(Action<RankEvalMetricRecallDescriptor> configure) => configure.Invoke(this);

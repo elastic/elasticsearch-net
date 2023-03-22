@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class CloneIndexRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the cloned index before the operation returns.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Clones an index</para>
+/// </summary>
 public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestParameters>
 {
 	public CloneIndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target) : base(r => r.Required("index", index).Required("target", target))
@@ -51,10 +62,21 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for on the cloned index before the operation returns.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonInclude, JsonPropertyName("aliases")]
@@ -63,6 +85,9 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
+/// <summary>
+/// <para>Clones an index</para>
+/// </summary>
 public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDescriptor<CloneIndexRequestDescriptor<TDocument>, CloneIndexRequestParameters>
 {
 	internal CloneIndexRequestDescriptor(Action<CloneIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -131,6 +156,9 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 	}
 }
 
+/// <summary>
+/// <para>Clones an index</para>
+/// </summary>
 public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<CloneIndexRequestDescriptor, CloneIndexRequestParameters>
 {
 	internal CloneIndexRequestDescriptor(Action<CloneIndexRequestDescriptor> configure) => configure.Invoke(this);

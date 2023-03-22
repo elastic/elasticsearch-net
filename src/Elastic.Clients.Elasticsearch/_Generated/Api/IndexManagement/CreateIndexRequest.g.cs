@@ -31,14 +31,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed class CreateIndexRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
 {
 	public CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
@@ -51,10 +62,21 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 
 	internal override bool SupportsBody => true;
 
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Explicit operation timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonInclude, JsonPropertyName("aliases")]
@@ -69,6 +91,9 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 {
 	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -211,6 +236,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Creates an index with optional settings and mappings.</para>
+/// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 {
 	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor> configure) => configure.Invoke(this);

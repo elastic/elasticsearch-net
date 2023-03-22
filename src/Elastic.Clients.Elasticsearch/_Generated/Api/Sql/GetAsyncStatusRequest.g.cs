@@ -33,6 +33,9 @@ public sealed class GetAsyncStatusRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// </summary>
 public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusRequestParameters>
 {
 	public GetAsyncStatusRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
@@ -46,6 +49,9 @@ public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusR
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// </summary>
 public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusRequestParameters>
 {
 	internal GetAsyncStatusRequestDescriptor(Action<GetAsyncStatusRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
@@ -75,6 +81,9 @@ public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : Request
 	}
 }
 
+/// <summary>
+/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
+/// </summary>
 public sealed partial class GetAsyncStatusRequestDescriptor : RequestDescriptor<GetAsyncStatusRequestDescriptor, GetAsyncStatusRequestParameters>
 {
 	internal GetAsyncStatusRequestDescriptor(Action<GetAsyncStatusRequestDescriptor> configure) => configure.Invoke(this);
