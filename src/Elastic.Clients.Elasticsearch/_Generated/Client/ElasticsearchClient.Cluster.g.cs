@@ -38,7 +38,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.4/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health(HealthRequest request)
 	{
@@ -48,7 +48,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.4/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{

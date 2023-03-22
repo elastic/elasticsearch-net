@@ -25,28 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class NodeShard
+public sealed partial class MappingStats
 {
-	[JsonInclude, JsonPropertyName("allocation_id")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? AllocationId { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("primary")]
-	public bool Primary { get; init; }
-	[JsonInclude, JsonPropertyName("recovery_source")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? RecoverySource { get; init; }
-	[JsonInclude, JsonPropertyName("relocating_node")]
-	public string? RelocatingNode { get; init; }
-	[JsonInclude, JsonPropertyName("relocation_failure_info")]
-	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; init; }
-	[JsonInclude, JsonPropertyName("shard")]
-	public int Shard { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_info")]
-	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
+	[JsonInclude, JsonPropertyName("total_count")]
+	public long TotalCount { get; init; }
+	[JsonInclude, JsonPropertyName("total_estimated_overhead")]
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalEstimatedOverhead { get; init; }
+	[JsonInclude, JsonPropertyName("total_estimated_overhead_in_bytes")]
+	public long TotalEstimatedOverheadInBytes { get; init; }
 }
