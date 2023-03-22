@@ -32,7 +32,7 @@ public sealed partial class MatrixStatsAggregate : IAggregate
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
 	[JsonInclude, JsonPropertyName("fields")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields> Fields { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields>? Fields { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }
