@@ -13,32 +13,25 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations;
 
-[Obsolete("Prefer AggregationUsageWithVerifyTestBase")]
-public abstract class AggregationUsageTestBase<TCluster>
+public abstract class AggregationUsageWithVerifyTestBase<TCluster>
 		: ApiIntegrationTestBase<TCluster, SearchResponse<Project>, SearchRequestDescriptor<Project>, SearchRequest<Project>>
-			where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
+		where TCluster : IEphemeralCluster<EphemeralClusterConfiguration>, ITestCluster, new()
 {
-	protected AggregationUsageTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	protected AggregationUsageWithVerifyTestBase(TCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	protected virtual Indices AgainstIndex { get; } = Infer.Index<Project>();
 
-	protected abstract object AggregationJson { get; }
-
+	protected override bool VerifyJson => true;
 	protected override bool ExpectIsValid => true;
-
-	protected sealed override object ExpectJson => QueryScopeJson == null
-		? new { size = 0, aggregations = AggregationJson }
-		: new { size = 0, aggregations = AggregationJson, query = QueryScopeJson };
-
 	protected override int ExpectStatusCode => 200;
 
 	protected override Action<SearchRequestDescriptor<Project>> Fluent => s => s
 		.Size(0)
 		.Index(AgainstIndex)
 		.Query(QueryScope)
-		.Aggregations(FluentAggs);
+		.Aggregations(FluentAggregations);
 
-	protected abstract Action<AggregationDescriptor<Project>> FluentAggs { get; }
+	protected abstract Action<AggregationDescriptor<Project>> FluentAggregations { get; }
 
 	protected override HttpMethod ExpectHttpMethod => HttpMethod.POST;
 
@@ -47,10 +40,10 @@ public abstract class AggregationUsageTestBase<TCluster>
 		{
 			Query = QueryScope,
 			Size = 0,
-			Aggregations = InitializerAggs
+			Aggregations = InitializerAggregations
 		};
 
-	protected abstract AggregationDictionary InitializerAggs { get; }
+	protected abstract AggregationDictionary InitializerAggregations { get; }
 
 	protected virtual Query QueryScope { get; } = new TermQuery("type") { Value = Project.TypeName };
 
