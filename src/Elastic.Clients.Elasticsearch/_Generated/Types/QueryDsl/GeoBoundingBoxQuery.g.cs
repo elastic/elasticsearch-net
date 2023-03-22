@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBoundingBoxQuery>
 {
 	public override GeoBoundingBoxQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -117,15 +119,10 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 public sealed partial class GeoBoundingBoxQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	public bool? IgnoreUnmapped { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoBoundingBoxQuery geoBoundingBoxQuery) => QueryDsl.Query.GeoBoundingBox(geoBoundingBoxQuery);
@@ -134,20 +131,16 @@ public sealed partial class GeoBoundingBoxQuery : SearchQuery
 public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : SerializableDescriptor<GeoBoundingBoxQueryDescriptor<TDocument>>
 {
 	internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GeoBoundingBoxQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
 
 	public GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -233,20 +226,16 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescriptor<GeoBoundingBoxQueryDescriptor>
 {
 	internal GeoBoundingBoxQueryDescriptor(Action<GeoBoundingBoxQueryDescriptor> configure) => configure.Invoke(this);
+
 	public GeoBoundingBoxQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
 
 	public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)

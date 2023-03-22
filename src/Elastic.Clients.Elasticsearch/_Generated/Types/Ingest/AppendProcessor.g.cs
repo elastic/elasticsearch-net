@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class AppendProcessor
 {
 	[JsonInclude, JsonPropertyName("allow_duplicates")]
 	public bool? AllowDuplicates { get; set; }
-
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("value")]
 	public ICollection<object> Value { get; set; }
 
@@ -57,30 +52,21 @@ public sealed partial class AppendProcessor
 public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableDescriptor<AppendProcessorDescriptor<TDocument>>
 {
 	internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public AppendProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private bool? AllowDuplicatesValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private ICollection<object> ValueValue { get; set; }
 
 	public AppendProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -242,30 +228,21 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<AppendProcessorDescriptor>
 {
 	internal AppendProcessorDescriptor(Action<AppendProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public AppendProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private bool? AllowDuplicatesValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private ICollection<object> ValueValue { get; set; }
 
 	public AppendProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

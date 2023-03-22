@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
@@ -24,8 +26,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 [JsonConverter(typeof(SortOptionsConverter))]
 public sealed partial class SortOptions
 {
@@ -52,9 +54,7 @@ public sealed partial class SortOptions
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
-
 	internal Elastic.Clients.Elasticsearch.Field? AdditionalPropertyName { get; }
 
 	public static SortOptions Doc(Elastic.Clients.Elasticsearch.ScoreSort scoreSort) => new SortOptions("_doc", scoreSort);
@@ -67,24 +67,19 @@ public sealed partial class SortOptions
 public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescriptor<SortOptionsDescriptor<TDocument>>
 {
 	internal SortOptionsDescriptor(Action<SortOptionsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SortOptionsDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
 
-	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		AdditionalPropertyValue = null;
 		AdditionalPropertyName = null;
@@ -106,8 +101,7 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName)
-		where T : Descriptor
+	private SortOptionsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName) where T : Descriptor
 	{
 		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 		descriptorAction?.Invoke(descriptor);
@@ -144,6 +138,7 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
 	public SortOptionsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
 	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field, Action<FieldSortDescriptor<TDocument>> configure) => Set(configure, field);
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -188,24 +183,19 @@ public sealed partial class SortOptionsDescriptor<TDocument> : SerializableDescr
 public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortOptionsDescriptor>
 {
 	internal SortOptionsDescriptor(Action<SortOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public SortOptionsDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field AdditionalPropertyName { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldSort AdditionalPropertyValue { get; set; }
 
-	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		AdditionalPropertyValue = null;
 		AdditionalPropertyName = null;
@@ -227,8 +217,7 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 		return Self;
 	}
 
-	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName)
-		where T : Descriptor
+	private SortOptionsDescriptor Set<T>(Action<T> descriptorAction, Elastic.Clients.Elasticsearch.Field variantName) where T : Descriptor
 	{
 		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
 		descriptorAction?.Invoke(descriptor);
@@ -264,6 +253,7 @@ public sealed partial class SortOptionsDescriptor : SerializableDescriptor<SortO
 	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field) => Set(FieldSort.Empty, field);
 	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldSort sort) => Set(sort, field);
 	public SortOptionsDescriptor Field(Elastic.Clients.Elasticsearch.Field field, Action<FieldSortDescriptor> configure) => Set(configure, field);
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

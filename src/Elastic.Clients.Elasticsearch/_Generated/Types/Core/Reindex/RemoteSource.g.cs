@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
+
 public sealed partial class RemoteSource
 {
 	[JsonInclude, JsonPropertyName("connect_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("headers")]
 	public IDictionary<string, string>? Headers { get; set; }
-
 	[JsonInclude, JsonPropertyName("host")]
 	public string Host { get; set; }
-
 	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
-
 	[JsonInclude, JsonPropertyName("socket_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
-
 	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
@@ -49,20 +46,16 @@ public sealed partial class RemoteSource
 public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<RemoteSourceDescriptor>
 {
 	internal RemoteSourceDescriptor(Action<RemoteSourceDescriptor> configure) => configure.Invoke(this);
+
 	public RemoteSourceDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Duration? ConnectTimeoutValue { get; set; }
-
 	private IDictionary<string, string>? HeadersValue { get; set; }
-
 	private string HostValue { get; set; }
-
 	private string? PasswordValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? SocketTimeoutValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
 	public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? connectTimeout)

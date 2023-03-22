@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class FetchProfileBreakdown
 {
 	[JsonInclude, JsonPropertyName("load_source")]
 	public int? LoadSource { get; init; }
-
 	[JsonInclude, JsonPropertyName("load_source_count")]
 	public int? LoadSourceCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("load_stored_fields")]
 	public int? LoadStoredFields { get; init; }
-
 	[JsonInclude, JsonPropertyName("load_stored_fields_count")]
 	public int? LoadStoredFieldsCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("next_reader")]
 	public int? NextReader { get; init; }
-
 	[JsonInclude, JsonPropertyName("next_reader_count")]
 	public int? NextReaderCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("process")]
 	public int? Process { get; init; }
-
 	[JsonInclude, JsonPropertyName("process_count")]
 	public int? ProcessCount { get; init; }
 }

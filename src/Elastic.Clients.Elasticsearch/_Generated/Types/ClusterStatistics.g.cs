@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class ClusterStatistics
 {
 	[JsonInclude, JsonPropertyName("skipped")]
 	public int Skipped { get; init; }
-
 	[JsonInclude, JsonPropertyName("successful")]
 	public int Successful { get; init; }
-
 	[JsonInclude, JsonPropertyName("total")]
 	public int Total { get; init; }
 }

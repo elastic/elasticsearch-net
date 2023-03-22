@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class WrapperQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
+	/// <summary>
+	/// <para>A base64 encoded query. The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
 
@@ -42,14 +46,13 @@ public sealed partial class WrapperQuery : SearchQuery
 public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>
 {
 	internal WrapperQueryDescriptor(Action<WrapperQueryDescriptor> configure) => configure.Invoke(this);
+
 	public WrapperQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private string QueryValue { get; set; }
 
 	public WrapperQueryDescriptor QueryName(string? queryName)
@@ -64,6 +67,9 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A base64 encoded query. The binary data format can be any of JSON, YAML, CBOR or SMILE encodings</para>
+	/// </summary>
 	public WrapperQueryDescriptor Query(string query)
 	{
 		QueryValue = query;

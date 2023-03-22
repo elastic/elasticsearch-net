@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,41 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class NodeAttributes
 {
+	/// <summary>
+	/// <para>Lists node attributes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("attributes")]
 	public IReadOnlyDictionary<string, string> Attributes { get; init; }
 
+	/// <summary>
+	/// <para>The ephemeral ID of the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ephemeral_id")]
 	public string EphemeralId { get; init; }
-
 	[JsonInclude, JsonPropertyName("external_id")]
 	public string ExternalId { get; init; }
 
+	/// <summary>
+	/// <para>The unique identifier of the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
 
+	/// <summary>
+	/// <para>The unique identifier of the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
-
 	[JsonInclude, JsonPropertyName("roles")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>? Roles { get; init; }
 
+	/// <summary>
+	/// <para>The host and port where transport HTTP connections are accepted.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("transport_address")]
 	public string TransportAddress { get; init; }
 }

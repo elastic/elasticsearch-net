@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class Retries
 {
 	[JsonInclude, JsonPropertyName("bulk")]
 	public long Bulk { get; init; }
-
 	[JsonInclude, JsonPropertyName("search")]
 	public long Search { get; init; }
 }

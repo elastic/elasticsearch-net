@@ -15,8 +15,11 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 namespace Elastic.Clients.Elasticsearch.Requests;
-internal static class ApiUrlsLookups
+
+internal static class ApiUrlLookup
 {
 	internal static ApiUrls AsyncSearchStatus = new ApiUrls(new[] { "/_async_search/status/{id}" });
 	internal static ApiUrls AsyncSearchDelete = new ApiUrls(new[] { "/_async_search/{id}" });

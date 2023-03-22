@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsFuzzy
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("term")]
 	public string Term { get; set; }
-
 	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -49,20 +46,16 @@ public sealed partial class IntervalsFuzzy
 public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptor<IntervalsFuzzyDescriptor<TDocument>>
 {
 	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsFuzzyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string TermValue { get; set; }
-
 	private bool? TranspositionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -149,20 +142,16 @@ public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDe
 public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<IntervalsFuzzyDescriptor>
 {
 	internal IntervalsFuzzyDescriptor(Action<IntervalsFuzzyDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsFuzzyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string TermValue { get; set; }
-
 	private bool? TranspositionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsFuzzyDescriptor Analyzer(string? analyzer)

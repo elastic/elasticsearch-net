@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class FieldCollapse
 {
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("inner_hits"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.InnerHits))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHits { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_concurrent_group_searches")]
 	public int? MaxConcurrentGroupSearches { get; set; }
 }
@@ -43,26 +42,19 @@ public sealed partial class FieldCollapse
 public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDescriptor<FieldCollapseDescriptor<TDocument>>
 {
 	internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FieldCollapseDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-
 	private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
-
 	private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-
 	private Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-
 	private Action<InnerHitsDescriptor<TDocument>>[] InnerHitsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxConcurrentGroupSearchesValue { get; set; }
 
 	public FieldCollapseDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
@@ -206,26 +198,19 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<FieldCollapseDescriptor>
 {
 	internal FieldCollapseDescriptor(Action<FieldCollapseDescriptor> configure) => configure.Invoke(this);
+
 	public FieldCollapseDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private FieldCollapseDescriptor CollapseDescriptor { get; set; }
-
 	private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
-
 	private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-
 	private Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-
 	private Action<InnerHitsDescriptor>[] InnerHitsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxConcurrentGroupSearchesValue { get; set; }
 
 	public FieldCollapseDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class SuggestFuzziness
 {
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_length")]
 	public int? MinLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("unicode_aware")]
 	public bool? UnicodeAware { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class SuggestFuzziness
 public sealed partial class SuggestFuzzinessDescriptor : SerializableDescriptor<SuggestFuzzinessDescriptor>
 {
 	internal SuggestFuzzinessDescriptor(Action<SuggestFuzzinessDescriptor> configure) => configure.Invoke(this);
+
 	public SuggestFuzzinessDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? MinLengthValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private bool? TranspositionsValue { get; set; }
-
 	private bool? UnicodeAwareValue { get; set; }
 
 	public SuggestFuzzinessDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)

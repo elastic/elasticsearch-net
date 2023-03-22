@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,26 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class TemplateMapping
 {
 	[JsonInclude, JsonPropertyName("aliases")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
-
 	[JsonInclude, JsonPropertyName("index_patterns")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; init; }
-
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
-
 	[JsonInclude, JsonPropertyName("order")]
 	public int Order { get; init; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public IReadOnlyDictionary<string, object> Settings { get; init; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; init; }
 }

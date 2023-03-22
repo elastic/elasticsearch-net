@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class BoxplotAggregationConverter : JsonConverter<BoxplotAggregation>
 {
 	public override BoxplotAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,38 +157,31 @@ public sealed partial class BoxplotAggregation : SearchAggregation
 {
 	public BoxplotAggregation(string name, Field field) : this(name) => Field = field;
 	public BoxplotAggregation(string name) => Name = name;
+
 	internal BoxplotAggregation()
 	{
 	}
 
 	public double? Compression { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class BoxplotAggregationDescriptor<TDocument> : SerializableDescriptor<BoxplotAggregationDescriptor<TDocument>>
 {
 	internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public BoxplotAggregationDescriptor() : base()
 	{
 	}
 
 	private double? CompressionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public BoxplotAggregationDescriptor<TDocument> Compression(double? compression)
@@ -268,18 +263,15 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 public sealed partial class BoxplotAggregationDescriptor : SerializableDescriptor<BoxplotAggregationDescriptor>
 {
 	internal BoxplotAggregationDescriptor(Action<BoxplotAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public BoxplotAggregationDescriptor() : base()
 	{
 	}
 
 	private double? CompressionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public BoxplotAggregationDescriptor Compression(double? compression)

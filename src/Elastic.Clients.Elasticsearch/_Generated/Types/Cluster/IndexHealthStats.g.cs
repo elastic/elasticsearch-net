@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
 public sealed partial class IndexHealthStats
 {
 	[JsonInclude, JsonPropertyName("active_primary_shards")]
 	public int ActivePrimaryShards { get; init; }
-
 	[JsonInclude, JsonPropertyName("active_shards")]
 	public int ActiveShards { get; init; }
-
 	[JsonInclude, JsonPropertyName("initializing_shards")]
 	public int InitializingShards { get; init; }
-
 	[JsonInclude, JsonPropertyName("number_of_replicas")]
 	public int NumberOfReplicas { get; init; }
-
 	[JsonInclude, JsonPropertyName("number_of_shards")]
 	public int NumberOfShards { get; init; }
-
 	[JsonInclude, JsonPropertyName("relocating_shards")]
 	public int RelocatingShards { get; init; }
-
 	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats>? Shards { get; init; }
-
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
-
 	[JsonInclude, JsonPropertyName("unassigned_shards")]
 	public int UnassignedShards { get; init; }
 }

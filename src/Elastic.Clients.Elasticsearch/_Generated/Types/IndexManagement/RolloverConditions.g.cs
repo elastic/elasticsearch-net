@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,43 +25,32 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class RolloverConditions
 {
 	[JsonInclude, JsonPropertyName("max_age")]
 	public Elastic.Clients.Elasticsearch.Duration? MaxAge { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_age_millis")]
 	public long? MaxAgeMillis { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_primary_shard_docs")]
 	public long? MaxPrimaryShardDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_size_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytes { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_age")]
 	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_docs")]
 	public long? MinDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_primary_shard_docs")]
 	public long? MinPrimaryShardDocs { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_primary_shard_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; set; }
 }
@@ -67,32 +58,22 @@ public sealed partial class RolloverConditions
 public sealed partial class RolloverConditionsDescriptor : SerializableDescriptor<RolloverConditionsDescriptor>
 {
 	internal RolloverConditionsDescriptor(Action<RolloverConditionsDescriptor> configure) => configure.Invoke(this);
+
 	public RolloverConditionsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Duration? MaxAgeValue { get; set; }
-
 	private long? MaxAgeMillisValue { get; set; }
-
 	private long? MaxDocsValue { get; set; }
-
 	private long? MaxPrimaryShardDocsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? MaxSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? MaxSizeBytesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? MinAgeValue { get; set; }
-
 	private long? MinDocsValue { get; set; }
-
 	private long? MinPrimaryShardDocsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ByteSize? MinSizeValue { get; set; }
 
 	public RolloverConditionsDescriptor MaxAge(Elastic.Clients.Elasticsearch.Duration? maxAge)

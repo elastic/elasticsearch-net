@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class MultiTermsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsBucket> Buckets { get; init; }
-
 	[JsonInclude, JsonPropertyName("doc_count_error_upper_bound")]
 	public long? DocCountErrorUpperBound { get; init; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-
 	[JsonInclude, JsonPropertyName("sum_other_doc_count")]
 	public long? SumOtherDocCount { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,28 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KuromojiTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("discard_compound_token")]
 	public bool? DiscardCompoundToken { get; set; }
-
 	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
-
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
-
 	[JsonInclude, JsonPropertyName("nbest_cost")]
 	public int? NbestCost { get; set; }
-
 	[JsonInclude, JsonPropertyName("nbest_examples")]
 	public string? NbestExamples { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_tokenizer";
+
 	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
-
 	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
 	public ICollection<string>? UserDictionaryRules { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -58,24 +54,18 @@ public sealed partial class KuromojiTokenizer : ITokenizer
 public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor<KuromojiTokenizerDescriptor>, IBuildableDescriptor<KuromojiTokenizer>
 {
 	internal KuromojiTokenizerDescriptor(Action<KuromojiTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public KuromojiTokenizerDescriptor() : base()
 	{
 	}
 
 	private bool? DiscardCompoundTokenValue { get; set; }
-
 	private bool? DiscardPunctuationValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ModeValue { get; set; }
-
 	private int? NbestCostValue { get; set; }
-
 	private string? NbestExamplesValue { get; set; }
-
 	private string? UserDictionaryValue { get; set; }
-
 	private ICollection<string>? UserDictionaryRulesValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KuromojiTokenizerDescriptor DiscardCompoundToken(bool? discardCompoundToken = true)

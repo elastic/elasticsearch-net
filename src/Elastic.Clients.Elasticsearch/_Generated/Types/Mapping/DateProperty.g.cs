@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,109 +25,75 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class DateProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fielddata")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? Fielddata { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public DateTimeOffset? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("precision_step")]
 	public int? PrecisionStep { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date";
 }
 
 public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDescriptor<DatePropertyDescriptor<TDocument>>, IBuildableDescriptor<DateProperty>
 {
 	internal DatePropertyDescriptor(Action<DatePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DatePropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-
 	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-
 	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private DateTimeOffset? NullValueValue { get; set; }
-
 	private int? PrecisionStepValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public DatePropertyDescriptor<TDocument> Boost(double? boost)
@@ -445,46 +413,29 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 public sealed partial class DatePropertyDescriptor : SerializableDescriptor<DatePropertyDescriptor>, IBuildableDescriptor<DateProperty>
 {
 	internal DatePropertyDescriptor(Action<DatePropertyDescriptor> configure) => configure.Invoke(this);
+
 	public DatePropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-
 	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-
 	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private DateTimeOffset? NullValueValue { get; set; }
-
 	private int? PrecisionStepValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public DatePropertyDescriptor Boost(double? boost)
