@@ -13,7 +13,9 @@ using static Elastic.Clients.Elasticsearch.Infer;
 
 namespace Tests.Aggregations.Metric;
 
+#pragma warning disable CS0618 // Type or member is obsolete
 public class ValueCountAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
+#pragma warning restore CS0618 // Type or member is obsolete
 {
 	public ValueCountAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

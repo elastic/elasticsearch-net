@@ -630,6 +630,8 @@ internal sealed class OnScriptErrorConverter : JsonConverter<OnScriptError>
 [JsonConverter(typeof(RuntimeFieldTypeConverter))]
 public enum RuntimeFieldType
 {
+	[EnumMember(Value = "lookup")]
+	Lookup,
 	[EnumMember(Value = "long")]
 	Long,
 	[EnumMember(Value = "keyword")]
@@ -653,6 +655,8 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 		var enumString = reader.GetString();
 		switch (enumString)
 		{
+			case "lookup":
+				return RuntimeFieldType.Lookup;
 			case "long":
 				return RuntimeFieldType.Long;
 			case "keyword":
@@ -676,6 +680,9 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 	{
 		switch (value)
 		{
+			case RuntimeFieldType.Lookup:
+				writer.WriteStringValue("lookup");
+				return;
 			case RuntimeFieldType.Long:
 				writer.WriteStringValue("long");
 				return;
