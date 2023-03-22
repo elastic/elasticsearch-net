@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,88 +25,62 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class QueryStringQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("allow_leading_wildcard")]
 	public bool? AllowLeadingWildcard { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("default_field")]
 	public Elastic.Clients.Elasticsearch.Field? DefaultField { get; set; }
-
 	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
-
 	[JsonInclude, JsonPropertyName("enable_position_increments")]
 	public bool? EnablePositionIncrements { get; set; }
-
 	[JsonInclude, JsonPropertyName("escape")]
 	public bool? Escape { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_determinized_states")]
 	public int? MaxDeterminizedStates { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("phrase_slop")]
 	public double? PhraseSlop { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("quote_analyzer")]
 	public string? QuoteAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
-
 	[JsonInclude, JsonPropertyName("rewrite")]
 	public string? Rewrite { get; set; }
-
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
-
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
@@ -114,62 +90,37 @@ public sealed partial class QueryStringQuery : SearchQuery
 public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptor<QueryStringQueryDescriptor<TDocument>>
 {
 	internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public QueryStringQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AllowLeadingWildcardValue { get; set; }
-
 	private bool? AnalyzeWildcardValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? DefaultFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-
 	private bool? EnablePositionIncrementsValue { get; set; }
-
 	private bool? EscapeValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? FuzzyMaxExpansionsValue { get; set; }
-
 	private int? FuzzyPrefixLengthValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxDeterminizedStatesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private double? PhraseSlopValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private string? QuoteAnalyzerValue { get; set; }
-
 	private string? QuoteFieldSuffixValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
 
 	public QueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -508,62 +459,37 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<QueryStringQueryDescriptor>
 {
 	internal QueryStringQueryDescriptor(Action<QueryStringQueryDescriptor> configure) => configure.Invoke(this);
+
 	public QueryStringQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AllowLeadingWildcardValue { get; set; }
-
 	private bool? AnalyzeWildcardValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? DefaultFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-
 	private bool? EnablePositionIncrementsValue { get; set; }
-
 	private bool? EscapeValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? FuzzyMaxExpansionsValue { get; set; }
-
 	private int? FuzzyPrefixLengthValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxDeterminizedStatesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private double? PhraseSlopValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private string? QuoteAnalyzerValue { get; set; }
-
 	private string? QuoteFieldSuffixValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
 
 	public QueryStringQueryDescriptor QueryName(string? queryName)

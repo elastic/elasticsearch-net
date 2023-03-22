@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class FieldMapping
 {
 	[JsonInclude, JsonPropertyName("full_name")]
 	public string FullName { get; init; }
-
 	[JsonInclude, JsonPropertyName("mapping")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties Mapping { get; init; }
 }

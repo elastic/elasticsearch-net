@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 {
 	public override ErrorCause Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -85,16 +87,7 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 			}
 		}
 
-		return new ErrorCause
-		{
-			CausedBy = causedBy,
-			Reason = reason,
-			RootCause = rootCause,
-			StackTrace = stackTrace,
-			Suppressed = suppressed,
-			Type = type,
-			Metadata = additionalProperties
-		};
+		return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
 	}
 
 	public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
@@ -104,19 +97,28 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 }
 
 [JsonConverter(typeof(ErrorCauseConverter))]
+/// <summary>
+/// <para>Cause and details about a request failure. This class defines the properties common to all error types.<br/>Additional details are also provided, that depend on the error type.</para>
+/// </summary>
 public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
-
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 
+	/// <summary>
+	/// <para>A human-readable explanation of the error, in english</para>
+	/// </summary>
 	public string? Reason { get; init; }
-
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
 
+	/// <summary>
+	/// <para>The server stack trace. Present only if the `error_trace=true` parameter was sent with the request.</para>
+	/// </summary>
 	public string? StackTrace { get; init; }
-
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
 
+	/// <summary>
+	/// <para>The type of error</para>
+	/// </summary>
 	public string Type { get; init; }
 }

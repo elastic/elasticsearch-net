@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class RankEvalHitItem
 {
 	[JsonInclude, JsonPropertyName("hit")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; init; }
-
 	[JsonInclude, JsonPropertyName("rating")]
 	public double? Rating { get; init; }
 }

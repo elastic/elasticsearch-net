@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,110 +25,80 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class KeywordProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("normalizer")]
 	public string? Normalizer { get; set; }
-
 	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
 	public bool? SplitQueriesOnWhitespace { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
 }
 
 public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableDescriptor<KeywordPropertyDescriptor<TDocument>>, IBuildableDescriptor<KeywordProperty>
 {
 	internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public KeywordPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NormalizerValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
@@ -259,6 +231,9 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
@@ -407,44 +382,28 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<KeywordPropertyDescriptor>, IBuildableDescriptor<KeywordProperty>
 {
 	internal KeywordPropertyDescriptor(Action<KeywordPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public KeywordPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EagerGlobalOrdinalsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NormalizerValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor Boost(double? boost)
@@ -577,6 +536,9 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;

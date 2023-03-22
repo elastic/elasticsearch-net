@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,100 +25,70 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class SearchAsYouTypeProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_shingle_size")]
 	public int? MaxShingleSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("norms")]
 	public bool? Norms { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
 	[JsonInclude, JsonPropertyName("term_vector")]
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "search_as_you_type";
 }
 
 public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : SerializableDescriptor<SearchAsYouTypePropertyDescriptor<TDocument>>, IBuildableDescriptor<SearchAsYouTypeProperty>
 {
 	internal SearchAsYouTypePropertyDescriptor(Action<SearchAsYouTypePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SearchAsYouTypePropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private int? MaxShingleSizeValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public SearchAsYouTypePropertyDescriptor<TDocument> Analyzer(string? analyzer)
@@ -371,40 +343,26 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDescriptor<SearchAsYouTypePropertyDescriptor>, IBuildableDescriptor<SearchAsYouTypeProperty>
 {
 	internal SearchAsYouTypePropertyDescriptor(Action<SearchAsYouTypePropertyDescriptor> configure) => configure.Invoke(this);
+
 	public SearchAsYouTypePropertyDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-
 	private int? MaxShingleSizeValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? NormsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SearchAnalyzerValue { get; set; }
-
 	private string? SearchQuoteAnalyzerValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
 
 	public SearchAsYouTypePropertyDescriptor Analyzer(string? analyzer)

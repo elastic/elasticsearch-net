@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRangeQuery>
 {
 	public override NumberRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -183,23 +185,14 @@ public sealed partial class NumberRangeQuery : RangeQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public double? From { get; set; }
-
 	public double? Gt { get; set; }
-
 	public double? Gte { get; set; }
-
 	public double? Lt { get; set; }
-
 	public double? Lte { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
-
 	public double? To { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => QueryDsl.Query.Range(numberRangeQuery);
@@ -208,6 +201,7 @@ public sealed partial class NumberRangeQuery : RangeQuery
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>
 {
 	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal NumberRangeQueryDescriptor() : base()
 	{
 	}
@@ -227,23 +221,14 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private double? FromValue { get; set; }
-
 	private double? GtValue { get; set; }
-
 	private double? GteValue { get; set; }
-
 	private double? LtValue { get; set; }
-
 	private double? LteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-
 	private double? ToValue { get; set; }
 
 	public NumberRangeQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -381,6 +366,7 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<NumberRangeQueryDescriptor>
 {
 	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal NumberRangeQueryDescriptor() : base()
 	{
 	}
@@ -393,23 +379,14 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private double? FromValue { get; set; }
-
 	private double? GtValue { get; set; }
-
 	private double? GteValue { get; set; }
-
 	private double? LtValue { get; set; }
-
 	private double? LteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-
 	private double? ToValue { get; set; }
 
 	public NumberRangeQueryDescriptor QueryName(string? queryName)

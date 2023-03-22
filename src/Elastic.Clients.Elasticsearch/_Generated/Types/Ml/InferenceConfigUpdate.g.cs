@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 [JsonConverter(typeof(InferenceConfigUpdateConverter))]
 public sealed partial class InferenceConfigUpdate
 {
@@ -41,7 +43,6 @@ public sealed partial class InferenceConfigUpdate
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static InferenceConfigUpdate Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigUpdate("classification", classificationInferenceOptions);
@@ -180,20 +181,17 @@ internal sealed partial class InferenceConfigUpdateConverter : JsonConverter<Inf
 public sealed partial class InferenceConfigUpdateDescriptor<TDocument> : SerializableDescriptor<InferenceConfigUpdateDescriptor<TDocument>>
 {
 	internal InferenceConfigUpdateDescriptor(Action<InferenceConfigUpdateDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceConfigUpdateDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigUpdateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigUpdateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -229,6 +227,7 @@ public sealed partial class InferenceConfigUpdateDescriptor<TDocument> : Seriali
 	public InferenceConfigUpdateDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
 	public InferenceConfigUpdateDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => Set(zeroShotClassificationInferenceUpdateOptions, "zero_shot_classification");
 	public InferenceConfigUpdateDescriptor<TDocument> ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -254,20 +253,17 @@ public sealed partial class InferenceConfigUpdateDescriptor<TDocument> : Seriali
 public sealed partial class InferenceConfigUpdateDescriptor : SerializableDescriptor<InferenceConfigUpdateDescriptor>
 {
 	internal InferenceConfigUpdateDescriptor(Action<InferenceConfigUpdateDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceConfigUpdateDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigUpdateDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigUpdateDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -304,6 +300,7 @@ public sealed partial class InferenceConfigUpdateDescriptor : SerializableDescri
 	public InferenceConfigUpdateDescriptor TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
 	public InferenceConfigUpdateDescriptor ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => Set(zeroShotClassificationInferenceUpdateOptions, "zero_shot_classification");
 	public InferenceConfigUpdateDescriptor ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

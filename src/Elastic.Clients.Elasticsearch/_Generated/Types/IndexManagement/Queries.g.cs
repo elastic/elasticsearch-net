@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class Queries
 {
 	[JsonInclude, JsonPropertyName("cache")]
@@ -34,14 +36,13 @@ public sealed partial class Queries
 public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDescriptor>
 {
 	internal QueriesDescriptor(Action<QueriesDescriptor> configure) => configure.Invoke(this);
+
 	public QueriesDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
-
 	private CacheQueriesDescriptor CacheDescriptor { get; set; }
-
 	private Action<CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
 
 	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)

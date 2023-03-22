@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSearch
 {
 	[JsonInclude, JsonPropertyName("idle")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? Idle { get; set; }
-
 	[JsonInclude, JsonPropertyName("slowlog")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? Slowlog { get; set; }
 }
@@ -37,20 +38,16 @@ public sealed partial class SettingsSearch
 public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<SettingsSearchDescriptor>
 {
 	internal SettingsSearchDescriptor(Action<SettingsSearchDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSearchDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? IdleValue { get; set; }
-
 	private SearchIdleDescriptor IdleDescriptor { get; set; }
-
 	private Action<SearchIdleDescriptor> IdleDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? SlowlogValue { get; set; }
-
 	private SlowlogSettingsDescriptor SlowlogDescriptor { get; set; }
-
 	private Action<SlowlogSettingsDescriptor> SlowlogDescriptorAction { get; set; }
 
 	public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? idle)

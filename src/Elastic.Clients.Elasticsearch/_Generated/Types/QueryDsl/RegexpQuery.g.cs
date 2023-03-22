@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class RegexpQueryConverter : JsonConverter<RegexpQuery>
 {
 	public override RegexpQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,19 +157,12 @@ public sealed partial class RegexpQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public bool? CaseInsensitive { get; set; }
-
 	public string? Flags { get; set; }
-
 	public int? MaxDeterminizedStates { get; set; }
-
 	public string? Rewrite { get; set; }
-
 	public string Value { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(RegexpQuery regexpQuery) => QueryDsl.Query.Regexp(regexpQuery);
@@ -176,6 +171,7 @@ public sealed partial class RegexpQuery : SearchQuery
 public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptor<RegexpQueryDescriptor<TDocument>>
 {
 	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal RegexpQueryDescriptor() : base()
 	{
 	}
@@ -195,19 +191,12 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FlagsValue { get; set; }
-
 	private int? MaxDeterminizedStatesValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string ValueValue { get; set; }
 
 	public RegexpQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -317,6 +306,7 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<RegexpQueryDescriptor>
 {
 	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal RegexpQueryDescriptor() : base()
 	{
 	}
@@ -329,19 +319,12 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FlagsValue { get; set; }
-
 	private int? MaxDeterminizedStatesValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private string ValueValue { get; set; }
 
 	public RegexpQueryDescriptor QueryName(string? queryName)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,23 +27,34 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class RankEvalRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 }
 
+/// <summary>
+/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// </summary>
 public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParameters>
 {
 	public RankEvalRequest()
@@ -52,42 +65,71 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
+	/// <summary>
+	/// <para>If `true`, missing or closed indices are not included in the response.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("requests")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? Metric { get; set; }
 }
 
+/// <summary>
+/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// </summary>
 public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescriptor<RankEvalRequestDescriptor<TDocument>, RankEvalRequestParameters>
 {
 	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RankEvalRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor<TDocument> SearchType(string? searchType) => Qs("search_type", searchType);
+
 	public RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -95,19 +137,16 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
-
 	private Core.RankEval.RankEvalRequestItemDescriptor<TDocument> RequestsDescriptor { get; set; }
-
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor<TDocument>> RequestsDescriptorAction { get; set; }
-
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] RequestsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-
 	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
@@ -144,6 +183,9 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
 	{
 		MetricDescriptor = null;
@@ -222,20 +264,28 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	}
 }
 
+/// <summary>
+/// <para>Enables you to evaluate the quality of ranked search results over a set of typical search queries.</para>
+/// </summary>
 public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEvalRequestDescriptor, RankEvalRequestParameters>
 {
 	internal RankEvalRequestDescriptor(Action<RankEvalRequestDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public RankEvalRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RankEvalRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RankEvalRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public RankEvalRequestDescriptor SearchType(string? searchType) => Qs("search_type", searchType);
+
 	public RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -243,19 +293,16 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
-
 	private Core.RankEval.RankEvalRequestItemDescriptor RequestsDescriptor { get; set; }
-
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor> RequestsDescriptorAction { get; set; }
-
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor>[] RequestsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-
 	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-
 	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor Requests(ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> requests)
 	{
 		RequestsDescriptor = null;
@@ -292,6 +339,9 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
 	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? metric)
 	{
 		MetricDescriptor = null;

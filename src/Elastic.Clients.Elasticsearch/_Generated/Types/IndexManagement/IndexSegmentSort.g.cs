@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexSegmentSort
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Fields? Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("missing"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? Missing { get; set; }
-
 	[JsonInclude, JsonPropertyName("mode"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? Mode { get; set; }
-
 	[JsonInclude, JsonPropertyName("order"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
 }
@@ -43,16 +42,14 @@ public sealed partial class IndexSegmentSort
 public sealed partial class IndexSegmentSortDescriptor<TDocument> : SerializableDescriptor<IndexSegmentSortDescriptor<TDocument>>
 {
 	internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IndexSegmentSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
 	public IndexSegmentSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields? field)
@@ -113,16 +110,14 @@ public sealed partial class IndexSegmentSortDescriptor<TDocument> : Serializable
 public sealed partial class IndexSegmentSortDescriptor : SerializableDescriptor<IndexSegmentSortDescriptor>
 {
 	internal IndexSegmentSortDescriptor(Action<IndexSegmentSortDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSegmentSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? FieldValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? ModeValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? OrderValue { get; set; }
 
 	public IndexSegmentSortDescriptor Field(Elastic.Clients.Elasticsearch.Fields? field)

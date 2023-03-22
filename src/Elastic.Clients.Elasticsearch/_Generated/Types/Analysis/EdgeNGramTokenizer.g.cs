@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class EdgeNGramTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("custom_token_chars")]
 	public string? CustomTokenChars { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_gram")]
 	public int MaxGram { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int MinGram { get; set; }
-
 	[JsonInclude, JsonPropertyName("token_chars")]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "edge_ngram";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -49,18 +48,15 @@ public sealed partial class EdgeNGramTokenizer : ITokenizer
 public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescriptor<EdgeNGramTokenizerDescriptor>, IBuildableDescriptor<EdgeNGramTokenizer>
 {
 	internal EdgeNGramTokenizerDescriptor(Action<EdgeNGramTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public EdgeNGramTokenizerDescriptor() : base()
 	{
 	}
 
 	private string? CustomTokenCharsValue { get; set; }
-
 	private int MaxGramValue { get; set; }
-
 	private int MinGramValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> TokenCharsValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public EdgeNGramTokenizerDescriptor CustomTokenChars(string? customTokenChars)

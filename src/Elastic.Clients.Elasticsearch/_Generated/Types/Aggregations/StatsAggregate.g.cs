@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,37 +25,31 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+/// <summary>
+/// <para>Statistics aggregation result. `min`, `max` and `avg` are missing if there were no values to process<br/>(`count` is zero).</para>
+/// </summary>
 public sealed partial class StatsAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("avg")]
 	public double? Avg { get; init; }
-
 	[JsonInclude, JsonPropertyName("avg_as_string")]
 	public string? AvgAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("count")]
 	public long Count { get; init; }
-
 	[JsonInclude, JsonPropertyName("max")]
 	public double? Max { get; init; }
-
 	[JsonInclude, JsonPropertyName("max_as_string")]
 	public string? MaxAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-
 	[JsonInclude, JsonPropertyName("min")]
 	public double? Min { get; init; }
-
 	[JsonInclude, JsonPropertyName("min_as_string")]
 	public string? MinAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("sum")]
 	public double Sum { get; init; }
-
 	[JsonInclude, JsonPropertyName("sum_as_string")]
 	public string? SumAsString { get; init; }
 }
