@@ -15,34 +15,30 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class RolloverResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-
 	[JsonInclude, JsonPropertyName("conditions")]
 	public IReadOnlyDictionary<string, bool> Conditions { get; init; }
-
 	[JsonInclude, JsonPropertyName("dry_run")]
 	public bool DryRun { get; init; }
-
 	[JsonInclude, JsonPropertyName("new_index")]
 	public string NewIndex { get; init; }
-
 	[JsonInclude, JsonPropertyName("old_index")]
 	public string OldIndex { get; init; }
-
 	[JsonInclude, JsonPropertyName("rolled_over")]
 	public bool RolledOver { get; init; }
-
 	[JsonInclude, JsonPropertyName("shards_acknowledged")]
 	public bool ShardsAcknowledged { get; init; }
 }

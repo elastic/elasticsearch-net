@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(StringTermsBucketConverter))]
 public sealed partial class StringTermsBucket : AggregateDictionary
 {
@@ -34,10 +36,8 @@ public sealed partial class StringTermsBucket : AggregateDictionary
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("doc_count_error")]
 	public long? DocCountError { get; init; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public Elastic.Clients.Elasticsearch.FieldValue Key { get; init; }
 }
@@ -48,7 +48,7 @@ internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBuck
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		long? docCountError = default;
 		Elastic.Clients.Elasticsearch.FieldValue key = default;
@@ -58,7 +58,7 @@ internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBuck
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -87,12 +87,7 @@ internal sealed class StringTermsBucketConverter : JsonConverter<StringTermsBuck
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new StringTermsBucket(subAggs)
-		{
-			DocCount = docCount,
-			DocCountError = docCountError,
-			Key = key
-		};
+		return new StringTermsBucket(subAggs) { DocCount = docCount, DocCountError = docCountError, Key = key };
 	}
 
 	public override void Write(Utf8JsonWriter writer, StringTermsBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

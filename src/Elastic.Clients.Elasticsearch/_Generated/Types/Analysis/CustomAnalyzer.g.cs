@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,45 +25,37 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class CustomAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("char_filter")]
 	public ICollection<string>? CharFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string>? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
-
 	[JsonInclude, JsonPropertyName("position_offset_gap")]
 	public int? PositionOffsetGap { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string Tokenizer { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "custom";
 }
 
 public sealed partial class CustomAnalyzerDescriptor : SerializableDescriptor<CustomAnalyzerDescriptor>, IBuildableDescriptor<CustomAnalyzer>
 {
 	internal CustomAnalyzerDescriptor(Action<CustomAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public CustomAnalyzerDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? CharFilterValue { get; set; }
-
 	private ICollection<string>? FilterValue { get; set; }
-
 	private int? PositionIncrementGapValue { get; set; }
-
 	private int? PositionOffsetGapValue { get; set; }
-
 	private string TokenizerValue { get; set; }
 
 	public CustomAnalyzerDescriptor CharFilter(ICollection<string>? charFilter)

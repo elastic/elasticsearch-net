@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter>
 {
 	public override SourceFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -77,19 +79,18 @@ internal sealed partial class SourceFilterConverter : JsonConverter<SourceFilter
 public sealed partial class SourceFilter
 {
 	public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 }
 
 public sealed partial class SourceFilterDescriptor : SerializableDescriptor<SourceFilterDescriptor>
 {
 	internal SourceFilterDescriptor(Action<SourceFilterDescriptor> configure) => configure.Invoke(this);
+
 	public SourceFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? ExcludesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? IncludesValue { get; set; }
 
 	public SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? excludes)

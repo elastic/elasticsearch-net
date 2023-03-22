@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,49 +25,36 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SimpleQueryStringQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyze_wildcard")]
 	public bool? AnalyzeWildcard { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("default_operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
 	public int? FuzzyPrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
@@ -75,36 +64,24 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>
 {
 	internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SimpleQueryStringQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AnalyzeWildcardValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private int? FuzzyMaxExpansionsValue { get; set; }
-
 	private int? FuzzyPrefixLengthValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private string? QuoteFieldSuffixValue { get; set; }
 
 	public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -281,36 +258,24 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescriptor<SimpleQueryStringQueryDescriptor>
 {
 	internal SimpleQueryStringQueryDescriptor(Action<SimpleQueryStringQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SimpleQueryStringQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AnalyzeWildcardValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private int? FuzzyMaxExpansionsValue { get; set; }
-
 	private int? FuzzyPrefixLengthValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private string? QuoteFieldSuffixValue { get; set; }
 
 	public SimpleQueryStringQueryDescriptor QueryName(string? queryName)

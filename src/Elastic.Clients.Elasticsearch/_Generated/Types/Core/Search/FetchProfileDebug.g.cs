@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class FetchProfileDebug
 {
 	[JsonInclude, JsonPropertyName("fast_path")]
 	public int? FastPath { get; init; }
-
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	public IReadOnlyCollection<string>? StoredFields { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 {
 	public override Suggester Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -81,18 +83,21 @@ public sealed partial class Suggester
 {
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> Suggesters { get; set; }
 
+	/// <summary>
+	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// </summary>
 	public string? Text { get; set; }
 }
 
 public sealed partial class SuggesterDescriptor : SerializableDescriptor<SuggesterDescriptor>
 {
 	internal SuggesterDescriptor(Action<SuggesterDescriptor> configure) => configure.Invoke(this);
+
 	public SuggesterDescriptor() : base()
 	{
 	}
 
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> SuggestersValue { get; set; }
-
 	private string? TextValue { get; set; }
 
 	public SuggesterDescriptor Suggesters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>> selector)
@@ -101,6 +106,9 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// </summary>
 	public SuggesterDescriptor Text(string? text)
 	{
 		TextValue = text;

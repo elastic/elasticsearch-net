@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class PercolateQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("document")]
 	public object? Document { get; set; }
-
 	[JsonInclude, JsonPropertyName("documents")]
 	public ICollection<object>? Documents { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public string? Name { get; set; }
-
 	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
@@ -66,30 +58,21 @@ public sealed partial class PercolateQuery : SearchQuery
 public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>
 {
 	internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PercolateQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private object? DocumentValue { get; set; }
-
 	private ICollection<object>? DocumentsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private string? NameValue { get; set; }
-
 	private string? PreferenceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PercolateQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -236,30 +219,21 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<PercolateQueryDescriptor>
 {
 	internal PercolateQueryDescriptor(Action<PercolateQueryDescriptor> configure) => configure.Invoke(this);
+
 	public PercolateQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private object? DocumentValue { get; set; }
-
 	private ICollection<object>? DocumentsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private string? NameValue { get; set; }
-
 	private string? PreferenceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PercolateQueryDescriptor QueryName(string? queryName)

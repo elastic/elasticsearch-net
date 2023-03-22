@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class MappingCharFilter : ICharFilter
 {
 	[JsonInclude, JsonPropertyName("mappings")]
 	public ICollection<string>? Mappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("mappings_path")]
 	public string? MappingsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "mapping";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class MappingCharFilter : ICharFilter
 public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor<MappingCharFilterDescriptor>, IBuildableDescriptor<MappingCharFilter>
 {
 	internal MappingCharFilterDescriptor(Action<MappingCharFilterDescriptor> configure) => configure.Invoke(this);
+
 	public MappingCharFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? MappingsValue { get; set; }
-
 	private string? MappingsPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public MappingCharFilterDescriptor Mappings(ICollection<string>? mappings)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanOrQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 }
@@ -40,20 +40,16 @@ public sealed partial class SpanOrQuery : SearchQuery
 public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescriptor<SpanOrQueryDescriptor<TDocument>>
 {
 	internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanOrQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public SpanOrQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
@@ -157,20 +153,16 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanOrQueryDescriptor>
 {
 	internal SpanOrQueryDescriptor(Action<SpanOrQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanOrQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
-
 	private Action<SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public SpanOrQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)

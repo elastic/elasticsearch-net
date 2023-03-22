@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class SourceField
 {
 	[JsonInclude, JsonPropertyName("compress")]
 	public bool? Compress { get; set; }
-
 	[JsonInclude, JsonPropertyName("compress_threshold")]
 	public string? CompressThreshold { get; set; }
-
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("excludes")]
 	public ICollection<string>? Excludes { get; set; }
-
 	[JsonInclude, JsonPropertyName("includes")]
 	public ICollection<string>? Includes { get; set; }
-
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? Mode { get; set; }
 }
@@ -49,20 +46,16 @@ public sealed partial class SourceField
 public sealed partial class SourceFieldDescriptor : SerializableDescriptor<SourceFieldDescriptor>
 {
 	internal SourceFieldDescriptor(Action<SourceFieldDescriptor> configure) => configure.Invoke(this);
+
 	public SourceFieldDescriptor() : base()
 	{
 	}
 
 	private bool? CompressValue { get; set; }
-
 	private string? CompressThresholdValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private ICollection<string>? ExcludesValue { get; set; }
-
 	private ICollection<string>? IncludesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? ModeValue { get; set; }
 
 	public SourceFieldDescriptor Compress(bool? compress = true)

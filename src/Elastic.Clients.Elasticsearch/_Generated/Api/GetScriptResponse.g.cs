@@ -15,22 +15,22 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class GetScriptResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
-
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.StoredScript? Script { get; init; }
 }

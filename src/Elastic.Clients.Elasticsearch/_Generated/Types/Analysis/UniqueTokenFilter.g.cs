@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class UniqueTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("only_on_same_position")]
 	public bool? OnlyOnSamePosition { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "unique";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +42,12 @@ public sealed partial class UniqueTokenFilter : ITokenFilter
 public sealed partial class UniqueTokenFilterDescriptor : SerializableDescriptor<UniqueTokenFilterDescriptor>, IBuildableDescriptor<UniqueTokenFilter>
 {
 	internal UniqueTokenFilterDescriptor(Action<UniqueTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public UniqueTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? OnlyOnSamePositionValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? onlyOnSamePosition = true)
