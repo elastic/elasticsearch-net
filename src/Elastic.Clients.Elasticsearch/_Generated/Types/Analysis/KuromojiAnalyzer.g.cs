@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KuromojiAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji";
+
 	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
 }
@@ -40,12 +42,12 @@ public sealed partial class KuromojiAnalyzer : IAnalyzer
 public sealed partial class KuromojiAnalyzerDescriptor : SerializableDescriptor<KuromojiAnalyzerDescriptor>, IBuildableDescriptor<KuromojiAnalyzer>
 {
 	internal KuromojiAnalyzerDescriptor(Action<KuromojiAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public KuromojiAnalyzerDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode ModeValue { get; set; }
-
 	private string? UserDictionaryValue { get; set; }
 
 	public KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class RemoveIndexAction
 {
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
@@ -42,14 +42,13 @@ public sealed partial class RemoveIndexAction
 public sealed partial class RemoveIndexActionDescriptor : SerializableDescriptor<RemoveIndexActionDescriptor>
 {
 	internal RemoveIndexActionDescriptor(Action<RemoveIndexActionDescriptor> configure) => configure.Invoke(this);
+
 	public RemoveIndexActionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-
 	private bool? MustExistValue { get; set; }
 
 	public RemoveIndexActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)

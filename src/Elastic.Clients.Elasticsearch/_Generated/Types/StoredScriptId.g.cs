@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class StoredScriptId
 {
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class StoredScriptId
 public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<StoredScriptIdDescriptor>
 {
 	internal StoredScriptIdDescriptor(Action<StoredScriptIdDescriptor> configure) => configure.Invoke(this);
+
 	public StoredScriptIdDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
 
 	public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)

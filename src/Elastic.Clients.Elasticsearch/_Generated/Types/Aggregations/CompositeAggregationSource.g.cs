@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class CompositeAggregationSource
 {
 	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
-
 	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
-
 	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get; set; }
 }
@@ -40,26 +40,19 @@ public sealed partial class CompositeAggregationSource
 public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : SerializableDescriptor<CompositeAggregationSourceDescriptor<TDocument>>
 {
 	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CompositeAggregationSourceDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
-
 	private DateHistogramAggregationDescriptor<TDocument> DateHistogramDescriptor { get; set; }
-
 	private Action<DateHistogramAggregationDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
-
 	private HistogramAggregationDescriptor<TDocument> HistogramDescriptor { get; set; }
-
 	private Action<HistogramAggregationDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
-
 	private TermsAggregationDescriptor<TDocument> TermsDescriptor { get; set; }
-
 	private Action<TermsAggregationDescriptor<TDocument>> TermsDescriptorAction { get; set; }
 
 	public CompositeAggregationSourceDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)
@@ -192,26 +185,19 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 public sealed partial class CompositeAggregationSourceDescriptor : SerializableDescriptor<CompositeAggregationSourceDescriptor>
 {
 	internal CompositeAggregationSourceDescriptor(Action<CompositeAggregationSourceDescriptor> configure) => configure.Invoke(this);
+
 	public CompositeAggregationSourceDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
-
 	private DateHistogramAggregationDescriptor DateHistogramDescriptor { get; set; }
-
 	private Action<DateHistogramAggregationDescriptor> DateHistogramDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
-
 	private HistogramAggregationDescriptor HistogramDescriptor { get; set; }
-
 	private Action<HistogramAggregationDescriptor> HistogramDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? TermsValue { get; set; }
-
 	private TermsAggregationDescriptor TermsDescriptor { get; set; }
-
 	private Action<TermsAggregationDescriptor> TermsDescriptorAction { get; set; }
 
 	public CompositeAggregationSourceDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? dateHistogram)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class CharGroupTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenize_on_chars")]
 	public ICollection<string> TokenizeOnChars { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "char_group";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class CharGroupTokenizer : ITokenizer
 public sealed partial class CharGroupTokenizerDescriptor : SerializableDescriptor<CharGroupTokenizerDescriptor>, IBuildableDescriptor<CharGroupTokenizer>
 {
 	internal CharGroupTokenizerDescriptor(Action<CharGroupTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public CharGroupTokenizerDescriptor() : base()
 	{
 	}
 
 	private int? MaxTokenLengthValue { get; set; }
-
 	private ICollection<string> TokenizeOnCharsValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public CharGroupTokenizerDescriptor MaxTokenLength(int? maxTokenLength)

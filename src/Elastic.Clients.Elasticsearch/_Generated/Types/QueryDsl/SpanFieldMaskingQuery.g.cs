@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanFieldMaskingQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
 }
@@ -43,20 +42,16 @@ public sealed partial class SpanFieldMaskingQuery : SearchQuery
 public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : SerializableDescriptor<SpanFieldMaskingQueryDescriptor<TDocument>>
 {
 	internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanFieldMaskingQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public SpanFieldMaskingQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)
@@ -147,20 +142,16 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescriptor<SpanFieldMaskingQueryDescriptor>
 {
 	internal SpanFieldMaskingQueryDescriptor(Action<SpanFieldMaskingQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanFieldMaskingQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; set; }
-
 	private SpanQueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public SpanFieldMaskingQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery query)

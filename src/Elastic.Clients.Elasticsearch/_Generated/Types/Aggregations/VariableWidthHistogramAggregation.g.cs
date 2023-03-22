@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class VariableWidthHistogramAggregationConverter : JsonConverter<VariableWidthHistogramAggregation>
 {
 	public override VariableWidthHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -154,38 +156,31 @@ internal sealed class VariableWidthHistogramAggregationConverter : JsonConverter
 public sealed partial class VariableWidthHistogramAggregation : SearchAggregation
 {
 	public VariableWidthHistogramAggregation(string name) => Name = name;
+
 	internal VariableWidthHistogramAggregation()
 	{
 	}
 
 	public int? Buckets { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public int? InitialBuffer { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public int? ShardSize { get; set; }
 }
 
 public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<VariableWidthHistogramAggregationDescriptor<TDocument>>
 {
 	internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public VariableWidthHistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private int? BucketsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private int? InitialBufferValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
 
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
@@ -267,18 +262,15 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 public sealed partial class VariableWidthHistogramAggregationDescriptor : SerializableDescriptor<VariableWidthHistogramAggregationDescriptor>
 {
 	internal VariableWidthHistogramAggregationDescriptor(Action<VariableWidthHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public VariableWidthHistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private int? BucketsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private int? InitialBufferValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
 
 	public VariableWidthHistogramAggregationDescriptor Buckets(int? buckets)

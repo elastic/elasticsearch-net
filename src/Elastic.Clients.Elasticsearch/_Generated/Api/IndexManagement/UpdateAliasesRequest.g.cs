@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,50 +27,70 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class UpdateAliasesRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Request timeout</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>Specify timeout for connection to master</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
+	/// <summary>
+	/// <para>Request timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? Actions { get; set; }
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestDescriptor<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesRequestParameters>
 {
 	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public UpdateAliasesRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? ActionsValue { get; set; }
-
 	private ActionDescriptor ActionsDescriptor { get; set; }
-
 	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
-
 	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
 	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? actions)
@@ -145,24 +167,29 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	}
 }
 
+/// <summary>
+/// <para>Updates index aliases.</para>
+/// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
 {
 	internal UpdateAliasesRequestDescriptor(Action<UpdateAliasesRequestDescriptor> configure) => configure.Invoke(this);
+
 	public UpdateAliasesRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	private ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? ActionsValue { get; set; }
-
 	private ActionDescriptor ActionsDescriptor { get; set; }
-
 	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
-
 	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
 	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? actions)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class IcuTransformTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("dir")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_transform";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class IcuTransformTokenFilter : ITokenFilter
 public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDescriptor<IcuTransformTokenFilterDescriptor>, IBuildableDescriptor<IcuTransformTokenFilter>
 {
 	internal IcuTransformTokenFilterDescriptor(Action<IcuTransformTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public IcuTransformTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? DirValue { get; set; }
-
 	private string IdValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public IcuTransformTokenFilterDescriptor Dir(Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? dir)

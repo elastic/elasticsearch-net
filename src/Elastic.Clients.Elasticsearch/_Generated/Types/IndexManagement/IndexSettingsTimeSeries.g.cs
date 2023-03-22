@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexSettingsTimeSeries
 {
 	[JsonInclude, JsonPropertyName("end_time")]
 	public DateTimeOffset? EndTime { get; set; }
-
 	[JsonInclude, JsonPropertyName("start_time")]
 	public DateTimeOffset? StartTime { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class IndexSettingsTimeSeries
 public sealed partial class IndexSettingsTimeSeriesDescriptor : SerializableDescriptor<IndexSettingsTimeSeriesDescriptor>
 {
 	internal IndexSettingsTimeSeriesDescriptor(Action<IndexSettingsTimeSeriesDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSettingsTimeSeriesDescriptor() : base()
 	{
 	}
 
 	private DateTimeOffset? EndTimeValue { get; set; }
-
 	private DateTimeOffset? StartTimeValue { get; set; }
 
 	public IndexSettingsTimeSeriesDescriptor EndTime(DateTimeOffset? endTime)

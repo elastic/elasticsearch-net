@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class DisMaxQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("queries")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
-
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
@@ -45,22 +44,17 @@ public sealed partial class DisMaxQuery : SearchQuery
 public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
 {
 	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DisMaxQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
 
 	public DisMaxQueryDescriptor<TDocument> Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)
@@ -176,22 +170,17 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMaxQueryDescriptor>
 {
 	internal DisMaxQueryDescriptor(Action<DisMaxQueryDescriptor> configure) => configure.Invoke(this);
+
 	public DisMaxQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> QueriesValue { get; set; }
-
 	private QueryDescriptor QueriesDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueriesDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor>[] QueriesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
 
 	public DisMaxQueryDescriptor Queries(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> queries)

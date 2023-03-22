@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class WarmerStats
 {
 	[JsonInclude, JsonPropertyName("current")]
 	public long Current { get; init; }
-
 	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_time_in_millis")]
 	public long TotalTimeInMillis { get; init; }
 }

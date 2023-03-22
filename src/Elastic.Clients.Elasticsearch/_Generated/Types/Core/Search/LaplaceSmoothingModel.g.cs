@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class LaplaceSmoothingModel
 {
 	[JsonInclude, JsonPropertyName("alpha")]
@@ -36,6 +38,7 @@ public sealed partial class LaplaceSmoothingModel
 public sealed partial class LaplaceSmoothingModelDescriptor : SerializableDescriptor<LaplaceSmoothingModelDescriptor>
 {
 	internal LaplaceSmoothingModelDescriptor(Action<LaplaceSmoothingModelDescriptor> configure) => configure.Invoke(this);
+
 	public LaplaceSmoothingModelDescriptor() : base()
 	{
 	}

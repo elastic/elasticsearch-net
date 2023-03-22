@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,45 +25,37 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class PercolatorProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "percolator";
 }
 
 public sealed partial class PercolatorPropertyDescriptor<TDocument> : SerializableDescriptor<PercolatorPropertyDescriptor<TDocument>>, IBuildableDescriptor<PercolatorProperty>
 {
 	internal PercolatorPropertyDescriptor(Action<PercolatorPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PercolatorPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 	public PercolatorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
@@ -173,18 +167,15 @@ public sealed partial class PercolatorPropertyDescriptor<TDocument> : Serializab
 public sealed partial class PercolatorPropertyDescriptor : SerializableDescriptor<PercolatorPropertyDescriptor>, IBuildableDescriptor<PercolatorProperty>
 {
 	internal PercolatorPropertyDescriptor(Action<PercolatorPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public PercolatorPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 	public PercolatorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)

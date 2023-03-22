@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,35 +25,31 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarityBm25
 {
 	[JsonInclude, JsonPropertyName("b")]
 	public double b { get; set; }
-
 	[JsonInclude, JsonPropertyName("discount_overlaps")]
 	public bool DiscountOverlaps { get; set; }
-
 	[JsonInclude, JsonPropertyName("k1")]
 	public double K1 { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "BM25";
 }
 
 public sealed partial class SettingsSimilarityBm25Descriptor : SerializableDescriptor<SettingsSimilarityBm25Descriptor>
 {
 	internal SettingsSimilarityBm25Descriptor(Action<SettingsSimilarityBm25Descriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityBm25Descriptor() : base()
 	{
 	}
 
 	private double bValue { get; set; }
-
 	private bool DiscountOverlapsValue { get; set; }
-
 	private double K1Value { get; set; }
 
 	public SettingsSimilarityBm25Descriptor b(double b)

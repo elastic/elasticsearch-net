@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,23 +27,34 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class GetAliasRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParameters>
 {
 	public GetAliasRequest()
@@ -60,25 +73,44 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
+	/// <summary>
+	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescriptor<GetAliasRequestDescriptor<TDocument>, GetAliasRequestParameters>
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GetAliasRequestDescriptor()
 	{
 	}
@@ -91,13 +123,17 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetAliasRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
+
 	public GetAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		RouteValues.Optional("name", name);
@@ -115,9 +151,13 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 }
 
+/// <summary>
+/// <para>Returns an alias.</para>
+/// </summary>
 public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAliasRequestDescriptor, GetAliasRequestParameters>
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetAliasRequestDescriptor()
 	{
 	}
@@ -130,13 +170,17 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetAliasRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetAliasRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
+
 	public GetAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		RouteValues.Optional("name", name);

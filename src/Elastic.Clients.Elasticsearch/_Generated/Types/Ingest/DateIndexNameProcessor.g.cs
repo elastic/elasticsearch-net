@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,43 +25,36 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class DateIndexNameProcessor
 {
 	[JsonInclude, JsonPropertyName("date_formats")]
 	public ICollection<string> DateFormats { get; set; }
 
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("date_rounding")]
 	public string DateRounding { get; set; }
-
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_name_format")]
 	public string? IndexNameFormat { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_name_prefix")]
 	public string? IndexNamePrefix { get; set; }
-
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
 
@@ -69,38 +64,25 @@ public sealed partial class DateIndexNameProcessor
 public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : SerializableDescriptor<DateIndexNameProcessorDescriptor<TDocument>>
 {
 	internal DateIndexNameProcessorDescriptor(Action<DateIndexNameProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DateIndexNameProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<string> DateFormatsValue { get; set; }
-
 	private string DateRoundingValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? IndexNameFormatValue { get; set; }
-
 	private string? IndexNamePrefixValue { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private string? TimezoneValue { get; set; }
 
 	public DateIndexNameProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -145,6 +127,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> DateRounding(string dateRounding)
 	{
 		DateRoundingValue = dateRounding;
@@ -306,38 +291,25 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescriptor<DateIndexNameProcessorDescriptor>
 {
 	internal DateIndexNameProcessorDescriptor(Action<DateIndexNameProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public DateIndexNameProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<string> DateFormatsValue { get; set; }
-
 	private string DateRoundingValue { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private string? IndexNameFormatValue { get; set; }
-
 	private string? IndexNamePrefixValue { get; set; }
-
 	private string? LocaleValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private string? TimezoneValue { get; set; }
 
 	public DateIndexNameProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -382,6 +354,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to round the date when formatting the date into the index name. Valid values are:<br/>`y` (year), `M` (month), `w` (week), `d` (day), `h` (hour), `m` (minute) and `s` (second).<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor DateRounding(string dateRounding)
 	{
 		DateRoundingValue = dateRounding;

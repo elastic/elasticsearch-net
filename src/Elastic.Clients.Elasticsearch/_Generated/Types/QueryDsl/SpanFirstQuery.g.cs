@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanFirstQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("end")]
 	public int End { get; set; }
-
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
 }
@@ -43,20 +42,16 @@ public sealed partial class SpanFirstQuery : SearchQuery
 public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDescriptor<SpanFirstQueryDescriptor<TDocument>>
 {
 	internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanFirstQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> MatchDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private int EndValue { get; set; }
 
 	public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
@@ -141,20 +136,16 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<SpanFirstQueryDescriptor>
 {
 	internal SpanFirstQueryDescriptor(Action<SpanFirstQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanFirstQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery MatchValue { get; set; }
-
 	private SpanQueryDescriptor MatchDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> MatchDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private int EndValue { get; set; }
 
 	public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)

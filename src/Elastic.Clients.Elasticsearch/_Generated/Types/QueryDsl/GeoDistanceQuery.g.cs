@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDistanceQuery>
 {
 	public override GeoDistanceQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -129,17 +131,11 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 public sealed partial class GeoDistanceQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public string? Distance { get; set; }
-
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoDistanceQuery geoDistanceQuery) => QueryDsl.Query.GeoDistance(geoDistanceQuery);
@@ -148,22 +144,17 @@ public sealed partial class GeoDistanceQuery : SearchQuery
 public sealed partial class GeoDistanceQueryDescriptor<TDocument> : SerializableDescriptor<GeoDistanceQueryDescriptor<TDocument>>
 {
 	internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GeoDistanceQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private string? DistanceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
 	public GeoDistanceQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -261,22 +252,17 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<GeoDistanceQueryDescriptor>
 {
 	internal GeoDistanceQueryDescriptor(Action<GeoDistanceQueryDescriptor> configure) => configure.Invoke(this);
+
 	public GeoDistanceQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private string? DistanceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
 	public GeoDistanceQueryDescriptor QueryName(string? queryName)

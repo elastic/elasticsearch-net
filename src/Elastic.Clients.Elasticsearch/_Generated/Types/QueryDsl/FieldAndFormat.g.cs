@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,45 +25,64 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormat
 {
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("include_unmapped")]
 	public bool? IncludeUnmapped { get; set; }
 }
 
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDescriptor<FieldAndFormatDescriptor<TDocument>>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FieldAndFormatDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private bool? IncludeUnmappedValue { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -95,37 +116,51 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	}
 }
 
+/// <summary>
+/// <para>A reference to a field with formatting instructions on how to return the value</para>
+/// </summary>
 public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<FieldAndFormatDescriptor>
 {
 	internal FieldAndFormatDescriptor(Action<FieldAndFormatDescriptor> configure) => configure.Invoke(this);
+
 	public FieldAndFormatDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private bool? IncludeUnmappedValue { get; set; }
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Format in which the values are returned.</para>
+	/// </summary>
 	public FieldAndFormatDescriptor Format(string? format)
 	{
 		FormatValue = format;
