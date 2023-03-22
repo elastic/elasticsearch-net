@@ -2,19 +2,19 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using Elastic.Clients.Elasticsearch.Aggregations;
-using System.Collections.Generic;
 using System;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Domain;
 using Tests.Framework.EndpointTests.TestState;
+using Elastic.Clients.Elasticsearch.Aggregations;
 using Tests.Core.Extensions;
+using Xunit;
 
 namespace Tests.Aggregations.Pipeline;
 
-public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
+public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
 {
-	public BucketSortAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public CumulativeSumAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	protected override object AggregationJson => new
 	{
@@ -34,14 +34,11 @@ public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 						field = "numberOfCommits"
 					}
 				},
-				commits_bucket_sort = new
+				cumulative_commits = new
 				{
-					bucket_sort = new
+					cumulative_sum = new
 					{
-						sort = new { commits = new { order = "desc" } },
-						from = 0,
-						size = 3,
-						gap_policy = "insert_zeros"
+						buckets_path = "commits"
 					}
 				}
 			}
@@ -56,13 +53,8 @@ public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 				.Sum("commits", sm => sm
 					.Field(p => p.NumberOfCommits)
 				)
-				.BucketSort("commits_bucket_sort", bs => bs
-					.Sort(s => s
-						.Field("commits", f => f.Order(SortOrder.Desc))
-					)
-					.From(0)
-					.Size(3)
-					.GapPolicy(GapPolicy.InsertZeros)
+				.CumulativeSum("cumulative_commits", d => d
+					.BucketsPath("commits")
 				)
 			)
 		);
@@ -74,16 +66,7 @@ public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 			CalendarInterval = CalendarInterval.Month,
 			Aggregations =
 				new SumAggregation("commits", "numberOfCommits") &&
-				new BucketSortAggregation("commits_bucket_sort")
-				{
-					Sort = new List<SortOptions>
-					{
-						SortOptions.Field("commits", new FieldSort { Order = SortOrder.Desc })
-					},
-					From = 0,
-					Size = 3,
-					GapPolicy = GapPolicy.InsertZeros
-				}
+				new CumulativeSumAggregation("cumulative_commits") { BucketsPath = "commits" }
 		};
 
 	protected override void ExpectResponse(SearchResponse<Project> response)
@@ -93,22 +76,20 @@ public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 		var projectsPerMonth = response.Aggregations.GetDateHistogram("projects_started_per_month");
 		projectsPerMonth.Should().NotBeNull();
 		projectsPerMonth.Buckets.Should().NotBeNull();
-		projectsPerMonth.Buckets.Count.Should().Be(3);
+		projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
-		double previousCommits = -1;
-
-		// sum of commits should descend over buckets
 		foreach (var item in projectsPerMonth.Buckets)
 		{
-			var value = item.GetSum("commits").Value;
-			if (value == null)
-				continue;
+			item.TryGetValue("cumulative_commits", out var cumulative).Should().BeTrue();
 
-			var numberOfCommits = value.Value;
-			if (Math.Abs(previousCommits - (-1)) > double.Epsilon)
-				numberOfCommits.Should().BeLessOrEqualTo(previousCommits);
+			if (cumulative is not SimpleValueAggregate simpleValue)
+			{
+				Assert.Fail("Expected cumulative_commits to be SimpleValueAggregate");
+				return;
+			}
 
-			previousCommits = numberOfCommits;
+			simpleValue.Should().NotBeNull();
+			simpleValue.Value.Should().NotBe(null);
 		}
 	}
 }
