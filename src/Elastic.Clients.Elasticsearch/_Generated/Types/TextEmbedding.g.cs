@@ -27,26 +27,46 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class NodeShard
+public sealed partial class TextEmbedding
 {
-	[JsonInclude, JsonPropertyName("allocation_id")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? AllocationId { get; init; }
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("primary")]
-	public bool Primary { get; init; }
-	[JsonInclude, JsonPropertyName("recovery_source")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? RecoverySource { get; init; }
-	[JsonInclude, JsonPropertyName("relocating_node")]
-	public string? RelocatingNode { get; init; }
-	[JsonInclude, JsonPropertyName("relocation_failure_info")]
-	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; init; }
-	[JsonInclude, JsonPropertyName("shard")]
-	public int Shard { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_info")]
-	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
+	[JsonInclude, JsonPropertyName("model_id")]
+	public string ModelId { get; set; }
+	[JsonInclude, JsonPropertyName("model_text")]
+	public string ModelText { get; set; }
+
+	public static implicit operator QueryVectorBuilder(TextEmbedding textEmbedding) => QueryVectorBuilder.TextEmbedding(textEmbedding);
+}
+
+public sealed partial class TextEmbeddingDescriptor : SerializableDescriptor<TextEmbeddingDescriptor>
+{
+	internal TextEmbeddingDescriptor(Action<TextEmbeddingDescriptor> configure) => configure.Invoke(this);
+
+	public TextEmbeddingDescriptor() : base()
+	{
+	}
+
+	private string ModelIdValue { get; set; }
+	private string ModelTextValue { get; set; }
+
+	public TextEmbeddingDescriptor ModelId(string modelId)
+	{
+		ModelIdValue = modelId;
+		return Self;
+	}
+
+	public TextEmbeddingDescriptor ModelText(string modelText)
+	{
+		ModelTextValue = modelText;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("model_id");
+		writer.WriteStringValue(ModelIdValue);
+		writer.WritePropertyName("model_text");
+		writer.WriteStringValue(ModelTextValue);
+		writer.WriteEndObject();
+	}
 }

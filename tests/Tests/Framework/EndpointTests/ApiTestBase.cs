@@ -29,6 +29,7 @@ namespace Tests.Framework.EndpointTests
 		protected override object ExpectJson { get; } = null;
 		protected virtual bool VerifyNdJson { get; } = false;
 		protected virtual bool VerifyJson { get; } = false;
+		protected virtual bool CompareJsonStrings { get; } = false;
 		protected virtual bool VerifyResponseObjects { get; } = false;
 
 		protected override IReadOnlyList<object> ExpectNdjson { get; } = null;
@@ -36,25 +37,24 @@ namespace Tests.Framework.EndpointTests
 		protected abstract HttpMethod ExpectHttpMethod { get; }
 		protected abstract string ExpectedUrlPathAndQuery { get; }
 
-		// TODO - It would be useful to verify that the JSON is equivalent, but using a string
-		// comparison is too brittle due to potential for elements to be ordered differently.
+		// TODO - It would be nice to make this happen for all tests but using a string comparison is brittle due to
+		// potential for elements to be ordered differently. This is currently opt in.
 
-		//[U]
-		//protected virtual void VerifyInitializerAndDescriptorProduceIdenticalJson()
-		//{
-		//	if (VerifyJson)
-		//	{
+		[U]
+		protected virtual void InitializerAndDescriptorProduceIdenticalJson()
+		{
+			if (CompareJsonStrings)
+			{
+				var initializerJson = SerializeUsingClient(Initializer);
 
-		//		var initializerJson = SerializeUsingClient(Initializer);
+				var descriptor = NewDescriptor();
+				Fluent?.Invoke(descriptor);
 
-		//		var descriptor = NewDescriptor();
-		//		Fluent?.Invoke(descriptor);
+				var descriptorJson = SerializeUsingClient(descriptor);
 
-		//		var descriptorJson = SerializeUsingClient(descriptor);
-
-		//		initializerJson.Equals(descriptorJson).Should().BeTrue();
-		//	}
-		//}
+				initializerJson.Should().Be(descriptorJson, because: "Expected the JSON string produced by the initializer serialization to match the descriptor serialization.");
+			}
+		}
 
 		[U]
 		protected virtual async Task VerifyInitializerJson()
