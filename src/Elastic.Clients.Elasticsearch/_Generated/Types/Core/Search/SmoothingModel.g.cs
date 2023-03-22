@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 [JsonConverter(typeof(SmoothingModelConverter))]
 public sealed partial class SmoothingModel
 {
@@ -41,7 +43,6 @@ public sealed partial class SmoothingModel
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static SmoothingModel Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModel("laplace", laplaceSmoothingModel);
@@ -114,20 +115,17 @@ internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingM
 public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDescriptor<SmoothingModelDescriptor<TDocument>>
 {
 	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SmoothingModelDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private SmoothingModelDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SmoothingModelDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -151,6 +149,7 @@ public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDe
 	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
 	public SmoothingModelDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
 	public SmoothingModelDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -176,20 +175,17 @@ public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDe
 public sealed partial class SmoothingModelDescriptor : SerializableDescriptor<SmoothingModelDescriptor>
 {
 	internal SmoothingModelDescriptor(Action<SmoothingModelDescriptor> configure) => configure.Invoke(this);
+
 	public SmoothingModelDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private SmoothingModelDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SmoothingModelDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -213,6 +209,7 @@ public sealed partial class SmoothingModelDescriptor : SerializableDescriptor<Sm
 	public SmoothingModelDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
 	public SmoothingModelDescriptor StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
 	public SmoothingModelDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

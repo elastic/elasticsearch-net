@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class DateRangeExpression
 {
 	[JsonInclude, JsonPropertyName("from")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? From { get; set; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
-
 	[JsonInclude, JsonPropertyName("to")]
 	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? To { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class DateRangeExpression
 public sealed partial class DateRangeExpressionDescriptor : SerializableDescriptor<DateRangeExpressionDescriptor>
 {
 	internal DateRangeExpressionDescriptor(Action<DateRangeExpressionDescriptor> configure) => configure.Invoke(this);
+
 	public DateRangeExpressionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? FromValue { get; set; }
-
 	private string? KeyValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? ToValue { get; set; }
 
 	public DateRangeExpressionDescriptor From(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath? from)

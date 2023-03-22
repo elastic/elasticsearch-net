@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygonQuery>
 {
 	public override GeoPolygonQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -117,15 +119,10 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 public sealed partial class GeoPolygonQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	public bool? IgnoreUnmapped { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints Polygon { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoPolygonQuery geoPolygonQuery) => QueryDsl.Query.GeoPolygon(geoPolygonQuery);
@@ -134,24 +131,18 @@ public sealed partial class GeoPolygonQuery : SearchQuery
 public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableDescriptor<GeoPolygonQueryDescriptor<TDocument>>
 {
 	internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GeoPolygonQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-
 	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-
 	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
 	public GeoPolygonQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -265,24 +256,18 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<GeoPolygonQueryDescriptor>
 {
 	internal GeoPolygonQueryDescriptor(Action<GeoPolygonQueryDescriptor> configure) => configure.Invoke(this);
+
 	public GeoPolygonQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-
 	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-
 	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
 	public GeoPolygonQueryDescriptor QueryName(string? queryName)

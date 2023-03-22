@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("rules")]
 	public ICollection<string>? Rules { get; set; }
-
 	[JsonInclude, JsonPropertyName("rules_path")]
 	public string? RulesPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stemmer_override";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
 public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableDescriptor<StemmerOverrideTokenFilterDescriptor>, IBuildableDescriptor<StemmerOverrideTokenFilter>
 {
 	internal StemmerOverrideTokenFilterDescriptor(Action<StemmerOverrideTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public StemmerOverrideTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? RulesValue { get; set; }
-
 	private string? RulesPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public StemmerOverrideTokenFilterDescriptor Rules(ICollection<string>? rules)

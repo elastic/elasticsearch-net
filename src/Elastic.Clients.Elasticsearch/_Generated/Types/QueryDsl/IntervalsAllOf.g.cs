@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsAllOf
 {
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("intervals")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
-
 	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
 }
@@ -43,26 +42,19 @@ public sealed partial class IntervalsAllOf
 public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDescriptor<IntervalsAllOfDescriptor<TDocument>>
 {
 	internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsAllOfDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-
 	private IntervalsDescriptor<TDocument> IntervalsDescriptor { get; set; }
-
 	private Action<IntervalsDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
-
 	private Action<IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
 	private int? MaxGapsValue { get; set; }
-
 	private bool? OrderedValue { get; set; }
 
 	public IntervalsAllOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
@@ -206,26 +198,19 @@ public sealed partial class IntervalsAllOfDescriptor<TDocument> : SerializableDe
 public sealed partial class IntervalsAllOfDescriptor : SerializableDescriptor<IntervalsAllOfDescriptor>
 {
 	internal IntervalsAllOfDescriptor(Action<IntervalsAllOfDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsAllOfDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-
 	private IntervalsDescriptor IntervalsDescriptor { get; set; }
-
 	private Action<IntervalsDescriptor> IntervalsDescriptorAction { get; set; }
-
 	private Action<IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
 	private int? MaxGapsValue { get; set; }
-
 	private bool? OrderedValue { get; set; }
 
 	public IntervalsAllOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)

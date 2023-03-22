@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class PhraseSuggestHighlight
 {
 	[JsonInclude, JsonPropertyName("post_tag")]
 	public string PostTag { get; set; }
-
 	[JsonInclude, JsonPropertyName("pre_tag")]
 	public string PreTag { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class PhraseSuggestHighlight
 public sealed partial class PhraseSuggestHighlightDescriptor : SerializableDescriptor<PhraseSuggestHighlightDescriptor>
 {
 	internal PhraseSuggestHighlightDescriptor(Action<PhraseSuggestHighlightDescriptor> configure) => configure.Invoke(this);
+
 	public PhraseSuggestHighlightDescriptor() : base()
 	{
 	}
 
 	private string PostTagValue { get; set; }
-
 	private string PreTagValue { get; set; }
 
 	public PhraseSuggestHighlightDescriptor PostTag(string postTag)

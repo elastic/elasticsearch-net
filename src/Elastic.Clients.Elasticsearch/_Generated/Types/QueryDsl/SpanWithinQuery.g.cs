@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanWithinQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("big")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("little")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 }
@@ -43,24 +42,18 @@ public sealed partial class SpanWithinQuery : SearchQuery
 public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableDescriptor<SpanWithinQueryDescriptor<TDocument>>
 {
 	internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanWithinQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> BigDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> BigDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> LittleDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> LittleDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
@@ -177,24 +170,18 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<SpanWithinQueryDescriptor>
 {
 	internal SpanWithinQueryDescriptor(Action<SpanWithinQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanWithinQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
-
 	private SpanQueryDescriptor BigDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> BigDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
-
 	private SpanQueryDescriptor LittleDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> LittleDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)

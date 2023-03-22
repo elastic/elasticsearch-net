@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class CompletionContext
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("context")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
-
 	[JsonInclude, JsonPropertyName("neighbours")]
 	public ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
-
 	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.GeoHashPrecision? Precision { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class CompletionContext
 public sealed partial class CompletionContextDescriptor : SerializableDescriptor<CompletionContextDescriptor>
 {
 	internal CompletionContextDescriptor(Action<CompletionContextDescriptor> configure) => configure.Invoke(this);
+
 	public CompletionContextDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Context ContextValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? NeighboursValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoHashPrecision? PrecisionValue { get; set; }
-
 	private bool? PrefixValue { get; set; }
 
 	public CompletionContextDescriptor Boost(double? boost)

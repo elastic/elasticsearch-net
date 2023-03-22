@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
 {
@@ -41,7 +43,6 @@ public sealed partial class Query
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static Query Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => new Query("bool", boolQuery);
@@ -626,20 +627,17 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<QueryDescriptor<TDocument>>
 {
 	internal QueryDescriptor(Action<QueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public QueryDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private QueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private QueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -754,6 +752,7 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	public QueryDescriptor<TDocument> Wrapper(WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
 	public QueryDescriptor<TDocument> Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -785,20 +784,17 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescriptor>
 {
 	internal QueryDescriptor(Action<QueryDescriptor> configure) => configure.Invoke(this);
+
 	public QueryDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private QueryDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private QueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -955,6 +951,7 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Wildcard<TDocument>(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	public QueryDescriptor Wrapper(WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
 	public QueryDescriptor Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

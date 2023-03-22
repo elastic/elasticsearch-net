@@ -15,25 +15,32 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class DeleteByQueryRethrottleResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("node_failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; init; }
 
+	/// <summary>
+	/// <para>Task information grouped by node, if `group_by` was set to `node` (the default).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.NodeTasks>? Nodes { get; init; }
-
 	[JsonInclude, JsonPropertyName("task_failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; init; }
 
+	/// <summary>
+	/// <para>Either a flat list of tasks if `group_by` was set to `none`, or grouped by parents if<br/>`group_by` was set to `parents`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tasks")]
 	public Elastic.Clients.Elasticsearch.Tasks.TaskInfos? Tasks { get; init; }
 }

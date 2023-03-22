@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexTemplateMapping
 {
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
@@ -40,22 +40,17 @@ public sealed partial class IndexTemplateMapping
 public sealed partial class IndexTemplateMappingDescriptor<TDocument> : SerializableDescriptor<IndexTemplateMappingDescriptor<TDocument>>
 {
 	internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IndexTemplateMappingDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
@@ -160,22 +155,17 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 public sealed partial class IndexTemplateMappingDescriptor : SerializableDescriptor<IndexTemplateMappingDescriptor>
 {
 	internal IndexTemplateMappingDescriptor(Action<IndexTemplateMappingDescriptor> configure) => configure.Invoke(this);
+
 	public IndexTemplateMappingDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-
 	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-
 	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 
 	public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)

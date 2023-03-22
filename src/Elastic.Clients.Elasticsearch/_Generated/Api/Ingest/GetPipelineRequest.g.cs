@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,17 +27,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed class GetPipelineRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// </summary>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequestParameters>
 {
 	public GetPipelineRequest()
@@ -46,28 +55,45 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Explicit operation timeout for connection to master node</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
+	/// <summary>
+	/// <para>Return pipelines without their definitions (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDescriptor<GetPipelineRequestDescriptor<TDocument>, GetPipelineRequestParameters>
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GetPipelineRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetPipelineRequestDescriptor<TDocument> Summary(bool? summary = true) => Qs("summary", summary);
+
 	public GetPipelineRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		RouteValues.Optional("id", id);
@@ -79,18 +105,26 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 	}
 }
 
+/// <summary>
+/// <para>Returns a pipeline.</para>
+/// </summary>
 public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<GetPipelineRequestDescriptor, GetPipelineRequestParameters>
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor> configure) => configure.Invoke(this);
+
 	public GetPipelineRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	public GetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetPipelineRequestDescriptor Summary(bool? summary = true) => Qs("summary", summary);
+
 	public GetPipelineRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		RouteValues.Optional("id", id);

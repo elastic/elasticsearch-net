@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class TTestAggregationConverter : JsonConverter<TTestAggregation>
 {
 	public override TTestAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -136,42 +138,33 @@ internal sealed class TTestAggregationConverter : JsonConverter<TTestAggregation
 public sealed partial class TTestAggregation : SearchAggregation
 {
 	public TTestAggregation(string name) => Name = name;
+
 	internal TTestAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 }
 
 public sealed partial class TTestAggregationDescriptor<TDocument> : SerializableDescriptor<TTestAggregationDescriptor<TDocument>>
 {
 	internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TTestAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? aValue { get; set; }
-
 	private TestPopulationDescriptor<TDocument> aDescriptor { get; set; }
-
 	private Action<TestPopulationDescriptor<TDocument>> aDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
-
 	private TestPopulationDescriptor<TDocument> bDescriptor { get; set; }
-
 	private Action<TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
@@ -291,24 +284,18 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<TTestAggregationDescriptor>
 {
 	internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public TTestAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? aValue { get; set; }
-
 	private TestPopulationDescriptor aDescriptor { get; set; }
-
 	private Action<TestPopulationDescriptor> aDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
-
 	private TestPopulationDescriptor bDescriptor { get; set; }
-
 	private Action<TestPopulationDescriptor> bDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)

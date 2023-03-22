@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsDimensionFields
 {
+	/// <summary>
+	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release. Elastic will<br/>apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class MappingLimitSettingsDimensionFields
 public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsDimensionFieldsDescriptor>
 {
 	internal MappingLimitSettingsDimensionFieldsDescriptor(Action<MappingLimitSettingsDimensionFieldsDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsDimensionFieldsDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release. Elastic will<br/>apply best effort to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
+	/// </summary>
 	public MappingLimitSettingsDimensionFieldsDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

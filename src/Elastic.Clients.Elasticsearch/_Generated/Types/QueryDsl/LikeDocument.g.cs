@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class LikeDocument
 {
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
@@ -55,24 +50,18 @@ public sealed partial class LikeDocument
 public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDescriptor<LikeDocumentDescriptor<TDocument>>
 {
 	internal LikeDocumentDescriptor(Action<LikeDocumentDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public LikeDocumentDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private object? DocValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private long? VersionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	public LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
@@ -181,24 +170,18 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<LikeDocumentDescriptor>
 {
 	internal LikeDocumentDescriptor(Action<LikeDocumentDescriptor> configure) => configure.Invoke(this);
+
 	public LikeDocumentDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private object? DocValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private long? VersionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	public LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)

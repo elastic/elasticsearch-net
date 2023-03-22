@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class SamplerAggregationConverter : JsonConverter<SamplerAggregation>
 {
 	public override SamplerAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -117,34 +119,29 @@ internal sealed class SamplerAggregationConverter : JsonConverter<SamplerAggrega
 public sealed partial class SamplerAggregation : SearchAggregation
 {
 	public SamplerAggregation(string name) => Name = name;
+
 	internal SamplerAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public int? ShardSize { get; set; }
 }
 
 public sealed partial class SamplerAggregationDescriptor<TDocument> : SerializableDescriptor<SamplerAggregationDescriptor<TDocument>>
 {
 	internal SamplerAggregationDescriptor(Action<SamplerAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SamplerAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
 
 	public SamplerAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -224,18 +221,15 @@ public sealed partial class SamplerAggregationDescriptor<TDocument> : Serializab
 public sealed partial class SamplerAggregationDescriptor : SerializableDescriptor<SamplerAggregationDescriptor>
 {
 	internal SamplerAggregationDescriptor(Action<SamplerAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public SamplerAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
 
 	public SamplerAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

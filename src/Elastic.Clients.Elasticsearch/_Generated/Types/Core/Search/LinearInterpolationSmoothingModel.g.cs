@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class LinearInterpolationSmoothingModel
 {
 	[JsonInclude, JsonPropertyName("bigram_lambda")]
 	public double BigramLambda { get; set; }
-
 	[JsonInclude, JsonPropertyName("trigram_lambda")]
 	public double TrigramLambda { get; set; }
-
 	[JsonInclude, JsonPropertyName("unigram_lambda")]
 	public double UnigramLambda { get; set; }
 
@@ -42,14 +42,13 @@ public sealed partial class LinearInterpolationSmoothingModel
 public sealed partial class LinearInterpolationSmoothingModelDescriptor : SerializableDescriptor<LinearInterpolationSmoothingModelDescriptor>
 {
 	internal LinearInterpolationSmoothingModelDescriptor(Action<LinearInterpolationSmoothingModelDescriptor> configure) => configure.Invoke(this);
+
 	public LinearInterpolationSmoothingModelDescriptor() : base()
 	{
 	}
 
 	private double BigramLambdaValue { get; set; }
-
 	private double TrigramLambdaValue { get; set; }
-
 	private double UnigramLambdaValue { get; set; }
 
 	public LinearInterpolationSmoothingModelDescriptor BigramLambda(double bigramLambda)
