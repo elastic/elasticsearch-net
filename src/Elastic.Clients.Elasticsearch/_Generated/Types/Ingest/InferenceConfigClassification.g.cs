@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class InferenceConfigClassification
 {
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
-
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
-
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
 
@@ -48,18 +46,15 @@ public sealed partial class InferenceConfigClassification
 public sealed partial class InferenceConfigClassificationDescriptor<TDocument> : SerializableDescriptor<InferenceConfigClassificationDescriptor<TDocument>>
 {
 	internal InferenceConfigClassificationDescriptor(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceConfigClassificationDescriptor() : base()
 	{
 	}
 
 	private int? NumTopClassesValue { get; set; }
-
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private string? PredictionFieldTypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
 	public InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? numTopClasses)
@@ -144,18 +139,15 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 public sealed partial class InferenceConfigClassificationDescriptor : SerializableDescriptor<InferenceConfigClassificationDescriptor>
 {
 	internal InferenceConfigClassificationDescriptor(Action<InferenceConfigClassificationDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceConfigClassificationDescriptor() : base()
 	{
 	}
 
 	private int? NumTopClassesValue { get; set; }
-
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private string? PredictionFieldTypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
 	public InferenceConfigClassificationDescriptor NumTopClasses(int? numTopClasses)

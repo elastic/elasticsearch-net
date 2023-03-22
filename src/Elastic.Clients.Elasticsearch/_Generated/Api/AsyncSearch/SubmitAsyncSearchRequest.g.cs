@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,104 +27,148 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
+
 public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// </summary>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Indicate if an error should be returned if there is a partial search failure or timeout</para>
+	/// </summary>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// </summary>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-
-	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</para>
+	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-
-	[JsonIgnore]
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
+	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specifies which field to use for suggestions.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify suggest mode</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>How many suggestions to return in response</para>
+	/// </summary>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>The source text for which the suggestions should be returned.</para>
+	/// </summary>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
@@ -535,6 +581,9 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 }
 
 [JsonConverter(typeof(SubmitAsyncSearchRequestConverter))]
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncSearchRequestParameters>
 {
 	public SubmitAsyncSearchRequest()
@@ -545,212 +594,354 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
+	/// <summary>
+	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
+	/// <summary>
+	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
+	/// <summary>
+	/// <para>Indicate if an error should be returned if there is a partial search failure or timeout</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
+	/// <summary>
+	/// <para>The analyzer to use for the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
+	/// <summary>
+	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
+	/// <summary>
+	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
-
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
+	/// <summary>
+	/// <para>The default operator for query string query (AND or OR)</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
+	/// <summary>
+	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
+	/// <summary>
+	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
+	/// <summary>
+	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
+	/// <summary>
+	/// <para>The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-
 	[JsonIgnore]
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
 	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
+	/// <summary>
+	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
+	/// <summary>
+	/// <para>A comma-separated list of specific routing values</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
+	/// <summary>
+	/// <para>Search operation type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
+	/// <summary>
+	/// <para>Specifies which field to use for suggestions.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
+	/// <summary>
+	/// <para>Specify suggest mode</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
+	/// <summary>
+	/// <para>How many suggestions to return in response</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
+	/// <summary>
+	/// <para>The source text for which the suggestions should be returned.</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
+	/// <summary>
+	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
+	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
-
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ext")]
 	public IDictionary<string, object>? Ext { get; set; }
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
-
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("knn")]
 	public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
-
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("rescore"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_after")]
 	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-
 	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("terminate_after")]
 	public long? TerminateAfter { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timeout")]
 	public string? Timeout { get; set; }
 
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pit")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stats")]
 	public ICollection<string>? Stats { get; set; }
 }
 
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchRequestParameters>
 {
 	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SubmitAsyncSearchRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
@@ -783,6 +974,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -790,127 +982,66 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-
 	private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-
 	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.KnnQuery? KnnValue { get; set; }
-
 	private KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
-
 	private Action<KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
-
 	private Action<Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
-
 	private Action<Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private IDictionary<string, object>? ExtValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-
 	private double? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-
 	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-
 	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-
 	private bool? ProfileValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private ICollection<string>? StatsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-
 	private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
-
 	private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
-
 	private long? TerminateAfterValue { get; set; }
-
 	private string? TimeoutValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -961,6 +1092,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
@@ -997,6 +1131,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
@@ -1057,6 +1194,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnQuery? knn)
 	{
 		KnnDescriptor = null;
@@ -1105,6 +1245,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -1225,42 +1368,63 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> From(int? from)
 	{
 		FromValue = from;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 	{
 		PitDescriptor = null;
@@ -1291,12 +1455,18 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -1309,24 +1479,36 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -1357,30 +1539,45 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter)
 	{
 		TerminateAfterValue = terminateAfter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Timeout(string? timeout)
 	{
 		TimeoutValue = timeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
 		TrackTotalHitsValue = trackTotalHits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Version(bool? version = true)
 	{
 		VersionValue = version;
@@ -1772,16 +1969,23 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 }
 
+/// <summary>
+/// <para>Executes a search request asynchronously.</para>
+/// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescriptor<SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters>
 {
 	internal SubmitAsyncSearchRequestDescriptor(Action<SubmitAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
+
 	public SubmitAsyncSearchRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
@@ -1814,6 +2018,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	public SubmitAsyncSearchRequestDescriptor SuggestText(string? suggestText) => Qs("suggest_text", suggestText);
 	public SubmitAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	public SubmitAsyncSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
+
 	public SubmitAsyncSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -1821,127 +2026,66 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
-
 	private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.KnnQuery? KnnValue { get; set; }
-
 	private KnnQueryDescriptor KnnDescriptor { get; set; }
-
 	private Action<KnnQueryDescriptor> KnnDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
-
 	private Action<Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
-
 	private Action<Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private IDictionary<string, object>? ExtValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-
 	private double? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-
 	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-
 	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-
 	private bool? ProfileValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private ICollection<string>? StatsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-
 	private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
-
 	private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
-
 	private long? TerminateAfterValue { get; set; }
-
 	private string? TimeoutValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public SubmitAsyncSearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -1992,6 +2136,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
 		DocvalueFieldsDescriptor = null;
@@ -2028,6 +2175,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
 	{
 		FieldsDescriptor = null;
@@ -2088,6 +2238,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the approximate kNN search to run.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnQuery? knn)
 	{
 		KnnDescriptor = null;
@@ -2136,6 +2289,9 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -2256,42 +2412,63 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates which source fields are returned for matching documents. These<br/>fields are returned in the hits._source property of the search response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor From(int? from)
 	{
 		FromValue = from;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? pit)
 	{
 		PitDescriptor = null;
@@ -2322,12 +2499,18 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
 	{
 		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
@@ -2340,24 +2523,36 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Stats(ICollection<string>? stats)
 	{
 		StatsValue = stats;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
@@ -2388,30 +2583,45 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of documents to collect for each shard. If a query reaches this<br/>limit, Elasticsearch terminates the query early. Elasticsearch collects documents<br/>before sorting. Defaults to 0, which does not terminate query execution early.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor TerminateAfter(long? terminateAfter)
 	{
 		TerminateAfterValue = terminateAfter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the period of time to wait for a response from each shard. If no response<br/>is received before the timeout expires, the request fails and returns an error.<br/>Defaults to no timeout.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Timeout(string? timeout)
 	{
 		TimeoutValue = timeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, calculate and return document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
 	{
 		TrackTotalHitsValue = trackTotalHits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, returns document version as part of a hit.</para>
+	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Version(bool? version = true)
 	{
 		VersionValue = version;

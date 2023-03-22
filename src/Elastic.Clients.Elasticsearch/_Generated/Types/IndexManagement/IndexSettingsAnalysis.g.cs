@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexSettingsAnalysis
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzers { get; set; }
-
 	[JsonInclude, JsonPropertyName("char_filter")]
 	public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilters { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
-
 	[JsonInclude, JsonPropertyName("normalizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizers { get; set; }
-
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class IndexSettingsAnalysis
 public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescriptor<IndexSettingsAnalysisDescriptor>
 {
 	internal IndexSettingsAnalysisDescriptor(Action<IndexSettingsAnalysisDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSettingsAnalysisDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzersValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFiltersValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFiltersValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizersValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.Tokenizers? TokenizersValue { get; set; }
 
 	public IndexSettingsAnalysisDescriptor Analyzers(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzers)

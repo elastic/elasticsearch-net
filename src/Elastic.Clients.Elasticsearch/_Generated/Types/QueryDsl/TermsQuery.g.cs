@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 {
 	public override TermsQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -93,11 +95,8 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 public sealed partial class TermsQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 
 	public static implicit operator Query(TermsQuery termsQuery) => QueryDsl.Query.Terms(termsQuery);
@@ -106,16 +105,14 @@ public sealed partial class TermsQuery : SearchQuery
 public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescriptor<TermsQueryDescriptor<TDocument>>
 {
 	internal TermsQueryDescriptor(Action<TermsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TermsQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
 
 	public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -177,16 +174,14 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQueryDescriptor>
 {
 	internal TermsQueryDescriptor(Action<TermsQueryDescriptor> configure) => configure.Invoke(this);
+
 	public TermsQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField TermsValue { get; set; }
 
 	public TermsQueryDescriptor QueryName(string? queryName)

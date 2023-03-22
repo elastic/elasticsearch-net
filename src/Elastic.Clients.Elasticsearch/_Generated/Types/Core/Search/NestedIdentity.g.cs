@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class NestedIdentity
 {
 	[JsonInclude, JsonPropertyName("_nested")]
 	public Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity? Nested { get; init; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public string Field { get; init; }
-
 	[JsonInclude, JsonPropertyName("offset")]
 	public int Offset { get; init; }
 }

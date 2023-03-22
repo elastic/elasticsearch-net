@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 [JsonConverter(typeof(FieldSuggesterConverter))]
 public sealed partial class FieldSuggester
 {
@@ -41,18 +43,16 @@ public sealed partial class FieldSuggester
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static FieldSuggester Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => new FieldSuggester("completion", completionSuggester);
 	public static FieldSuggester Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => new FieldSuggester("phrase", phraseSuggester);
 	public static FieldSuggester Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => new FieldSuggester("term", termSuggester);
+
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
-
 	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
-
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 }
@@ -177,20 +177,17 @@ internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSugge
 public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDescriptor<FieldSuggesterDescriptor<TDocument>>
 {
 	internal FieldSuggesterDescriptor(Action<FieldSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FieldSuggesterDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private FieldSuggesterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private FieldSuggesterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -209,9 +206,7 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	}
 
 	private string? PrefixValue { get; set; }
-
 	private string? RegexValue { get; set; }
-
 	private string? TextValue { get; set; }
 
 	public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
@@ -238,6 +233,7 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	public FieldSuggesterDescriptor<TDocument> Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
 	public FieldSuggesterDescriptor<TDocument> Term(TermSuggester termSuggester) => Set(termSuggester, "term");
 	public FieldSuggesterDescriptor<TDocument> Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -281,20 +277,17 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<FieldSuggesterDescriptor>
 {
 	internal FieldSuggesterDescriptor(Action<FieldSuggesterDescriptor> configure) => configure.Invoke(this);
+
 	public FieldSuggesterDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private FieldSuggesterDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private FieldSuggesterDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -313,9 +306,7 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	}
 
 	private string? PrefixValue { get; set; }
-
 	private string? RegexValue { get; set; }
-
 	private string? TextValue { get; set; }
 
 	public FieldSuggesterDescriptor Prefix(string? prefix)
@@ -345,6 +336,7 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	public FieldSuggesterDescriptor Term(TermSuggester termSuggester) => Set(termSuggester, "term");
 	public FieldSuggesterDescriptor Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
 	public FieldSuggesterDescriptor Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class ConvertProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 
@@ -60,32 +54,22 @@ public sealed partial class ConvertProcessor
 public sealed partial class ConvertProcessorDescriptor<TDocument> : SerializableDescriptor<ConvertProcessorDescriptor<TDocument>>
 {
 	internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ConvertProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private bool? IgnoreMissingValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ingest.ConvertType TypeValue { get; set; }
 
 	public ConvertProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -265,32 +249,22 @@ public sealed partial class ConvertProcessorDescriptor<TDocument> : Serializable
 public sealed partial class ConvertProcessorDescriptor : SerializableDescriptor<ConvertProcessorDescriptor>
 {
 	internal ConvertProcessorDescriptor(Action<ConvertProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public ConvertProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private bool? IgnoreMissingValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ingest.ConvertType TypeValue { get; set; }
 
 	public ConvertProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

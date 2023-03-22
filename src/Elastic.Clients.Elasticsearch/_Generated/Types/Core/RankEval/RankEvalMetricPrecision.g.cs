@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,33 +25,42 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+/// <summary>
+/// <para>Precision at K (P@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricPrecision
 {
+	/// <summary>
+	/// <para>Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unlabeled")]
 	public bool? IgnoreUnlabeled { get; set; }
-
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
-
 	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 
+/// <summary>
+/// <para>Precision at K (P@k)</para>
+/// </summary>
 public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptor<RankEvalMetricPrecisionDescriptor>
 {
 	internal RankEvalMetricPrecisionDescriptor(Action<RankEvalMetricPrecisionDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricPrecisionDescriptor() : base()
 	{
 	}
 
 	private bool? IgnoreUnlabeledValue { get; set; }
-
 	private int? kValue { get; set; }
-
 	private int? RelevantRatingThresholdValue { get; set; }
 
+	/// <summary>
+	/// <para>Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.</para>
+	/// </summary>
 	public RankEvalMetricPrecisionDescriptor IgnoreUnlabeled(bool? ignoreUnlabeled = true)
 	{
 		IgnoreUnlabeledValue = ignoreUnlabeled;

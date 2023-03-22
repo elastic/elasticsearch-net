@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class SearchProfile
 {
 	[JsonInclude, JsonPropertyName("collector")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> Collector { get; init; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> Query { get; init; }
-
 	[JsonInclude, JsonPropertyName("rewrite_time")]
 	public long RewriteTime { get; init; }
 }

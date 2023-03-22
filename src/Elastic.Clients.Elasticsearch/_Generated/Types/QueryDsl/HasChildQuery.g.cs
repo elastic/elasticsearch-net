@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class HasChildQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
-
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_children")]
 	public int? MaxChildren { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_children")]
 	public int? MinChildren { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 
@@ -60,34 +54,23 @@ public sealed partial class HasChildQuery : SearchQuery
 public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
 {
 	internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public HasChildQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private int? MaxChildrenValue { get; set; }
-
 	private int? MinChildrenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
-
 	private string TypeValue { get; set; }
 
 	public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
@@ -260,34 +243,23 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<HasChildQueryDescriptor>
 {
 	internal HasChildQueryDescriptor(Action<HasChildQueryDescriptor> configure) => configure.Invoke(this);
+
 	public HasChildQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private int? MaxChildrenValue { get; set; }
-
 	private int? MinChildrenValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
-
 	private string TypeValue { get; set; }
 
 	public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)

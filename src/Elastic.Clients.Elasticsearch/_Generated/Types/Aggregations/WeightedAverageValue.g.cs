@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class WeightedAverageValue
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class WeightedAverageValue
 public sealed partial class WeightedAverageValueDescriptor<TDocument> : SerializableDescriptor<WeightedAverageValueDescriptor<TDocument>>
 {
 	internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public WeightedAverageValueDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -102,14 +101,13 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 public sealed partial class WeightedAverageValueDescriptor : SerializableDescriptor<WeightedAverageValueDescriptor>
 {
 	internal WeightedAverageValueDescriptor(Action<WeightedAverageValueDescriptor> configure) => configure.Invoke(this);
+
 	public WeightedAverageValueDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

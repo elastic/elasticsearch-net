@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
 public sealed partial class UnassignedInformation
 {
 	[JsonInclude, JsonPropertyName("allocation_status")]
 	public string? AllocationStatus { get; init; }
-
 	[JsonInclude, JsonPropertyName("at")]
 	public DateTimeOffset At { get; init; }
-
 	[JsonInclude, JsonPropertyName("delayed")]
 	public bool? Delayed { get; init; }
-
 	[JsonInclude, JsonPropertyName("details")]
 	public string? Details { get; init; }
-
 	[JsonInclude, JsonPropertyName("failed_allocation_attempts")]
 	public int? FailedAllocationAttempts { get; init; }
-
 	[JsonInclude, JsonPropertyName("last_allocation_status")]
 	public string? LastAllocationStatus { get; init; }
-
 	[JsonInclude, JsonPropertyName("reason")]
 	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; init; }
 }

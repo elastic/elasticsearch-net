@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public partial class TokenFilters : IsADictionary<string, ITokenFilter>
 {
 	public TokenFilters()
@@ -40,8 +42,8 @@ public partial class TokenFilters : IsADictionary<string, ITokenFilter>
 
 	public void Add(string name, ITokenFilter tokenFilter) => BackingDictionary.Add(Sanitize(name), tokenFilter);
 	public bool TryGetTokenFilter(string name, [NotNullWhen(returnValue: true)] out ITokenFilter tokenFilter) => BackingDictionary.TryGetValue(Sanitize(name), out tokenFilter);
-	public bool TryGetTokenFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenFilter)
-		where T : class, ITokenFilter
+
+	public bool TryGetTokenFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenFilter) where T : class, ITokenFilter
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{

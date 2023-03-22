@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class TopLeftBottomRightGeoBounds
 {
 	[JsonInclude, JsonPropertyName("bottom_right")]
 	public Elastic.Clients.Elasticsearch.GeoLocation BottomRight { get; set; }
-
 	[JsonInclude, JsonPropertyName("top_left")]
 	public Elastic.Clients.Elasticsearch.GeoLocation TopLeft { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class TopLeftBottomRightGeoBounds
 public sealed partial class TopLeftBottomRightGeoBoundsDescriptor : SerializableDescriptor<TopLeftBottomRightGeoBoundsDescriptor>
 {
 	internal TopLeftBottomRightGeoBoundsDescriptor(Action<TopLeftBottomRightGeoBoundsDescriptor> configure) => configure.Invoke(this);
+
 	public TopLeftBottomRightGeoBoundsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.GeoLocation BottomRightValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.GeoLocation TopLeftValue { get; set; }
 
 	public TopLeftBottomRightGeoBoundsDescriptor BottomRight(Elastic.Clients.Elasticsearch.GeoLocation bottomRight)

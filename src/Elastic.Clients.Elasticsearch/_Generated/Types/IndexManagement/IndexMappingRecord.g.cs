@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexMappingRecord
 {
 	[JsonInclude, JsonPropertyName("item")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Item { get; init; }
-
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 }

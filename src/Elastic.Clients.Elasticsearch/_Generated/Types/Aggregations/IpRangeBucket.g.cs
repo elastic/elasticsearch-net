@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(IpRangeBucketConverter))]
 public sealed partial class IpRangeBucket : AggregateDictionary
 {
@@ -34,13 +36,10 @@ public sealed partial class IpRangeBucket : AggregateDictionary
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; init; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; init; }
-
 	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; init; }
 }
@@ -51,7 +50,7 @@ internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		string? from = default;
 		string? key = default;
@@ -62,7 +61,7 @@ internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -97,13 +96,7 @@ internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new IpRangeBucket(subAggs)
-		{
-			DocCount = docCount,
-			From = from,
-			Key = key,
-			To = to
-		};
+		return new IpRangeBucket(subAggs) { DocCount = docCount, From = from, Key = key, To = to };
 	}
 
 	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

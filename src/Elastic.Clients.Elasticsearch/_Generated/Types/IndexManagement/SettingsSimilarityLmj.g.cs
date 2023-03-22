@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,21 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarityLmj
 {
 	[JsonInclude, JsonPropertyName("lambda")]
 	public double Lambda { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMJelinekMercer";
 }
 
 public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptor<SettingsSimilarityLmjDescriptor>
 {
 	internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityLmjDescriptor() : base()
 	{
 	}

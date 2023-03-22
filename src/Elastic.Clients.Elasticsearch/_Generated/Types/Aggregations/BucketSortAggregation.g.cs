@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class BucketSortAggregationConverter : JsonConverter<BucketSortAggregation>
 {
 	public override BucketSortAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -154,44 +156,34 @@ internal sealed class BucketSortAggregationConverter : JsonConverter<BucketSortA
 public sealed partial class BucketSortAggregation : SearchAggregation
 {
 	public BucketSortAggregation(string name) => Name = name;
+
 	internal BucketSortAggregation()
 	{
 	}
 
 	public int? From { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public int? Size { get; set; }
-
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 public sealed partial class BucketSortAggregationDescriptor<TDocument> : SerializableDescriptor<BucketSortAggregationDescriptor<TDocument>>
 {
 	internal BucketSortAggregationDescriptor(Action<BucketSortAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public BucketSortAggregationDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public BucketSortAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
@@ -320,24 +312,18 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 public sealed partial class BucketSortAggregationDescriptor : SerializableDescriptor<BucketSortAggregationDescriptor>
 {
 	internal BucketSortAggregationDescriptor(Action<BucketSortAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public BucketSortAggregationDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public BucketSortAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,55 +25,40 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class PhraseSuggester
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("collate")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? Collate { get; set; }
-
 	[JsonInclude, JsonPropertyName("confidence")]
 	public double? Confidence { get; set; }
-
 	[JsonInclude, JsonPropertyName("direct_generator")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("force_unigrams")]
 	public bool? ForceUnigrams { get; set; }
-
 	[JsonInclude, JsonPropertyName("gram_size")]
 	public int? GramSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? Highlight { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_errors")]
 	public double? MaxErrors { get; set; }
-
 	[JsonInclude, JsonPropertyName("real_word_error_likelihood")]
 	public double? RealWordErrorLikelihood { get; set; }
-
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
-
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("smoothing")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? Smoothing { get; set; }
-
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
-
 	[JsonInclude, JsonPropertyName("token_limit")]
 	public int? TokenLimit { get; set; }
 
@@ -81,58 +68,35 @@ public sealed partial class PhraseSuggester
 public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableDescriptor<PhraseSuggesterDescriptor<TDocument>>
 {
 	internal PhraseSuggesterDescriptor(Action<PhraseSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PhraseSuggesterDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-
 	private DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
-
 	private Action<DirectGeneratorDescriptor<TDocument>> DirectGeneratorDescriptorAction { get; set; }
-
 	private Action<DirectGeneratorDescriptor<TDocument>>[] DirectGeneratorDescriptorActions { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
-
 	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
-
 	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
-
 	private double? ConfidenceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private bool? ForceUnigramsValue { get; set; }
-
 	private int? GramSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? HighlightValue { get; set; }
-
 	private PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private double? MaxErrorsValue { get; set; }
-
 	private double? RealWordErrorLikelihoodValue { get; set; }
-
 	private string? SeparatorValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
-
 	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
-
 	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
-
 	private string? TextValue { get; set; }
-
 	private int? TokenLimitValue { get; set; }
 
 	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)
@@ -478,58 +442,35 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<PhraseSuggesterDescriptor>
 {
 	internal PhraseSuggesterDescriptor(Action<PhraseSuggesterDescriptor> configure) => configure.Invoke(this);
+
 	public PhraseSuggesterDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-
 	private DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
-
 	private Action<DirectGeneratorDescriptor> DirectGeneratorDescriptorAction { get; set; }
-
 	private Action<DirectGeneratorDescriptor>[] DirectGeneratorDescriptorActions { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
-
 	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
-
 	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
-
 	private double? ConfidenceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private bool? ForceUnigramsValue { get; set; }
-
 	private int? GramSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? HighlightValue { get; set; }
-
 	private PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private double? MaxErrorsValue { get; set; }
-
 	private double? RealWordErrorLikelihoodValue { get; set; }
-
 	private string? SeparatorValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
-
 	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
-
 	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
-
 	private string? TextValue { get; set; }
-
 	private int? TokenLimitValue { get; set; }
 
 	public PhraseSuggesterDescriptor DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? directGenerator)

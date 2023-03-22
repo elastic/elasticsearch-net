@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,70 +25,52 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class WildcardProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "wildcard";
 }
 
 public sealed partial class WildcardPropertyDescriptor<TDocument> : SerializableDescriptor<WildcardPropertyDescriptor<TDocument>>, IBuildableDescriptor<WildcardProperty>
 {
 	internal WildcardPropertyDescriptor(Action<WildcardPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public WildcardPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public WildcardPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -263,28 +247,20 @@ public sealed partial class WildcardPropertyDescriptor<TDocument> : Serializable
 public sealed partial class WildcardPropertyDescriptor : SerializableDescriptor<WildcardPropertyDescriptor>, IBuildableDescriptor<WildcardProperty>
 {
 	internal WildcardPropertyDescriptor(Action<WildcardPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public WildcardPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private string? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public WildcardPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)

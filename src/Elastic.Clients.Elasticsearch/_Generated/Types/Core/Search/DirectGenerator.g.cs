@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class DirectGenerator
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_inspections")]
 	public float? MaxInspections { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public string? PostFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("pre_filter")]
 	public string? PreFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
@@ -64,30 +56,21 @@ public sealed partial class DirectGenerator
 public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableDescriptor<DirectGeneratorDescriptor<TDocument>>
 {
 	internal DirectGeneratorDescriptor(Action<DirectGeneratorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DirectGeneratorDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxEditsValue { get; set; }
-
 	private float? MaxInspectionsValue { get; set; }
-
 	private float? MaxTermFreqValue { get; set; }
-
 	private float? MinDocFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private string? PostFilterValue { get; set; }
-
 	private string? PreFilterValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
 
 	public DirectGeneratorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
@@ -234,30 +217,21 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<DirectGeneratorDescriptor>
 {
 	internal DirectGeneratorDescriptor(Action<DirectGeneratorDescriptor> configure) => configure.Invoke(this);
+
 	public DirectGeneratorDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxEditsValue { get; set; }
-
 	private float? MaxInspectionsValue { get; set; }
-
 	private float? MaxTermFreqValue { get; set; }
-
 	private float? MinDocFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private string? PostFilterValue { get; set; }
-
 	private string? PreFilterValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
 
 	public DirectGeneratorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)

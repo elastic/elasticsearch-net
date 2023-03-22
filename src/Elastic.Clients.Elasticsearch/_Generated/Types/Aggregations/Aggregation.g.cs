@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,12 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(AggregationConverter))]
 public sealed partial class Aggregation
 {
 	internal Aggregation(ISearchAggregation variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+
 	internal ISearchAggregation Variant { get; }
 }
 
@@ -297,6 +300,7 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 public sealed partial class AggregationDescriptor<TDocument> : SerializableDescriptor<AggregationDescriptor<TDocument>>
 {
 	internal AggregationDescriptor(Action<AggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public AggregationDescriptor() : base()
 	{
 	}
@@ -530,6 +534,7 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 public sealed partial class AggregationDescriptor : SerializableDescriptor<AggregationDescriptor>
 {
 	internal AggregationDescriptor(Action<AggregationDescriptor> configure) => configure.Invoke(this);
+
 	public AggregationDescriptor() : base()
 	{
 	}
