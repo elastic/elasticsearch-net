@@ -30,6 +30,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <summary>
+/// <para>A latitude/longitude as a 2 dimensional point. It can be represented in various ways:<br/>- as a `{lat, long}` object<br/>- as a geo hash value<br/>- as a `[lon, lat]` array<br/>- as a string in `"<lat>, <lon>"` or WKT point formats</para>
+/// </summary>
 [JsonConverter(typeof(GeoLocationConverter))]
 public sealed partial class GeoLocation : IComplexUnion<GeoLocation.Kind>
 {
