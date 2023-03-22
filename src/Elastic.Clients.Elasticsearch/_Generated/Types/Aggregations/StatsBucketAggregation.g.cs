@@ -42,6 +42,18 @@ internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucke
 		{
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
+				if (reader.ValueTextEquals("buckets_path"))
+				{
+					reader.Read();
+					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?>(ref reader, options);
+					if (value is not null)
+					{
+						agg.BucketsPath = value;
+					}
+
+					continue;
+				}
+
 				if (reader.ValueTextEquals("format"))
 				{
 					reader.Read();
@@ -93,6 +105,12 @@ internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucke
 		writer.WriteStartObject();
 		writer.WritePropertyName("stats_bucket");
 		writer.WriteStartObject();
+		if (value.BucketsPath is not null)
+		{
+			writer.WritePropertyName("buckets_path");
+			JsonSerializer.Serialize(writer, value.BucketsPath, options);
+		}
+
 		if (!string.IsNullOrEmpty(value.Format))
 		{
 			writer.WritePropertyName("format");
@@ -125,6 +143,7 @@ public sealed partial class StatsBucketAggregation : SearchAggregation
 	{
 	}
 
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
@@ -139,9 +158,16 @@ public sealed partial class StatsBucketAggregationDescriptor : SerializableDescr
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+
+	public StatsBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? bucketsPath)
+	{
+		BucketsPathValue = bucketsPath;
+		return Self;
+	}
 
 	public StatsBucketAggregationDescriptor Format(string? format)
 	{
@@ -166,6 +192,12 @@ public sealed partial class StatsBucketAggregationDescriptor : SerializableDescr
 		writer.WriteStartObject();
 		writer.WritePropertyName("stats_bucket");
 		writer.WriteStartObject();
+		if (BucketsPathValue is not null)
+		{
+			writer.WritePropertyName("buckets_path");
+			JsonSerializer.Serialize(writer, BucketsPathValue, options);
+		}
+
 		if (!string.IsNullOrEmpty(FormatValue))
 		{
 			writer.WritePropertyName("format");
