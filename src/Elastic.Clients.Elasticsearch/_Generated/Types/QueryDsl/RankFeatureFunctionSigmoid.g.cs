@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class RankFeatureFunctionSigmoid
 {
 	[JsonInclude, JsonPropertyName("exponent")]
 	public float Exponent { get; set; }
-
 	[JsonInclude, JsonPropertyName("pivot")]
 	public float Pivot { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class RankFeatureFunctionSigmoid
 public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableDescriptor<RankFeatureFunctionSigmoidDescriptor>
 {
 	internal RankFeatureFunctionSigmoidDescriptor(Action<RankFeatureFunctionSigmoidDescriptor> configure) => configure.Invoke(this);
+
 	public RankFeatureFunctionSigmoidDescriptor() : base()
 	{
 	}
 
 	private float ExponentValue { get; set; }
-
 	private float PivotValue { get; set; }
 
 	public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)

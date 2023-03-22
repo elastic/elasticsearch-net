@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(SpanQueryConverter))]
 public sealed partial class SpanQuery : SearchQuery
 {
@@ -41,7 +43,6 @@ public sealed partial class SpanQuery : SearchQuery
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static SpanQuery FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("field_masking_span", spanFieldMaskingQuery);
@@ -180,20 +181,17 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescriptor<SpanQueryDescriptor<TDocument>>
 {
 	internal SpanQueryDescriptor(Action<SpanQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanQueryDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private SpanQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SpanQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -229,6 +227,7 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 	public SpanQueryDescriptor<TDocument> SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 	public SpanQueryDescriptor<TDocument> SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public SpanQueryDescriptor<TDocument> SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -254,20 +253,17 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQueryDescriptor>
 {
 	internal SpanQueryDescriptor(Action<SpanQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanQueryDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private SpanQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private SpanQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -312,6 +308,7 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 	public SpanQueryDescriptor SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public SpanQueryDescriptor SpanWithin(Action<SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
 	public SpanQueryDescriptor SpanWithin<TDocument>(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

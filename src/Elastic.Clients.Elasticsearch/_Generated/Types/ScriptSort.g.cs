@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class ScriptSort
 {
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-
 	[JsonInclude, JsonPropertyName("nested")]
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-
 	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
 
@@ -48,22 +46,17 @@ public sealed partial class ScriptSort
 public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescriptor<ScriptSortDescriptor<TDocument>>
 {
 	internal ScriptSortDescriptor(Action<ScriptSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ScriptSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-
 	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-
 	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
 	public ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
@@ -160,22 +153,17 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 public sealed partial class ScriptSortDescriptor : SerializableDescriptor<ScriptSortDescriptor>
 {
 	internal ScriptSortDescriptor(Action<ScriptSortDescriptor> configure) => configure.Invoke(this);
+
 	public ScriptSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-
 	private NestedSortValueDescriptor NestedDescriptor { get; set; }
-
 	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
 	public ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)

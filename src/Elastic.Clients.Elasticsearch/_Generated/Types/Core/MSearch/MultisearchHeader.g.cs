@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,72 +25,59 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
+
+/// <summary>
+/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
+/// </summary>
 public sealed partial class MultisearchHeader
 {
 	[JsonInclude, JsonPropertyName("allow_no_indices")]
 	public bool? AllowNoIndices { get; set; }
-
 	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
 	public bool? AllowPartialSearchResults { get; set; }
-
 	[JsonInclude, JsonPropertyName("ccs_minimize_roundtrips")]
 	public bool? CcsMinimizeRoundtrips { get; set; }
-
 	[JsonInclude, JsonPropertyName("expand_wildcards")]
 	[JsonConverter(typeof(ExpandWildcardsConverter))]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_throttled")]
 	public bool? IgnoreThrottled { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_unavailable")]
 	public bool? IgnoreUnavailable { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Indices? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
-
 	[JsonInclude, JsonPropertyName("request_cache")]
 	public bool? RequestCache { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_type")]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 }
 
+/// <summary>
+/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
+/// </summary>
 public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor<MultisearchHeaderDescriptor>
 {
 	internal MultisearchHeaderDescriptor(Action<MultisearchHeaderDescriptor> configure) => configure.Invoke(this);
+
 	public MultisearchHeaderDescriptor() : base()
 	{
 	}
 
 	private bool? AllowNoIndicesValue { get; set; }
-
 	private bool? AllowPartialSearchResultsValue { get; set; }
-
 	private bool? CcsMinimizeRoundtripsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcardsValue { get; set; }
-
 	private bool? IgnoreThrottledValue { get; set; }
-
 	private bool? IgnoreUnavailableValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndexValue { get; set; }
-
 	private string? PreferenceValue { get; set; }
-
 	private bool? RequestCacheValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SearchType? SearchTypeValue { get; set; }
 
 	public MultisearchHeaderDescriptor AllowNoIndices(bool? allowNoIndices = true)

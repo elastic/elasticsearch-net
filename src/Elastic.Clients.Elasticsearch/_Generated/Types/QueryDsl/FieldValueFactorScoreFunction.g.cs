@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class FieldValueFactorScoreFunction
 {
 	[JsonInclude, JsonPropertyName("factor")]
 	public double? Factor { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
-
 	[JsonInclude, JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 
@@ -45,16 +44,14 @@ public sealed partial class FieldValueFactorScoreFunction
 public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor<TDocument>>
 {
 	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FieldValueFactorScoreFunctionDescriptor() : base()
 	{
 	}
 
 	private double? FactorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
 
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? factor)
@@ -117,16 +114,14 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 public sealed partial class FieldValueFactorScoreFunctionDescriptor : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor>
 {
 	internal FieldValueFactorScoreFunctionDescriptor(Action<FieldValueFactorScoreFunctionDescriptor> configure) => configure.Invoke(this);
+
 	public FieldValueFactorScoreFunctionDescriptor() : base()
 	{
 	}
 
 	private double? FactorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? ModifierValue { get; set; }
 
 	public FieldValueFactorScoreFunctionDescriptor Factor(double? factor)

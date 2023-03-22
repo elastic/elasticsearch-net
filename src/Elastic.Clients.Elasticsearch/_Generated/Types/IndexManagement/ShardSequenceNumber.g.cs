@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class ShardSequenceNumber
 {
 	[JsonInclude, JsonPropertyName("global_checkpoint")]
 	public long GlobalCheckpoint { get; init; }
-
 	[JsonInclude, JsonPropertyName("local_checkpoint")]
 	public long LocalCheckpoint { get; init; }
-
 	[JsonInclude, JsonPropertyName("max_seq_no")]
 	public long MaxSeqNo { get; init; }
 }

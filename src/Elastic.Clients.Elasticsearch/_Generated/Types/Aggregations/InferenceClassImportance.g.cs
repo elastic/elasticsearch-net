@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class InferenceClassImportance
 {
 	[JsonInclude, JsonPropertyName("class_name")]
 	public string ClassName { get; init; }
-
 	[JsonInclude, JsonPropertyName("importance")]
 	public double Importance { get; init; }
 }

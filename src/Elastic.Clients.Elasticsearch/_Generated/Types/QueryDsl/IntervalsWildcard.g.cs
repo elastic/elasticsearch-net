@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsWildcard
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
-
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class IntervalsWildcard
 public sealed partial class IntervalsWildcardDescriptor<TDocument> : SerializableDescriptor<IntervalsWildcardDescriptor<TDocument>>
 {
 	internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsWildcardDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private string PatternValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsWildcardDescriptor<TDocument> Analyzer(string? analyzer)
@@ -98,14 +97,13 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 public sealed partial class IntervalsWildcardDescriptor : SerializableDescriptor<IntervalsWildcardDescriptor>
 {
 	internal IntervalsWildcardDescriptor(Action<IntervalsWildcardDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsWildcardDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private string PatternValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsWildcardDescriptor Analyzer(string? analyzer)

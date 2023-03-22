@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,26 +25,35 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+/// <summary>
+/// <para>Expected Reciprocal Rank (ERR)</para>
+/// </summary>
 public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
+	/// <summary>
+	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("maximum_relevance")]
 	public int MaximumRelevance { get; set; }
 }
 
+/// <summary>
+/// <para>Expected Reciprocal Rank (ERR)</para>
+/// </summary>
 public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricExpectedReciprocalRankDescriptor>
 {
 	internal RankEvalMetricExpectedReciprocalRankDescriptor(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricExpectedReciprocalRankDescriptor() : base()
 	{
 	}
 
 	private int? kValue { get; set; }
-
 	private int MaximumRelevanceValue { get; set; }
 
 	public RankEvalMetricExpectedReciprocalRankDescriptor k(int? k)
@@ -51,6 +62,9 @@ public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The highest relevance grade used in the user-supplied relevance judgments.</para>
+	/// </summary>
 	public RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int maximumRelevance)
 	{
 		MaximumRelevanceValue = maximumRelevance;

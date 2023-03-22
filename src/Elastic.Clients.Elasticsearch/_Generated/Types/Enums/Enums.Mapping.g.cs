@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 [JsonConverter(typeof(DynamicMappingConverter))]
 public enum DynamicMapping
 {
@@ -54,8 +56,7 @@ internal sealed class DynamicMappingConverter : JsonConverter<DynamicMapping>
 				return DynamicMapping.False;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DynamicMapping value, JsonSerializerOptions options)
@@ -262,8 +263,7 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.AggregateMetricDouble;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldType value, JsonSerializerOptions options)
@@ -430,8 +430,7 @@ internal sealed class GeoOrientationConverter : JsonConverter<GeoOrientation>
 				return GeoOrientation.Left;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoOrientation value, JsonSerializerOptions options)
@@ -472,8 +471,7 @@ internal sealed class GeoStrategyConverter : JsonConverter<GeoStrategy>
 				return GeoStrategy.Recursive;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoStrategy value, JsonSerializerOptions options)
@@ -522,8 +520,7 @@ internal sealed class IndexOptionsConverter : JsonConverter<IndexOptions>
 				return IndexOptions.Docs;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IndexOptions value, JsonSerializerOptions options)
@@ -570,8 +567,7 @@ internal sealed class MatchTypeConverter : JsonConverter<MatchType>
 				return MatchType.Regex;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, MatchType value, JsonSerializerOptions options)
@@ -612,8 +608,7 @@ internal sealed class OnScriptErrorConverter : JsonConverter<OnScriptError>
 				return OnScriptError.Continue;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, OnScriptError value, JsonSerializerOptions options)
@@ -674,8 +669,7 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 				return RuntimeFieldType.Boolean;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, RuntimeFieldType value, JsonSerializerOptions options)
@@ -712,6 +706,9 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 [JsonConverter(typeof(SourceFieldModeConverter))]
 public enum SourceFieldMode
 {
+	/// <summary>
+	/// <para>Instead of storing source documents on disk exactly as you send them,<br/> Elasticsearch can reconstruct source content on the fly upon retrieval.</para>
+	/// </summary>
 	[EnumMember(Value = "synthetic")]
 	Synthetic,
 	[EnumMember(Value = "stored")]
@@ -735,8 +732,7 @@ internal sealed class SourceFieldModeConverter : JsonConverter<SourceFieldMode>
 				return SourceFieldMode.Disabled;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SourceFieldMode value, JsonSerializerOptions options)
@@ -800,8 +796,7 @@ internal sealed class TermVectorOptionConverter : JsonConverter<TermVectorOption
 				return TermVectorOption.No;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermVectorOption value, JsonSerializerOptions options)
@@ -865,8 +860,7 @@ internal sealed class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMe
 				return TimeSeriesMetricType.Counter;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TimeSeriesMetricType value, JsonSerializerOptions options)

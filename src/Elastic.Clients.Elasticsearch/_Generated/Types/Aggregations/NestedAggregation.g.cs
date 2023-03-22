@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class NestedAggregationConverter : JsonConverter<NestedAggregation>
 {
 	public override NestedAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -117,34 +119,29 @@ internal sealed class NestedAggregationConverter : JsonConverter<NestedAggregati
 public sealed partial class NestedAggregation : SearchAggregation
 {
 	public NestedAggregation(string name) => Name = name;
+
 	internal NestedAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 }
 
 public sealed partial class NestedAggregationDescriptor<TDocument> : SerializableDescriptor<NestedAggregationDescriptor<TDocument>>
 {
 	internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public NestedAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 	public NestedAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -230,18 +227,15 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 public sealed partial class NestedAggregationDescriptor : SerializableDescriptor<NestedAggregationDescriptor>
 {
 	internal NestedAggregationDescriptor(Action<NestedAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public NestedAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
 
 	public NestedAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

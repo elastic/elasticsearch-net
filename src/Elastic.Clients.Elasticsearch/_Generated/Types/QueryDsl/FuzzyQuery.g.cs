@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 {
 	public override FuzzyQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -167,21 +169,13 @@ public sealed partial class FuzzyQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	public int? MaxExpansions { get; set; }
-
 	public int? PrefixLength { get; set; }
-
 	public string? Rewrite { get; set; }
-
 	public bool? Transpositions { get; set; }
-
 	public object Value { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(FuzzyQuery fuzzyQuery) => QueryDsl.Query.Fuzzy(fuzzyQuery);
@@ -190,6 +184,7 @@ public sealed partial class FuzzyQuery : SearchQuery
 public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptor<FuzzyQueryDescriptor<TDocument>>
 {
 	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal FuzzyQueryDescriptor() : base()
 	{
 	}
@@ -209,21 +204,13 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private bool? TranspositionsValue { get; set; }
-
 	private object ValueValue { get; set; }
 
 	public FuzzyQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -345,6 +332,7 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQueryDescriptor>
 {
 	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal FuzzyQueryDescriptor() : base()
 	{
 	}
@@ -357,21 +345,13 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string? RewriteValue { get; set; }
-
 	private bool? TranspositionsValue { get; set; }
-
 	private object ValueValue { get; set; }
 
 	public FuzzyQueryDescriptor QueryName(string? queryName)

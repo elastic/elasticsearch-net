@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
 [JsonConverter(typeof(UnassignedInformationReasonConverter))]
 public enum UnassignedInformationReason
 {
@@ -98,8 +100,7 @@ internal sealed class UnassignedInformationReasonConverter : JsonConverter<Unass
 				return UnassignedInformationReason.AllocationFailed;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)

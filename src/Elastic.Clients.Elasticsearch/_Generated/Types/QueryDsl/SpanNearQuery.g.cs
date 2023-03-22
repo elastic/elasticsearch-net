@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanNearQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
-
 	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
-
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 }
@@ -46,24 +44,18 @@ public sealed partial class SpanNearQuery : SearchQuery
 public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDescriptor<SpanNearQueryDescriptor<TDocument>>
 {
 	internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanNearQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? InOrderValue { get; set; }
-
 	private int? SlopValue { get; set; }
 
 	public SpanNearQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
@@ -191,24 +183,18 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<SpanNearQueryDescriptor>
 {
 	internal SpanNearQueryDescriptor(Action<SpanNearQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanNearQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
-
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
-
 	private Action<SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? InOrderValue { get; set; }
-
 	private int? SlopValue { get; set; }
 
 	public SpanNearQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)

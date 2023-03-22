@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class GlobalAggregationConverter : JsonConverter<GlobalAggregation>
 {
 	public override GlobalAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -100,30 +102,27 @@ internal sealed class GlobalAggregationConverter : JsonConverter<GlobalAggregati
 public sealed partial class GlobalAggregation : SearchAggregation
 {
 	public GlobalAggregation(string name) => Name = name;
+
 	internal GlobalAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class GlobalAggregationDescriptor<TDocument> : SerializableDescriptor<GlobalAggregationDescriptor<TDocument>>
 {
 	internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GlobalAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public GlobalAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -191,16 +190,14 @@ public sealed partial class GlobalAggregationDescriptor<TDocument> : Serializabl
 public sealed partial class GlobalAggregationDescriptor : SerializableDescriptor<GlobalAggregationDescriptor>
 {
 	internal GlobalAggregationDescriptor(Action<GlobalAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public GlobalAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public GlobalAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

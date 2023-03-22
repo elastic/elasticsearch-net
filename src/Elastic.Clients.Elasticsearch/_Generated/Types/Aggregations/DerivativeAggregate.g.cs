@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class DerivativeAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-
 	[JsonInclude, JsonPropertyName("normalized_value")]
 	public double? NormalizedValue { get; init; }
-
 	[JsonInclude, JsonPropertyName("normalized_value_as_string")]
 	public string? NormalizedValueAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }
-
 	[JsonInclude, JsonPropertyName("value_as_string")]
 	public string? ValueAsString { get; init; }
 }

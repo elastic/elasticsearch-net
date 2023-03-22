@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(IntervalsConverter))]
 public sealed partial class Intervals
 {
@@ -41,7 +43,6 @@ public sealed partial class Intervals
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static Intervals AllOf(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf intervalsAllOf) => new Intervals("all_of", intervalsAllOf);
@@ -147,20 +148,17 @@ internal sealed partial class IntervalsConverter : JsonConverter<Intervals>
 public sealed partial class IntervalsDescriptor<TDocument> : SerializableDescriptor<IntervalsDescriptor<TDocument>>
 {
 	internal IntervalsDescriptor(Action<IntervalsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -190,6 +188,7 @@ public sealed partial class IntervalsDescriptor<TDocument> : SerializableDescrip
 	public IntervalsDescriptor<TDocument> Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
 	public IntervalsDescriptor<TDocument> Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsDescriptor<TDocument> Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -215,20 +214,17 @@ public sealed partial class IntervalsDescriptor<TDocument> : SerializableDescrip
 public sealed partial class IntervalsDescriptor : SerializableDescriptor<IntervalsDescriptor>
 {
 	internal IntervalsDescriptor(Action<IntervalsDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -264,6 +260,7 @@ public sealed partial class IntervalsDescriptor : SerializableDescriptor<Interva
 	public IntervalsDescriptor Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsDescriptor Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
 	public IntervalsDescriptor Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

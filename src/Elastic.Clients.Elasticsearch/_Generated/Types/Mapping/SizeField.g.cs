@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class SizeField
 {
 	[JsonInclude, JsonPropertyName("enabled")]
@@ -34,6 +36,7 @@ public sealed partial class SizeField
 public sealed partial class SizeFieldDescriptor : SerializableDescriptor<SizeFieldDescriptor>
 {
 	internal SizeFieldDescriptor(Action<SizeFieldDescriptor> configure) => configure.Invoke(this);
+
 	public SizeFieldDescriptor() : base()
 	{
 	}

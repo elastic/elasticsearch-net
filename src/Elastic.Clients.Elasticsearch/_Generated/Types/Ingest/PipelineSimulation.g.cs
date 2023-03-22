@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class PipelineSimulation
 {
 	[JsonInclude, JsonPropertyName("doc")]
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; init; }
-
 	[JsonInclude, JsonPropertyName("processor_results")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
-
 	[JsonInclude, JsonPropertyName("processor_type")]
 	public string? ProcessorType { get; init; }
-
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status { get; init; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; init; }
 }

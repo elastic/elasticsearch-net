@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,26 +25,35 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+/// <summary>
+/// <para>Discounted cumulative gain (DCG)</para>
+/// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
 
+	/// <summary>
+	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("normalize")]
 	public bool? Normalize { get; set; }
 }
 
+/// <summary>
+/// <para>Discounted cumulative gain (DCG)</para>
+/// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptor<RankEvalMetricDiscountedCumulativeGainDescriptor>
 {
 	internal RankEvalMetricDiscountedCumulativeGainDescriptor(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricDiscountedCumulativeGainDescriptor() : base()
 	{
 	}
 
 	private int? kValue { get; set; }
-
 	private bool? NormalizeValue { get; set; }
 
 	public RankEvalMetricDiscountedCumulativeGainDescriptor k(int? k)
@@ -51,6 +62,9 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If set to true, this metric will calculate the Normalized DCG.</para>
+	/// </summary>
 	public RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? normalize = true)
 	{
 		NormalizeValue = normalize;

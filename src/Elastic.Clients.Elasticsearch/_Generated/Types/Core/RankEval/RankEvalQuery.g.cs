@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class RankEvalQuery
 {
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
@@ -37,16 +38,14 @@ public sealed partial class RankEvalQuery
 public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDescriptor<RankEvalQueryDescriptor<TDocument>>
 {
 	internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RankEvalQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
@@ -111,16 +110,14 @@ public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<RankEvalQueryDescriptor>
 {
 	internal RankEvalQueryDescriptor(Action<RankEvalQueryDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
