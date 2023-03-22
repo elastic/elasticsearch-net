@@ -63,7 +63,7 @@ public class FunctionScoreQueryUsageTests : QueryDslUsageTestsBase
 			new RandomScoreFunction { Seed = 1337, Field = "_seq_no" }, // For ease, when weight is not required, we can allow the implicit conversion to apply.
 			new RandomScoreFunction { Seed = "random_string", Field = "_seq_no" }, // For ease, when weight is not required, we can allow the implicit conversion to apply.
 			GetScriptScoreFunction(),
-			FunctionScore.WeightScore(1.0)
+			FunctionScore.WeightScore(5.0)
 		}
 	};
 
@@ -86,6 +86,6 @@ public class FunctionScoreQueryUsageTests : QueryDslUsageTestsBase
 					f => f.RandomScore(r => r.Seed(1337).Field("_seq_no")),
 					f => f.RandomScore(r => r.Seed("random_string").Field("_seq_no")),
 					f => f.ScriptScore(s => s.Script(new Script(new InlineScript("Math.log(2 + doc['numberOfCommits'].value)")))).Weight(1.0),
-					f => f.WeightScore(1.0)
+					f => f.WeightScore(5.0)
 				));
 }

@@ -292,7 +292,7 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 		}
 		else
 		{
-			throw new JsonException("Invalid container cannot be serialised");
+			throw new JsonException("Invalid container cannot be serialized");
 		}
 	}
 }
