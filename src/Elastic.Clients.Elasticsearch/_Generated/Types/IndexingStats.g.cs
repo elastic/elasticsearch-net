@@ -57,4 +57,6 @@ public sealed partial class IndexingStats
 	public long ThrottleTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("types")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; init; }
+	[JsonInclude, JsonPropertyName("write_load")]
+	public double? WriteLoad { get; init; }
 }
