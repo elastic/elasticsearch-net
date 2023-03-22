@@ -408,7 +408,11 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 				}
 
 			case "cumulative_sum":
-				throw new Exception("The aggregate in response is not yet supported.");
+				{
+					var agg = JsonSerializer.Deserialize<SimpleValueAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
 			case "derivative":
 				{
