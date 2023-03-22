@@ -15,14 +15,16 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class GetPipelineResponse : DictionaryResponse<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>
 {
 	public GetPipelineResponse(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> dictionary) : base(dictionary)

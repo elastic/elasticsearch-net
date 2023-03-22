@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(VariableWidthHistogramBucketConverter))]
 public sealed partial class VariableWidthHistogramBucket : AggregateDictionary
 {
@@ -34,22 +36,16 @@ public sealed partial class VariableWidthHistogramBucket : AggregateDictionary
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public double Key { get; init; }
-
 	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("max")]
 	public double Max { get; init; }
-
 	[JsonInclude, JsonPropertyName("max_as_string")]
 	public string? MaxAsString { get; init; }
-
 	[JsonInclude, JsonPropertyName("min")]
 	public double Min { get; init; }
-
 	[JsonInclude, JsonPropertyName("min_as_string")]
 	public string? MinAsString { get; init; }
 }
@@ -60,7 +56,7 @@ internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<Vari
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		double key = default;
 		string? keyAsString = default;
@@ -74,7 +70,7 @@ internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<Vari
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -127,16 +123,7 @@ internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<Vari
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new VariableWidthHistogramBucket(subAggs)
-		{
-			DocCount = docCount,
-			Key = key,
-			KeyAsString = keyAsString,
-			Max = max,
-			MaxAsString = maxAsString,
-			Min = min,
-			MinAsString = minAsString
-		};
+		return new VariableWidthHistogramBucket(subAggs) { DocCount = docCount, Key = key, KeyAsString = keyAsString, Max = max, MaxAsString = maxAsString, Min = min, MinAsString = minAsString };
 	}
 
 	public override void Write(Utf8JsonWriter writer, VariableWidthHistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class DateHistogramAggregationConverter : JsonConverter<DateHistogramAggregation>
 {
 	public override DateHistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -297,75 +299,50 @@ internal sealed class DateHistogramAggregationConverter : JsonConverter<DateHist
 public sealed partial class DateHistogramAggregation : SearchAggregation
 {
 	public DateHistogramAggregation(string name) => Name = name;
+
 	internal DateHistogramAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public int? MinDocCount { get; set; }
-
 	public DateTimeOffset? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
-
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-
 	public IDictionary<string, object>? Params { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	public string? TimeZone { get; set; }
 }
 
 public sealed partial class DateHistogramAggregationDescriptor<TDocument> : SerializableDescriptor<DateHistogramAggregationDescriptor<TDocument>>
 {
 	internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DateHistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MinDocCountValue { get; set; }
-
 	private DateTimeOffset? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
 
 	public DateHistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -571,38 +548,25 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 public sealed partial class DateHistogramAggregationDescriptor : SerializableDescriptor<DateHistogramAggregationDescriptor>
 {
 	internal DateHistogramAggregationDescriptor(Action<DateHistogramAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public DateHistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? FixedIntervalValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MinDocCountValue { get; set; }
-
 	private DateTimeOffset? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? OffsetValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
 
 	public DateHistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

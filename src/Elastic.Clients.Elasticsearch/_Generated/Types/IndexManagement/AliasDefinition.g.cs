@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class AliasDefinition
 {
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public string? IndexRouting { get; set; }
-
 	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
-
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public string? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public string? SearchRouting { get; set; }
 }
@@ -49,24 +46,18 @@ public sealed partial class AliasDefinition
 public sealed partial class AliasDefinitionDescriptor<TDocument> : SerializableDescriptor<AliasDefinitionDescriptor<TDocument>>
 {
 	internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public AliasDefinitionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private string? IndexRoutingValue { get; set; }
-
 	private bool? IsHiddenValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private string? RoutingValue { get; set; }
-
 	private string? SearchRoutingValue { get; set; }
 
 	public AliasDefinitionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -179,24 +170,18 @@ public sealed partial class AliasDefinitionDescriptor<TDocument> : SerializableD
 public sealed partial class AliasDefinitionDescriptor : SerializableDescriptor<AliasDefinitionDescriptor>
 {
 	internal AliasDefinitionDescriptor(Action<AliasDefinitionDescriptor> configure) => configure.Invoke(this);
+
 	public AliasDefinitionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private string? IndexRoutingValue { get; set; }
-
 	private bool? IsHiddenValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private string? RoutingValue { get; set; }
-
 	private string? SearchRoutingValue { get; set; }
 
 	public AliasDefinitionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)

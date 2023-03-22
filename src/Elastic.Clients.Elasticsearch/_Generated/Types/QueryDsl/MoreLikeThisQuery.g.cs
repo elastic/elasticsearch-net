@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,71 +25,51 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class MoreLikeThisQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost_terms")]
 	public double? BoostTerms { get; set; }
-
 	[JsonInclude, JsonPropertyName("fail_on_unsupported_field")]
 	public bool? FailOnUnsupportedField { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("include")]
 	public bool? Include { get; set; }
-
 	[JsonInclude, JsonPropertyName("like"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_doc_freq")]
 	public int? MaxDocFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_query_terms")]
 	public int? MaxQueryTerms { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_word_length")]
 	public int? MaxWordLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public int? MinDocFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_term_freq")]
 	public int? MinTermFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("stop_words")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? StopWords { get; set; }
-
 	[JsonInclude, JsonPropertyName("unlike"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
-
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
@@ -97,50 +79,31 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptor<MoreLikeThisQueryDescriptor<TDocument>>
 {
 	internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MoreLikeThisQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double? BoostTermsValue { get; set; }
-
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private bool? IncludeValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
-
 	private int? MaxDocFreqValue { get; set; }
-
 	private int? MaxQueryTermsValue { get; set; }
-
 	private int? MaxWordLengthValue { get; set; }
-
 	private int? MinDocFreqValue { get; set; }
-
 	private int? MinTermFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private ICollection<string>? StopWordsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
-
 	private long? VersionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -401,50 +364,31 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor<MoreLikeThisQueryDescriptor>
 {
 	internal MoreLikeThisQueryDescriptor(Action<MoreLikeThisQueryDescriptor> configure) => configure.Invoke(this);
+
 	public MoreLikeThisQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double? BoostTermsValue { get; set; }
-
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-
 	private Fields? FieldsValue { get; set; }
-
 	private bool? IncludeValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
-
 	private int? MaxDocFreqValue { get; set; }
-
 	private int? MaxQueryTermsValue { get; set; }
-
 	private int? MaxWordLengthValue { get; set; }
-
 	private int? MinDocFreqValue { get; set; }
-
 	private int? MinTermFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private ICollection<string>? StopWordsValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
-
 	private long? VersionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	public MoreLikeThisQueryDescriptor QueryName(string? queryName)

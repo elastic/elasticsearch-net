@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 {
 	public override MatchQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -239,33 +241,19 @@ public sealed partial class MatchQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public string? Analyzer { get; set; }
-
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-
 	public float? Boost { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	public string? FuzzyRewrite { get; set; }
-
 	public bool? FuzzyTranspositions { get; set; }
-
 	public bool? Lenient { get; set; }
-
 	public int? MaxExpansions { get; set; }
-
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
-
 	public int? PrefixLength { get; set; }
-
 	public string Query { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(MatchQuery matchQuery) => QueryDsl.Query.Match(matchQuery);
@@ -274,6 +262,7 @@ public sealed partial class MatchQuery : SearchQuery
 public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescriptor<MatchQueryDescriptor<TDocument>>
 {
 	internal MatchQueryDescriptor(Action<MatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal MatchQueryDescriptor() : base()
 	{
 	}
@@ -293,33 +282,19 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -513,6 +488,7 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQueryDescriptor>
 {
 	internal MatchQueryDescriptor(Action<MatchQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal MatchQueryDescriptor() : base()
 	{
 	}
@@ -525,33 +501,19 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchQueryDescriptor QueryName(string? queryName)

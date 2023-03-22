@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,65 +25,49 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class ObjectProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "object";
 }
 
 public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDescriptor<ObjectPropertyDescriptor<TDocument>>, IBuildableDescriptor<ObjectProperty>
 {
 	internal ObjectPropertyDescriptor(Action<ObjectPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ObjectPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public ObjectPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -245,26 +231,19 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<ObjectPropertyDescriptor>, IBuildableDescriptor<ObjectProperty>
 {
 	internal ObjectPropertyDescriptor(Action<ObjectPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public ObjectPropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private bool? EnabledValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public ObjectPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,55 +25,40 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class InnerHits
 {
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
-
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
-
 	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
-
 	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-
 	[JsonInclude, JsonPropertyName("stored_field")]
 	public Elastic.Clients.Elasticsearch.Fields? StoredField { get; set; }
-
 	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
 }
@@ -79,60 +66,36 @@ public sealed partial class InnerHits
 public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescriptor<InnerHitsDescriptor<TDocument>>
 {
 	internal InnerHitsDescriptor(Action<InnerHitsDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InnerHitsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-
 	private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-
 	private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public InnerHitsDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
@@ -501,60 +464,36 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHitsDescriptor>
 {
 	internal InnerHitsDescriptor(Action<InnerHitsDescriptor> configure) => configure.Invoke(this);
+
 	public InnerHitsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-
 	private FieldCollapseDescriptor CollapseDescriptor { get; set; }
-
 	private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
-
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-
 	private HighlightDescriptor HighlightDescriptor { get; set; }
-
 	private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
-
 	private bool? ExplainValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private int? FromValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
-
 	private bool? SeqNoPrimaryTermValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldValue { get; set; }
-
 	private bool? TrackScoresValue { get; set; }
-
 	private bool? VersionValue { get; set; }
 
 	public InnerHitsDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)

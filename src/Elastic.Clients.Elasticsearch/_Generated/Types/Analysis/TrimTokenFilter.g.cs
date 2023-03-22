@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class TrimTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "trim";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -37,6 +39,7 @@ public sealed partial class TrimTokenFilter : ITokenFilter
 public sealed partial class TrimTokenFilterDescriptor : SerializableDescriptor<TrimTokenFilterDescriptor>, IBuildableDescriptor<TrimTokenFilter>
 {
 	internal TrimTokenFilterDescriptor(Action<TrimTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public TrimTokenFilterDescriptor() : base()
 	{
 	}

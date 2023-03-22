@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class HistogramAggregationConverter : JsonConverter<HistogramAggregation>
 {
 	public override HistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -243,63 +245,44 @@ internal sealed class HistogramAggregationConverter : JsonConverter<HistogramAgg
 public sealed partial class HistogramAggregation : SearchAggregation
 {
 	public HistogramAggregation(string name) => Name = name;
+
 	internal HistogramAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public double? Interval { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public int? MinDocCount { get; set; }
-
 	public double? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public double? Offset { get; set; }
-
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class HistogramAggregationDescriptor<TDocument> : SerializableDescriptor<HistogramAggregationDescriptor<TDocument>>
 {
 	internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public HistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private double? IntervalValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MinDocCountValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private double? OffsetValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -469,32 +452,22 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 public sealed partial class HistogramAggregationDescriptor : SerializableDescriptor<HistogramAggregationDescriptor>
 {
 	internal HistogramAggregationDescriptor(Action<HistogramAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public HistogramAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private double? IntervalValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MinDocCountValue { get; set; }
-
 	private double? MissingValue { get; set; }
-
 	private double? OffsetValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

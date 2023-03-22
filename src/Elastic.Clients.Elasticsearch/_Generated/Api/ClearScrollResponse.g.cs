@@ -15,19 +15,20 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class ClearScrollResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("num_freed")]
 	public int NumFreed { get; init; }
-
 	[JsonInclude, JsonPropertyName("succeeded")]
 	public bool Succeeded { get; init; }
 }

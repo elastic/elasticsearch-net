@@ -15,19 +15,24 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class ForcemergeResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 
+	/// <summary>
+	/// <para>task contains a task id returned when wait_for_completion=false,<br/>you can use the task_id to get the status of the task at _tasks/<task_id></para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("task")]
 	public string? Task { get; init; }
 }

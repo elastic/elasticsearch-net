@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public partial class Analyzers : IsADictionary<string, IAnalyzer>
 {
 	public Analyzers()
@@ -40,8 +42,8 @@ public partial class Analyzers : IsADictionary<string, IAnalyzer>
 
 	public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(Sanitize(name), analyzer);
 	public bool TryGetAnalyzer(string name, [NotNullWhen(returnValue: true)] out IAnalyzer analyzer) => BackingDictionary.TryGetValue(Sanitize(name), out analyzer);
-	public bool TryGetAnalyzer<T>(string name, [NotNullWhen(returnValue: true)] out T? analyzer)
-		where T : class, IAnalyzer
+
+	public bool TryGetAnalyzer<T>(string name, [NotNullWhen(returnValue: true)] out T? analyzer) where T : class, IAnalyzer
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{

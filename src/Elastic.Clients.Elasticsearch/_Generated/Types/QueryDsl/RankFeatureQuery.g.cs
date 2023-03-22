@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class RankFeatureQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("linear")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
-
 	[JsonInclude, JsonPropertyName("log")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
-
 	[JsonInclude, JsonPropertyName("saturation")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
-
 	[JsonInclude, JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
@@ -54,38 +50,25 @@ public sealed partial class RankFeatureQuery : SearchQuery
 public sealed partial class RankFeatureQueryDescriptor<TDocument> : SerializableDescriptor<RankFeatureQueryDescriptor<TDocument>>
 {
 	internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RankFeatureQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; set; }
-
 	private RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? LogValue { get; set; }
-
 	private RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; set; }
-
 	private RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; set; }
-
 	private RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
 	public RankFeatureQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -296,38 +279,25 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<RankFeatureQueryDescriptor>
 {
 	internal RankFeatureQueryDescriptor(Action<RankFeatureQueryDescriptor> configure) => configure.Invoke(this);
+
 	public RankFeatureQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; set; }
-
 	private RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? LogValue { get; set; }
-
 	private RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; set; }
-
 	private RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; set; }
-
 	private RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
-
 	private Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
 	public RankFeatureQueryDescriptor QueryName(string? queryName)

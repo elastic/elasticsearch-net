@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,29 +25,25 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class FingerprintAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int MaxOutputSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool PreserveOriginal { get; set; }
-
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -53,20 +51,16 @@ public sealed partial class FingerprintAnalyzer : IAnalyzer
 public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescriptor<FingerprintAnalyzerDescriptor>, IBuildableDescriptor<FingerprintAnalyzer>
 {
 	internal FingerprintAnalyzerDescriptor(Action<FingerprintAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public FingerprintAnalyzerDescriptor() : base()
 	{
 	}
 
 	private int MaxOutputSizeValue { get; set; }
-
 	private bool PreserveOriginalValue { get; set; }
-
 	private string SeparatorValue { get; set; }
-
 	private ICollection<string>? StopwordsValue { get; set; }
-
 	private string? StopwordsPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public FingerprintAnalyzerDescriptor MaxOutputSize(int maxOutputSize)

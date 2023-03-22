@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,26 +27,35 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
+
 public sealed class DeleteAsyncSearchRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncSearchRequestParameters>
 {
 	public DeleteAsyncSearchRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchRequestParameters>
 {
 	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -53,9 +64,12 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public DeleteAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -67,9 +81,13 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 }
 
+/// <summary>
+/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptor<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
 {
 	internal DeleteAsyncSearchRequestDescriptor(Action<DeleteAsyncSearchRequestDescriptor> configure) => configure.Invoke(this);
+
 	public DeleteAsyncSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -78,9 +96,12 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

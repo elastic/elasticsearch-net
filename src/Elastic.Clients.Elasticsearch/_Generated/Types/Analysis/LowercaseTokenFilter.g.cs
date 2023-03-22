@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class LowercaseTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "lowercase";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +42,12 @@ public sealed partial class LowercaseTokenFilter : ITokenFilter
 public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescriptor<LowercaseTokenFilterDescriptor>, IBuildableDescriptor<LowercaseTokenFilter>
 {
 	internal LowercaseTokenFilterDescriptor(Action<LowercaseTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public LowercaseTokenFilterDescriptor() : base()
 	{
 	}
 
 	private string? LanguageValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public LowercaseTokenFilterDescriptor Language(string? language)

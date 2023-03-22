@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,30 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class AddAction
 {
 	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
-
 	[JsonInclude, JsonPropertyName("aliases"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
-
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
 	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
-
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
-
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 
@@ -66,34 +58,23 @@ public sealed partial class AddAction
 public sealed partial class AddActionDescriptor<TDocument> : SerializableDescriptor<AddActionDescriptor<TDocument>>
 {
 	internal AddActionDescriptor(Action<AddActionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public AddActionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-
 	private bool? IsHiddenValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private bool? MustExistValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
 	public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -266,34 +247,23 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActionDescriptor>
 {
 	internal AddActionDescriptor(Action<AddActionDescriptor> configure) => configure.Invoke(this);
+
 	public AddActionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? IndexRoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-
 	private bool? IsHiddenValue { get; set; }
-
 	private bool? IsWriteIndexValue { get; set; }
-
 	private bool? MustExistValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
 	public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
