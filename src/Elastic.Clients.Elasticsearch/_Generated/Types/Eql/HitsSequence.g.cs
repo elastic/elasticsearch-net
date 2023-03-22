@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
+
 public sealed partial class HitsSequence<TEvent>
 {
+	/// <summary>
+	/// <para>Contains events matching the query. Each object represents a matching event.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> Events { get; init; }
 
+	/// <summary>
+	/// <para>Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("join_keys")]
 	public IReadOnlyCollection<object> JoinKeys { get; init; }
 }

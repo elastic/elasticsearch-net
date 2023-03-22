@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class LimitTokenCountTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("consume_all_tokens")]
 	public bool? ConsumeAllTokens { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_token_count")]
 	public int? MaxTokenCount { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "limit";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class LimitTokenCountTokenFilter : ITokenFilter
 public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableDescriptor<LimitTokenCountTokenFilterDescriptor>, IBuildableDescriptor<LimitTokenCountTokenFilter>
 {
 	internal LimitTokenCountTokenFilterDescriptor(Action<LimitTokenCountTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public LimitTokenCountTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool? ConsumeAllTokensValue { get; set; }
-
 	private int? MaxTokenCountValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? consumeAllTokens = true)

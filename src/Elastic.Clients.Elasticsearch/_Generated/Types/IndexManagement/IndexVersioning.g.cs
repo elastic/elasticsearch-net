@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexVersioning
 {
 	[JsonInclude, JsonPropertyName("created")]
 	public string? Created { get; set; }
-
 	[JsonInclude, JsonPropertyName("created_string")]
 	public string? CreatedString { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class IndexVersioning
 public sealed partial class IndexVersioningDescriptor : SerializableDescriptor<IndexVersioningDescriptor>
 {
 	internal IndexVersioningDescriptor(Action<IndexVersioningDescriptor> configure) => configure.Invoke(this);
+
 	public IndexVersioningDescriptor() : base()
 	{
 	}
 
 	private string? CreatedValue { get; set; }
-
 	private string? CreatedStringValue { get; set; }
 
 	public IndexVersioningDescriptor Created(string? created)

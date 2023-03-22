@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class MultiTermLookup
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("missing")]
 	public FieldValue? Missing { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class MultiTermLookup
 public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableDescriptor<MultiTermLookupDescriptor<TDocument>>
 {
 	internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MultiTermLookupDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
 
 	public MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
@@ -81,12 +82,12 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<MultiTermLookupDescriptor>
 {
 	internal MultiTermLookupDescriptor(Action<MultiTermLookupDescriptor> configure) => configure.Invoke(this);
+
 	public MultiTermLookupDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
 
 	public MultiTermLookupDescriptor Field(Elastic.Clients.Elasticsearch.Field field)

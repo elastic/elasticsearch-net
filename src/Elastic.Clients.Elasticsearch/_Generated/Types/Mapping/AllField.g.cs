@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,37 +25,28 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class AllField
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool Enabled { get; set; }
-
 	[JsonInclude, JsonPropertyName("omit_norms")]
 	public bool OmitNorms { get; set; }
-
 	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string SearchAnalyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool Store { get; set; }
-
 	[JsonInclude, JsonPropertyName("store_term_vector_offsets")]
 	public bool StoreTermVectorOffsets { get; set; }
-
 	[JsonInclude, JsonPropertyName("store_term_vector_payloads")]
 	public bool StoreTermVectorPayloads { get; set; }
-
 	[JsonInclude, JsonPropertyName("store_term_vector_positions")]
 	public bool StoreTermVectorPositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("store_term_vectors")]
 	public bool StoreTermVectors { get; set; }
 }
@@ -61,28 +54,20 @@ public sealed partial class AllField
 public sealed partial class AllFieldDescriptor : SerializableDescriptor<AllFieldDescriptor>
 {
 	internal AllFieldDescriptor(Action<AllFieldDescriptor> configure) => configure.Invoke(this);
+
 	public AllFieldDescriptor() : base()
 	{
 	}
 
 	private string AnalyzerValue { get; set; }
-
 	private bool EnabledValue { get; set; }
-
 	private bool OmitNormsValue { get; set; }
-
 	private string SearchAnalyzerValue { get; set; }
-
 	private string SimilarityValue { get; set; }
-
 	private bool StoreValue { get; set; }
-
 	private bool StoreTermVectorOffsetsValue { get; set; }
-
 	private bool StoreTermVectorPayloadsValue { get; set; }
-
 	private bool StoreTermVectorPositionsValue { get; set; }
-
 	private bool StoreTermVectorsValue { get; set; }
 
 	public AllFieldDescriptor Analyzer(string analyzer)

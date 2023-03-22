@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsAnyOf
 {
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("intervals")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 }
@@ -37,22 +38,17 @@ public sealed partial class IntervalsAnyOf
 public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDescriptor<IntervalsAnyOfDescriptor<TDocument>>
 {
 	internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsAnyOfDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-
 	private IntervalsDescriptor<TDocument> IntervalsDescriptor { get; set; }
-
 	private Action<IntervalsDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
-
 	private Action<IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 
 	public IntervalsAnyOfDescriptor<TDocument> Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)
@@ -172,22 +168,17 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<IntervalsAnyOfDescriptor>
 {
 	internal IntervalsAnyOfDescriptor(Action<IntervalsAnyOfDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsAnyOfDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
-
 	private IntervalsDescriptor IntervalsDescriptor { get; set; }
-
 	private Action<IntervalsDescriptor> IntervalsDescriptorAction { get; set; }
-
 	private Action<IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 
 	public IntervalsAnyOfDescriptor Intervals(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> intervals)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class TopMetricsValue
 {
 	[JsonInclude, JsonPropertyName("field")]
@@ -34,6 +36,7 @@ public sealed partial class TopMetricsValue
 public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableDescriptor<TopMetricsValueDescriptor<TDocument>>
 {
 	internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TopMetricsValueDescriptor() : base()
 	{
 	}
@@ -64,6 +67,7 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<TopMetricsValueDescriptor>
 {
 	internal TopMetricsValueDescriptor(Action<TopMetricsValueDescriptor> configure) => configure.Invoke(this);
+
 	public TopMetricsValueDescriptor() : base()
 	{
 	}

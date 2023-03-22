@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexRouting
 {
 	[JsonInclude, JsonPropertyName("allocation")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? Allocation { get; set; }
-
 	[JsonInclude, JsonPropertyName("rebalance")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? Rebalance { get; set; }
 }
@@ -37,20 +38,16 @@ public sealed partial class IndexRouting
 public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<IndexRoutingDescriptor>
 {
 	internal IndexRoutingDescriptor(Action<IndexRoutingDescriptor> configure) => configure.Invoke(this);
+
 	public IndexRoutingDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
-
 	private IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
-
 	private Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
-
 	private IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
-
 	private Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
 
 	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation? allocation)

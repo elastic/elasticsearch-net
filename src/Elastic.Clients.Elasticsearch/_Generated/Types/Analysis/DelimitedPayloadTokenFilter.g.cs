@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("delimiter")]
 	public string? Delimiter { get; set; }
-
 	[JsonInclude, JsonPropertyName("encoding")]
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "delimited_payload";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
 public sealed partial class DelimitedPayloadTokenFilterDescriptor : SerializableDescriptor<DelimitedPayloadTokenFilterDescriptor>, IBuildableDescriptor<DelimitedPayloadTokenFilter>
 {
 	internal DelimitedPayloadTokenFilterDescriptor(Action<DelimitedPayloadTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public DelimitedPayloadTokenFilterDescriptor() : base()
 	{
 	}
 
 	private string? DelimiterValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)

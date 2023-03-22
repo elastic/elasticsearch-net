@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,15 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class Storage
 {
+	/// <summary>
+	/// <para>You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.<br/>This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This<br/>setting is useful, for example, if you are in an environment where you can not control the ability to create a lot<br/>of memory maps so you need disable the ability to use memory-mapping.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_mmap")]
 	public bool? AllowMmap { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
 }
@@ -37,14 +41,17 @@ public sealed partial class Storage
 public sealed partial class StorageDescriptor : SerializableDescriptor<StorageDescriptor>
 {
 	internal StorageDescriptor(Action<StorageDescriptor> configure) => configure.Invoke(this);
+
 	public StorageDescriptor() : base()
 	{
 	}
 
 	private bool? AllowMmapValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.StorageType TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>You can restrict the use of the mmapfs and the related hybridfs store type via the setting node.store.allow_mmap.<br/>This is a boolean setting indicating whether or not memory-mapping is allowed. The default is to allow it. This<br/>setting is useful, for example, if you are in an environment where you can not control the ability to create a lot<br/>of memory maps so you need disable the ability to use memory-mapping.</para>
+	/// </summary>
 	public StorageDescriptor AllowMmap(bool? allowMmap = true)
 	{
 		AllowMmapValue = allowMmap;

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,49 +25,38 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class IcuCollationTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("alternate")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? Alternate { get; set; }
-
 	[JsonInclude, JsonPropertyName("caseFirst")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? Casefirst { get; set; }
-
 	[JsonInclude, JsonPropertyName("caseLevel")]
 	public bool? Caselevel { get; set; }
-
 	[JsonInclude, JsonPropertyName("country")]
 	public string? Country { get; set; }
-
 	[JsonInclude, JsonPropertyName("decomposition")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? Decomposition { get; set; }
-
 	[JsonInclude, JsonPropertyName("hiraganaQuaternaryMode")]
 	public bool? Hiraganaquaternarymode { get; set; }
-
 	[JsonInclude, JsonPropertyName("language")]
 	public string? Language { get; set; }
-
 	[JsonInclude, JsonPropertyName("numeric")]
 	public bool? Numeric { get; set; }
-
 	[JsonInclude, JsonPropertyName("rules")]
 	public string? Rules { get; set; }
-
 	[JsonInclude, JsonPropertyName("strength")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? Strength { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_collation";
+
 	[JsonInclude, JsonPropertyName("variableTop")]
 	public string? Variabletop { get; set; }
-
 	[JsonInclude, JsonPropertyName("variant")]
 	public string? Variant { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -73,34 +64,23 @@ public sealed partial class IcuCollationTokenFilter : ITokenFilter
 public sealed partial class IcuCollationTokenFilterDescriptor : SerializableDescriptor<IcuCollationTokenFilterDescriptor>, IBuildableDescriptor<IcuCollationTokenFilter>
 {
 	internal IcuCollationTokenFilterDescriptor(Action<IcuCollationTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public IcuCollationTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? AlternateValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? CasefirstValue { get; set; }
-
 	private bool? CaselevelValue { get; set; }
-
 	private string? CountryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? DecompositionValue { get; set; }
-
 	private bool? HiraganaquaternarymodeValue { get; set; }
-
 	private string? LanguageValue { get; set; }
-
 	private bool? NumericValue { get; set; }
-
 	private string? RulesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? StrengthValue { get; set; }
-
 	private string? VariabletopValue { get; set; }
-
 	private string? VariantValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public IcuCollationTokenFilterDescriptor Alternate(Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? alternate)

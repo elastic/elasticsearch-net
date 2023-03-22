@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public partial class CharFilters : IsADictionary<string, ICharFilter>
 {
 	public CharFilters()
@@ -40,8 +42,8 @@ public partial class CharFilters : IsADictionary<string, ICharFilter>
 
 	public void Add(string name, ICharFilter charFilter) => BackingDictionary.Add(Sanitize(name), charFilter);
 	public bool TryGetCharFilter(string name, [NotNullWhen(returnValue: true)] out ICharFilter charFilter) => BackingDictionary.TryGetValue(Sanitize(name), out charFilter);
-	public bool TryGetCharFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? charFilter)
-		where T : class, ICharFilter
+
+	public bool TryGetCharFilter<T>(string name, [NotNullWhen(returnValue: true)] out T? charFilter) where T : class, ICharFilter
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{

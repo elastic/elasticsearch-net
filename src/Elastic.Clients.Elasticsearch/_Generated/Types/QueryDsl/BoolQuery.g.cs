@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class BoolQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("must"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
-
 	[JsonInclude, JsonPropertyName("must_not"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
-
 	[JsonInclude, JsonPropertyName("should"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
@@ -54,46 +50,29 @@ public sealed partial class BoolQuery : SearchQuery
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>
 {
 	internal BoolQueryDescriptor(Action<BoolQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public BoolQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
-
 	private QueryDescriptor<TDocument> MustDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> MustDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor<TDocument>>[] MustDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
-
 	private QueryDescriptor<TDocument> MustNotDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
-
 	private QueryDescriptor<TDocument> ShouldDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
 	public BoolQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
@@ -402,46 +381,29 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQueryDescriptor>
 {
 	internal BoolQueryDescriptor(Action<BoolQueryDescriptor> configure) => configure.Invoke(this);
+
 	public BoolQueryDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-
 	private QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor>[] FilterDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
-
 	private QueryDescriptor MustDescriptor { get; set; }
-
 	private Action<QueryDescriptor> MustDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor>[] MustDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNotValue { get; set; }
-
 	private QueryDescriptor MustNotDescriptor { get; set; }
-
 	private Action<QueryDescriptor> MustNotDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor>[] MustNotDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
-
 	private QueryDescriptor ShouldDescriptor { get; set; }
-
 	private Action<QueryDescriptor> ShouldDescriptorAction { get; set; }
-
 	private Action<QueryDescriptor>[] ShouldDescriptorActions { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
 	public BoolQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)

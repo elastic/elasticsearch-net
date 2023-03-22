@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class FetchProfile
 {
 	[JsonInclude, JsonPropertyName("breakdown")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfileBreakdown Breakdown { get; init; }
-
 	[JsonInclude, JsonPropertyName("children")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.FetchProfile>? Children { get; init; }
-
 	[JsonInclude, JsonPropertyName("debug")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfileDebug? Debug { get; init; }
-
 	[JsonInclude, JsonPropertyName("description")]
 	public string Description { get; init; }
-
 	[JsonInclude, JsonPropertyName("time_in_nanos")]
 	public long TimeInNanos { get; init; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

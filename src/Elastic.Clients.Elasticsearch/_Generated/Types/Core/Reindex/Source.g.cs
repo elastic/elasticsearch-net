@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
+
 public sealed partial class Source
 {
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.Indices Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("remote")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? Remote { get; set; }
-
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-
 	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
@@ -55,42 +50,27 @@ public sealed partial class Source
 public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor<SourceDescriptor<TDocument>>
 {
 	internal SourceDescriptor(Action<SourceDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SourceDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
-
 	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
-
 	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
@@ -332,42 +312,27 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDescriptor>
 {
 	internal SourceDescriptor(Action<SourceDescriptor> configure) => configure.Invoke(this);
+
 	public SourceDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
-
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-
 	private SortOptionsDescriptor SortDescriptor { get; set; }
-
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
-
 	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
-
 	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)

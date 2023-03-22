@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,26 +25,31 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+/// <summary>
+/// <para>Mean Reciprocal Rank</para>
+/// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
-
 	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 
+/// <summary>
+/// <para>Mean Reciprocal Rank</para>
+/// </summary>
 public sealed partial class RankEvalMetricMeanReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricMeanReciprocalRankDescriptor>
 {
 	internal RankEvalMetricMeanReciprocalRankDescriptor(Action<RankEvalMetricMeanReciprocalRankDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricMeanReciprocalRankDescriptor() : base()
 	{
 	}
 
 	private int? kValue { get; set; }
-
 	private int? RelevantRatingThresholdValue { get; set; }
 
 	public RankEvalMetricMeanReciprocalRankDescriptor k(int? k)

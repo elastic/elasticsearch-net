@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
+
 [JsonConverter(typeof(PivotGroupByConverter))]
 public sealed partial class PivotGroupBy
 {
@@ -41,7 +43,6 @@ public sealed partial class PivotGroupBy
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static PivotGroupBy DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupBy("date_histogram", dateHistogramAggregation);
@@ -114,20 +115,17 @@ internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy
 public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDescriptor<PivotGroupByDescriptor<TDocument>>
 {
 	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PivotGroupByDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private PivotGroupByDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private PivotGroupByDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -151,6 +149,7 @@ public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDesc
 	public PivotGroupByDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 	public PivotGroupByDescriptor<TDocument> Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
 	public PivotGroupByDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -176,20 +175,17 @@ public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDesc
 public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<PivotGroupByDescriptor>
 {
 	internal PivotGroupByDescriptor(Action<PivotGroupByDescriptor> configure) => configure.Invoke(this);
+
 	public PivotGroupByDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private PivotGroupByDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private PivotGroupByDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -216,6 +212,7 @@ public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<Pivo
 	public PivotGroupByDescriptor Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
 	public PivotGroupByDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
 	public PivotGroupByDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

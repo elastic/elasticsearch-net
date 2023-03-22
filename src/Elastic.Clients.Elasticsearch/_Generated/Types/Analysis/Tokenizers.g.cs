@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public partial class Tokenizers : IsADictionary<string, ITokenizer>
 {
 	public Tokenizers()
@@ -40,8 +42,8 @@ public partial class Tokenizers : IsADictionary<string, ITokenizer>
 
 	public void Add(string name, ITokenizer tokenizer) => BackingDictionary.Add(Sanitize(name), tokenizer);
 	public bool TryGetTokenizer(string name, [NotNullWhen(returnValue: true)] out ITokenizer tokenizer) => BackingDictionary.TryGetValue(Sanitize(name), out tokenizer);
-	public bool TryGetTokenizer<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenizer)
-		where T : class, ITokenizer
+
+	public bool TryGetTokenizer<T>(string name, [NotNullWhen(returnValue: true)] out T? tokenizer) where T : class, ITokenizer
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{

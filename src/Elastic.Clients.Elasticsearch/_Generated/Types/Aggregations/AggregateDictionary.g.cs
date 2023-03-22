@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(AggregateDictionaryConverter))]
 public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggregate>
 {
@@ -82,6 +84,5 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? GetRate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate? GetCumulativeCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? GetMatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
-	private TAggregate TryGet<TAggregate>(string key)
-		where TAggregate : class, IAggregate => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
+	private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 }

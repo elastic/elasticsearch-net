@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public partial class Properties : IsADictionary<PropertyName, IProperty>
 {
 	public Properties()
@@ -40,8 +42,8 @@ public partial class Properties : IsADictionary<PropertyName, IProperty>
 
 	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
 	public bool TryGetProperty(PropertyName propertyName, [NotNullWhen(returnValue: true)] out IProperty property) => BackingDictionary.TryGetValue(Sanitize(propertyName), out property);
-	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property)
-		where T : class, IProperty
+
+	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(propertyName), out var matchedValue) && matchedValue is T finalValue)
 		{

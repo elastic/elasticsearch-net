@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class Document
 {
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("_source")]
 	public object Source { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class Document
 public sealed partial class DocumentDescriptor : SerializableDescriptor<DocumentDescriptor>
 {
 	internal DocumentDescriptor(Action<DocumentDescriptor> configure) => configure.Invoke(this);
+
 	public DocumentDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private object SourceValue { get; set; }
 
 	public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)

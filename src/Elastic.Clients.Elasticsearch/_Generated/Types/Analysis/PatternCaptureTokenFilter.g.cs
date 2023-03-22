@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
-
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_capture";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDescriptor<PatternCaptureTokenFilterDescriptor>, IBuildableDescriptor<PatternCaptureTokenFilter>
 {
 	internal PatternCaptureTokenFilterDescriptor(Action<PatternCaptureTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public PatternCaptureTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> PatternsValue { get; set; }
-
 	private bool? PreserveOriginalValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PatternCaptureTokenFilterDescriptor Patterns(ICollection<string> patterns)

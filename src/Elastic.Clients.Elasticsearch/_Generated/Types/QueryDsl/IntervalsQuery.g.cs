@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(IntervalsQueryConverter))]
 public sealed partial class IntervalsQuery : SearchQuery
 {
@@ -53,12 +55,11 @@ public sealed partial class IntervalsQuery : SearchQuery
 	public static IntervalsQuery Match(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch intervalsMatch) => new IntervalsQuery(field, "match", intervalsMatch);
 	public static IntervalsQuery Prefix(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix intervalsPrefix) => new IntervalsQuery(field, "prefix", intervalsPrefix);
 	public static IntervalsQuery Wildcard(Field field, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard intervalsWildcard) => new IntervalsQuery(field, "wildcard", intervalsWildcard);
+
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -220,6 +221,7 @@ internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQ
 public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDescriptor<IntervalsQueryDescriptor<TDocument>>
 {
 	internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal IntervalsQueryDescriptor() : base()
 	{
 	}
@@ -232,15 +234,11 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsQueryDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -259,9 +257,7 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public IntervalsQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -300,6 +296,7 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	public IntervalsQueryDescriptor<TDocument> Prefix(Action<IntervalsPrefixDescriptor<TDocument>> configure) => Set(configure, "prefix");
 	public IntervalsQueryDescriptor<TDocument> Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsQueryDescriptor<TDocument> Wildcard(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -341,6 +338,7 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<IntervalsQueryDescriptor>
 {
 	internal IntervalsQueryDescriptor(Action<IntervalsQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal IntervalsQueryDescriptor() : base()
 	{
 	}
@@ -353,15 +351,11 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsQueryDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -380,9 +374,7 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public IntervalsQueryDescriptor QueryName(string? queryName)
@@ -433,6 +425,7 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	public IntervalsQueryDescriptor Wildcard(IntervalsWildcard intervalsWildcard) => Set(intervalsWildcard, "wildcard");
 	public IntervalsQueryDescriptor Wildcard(Action<IntervalsWildcardDescriptor> configure) => Set(configure, "wildcard");
 	public IntervalsQueryDescriptor Wildcard<TDocument>(Action<IntervalsWildcardDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

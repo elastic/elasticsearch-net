@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class MultiTermsAggregationConverter : JsonConverter<MultiTermsAggregation>
 {
 	public override MultiTermsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -239,69 +241,47 @@ internal sealed class MultiTermsAggregationConverter : JsonConverter<MultiTermsA
 public sealed partial class MultiTermsAggregation : SearchAggregation
 {
 	public MultiTermsAggregation(string name) => Name = name;
+
 	internal MultiTermsAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public long? MinDocCount { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
-
 	public long? ShardMinDocCount { get; set; }
-
 	public int? ShardSize { get; set; }
-
 	public bool? ShowTermDocCountError { get; set; }
-
 	public int? Size { get; set; }
-
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 }
 
 public sealed partial class MultiTermsAggregationDescriptor<TDocument> : SerializableDescriptor<MultiTermsAggregationDescriptor<TDocument>>
 {
 	internal MultiTermsAggregationDescriptor(Action<MultiTermsAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MultiTermsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
-
 	private MultiTermLookupDescriptor<TDocument> TermsDescriptor { get; set; }
-
 	private Action<MultiTermLookupDescriptor<TDocument>> TermsDescriptorAction { get; set; }
-
 	private Action<MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private long? MinDocCountValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private long? ShardMinDocCountValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private bool? ShowTermDocCountErrorValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public MultiTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -520,38 +500,25 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 public sealed partial class MultiTermsAggregationDescriptor : SerializableDescriptor<MultiTermsAggregationDescriptor>
 {
 	internal MultiTermsAggregationDescriptor(Action<MultiTermsAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public MultiTermsAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
-
 	private MultiTermLookupDescriptor TermsDescriptor { get; set; }
-
 	private Action<MultiTermLookupDescriptor> TermsDescriptorAction { get; set; }
-
 	private Action<MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private long? MinDocCountValue { get; set; }
-
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
-
 	private long? ShardMinDocCountValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private bool? ShowTermDocCountErrorValue { get; set; }
-
 	private int? SizeValue { get; set; }
 
 	public MultiTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

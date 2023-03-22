@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class RangeAggregationConverter : JsonConverter<RangeAggregation>
 {
 	public override RangeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -189,56 +191,40 @@ internal sealed class RangeAggregationConverter : JsonConverter<RangeAggregation
 public sealed partial class RangeAggregation : SearchAggregation
 {
 	public RangeAggregation(string name) => Name = name;
+
 	internal RangeAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public int? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class RangeAggregationDescriptor<TDocument> : SerializableDescriptor<RangeAggregationDescriptor<TDocument>>
 {
 	internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RangeAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-
 	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-
 	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-
 	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -427,32 +413,22 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<RangeAggregationDescriptor>
 {
 	internal RangeAggregationDescriptor(Action<RangeAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public RangeAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private int? MissingValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-
 	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-
 	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-
 	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public RangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
