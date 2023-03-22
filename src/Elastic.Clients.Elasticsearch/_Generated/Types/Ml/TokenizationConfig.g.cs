@@ -97,18 +97,21 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 	public override void Write(Utf8JsonWriter writer, TokenizationConfig value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "bert":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
-				break;
-			case "mpnet":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
-				break;
-			case "roberta":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "bert":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
+					break;
+				case "mpnet":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpBertTokenizationConfig)value.Variant, options);
+					break;
+				case "roberta":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.Ml.NlpRobertaTokenizationConfig)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();

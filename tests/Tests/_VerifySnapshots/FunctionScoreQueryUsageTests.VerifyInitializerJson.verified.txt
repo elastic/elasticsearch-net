@@ -1,0 +1,56 @@
+{
+  query: {
+    function_score: {
+      boost: 1.1,
+      boost_mode: multiply,
+      functions: [
+        {
+          field_value_factor: {
+            factor: 1.1,
+            field: numberOfCommits,
+            missing: 0.1,
+            modifier: square
+          },
+          filter: {
+            term: {
+              branches: {
+                value: dev
+              }
+            }
+          },
+          weight: 3
+        },
+        {
+          random_score: {
+            field: _seq_no,
+            seed: 1337
+          }
+        },
+        {
+          random_score: {
+            field: _seq_no,
+            seed: random_string
+          }
+        },
+        {
+          script_score: {
+            script: {
+              source: Math.log(2 + doc['numberOfCommits'].value)
+            }
+          },
+          weight: 1
+        },
+        {
+          weight: 5
+        }
+      ],
+      max_boost: 20,
+      min_score: 1,
+      query: {
+        match_all: {}
+      },
+      score_mode: sum,
+      _name: named_query
+    }
+  }
+}
