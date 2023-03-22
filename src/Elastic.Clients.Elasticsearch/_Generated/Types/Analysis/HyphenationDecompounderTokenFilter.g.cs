@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,28 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("hyphenation_patterns_path")]
 	public string? HyphenationPatternsPath { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_subword_size")]
 	public int? MaxSubwordSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_subword_size")]
 	public int? MinSubwordSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_word_size")]
 	public int? MinWordSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("only_longest_match")]
 	public bool? OnlyLongestMatch { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "hyphenation_decompounder";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
-
 	[JsonInclude, JsonPropertyName("word_list")]
 	public ICollection<string>? WordList { get; set; }
-
 	[JsonInclude, JsonPropertyName("word_list_path")]
 	public string? WordListPath { get; set; }
 }
@@ -58,24 +54,18 @@ public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilter
 public sealed partial class HyphenationDecompounderTokenFilterDescriptor : SerializableDescriptor<HyphenationDecompounderTokenFilterDescriptor>, IBuildableDescriptor<HyphenationDecompounderTokenFilter>
 {
 	internal HyphenationDecompounderTokenFilterDescriptor(Action<HyphenationDecompounderTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public HyphenationDecompounderTokenFilterDescriptor() : base()
 	{
 	}
 
 	private string? HyphenationPatternsPathValue { get; set; }
-
 	private int? MaxSubwordSizeValue { get; set; }
-
 	private int? MinSubwordSizeValue { get; set; }
-
 	private int? MinWordSizeValue { get; set; }
-
 	private bool? OnlyLongestMatchValue { get; set; }
-
 	private string? VersionValue { get; set; }
-
 	private ICollection<string>? WordListValue { get; set; }
-
 	private string? WordListPathValue { get; set; }
 
 	public HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? hyphenationPatternsPath)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PredicateTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "predicate_token_filter";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +42,12 @@ public sealed partial class PredicateTokenFilter : ITokenFilter
 public sealed partial class PredicateTokenFilterDescriptor : SerializableDescriptor<PredicateTokenFilterDescriptor>, IBuildableDescriptor<PredicateTokenFilter>
 {
 	internal PredicateTokenFilterDescriptor(Action<PredicateTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public PredicateTokenFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)

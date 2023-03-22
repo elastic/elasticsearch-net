@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 {
 	public override TermQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -119,13 +121,9 @@ public sealed partial class TermQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public bool? CaseInsensitive { get; set; }
-
 	public Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(TermQuery termQuery) => QueryDsl.Query.Term(termQuery);
@@ -134,6 +132,7 @@ public sealed partial class TermQuery : SearchQuery
 public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptor<TermQueryDescriptor<TDocument>>
 {
 	internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal TermQueryDescriptor() : base()
 	{
 	}
@@ -153,13 +152,9 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
 
 	public TermQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -233,6 +228,7 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQueryDescriptor>
 {
 	internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal TermQueryDescriptor() : base()
 	{
 	}
@@ -245,13 +241,9 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? CaseInsensitiveValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
 
 	public TermQueryDescriptor QueryName(string? queryName)

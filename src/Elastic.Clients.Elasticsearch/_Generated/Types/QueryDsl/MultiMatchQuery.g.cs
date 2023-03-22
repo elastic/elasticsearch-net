@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,61 +25,44 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class MultiMatchQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_rewrite")]
 	public string? FuzzyRewrite { get; set; }
-
 	[JsonInclude, JsonPropertyName("fuzzy_transpositions")]
 	public bool? FuzzyTranspositions { get; set; }
-
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_expansions")]
 	public int? MaxExpansions { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
-
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
-
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
@@ -87,44 +72,28 @@ public sealed partial class MultiMatchQuery : SearchQuery
 public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableDescriptor<MultiMatchQueryDescriptor<TDocument>>
 {
 	internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MultiMatchQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MultiMatchQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -349,44 +318,28 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<MultiMatchQueryDescriptor>
 {
 	internal MultiMatchQueryDescriptor(Action<MultiMatchQueryDescriptor> configure) => configure.Invoke(this);
+
 	public MultiMatchQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
-
 	private string? FuzzyRewriteValue { get; set; }
-
 	private bool? FuzzyTranspositionsValue { get; set; }
-
 	private bool? LenientValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? OperatorValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private double? TieBreakerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MultiMatchQueryDescriptor QueryName(string? queryName)

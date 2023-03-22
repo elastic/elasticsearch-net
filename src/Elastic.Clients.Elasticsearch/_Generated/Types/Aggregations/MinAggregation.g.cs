@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class MinAggregationConverter : JsonConverter<MinAggregation>
 {
 	public override MinAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,38 +157,31 @@ public sealed partial class MinAggregation : SearchAggregation
 {
 	public MinAggregation(string name, Field field) : this(name) => Field = field;
 	public MinAggregation(string name) => Name = name;
+
 	internal MinAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class MinAggregationDescriptor<TDocument> : SerializableDescriptor<MinAggregationDescriptor<TDocument>>
 {
 	internal MinAggregationDescriptor(Action<MinAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MinAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MinAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -268,18 +263,15 @@ public sealed partial class MinAggregationDescriptor<TDocument> : SerializableDe
 public sealed partial class MinAggregationDescriptor : SerializableDescriptor<MinAggregationDescriptor>
 {
 	internal MinAggregationDescriptor(Action<MinAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public MinAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MinAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

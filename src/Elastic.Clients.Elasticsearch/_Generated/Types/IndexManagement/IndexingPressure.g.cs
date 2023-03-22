@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexingPressure
 {
 	[JsonInclude, JsonPropertyName("memory")]
@@ -34,14 +36,13 @@ public sealed partial class IndexingPressure
 public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<IndexingPressureDescriptor>
 {
 	internal IndexingPressureDescriptor(Action<IndexingPressureDescriptor> configure) => configure.Invoke(this);
+
 	public IndexingPressureDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory MemoryValue { get; set; }
-
 	private IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
-
 	private Action<IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
 
 	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory memory)

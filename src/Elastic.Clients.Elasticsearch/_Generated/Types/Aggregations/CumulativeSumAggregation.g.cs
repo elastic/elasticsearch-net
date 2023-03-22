@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class CumulativeSumAggregationConverter : JsonConverter<CumulativeSumAggregation>
 {
 	public override CumulativeSumAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -118,30 +120,27 @@ internal sealed class CumulativeSumAggregationConverter : JsonConverter<Cumulati
 public sealed partial class CumulativeSumAggregation : SearchAggregation
 {
 	public CumulativeSumAggregation(string name) => Name = name;
+
 	internal CumulativeSumAggregation()
 	{
 	}
 
 	public string? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class CumulativeSumAggregationDescriptor : SerializableDescriptor<CumulativeSumAggregationDescriptor>
 {
 	internal CumulativeSumAggregationDescriptor(Action<CumulativeSumAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public CumulativeSumAggregationDescriptor() : base()
 	{
 	}
 
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public CumulativeSumAggregationDescriptor Format(string? format)

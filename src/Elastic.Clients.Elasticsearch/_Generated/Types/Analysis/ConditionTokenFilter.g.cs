@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class ConditionTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string> Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "condition";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class ConditionTokenFilter : ITokenFilter
 public sealed partial class ConditionTokenFilterDescriptor : SerializableDescriptor<ConditionTokenFilterDescriptor>, IBuildableDescriptor<ConditionTokenFilter>
 {
 	internal ConditionTokenFilterDescriptor(Action<ConditionTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public ConditionTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string> FilterValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public ConditionTokenFilterDescriptor Filter(ICollection<string> filter)

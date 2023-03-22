@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class Collector
 {
 	[JsonInclude, JsonPropertyName("children")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector>? Children { get; init; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
-
 	[JsonInclude, JsonPropertyName("reason")]
 	public string Reason { get; init; }
-
 	[JsonInclude, JsonPropertyName("time_in_nanos")]
 	public long TimeInNanos { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistanceSort>
 {
 	public override GeoDistanceSort Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -129,17 +131,11 @@ internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistan
 public sealed partial class GeoDistanceSort
 {
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	public bool? IgnoreUnmapped { get; set; }
-
 	public ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
-
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
-
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
 
 	public static implicit operator SortOptions(GeoDistanceSort geoDistanceSort) => SortOptions.GeoDistance(geoDistanceSort);
@@ -148,22 +144,17 @@ public sealed partial class GeoDistanceSort
 public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptor<GeoDistanceSortDescriptor<TDocument>>
 {
 	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GeoDistanceSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
 
 	public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
@@ -261,22 +252,17 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<GeoDistanceSortDescriptor>
 {
 	internal GeoDistanceSortDescriptor(Action<GeoDistanceSortDescriptor> configure) => configure.Invoke(this);
+
 	public GeoDistanceSortDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.GeoLocation> LocationValue { get; set; }
 
 	public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PathHierarchyTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
 	public int BufferSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("delimiter")]
 	public string Delimiter { get; set; }
-
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string Replacement { get; set; }
-
 	[JsonInclude, JsonPropertyName("reverse")]
 	public bool Reverse { get; set; }
-
 	[JsonInclude, JsonPropertyName("skip")]
 	public int Skip { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "path_hierarchy";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -52,20 +50,16 @@ public sealed partial class PathHierarchyTokenizer : ITokenizer
 public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescriptor<PathHierarchyTokenizerDescriptor>, IBuildableDescriptor<PathHierarchyTokenizer>
 {
 	internal PathHierarchyTokenizerDescriptor(Action<PathHierarchyTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public PathHierarchyTokenizerDescriptor() : base()
 	{
 	}
 
 	private int BufferSizeValue { get; set; }
-
 	private string DelimiterValue { get; set; }
-
 	private string ReplacementValue { get; set; }
-
 	private bool ReverseValue { get; set; }
-
 	private int SkipValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public PathHierarchyTokenizerDescriptor BufferSize(int bufferSize)

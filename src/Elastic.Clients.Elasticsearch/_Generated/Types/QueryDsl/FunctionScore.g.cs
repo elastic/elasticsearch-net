@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(FunctionScoreConverter))]
 public sealed partial class FunctionScore
 {
@@ -41,15 +43,14 @@ public sealed partial class FunctionScore
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static FunctionScore FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScore("field_value_factor", fieldValueFactorScoreFunction);
 	public static FunctionScore RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScore("random_score", randomScoreFunction);
 	public static FunctionScore ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScore("script_score", scriptScoreFunction);
+
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("weight")]
 	public double? Weight { get; set; }
 }
@@ -160,20 +161,17 @@ internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionSco
 public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDescriptor<FunctionScoreDescriptor<TDocument>>
 {
 	internal FunctionScoreDescriptor(Action<FunctionScoreDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FunctionScoreDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private FunctionScoreDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private FunctionScoreDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -192,11 +190,8 @@ public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDes
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private double? WeightValue { get; set; }
 
 	public FunctionScoreDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -235,6 +230,7 @@ public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDes
 	public FunctionScoreDescriptor<TDocument> RandomScore(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
 	public FunctionScoreDescriptor<TDocument> ScriptScore(ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
 	public FunctionScoreDescriptor<TDocument> ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -282,20 +278,17 @@ public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDes
 public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<FunctionScoreDescriptor>
 {
 	internal FunctionScoreDescriptor(Action<FunctionScoreDescriptor> configure) => configure.Invoke(this);
+
 	public FunctionScoreDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private FunctionScoreDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private FunctionScoreDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -314,11 +307,8 @@ public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<Fun
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-
 	private QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private double? WeightValue { get; set; }
 
 	public FunctionScoreDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -359,6 +349,7 @@ public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<Fun
 	public FunctionScoreDescriptor RandomScore<TDocument>(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
 	public FunctionScoreDescriptor ScriptScore(ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
 	public FunctionScoreDescriptor ScriptScore(Action<ScriptScoreFunctionDescriptor> configure) => Set(configure, "script_score");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

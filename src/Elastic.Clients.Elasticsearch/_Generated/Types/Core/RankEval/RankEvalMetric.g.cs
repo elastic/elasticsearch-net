@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
 public sealed partial class RankEvalMetric
 {
 	[JsonInclude, JsonPropertyName("dcg")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? Dcg { get; set; }
-
 	[JsonInclude, JsonPropertyName("expected_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRank { get; set; }
-
 	[JsonInclude, JsonPropertyName("mean_reciprocal_rank")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRank { get; set; }
-
 	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? Precision { get; set; }
-
 	[JsonInclude, JsonPropertyName("recall")]
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? Recall { get; set; }
 }
@@ -46,38 +44,25 @@ public sealed partial class RankEvalMetric
 public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<RankEvalMetricDescriptor>
 {
 	internal RankEvalMetricDescriptor(Action<RankEvalMetricDescriptor> configure) => configure.Invoke(this);
+
 	public RankEvalMetricDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? DcgValue { get; set; }
-
 	private RankEvalMetricDiscountedCumulativeGainDescriptor DcgDescriptor { get; set; }
-
 	private Action<RankEvalMetricDiscountedCumulativeGainDescriptor> DcgDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRankValue { get; set; }
-
 	private RankEvalMetricExpectedReciprocalRankDescriptor ExpectedReciprocalRankDescriptor { get; set; }
-
 	private Action<RankEvalMetricExpectedReciprocalRankDescriptor> ExpectedReciprocalRankDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRankValue { get; set; }
-
 	private RankEvalMetricMeanReciprocalRankDescriptor MeanReciprocalRankDescriptor { get; set; }
-
 	private Action<RankEvalMetricMeanReciprocalRankDescriptor> MeanReciprocalRankDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? PrecisionValue { get; set; }
-
 	private RankEvalMetricPrecisionDescriptor PrecisionDescriptor { get; set; }
-
 	private Action<RankEvalMetricPrecisionDescriptor> PrecisionDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? RecallValue { get; set; }
-
 	private RankEvalMetricRecallDescriptor RecallDescriptor { get; set; }
-
 	private Action<RankEvalMetricRecallDescriptor> RecallDescriptorAction { get; set; }
 
 	public RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? dcg)

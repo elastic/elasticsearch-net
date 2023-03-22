@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KeepWordsTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("keep_words")]
 	public ICollection<string>? KeepWords { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_words_case")]
 	public bool? KeepWordsCase { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_words_path")]
 	public string? KeepWordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -46,16 +46,14 @@ public sealed partial class KeepWordsTokenFilter : ITokenFilter
 public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescriptor<KeepWordsTokenFilterDescriptor>, IBuildableDescriptor<KeepWordsTokenFilter>
 {
 	internal KeepWordsTokenFilterDescriptor(Action<KeepWordsTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KeepWordsTokenFilterDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? KeepWordsValue { get; set; }
-
 	private bool? KeepWordsCaseValue { get; set; }
-
 	private string? KeepWordsPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KeepWordsTokenFilterDescriptor KeepWords(ICollection<string>? keepWords)

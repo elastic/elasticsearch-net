@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class MedianAbsoluteDeviationAggregationConverter : JsonConverter<MedianAbsoluteDeviationAggregation>
 {
 	public override MedianAbsoluteDeviationAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -173,42 +175,33 @@ public sealed partial class MedianAbsoluteDeviationAggregation : SearchAggregati
 {
 	public MedianAbsoluteDeviationAggregation(string name, Field field) : this(name) => Field = field;
 	public MedianAbsoluteDeviationAggregation(string name) => Name = name;
+
 	internal MedianAbsoluteDeviationAggregation()
 	{
 	}
 
 	public double? Compression { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public string? Format { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocument> : SerializableDescriptor<MedianAbsoluteDeviationAggregationDescriptor<TDocument>>
 {
 	internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public MedianAbsoluteDeviationAggregationDescriptor() : base()
 	{
 	}
 
 	private double? CompressionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression)
@@ -302,20 +295,16 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : SerializableDescriptor<MedianAbsoluteDeviationAggregationDescriptor>
 {
 	internal MedianAbsoluteDeviationAggregationDescriptor(Action<MedianAbsoluteDeviationAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public MedianAbsoluteDeviationAggregationDescriptor() : base()
 	{
 	}
 
 	private double? CompressionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public MedianAbsoluteDeviationAggregationDescriptor Compression(double? compression)

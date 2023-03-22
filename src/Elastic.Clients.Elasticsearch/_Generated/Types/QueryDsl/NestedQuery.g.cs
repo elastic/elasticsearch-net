@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class NestedQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
-
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
-
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field Path { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
@@ -54,30 +50,21 @@ public sealed partial class NestedQuery : SearchQuery
 public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptor<NestedQueryDescriptor<TDocument>>
 {
 	internal NestedQueryDescriptor(Action<NestedQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public NestedQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 
 	public NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
@@ -232,30 +219,21 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 public sealed partial class NestedQueryDescriptor : SerializableDescriptor<NestedQueryDescriptor>
 {
 	internal NestedQueryDescriptor(Action<NestedQueryDescriptor> configure) => configure.Invoke(this);
+
 	public NestedQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 
 	public NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
