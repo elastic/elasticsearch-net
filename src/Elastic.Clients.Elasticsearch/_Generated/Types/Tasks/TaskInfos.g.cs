@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Tasks;
+
 public sealed partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
 {
 	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> flat) : base(flat)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,34 +25,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class InferenceProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field_map")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
-
 	[JsonInclude, JsonPropertyName("model_id")]
 	public Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -60,36 +54,24 @@ public sealed partial class InferenceProcessor
 public sealed partial class InferenceProcessorDescriptor<TDocument> : SerializableDescriptor<InferenceProcessorDescriptor<TDocument>>
 {
 	internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceProcessorDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-
 	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-
 	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
@@ -295,36 +277,24 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 public sealed partial class InferenceProcessorDescriptor : SerializableDescriptor<InferenceProcessorDescriptor>
 {
 	internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceProcessorDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-
 	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-
 	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
 	public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)

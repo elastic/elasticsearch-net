@@ -15,19 +15,20 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class OpenIndexResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
-
 	[JsonInclude, JsonPropertyName("shards_acknowledged")]
 	public bool ShardsAcknowledged { get; init; }
 }

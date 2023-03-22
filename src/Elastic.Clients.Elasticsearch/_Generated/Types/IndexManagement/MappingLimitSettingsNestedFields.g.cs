@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsNestedFields
 {
+	/// <summary>
+	/// <para>The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when<br/>arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this<br/>setting limits the number of unique nested types per index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class MappingLimitSettingsNestedFields
 public sealed partial class MappingLimitSettingsNestedFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsNestedFieldsDescriptor>
 {
 	internal MappingLimitSettingsNestedFieldsDescriptor(Action<MappingLimitSettingsNestedFieldsDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsNestedFieldsDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when<br/>arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this<br/>setting limits the number of unique nested types per index.</para>
+	/// </summary>
 	public MappingLimitSettingsNestedFieldsDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

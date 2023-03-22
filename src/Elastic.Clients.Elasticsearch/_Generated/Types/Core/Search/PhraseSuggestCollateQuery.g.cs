@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class PhraseSuggestCollateQuery
 {
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class PhraseSuggestCollateQuery
 public sealed partial class PhraseSuggestCollateQueryDescriptor : SerializableDescriptor<PhraseSuggestCollateQueryDescriptor>
 {
 	internal PhraseSuggestCollateQueryDescriptor(Action<PhraseSuggestCollateQueryDescriptor> configure) => configure.Invoke(this);
+
 	public PhraseSuggestCollateQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-
 	private string? SourceValue { get; set; }
 
 	public PhraseSuggestCollateQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)

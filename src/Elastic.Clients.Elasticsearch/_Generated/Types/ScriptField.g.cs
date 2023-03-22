@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class ScriptField
 {
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class ScriptField
 public sealed partial class ScriptFieldDescriptor : SerializableDescriptor<ScriptFieldDescriptor>
 {
 	internal ScriptFieldDescriptor(Action<ScriptFieldDescriptor> configure) => configure.Invoke(this);
+
 	public ScriptFieldDescriptor() : base()
 	{
 	}
 
 	private bool? IgnoreFailureValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 	public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)

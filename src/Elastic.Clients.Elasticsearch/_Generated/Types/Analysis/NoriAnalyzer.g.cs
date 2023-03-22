@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class NoriAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("decompound_mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
-
 	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori";
+
 	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -46,16 +46,14 @@ public sealed partial class NoriAnalyzer : IAnalyzer
 public sealed partial class NoriAnalyzerDescriptor : SerializableDescriptor<NoriAnalyzerDescriptor>, IBuildableDescriptor<NoriAnalyzer>
 {
 	internal NoriAnalyzerDescriptor(Action<NoriAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public NoriAnalyzerDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundModeValue { get; set; }
-
 	private ICollection<string>? StoptagsValue { get; set; }
-
 	private string? UserDictionaryValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public NoriAnalyzerDescriptor DecompoundMode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? decompoundMode)

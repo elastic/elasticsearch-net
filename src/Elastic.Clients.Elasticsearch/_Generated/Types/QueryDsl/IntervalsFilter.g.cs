@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 [JsonConverter(typeof(IntervalsFilterConverter))]
 public sealed partial class IntervalsFilter
 {
@@ -41,7 +43,6 @@ public sealed partial class IntervalsFilter
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 }
 
@@ -76,20 +77,17 @@ internal sealed partial class IntervalsFilterConverter : JsonConverter<Intervals
 public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableDescriptor<IntervalsFilterDescriptor<TDocument>>
 {
 	internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsFilterDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsFilterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsFilterDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -132,20 +130,17 @@ public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableD
 public sealed partial class IntervalsFilterDescriptor : SerializableDescriptor<IntervalsFilterDescriptor>
 {
 	internal IntervalsFilterDescriptor(Action<IntervalsFilterDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsFilterDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private IntervalsFilterDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private IntervalsFilterDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;

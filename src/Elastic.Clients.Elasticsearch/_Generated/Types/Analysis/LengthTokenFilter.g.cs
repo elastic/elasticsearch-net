@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class LengthTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("max")]
 	public int? Max { get; set; }
-
 	[JsonInclude, JsonPropertyName("min")]
 	public int? Min { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "length";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class LengthTokenFilter : ITokenFilter
 public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor<LengthTokenFilterDescriptor>, IBuildableDescriptor<LengthTokenFilter>
 {
 	internal LengthTokenFilterDescriptor(Action<LengthTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public LengthTokenFilterDescriptor() : base()
 	{
 	}
 
 	private int? MaxValue { get; set; }
-
 	private int? MinValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public LengthTokenFilterDescriptor Max(int? max)

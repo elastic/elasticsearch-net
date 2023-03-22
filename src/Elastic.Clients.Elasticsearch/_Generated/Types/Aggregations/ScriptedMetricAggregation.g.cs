@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class ScriptedMetricAggregationConverter : JsonConverter<ScriptedMetricAggregation>
 {
 	public override ScriptedMetricAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -227,54 +229,39 @@ public sealed partial class ScriptedMetricAggregation : SearchAggregation
 {
 	public ScriptedMetricAggregation(string name, Field field) : this(name) => Field = field;
 	public ScriptedMetricAggregation(string name) => Name = name;
+
 	internal ScriptedMetricAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
 	public FieldValue? Missing { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public IDictionary<string, object>? Params { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : SerializableDescriptor<ScriptedMetricAggregationDescriptor<TDocument>>
 {
 	internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ScriptedMetricAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
@@ -404,26 +391,19 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDescriptor<ScriptedMetricAggregationDescriptor>
 {
 	internal ScriptedMetricAggregationDescriptor(Action<ScriptedMetricAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public ScriptedMetricAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Script? CombineScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private FieldValue? MissingValue { get; set; }
-
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)

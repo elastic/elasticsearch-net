@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class CoordsGeoBounds
 {
 	[JsonInclude, JsonPropertyName("bottom")]
 	public double Bottom { get; set; }
-
 	[JsonInclude, JsonPropertyName("left")]
 	public double Left { get; set; }
-
 	[JsonInclude, JsonPropertyName("right")]
 	public double Right { get; set; }
-
 	[JsonInclude, JsonPropertyName("top")]
 	public double Top { get; set; }
 }
@@ -43,16 +42,14 @@ public sealed partial class CoordsGeoBounds
 public sealed partial class CoordsGeoBoundsDescriptor : SerializableDescriptor<CoordsGeoBoundsDescriptor>
 {
 	internal CoordsGeoBoundsDescriptor(Action<CoordsGeoBoundsDescriptor> configure) => configure.Invoke(this);
+
 	public CoordsGeoBoundsDescriptor() : base()
 	{
 	}
 
 	private double BottomValue { get; set; }
-
 	private double LeftValue { get; set; }
-
 	private double RightValue { get; set; }
-
 	private double TopValue { get; set; }
 
 	public CoordsGeoBoundsDescriptor Bottom(double bottom)

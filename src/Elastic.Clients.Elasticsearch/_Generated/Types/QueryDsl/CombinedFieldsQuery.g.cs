@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,31 +25,24 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class CombinedFieldsQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
@@ -57,24 +52,18 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>
 {
 	internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public CombinedFieldsQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Fields FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
 
 	public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -175,24 +164,18 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescriptor<CombinedFieldsQueryDescriptor>
 {
 	internal CombinedFieldsQueryDescriptor(Action<CombinedFieldsQueryDescriptor> configure) => configure.Invoke(this);
+
 	public CombinedFieldsQueryDescriptor() : base()
 	{
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Fields FieldsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
 
 	public CombinedFieldsQueryDescriptor QueryName(string? queryName)

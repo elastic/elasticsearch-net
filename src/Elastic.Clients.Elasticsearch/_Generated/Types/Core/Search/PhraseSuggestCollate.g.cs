@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class PhraseSuggestCollate
 {
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
-
 	[JsonInclude, JsonPropertyName("prune")]
 	public bool? Prune { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Query { get; set; }
 }
@@ -40,18 +40,15 @@ public sealed partial class PhraseSuggestCollate
 public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescriptor<PhraseSuggestCollateDescriptor>
 {
 	internal PhraseSuggestCollateDescriptor(Action<PhraseSuggestCollateDescriptor> configure) => configure.Invoke(this);
+
 	public PhraseSuggestCollateDescriptor() : base()
 	{
 	}
 
 	private IDictionary<string, object>? ParamsValue { get; set; }
-
 	private bool? PruneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery QueryValue { get; set; }
-
 	private PhraseSuggestCollateQueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; set; }
 
 	public PhraseSuggestCollateDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)

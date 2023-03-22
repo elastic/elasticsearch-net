@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,52 +25,38 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class TermSuggester
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("lowercase_terms")]
 	public bool? LowercaseTerms { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_inspections")]
 	public int? MaxInspections { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
-
 	[JsonInclude, JsonPropertyName("sort")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? Sort { get; set; }
-
 	[JsonInclude, JsonPropertyName("string_distance")]
 	public Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistance { get; set; }
-
 	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
-
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 
@@ -78,38 +66,25 @@ public sealed partial class TermSuggester
 public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDescriptor<TermSuggesterDescriptor<TDocument>>
 {
 	internal TermSuggesterDescriptor(Action<TermSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public TermSuggesterDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private bool? LowercaseTermsValue { get; set; }
-
 	private int? MaxEditsValue { get; set; }
-
 	private int? MaxInspectionsValue { get; set; }
-
 	private float? MaxTermFreqValue { get; set; }
-
 	private float? MinDocFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? SortValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistanceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
-
 	private string? TextValue { get; set; }
 
 	public TermSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
@@ -304,38 +279,25 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<TermSuggesterDescriptor>
 {
 	internal TermSuggesterDescriptor(Action<TermSuggesterDescriptor> configure) => configure.Invoke(this);
+
 	public TermSuggesterDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private bool? LowercaseTermsValue { get; set; }
-
 	private int? MaxEditsValue { get; set; }
-
 	private int? MaxInspectionsValue { get; set; }
-
 	private float? MaxTermFreqValue { get; set; }
-
 	private float? MinDocFreqValue { get; set; }
-
 	private int? MinWordLengthValue { get; set; }
-
 	private int? PrefixLengthValue { get; set; }
-
 	private int? ShardSizeValue { get; set; }
-
 	private int? SizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? SortValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.StringDistance? StringDistanceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
-
 	private string? TextValue { get; set; }
 
 	public TermSuggesterDescriptor Analyzer(string? analyzer)

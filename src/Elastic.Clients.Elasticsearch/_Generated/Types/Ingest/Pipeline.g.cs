@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class Pipeline
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("processors")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
@@ -43,28 +42,20 @@ public sealed partial class Pipeline
 public sealed partial class PipelineDescriptor<TDocument> : SerializableDescriptor<PipelineDescriptor<TDocument>>
 {
 	internal PipelineDescriptor(Action<PipelineDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public PipelineDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> ProcessorsDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PipelineDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -235,28 +226,20 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 public sealed partial class PipelineDescriptor : SerializableDescriptor<PipelineDescriptor>
 {
 	internal PipelineDescriptor(Action<PipelineDescriptor> configure) => configure.Invoke(this);
+
 	public PipelineDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-
 	private ProcessorDescriptor ProcessorsDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private long? VersionValue { get; set; }
 
 	public PipelineDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

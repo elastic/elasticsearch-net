@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(InferenceConfigConverter))]
 public sealed partial class InferenceConfig
 {
@@ -41,7 +43,6 @@ public sealed partial class InferenceConfig
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfig("classification", classificationInferenceOptions);
@@ -103,20 +104,17 @@ internal sealed partial class InferenceConfigConverter : JsonConverter<Inference
 public sealed partial class InferenceConfigDescriptor<TDocument> : SerializableDescriptor<InferenceConfigDescriptor<TDocument>>
 {
 	internal InferenceConfigDescriptor(Action<InferenceConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceConfigDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -138,6 +136,7 @@ public sealed partial class InferenceConfigDescriptor<TDocument> : SerializableD
 	public InferenceConfigDescriptor<TDocument> Classification(Action<Ml.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
 	public InferenceConfigDescriptor<TDocument> Regression(Ml.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigDescriptor<TDocument> Regression(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -163,20 +162,17 @@ public sealed partial class InferenceConfigDescriptor<TDocument> : SerializableD
 public sealed partial class InferenceConfigDescriptor : SerializableDescriptor<InferenceConfigDescriptor>
 {
 	internal InferenceConfigDescriptor(Action<InferenceConfigDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceConfigDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -199,6 +195,7 @@ public sealed partial class InferenceConfigDescriptor : SerializableDescriptor<I
 	public InferenceConfigDescriptor Regression(Ml.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
 	public InferenceConfigDescriptor Regression(Action<Ml.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
 	public InferenceConfigDescriptor Regression<TDocument>(Action<Ml.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

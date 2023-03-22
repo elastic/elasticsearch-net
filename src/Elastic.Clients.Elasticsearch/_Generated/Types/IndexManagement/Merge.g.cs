@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class Merge
 {
 	[JsonInclude, JsonPropertyName("scheduler")]
@@ -34,14 +36,13 @@ public sealed partial class Merge
 public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescriptor>
 {
 	internal MergeDescriptor(Action<MergeDescriptor> configure) => configure.Invoke(this);
+
 	public MergeDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
-
 	private MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
-
 	private Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
 
 	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)

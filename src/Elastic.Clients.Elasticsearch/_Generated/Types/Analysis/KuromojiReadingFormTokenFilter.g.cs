@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,15 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_readingform";
+
 	[JsonInclude, JsonPropertyName("use_romaji")]
 	public bool UseRomaji { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -40,12 +41,12 @@ public sealed partial class KuromojiReadingFormTokenFilter : ITokenFilter
 public sealed partial class KuromojiReadingFormTokenFilterDescriptor : SerializableDescriptor<KuromojiReadingFormTokenFilterDescriptor>, IBuildableDescriptor<KuromojiReadingFormTokenFilter>
 {
 	internal KuromojiReadingFormTokenFilterDescriptor(Action<KuromojiReadingFormTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KuromojiReadingFormTokenFilterDescriptor() : base()
 	{
 	}
 
 	private bool UseRomajiValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KuromojiReadingFormTokenFilterDescriptor UseRomaji(bool useRomaji = true)

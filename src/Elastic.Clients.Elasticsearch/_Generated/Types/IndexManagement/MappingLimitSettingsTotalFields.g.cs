@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsTotalFields
 {
+	/// <summary>
+	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class MappingLimitSettingsTotalFields
 public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsTotalFieldsDescriptor>
 {
 	internal MappingLimitSettingsTotalFieldsDescriptor(Action<MappingLimitSettingsTotalFieldsDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsTotalFieldsDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
+	/// </summary>
 	public MappingLimitSettingsTotalFieldsDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class DataStreamVisibility
 {
 	[JsonInclude, JsonPropertyName("hidden")]
@@ -34,6 +36,7 @@ public sealed partial class DataStreamVisibility
 public sealed partial class DataStreamVisibilityDescriptor : SerializableDescriptor<DataStreamVisibilityDescriptor>
 {
 	internal DataStreamVisibilityDescriptor(Action<DataStreamVisibilityDescriptor> configure) => configure.Invoke(this);
+
 	public DataStreamVisibilityDescriptor() : base()
 	{
 	}

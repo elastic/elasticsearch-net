@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public partial class Normalizers : IsADictionary<string, INormalizer>
 {
 	public Normalizers()
@@ -40,8 +42,8 @@ public partial class Normalizers : IsADictionary<string, INormalizer>
 
 	public void Add(string name, INormalizer normalizer) => BackingDictionary.Add(Sanitize(name), normalizer);
 	public bool TryGetNormalizer(string name, [NotNullWhen(returnValue: true)] out INormalizer normalizer) => BackingDictionary.TryGetValue(Sanitize(name), out normalizer);
-	public bool TryGetNormalizer<T>(string name, [NotNullWhen(returnValue: true)] out T? normalizer)
-		where T : class, INormalizer
+
+	public bool TryGetNormalizer<T>(string name, [NotNullWhen(returnValue: true)] out T? normalizer) where T : class, INormalizer
 	{
 		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{

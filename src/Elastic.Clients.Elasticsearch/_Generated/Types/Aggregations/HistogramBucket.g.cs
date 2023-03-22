@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(HistogramBucketConverter))]
 public sealed partial class HistogramBucket : AggregateDictionary
 {
@@ -34,10 +36,8 @@ public sealed partial class HistogramBucket : AggregateDictionary
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public double Key { get; init; }
-
 	[JsonInclude, JsonPropertyName("key_as_string")]
 	public string? KeyAsString { get; init; }
 }
@@ -48,7 +48,7 @@ internal sealed class HistogramBucketConverter : JsonConverter<HistogramBucket>
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		double key = default;
 		string? keyAsString = default;
@@ -58,7 +58,7 @@ internal sealed class HistogramBucketConverter : JsonConverter<HistogramBucket>
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -87,12 +87,7 @@ internal sealed class HistogramBucketConverter : JsonConverter<HistogramBucket>
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new HistogramBucket(subAggs)
-		{
-			DocCount = docCount,
-			Key = key,
-			KeyAsString = keyAsString
-		};
+		return new HistogramBucket(subAggs) { DocCount = docCount, Key = key, KeyAsString = keyAsString };
 	}
 
 	public override void Write(Utf8JsonWriter writer, HistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

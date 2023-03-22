@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 [JsonConverter(typeof(AdjacencyMatrixBucketConverter))]
 public sealed partial class AdjacencyMatrixBucket : AggregateDictionary
 {
@@ -34,7 +36,6 @@ public sealed partial class AdjacencyMatrixBucket : AggregateDictionary
 
 	[JsonInclude, JsonPropertyName("doc_count")]
 	public long DocCount { get; init; }
-
 	[JsonInclude, JsonPropertyName("key")]
 	public string Key { get; init; }
 }
@@ -45,7 +46,7 @@ internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMa
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>(); // TODO - Optimise this and only create if we need it.
+		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
 		long docCount = default;
 		string key = default;
 		while (reader.Read())
@@ -54,7 +55,7 @@ internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMa
 				break;
 			if (reader.TokenType != JsonTokenType.PropertyName)
 				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString(); // TODO: Future optimisation, get raw bytes span and parse based on those
+			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
 			reader.Read();
 			if (name.Equals("doc_count", StringComparison.Ordinal))
 			{
@@ -77,11 +78,7 @@ internal sealed class AdjacencyMatrixBucketConverter : JsonConverter<AdjacencyMa
 			throw new JsonException("Unknown property read from JSON.");
 		}
 
-		return new AdjacencyMatrixBucket(subAggs)
-		{
-			DocCount = docCount,
-			Key = key
-		};
+		return new AdjacencyMatrixBucket(subAggs) { DocCount = docCount, Key = key };
 	}
 
 	public override void Write(Utf8JsonWriter writer, AdjacencyMatrixBucket value, JsonSerializerOptions options) => throw new NotImplementedException();

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class BulkIndexByScrollFailure
 {
 	[JsonInclude, JsonPropertyName("cause")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Cause { get; init; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public string Index { get; init; }
-
 	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

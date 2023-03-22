@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,17 +25,15 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class CompletionStats
 {
 	[JsonInclude, JsonPropertyName("fields")]
 	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.FieldSizeUsage))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
-
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
-
 	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }
 }

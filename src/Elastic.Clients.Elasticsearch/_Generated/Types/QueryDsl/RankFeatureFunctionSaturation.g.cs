@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class RankFeatureFunctionSaturation
 {
 	[JsonInclude, JsonPropertyName("pivot")]
@@ -34,6 +36,7 @@ public sealed partial class RankFeatureFunctionSaturation
 public sealed partial class RankFeatureFunctionSaturationDescriptor : SerializableDescriptor<RankFeatureFunctionSaturationDescriptor>
 {
 	internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
+
 	public RankFeatureFunctionSaturationDescriptor() : base()
 	{
 	}

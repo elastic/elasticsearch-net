@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,20 +27,29 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class RefreshRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
+/// <summary>
+/// <para>Performs the refresh operation in one or more indices.</para>
+/// </summary>
 public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParameters>
 {
 	public RefreshRequest()
@@ -49,32 +60,52 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
+/// <summary>
+/// <para>Performs the refresh operation in one or more indices.</para>
+/// </summary>
 public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescriptor<RefreshRequestDescriptor<TDocument>, RefreshRequestParameters>
 {
 	internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RefreshRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	public RefreshRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RefreshRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RefreshRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+
 	public RefreshRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -86,19 +117,27 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 	}
 }
 
+/// <summary>
+/// <para>Performs the refresh operation in one or more indices.</para>
+/// </summary>
 public sealed partial class RefreshRequestDescriptor : RequestDescriptor<RefreshRequestDescriptor, RefreshRequestParameters>
 {
 	internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor> configure) => configure.Invoke(this);
+
 	public RefreshRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	public RefreshRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RefreshRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public RefreshRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+
 	public RefreshRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
