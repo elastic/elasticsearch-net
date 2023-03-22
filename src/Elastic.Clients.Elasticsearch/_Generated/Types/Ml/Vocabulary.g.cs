@@ -25,28 +25,35 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Ml;
 
-public sealed partial class NodeShard
+public sealed partial class Vocabulary
 {
-	[JsonInclude, JsonPropertyName("allocation_id")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? AllocationId { get; init; }
 	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("node")]
-	public string? Node { get; init; }
-	[JsonInclude, JsonPropertyName("primary")]
-	public bool Primary { get; init; }
-	[JsonInclude, JsonPropertyName("recovery_source")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? RecoverySource { get; init; }
-	[JsonInclude, JsonPropertyName("relocating_node")]
-	public string? RelocatingNode { get; init; }
-	[JsonInclude, JsonPropertyName("relocation_failure_info")]
-	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; init; }
-	[JsonInclude, JsonPropertyName("shard")]
-	public int Shard { get; init; }
-	[JsonInclude, JsonPropertyName("state")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; init; }
-	[JsonInclude, JsonPropertyName("unassigned_info")]
-	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+}
+
+public sealed partial class VocabularyDescriptor : SerializableDescriptor<VocabularyDescriptor>
+{
+	internal VocabularyDescriptor(Action<VocabularyDescriptor> configure) => configure.Invoke(this);
+
+	public VocabularyDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
+
+	public VocabularyDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("index");
+		JsonSerializer.Serialize(writer, IndexValue, options);
+		writer.WriteEndObject();
+	}
 }
