@@ -94,18 +94,21 @@ internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingM
 	public override void Write(Utf8JsonWriter writer, SmoothingModel value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "laplace":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel)value.Variant, options);
-				break;
-			case "linear_interpolation":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel)value.Variant, options);
-				break;
-			case "stupid_backoff":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "laplace":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel)value.Variant, options);
+					break;
+				case "linear_interpolation":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel)value.Variant, options);
+					break;
+				case "stupid_backoff":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>(writer, (Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
