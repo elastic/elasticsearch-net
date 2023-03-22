@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 [JsonConverter(typeof(BoundaryScannerConverter))]
 public enum BoundaryScanner
 {
@@ -50,8 +52,7 @@ internal sealed class BoundaryScannerConverter : JsonConverter<BoundaryScanner>
 				return BoundaryScanner.Chars;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, BoundaryScanner value, JsonSerializerOptions options)
@@ -95,8 +96,7 @@ internal sealed class HighlighterEncoderConverter : JsonConverter<HighlighterEnc
 				return HighlighterEncoder.Default;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HighlighterEncoder value, JsonSerializerOptions options)
@@ -137,8 +137,7 @@ internal sealed class HighlighterFragmenterConverter : JsonConverter<Highlighter
 				return HighlighterFragmenter.Simple;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HighlighterFragmenter value, JsonSerializerOptions options)
@@ -175,8 +174,7 @@ internal sealed class HighlighterOrderConverter : JsonConverter<HighlighterOrder
 				return HighlighterOrder.Score;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HighlighterOrder value, JsonSerializerOptions options)
@@ -210,8 +208,7 @@ internal sealed class HighlighterTagsSchemaConverter : JsonConverter<Highlighter
 				return HighlighterTagsSchema.Styled;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HighlighterTagsSchema value, JsonSerializerOptions options)
@@ -231,17 +228,21 @@ internal sealed class HighlighterTagsSchemaConverter : JsonConverter<Highlighter
 public readonly partial struct HighlighterType
 {
 	public HighlighterType(string value) => Value = value;
-	public readonly string Value { get; }
 
+	public readonly string Value { get; }
 	public static HighlighterType Unified { get; } = new HighlighterType("unified");
 	public static HighlighterType Plain { get; } = new HighlighterType("plain");
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
+
 	public override string ToString() => Value ?? string.Empty;
+
 	public static implicit operator string(HighlighterType highlighterType) => highlighterType.Value;
 	public static implicit operator HighlighterType(string value) => new(value);
+
 	public override int GetHashCode() => Value.GetHashCode();
 	public override bool Equals(object obj) => obj is HighlighterType other && this.Equals(other);
 	public bool Equals(HighlighterType other) => Value == other.Value;
+
 	public static bool operator ==(HighlighterType a, HighlighterType b) => a.Equals(b);
 	public static bool operator !=(HighlighterType a, HighlighterType b) => !(a == b);
 }
@@ -280,8 +281,7 @@ internal sealed class ScoreModeConverter : JsonConverter<ScoreMode>
 				return ScoreMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ScoreMode value, JsonSerializerOptions options)
@@ -343,8 +343,7 @@ internal sealed class StringDistanceConverter : JsonConverter<StringDistance>
 				return StringDistance.DamerauLevenshtein;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, StringDistance value, JsonSerializerOptions options)
@@ -394,8 +393,7 @@ internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
 				return SuggestSort.Frequency;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SuggestSort value, JsonSerializerOptions options)
@@ -417,8 +415,14 @@ internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
 [JsonConverter(typeof(TotalHitsRelationConverter))]
 public enum TotalHitsRelation
 {
+	/// <summary>
+	/// <para>Lower bound, including returned events or sequences</para>
+	/// </summary>
 	[EnumMember(Value = "gte")]
 	Gte,
+	/// <summary>
+	/// <para>Accurate</para>
+	/// </summary>
 	[EnumMember(Value = "eq")]
 	Eq
 }
@@ -436,8 +440,7 @@ internal sealed class TotalHitsRelationConverter : JsonConverter<TotalHitsRelati
 				return TotalHitsRelation.Eq;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TotalHitsRelation value, JsonSerializerOptions options)

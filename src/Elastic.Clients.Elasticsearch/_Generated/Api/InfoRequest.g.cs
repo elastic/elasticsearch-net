@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,29 +27,41 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class InfoRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Returns basic information about the cluster.</para>
+/// </summary>
 public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceInfo;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Returns basic information about the cluster.</para>
+/// </summary>
 public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoRequestDescriptor, InfoRequestParameters>
 {
 	internal InfoRequestDescriptor(Action<InfoRequestDescriptor> configure) => configure.Invoke(this);
+
 	public InfoRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceInfo;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+
 	internal override bool SupportsBody => false;
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 	}

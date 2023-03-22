@@ -15,37 +15,32 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class CreateResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("forced_refresh")]
 	public bool? ForcedRefresh { get; init; }
-
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
-
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-
 	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long PrimaryTerm { get; init; }
-
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
-
 	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long SeqNo { get; init; }
-
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
-
 	[JsonInclude, JsonPropertyName("_version")]
 	public long Version { get; init; }
 }

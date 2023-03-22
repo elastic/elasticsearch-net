@@ -15,17 +15,19 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Cluster;
+
 public partial class ClusterNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
 	/// Initializes a new instance of the <see cref="ClusterNamespacedClient"/> class for mocking.
-	/// </summary>			
+	/// </summary>
 	protected ClusterNamespacedClient() : base()
 	{
 	}
@@ -34,12 +36,20 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 	}
 
+	/// <summary>
+	/// <para>Returns basic information about the health of the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.4/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual HealthResponse Health(HealthRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<HealthRequest, HealthResponse, HealthRequestParameters>(request);
 	}
 
+	/// <summary>
+	/// <para>Returns basic information about the health of the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.4/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();

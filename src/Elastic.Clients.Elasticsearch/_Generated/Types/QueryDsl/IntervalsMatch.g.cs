@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,20 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsMatch
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
-
 	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -49,24 +46,18 @@ public sealed partial class IntervalsMatch
 public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDescriptor<IntervalsMatchDescriptor<TDocument>>
 {
 	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsMatchDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
 	private int? MaxGapsValue { get; set; }
-
 	private bool? OrderedValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer)
@@ -181,24 +172,18 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<IntervalsMatchDescriptor>
 {
 	internal IntervalsMatchDescriptor(Action<IntervalsMatchDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsMatchDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-
 	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-
 	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
-
 	private int? MaxGapsValue { get; set; }
-
 	private bool? OrderedValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsMatchDescriptor Analyzer(string? analyzer)

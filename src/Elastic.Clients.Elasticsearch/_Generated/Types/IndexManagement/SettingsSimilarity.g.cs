@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("bm25")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? Bm25 { get; set; }
-
 	[JsonInclude, JsonPropertyName("dfi")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? Dfi { get; set; }
-
 	[JsonInclude, JsonPropertyName("dfr")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? Dfr { get; set; }
-
 	[JsonInclude, JsonPropertyName("ib")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? Ib { get; set; }
-
 	[JsonInclude, JsonPropertyName("lmd")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? Lmd { get; set; }
-
 	[JsonInclude, JsonPropertyName("lmj")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? Lmj { get; set; }
-
 	[JsonInclude, JsonPropertyName("scripted_tfidf")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidf { get; set; }
 }
@@ -52,50 +48,31 @@ public sealed partial class SettingsSimilarity
 public sealed partial class SettingsSimilarityDescriptor : SerializableDescriptor<SettingsSimilarityDescriptor>
 {
 	internal SettingsSimilarityDescriptor(Action<SettingsSimilarityDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? Bm25Value { get; set; }
-
 	private SettingsSimilarityBm25Descriptor Bm25Descriptor { get; set; }
-
 	private Action<SettingsSimilarityBm25Descriptor> Bm25DescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfi? DfiValue { get; set; }
-
 	private SettingsSimilarityDfiDescriptor DfiDescriptor { get; set; }
-
 	private Action<SettingsSimilarityDfiDescriptor> DfiDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr? DfrValue { get; set; }
-
 	private SettingsSimilarityDfrDescriptor DfrDescriptor { get; set; }
-
 	private Action<SettingsSimilarityDfrDescriptor> DfrDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb? IbValue { get; set; }
-
 	private SettingsSimilarityIbDescriptor IbDescriptor { get; set; }
-
 	private Action<SettingsSimilarityIbDescriptor> IbDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd? LmdValue { get; set; }
-
 	private SettingsSimilarityLmdDescriptor LmdDescriptor { get; set; }
-
 	private Action<SettingsSimilarityLmdDescriptor> LmdDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj? LmjValue { get; set; }
-
 	private SettingsSimilarityLmjDescriptor LmjDescriptor { get; set; }
-
 	private Action<SettingsSimilarityLmjDescriptor> LmjDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedTfidf? ScriptedTfidfValue { get; set; }
-
 	private SettingsSimilarityScriptedTfidfDescriptor ScriptedTfidfDescriptor { get; set; }
-
 	private Action<SettingsSimilarityScriptedTfidfDescriptor> ScriptedTfidfDescriptorAction { get; set; }
 
 	public SettingsSimilarityDescriptor Bm25(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25? bm25)

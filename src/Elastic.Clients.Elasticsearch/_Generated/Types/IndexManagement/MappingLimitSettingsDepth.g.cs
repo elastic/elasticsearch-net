@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MappingLimitSettingsDepth
 {
+	/// <summary>
+	/// <para>The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined<br/>at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class MappingLimitSettingsDepth
 public sealed partial class MappingLimitSettingsDepthDescriptor : SerializableDescriptor<MappingLimitSettingsDepthDescriptor>
 {
 	internal MappingLimitSettingsDepthDescriptor(Action<MappingLimitSettingsDepthDescriptor> configure) => configure.Invoke(this);
+
 	public MappingLimitSettingsDepthDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The maximum depth for a field, which is measured as the number of inner objects. For instance, if all fields are defined<br/>at the root object level, then the depth is 1. If there is one object mapping, then the depth is 2, etc.</para>
+	/// </summary>
 	public MappingLimitSettingsDepthDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class HasParentQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
-
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
-
 	[JsonInclude, JsonPropertyName("parent_type")]
 	public string ParentType { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("score")]
 	public bool? Score { get; set; }
 
@@ -54,30 +50,21 @@ public sealed partial class HasParentQuery : SearchQuery
 public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDescriptor<HasParentQueryDescriptor<TDocument>>
 {
 	internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public HasParentQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private string ParentTypeValue { get; set; }
-
 	private bool? ScoreValue { get; set; }
 
 	public HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
@@ -226,30 +213,21 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<HasParentQueryDescriptor>
 {
 	internal HasParentQueryDescriptor(Action<HasParentQueryDescriptor> configure) => configure.Invoke(this);
+
 	public HasParentQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private bool? IgnoreUnmappedValue { get; set; }
-
 	private string ParentTypeValue { get; set; }
-
 	private bool? ScoreValue { get; set; }
 
 	public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)

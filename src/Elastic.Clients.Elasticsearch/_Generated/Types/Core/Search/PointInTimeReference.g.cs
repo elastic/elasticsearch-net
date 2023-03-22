@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class PointInTimeReference
 {
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class PointInTimeReference
 public sealed partial class PointInTimeReferenceDescriptor : SerializableDescriptor<PointInTimeReferenceDescriptor>
 {
 	internal PointInTimeReferenceDescriptor(Action<PointInTimeReferenceDescriptor> configure) => configure.Invoke(this);
+
 	public PointInTimeReferenceDescriptor() : base()
 	{
 	}
 
 	private string IdValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 
 	public PointInTimeReferenceDescriptor Id(string id)

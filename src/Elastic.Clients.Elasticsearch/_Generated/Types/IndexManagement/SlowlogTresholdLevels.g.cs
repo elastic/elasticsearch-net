@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SlowlogTresholdLevels
 {
 	[JsonInclude, JsonPropertyName("debug")]
 	public Elastic.Clients.Elasticsearch.Duration? Debug { get; set; }
-
 	[JsonInclude, JsonPropertyName("info")]
 	public Elastic.Clients.Elasticsearch.Duration? Info { get; set; }
-
 	[JsonInclude, JsonPropertyName("trace")]
 	public Elastic.Clients.Elasticsearch.Duration? Trace { get; set; }
-
 	[JsonInclude, JsonPropertyName("warn")]
 	public Elastic.Clients.Elasticsearch.Duration? Warn { get; set; }
 }
@@ -43,16 +42,14 @@ public sealed partial class SlowlogTresholdLevels
 public sealed partial class SlowlogTresholdLevelsDescriptor : SerializableDescriptor<SlowlogTresholdLevelsDescriptor>
 {
 	internal SlowlogTresholdLevelsDescriptor(Action<SlowlogTresholdLevelsDescriptor> configure) => configure.Invoke(this);
+
 	public SlowlogTresholdLevelsDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Duration? DebugValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? InfoValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? TraceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Duration? WarnValue { get; set; }
 
 	public SlowlogTresholdLevelsDescriptor Debug(Elastic.Clients.Elasticsearch.Duration? debug)

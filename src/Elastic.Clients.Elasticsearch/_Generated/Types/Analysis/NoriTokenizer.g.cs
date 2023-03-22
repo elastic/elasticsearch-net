@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,25 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class NoriTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("decompound_mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundMode { get; set; }
-
 	[JsonInclude, JsonPropertyName("discard_punctuation")]
 	public bool? DiscardPunctuation { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "nori_tokenizer";
+
 	[JsonInclude, JsonPropertyName("user_dictionary")]
 	public string? UserDictionary { get; set; }
-
 	[JsonInclude, JsonPropertyName("user_dictionary_rules")]
 	public ICollection<string>? UserDictionaryRules { get; set; }
-
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -49,18 +48,15 @@ public sealed partial class NoriTokenizer : ITokenizer
 public sealed partial class NoriTokenizerDescriptor : SerializableDescriptor<NoriTokenizerDescriptor>, IBuildableDescriptor<NoriTokenizer>
 {
 	internal NoriTokenizerDescriptor(Action<NoriTokenizerDescriptor> configure) => configure.Invoke(this);
+
 	public NoriTokenizerDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? DecompoundModeValue { get; set; }
-
 	private bool? DiscardPunctuationValue { get; set; }
-
 	private string? UserDictionaryValue { get; set; }
-
 	private ICollection<string>? UserDictionaryRulesValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public NoriTokenizerDescriptor DecompoundMode(Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? decompoundMode)

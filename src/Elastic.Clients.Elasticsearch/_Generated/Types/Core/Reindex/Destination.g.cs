@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
+
 public sealed partial class Destination
 {
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("op_type")]
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get; set; }
-
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
-
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
-
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class Destination
 public sealed partial class DestinationDescriptor : SerializableDescriptor<DestinationDescriptor>
 {
 	internal DestinationDescriptor(Action<DestinationDescriptor> configure) => configure.Invoke(this);
+
 	public DestinationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.OpType? OpTypeValue { get; set; }
-
 	private string? PipelineValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	public DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)

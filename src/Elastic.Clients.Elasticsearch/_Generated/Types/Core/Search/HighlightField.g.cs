@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,79 +25,56 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class HighlightField
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("boundary_chars")]
 	public string? BoundaryChars { get; set; }
-
 	[JsonInclude, JsonPropertyName("boundary_max_scan")]
 	public int? BoundaryMaxScan { get; set; }
-
 	[JsonInclude, JsonPropertyName("boundary_scanner")]
 	public Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
-
 	[JsonInclude, JsonPropertyName("boundary_scanner_locale")]
 	public string? BoundaryScannerLocale { get; set; }
-
 	[JsonInclude, JsonPropertyName("force_source")]
 	public bool? ForceSource { get; set; }
-
 	[JsonInclude, JsonPropertyName("fragment_offset")]
 	public int? FragmentOffset { get; set; }
-
 	[JsonInclude, JsonPropertyName("fragment_size")]
 	public int? FragmentSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("fragmenter")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
-
 	[JsonInclude, JsonPropertyName("highlight_filter")]
 	public bool? HighlightFilter { get; set; }
-
 	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
-
 	[JsonInclude, JsonPropertyName("matched_fields")]
 	public Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
-
 	[JsonInclude, JsonPropertyName("max_fragment_length")]
 	public int? MaxFragmentLength { get; set; }
-
 	[JsonInclude, JsonPropertyName("no_match_size")]
 	public int? NoMatchSize { get; set; }
-
 	[JsonInclude, JsonPropertyName("number_of_fragments")]
 	public int? NumberOfFragments { get; set; }
-
 	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, object>? Options { get; set; }
-
 	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? Order { get; set; }
-
 	[JsonInclude, JsonPropertyName("phrase_limit")]
 	public int? PhraseLimit { get; set; }
-
 	[JsonInclude, JsonPropertyName("post_tags")]
 	public ICollection<string>? PostTags { get; set; }
-
 	[JsonInclude, JsonPropertyName("pre_tags")]
 	public ICollection<string>? PreTags { get; set; }
-
 	[JsonInclude, JsonPropertyName("require_field_match")]
 	public bool? RequireFieldMatch { get; set; }
-
 	[JsonInclude, JsonPropertyName("tags_schema")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? Type { get; set; }
 }
@@ -103,60 +82,36 @@ public sealed partial class HighlightField
 public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDescriptor<HighlightFieldDescriptor<TDocument>>
 {
 	internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public HighlightFieldDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
-
 	private string? BoundaryCharsValue { get; set; }
-
 	private int? BoundaryMaxScanValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
-
 	private string? BoundaryScannerLocaleValue { get; set; }
-
 	private bool? ForceSourceValue { get; set; }
-
 	private int? FragmentOffsetValue { get; set; }
-
 	private int? FragmentSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
-
 	private bool? HighlightFilterValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? MatchedFieldsValue { get; set; }
-
 	private int? MaxAnalyzedOffsetValue { get; set; }
-
 	private int? MaxFragmentLengthValue { get; set; }
-
 	private int? NoMatchSizeValue { get; set; }
-
 	private int? NumberOfFragmentsValue { get; set; }
-
 	private IDictionary<string, object>? OptionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
-
 	private int? PhraseLimitValue { get; set; }
-
 	private ICollection<string>? PostTagsValue { get; set; }
-
 	private ICollection<string>? PreTagsValue { get; set; }
-
 	private bool? RequireFieldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
 
 	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)
@@ -485,60 +440,36 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<HighlightFieldDescriptor>
 {
 	internal HighlightFieldDescriptor(Action<HighlightFieldDescriptor> configure) => configure.Invoke(this);
+
 	public HighlightFieldDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzerValue { get; set; }
-
 	private string? BoundaryCharsValue { get; set; }
-
 	private int? BoundaryMaxScanValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
-
 	private string? BoundaryScannerLocaleValue { get; set; }
-
 	private bool? ForceSourceValue { get; set; }
-
 	private int? FragmentOffsetValue { get; set; }
-
 	private int? FragmentSizeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
-
 	private bool? HighlightFilterValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? MatchedFieldsValue { get; set; }
-
 	private int? MaxAnalyzedOffsetValue { get; set; }
-
 	private int? MaxFragmentLengthValue { get; set; }
-
 	private int? NoMatchSizeValue { get; set; }
-
 	private int? NumberOfFragmentsValue { get; set; }
-
 	private IDictionary<string, object>? OptionsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? OrderValue { get; set; }
-
 	private int? PhraseLimitValue { get; set; }
-
 	private ICollection<string>? PostTagsValue { get; set; }
-
 	private ICollection<string>? PreTagsValue { get; set; }
-
 	private bool? RequireFieldMatchValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? TypeValue { get; set; }
 
 	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.QueryDsl.Query? highlightQuery)

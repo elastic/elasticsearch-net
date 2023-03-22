@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexTemplateItem
 {
 	[JsonInclude, JsonPropertyName("index_template")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; init; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

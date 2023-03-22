@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class PorterStemTokenFilter : ITokenFilter
 {
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "porter_stem";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -37,6 +39,7 @@ public sealed partial class PorterStemTokenFilter : ITokenFilter
 public sealed partial class PorterStemTokenFilterDescriptor : SerializableDescriptor<PorterStemTokenFilterDescriptor>, IBuildableDescriptor<PorterStemTokenFilter>
 {
 	internal PorterStemTokenFilterDescriptor(Action<PorterStemTokenFilterDescriptor> configure) => configure.Invoke(this);
+
 	public PorterStemTokenFilterDescriptor() : base()
 	{
 	}

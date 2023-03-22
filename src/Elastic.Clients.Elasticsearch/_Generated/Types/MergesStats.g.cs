@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,55 +25,40 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class MergesStats
 {
 	[JsonInclude, JsonPropertyName("current")]
 	public long Current { get; init; }
-
 	[JsonInclude, JsonPropertyName("current_docs")]
 	public long CurrentDocs { get; init; }
-
 	[JsonInclude, JsonPropertyName("current_size")]
 	public string? CurrentSize { get; init; }
-
 	[JsonInclude, JsonPropertyName("current_size_in_bytes")]
 	public long CurrentSizeInBytes { get; init; }
-
 	[JsonInclude, JsonPropertyName("total")]
 	public long Total { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_auto_throttle")]
 	public string? TotalAutoThrottle { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_auto_throttle_in_bytes")]
 	public long TotalAutoThrottleInBytes { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_docs")]
 	public long TotalDocs { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_size")]
 	public string? TotalSize { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_size_in_bytes")]
 	public long TotalSizeInBytes { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_stopped_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_stopped_time_in_millis")]
 	public long TotalStoppedTimeInMillis { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_throttled_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_throttled_time_in_millis")]
 	public long TotalThrottledTimeInMillis { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-
 	[JsonInclude, JsonPropertyName("total_time_in_millis")]
 	public long TotalTimeInMillis { get; init; }
 }

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class InferenceConfigRegression
 {
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
@@ -39,12 +40,12 @@ public sealed partial class InferenceConfigRegression
 public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : SerializableDescriptor<InferenceConfigRegressionDescriptor<TDocument>>
 {
 	internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceConfigRegressionDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	public InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
@@ -87,12 +88,12 @@ public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : Ser
 public sealed partial class InferenceConfigRegressionDescriptor : SerializableDescriptor<InferenceConfigRegressionDescriptor>
 {
 	internal InferenceConfigRegressionDescriptor(Action<InferenceConfigRegressionDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceConfigRegressionDescriptor() : base()
 	{
 	}
 
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
 	public InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)

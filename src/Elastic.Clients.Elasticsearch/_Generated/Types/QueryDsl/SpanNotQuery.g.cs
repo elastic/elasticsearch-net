@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,28 +25,22 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class SpanNotQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("dist")]
 	public int? Dist { get; set; }
-
 	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
-
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
-
 	[JsonInclude, JsonPropertyName("post")]
 	public int? Post { get; set; }
-
 	[JsonInclude, JsonPropertyName("pre")]
 	public int? Pre { get; set; }
 }
@@ -52,30 +48,21 @@ public sealed partial class SpanNotQuery : SearchQuery
 public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDescriptor<SpanNotQueryDescriptor<TDocument>>
 {
 	internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SpanNotQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> ExcludeDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> ExcludeDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
-
 	private SpanQueryDescriptor<TDocument> IncludeDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor<TDocument>> IncludeDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private int? DistValue { get; set; }
-
 	private int? PostValue { get; set; }
-
 	private int? PreValue { get; set; }
 
 	public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
@@ -228,30 +215,21 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<SpanNotQueryDescriptor>
 {
 	internal SpanNotQueryDescriptor(Action<SpanNotQueryDescriptor> configure) => configure.Invoke(this);
+
 	public SpanNotQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
-
 	private SpanQueryDescriptor ExcludeDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> ExcludeDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
-
 	private SpanQueryDescriptor IncludeDescriptor { get; set; }
-
 	private Action<SpanQueryDescriptor> IncludeDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private int? DistValue { get; set; }
-
 	private int? PostValue { get; set; }
-
 	private int? PreValue { get; set; }
 
 	public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)

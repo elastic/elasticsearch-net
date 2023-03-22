@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class RemoveAction
 {
 	[JsonInclude, JsonPropertyName("alias")]
 	public Elastic.Clients.Elasticsearch.IndexAlias? Alias { get; set; }
-
 	[JsonInclude, JsonPropertyName("aliases"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
-
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
@@ -48,18 +46,15 @@ public sealed partial class RemoveAction
 public sealed partial class RemoveActionDescriptor : SerializableDescriptor<RemoveActionDescriptor>
 {
 	internal RemoveActionDescriptor(Action<RemoveActionDescriptor> configure) => configure.Invoke(this);
+
 	public RemoveActionDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexAlias? AliasValue { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? AliasesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
-
 	private bool? MustExistValue { get; set; }
 
 	public RemoveActionDescriptor Alias(Elastic.Clients.Elasticsearch.IndexAlias? alias)

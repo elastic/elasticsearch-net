@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class Rescore
 {
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("window_size")]
 	public int? WindowSize { get; set; }
 }
@@ -37,16 +38,14 @@ public sealed partial class Rescore
 public sealed partial class RescoreDescriptor<TDocument> : SerializableDescriptor<RescoreDescriptor<TDocument>>
 {
 	internal RescoreDescriptor(Action<RescoreDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RescoreDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery QueryValue { get; set; }
-
 	private RescoreQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<RescoreQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private int? WindowSizeValue { get; set; }
 
 	public RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery query)
@@ -111,16 +110,14 @@ public sealed partial class RescoreDescriptor<TDocument> : SerializableDescripto
 public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDescriptor>
 {
 	internal RescoreDescriptor(Action<RescoreDescriptor> configure) => configure.Invoke(this);
+
 	public RescoreDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery QueryValue { get; set; }
-
 	private RescoreQueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<RescoreQueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private int? WindowSizeValue { get; set; }
 
 	public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery query)

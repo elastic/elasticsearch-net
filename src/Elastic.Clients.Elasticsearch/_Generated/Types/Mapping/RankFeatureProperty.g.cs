@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,50 +25,40 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class RankFeatureProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("positive_score_impact")]
 	public bool? PositiveScoreImpact { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "rank_feature";
 }
 
 public sealed partial class RankFeaturePropertyDescriptor<TDocument> : SerializableDescriptor<RankFeaturePropertyDescriptor<TDocument>>, IBuildableDescriptor<RankFeatureProperty>
 {
 	internal RankFeaturePropertyDescriptor(Action<RankFeaturePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RankFeaturePropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? PositiveScoreImpactValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 	public RankFeaturePropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
@@ -191,20 +183,16 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 public sealed partial class RankFeaturePropertyDescriptor : SerializableDescriptor<RankFeaturePropertyDescriptor>, IBuildableDescriptor<RankFeatureProperty>
 {
 	internal RankFeaturePropertyDescriptor(Action<RankFeaturePropertyDescriptor> configure) => configure.Invoke(this);
+
 	public RankFeaturePropertyDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private bool? PositiveScoreImpactValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 
 	public RankFeaturePropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
