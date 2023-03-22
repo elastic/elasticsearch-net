@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class BoostingQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("negative")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
-
 	[JsonInclude, JsonPropertyName("negative_boost")]
 	public double NegativeBoost { get; set; }
-
 	[JsonInclude, JsonPropertyName("positive")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 
@@ -48,26 +46,19 @@ public sealed partial class BoostingQuery : SearchQuery
 public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDescriptor<BoostingQueryDescriptor<TDocument>>
 {
 	internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public BoostingQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query NegativeValue { get; set; }
-
 	private QueryDescriptor<TDocument> NegativeDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> NegativeDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query PositiveValue { get; set; }
-
 	private QueryDescriptor<TDocument> PositiveDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> PositiveDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double NegativeBoostValue { get; set; }
 
 	public BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)
@@ -192,26 +183,19 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<BoostingQueryDescriptor>
 {
 	internal BoostingQueryDescriptor(Action<BoostingQueryDescriptor> configure) => configure.Invoke(this);
+
 	public BoostingQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query NegativeValue { get; set; }
-
 	private QueryDescriptor NegativeDescriptor { get; set; }
-
 	private Action<QueryDescriptor> NegativeDescriptorAction { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query PositiveValue { get; set; }
-
 	private QueryDescriptor PositiveDescriptor { get; set; }
-
 	private Action<QueryDescriptor> PositiveDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private double NegativeBoostValue { get; set; }
 
 	public BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query negative)

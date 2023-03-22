@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class RescoreQuery
 {
 	[JsonInclude, JsonPropertyName("query_weight")]
 	public double? QueryWeight { get; set; }
-
 	[JsonInclude, JsonPropertyName("rescore_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("rescore_query_weight")]
 	public double? RescoreQueryWeight { get; set; }
-
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
 }
@@ -43,20 +42,16 @@ public sealed partial class RescoreQuery
 public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDescriptor<RescoreQueryDescriptor<TDocument>>
 {
 	internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public RescoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private double? QueryWeightValue { get; set; }
-
 	private double? RescoreQueryWeightValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
 
 	public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
@@ -145,20 +140,16 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<RescoreQueryDescriptor>
 {
 	internal RescoreQueryDescriptor(Action<RescoreQueryDescriptor> configure) => configure.Invoke(this);
+
 	public RescoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private double? QueryWeightValue { get; set; }
-
 	private double? RescoreQueryWeightValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreModeValue { get; set; }
 
 	public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)

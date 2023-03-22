@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,26 +27,39 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed class FlushRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</para>
+	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</para>
+	/// </summary>
 	public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 }
 
+/// <summary>
+/// <para>Performs the flush operation on one or more indices.</para>
+/// </summary>
 public sealed partial class FlushRequest : PlainRequest<FlushRequestParameters>
 {
 	public FlushRequest()
@@ -55,40 +70,66 @@ public sealed partial class FlushRequest : PlainRequest<FlushRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
+	/// <summary>
+	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
+	/// <summary>
+	/// <para>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
+	/// <summary>
+	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
+	/// <summary>
+	/// <para>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? WaitIfOngoing { get => Q<bool?>("wait_if_ongoing"); set => Q("wait_if_ongoing", value); }
 }
 
+/// <summary>
+/// <para>Performs the flush operation on one or more indices.</para>
+/// </summary>
 public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescriptor<FlushRequestDescriptor<TDocument>, FlushRequestParameters>
 {
 	internal FlushRequestDescriptor(Action<FlushRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public FlushRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	public FlushRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public FlushRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FlushRequestDescriptor<TDocument> Force(bool? force = true) => Qs("force", force);
 	public FlushRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FlushRequestDescriptor<TDocument> WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
+
 	public FlushRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
@@ -100,21 +141,29 @@ public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescripto
 	}
 }
 
+/// <summary>
+/// <para>Performs the flush operation on one or more indices.</para>
+/// </summary>
 public sealed partial class FlushRequestDescriptor : RequestDescriptor<FlushRequestDescriptor, FlushRequestParameters>
 {
 	internal FlushRequestDescriptor(Action<FlushRequestDescriptor> configure) => configure.Invoke(this);
+
 	public FlushRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => false;
+
 	public FlushRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public FlushRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FlushRequestDescriptor Force(bool? force = true) => Qs("force", force);
 	public FlushRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public FlushRequestDescriptor WaitIfOngoing(bool? waitIfOngoing = true) => Qs("wait_if_ongoing", waitIfOngoing);
+
 	public FlushRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class StoredScript
 {
 	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; set; }
-
 	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, string>? Options { get; set; }
-
 	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class StoredScript
 public sealed partial class StoredScriptDescriptor : SerializableDescriptor<StoredScriptDescriptor>
 {
 	internal StoredScriptDescriptor(Action<StoredScriptDescriptor> configure) => configure.Invoke(this);
+
 	public StoredScriptDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.ScriptLanguage LanguageValue { get; set; }
-
 	private IDictionary<string, string>? OptionsValue { get; set; }
-
 	private string SourceValue { get; set; }
 
 	public StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage language)

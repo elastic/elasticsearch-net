@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,8 +24,8 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 [JsonConverter(typeof(TokenizationTruncateConverter))]
 public enum TokenizationTruncate
 {
@@ -50,8 +52,7 @@ internal sealed class TokenizationTruncateConverter : JsonConverter<Tokenization
 				return TokenizationTruncate.First;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TokenizationTruncate value, JsonSerializerOptions options)

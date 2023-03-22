@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,85 +25,61 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class DateRangeProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "date_range";
 }
 
 public sealed partial class DateRangePropertyDescriptor<TDocument> : SerializableDescriptor<DateRangePropertyDescriptor<TDocument>>, IBuildableDescriptor<DateRangeProperty>
 {
 	internal DateRangePropertyDescriptor(Action<DateRangePropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DateRangePropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public DateRangePropertyDescriptor<TDocument> Boost(double? boost)
@@ -317,34 +295,23 @@ public sealed partial class DateRangePropertyDescriptor<TDocument> : Serializabl
 public sealed partial class DateRangePropertyDescriptor : SerializableDescriptor<DateRangePropertyDescriptor>, IBuildableDescriptor<DateRangeProperty>
 {
 	internal DateRangePropertyDescriptor(Action<DateRangePropertyDescriptor> configure) => configure.Invoke(this);
+
 	public DateRangePropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
 
 	public DateRangePropertyDescriptor Boost(double? boost)

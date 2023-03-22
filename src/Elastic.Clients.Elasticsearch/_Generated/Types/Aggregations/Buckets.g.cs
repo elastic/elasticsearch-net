@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -26,8 +28,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class Buckets<TBucket> : Union<IReadOnlyDictionary<string, TBucket>, IReadOnlyCollection<TBucket>>
 {
 	public Buckets(IReadOnlyDictionary<string, TBucket> dictionary) : base(dictionary)

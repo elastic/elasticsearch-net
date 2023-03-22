@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,10 +25,13 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexingPressureMemory
 {
+	/// <summary>
+	/// <para>Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,<br/>the node will reject new coordinating and primary operations. When replica operations consume 1.5x this limit,<br/>the node will reject new replica operations. Defaults to 10% of the heap.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
 	public int? Limit { get; set; }
 }
@@ -34,12 +39,16 @@ public sealed partial class IndexingPressureMemory
 public sealed partial class IndexingPressureMemoryDescriptor : SerializableDescriptor<IndexingPressureMemoryDescriptor>
 {
 	internal IndexingPressureMemoryDescriptor(Action<IndexingPressureMemoryDescriptor> configure) => configure.Invoke(this);
+
 	public IndexingPressureMemoryDescriptor() : base()
 	{
 	}
 
 	private int? LimitValue { get; set; }
 
+	/// <summary>
+	/// <para>Number of outstanding bytes that may be consumed by indexing requests. When this limit is reached or exceeded,<br/>the node will reject new coordinating and primary operations. When replica operations consume 1.5x this limit,<br/>the node will reject new replica operations. Defaults to 10% of the heap.</para>
+	/// </summary>
 	public IndexingPressureMemoryDescriptor Limit(int? limit)
 	{
 		LimitValue = limit;

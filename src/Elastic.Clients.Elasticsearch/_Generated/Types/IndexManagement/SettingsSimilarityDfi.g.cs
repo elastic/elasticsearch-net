@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,21 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarityDfi
 {
 	[JsonInclude, JsonPropertyName("independence_measure")]
 	public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "DFI";
 }
 
 public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescriptor<SettingsSimilarityDfiDescriptor>
 {
 	internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityDfiDescriptor() : base()
 	{
 	}

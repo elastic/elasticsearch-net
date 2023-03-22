@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class IndexField
 {
 	[JsonInclude, JsonPropertyName("enabled")]
@@ -34,6 +36,7 @@ public sealed partial class IndexField
 public sealed partial class IndexFieldDescriptor : SerializableDescriptor<IndexFieldDescriptor>
 {
 	internal IndexFieldDescriptor(Action<IndexFieldDescriptor> configure) => configure.Invoke(this);
+
 	public IndexFieldDescriptor() : base()
 	{
 	}

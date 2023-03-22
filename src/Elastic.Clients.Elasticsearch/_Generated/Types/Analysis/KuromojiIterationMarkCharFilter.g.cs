@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class KuromojiIterationMarkCharFilter : ICharFilter
 {
 	[JsonInclude, JsonPropertyName("normalize_kana")]
 	public bool NormalizeKana { get; set; }
-
 	[JsonInclude, JsonPropertyName("normalize_kanji")]
 	public bool NormalizeKanji { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "kuromoji_iteration_mark";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class KuromojiIterationMarkCharFilter : ICharFilter
 public sealed partial class KuromojiIterationMarkCharFilterDescriptor : SerializableDescriptor<KuromojiIterationMarkCharFilterDescriptor>, IBuildableDescriptor<KuromojiIterationMarkCharFilter>
 {
 	internal KuromojiIterationMarkCharFilterDescriptor(Action<KuromojiIterationMarkCharFilterDescriptor> configure) => configure.Invoke(this);
+
 	public KuromojiIterationMarkCharFilterDescriptor() : base()
 	{
 	}
 
 	private bool NormalizeKanaValue { get; set; }
-
 	private bool NormalizeKanjiValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public KuromojiIterationMarkCharFilterDescriptor NormalizeKana(bool normalizeKana = true)

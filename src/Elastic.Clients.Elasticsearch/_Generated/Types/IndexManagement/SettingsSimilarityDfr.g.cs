@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,35 +25,31 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SettingsSimilarityDfr
 {
 	[JsonInclude, JsonPropertyName("after_effect")]
 	public Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
-
 	[JsonInclude, JsonPropertyName("basic_model")]
 	public Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
-
 	[JsonInclude, JsonPropertyName("normalization")]
 	public Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "DFR";
 }
 
 public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptor<SettingsSimilarityDfrDescriptor>
 {
 	internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
+
 	public SettingsSimilarityDfrDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffectValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DFRBasicModel BasicModelValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Normalization NormalizationValue { get; set; }
 
 	public SettingsSimilarityDfrDescriptor AfterEffect(Elastic.Clients.Elasticsearch.DFRAfterEffect afterEffect)

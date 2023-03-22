@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexSettingBlocks
 {
 	[JsonInclude, JsonPropertyName("metadata")]
 	public bool? Metadata { get; set; }
-
 	[JsonInclude, JsonPropertyName("read")]
 	public bool? Read { get; set; }
-
 	[JsonInclude, JsonPropertyName("read_only")]
 	public bool? ReadOnly { get; set; }
-
 	[JsonInclude, JsonPropertyName("read_only_allow_delete")]
 	public bool? ReadOnlyAllowDelete { get; set; }
-
 	[JsonInclude, JsonPropertyName("write")]
 	public Union<bool?, string?>? Write { get; set; }
 }
@@ -46,18 +44,15 @@ public sealed partial class IndexSettingBlocks
 public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptor<IndexSettingBlocksDescriptor>
 {
 	internal IndexSettingBlocksDescriptor(Action<IndexSettingBlocksDescriptor> configure) => configure.Invoke(this);
+
 	public IndexSettingBlocksDescriptor() : base()
 	{
 	}
 
 	private bool? MetadataValue { get; set; }
-
 	private bool? ReadValue { get; set; }
-
 	private bool? ReadOnlyValue { get; set; }
-
 	private bool? ReadOnlyAllowDeleteValue { get; set; }
-
 	private Union<bool?, string?>? WriteValue { get; set; }
 
 	public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)

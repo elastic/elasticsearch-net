@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucketAggregation>
 {
 	public override StatsBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -118,30 +120,27 @@ internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucke
 public sealed partial class StatsBucketAggregation : SearchAggregation
 {
 	public StatsBucketAggregation(string name) => Name = name;
+
 	internal StatsBucketAggregation()
 	{
 	}
 
 	public string? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class StatsBucketAggregationDescriptor : SerializableDescriptor<StatsBucketAggregationDescriptor>
 {
 	internal StatsBucketAggregationDescriptor(Action<StatsBucketAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public StatsBucketAggregationDescriptor() : base()
 	{
 	}
 
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public StatsBucketAggregationDescriptor Format(string? format)

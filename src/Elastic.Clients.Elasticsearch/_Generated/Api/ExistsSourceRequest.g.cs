@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,78 +27,133 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed class ExistsSourceRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specify whether to perform the operation in realtime or search mode</para>
+	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Refresh the shard containing the document before performing the operation</para>
+	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>True or false to return the _source field or not, or a list of fields to return</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a document source exists in an index.</para>
+/// </summary>
 public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceRequestParameters>
 {
 	public ExistsSourceRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExistsSource;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
+	/// <summary>
+	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
+	/// <summary>
+	/// <para>Specify whether to perform the operation in realtime or search mode</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
+	/// <summary>
+	/// <para>Refresh the shard containing the document before performing the operation</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
+	/// <summary>
+	/// <para>Specific routing value</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
+	/// <summary>
+	/// <para>True or false to return the _source field or not, or a list of fields to return</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
+	/// <summary>
+	/// <para>Explicit version number for concurrency control</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
+	/// <summary>
+	/// <para>Specific version type</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
+/// <summary>
+/// <para>Returns information about whether a document source exists in an index.</para>
+/// </summary>
 public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDescriptor<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceRequestParameters>
 {
 	internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
@@ -125,9 +182,12 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExistsSource;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExistsSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -137,6 +197,7 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 	public ExistsSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public ExistsSourceRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 	public ExistsSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+
 	public ExistsSourceRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -154,9 +215,13 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 	}
 }
 
+/// <summary>
+/// <para>Returns information about whether a document source exists in an index.</para>
+/// </summary>
 public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<ExistsSourceRequestDescriptor, ExistsSourceRequestParameters>
 {
 	internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor> configure) => configure.Invoke(this);
+
 	public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
 	{
 	}
@@ -165,9 +230,12 @@ public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<Ex
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExistsSource;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExistsSource;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
+
 	internal override bool SupportsBody => false;
+
 	public ExistsSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExistsSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -177,6 +245,7 @@ public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<Ex
 	public ExistsSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public ExistsSourceRequestDescriptor Version(long? version) => Qs("version", version);
 	public ExistsSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
+
 	public ExistsSourceRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

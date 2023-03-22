@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQuery>
 {
 	public override DateRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -207,27 +209,16 @@ public sealed partial class DateRangeQuery : RangeQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public float? Boost { get; set; }
-
 	public string? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? Gt { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? Gte { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? Lt { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
-
 	public string? TimeZone { get; set; }
-
 	public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(DateRangeQuery dateRangeQuery) => QueryDsl.Query.Range(dateRangeQuery);
@@ -236,6 +227,7 @@ public sealed partial class DateRangeQuery : RangeQuery
 public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptor<DateRangeQueryDescriptor<TDocument>>
 {
 	internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal DateRangeQueryDescriptor() : base()
 	{
 	}
@@ -255,27 +247,16 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? FromValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? GtValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? LteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	public DateRangeQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -437,6 +418,7 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<DateRangeQueryDescriptor>
 {
 	internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal DateRangeQueryDescriptor() : base()
 	{
 	}
@@ -449,27 +431,16 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? FromValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? GtValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? LteValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-
 	private string? TimeZoneValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
 
 	public DateRangeQueryDescriptor QueryName(string? queryName)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,110 +25,76 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class DoubleNumberProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-
 	[JsonInclude, JsonPropertyName("copy_to")]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
-
 	[JsonInclude, JsonPropertyName("null_value")]
 	public double? NullValue { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
-
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
-
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
-
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "double";
 }
 
 public sealed partial class DoubleNumberPropertyDescriptor<TDocument> : SerializableDescriptor<DoubleNumberPropertyDescriptor<TDocument>>, IBuildableDescriptor<DoubleNumberProperty>
 {
 	internal DoubleNumberPropertyDescriptor(Action<DoubleNumberPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public DoubleNumberPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private double? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private bool? TimeSeriesDimensionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public DoubleNumberPropertyDescriptor<TDocument> Boost(double? boost)
@@ -407,44 +375,28 @@ public sealed partial class DoubleNumberPropertyDescriptor<TDocument> : Serializ
 public sealed partial class DoubleNumberPropertyDescriptor : SerializableDescriptor<DoubleNumberPropertyDescriptor>, IBuildableDescriptor<DoubleNumberProperty>
 {
 	internal DoubleNumberPropertyDescriptor(Action<DoubleNumberPropertyDescriptor> configure) => configure.Invoke(this);
+
 	public DoubleNumberPropertyDescriptor() : base()
 	{
 	}
 
 	private double? BoostValue { get; set; }
-
 	private bool? CoerceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-
 	private bool? DocValuesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-
 	private int? IgnoreAboveValue { get; set; }
-
 	private bool? IgnoreMalformedValue { get; set; }
-
 	private bool? IndexValue { get; set; }
-
 	private IDictionary<string, string>? MetaValue { get; set; }
-
 	private double? NullValueValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private string? SimilarityValue { get; set; }
-
 	private bool? StoreValue { get; set; }
-
 	private bool? TimeSeriesDimensionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public DoubleNumberPropertyDescriptor Boost(double? boost)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,26 +27,35 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
+
 public sealed class EqlDeleteRequestParameters : RequestParameters
 {
 }
 
+/// <summary>
+/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestParameters>
 {
 	public EqlDeleteRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
 }
 
+/// <summary>
+/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescriptor<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteRequestParameters>
 {
 	internal EqlDeleteRequestDescriptor(Action<EqlDeleteRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public EqlDeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -53,9 +64,12 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public EqlDeleteRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);
@@ -67,9 +81,13 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	}
 }
 
+/// <summary>
+/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// </summary>
 public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDeleteRequestDescriptor, EqlDeleteRequestParameters>
 {
 	internal EqlDeleteRequestDescriptor(Action<EqlDeleteRequestDescriptor> configure) => configure.Invoke(this);
+
 	public EqlDeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
@@ -78,9 +96,12 @@ public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+
 	internal override bool SupportsBody => false;
+
 	public EqlDeleteRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		RouteValues.Required("id", id);

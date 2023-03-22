@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class SlicedScroll
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
-
 	[JsonInclude, JsonPropertyName("max")]
 	public int Max { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class SlicedScroll
 public sealed partial class SlicedScrollDescriptor<TDocument> : SerializableDescriptor<SlicedScrollDescriptor<TDocument>>
 {
 	internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SlicedScrollDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private int MaxValue { get; set; }
 
 	public SlicedScrollDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
@@ -94,14 +93,13 @@ public sealed partial class SlicedScrollDescriptor<TDocument> : SerializableDesc
 public sealed partial class SlicedScrollDescriptor : SerializableDescriptor<SlicedScrollDescriptor>
 {
 	internal SlicedScrollDescriptor(Action<SlicedScrollDescriptor> configure) => configure.Invoke(this);
+
 	public SlicedScrollDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
-
 	private int MaxValue { get; set; }
 
 	public SlicedScrollDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)

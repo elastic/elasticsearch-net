@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class IcuNormalizationCharFilter : ICharFilter
 {
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? Mode { get; set; }
-
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? Name { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_normalizer";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -43,14 +44,13 @@ public sealed partial class IcuNormalizationCharFilter : ICharFilter
 public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableDescriptor<IcuNormalizationCharFilterDescriptor>, IBuildableDescriptor<IcuNormalizationCharFilter>
 {
 	internal IcuNormalizationCharFilterDescriptor(Action<IcuNormalizationCharFilterDescriptor> configure) => configure.Invoke(this);
+
 	public IcuNormalizationCharFilterDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? ModeValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? NameValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public IcuNormalizationCharFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? mode)
