@@ -502,9 +502,25 @@ public readonly partial struct StorageType
 	public StorageType(string value) => Value = value;
 
 	public readonly string Value { get; }
+
+	/// <summary>
+	/// <para>The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple<br/>threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java<br/>implementation and disables some optimizations for heap memory usage.</para>
+	/// </summary>
 	public static StorageType Niofs { get; } = new StorageType("niofs");
+
+	/// <summary>
+	/// <para>The MMap FS type stores the shard index on the file system (maps to Lucene MMapDirectory) by mapping a file into<br/>memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size<br/>of the file being mapped. Before using this class, be sure you have allowed plenty of virtual address space.</para>
+	/// </summary>
 	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
+
+	/// <summary>
+	/// <para>The hybridfs type is a hybrid of niofs and mmapfs, which chooses the best file system type for each type of file<br/>based on the read access pattern. Currently only the Lucene term dictionary, norms and doc values files are memory<br/>mapped. All other files are opened using Lucene NIOFSDirectory. Similarly to mmapfs be sure you have allowed<br/>plenty of virtual address space.</para>
+	/// </summary>
 	public static StorageType Hybridfs { get; } = new StorageType("hybridfs");
+
+	/// <summary>
+	/// <para>Default file system implementation. This will pick the best implementation depending on the operating environment, which<br/>is currently hybridfs on all supported systems but is subject to change.</para>
+	/// </summary>
 	public static StorageType Fs { get; } = new StorageType("fs");
 
 	public override string ToString() => Value ?? string.Empty;
@@ -523,8 +539,14 @@ public readonly partial struct StorageType
 [JsonConverter(typeof(TranslogDurabilityConverter))]
 public enum TranslogDurability
 {
+	/// <summary>
+	/// <para>(default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes<br/>will already have been committed to disk.</para>
+	/// </summary>
 	[EnumMember(Value = "request")]
 	Request,
+	/// <summary>
+	/// <para>fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes<br/>since the last automatic commit will be discarded.</para>
+	/// </summary>
 	[EnumMember(Value = "async")]
 	Async
 }

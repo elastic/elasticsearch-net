@@ -105,8 +105,14 @@ internal sealed class ConvertTypeConverter : JsonConverter<ConvertType>
 [JsonConverter(typeof(JsonProcessorConflictStrategyConverter))]
 public enum JsonProcessorConflictStrategy
 {
+	/// <summary>
+	/// <para>Root fields that conflict with fields from the parsed JSON will be overridden.</para>
+	/// </summary>
 	[EnumMember(Value = "replace")]
 	Replace,
+	/// <summary>
+	/// <para>Conflicting fields will be merged.</para>
+	/// </summary>
 	[EnumMember(Value = "merge")]
 	Merge
 }

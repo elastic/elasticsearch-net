@@ -332,14 +332,29 @@ internal sealed class DistanceUnitConverter : JsonConverter<DistanceUnit>
 [JsonConverter(typeof(ExpandWildcardConverter))]
 public enum ExpandWildcard
 {
+	/// <summary>
+	/// <para>Match open, non-hidden indices. Also matches any non-hidden data stream.</para>
+	/// </summary>
 	[EnumMember(Value = "open")]
 	Open,
+	/// <summary>
+	/// <para>Wildcard expressions are not accepted.</para>
+	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
+	/// <summary>
+	/// <para>Match hidden data streams and hidden indices. Must be combined with open, closed, or both.</para>
+	/// </summary>
 	[EnumMember(Value = "hidden")]
 	Hidden,
+	/// <summary>
+	/// <para>Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.</para>
+	/// </summary>
 	[EnumMember(Value = "closed")]
 	Closed,
+	/// <summary>
+	/// <para>Match any data stream or index, including hidden ones.</para>
+	/// </summary>
 	[EnumMember(Value = "all")]
 	All
 }
@@ -545,10 +560,19 @@ internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation
 [JsonConverter(typeof(HealthStatusConverter))]
 public enum HealthStatus
 {
+	/// <summary>
+	/// <para>All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.</para>
+	/// </summary>
 	[EnumMember(Value = "yellow")]
 	Yellow,
+	/// <summary>
+	/// <para>One or more primary shards are unassigned, so some data is unavailable. This can occur briefly during cluster startup as primary shards are assigned.</para>
+	/// </summary>
 	[EnumMember(Value = "red")]
 	Red,
+	/// <summary>
+	/// <para>All shards are assigned.</para>
+	/// </summary>
 	[EnumMember(Value = "green")]
 	Green
 }
@@ -1047,8 +1071,14 @@ internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
 [JsonConverter(typeof(SearchTypeConverter))]
 public enum SearchType
 {
+	/// <summary>
+	/// <para>Documents are scored using local term and document frequencies for the shard. This is usually faster but less accurate.</para>
+	/// </summary>
 	[EnumMember(Value = "query_then_fetch")]
 	QueryThenFetch,
+	/// <summary>
+	/// <para>Documents are scored using global term and document frequencies across all shards. This is usually slower but more accurate.</para>
+	/// </summary>
 	[EnumMember(Value = "dfs_query_then_fetch")]
 	DfsQueryThenFetch
 }
@@ -1088,6 +1118,9 @@ internal sealed class SearchTypeConverter : JsonConverter<SearchType>
 [JsonConverter(typeof(SlicesCalculationConverter))]
 public enum SlicesCalculation
 {
+	/// <summary>
+	/// <para>Let Elasticsearch choose a reasonable number for most data streams and indices.</para>
+	/// </summary>
 	[EnumMember(Value = "auto")]
 	Auto
 }

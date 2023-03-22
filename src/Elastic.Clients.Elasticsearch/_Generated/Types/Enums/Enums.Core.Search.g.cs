@@ -415,8 +415,14 @@ internal sealed class SuggestSortConverter : JsonConverter<SuggestSort>
 [JsonConverter(typeof(TotalHitsRelationConverter))]
 public enum TotalHitsRelation
 {
+	/// <summary>
+	/// <para>Lower bound, including returned events or sequences</para>
+	/// </summary>
 	[EnumMember(Value = "gte")]
 	Gte,
+	/// <summary>
+	/// <para>Accurate</para>
+	/// </summary>
 	[EnumMember(Value = "eq")]
 	Eq
 }

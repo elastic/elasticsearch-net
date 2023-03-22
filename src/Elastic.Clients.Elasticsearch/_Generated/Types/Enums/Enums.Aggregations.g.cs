@@ -182,10 +182,19 @@ internal sealed class CardinalityExecutionModeConverter : JsonConverter<Cardinal
 [JsonConverter(typeof(GapPolicyConverter))]
 public enum GapPolicy
 {
+	/// <summary>
+	/// <para>Treats missing data as if the bucket does not exist. It will skip the bucket and<br/>continue calculating using the next available value.</para>
+	/// </summary>
 	[EnumMember(Value = "skip")]
 	Skip,
+	/// <summary>
+	/// <para>Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,<br/>otherwise the empty bucket is skipped.</para>
+	/// </summary>
 	[EnumMember(Value = "keep_values")]
 	KeepValues,
+	/// <summary>
+	/// <para>Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.</para>
+	/// </summary>
 	[EnumMember(Value = "insert_zeros")]
 	InsertZeros
 }
