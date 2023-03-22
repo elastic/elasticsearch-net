@@ -81,7 +81,7 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -171,7 +171,7 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -218,7 +218,7 @@ public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

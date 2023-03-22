@@ -56,7 +56,7 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -96,7 +96,7 @@ public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 

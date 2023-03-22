@@ -599,7 +599,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -957,7 +957,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -2002,7 +2002,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

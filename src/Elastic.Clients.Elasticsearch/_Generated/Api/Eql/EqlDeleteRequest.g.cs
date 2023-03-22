@@ -42,7 +42,7 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -64,7 +64,7 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -96,7 +96,7 @@ public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

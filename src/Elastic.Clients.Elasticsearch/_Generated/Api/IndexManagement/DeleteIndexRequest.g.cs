@@ -66,7 +66,7 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -118,7 +118,7 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -156,7 +156,7 @@ public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<Del
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

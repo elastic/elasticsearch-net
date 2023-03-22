@@ -80,7 +80,7 @@ public sealed partial class ForcemergeRequest : PlainRequest<ForcemergeRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementForcemerge;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementForcemerge;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -140,7 +140,7 @@ public sealed partial class ForcemergeRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementForcemerge;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementForcemerge;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -176,7 +176,7 @@ public sealed partial class ForcemergeRequestDescriptor : RequestDescriptor<Forc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementForcemerge;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementForcemerge;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

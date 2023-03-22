@@ -96,7 +96,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -248,7 +248,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

@@ -42,7 +42,7 @@ public sealed partial class DeleteAsyncRequest : PlainRequest<DeleteAsyncRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlDeleteAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -64,7 +64,7 @@ public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlDeleteAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -96,7 +96,7 @@ public sealed partial class DeleteAsyncRequestDescriptor : RequestDescriptor<Del
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlDeleteAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlDeleteAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

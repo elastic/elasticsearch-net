@@ -46,7 +46,7 @@ public sealed partial class UrlDecodeProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(UrlDecodeProcessor urlDecodeProcessor) => Ingest.Processor.Urldecode(urlDecodeProcessor);
+	public static implicit operator Processor(UrlDecodeProcessor urlDecodeProcessor) => Ingest.Processor.UrlDecode(urlDecodeProcessor);
 }
 
 public sealed partial class UrlDecodeProcessorDescriptor<TDocument> : SerializableDescriptor<UrlDecodeProcessorDescriptor<TDocument>>

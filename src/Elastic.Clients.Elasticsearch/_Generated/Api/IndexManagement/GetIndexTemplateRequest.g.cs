@@ -60,7 +60,7 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -96,7 +96,7 @@ public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

@@ -38,7 +38,7 @@ public sealed class QueryRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -144,7 +144,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -449,7 +449,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

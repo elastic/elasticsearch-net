@@ -91,7 +91,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -193,7 +193,7 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -242,7 +242,7 @@ public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestD
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

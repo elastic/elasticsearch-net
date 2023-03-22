@@ -71,7 +71,7 @@ public sealed partial class OpenIndexRequest : PlainRequest<OpenIndexRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -129,7 +129,7 @@ public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -168,7 +168,7 @@ public sealed partial class OpenIndexRequestDescriptor : RequestDescriptor<OpenI
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementOpen;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

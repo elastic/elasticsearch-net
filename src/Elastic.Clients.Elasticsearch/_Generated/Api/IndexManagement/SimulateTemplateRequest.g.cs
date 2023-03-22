@@ -55,7 +55,7 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -85,7 +85,7 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

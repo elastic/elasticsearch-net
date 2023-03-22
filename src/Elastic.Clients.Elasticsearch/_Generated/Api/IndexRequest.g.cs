@@ -100,7 +100,7 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceIndex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -204,7 +204,7 @@ public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceIndex;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceIndex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

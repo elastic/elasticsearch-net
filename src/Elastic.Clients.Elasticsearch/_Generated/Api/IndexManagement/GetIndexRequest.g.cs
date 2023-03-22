@@ -81,7 +81,7 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -151,7 +151,7 @@ public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -192,7 +192,7 @@ public sealed partial class GetIndexRequestDescriptor : RequestDescriptor<GetInd
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

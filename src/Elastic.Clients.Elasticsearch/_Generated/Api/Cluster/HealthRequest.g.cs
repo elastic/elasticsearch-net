@@ -100,7 +100,7 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterHealth;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -184,7 +184,7 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterHealth;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -224,7 +224,7 @@ public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.ClusterHealth;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterHealth;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

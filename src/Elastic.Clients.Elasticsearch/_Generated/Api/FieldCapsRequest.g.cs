@@ -80,7 +80,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceFieldCaps;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -152,7 +152,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceFieldCaps;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -253,7 +253,7 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceFieldCaps;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceFieldCaps;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

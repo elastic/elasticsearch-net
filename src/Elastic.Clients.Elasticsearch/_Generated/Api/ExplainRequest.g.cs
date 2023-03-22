@@ -101,7 +101,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -217,7 +217,7 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -314,7 +314,7 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExplain;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

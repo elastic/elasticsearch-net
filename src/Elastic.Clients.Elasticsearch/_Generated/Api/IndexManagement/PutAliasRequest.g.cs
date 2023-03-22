@@ -51,7 +51,7 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -95,7 +95,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -234,7 +234,7 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

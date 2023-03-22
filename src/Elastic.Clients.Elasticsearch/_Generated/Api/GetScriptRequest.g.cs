@@ -46,7 +46,7 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -74,7 +74,7 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -108,7 +108,7 @@ public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetSc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

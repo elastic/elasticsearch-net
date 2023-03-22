@@ -181,7 +181,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -377,7 +377,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -540,7 +540,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

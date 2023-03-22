@@ -56,7 +56,7 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -100,7 +100,7 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -171,7 +171,7 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSplit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

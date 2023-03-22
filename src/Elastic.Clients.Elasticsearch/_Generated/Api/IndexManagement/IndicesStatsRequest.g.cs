@@ -98,7 +98,7 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -178,7 +178,7 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -230,7 +230,7 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementStats;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

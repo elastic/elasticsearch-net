@@ -47,7 +47,7 @@ public sealed class UpdateAliasesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -79,7 +79,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -178,7 +178,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementUpdateAliases;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementUpdateAliases;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

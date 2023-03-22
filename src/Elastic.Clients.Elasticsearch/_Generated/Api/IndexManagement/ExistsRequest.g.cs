@@ -71,7 +71,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -129,7 +129,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -168,7 +168,7 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 

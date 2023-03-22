@@ -50,7 +50,7 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -78,7 +78,7 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -225,7 +225,7 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

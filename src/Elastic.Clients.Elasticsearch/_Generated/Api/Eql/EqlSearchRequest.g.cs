@@ -49,7 +49,7 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -142,7 +142,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -522,7 +522,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlSearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

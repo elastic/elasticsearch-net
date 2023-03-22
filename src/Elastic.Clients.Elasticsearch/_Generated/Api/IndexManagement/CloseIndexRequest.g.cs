@@ -71,7 +71,7 @@ public sealed partial class CloseIndexRequest : PlainRequest<CloseIndexRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -129,7 +129,7 @@ public sealed partial class CloseIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -168,7 +168,7 @@ public sealed partial class CloseIndexRequestDescriptor : RequestDescriptor<Clos
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClose;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

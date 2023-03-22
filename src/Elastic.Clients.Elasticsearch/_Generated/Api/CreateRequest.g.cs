@@ -77,7 +77,7 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -154,7 +154,7 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

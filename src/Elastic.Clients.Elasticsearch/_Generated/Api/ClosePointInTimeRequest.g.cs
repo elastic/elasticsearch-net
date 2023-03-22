@@ -38,7 +38,7 @@ public sealed class ClosePointInTimeRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClosePointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -59,7 +59,7 @@ public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClosePointInTime;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClosePointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

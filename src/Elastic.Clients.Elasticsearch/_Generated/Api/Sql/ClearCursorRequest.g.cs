@@ -38,7 +38,7 @@ public sealed class ClearCursorRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlClearCursor;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -59,7 +59,7 @@ public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<Cle
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlClearCursor;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlClearCursor;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

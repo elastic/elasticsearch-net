@@ -51,7 +51,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -101,7 +101,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -303,7 +303,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementSimulateIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

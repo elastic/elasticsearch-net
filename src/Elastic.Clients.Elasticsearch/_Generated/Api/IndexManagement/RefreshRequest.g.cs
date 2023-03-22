@@ -60,7 +60,7 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -96,7 +96,7 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -128,7 +128,7 @@ public sealed partial class RefreshRequestDescriptor : RequestDescriptor<Refresh
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRefresh;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRefresh;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

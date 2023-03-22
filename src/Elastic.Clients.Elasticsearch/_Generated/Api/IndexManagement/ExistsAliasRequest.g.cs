@@ -65,7 +65,7 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -115,7 +115,7 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -162,7 +162,7 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementExistsAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 

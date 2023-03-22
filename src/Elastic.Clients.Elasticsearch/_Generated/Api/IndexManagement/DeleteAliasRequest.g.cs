@@ -51,7 +51,7 @@ public sealed partial class DeleteAliasRequest : PlainRequest<DeleteAliasRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -85,7 +85,7 @@ public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -126,7 +126,7 @@ public sealed partial class DeleteAliasRequestDescriptor : RequestDescriptor<Del
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

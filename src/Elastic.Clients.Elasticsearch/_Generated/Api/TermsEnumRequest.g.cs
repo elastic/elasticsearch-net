@@ -42,7 +42,7 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -106,7 +106,7 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -285,7 +285,7 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceTermsEnum;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

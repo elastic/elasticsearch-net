@@ -70,7 +70,7 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetFieldMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -126,7 +126,7 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetFieldMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -174,7 +174,7 @@ public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetFieldMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetFieldMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

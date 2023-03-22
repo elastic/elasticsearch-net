@@ -38,7 +38,7 @@ public sealed class ProcessorGrokRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestProcessorGrok;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -56,7 +56,7 @@ public sealed partial class ProcessorGrokRequestDescriptor : RequestDescriptor<P
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestProcessorGrok;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestProcessorGrok;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

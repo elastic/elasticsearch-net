@@ -51,7 +51,7 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -85,7 +85,7 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -120,7 +120,7 @@ public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<De
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

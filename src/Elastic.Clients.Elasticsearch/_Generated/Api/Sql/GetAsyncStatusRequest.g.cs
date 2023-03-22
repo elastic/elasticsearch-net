@@ -42,7 +42,7 @@ public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusR
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsyncStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -64,7 +64,7 @@ public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : Request
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsyncStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -96,7 +96,7 @@ public sealed partial class GetAsyncStatusRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsyncStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsyncStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

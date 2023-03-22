@@ -46,7 +46,7 @@ public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<Update
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdateByQueryRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -74,7 +74,7 @@ public sealed partial class UpdateByQueryRethrottleRequestDescriptor : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdateByQueryRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

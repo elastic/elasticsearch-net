@@ -38,7 +38,7 @@ public sealed class GetScriptLanguagesRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLanguagesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptLanguages;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -56,7 +56,7 @@ public sealed partial class GetScriptLanguagesRequestDescriptor : RequestDescrip
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceGetScriptLanguages;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScriptLanguages;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

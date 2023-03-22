@@ -73,7 +73,7 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -123,7 +123,7 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -170,7 +170,7 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetAlias;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

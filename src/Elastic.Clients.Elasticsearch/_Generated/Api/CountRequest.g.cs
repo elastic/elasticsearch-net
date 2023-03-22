@@ -115,7 +115,7 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCount;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -223,7 +223,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCount;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -316,7 +316,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceCount;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceCount;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

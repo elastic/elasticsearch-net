@@ -53,7 +53,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -128,7 +128,7 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

@@ -76,7 +76,7 @@ public sealed partial class Processor
 	public static Processor Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor splitProcessor) => new Processor("split", splitProcessor);
 	public static Processor Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor trimProcessor) => new Processor("trim", trimProcessor);
 	public static Processor Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor uppercaseProcessor) => new Processor("uppercase", uppercaseProcessor);
-	public static Processor Urldecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
+	public static Processor UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
 	public static Processor UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor userAgentProcessor) => new Processor("user_agent", userAgentProcessor);
 }
 
@@ -535,8 +535,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Trim(Action<TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
 	public ProcessorDescriptor<TDocument> Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor<TDocument> Uppercase(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor<TDocument> Urldecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor<TDocument> Urldecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor<TDocument> UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor<TDocument> UrlDecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor<TDocument> UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor<TDocument> UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
 
@@ -686,9 +686,9 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
 	public ProcessorDescriptor Uppercase(Action<UppercaseProcessorDescriptor> configure) => Set(configure, "uppercase");
 	public ProcessorDescriptor Uppercase<TDocument>(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor Urldecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor Urldecode(Action<UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
-	public ProcessorDescriptor Urldecode<TDocument>(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor UrlDecode(Action<UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor UrlDecode<TDocument>(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
 	public ProcessorDescriptor UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
 	public ProcessorDescriptor UserAgent(Action<UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
 	public ProcessorDescriptor UserAgent<TDocument>(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");

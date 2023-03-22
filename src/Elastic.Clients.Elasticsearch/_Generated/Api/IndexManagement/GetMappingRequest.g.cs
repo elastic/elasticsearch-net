@@ -70,7 +70,7 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -118,7 +118,7 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -152,7 +152,7 @@ public sealed partial class GetMappingRequestDescriptor : RequestDescriptor<GetM
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

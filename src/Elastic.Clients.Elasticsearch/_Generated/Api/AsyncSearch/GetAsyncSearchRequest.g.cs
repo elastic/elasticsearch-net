@@ -56,7 +56,7 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -96,7 +96,7 @@ public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : Request
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -132,7 +132,7 @@ public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

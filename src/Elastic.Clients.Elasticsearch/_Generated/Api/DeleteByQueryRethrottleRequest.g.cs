@@ -46,7 +46,7 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQueryRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -74,7 +74,7 @@ public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceDeleteByQueryRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQueryRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

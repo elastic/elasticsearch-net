@@ -181,7 +181,7 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdateByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -381,7 +381,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdateByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -570,7 +570,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceUpdateByQuery;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

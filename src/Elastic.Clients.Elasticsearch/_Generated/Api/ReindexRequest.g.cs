@@ -73,7 +73,7 @@ public sealed class ReindexRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -147,7 +147,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -319,7 +319,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindex;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

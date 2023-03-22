@@ -46,7 +46,7 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindexRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -74,7 +74,7 @@ public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceReindexRethrottle;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindexRethrottle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

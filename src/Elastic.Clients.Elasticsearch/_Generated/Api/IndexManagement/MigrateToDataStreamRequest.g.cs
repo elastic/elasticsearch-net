@@ -42,7 +42,7 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementMigrateToDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -64,7 +64,7 @@ public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementMigrateToDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementMigrateToDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

@@ -72,7 +72,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -143,7 +143,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -207,7 +207,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

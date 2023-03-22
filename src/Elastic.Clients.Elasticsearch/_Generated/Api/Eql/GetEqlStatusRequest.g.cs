@@ -42,7 +42,7 @@ public sealed partial class GetEqlStatusRequest : PlainRequest<GetEqlStatusReque
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -64,7 +64,7 @@ public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -96,7 +96,7 @@ public sealed partial class GetEqlStatusRequestDescriptor : RequestDescriptor<Ge
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGetStatus;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

@@ -56,7 +56,7 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -126,7 +126,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -361,7 +361,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestPutPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

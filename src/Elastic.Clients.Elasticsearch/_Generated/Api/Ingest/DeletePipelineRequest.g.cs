@@ -51,7 +51,7 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeletePipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -85,7 +85,7 @@ public sealed partial class DeletePipelineRequestDescriptor<TDocument> : Request
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeletePipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -120,7 +120,7 @@ public sealed partial class DeletePipelineRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestDeletePipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeletePipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

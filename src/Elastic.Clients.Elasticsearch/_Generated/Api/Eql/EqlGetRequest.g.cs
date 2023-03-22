@@ -51,7 +51,7 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -85,7 +85,7 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -120,7 +120,7 @@ public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.EqlGet;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

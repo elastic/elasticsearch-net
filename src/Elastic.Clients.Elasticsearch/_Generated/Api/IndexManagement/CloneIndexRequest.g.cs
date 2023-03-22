@@ -56,7 +56,7 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -100,7 +100,7 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -171,7 +171,7 @@ public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<Clon
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementClone;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

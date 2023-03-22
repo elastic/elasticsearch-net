@@ -46,7 +46,7 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -88,7 +88,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -276,7 +276,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutIndexTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

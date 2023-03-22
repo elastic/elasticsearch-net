@@ -55,7 +55,7 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -85,7 +85,7 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -116,7 +116,7 @@ public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<Get
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGetPipeline;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGetPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

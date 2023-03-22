@@ -75,7 +75,7 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchShards;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -129,7 +129,7 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchShards;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -164,7 +164,7 @@ public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<Se
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceSearchShards;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchShards;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

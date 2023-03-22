@@ -70,7 +70,7 @@ public sealed partial class FlushRequest : PlainRequest<FlushRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -118,7 +118,7 @@ public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -152,7 +152,7 @@ public sealed partial class FlushRequestDescriptor : RequestDescriptor<FlushRequ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementFlush;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFlush;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

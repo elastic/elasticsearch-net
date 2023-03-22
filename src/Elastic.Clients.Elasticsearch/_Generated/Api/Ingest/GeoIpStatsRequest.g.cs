@@ -38,7 +38,7 @@ public sealed class GeoIpStatsRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GeoIpStatsRequest : PlainRequest<GeoIpStatsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGeoIpStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -56,7 +56,7 @@ public sealed partial class GeoIpStatsRequestDescriptor : RequestDescriptor<GeoI
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestGeoIpStats;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestGeoIpStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

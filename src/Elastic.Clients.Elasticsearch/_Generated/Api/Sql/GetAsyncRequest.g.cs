@@ -61,7 +61,7 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -107,7 +107,7 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -144,7 +144,7 @@ public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsy
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.SqlGetAsync;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

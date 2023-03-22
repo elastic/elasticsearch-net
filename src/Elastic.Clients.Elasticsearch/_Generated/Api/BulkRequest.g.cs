@@ -90,7 +90,7 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -162,7 +162,7 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -200,7 +200,7 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceBulk;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceBulk;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

@@ -38,7 +38,7 @@ public sealed class ClearScrollRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClearScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -59,7 +59,7 @@ public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<Cle
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceClearScroll;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceClearScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

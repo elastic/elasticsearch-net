@@ -65,7 +65,7 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -119,7 +119,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -275,7 +275,7 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceRankEval;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRankEval;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

@@ -91,7 +91,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -193,7 +193,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -242,7 +242,7 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceExists;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 

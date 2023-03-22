@@ -55,7 +55,7 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -95,7 +95,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -186,7 +186,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePutScript;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

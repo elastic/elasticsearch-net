@@ -42,7 +42,7 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreateDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -64,7 +64,7 @@ public sealed partial class CreateDataStreamRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreateDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreateDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

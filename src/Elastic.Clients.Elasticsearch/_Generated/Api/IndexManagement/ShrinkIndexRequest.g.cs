@@ -56,7 +56,7 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementShrink;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -100,7 +100,7 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementShrink;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -171,7 +171,7 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementShrink;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

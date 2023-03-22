@@ -65,7 +65,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -123,7 +123,7 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementRollover;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementRollover;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

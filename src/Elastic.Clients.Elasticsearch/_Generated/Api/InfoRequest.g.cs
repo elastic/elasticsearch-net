@@ -38,7 +38,7 @@ public sealed class InfoRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -56,7 +56,7 @@ public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoReques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceInfo;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceInfo;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

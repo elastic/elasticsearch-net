@@ -42,7 +42,7 @@ public sealed class ScrollRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -78,7 +78,7 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceScroll;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScroll;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

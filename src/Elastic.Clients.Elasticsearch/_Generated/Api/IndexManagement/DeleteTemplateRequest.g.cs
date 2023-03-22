@@ -51,7 +51,7 @@ public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateR
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -85,7 +85,7 @@ public sealed partial class DeleteTemplateRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementDeleteTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

@@ -107,7 +107,7 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -220,7 +220,7 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -291,7 +291,7 @@ public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<Mul
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

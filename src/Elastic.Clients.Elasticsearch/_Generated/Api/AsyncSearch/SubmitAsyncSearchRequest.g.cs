@@ -594,7 +594,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -936,7 +936,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -1980,7 +1980,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchSubmit;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchSubmit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

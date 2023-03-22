@@ -38,7 +38,7 @@ public sealed class PingRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePing;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
@@ -56,7 +56,7 @@ public sealed partial class PingRequestDescriptor : RequestDescriptor<PingReques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespacePing;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePing;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 

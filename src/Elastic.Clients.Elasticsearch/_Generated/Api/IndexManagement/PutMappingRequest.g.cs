@@ -71,7 +71,7 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -196,7 +196,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -527,7 +527,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementPutMapping;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 

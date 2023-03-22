@@ -66,7 +66,7 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -118,7 +118,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -156,7 +156,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceOpenPointInTime;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

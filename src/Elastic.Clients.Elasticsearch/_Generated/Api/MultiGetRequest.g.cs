@@ -85,7 +85,7 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -163,7 +163,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -293,7 +293,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 

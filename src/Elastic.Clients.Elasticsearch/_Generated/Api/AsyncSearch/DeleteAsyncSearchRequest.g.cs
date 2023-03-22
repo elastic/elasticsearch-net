@@ -42,7 +42,7 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -64,7 +64,7 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
@@ -96,7 +96,7 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescript
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.AsyncSearchDelete;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 

@@ -50,7 +50,7 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -74,7 +74,7 @@ public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<G
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementGetDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 

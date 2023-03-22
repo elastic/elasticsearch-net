@@ -56,7 +56,7 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -110,7 +110,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
@@ -251,7 +251,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IndexManagementCreate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
