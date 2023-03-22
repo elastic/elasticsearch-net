@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,37 +25,28 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed partial class GrokProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
-
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
-
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
-
 	[JsonInclude, JsonPropertyName("pattern_definitions")]
 	public IDictionary<string, string>? PatternDefinitions { get; set; }
-
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
-
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
-
 	[JsonInclude, JsonPropertyName("trace_match")]
 	public bool? TraceMatch { get; set; }
 
@@ -63,34 +56,23 @@ public sealed partial class GrokProcessor
 public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDescriptor<GrokProcessorDescriptor<TDocument>>
 {
 	internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public GrokProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private bool? IgnoreMissingValue { get; set; }
-
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-
 	private ICollection<string> PatternsValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private bool? TraceMatchValue { get; set; }
 
 	public GrokProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
@@ -276,34 +258,23 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<GrokProcessorDescriptor>
 {
 	internal GrokProcessorDescriptor(Action<GrokProcessorDescriptor> configure) => configure.Invoke(this);
+
 	public GrokProcessorDescriptor() : base()
 	{
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-
 	private string? DescriptionValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private string? IfValue { get; set; }
-
 	private bool? IgnoreFailureValue { get; set; }
-
 	private bool? IgnoreMissingValue { get; set; }
-
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
-
 	private ICollection<string> PatternsValue { get; set; }
-
 	private string? TagValue { get; set; }
-
 	private bool? TraceMatchValue { get; set; }
 
 	public GrokProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)

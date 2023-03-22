@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -25,14 +27,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ingest;
+
 public sealed class SimulateRequestParameters : RequestParameters
 {
-	[JsonIgnore]
+	/// <summary>
+	/// <para>Verbose mode. Display data output for each processor in executed pipeline</para>
+	/// </summary>
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
+/// <summary>
+/// <para>Allows to simulate a pipeline with example documents.</para>
+/// </summary>
 public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParameters>
 {
 	public SimulateRequest()
@@ -43,30 +50,42 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
+	/// <summary>
+	/// <para>Verbose mode. Display data output for each processor in executed pipeline</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
-
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? Docs { get; set; }
-
 	[JsonInclude, JsonPropertyName("pipeline")]
 	public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 }
 
+/// <summary>
+/// <para>Allows to simulate a pipeline with example documents.</para>
+/// </summary>
 public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescriptor<SimulateRequestDescriptor<TDocument>, SimulateRequestParameters>
 {
 	internal SimulateRequestDescriptor(Action<SimulateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public SimulateRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SimulateRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
+
 	public SimulateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		RouteValues.Optional("id", id);
@@ -74,17 +93,11 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
-
 	private PipelineDescriptor<TDocument> PipelineDescriptor { get; set; }
-
 	private Action<PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
-
 	private DocumentDescriptor DocsDescriptor { get; set; }
-
 	private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
-
 	private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
 
 	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
@@ -201,17 +214,25 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	}
 }
 
+/// <summary>
+/// <para>Allows to simulate a pipeline with example documents.</para>
+/// </summary>
 public sealed partial class SimulateRequestDescriptor : RequestDescriptor<SimulateRequestDescriptor, SimulateRequestParameters>
 {
 	internal SimulateRequestDescriptor(Action<SimulateRequestDescriptor> configure) => configure.Invoke(this);
+
 	public SimulateRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlsLookups.IngestSimulate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
 	internal override bool SupportsBody => true;
+
 	public SimulateRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
+
 	public SimulateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		RouteValues.Optional("id", id);
@@ -219,17 +240,11 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	}
 
 	private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
-
 	private PipelineDescriptor PipelineDescriptor { get; set; }
-
 	private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
-
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>? DocsValue { get; set; }
-
 	private DocumentDescriptor DocsDescriptor { get; set; }
-
 	private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
-
 	private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
 
 	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)

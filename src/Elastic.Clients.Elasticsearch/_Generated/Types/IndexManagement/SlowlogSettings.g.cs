@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class SlowlogSettings
 {
 	[JsonInclude, JsonPropertyName("level")]
 	public string? Level { get; set; }
-
 	[JsonInclude, JsonPropertyName("reformat")]
 	public bool? Reformat { get; set; }
-
 	[JsonInclude, JsonPropertyName("source")]
 	public int? Source { get; set; }
-
 	[JsonInclude, JsonPropertyName("threshold")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? Threshold { get; set; }
 }
@@ -43,20 +42,16 @@ public sealed partial class SlowlogSettings
 public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<SlowlogSettingsDescriptor>
 {
 	internal SlowlogSettingsDescriptor(Action<SlowlogSettingsDescriptor> configure) => configure.Invoke(this);
+
 	public SlowlogSettingsDescriptor() : base()
 	{
 	}
 
 	private string? LevelValue { get; set; }
-
 	private bool? ReformatValue { get; set; }
-
 	private int? SourceValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? ThresholdValue { get; set; }
-
 	private SlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
-
 	private Action<SlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
 
 	public SlowlogSettingsDescriptor Level(string? level)

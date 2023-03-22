@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,20 +25,19 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Analysis;
+
 public sealed partial class StopAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("stopwords")]
 	[JsonConverter(typeof(StopWordsConverter))]
 	public ICollection<string>? Stopwords { get; set; }
-
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude]
-	[JsonPropertyName("type")]
+	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stop";
+
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -44,14 +45,13 @@ public sealed partial class StopAnalyzer : IAnalyzer
 public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<StopAnalyzerDescriptor>, IBuildableDescriptor<StopAnalyzer>
 {
 	internal StopAnalyzerDescriptor(Action<StopAnalyzerDescriptor> configure) => configure.Invoke(this);
+
 	public StopAnalyzerDescriptor() : base()
 	{
 	}
 
 	private ICollection<string>? StopwordsValue { get; set; }
-
 	private string? StopwordsPathValue { get; set; }
-
 	private string? VersionValue { get; set; }
 
 	public StopAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)

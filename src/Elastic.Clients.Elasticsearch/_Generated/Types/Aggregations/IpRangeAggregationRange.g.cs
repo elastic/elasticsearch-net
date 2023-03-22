@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class IpRangeAggregationRange
 {
 	[JsonInclude, JsonPropertyName("from")]
 	public string? From { get; set; }
-
 	[JsonInclude, JsonPropertyName("mask")]
 	public string? Mask { get; set; }
-
 	[JsonInclude, JsonPropertyName("to")]
 	public string? To { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class IpRangeAggregationRange
 public sealed partial class IpRangeAggregationRangeDescriptor : SerializableDescriptor<IpRangeAggregationRangeDescriptor>
 {
 	internal IpRangeAggregationRangeDescriptor(Action<IpRangeAggregationRangeDescriptor> configure) => configure.Invoke(this);
+
 	public IpRangeAggregationRangeDescriptor() : base()
 	{
 	}
 
 	private string? FromValue { get; set; }
-
 	private string? MaskValue { get; set; }
-
 	private string? ToValue { get; set; }
 
 	public IpRangeAggregationRangeDescriptor From(string? from)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
@@ -24,13 +26,15 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// <para>The response returned by Elasticsearch when request execution did not succeed.</para>
+/// </summary>
 public abstract partial class ErrorResponseBase
 {
 	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Error { get; init; }
-
 	[JsonInclude, JsonPropertyName("status")]
 	public int Status { get; init; }
 }

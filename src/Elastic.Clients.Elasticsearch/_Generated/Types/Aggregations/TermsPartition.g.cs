@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,13 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 public sealed partial class TermsPartition
 {
 	[JsonInclude, JsonPropertyName("num_partitions")]
 	public long NumPartitions { get; set; }
-
 	[JsonInclude, JsonPropertyName("partition")]
 	public long Partition { get; set; }
 }
@@ -37,12 +38,12 @@ public sealed partial class TermsPartition
 public sealed partial class TermsPartitionDescriptor : SerializableDescriptor<TermsPartitionDescriptor>
 {
 	internal TermsPartitionDescriptor(Action<TermsPartitionDescriptor> configure) => configure.Invoke(this);
+
 	public TermsPartitionDescriptor() : base()
 	{
 	}
 
 	private long NumPartitionsValue { get; set; }
-
 	private long PartitionValue { get; set; }
 
 	public TermsPartitionDescriptor NumPartitions(long numPartitions)

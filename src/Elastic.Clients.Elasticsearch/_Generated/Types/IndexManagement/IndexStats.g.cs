@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,64 +25,114 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class IndexStats
 {
 	[JsonInclude, JsonPropertyName("bulk")]
 	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about completions across all shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("completion")]
 	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about documents across all primary shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about the field data cache across all shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fielddata")]
 	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about flush operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("flush")]
 	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about get operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("get")]
 	public Elastic.Clients.Elasticsearch.GetStats? Get { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about indexing operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indexing")]
 	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about indices operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about merge operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("merges")]
 	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about the query cache across all shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query_cache")]
 	public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about recovery operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("recovery")]
 	public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about refresh operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh")]
 	public Elastic.Clients.Elasticsearch.RefreshStats? Refresh { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about the request cache across all shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("request_cache")]
 	public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about search operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("search")]
 	public Elastic.Clients.Elasticsearch.SearchStats? Search { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about segments across all shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("segments")]
 	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; init; }
-
 	[JsonInclude, JsonPropertyName("shard_stats")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about the size of shards assigned to the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about transaction log operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("translog")]
 	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; init; }
 
+	/// <summary>
+	/// <para>Contains statistics about index warming operations for the node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("warmer")]
 	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; init; }
 }

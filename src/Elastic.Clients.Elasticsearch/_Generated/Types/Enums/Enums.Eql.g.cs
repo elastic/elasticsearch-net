@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -22,13 +24,19 @@ using System.Runtime.Serialization;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
+
 [JsonConverter(typeof(ResultPositionConverter))]
 public enum ResultPosition
 {
+	/// <summary>
+	/// <para>Return the most recent matches, similar to the Unix tail command.</para>
+	/// </summary>
 	[EnumMember(Value = "tail")]
 	Tail,
+	/// <summary>
+	/// <para>Return the earliest matches, similar to the Unix head command.</para>
+	/// </summary>
 	[EnumMember(Value = "head")]
 	Head
 }
@@ -46,8 +54,7 @@ internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
 				return ResultPosition.Head;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		ThrowHelper.ThrowJsonException(); return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)

@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class ExtendedStatsBucketAggregationConverter : JsonConverter<ExtendedStatsBucketAggregation>
 {
 	public override ExtendedStatsBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -136,34 +138,29 @@ internal sealed class ExtendedStatsBucketAggregationConverter : JsonConverter<Ex
 public sealed partial class ExtendedStatsBucketAggregation : SearchAggregation
 {
 	public ExtendedStatsBucketAggregation(string name) => Name = name;
+
 	internal ExtendedStatsBucketAggregation()
 	{
 	}
 
 	public string? Format { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
-
+	override public string? Name { get; internal set; }
 	public double? Sigma { get; set; }
 }
 
 public sealed partial class ExtendedStatsBucketAggregationDescriptor : SerializableDescriptor<ExtendedStatsBucketAggregationDescriptor>
 {
 	internal ExtendedStatsBucketAggregationDescriptor(Action<ExtendedStatsBucketAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public ExtendedStatsBucketAggregationDescriptor() : base()
 	{
 	}
 
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
-
 	private double? SigmaValue { get; set; }
 
 	public ExtendedStatsBucketAggregationDescriptor Format(string? format)

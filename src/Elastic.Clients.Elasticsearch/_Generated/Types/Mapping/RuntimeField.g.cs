@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Mapping;
+
 public sealed partial class RuntimeField
 {
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class RuntimeField
 public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<RuntimeFieldDescriptor>
 {
 	internal RuntimeFieldDescriptor(Action<RuntimeFieldDescriptor> configure) => configure.Invoke(this);
+
 	public RuntimeFieldDescriptor() : base()
 	{
 	}
 
 	private string? FormatValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType TypeValue { get; set; }
 
 	public RuntimeFieldDescriptor Format(string? format)

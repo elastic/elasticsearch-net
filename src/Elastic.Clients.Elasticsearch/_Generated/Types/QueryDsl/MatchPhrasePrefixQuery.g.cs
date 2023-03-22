@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<MatchPhrasePrefixQuery>
 {
 	public override MatchPhrasePrefixQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -155,19 +157,12 @@ public sealed partial class MatchPhrasePrefixQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
-
 	public string? Analyzer { get; set; }
-
 	public float? Boost { get; set; }
-
 	public int? MaxExpansions { get; set; }
-
 	public string Query { get; set; }
-
 	public int? Slop { get; set; }
-
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(MatchPhrasePrefixQuery matchPhrasePrefixQuery) => QueryDsl.Query.MatchPhrasePrefix(matchPhrasePrefixQuery);
@@ -176,6 +171,7 @@ public sealed partial class MatchPhrasePrefixQuery : SearchQuery
 public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhrasePrefixQueryDescriptor<TDocument>>
 {
 	internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	internal MatchPhrasePrefixQueryDescriptor() : base()
 	{
 	}
@@ -195,19 +191,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? queryName)
@@ -317,6 +306,7 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescriptor<MatchPhrasePrefixQueryDescriptor>
 {
 	internal MatchPhrasePrefixQueryDescriptor(Action<MatchPhrasePrefixQueryDescriptor> configure) => configure.Invoke(this);
+
 	internal MatchPhrasePrefixQueryDescriptor() : base()
 	{
 	}
@@ -329,19 +319,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 	}
 
 	private string? QueryNameValue { get; set; }
-
 	private string? AnalyzerValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-
 	private int? MaxExpansionsValue { get; set; }
-
 	private string QueryValue { get; set; }
-
 	private int? SlopValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
 
 	public MatchPhrasePrefixQueryDescriptor QueryName(string? queryName)

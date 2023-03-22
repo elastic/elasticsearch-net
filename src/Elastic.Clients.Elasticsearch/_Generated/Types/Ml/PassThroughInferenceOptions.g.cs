@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,40 +25,56 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
+/// <summary>
+/// <para>Pass through configuration options</para>
+/// </summary>
 public sealed partial class PassThroughInferenceOptions
 {
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
 	public static implicit operator InferenceConfigCreate(PassThroughInferenceOptions passThroughInferenceOptions) => Ml.InferenceConfigCreate.PassThrough(passThroughInferenceOptions);
 }
 
+/// <summary>
+/// <para>Pass through configuration options</para>
+/// </summary>
 public sealed partial class PassThroughInferenceOptionsDescriptor : SerializableDescriptor<PassThroughInferenceOptionsDescriptor>
 {
 	internal PassThroughInferenceOptionsDescriptor(Action<PassThroughInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+
 	public PassThroughInferenceOptionsDescriptor() : base()
 	{
 	}
 
 	private string? ResultsFieldValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
-
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
+	/// </summary>
 	public PassThroughInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The tokenization options</para>
+	/// </summary>
 	public PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;

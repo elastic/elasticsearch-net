@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class ConstantScoreQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 
@@ -42,18 +42,15 @@ public sealed partial class ConstantScoreQuery : SearchQuery
 public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>
 {
 	internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ConstantScoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
-
 	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)
@@ -130,18 +127,15 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 public sealed partial class ConstantScoreQueryDescriptor : SerializableDescriptor<ConstantScoreQueryDescriptor>
 {
 	internal ConstantScoreQueryDescriptor(Action<ConstantScoreQueryDescriptor> configure) => configure.Invoke(this);
+
 	public ConstantScoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
-
 	private QueryDescriptor FilterDescriptor { get; set; }
-
 	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
 
 	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)

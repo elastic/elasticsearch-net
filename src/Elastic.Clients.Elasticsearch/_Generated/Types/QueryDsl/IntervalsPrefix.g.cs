@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,14 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class IntervalsPrefix
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
-
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string Prefix { get; set; }
-
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -40,14 +40,13 @@ public sealed partial class IntervalsPrefix
 public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableDescriptor<IntervalsPrefixDescriptor<TDocument>>
 {
 	internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public IntervalsPrefixDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private string PrefixValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer)
@@ -98,14 +97,13 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<IntervalsPrefixDescriptor>
 {
 	internal IntervalsPrefixDescriptor(Action<IntervalsPrefixDescriptor> configure) => configure.Invoke(this);
+
 	public IntervalsPrefixDescriptor() : base()
 	{
 	}
 
 	private string? AnalyzerValue { get; set; }
-
 	private string PrefixValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
 	public IntervalsPrefixDescriptor Analyzer(string? analyzer)

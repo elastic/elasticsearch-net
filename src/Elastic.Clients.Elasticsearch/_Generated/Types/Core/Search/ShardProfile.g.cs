@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,19 +25,16 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Core.Search;
+
 public sealed partial class ShardProfile
 {
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> Aggregations { get; init; }
-
 	[JsonInclude, JsonPropertyName("fetch")]
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfile? Fetch { get; init; }
-
 	[JsonInclude, JsonPropertyName("id")]
 	public string Id { get; init; }
-
 	[JsonInclude, JsonPropertyName("searches")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; init; }
 }

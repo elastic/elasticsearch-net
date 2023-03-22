@@ -15,16 +15,21 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
 public sealed partial class MigrateToDataStreamResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
 }

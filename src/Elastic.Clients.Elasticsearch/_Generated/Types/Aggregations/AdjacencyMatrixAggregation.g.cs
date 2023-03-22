@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,8 +25,8 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
 internal sealed class AdjacencyMatrixAggregationConverter : JsonConverter<AdjacencyMatrixAggregation>
 {
 	public override AdjacencyMatrixAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -117,34 +119,29 @@ internal sealed class AdjacencyMatrixAggregationConverter : JsonConverter<Adjace
 public sealed partial class AdjacencyMatrixAggregation : SearchAggregation
 {
 	public AdjacencyMatrixAggregation(string name) => Name = name;
+
 	internal AdjacencyMatrixAggregation()
 	{
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	public IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
-
 	public IDictionary<string, object>? Meta { get; set; }
-
-	public override string? Name { get; internal set; }
+	override public string? Name { get; internal set; }
 }
 
 public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : SerializableDescriptor<AdjacencyMatrixAggregationDescriptor<TDocument>>
 {
 	internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public AdjacencyMatrixAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public AdjacencyMatrixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
@@ -224,18 +221,15 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableDescriptor<AdjacencyMatrixAggregationDescriptor>
 {
 	internal AdjacencyMatrixAggregationDescriptor(Action<AdjacencyMatrixAggregationDescriptor> configure) => configure.Invoke(this);
+
 	public AdjacencyMatrixAggregationDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-
 	private IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? FiltersValue { get; set; }
-
 	private IDictionary<string, object>? MetaValue { get; set; }
 
 	public AdjacencyMatrixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)

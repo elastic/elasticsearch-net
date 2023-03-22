@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,16 +25,25 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Eql;
+
 public sealed partial class EqlHits<TEvent>
 {
+	/// <summary>
+	/// <para>Contains events matching the query. Each object represents a matching event.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("events")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>? Events { get; init; }
 
+	/// <summary>
+	/// <para>Contains event sequences matching the query. Each object represents a matching sequence. This parameter is only returned for EQL queries containing a sequence.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("sequences")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsSequence<TEvent>>? Sequences { get; init; }
 
+	/// <summary>
+	/// <para>Metadata about the number of matching events or sequences.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
 }

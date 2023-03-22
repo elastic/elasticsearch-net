@@ -15,22 +15,22 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch;
+
 public sealed partial class BulkResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("errors")]
 	public bool Errors { get; init; }
-
 	[JsonInclude, JsonPropertyName("ingest_took")]
 	public long? IngestTook { get; init; }
-
 	[JsonInclude, JsonPropertyName("took")]
 	public long Took { get; init; }
 }

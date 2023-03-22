@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,9 +25,12 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.Ml;
+
 [JsonConverter(typeof(InferenceConfigCreateConverter))]
+/// <summary>
+/// <para>Inference configuration provided when storing the model config</para>
+/// </summary>
 public sealed partial class InferenceConfigCreate
 {
 	internal InferenceConfigCreate(string variantName, object variant)
@@ -41,7 +46,6 @@ public sealed partial class InferenceConfigCreate
 	}
 
 	internal object Variant { get; }
-
 	internal string VariantName { get; }
 
 	public static InferenceConfigCreate Classification(Elastic.Clients.Elasticsearch.Ml.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigCreate("classification", classificationInferenceOptions);
@@ -180,20 +184,17 @@ internal sealed partial class InferenceConfigCreateConverter : JsonConverter<Inf
 public sealed partial class InferenceConfigCreateDescriptor<TDocument> : SerializableDescriptor<InferenceConfigCreateDescriptor<TDocument>>
 {
 	internal InferenceConfigCreateDescriptor(Action<InferenceConfigCreateDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public InferenceConfigCreateDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigCreateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigCreateDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -229,6 +230,7 @@ public sealed partial class InferenceConfigCreateDescriptor<TDocument> : Seriali
 	public InferenceConfigCreateDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
 	public InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
 	public InferenceConfigCreateDescriptor<TDocument> ZeroShotClassification(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)
@@ -254,20 +256,17 @@ public sealed partial class InferenceConfigCreateDescriptor<TDocument> : Seriali
 public sealed partial class InferenceConfigCreateDescriptor : SerializableDescriptor<InferenceConfigCreateDescriptor>
 {
 	internal InferenceConfigCreateDescriptor(Action<InferenceConfigCreateDescriptor> configure) => configure.Invoke(this);
+
 	public InferenceConfigCreateDescriptor() : base()
 	{
 	}
 
 	private bool ContainsVariant { get; set; }
-
 	private string ContainedVariantName { get; set; }
-
 	private object Variant { get; set; }
-
 	private Descriptor Descriptor { get; set; }
 
-	private InferenceConfigCreateDescriptor Set<T>(Action<T> descriptorAction, string variantName)
-		where T : Descriptor
+	private InferenceConfigCreateDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
 		ContainedVariantName = variantName;
 		ContainsVariant = true;
@@ -304,6 +303,7 @@ public sealed partial class InferenceConfigCreateDescriptor : SerializableDescri
 	public InferenceConfigCreateDescriptor TextEmbedding(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => Set(configure, "text_embedding");
 	public InferenceConfigCreateDescriptor ZeroShotClassification(ZeroShotClassificationInferenceOptions zeroShotClassificationInferenceOptions) => Set(zeroShotClassificationInferenceOptions, "zero_shot_classification");
 	public InferenceConfigCreateDescriptor ZeroShotClassification(Action<ZeroShotClassificationInferenceOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (!ContainsVariant)

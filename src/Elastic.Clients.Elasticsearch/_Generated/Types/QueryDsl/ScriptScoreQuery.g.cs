@@ -15,6 +15,8 @@
 //
 // ------------------------------------------------
 
+#nullable restore
+
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
@@ -23,22 +25,18 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#nullable restore
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
 public sealed partial class ScriptScoreQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
-
 	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
-
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
@@ -48,22 +46,17 @@ public sealed partial class ScriptScoreQuery : SearchQuery
 public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptor<ScriptScoreQueryDescriptor<TDocument>>
 {
 	internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
 	public ScriptScoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private float? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 	public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
@@ -160,22 +153,17 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<ScriptScoreQueryDescriptor>
 {
 	internal ScriptScoreQueryDescriptor(Action<ScriptScoreQueryDescriptor> configure) => configure.Invoke(this);
+
 	public ScriptScoreQueryDescriptor() : base()
 	{
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-
 	private QueryDescriptor QueryDescriptor { get; set; }
-
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
-
 	private string? QueryNameValue { get; set; }
-
 	private float? BoostValue { get; set; }
-
 	private float? MinScoreValue { get; set; }
-
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
 	public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
