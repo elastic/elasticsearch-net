@@ -12,43 +12,11 @@ using Tests.Core.Extensions;
 
 namespace Tests.Aggregations.Pipeline;
 
-public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
+public class BucketSortAggregationUsageTests : AggregationUsageWithVerifyTestBase<ReadOnlyCluster>
 {
 	public BucketSortAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	protected override object AggregationJson => new
-	{
-		projects_started_per_month = new
-		{
-			date_histogram = new
-			{
-				field = "startedOn",
-				calendar_interval = "month",
-			},
-			aggregations = new
-			{
-				commits = new
-				{
-					sum = new
-					{
-						field = "numberOfCommits"
-					}
-				},
-				commits_bucket_sort = new
-				{
-					bucket_sort = new
-					{
-						sort = new { commits = new { order = "desc" } },
-						from = 0,
-						size = 3,
-						gap_policy = "insert_zeros"
-					}
-				}
-			}
-		}
-	};
-
-	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggregations => a => a
 		.DateHistogram("projects_started_per_month", dh => dh
 			.Field(p => p.StartedOn)
 			.CalendarInterval(CalendarInterval.Month)
@@ -67,7 +35,7 @@ public class BucketSortAggregationUsageTests : AggregationUsageTestBase<ReadOnly
 			)
 		);
 
-	protected override AggregationDictionary InitializerAggs =>
+	protected override AggregationDictionary InitializerAggregations =>
 		new DateHistogramAggregation("projects_started_per_month")
 		{
 			Field = "startedOn",

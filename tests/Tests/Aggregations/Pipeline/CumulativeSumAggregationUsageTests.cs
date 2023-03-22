@@ -12,40 +12,13 @@ using Xunit;
 
 namespace Tests.Aggregations.Pipeline;
 
-public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
+public class CumulativeSumAggregationUsageTests : AggregationUsageWithVerifyTestBase<ReadOnlyCluster>
 {
 	public CumulativeSumAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-	protected override object AggregationJson => new
-	{
-		projects_started_per_month = new
-		{
-			date_histogram = new
-			{
-				field = "startedOn",
-				calendar_interval = "month",
-			},
-			aggregations = new
-			{
-				commits = new
-				{
-					sum = new
-					{
-						field = "numberOfCommits"
-					}
-				},
-				cumulative_commits = new
-				{
-					cumulative_sum = new
-					{
-						buckets_path = "commits"
-					}
-				}
-			}
-		}
-	};
+	protected override bool CompareJsonStrings => true;
 
-	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
+	protected override Action<AggregationDescriptor<Project>> FluentAggregations => a => a
 		.DateHistogram("projects_started_per_month", dh => dh
 			.Field(p => p.StartedOn)
 			.CalendarInterval(CalendarInterval.Month)
@@ -59,7 +32,7 @@ public class CumulativeSumAggregationUsageTests : AggregationUsageTestBase<ReadO
 			)
 		);
 
-	protected override AggregationDictionary InitializerAggs =>
+	protected override AggregationDictionary InitializerAggregations =>
 		new DateHistogramAggregation("projects_started_per_month")
 		{
 			Field = "startedOn",
