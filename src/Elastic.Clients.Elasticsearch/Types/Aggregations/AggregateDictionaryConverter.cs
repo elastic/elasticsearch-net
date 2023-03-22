@@ -407,7 +407,9 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "cumulative_sum":
+			// Used by:
+			// - cumulative sum aggregation
+			case "simple_value":
 				{
 					var agg = JsonSerializer.Deserialize<SimpleValueAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
