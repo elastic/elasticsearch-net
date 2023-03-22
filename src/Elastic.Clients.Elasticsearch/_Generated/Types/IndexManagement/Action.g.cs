@@ -94,18 +94,21 @@ internal sealed partial class ActionConverter : JsonConverter<Action>
 	public override void Write(Utf8JsonWriter writer, Action value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(value.VariantName);
-		switch (value.VariantName)
+		if (value.VariantName is not null & value.Variant is not null)
 		{
-			case "add":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction)value.Variant, options);
-				break;
-			case "remove":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction)value.Variant, options);
-				break;
-			case "remove_index":
-				JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction)value.Variant, options);
-				break;
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "add":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.AddAction)value.Variant, options);
+					break;
+				case "remove":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveAction)value.Variant, options);
+					break;
+				case "remove_index":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction>(writer, (Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndexAction)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
