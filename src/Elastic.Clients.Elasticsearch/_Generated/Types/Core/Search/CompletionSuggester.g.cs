@@ -38,13 +38,8 @@ public sealed partial class CompletionSuggester
 
 	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
-
-	[JsonInclude, JsonPropertyName("prefix")]
-	public string? Prefix { get; set; }
-
 	[JsonInclude, JsonPropertyName("regex")]
-	public string? Regex { get; set; }
-
+	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
@@ -72,11 +67,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
 
 	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-
-	private string? PrefixValue { get; set; }
-
-	private string? RegexValue { get; set; }
-
+	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
+	private RegexOptionsDescriptor RegexDescriptor { get; set; }
+	private Action<RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 
 	private bool? SkipDuplicatesValue { get; set; }
@@ -129,15 +122,27 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Prefix(string? prefix)
+	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
-		PrefixValue = prefix;
+		RegexDescriptor = null;
+		RegexDescriptorAction = null;
+		RegexValue = regex;
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Regex(string? regex)
+	public CompletionSuggesterDescriptor<TDocument> Regex(RegexOptionsDescriptor descriptor)
 	{
-		RegexValue = regex;
+		RegexValue = null;
+		RegexDescriptorAction = null;
+		RegexDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompletionSuggesterDescriptor<TDocument> Regex(Action<RegexOptionsDescriptor> configure)
+	{
+		RegexValue = null;
+		RegexDescriptor = null;
+		RegexDescriptorAction = configure;
 		return Self;
 	}
 
@@ -186,16 +191,20 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, FuzzyValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (!string.IsNullOrEmpty(RegexValue))
+		if (RegexDescriptor is not null)
 		{
 			writer.WritePropertyName("regex");
-			writer.WriteStringValue(RegexValue);
+			JsonSerializer.Serialize(writer, RegexDescriptor, options);
+		}
+		else if (RegexDescriptorAction is not null)
+		{
+			writer.WritePropertyName("regex");
+			JsonSerializer.Serialize(writer, new RegexOptionsDescriptor(RegexDescriptorAction), options);
+		}
+		else if (RegexValue is not null)
+		{
+			writer.WritePropertyName("regex");
+			JsonSerializer.Serialize(writer, RegexValue, options);
 		}
 
 		if (SizeValue.HasValue)
@@ -232,11 +241,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
 
 	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-
-	private string? PrefixValue { get; set; }
-
-	private string? RegexValue { get; set; }
-
+	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
+	private RegexOptionsDescriptor RegexDescriptor { get; set; }
+	private Action<RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 
 	private bool? SkipDuplicatesValue { get; set; }
@@ -295,15 +302,27 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Prefix(string? prefix)
+	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
-		PrefixValue = prefix;
+		RegexDescriptor = null;
+		RegexDescriptorAction = null;
+		RegexValue = regex;
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Regex(string? regex)
+	public CompletionSuggesterDescriptor Regex(RegexOptionsDescriptor descriptor)
 	{
-		RegexValue = regex;
+		RegexValue = null;
+		RegexDescriptorAction = null;
+		RegexDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompletionSuggesterDescriptor Regex(Action<RegexOptionsDescriptor> configure)
+	{
+		RegexValue = null;
+		RegexDescriptor = null;
+		RegexDescriptorAction = configure;
 		return Self;
 	}
 
@@ -352,16 +371,20 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, FuzzyValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(PrefixValue))
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteStringValue(PrefixValue);
-		}
-
-		if (!string.IsNullOrEmpty(RegexValue))
+		if (RegexDescriptor is not null)
 		{
 			writer.WritePropertyName("regex");
-			writer.WriteStringValue(RegexValue);
+			JsonSerializer.Serialize(writer, RegexDescriptor, options);
+		}
+		else if (RegexDescriptorAction is not null)
+		{
+			writer.WritePropertyName("regex");
+			JsonSerializer.Serialize(writer, new RegexOptionsDescriptor(RegexDescriptorAction), options);
+		}
+		else if (RegexValue is not null)
+		{
+			writer.WritePropertyName("regex");
+			JsonSerializer.Serialize(writer, RegexValue, options);
 		}
 
 		if (SizeValue.HasValue)
