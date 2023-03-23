@@ -32,13 +32,13 @@ public sealed partial class StoreStats
 	[JsonInclude, JsonPropertyName("reserved")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Reserved { get; init; }
 	[JsonInclude, JsonPropertyName("reserved_in_bytes")]
-	public int ReservedInBytes { get; init; }
+	public long ReservedInBytes { get; init; }
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
 	[JsonInclude, JsonPropertyName("size_in_bytes")]
-	public int SizeInBytes { get; init; }
+	public long SizeInBytes { get; init; }
 	[JsonInclude, JsonPropertyName("total_data_set_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalDataSetSize { get; init; }
 	[JsonInclude, JsonPropertyName("total_data_set_size_in_bytes")]
-	public int? TotalDataSetSizeInBytes { get; init; }
+	public long? TotalDataSetSizeInBytes { get; init; }
 }
