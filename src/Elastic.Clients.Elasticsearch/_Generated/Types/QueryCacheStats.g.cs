@@ -43,8 +43,7 @@ public sealed partial class QueryCacheStats
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; init; }
 
 	[JsonInclude, JsonPropertyName("memory_size_in_bytes")]
-	public int MemorySizeInBytes { get; init; }
-
+	public long MemorySizeInBytes { get; init; }
 	[JsonInclude, JsonPropertyName("miss_count")]
 	public int MissCount { get; init; }
 
