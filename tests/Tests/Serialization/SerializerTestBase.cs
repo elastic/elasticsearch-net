@@ -115,6 +115,7 @@ public abstract class InstanceSerializerTestBase
 public abstract class SerializerTestBase
 {
 	protected static readonly Serializer _requestResponseSerializer;
+	protected static readonly Serializer _sourceSerializer;
 	protected static readonly IElasticsearchClientSettings _settings;
 
 	static SerializerTestBase()
@@ -125,6 +126,7 @@ public abstract class SerializerTestBase
 		var client = new ElasticsearchClient(settings);
 		
 		_requestResponseSerializer = client.RequestResponseSerializer;
+		_sourceSerializer = client.SourceSerializer;
 		_settings = client.ElasticsearchClientSettings;
 	}
 
@@ -163,10 +165,25 @@ public abstract class SerializerTestBase
 		return reader.ReadToEnd();
 	}
 
+	protected static string SourceSerializeAndGetJsonString<T>(T data)
+	{
+		var stream = new MemoryStream();
+		_sourceSerializer.Serialize(data, stream);
+		stream.Position = 0;
+		var reader = new StreamReader(stream);
+		return reader.ReadToEnd();
+	}
+
 	protected static T DeserializeJsonString<T>(string json)
 	{
 		var stream = WrapInStream(json);
 		return _requestResponseSerializer.Deserialize<T>(stream);
+	}
+
+	protected static T SourceDeserializeJsonString<T>(string json)
+	{
+		var stream = WrapInStream(json);
+		return _sourceSerializer.Deserialize<T>(stream);
 	}
 
 	/// <summary>
