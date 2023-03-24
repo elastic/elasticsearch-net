@@ -20,7 +20,9 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 	/// </summary>
 	public static JsonConverter[] DefaultBuiltInConverters => new JsonConverter[]
 	{
-		new JsonStringEnumConverter()
+		new JsonStringEnumConverter(),
+		new DoubleWithFractionalPortionConverter(),
+		new FloatWithFractionalPortionConverter()
 	};
 
 	private readonly JsonSerializerOptions _jsonSerializerOptions;
@@ -63,7 +65,7 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 		{
 			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-			NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals
+			NumberHandling = JsonNumberHandling.AllowReadingFromString // For numerically mapped fields, it is possible for values in the source to be returned as strings, if they were indexed as such.
 		};
 
 		if (includeDefaultConverters)
