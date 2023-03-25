@@ -25,20 +25,39 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class AliasDefinition
+public sealed partial class GoogleNormalizedDistanceHeuristic
 {
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
-	[JsonInclude, JsonPropertyName("index_routing")]
-	public string? IndexRouting { get; init; }
-	[JsonInclude, JsonPropertyName("is_hidden")]
-	public bool? IsHidden { get; init; }
-	[JsonInclude, JsonPropertyName("is_write_index")]
-	public bool? IsWriteIndex { get; init; }
-	[JsonInclude, JsonPropertyName("routing")]
-	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("search_routing")]
-	public string? SearchRouting { get; init; }
+	[JsonInclude, JsonPropertyName("background_is_superset")]
+	public bool? BackgroundIsSuperset { get; set; }
+}
+
+public sealed partial class GoogleNormalizedDistanceHeuristicDescriptor : SerializableDescriptor<GoogleNormalizedDistanceHeuristicDescriptor>
+{
+	internal GoogleNormalizedDistanceHeuristicDescriptor(Action<GoogleNormalizedDistanceHeuristicDescriptor> configure) => configure.Invoke(this);
+
+	public GoogleNormalizedDistanceHeuristicDescriptor() : base()
+	{
+	}
+
+	private bool? BackgroundIsSupersetValue { get; set; }
+
+	public GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperset(bool? backgroundIsSuperset = true)
+	{
+		BackgroundIsSupersetValue = backgroundIsSuperset;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (BackgroundIsSupersetValue.HasValue)
+		{
+			writer.WritePropertyName("background_is_superset");
+			writer.WriteBooleanValue(BackgroundIsSupersetValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }

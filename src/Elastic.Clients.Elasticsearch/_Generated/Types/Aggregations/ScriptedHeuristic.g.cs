@@ -27,36 +27,33 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class BoxPlotAggregate : IAggregate
+public sealed partial class ScriptedHeuristic
 {
-	[JsonInclude, JsonPropertyName("lower")]
-	public double Lower { get; init; }
-	[JsonInclude, JsonPropertyName("lower_as_string")]
-	public string? LowerAsString { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public double Max { get; init; }
-	[JsonInclude, JsonPropertyName("max_as_string")]
-	public string? MaxAsString { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double Min { get; init; }
-	[JsonInclude, JsonPropertyName("min_as_string")]
-	public string? MinAsString { get; init; }
-	[JsonInclude, JsonPropertyName("q1")]
-	public double Q1 { get; init; }
-	[JsonInclude, JsonPropertyName("q1_as_string")]
-	public string? Q1AsString { get; init; }
-	[JsonInclude, JsonPropertyName("q2")]
-	public double Q2 { get; init; }
-	[JsonInclude, JsonPropertyName("q2_as_string")]
-	public string? Q2AsString { get; init; }
-	[JsonInclude, JsonPropertyName("q3")]
-	public double Q3 { get; init; }
-	[JsonInclude, JsonPropertyName("q3_as_string")]
-	public string? Q3AsString { get; init; }
-	[JsonInclude, JsonPropertyName("upper")]
-	public double Upper { get; init; }
-	[JsonInclude, JsonPropertyName("upper_as_string")]
-	public string? UpperAsString { get; init; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+}
+
+public sealed partial class ScriptedHeuristicDescriptor : SerializableDescriptor<ScriptedHeuristicDescriptor>
+{
+	internal ScriptedHeuristicDescriptor(Action<ScriptedHeuristicDescriptor> configure) => configure.Invoke(this);
+
+	public ScriptedHeuristicDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+
+	public ScriptedHeuristicDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("script");
+		JsonSerializer.Serialize(writer, ScriptValue, options);
+		writer.WriteEndObject();
+	}
 }

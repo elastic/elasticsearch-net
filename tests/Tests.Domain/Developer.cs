@@ -16,6 +16,7 @@ public class Developer : Person
 
 	// not populated by generator. Used by ingest geoip test
 	//public GeoIp GeoIp { get; set; }
+
 	public string IpAddress { get; set; }
 	public string OnlineHandle { get; set; }
 
