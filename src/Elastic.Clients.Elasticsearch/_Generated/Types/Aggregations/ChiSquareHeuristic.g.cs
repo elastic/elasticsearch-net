@@ -27,12 +27,44 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class AvgAggregate : IAggregate
+public sealed partial class ChiSquareHeuristic
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("value")]
-	public double? Value { get; init; }
-	[JsonInclude, JsonPropertyName("value_as_string")]
-	public string? ValueAsString { get; init; }
+	[JsonInclude, JsonPropertyName("background_is_superset")]
+	public bool BackgroundIsSuperset { get; set; }
+	[JsonInclude, JsonPropertyName("include_negatives")]
+	public bool IncludeNegatives { get; set; }
+}
+
+public sealed partial class ChiSquareHeuristicDescriptor : SerializableDescriptor<ChiSquareHeuristicDescriptor>
+{
+	internal ChiSquareHeuristicDescriptor(Action<ChiSquareHeuristicDescriptor> configure) => configure.Invoke(this);
+
+	public ChiSquareHeuristicDescriptor() : base()
+	{
+	}
+
+	private bool BackgroundIsSupersetValue { get; set; }
+	private bool IncludeNegativesValue { get; set; }
+
+	public ChiSquareHeuristicDescriptor BackgroundIsSuperset(bool backgroundIsSuperset = true)
+	{
+		BackgroundIsSupersetValue = backgroundIsSuperset;
+		return Self;
+	}
+
+	public ChiSquareHeuristicDescriptor IncludeNegatives(bool includeNegatives = true)
+	{
+		IncludeNegativesValue = includeNegatives;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("background_is_superset");
+		writer.WriteBooleanValue(BackgroundIsSupersetValue);
+		writer.WritePropertyName("include_negatives");
+		writer.WriteBooleanValue(IncludeNegativesValue);
+		writer.WriteEndObject();
+	}
 }
