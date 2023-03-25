@@ -130,11 +130,7 @@ internal sealed class MultiTermsAggregationConverter : JsonConverter<MultiTermsA
 				{
 					reader.Read();
 					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Terms = value;
-					}
-
+					agg.Terms = value;
 					continue;
 				}
 			}

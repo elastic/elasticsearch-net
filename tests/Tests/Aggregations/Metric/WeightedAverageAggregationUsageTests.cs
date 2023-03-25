@@ -45,7 +45,6 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 	protected override Action<AggregationDescriptor<Project>> FluentAggs => a => a
 		.WeightedAvg("weighted_avg_commits", avg => avg
 			.Value(v => v.Field(p => p.NumberOfCommits).Missing(0))
-			//.Weight(w => w.Script("(doc['numberOfContributors']?.value ?: 0) + 1"))
 			.Weight(s => s.Script(new Script(new InlineScript("(doc['numberOfContributors']?.value ?: 0) + 1"))))
 			.ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType.Long)
 		);
@@ -68,7 +67,7 @@ public class WeightedAverageAggregationUsageTests : AggregationUsageTestBase<Rea
 	protected override void ExpectResponse(SearchResponse<Project> response)
 	{
 		response.ShouldBeValid();
-		var commitsAvg = response.Aggregations.GetWeightedAvg("weighted_avg_commits");
+		var commitsAvg = response.Aggregations.GetWeightedAverage("weighted_avg_commits");
 		commitsAvg.Should().NotBeNull();
 		commitsAvg.Value.Should().BeGreaterThan(0);
 	}

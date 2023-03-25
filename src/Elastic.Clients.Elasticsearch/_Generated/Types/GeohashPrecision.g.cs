@@ -17,28 +17,26 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class AliasDefinition
+public sealed partial class GeohashPrecision : Union<double, string>
 {
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
-	[JsonInclude, JsonPropertyName("index_routing")]
-	public string? IndexRouting { get; init; }
-	[JsonInclude, JsonPropertyName("is_hidden")]
-	public bool? IsHidden { get; init; }
-	[JsonInclude, JsonPropertyName("is_write_index")]
-	public bool? IsWriteIndex { get; init; }
-	[JsonInclude, JsonPropertyName("routing")]
-	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("search_routing")]
-	public string? SearchRouting { get; init; }
+	public GeohashPrecision(double geohash_length) : base(geohash_length)
+	{
+	}
+
+	public GeohashPrecision(string distance) : base(distance)
+	{
+	}
 }
