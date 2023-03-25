@@ -1,0 +1,23 @@
+{
+  aggregations: {
+    names: {
+      meta: {
+        foo: bar
+      },
+      rare_terms: {
+        field: name,
+        max_doc_count: 5,
+        missing: n/a,
+        precision: 0.001
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

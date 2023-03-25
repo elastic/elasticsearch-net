@@ -394,6 +394,54 @@ internal sealed class RateModeConverter : JsonConverter<RateMode>
 	}
 }
 
+[JsonConverter(typeof(SamplerAggregationExecutionHintConverter))]
+public enum SamplerAggregationExecutionHint
+{
+	[EnumMember(Value = "map")]
+	Map,
+	[EnumMember(Value = "global_ordinals")]
+	GlobalOrdinals,
+	[EnumMember(Value = "bytes_hash")]
+	BytesHash
+}
+
+internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<SamplerAggregationExecutionHint>
+{
+	public override SamplerAggregationExecutionHint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "map":
+				return SamplerAggregationExecutionHint.Map;
+			case "global_ordinals":
+				return SamplerAggregationExecutionHint.GlobalOrdinals;
+			case "bytes_hash":
+				return SamplerAggregationExecutionHint.BytesHash;
+		}
+
+		ThrowHelper.ThrowJsonException(); return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, SamplerAggregationExecutionHint value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case SamplerAggregationExecutionHint.Map:
+				writer.WriteStringValue("map");
+				return;
+			case SamplerAggregationExecutionHint.GlobalOrdinals:
+				writer.WriteStringValue("global_ordinals");
+				return;
+			case SamplerAggregationExecutionHint.BytesHash:
+				writer.WriteStringValue("bytes_hash");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(TermsAggregationCollectModeConverter))]
 public enum TermsAggregationCollectMode
 {
