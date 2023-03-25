@@ -1,0 +1,33 @@
+{
+  aggregations: {
+    rings_around_amsterdam: {
+      geo_distance: {
+        field: locationPoint,
+        origin: {
+          lat: 52.376,
+          lon: 4.894
+        },
+        ranges: [
+          {
+            to: 100
+          },
+          {
+            from: 100,
+            to: 300
+          },
+          {
+            from: 300
+          }
+        ]
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}
