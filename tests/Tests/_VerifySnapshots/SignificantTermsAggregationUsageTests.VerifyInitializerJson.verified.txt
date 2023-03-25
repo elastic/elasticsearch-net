@@ -1,0 +1,22 @@
+{
+  aggregations: {
+    significant_names: {
+      significant_terms: {
+        field: name,
+        min_doc_count: 10,
+        mutual_information: {
+          background_is_superset: true,
+          include_negatives: true
+        }
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}
