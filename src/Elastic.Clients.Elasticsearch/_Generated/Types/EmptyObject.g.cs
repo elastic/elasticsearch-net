@@ -25,17 +25,27 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Aggregations;
+namespace Elastic.Clients.Elasticsearch;
 
 /// <summary>
-/// <para>Weighted average aggregation result. `value` is missing if the weight was set to zero.</para>
+/// <para>For empty Class assignments</para>
 /// </summary>
-public sealed partial class WeightedAvgAggregate : IAggregate
+public sealed partial class EmptyObject
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("value")]
-	public double? Value { get; init; }
-	[JsonInclude, JsonPropertyName("value_as_string")]
-	public string? ValueAsString { get; init; }
+}
+
+/// <summary>
+/// <para>For empty Class assignments</para>
+/// </summary>
+public sealed partial class EmptyObjectDescriptor : SerializableDescriptor<EmptyObjectDescriptor>
+{
+	internal EmptyObjectDescriptor(Action<EmptyObjectDescriptor> configure) => configure.Invoke(this);
+
+	public EmptyObjectDescriptor() : base()
+	{
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
 }
