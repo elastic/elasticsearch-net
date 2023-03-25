@@ -94,11 +94,7 @@ internal sealed class InferenceAggregationConverter : JsonConverter<InferenceAgg
 				{
 					reader.Read();
 					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Name>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ModelId = value;
-					}
-
+					agg.ModelId = value;
 					continue;
 				}
 			}

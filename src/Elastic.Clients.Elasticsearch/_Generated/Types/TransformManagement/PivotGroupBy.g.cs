@@ -46,6 +46,7 @@ public sealed partial class PivotGroupBy
 	internal string VariantName { get; }
 
 	public static PivotGroupBy DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new PivotGroupBy("date_histogram", dateHistogramAggregation);
+	public static PivotGroupBy GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => new PivotGroupBy("geotile_grid", geotileGridAggregation);
 	public static PivotGroupBy Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupBy("histogram", histogramAggregation);
 	public static PivotGroupBy Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupBy("terms", termsAggregation);
 }
@@ -70,6 +71,13 @@ internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy
 		if (propertyName == "date_histogram")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
+			reader.Read();
+			return new PivotGroupBy(propertyName, variant);
+		}
+
+		if (propertyName == "geotile_grid")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
 			reader.Read();
 			return new PivotGroupBy(propertyName, variant);
 		}
@@ -101,6 +109,9 @@ internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy
 			{
 				case "date_histogram":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
+					break;
+				case "geotile_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)value.Variant, options);
 					break;
 				case "histogram":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
@@ -148,6 +159,8 @@ public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDesc
 
 	public PivotGroupByDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
 	public PivotGroupByDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor<TDocument> GeotileGrid(Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public PivotGroupByDescriptor<TDocument> GeotileGrid(Action<Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
 	public PivotGroupByDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
 	public PivotGroupByDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
 	public PivotGroupByDescriptor<TDocument> Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
@@ -209,6 +222,9 @@ public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<Pivo
 	public PivotGroupByDescriptor DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
 	public PivotGroupByDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
 	public PivotGroupByDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor GeotileGrid(Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public PivotGroupByDescriptor GeotileGrid(Action<Aggregations.GeotileGridAggregationDescriptor> configure) => Set(configure, "geotile_grid");
+	public PivotGroupByDescriptor GeotileGrid<TDocument>(Action<Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
 	public PivotGroupByDescriptor Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
 	public PivotGroupByDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
 	public PivotGroupByDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");

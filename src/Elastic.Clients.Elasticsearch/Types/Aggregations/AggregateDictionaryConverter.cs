@@ -74,9 +74,6 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "categorize_text":
-				throw new Exception("The aggregate in response is not yet supported");
-
 			case "children":
 				{
 					var agg = JsonSerializer.Deserialize<ChildrenAggregate>(ref reader, options);
@@ -105,9 +102,6 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "diversified_sampler":
-				throw new Exception("The aggregate in response is not yet supported");
-
 			case "filter":
 				{
 					var agg = JsonSerializer.Deserialize<FilterAggregate>(ref reader, options);
@@ -122,26 +116,26 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			//case "geo_distance":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoDistanceAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geo_distance":
+				{
+					var agg = JsonSerializer.Deserialize<GeoDistanceAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
-			//case "geohash_grid":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoHashGridAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geohash_grid":
+				{
+					var agg = JsonSerializer.Deserialize<GeohashGridAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
-			//case "geotile_grid":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoTileGridAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geotile_grid":
+				{
+					var agg = JsonSerializer.Deserialize<GeotileGridAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
 			case "global":
 				{
@@ -160,6 +154,13 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 			case "ip_range":
 				{
 					var agg = JsonSerializer.Deserialize<IpRangeAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
+
+			case "ip_prefix":
+				{
+					var agg = JsonSerializer.Deserialize<IpPrefixAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
@@ -199,9 +200,6 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "rare_terms":
-				throw new Exception("The aggregate in response is not yet supported");
-
 			case "reverse_nested":
 				{
 					var agg = JsonSerializer.Deserialize<ReverseNestedAggregate>(ref reader, options);
@@ -216,11 +214,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "significant_terms":
-				throw new Exception("The aggregate in response is not yet supported");
-
-			case "significant_text":
-				throw new Exception("The aggregate in response is not yet supported");
+			case "sigsterms":
+				{
+					var agg = JsonSerializer.Deserialize<SignificantStringTermsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
 			case "variable_width_histogram":
 				{
@@ -231,14 +230,14 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 
 			case "avg":
 				{
-					var agg = JsonSerializer.Deserialize<AvgAggregate>(ref reader, options);
+					var agg = JsonSerializer.Deserialize<AverageAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
 
 			case "boxplot":
 				{
-					var agg = JsonSerializer.Deserialize<BoxPlotAggregate>(ref reader, options);
+					var agg = JsonSerializer.Deserialize<BoxplotAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
@@ -278,6 +277,13 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 			//		break;
 			//	}
 
+			case "srareterms":
+				{
+					var agg = JsonSerializer.Deserialize<StringRareTermsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
+
 			case "matrix_stats":
 				{
 					var agg = JsonSerializer.Deserialize<MatrixStatsAggregate>(ref reader, options);
@@ -306,18 +312,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "percentile_ranks":
-				throw new Exception("The aggregate in response is not yet supported.");
-
 			case "tdigest_percentile_ranks":
 				{
 					var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
-
-			case "percentiles":
-				throw new Exception("The aggregate in response is not yet supported.");
 
 			case "rate":
 				{
@@ -384,21 +384,10 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 
 			case "weighted_avg":
 				{
-					var agg = JsonSerializer.Deserialize<WeightedAvgAggregate>(ref reader, options);
+					var agg = JsonSerializer.Deserialize<WeightedAverageAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
-
-			case "avg_bucket":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "bucket_script":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "bucket_count_ks_test":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "bucket_correlation":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "bucket_selector":
-				throw new Exception("The aggregate in response is not yet supported.");
 
 			case "cumulative_cardinality":
 				{
@@ -436,29 +425,12 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
-
-			case "max_bucket":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "min_bucket":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "moving_avg":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "moving_fn":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "moving_percentiles":
-				throw new Exception("The aggregate in response is not yet supported.");
-			case "normalize":
-				throw new Exception("The aggregate in response is not yet supported.");
-
 			case "percentiles_bucket":
 				{
 					var agg = JsonSerializer.Deserialize<PercentilesBucketAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], agg);
 					break;
 				}
-
-			case "serial_diff":
-				throw new Exception("The aggregate in response is not yet supported.");
 
 			case "stats_bucket":
 				{
@@ -467,11 +439,8 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			case "sum_bucket":
-				throw new Exception("The aggregate in response is not yet supported.");
-
 			default:
-				throw new Exception("The aggregate in response is not yet supported.");
+				throw new Exception($"The aggregate '{aggregateName}' in this response is not currently supported.");
 		}
 	}
 

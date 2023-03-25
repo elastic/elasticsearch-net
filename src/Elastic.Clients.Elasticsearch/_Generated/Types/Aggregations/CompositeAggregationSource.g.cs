@@ -31,6 +31,8 @@ public sealed partial class CompositeAggregationSource
 {
 	[JsonInclude, JsonPropertyName("date_histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogram { get; set; }
+	[JsonInclude, JsonPropertyName("geotile_grid")]
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? GeotileGrid { get; set; }
 	[JsonInclude, JsonPropertyName("histogram")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? Histogram { get; set; }
 	[JsonInclude, JsonPropertyName("terms")]
@@ -48,6 +50,9 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
 	private DateHistogramAggregationDescriptor<TDocument> DateHistogramDescriptor { get; set; }
 	private Action<DateHistogramAggregationDescriptor<TDocument>> DateHistogramDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? GeotileGridValue { get; set; }
+	private GeotileGridAggregationDescriptor<TDocument> GeotileGridDescriptor { get; set; }
+	private Action<GeotileGridAggregationDescriptor<TDocument>> GeotileGridDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
 	private HistogramAggregationDescriptor<TDocument> HistogramDescriptor { get; set; }
 	private Action<HistogramAggregationDescriptor<TDocument>> HistogramDescriptorAction { get; set; }
@@ -76,6 +81,30 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 		DateHistogramValue = null;
 		DateHistogramDescriptor = null;
 		DateHistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? geotileGrid)
+	{
+		GeotileGridDescriptor = null;
+		GeotileGridDescriptorAction = null;
+		GeotileGridValue = geotileGrid;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(GeotileGridAggregationDescriptor<TDocument> descriptor)
+	{
+		GeotileGridValue = null;
+		GeotileGridDescriptorAction = null;
+		GeotileGridDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor<TDocument> GeotileGrid(Action<GeotileGridAggregationDescriptor<TDocument>> configure)
+	{
+		GeotileGridValue = null;
+		GeotileGridDescriptor = null;
+		GeotileGridDescriptorAction = configure;
 		return Self;
 	}
 
@@ -146,6 +175,22 @@ public sealed partial class CompositeAggregationSourceDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, DateHistogramValue, options);
 		}
 
+		if (GeotileGridDescriptor is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, GeotileGridDescriptor, options);
+		}
+		else if (GeotileGridDescriptorAction is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, new GeotileGridAggregationDescriptor<TDocument>(GeotileGridDescriptorAction), options);
+		}
+		else if (GeotileGridValue is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, GeotileGridValue, options);
+		}
+
 		if (HistogramDescriptor is not null)
 		{
 			writer.WritePropertyName("histogram");
@@ -193,6 +238,9 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 	private Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation? DateHistogramValue { get; set; }
 	private DateHistogramAggregationDescriptor DateHistogramDescriptor { get; set; }
 	private Action<DateHistogramAggregationDescriptor> DateHistogramDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? GeotileGridValue { get; set; }
+	private GeotileGridAggregationDescriptor GeotileGridDescriptor { get; set; }
+	private Action<GeotileGridAggregationDescriptor> GeotileGridDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation? HistogramValue { get; set; }
 	private HistogramAggregationDescriptor HistogramDescriptor { get; set; }
 	private Action<HistogramAggregationDescriptor> HistogramDescriptorAction { get; set; }
@@ -221,6 +269,30 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 		DateHistogramValue = null;
 		DateHistogramDescriptor = null;
 		DateHistogramDescriptorAction = configure;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation? geotileGrid)
+	{
+		GeotileGridDescriptor = null;
+		GeotileGridDescriptorAction = null;
+		GeotileGridValue = geotileGrid;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor GeotileGrid(GeotileGridAggregationDescriptor descriptor)
+	{
+		GeotileGridValue = null;
+		GeotileGridDescriptorAction = null;
+		GeotileGridDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeAggregationSourceDescriptor GeotileGrid(Action<GeotileGridAggregationDescriptor> configure)
+	{
+		GeotileGridValue = null;
+		GeotileGridDescriptor = null;
+		GeotileGridDescriptorAction = configure;
 		return Self;
 	}
 
@@ -289,6 +361,22 @@ public sealed partial class CompositeAggregationSourceDescriptor : SerializableD
 		{
 			writer.WritePropertyName("date_histogram");
 			JsonSerializer.Serialize(writer, DateHistogramValue, options);
+		}
+
+		if (GeotileGridDescriptor is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, GeotileGridDescriptor, options);
+		}
+		else if (GeotileGridDescriptorAction is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, new GeotileGridAggregationDescriptor(GeotileGridDescriptorAction), options);
+		}
+		else if (GeotileGridValue is not null)
+		{
+			writer.WritePropertyName("geotile_grid");
+			JsonSerializer.Serialize(writer, GeotileGridValue, options);
 		}
 
 		if (HistogramDescriptor is not null)

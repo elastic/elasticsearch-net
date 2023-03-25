@@ -25,20 +25,21 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class AliasDefinition
+public sealed partial class PercentageScoreHeuristic
 {
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
-	[JsonInclude, JsonPropertyName("index_routing")]
-	public string? IndexRouting { get; init; }
-	[JsonInclude, JsonPropertyName("is_hidden")]
-	public bool? IsHidden { get; init; }
-	[JsonInclude, JsonPropertyName("is_write_index")]
-	public bool? IsWriteIndex { get; init; }
-	[JsonInclude, JsonPropertyName("routing")]
-	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("search_routing")]
-	public string? SearchRouting { get; init; }
+}
+
+public sealed partial class PercentageScoreHeuristicDescriptor : SerializableDescriptor<PercentageScoreHeuristicDescriptor>
+{
+	internal PercentageScoreHeuristicDescriptor(Action<PercentageScoreHeuristicDescriptor> configure) => configure.Invoke(this);
+
+	public PercentageScoreHeuristicDescriptor() : base()
+	{
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
 }
