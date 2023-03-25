@@ -12,6 +12,7 @@ using System.Collections.Generic;
 
 namespace Tests.Aggregations.Bucket;
 
+[SkipVersion("<8.1.0", "IP prefix aggregations were introduced in 8.1.0")]
 public class IpPrefixAggregationUsageTests : AggregationUsageWithVerifyTestBase<ReadOnlyCluster>
 {
 	public IpPrefixAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
