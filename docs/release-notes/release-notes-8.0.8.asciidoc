@@ -1,0 +1,8 @@
+[[release-notes-8.0.8]]
+== Release notes v8.0.8
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7446[#7446] Fix byte properties in index stats types. (issue: https://github.com/elastic/elasticsearch-net/issues/7445[#7445])
+- https://github.com/elastic/elasticsearch-net/pull/7456[#7456] Fix CompletionSuggester based on spec fixes. (issue: https://github.com/elastic/elasticsearch-net/issues/7454[#7454])
