@@ -249,6 +249,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 
 					properties = new Dictionary<string, object>
 					{
+						{ "leadDeveloper", new { type = "object", properties = new Dictionary<string, object> { { "ipAddress", new { type = "ip" } } } } },
 						{ "locationPoint", new { type = "geo_point" } },
 						{ "name", new { type = "keyword", store = true, fields = new { suggest = new { type = "completion" }, standard = new { analyzer = "standard", type = "text" } } } },
 						{ "numberOfCommits", new { type = "integer", store = true } },
