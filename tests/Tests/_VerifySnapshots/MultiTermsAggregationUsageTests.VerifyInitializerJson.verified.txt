@@ -1,0 +1,42 @@
+{
+  aggregations: {
+    states: {
+      meta: {
+        foo: bar
+      },
+      multi_terms: {
+        collect_mode: breadth_first,
+        min_doc_count: 1,
+        order: [
+          {
+            _key: asc
+          },
+          {
+            _count: desc
+          }
+        ],
+        shard_min_doc_count: 1,
+        shard_size: 100,
+        show_term_doc_count_error: true,
+        size: 5,
+        terms: [
+          {
+            field: name
+          },
+          {
+            field: numberOfCommits,
+            missing: 0
+          }
+        ]
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}
