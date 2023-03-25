@@ -34,9 +34,9 @@ public sealed partial class CompletionContext
 	[JsonInclude, JsonPropertyName("context")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
 	[JsonInclude, JsonPropertyName("neighbours")]
-	public ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? Neighbours { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? Neighbours { get; set; }
 	[JsonInclude, JsonPropertyName("precision")]
-	public Elastic.Clients.Elasticsearch.GeoHashPrecision? Precision { get; set; }
+	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
 	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
@@ -51,8 +51,8 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 
 	private double? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Context ContextValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? NeighboursValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoHashPrecision? PrecisionValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? NeighboursValue { get; set; }
+	private Elastic.Clients.Elasticsearch.GeohashPrecision? PrecisionValue { get; set; }
 	private bool? PrefixValue { get; set; }
 
 	public CompletionContextDescriptor Boost(double? boost)
@@ -67,13 +67,13 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public CompletionContextDescriptor Neighbours(ICollection<Elastic.Clients.Elasticsearch.GeoHashPrecision>? neighbours)
+	public CompletionContextDescriptor Neighbours(ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? neighbours)
 	{
 		NeighboursValue = neighbours;
 		return Self;
 	}
 
-	public CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.GeoHashPrecision? precision)
+	public CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? precision)
 	{
 		PrecisionValue = precision;
 		return Self;

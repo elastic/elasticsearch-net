@@ -112,6 +112,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>("derivative", ref reader, options);
 		}
 
+		if (propertyName == "diversified_sampler")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation?>("diversified_sampler", ref reader, options);
+		}
+
 		if (propertyName == "extended_stats")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
@@ -127,6 +132,26 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
 		}
 
+		if (propertyName == "geo_distance")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>("geo_distance", ref reader, options);
+		}
+
+		if (propertyName == "geohash_grid")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation?>("geohash_grid", ref reader, options);
+		}
+
+		if (propertyName == "geohex_grid")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation?>("geohex_grid", ref reader, options);
+		}
+
+		if (propertyName == "geotile_grid")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>("geotile_grid", ref reader, options);
+		}
+
 		if (propertyName == "global")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>("global", ref reader, options);
@@ -140,6 +165,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 		if (propertyName == "inference")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>("inference", ref reader, options);
+		}
+
+		if (propertyName == "ip_prefix")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation?>("ip_prefix", ref reader, options);
 		}
 
 		if (propertyName == "ip_range")
@@ -197,6 +227,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
 		}
 
+		if (propertyName == "rare_terms")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation?>("rare_terms", ref reader, options);
+		}
+
 		if (propertyName == "rate")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>("rate", ref reader, options);
@@ -215,6 +250,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 		if (propertyName == "scripted_metric")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>("scripted_metric", ref reader, options);
+		}
+
+		if (propertyName == "significant_terms")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation?>("significant_terms", ref reader, options);
 		}
 
 		if (propertyName == "stats")
@@ -370,6 +410,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 		return SetContainer(name, Aggregation.CreateWithAction("derivative", configure));
 	}
 
+	public AggregationDescriptor<TDocument> DiversifiedSampler(string name, Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
+	}
+
 	public AggregationDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("extended_stats", configure));
@@ -385,6 +430,26 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
 	}
 
+	public AggregationDescriptor<TDocument> GeoDistance(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
+	}
+
+	public AggregationDescriptor<TDocument> GeohashGrid(string name, Action<GeohashGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
+	}
+
+	public AggregationDescriptor<TDocument> GeohexGrid(string name, Action<GeohexGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
+	}
+
+	public AggregationDescriptor<TDocument> GeotileGrid(string name, Action<GeotileGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
+	}
+
 	public AggregationDescriptor<TDocument> Global(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("global", configure));
@@ -398,6 +463,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> Inference(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("inference", configure));
+	}
+
+	public AggregationDescriptor<TDocument> IpPrefix(string name, Action<IpPrefixAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
 	}
 
 	public AggregationDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
@@ -455,6 +525,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 		return SetContainer(name, Aggregation.CreateWithAction("range", configure));
 	}
 
+	public AggregationDescriptor<TDocument> RareTerms(string name, Action<RareTermsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
+	}
+
 	public AggregationDescriptor<TDocument> Rate(string name, Action<RateAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("rate", configure));
@@ -473,6 +548,11 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("scripted_metric", configure));
+	}
+
+	public AggregationDescriptor<TDocument> SignificantTerms(string name, Action<SignificantTermsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
 	}
 
 	public AggregationDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
@@ -654,6 +734,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 		return SetContainer(name, Aggregation.CreateWithAction("derivative", configure));
 	}
 
+	public AggregationDescriptor DiversifiedSampler(string name, Action<DiversifiedSamplerAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
+	}
+
+	public AggregationDescriptor DiversifiedSampler<TDocument>(string name, Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
+	}
+
 	public AggregationDescriptor ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("extended_stats", configure));
@@ -677,6 +767,46 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor Filters<TDocument>(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
+	}
+
+	public AggregationDescriptor GeoDistance(string name, Action<GeoDistanceAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
+	}
+
+	public AggregationDescriptor GeoDistance<TDocument>(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
+	}
+
+	public AggregationDescriptor GeohashGrid(string name, Action<GeohashGridAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
+	}
+
+	public AggregationDescriptor GeohashGrid<TDocument>(string name, Action<GeohashGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
+	}
+
+	public AggregationDescriptor GeohexGrid(string name, Action<GeohexGridAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
+	}
+
+	public AggregationDescriptor GeohexGrid<TDocument>(string name, Action<GeohexGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
+	}
+
+	public AggregationDescriptor GeotileGrid(string name, Action<GeotileGridAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
+	}
+
+	public AggregationDescriptor GeotileGrid<TDocument>(string name, Action<GeotileGridAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
 	}
 
 	public AggregationDescriptor Global(string name, Action<GlobalAggregationDescriptor> configure)
@@ -707,6 +837,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor Inference<TDocument>(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("inference", configure));
+	}
+
+	public AggregationDescriptor IpPrefix(string name, Action<IpPrefixAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
+	}
+
+	public AggregationDescriptor IpPrefix<TDocument>(string name, Action<IpPrefixAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
 	}
 
 	public AggregationDescriptor IpRange(string name, Action<IpRangeAggregationDescriptor> configure)
@@ -814,6 +954,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 		return SetContainer(name, Aggregation.CreateWithAction("range", configure));
 	}
 
+	public AggregationDescriptor RareTerms(string name, Action<RareTermsAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
+	}
+
+	public AggregationDescriptor RareTerms<TDocument>(string name, Action<RareTermsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
+	}
+
 	public AggregationDescriptor Rate(string name, Action<RateAggregationDescriptor> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("rate", configure));
@@ -852,6 +1002,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor ScriptedMetric<TDocument>(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("scripted_metric", configure));
+	}
+
+	public AggregationDescriptor SignificantTerms(string name, Action<SignificantTermsAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
+	}
+
+	public AggregationDescriptor SignificantTerms<TDocument>(string name, Action<SignificantTermsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
 	}
 
 	public AggregationDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)
