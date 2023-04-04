@@ -37,8 +37,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -143,7 +143,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     },
@@ -183,8 +183,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -332,7 +332,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     },
@@ -381,8 +381,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -529,7 +529,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     },
@@ -569,8 +569,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -709,7 +709,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     },
@@ -749,8 +749,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -849,7 +849,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     },
@@ -889,8 +889,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.7",
-        "contentHash": "07MpXg25VUnlWRwJEQ1JyD3CIjTDDUA7Fa9umL+sQ5sVJjjHijdZbKHAseJBR3Mji83KnZj2IDEKDrAUQ9Rdbw==",
+        "resolved": "0.4.8",
+        "contentHash": "AFPWZMiCFW33y5d7SBobCQ9JJN3h5+2VGhIp7bRoDOx95pAtrA3jw3OY8477eAavqfVNoKDPFwGthPxC2iDedw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -989,7 +989,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.7, )"
+          "Elastic.Transport": "[0.4.8, )"
         }
       }
     }
