@@ -1,0 +1,24 @@
+{
+  aggregations: {
+    projects: {
+      aggregations: {
+        centroid: {
+          geo_centroid: {
+            field: locationPoint
+          }
+        }
+      },
+      terms: {
+        field: name
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}

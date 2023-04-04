@@ -256,26 +256,26 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
-			//case "geo_bounds":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoBoundsAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geo_bounds":
+				{
+					var agg = JsonSerializer.Deserialize<GeoBoundsAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
-			//case "geo_centroid":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoCentroidAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geo_centroid":
+				{
+					var agg = JsonSerializer.Deserialize<GeoCentroidAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
-			//case "geo_line":
-			//	{
-			//		var agg = JsonSerializer.Deserialize<GeoLineAggregate>(ref reader, options);
-			//		dictionary.Add(nameParts[1], agg);
-			//		break;
-			//	}
+			case "geo_line":
+				{
+					var agg = JsonSerializer.Deserialize<GeoLineAggregate>(ref reader, options);
+					dictionary.Add(nameParts[1], agg);
+					break;
+				}
 
 			case "srareterms":
 				{

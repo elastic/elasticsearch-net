@@ -132,9 +132,24 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
 		}
 
+		if (propertyName == "geo_bounds")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation?>("geo_bounds", ref reader, options);
+		}
+
+		if (propertyName == "geo_centroid")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation?>("geo_centroid", ref reader, options);
+		}
+
 		if (propertyName == "geo_distance")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>("geo_distance", ref reader, options);
+		}
+
+		if (propertyName == "geo_line")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>("geo_line", ref reader, options);
 		}
 
 		if (propertyName == "geohash_grid")
@@ -430,9 +445,24 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
 	}
 
+	public AggregationDescriptor<TDocument> GeoBounds(string name, Action<GeoBoundsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
+	}
+
+	public AggregationDescriptor<TDocument> GeoCentroid(string name, Action<GeoCentroidAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
+	}
+
 	public AggregationDescriptor<TDocument> GeoDistance(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
+	}
+
+	public AggregationDescriptor<TDocument> GeoLine(string name, Action<GeoLineAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
 	}
 
 	public AggregationDescriptor<TDocument> GeohashGrid(string name, Action<GeohashGridAggregationDescriptor<TDocument>> configure)
@@ -769,6 +799,26 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
 	}
 
+	public AggregationDescriptor GeoBounds(string name, Action<GeoBoundsAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
+	}
+
+	public AggregationDescriptor GeoBounds<TDocument>(string name, Action<GeoBoundsAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
+	}
+
+	public AggregationDescriptor GeoCentroid(string name, Action<GeoCentroidAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
+	}
+
+	public AggregationDescriptor GeoCentroid<TDocument>(string name, Action<GeoCentroidAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
+	}
+
 	public AggregationDescriptor GeoDistance(string name, Action<GeoDistanceAggregationDescriptor> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
@@ -777,6 +827,16 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor GeoDistance<TDocument>(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
+	}
+
+	public AggregationDescriptor GeoLine(string name, Action<GeoLineAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
+	}
+
+	public AggregationDescriptor GeoLine<TDocument>(string name, Action<GeoLineAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
 	}
 
 	public AggregationDescriptor GeohashGrid(string name, Action<GeohashGridAggregationDescriptor> configure)
