@@ -26,18 +26,11 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 
 				if (line.Contains("realms:"))
 				{
-					var collection = cluster.ClusterConfiguration.Version >= "7.0.0-alpha1"
-						? new[]
-						{
-							"        native.native1:",
-							"          order: 2"
-						}
-						: new[]
-						{
-							"        native1:",
-							"          type: native",
-							"          order: 2"
-						};
+					var collection = new[]
+					{
+						"        native.native1:",
+						"          order: 2"
+					};
 
 					modifiedLines.AddRange(collection);
 					modified = true;
@@ -46,30 +39,18 @@ namespace Tests.Core.ManagedElasticsearch.Tasks
 
 			if (!modified)
 			{
-				var collection = cluster.ClusterConfiguration.Version >= "7.0.0-alpha1"
-					? new[]
-					{
-						string.Empty,
-						"xpack:",
-						"  security:",
-						"    authc:",
-						"      realms:",
-						"        native1:",
-						"          type: native",
-						"          order: 0",
-						string.Empty
-					}
-					: new[]
-					{
-						string.Empty,
-						"xpack:",
-						"  security:",
-						"    authc:",
-						"      realms:",
-						"        native.native1:",
-						"          order: 0",
-						string.Empty
-					};
+				var collection = new[]
+				{
+					string.Empty,
+					"xpack:",
+					"  security:",
+					"    authc:",
+					"      realms:",
+					"        native1:",
+					"          type: native",
+					"          order: 0",
+					string.Empty
+				};
 
 				modifiedLines.AddRange(collection);
 			}
