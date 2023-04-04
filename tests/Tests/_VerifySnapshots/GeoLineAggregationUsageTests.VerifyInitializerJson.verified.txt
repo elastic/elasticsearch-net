@@ -1,0 +1,24 @@
+{
+  aggregations: {
+    line: {
+      geo_line: {
+        include_sort: true,
+        point: {
+          field: locationPoint
+        },
+        size: 25,
+        sort: {
+          field: startedOn
+        }
+      }
+    }
+  },
+  query: {
+    term: {
+      type: {
+        value: project
+      }
+    }
+  },
+  size: 0
+}
