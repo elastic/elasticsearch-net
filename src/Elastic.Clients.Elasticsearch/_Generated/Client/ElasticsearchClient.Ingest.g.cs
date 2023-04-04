@@ -56,6 +56,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<DeletePipelineRequest, DeletePipelineResponse, DeletePipelineRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
@@ -63,12 +67,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
@@ -77,12 +89,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual DeletePipelineResponse DeletePipeline<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
@@ -91,6 +111,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
@@ -98,12 +122,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
@@ -112,12 +144,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
@@ -146,6 +186,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<GeoIpStatsRequest, GeoIpStatsResponse, GeoIpStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats()
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
@@ -153,12 +197,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats(Action<GeoIpStatsRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
@@ -167,6 +219,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
@@ -174,12 +230,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns statistical information about geoip databases</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/geoip-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(Action<GeoIpStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
@@ -208,6 +272,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<GetPipelineRequest, GetPipelineResponse, GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GetPipelineResponse GetPipeline()
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
@@ -215,12 +283,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GetPipelineResponse GetPipeline(GetPipelineRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GetPipelineResponse GetPipeline(Action<GetPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
@@ -229,12 +305,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GetPipelineResponse GetPipeline<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual GetPipelineResponse GetPipeline<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
@@ -243,6 +327,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
@@ -250,12 +338,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
@@ -264,12 +360,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
@@ -298,6 +402,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<ProcessorGrokRequest, ProcessorGrokResponse, ProcessorGrokRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok()
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
@@ -305,12 +413,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok(Action<ProcessorGrokRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
@@ -319,6 +435,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
@@ -326,12 +446,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Returns a list of the built-in patterns.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(Action<ProcessorGrokRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
@@ -360,12 +488,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutPipelineRequest, PutPipelineResponse, PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutPipelineRequestDescriptor(id);
@@ -374,12 +510,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual PutPipelineResponse PutPipeline<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
@@ -388,12 +532,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutPipelineRequestDescriptor(id);
@@ -402,12 +554,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
@@ -436,6 +596,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<SimulateRequest, SimulateResponse, SimulateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual SimulateResponse Simulate()
 	{
 		var descriptor = new SimulateRequestDescriptor();
@@ -443,12 +607,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
 	{
 		var descriptor = new SimulateRequestDescriptor();
@@ -457,12 +629,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual SimulateResponse Simulate<TDocument>(SimulateRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
 		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual SimulateResponse Simulate<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new SimulateRequestDescriptor<TDocument>();
@@ -471,6 +651,10 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateRequestDescriptor();
@@ -478,12 +662,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateRequestDescriptor();
@@ -492,12 +684,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(SimulateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateRequestDescriptor<TDocument>();
