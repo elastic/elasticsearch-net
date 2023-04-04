@@ -24,14 +24,28 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
 	}
 
-	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual IndexResponse Index<TDocument>(TDocument document)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse, IndexRequestParameters>(descriptor);
+	}
+
+	public virtual IndexResponse Index<TDocument>(TDocument document, IndexName index)
 	{
 		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
 		descriptor.BeforeRequest();
 		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse, IndexRequestParameters>(descriptor);
 	}
 
-	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document,CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse, IndexRequestParameters>(descriptor);
+	}
+
+	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, IndexName index, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
 		descriptor.BeforeRequest();

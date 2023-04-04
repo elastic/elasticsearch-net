@@ -63,6 +63,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
 
+	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+	}
+
 	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
@@ -82,6 +88,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
@@ -129,6 +141,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
 
+	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
+	}
+
 	public virtual GeoIpStatsResponse GeoIpStats(Action<GeoIpStatsRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
@@ -140,6 +158,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GeoIpStatsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
@@ -179,6 +203,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
 
+	public virtual GetPipelineResponse GetPipeline(GetPipelineRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
 	public virtual GetPipelineResponse GetPipeline(Action<GetPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
@@ -198,6 +228,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
@@ -245,6 +281,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
 
+	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
+	}
+
 	public virtual ProcessorGrokResponse ProcessorGrok(Action<ProcessorGrokRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
@@ -256,6 +298,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ProcessorGrokRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
+	}
+
+	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
@@ -288,6 +336,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutPipelineRequest, PutPipelineResponse, PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+	}
+
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutPipelineRequestDescriptor(id);
@@ -302,6 +356,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+	}
+
+	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -347,6 +407,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
+	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
 	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
 	{
 		var descriptor = new SimulateRequestDescriptor();
@@ -366,6 +432,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
