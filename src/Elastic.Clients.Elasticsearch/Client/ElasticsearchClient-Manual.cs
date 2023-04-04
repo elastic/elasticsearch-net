@@ -10,6 +10,34 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class ElasticsearchClient
 {
+	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
+	}
+
+	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRequestDescriptor<TDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRequestDescriptor<TDocument>, CreateResponse, CreateRequestParameters>(descriptor);
+	}
+
+	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequest<IndexRequestDescriptor<TDocument>, IndexResponse, IndexRequestParameters>(descriptor);
+	}
+
+	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndexRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndexRequestDescriptor<TDocument>, IndexResponse, IndexRequestParameters>(descriptor);
+	}
+
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
@@ -22,6 +50,21 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
 	}
+
+	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
+	}
+
+	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
+	}
+
 
 	// TODO: Test and introduce in a future release
 	//public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TDocument>> configureRequest, CancellationToken cancellationToken = default)

@@ -56,26 +56,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<ClearCursorRequest, ClearCursorResponse, ClearCursorRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual ClearCursorResponse ClearCursor()
-	{
-		var descriptor = new ClearCursorRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor);
-	}
-
 	public virtual ClearCursorResponse ClearCursor(Action<ClearCursorRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ClearCursorRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor);
-	}
-
-	public virtual Task<ClearCursorResponse> ClearCursorAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCursorRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor);
 	}
 
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(Action<ClearCursorRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

@@ -1672,13 +1672,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutIndexTemplateRequest, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutIndexTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
-	}
-
 	public virtual PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutIndexTemplateRequestDescriptor(name);
@@ -1693,13 +1686,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutIndexTemplateRequestDescriptor<TDocument>, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
-	}
-
-	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutIndexTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutIndexTemplateRequestDescriptor, PutIndexTemplateResponse, PutIndexTemplateRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1738,13 +1724,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutMappingRequest, PutMappingResponse, PutMappingRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices)
-	{
-		var descriptor = new PutMappingRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
-	}
-
 	public virtual PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutMappingRequestDescriptor(indices);
@@ -1759,13 +1738,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor);
-	}
-
-	public virtual Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutMappingRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutMappingRequestDescriptor, PutMappingResponse, PutMappingRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1804,26 +1776,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutTemplateRequest, PutTemplateResponse, PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
-	}
-
 	public virtual PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
-	}
-
-	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTemplateRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTemplateRequestDescriptor, PutTemplateResponse, PutTemplateRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2278,13 +2236,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<UpdateAliasesRequest, UpdateAliasesResponse, UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual UpdateAliasesResponse UpdateAliases()
-	{
-		var descriptor = new UpdateAliasesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
-	}
-
 	public virtual UpdateAliasesResponse UpdateAliases(Action<UpdateAliasesRequestDescriptor> configureRequest)
 	{
 		var descriptor = new UpdateAliasesRequestDescriptor();
@@ -2299,13 +2250,6 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
-	}
-
-	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateAliasesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateAliasesRequestDescriptor, UpdateAliasesResponse, UpdateAliasesRequestParameters>(descriptor);
 	}
 
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(Action<UpdateAliasesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

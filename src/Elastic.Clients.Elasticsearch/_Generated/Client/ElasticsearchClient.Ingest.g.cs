@@ -288,13 +288,6 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		return DoRequestAsync<PutPipelineRequest, PutPipelineResponse, PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutPipelineRequestDescriptor(id);
@@ -309,13 +302,6 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
