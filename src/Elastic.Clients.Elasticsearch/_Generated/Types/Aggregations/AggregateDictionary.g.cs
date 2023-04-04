@@ -52,6 +52,8 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	public Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate? GetStatsBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate? GetExtendedStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate? GetExtendedStatsBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate?>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate? GetGeoBounds(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate?>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate? GetGeoCentroid(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate? GetHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate? GetDateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate? GetAutoDateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate?>(key);
@@ -91,5 +93,6 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	public Elastic.Clients.Elasticsearch.Aggregations.RateAggregate? GetRate(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate? GetCumulativeCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate? GetMatrixStats(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate?>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate? GetGeoLine(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate?>(key);
 	private TAggregate TryGet<TAggregate>(string key) where TAggregate : class, IAggregate => BackingDictionary.TryGetValue(key, out var agg) ? agg as TAggregate : null;
 }
