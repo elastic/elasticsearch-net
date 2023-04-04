@@ -18,7 +18,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// A strongly-typed client for communicating with Elasticsearch server endpoints.
 /// </summary>
-public partial class ElasticsearchClient
+public partial class ElasticsearchClient : IDisposable
 {
 	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
 
@@ -563,5 +563,12 @@ public partial class ElasticsearchClient
 	{
 		requestConfiguration.Accept = RequestData.MimeTypeTextPlain;
 		requestConfiguration.ContentType = RequestData.MimeTypeTextPlain;
+	}
+
+	public void Dispose()
+	{
+		_activitySource.Dispose(); 
+		GC.SuppressFinalize(this);
+
 	}
 }
