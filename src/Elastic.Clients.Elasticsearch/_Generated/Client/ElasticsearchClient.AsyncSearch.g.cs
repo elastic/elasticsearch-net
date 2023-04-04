@@ -77,6 +77,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
 	}
 
+	public virtual AsyncSearchStatusResponse Status<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+	}
+
 	public virtual AsyncSearchStatusResponse Status<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
@@ -104,6 +110,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+	}
+
+	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
 	}
 
 	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -155,6 +167,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
 	}
 
+	public virtual DeleteAsyncSearchResponse Delete<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
+	}
+
 	public virtual DeleteAsyncSearchResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
@@ -182,6 +200,12 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
 	}
 
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)

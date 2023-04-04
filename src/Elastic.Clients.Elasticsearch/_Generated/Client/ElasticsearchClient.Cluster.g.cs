@@ -77,6 +77,12 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
+	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+	}
+
 	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new HealthRequestDescriptor<TDocument>();
@@ -104,6 +110,12 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+	}
+
+	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)

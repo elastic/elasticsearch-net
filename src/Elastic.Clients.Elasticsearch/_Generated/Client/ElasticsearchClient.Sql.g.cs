@@ -125,6 +125,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		return DoRequest<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
 	}
 
+	public virtual DeleteAsyncResponse DeleteAsyncSearch<TDocument>(DeleteAsyncRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+	}
+
 	public virtual DeleteAsyncResponse DeleteAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeleteAsyncRequestDescriptor<TDocument>(id);
@@ -152,6 +158,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(DeleteAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
 	}
 
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -203,6 +215,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
 	}
 
+	public virtual GetAsyncResponse GetAsyncSearch<TDocument>(GetAsyncRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+	}
+
 	public virtual GetAsyncResponse GetAsyncSearch<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new GetAsyncRequestDescriptor<TDocument>(id);
@@ -230,6 +248,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetAsyncResponse> GetAsyncSearchAsync<TDocument>(GetAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
 	}
 
 	public virtual Task<GetAsyncResponse> GetAsyncSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -281,6 +305,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		return DoRequest<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
 	}
 
+	public virtual GetAsyncStatusResponse GetAsyncSearchStatus<TDocument>(GetAsyncStatusRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+	}
+
 	public virtual GetAsyncStatusResponse GetAsyncSearchStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new GetAsyncStatusRequestDescriptor<TDocument>(id);
@@ -308,6 +338,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(GetAsyncStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
 	}
 
 	public virtual Task<GetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -359,6 +395,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		return DoRequest<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor);
 	}
 
+	public virtual QueryResponse Query<TDocument>(QueryRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor);
+	}
+
 	public virtual QueryResponse Query<TDocument>(Action<QueryRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new QueryRequestDescriptor<TDocument>();
@@ -386,6 +428,12 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor);
+	}
+
+	public virtual Task<QueryResponse> QueryAsync<TDocument>(QueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor);
 	}
 
 	public virtual Task<QueryResponse> QueryAsync<TDocument>(Action<QueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)

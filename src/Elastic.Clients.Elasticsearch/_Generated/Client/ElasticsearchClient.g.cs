@@ -77,6 +77,12 @@ public partial class ElasticsearchClient
 		return DoRequest<BulkRequestDescriptor, BulkResponse, BulkRequestParameters>(descriptor);
 	}
 
+	public virtual BulkResponse Bulk<TDocument>(BulkRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<BulkRequestDescriptor<TDocument>, BulkResponse, BulkRequestParameters>(descriptor);
+	}
+
 	public virtual BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new BulkRequestDescriptor<TDocument>();
@@ -97,6 +103,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<BulkRequestDescriptor, BulkResponse, BulkRequestParameters>(descriptor);
+	}
+
+	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<BulkRequestDescriptor<TDocument>, BulkResponse, BulkRequestParameters>(descriptor);
 	}
 
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -272,6 +284,12 @@ public partial class ElasticsearchClient
 		return DoRequest<CountRequestDescriptor, CountResponse, CountRequestParameters>(descriptor);
 	}
 
+	public virtual CountResponse Count<TDocument>(CountRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CountRequestDescriptor<TDocument>, CountResponse, CountRequestParameters>(descriptor);
+	}
+
 	public virtual CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new CountRequestDescriptor<TDocument>();
@@ -299,6 +317,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CountRequestDescriptor, CountResponse, CountRequestParameters>(descriptor);
+	}
+
+	public virtual Task<CountResponse> CountAsync<TDocument>(CountRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CountRequestDescriptor<TDocument>, CountResponse, CountRequestParameters>(descriptor);
 	}
 
 	public virtual Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -409,6 +433,12 @@ public partial class ElasticsearchClient
 		return DoRequest<DeleteByQueryRequestDescriptor, DeleteByQueryResponse, DeleteByQueryRequestParameters>(descriptor);
 	}
 
+	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(DeleteByQueryRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse, DeleteByQueryRequestParameters>(descriptor);
+	}
+
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeleteByQueryRequestDescriptor<TDocument>(indices);
@@ -429,6 +459,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteByQueryRequestDescriptor, DeleteByQueryResponse, DeleteByQueryRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(DeleteByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryResponse, DeleteByQueryRequestParameters>(descriptor);
 	}
 
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -557,6 +593,12 @@ public partial class ElasticsearchClient
 		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
 
+	public virtual DeleteResponse Delete<TDocument>(DeleteRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
+	}
+
 	public virtual DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeleteRequestDescriptor<TDocument>(index, id);
@@ -597,6 +639,12 @@ public partial class ElasticsearchClient
 	{
 		var descriptor = new DeleteRequestDescriptor<TDocument>(typeof(TDocument), id);
 		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(DeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteRequestDescriptor<TDocument>, DeleteResponse, DeleteRequestParameters>(descriptor);
 	}
@@ -650,6 +698,12 @@ public partial class ElasticsearchClient
 		return DoRequest<DeleteScriptRequestDescriptor, DeleteScriptResponse, DeleteScriptRequestParameters>(descriptor);
 	}
 
+	public virtual DeleteScriptResponse DeleteScript<TDocument>(DeleteScriptRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse, DeleteScriptRequestParameters>(descriptor);
+	}
+
 	public virtual DeleteScriptResponse DeleteScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new DeleteScriptRequestDescriptor<TDocument>(id);
@@ -677,6 +731,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteScriptRequestDescriptor, DeleteScriptResponse, DeleteScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(DeleteScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptResponse, DeleteScriptRequestParameters>(descriptor);
 	}
 
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -743,6 +803,12 @@ public partial class ElasticsearchClient
 		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
+	public virtual ExistsResponse Exists<TDocument>(ExistsRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
+	}
+
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new ExistsRequestDescriptor<TDocument>(index, id);
@@ -783,6 +849,12 @@ public partial class ElasticsearchClient
 	{
 		var descriptor = new ExistsRequestDescriptor<TDocument>(typeof(TDocument), id);
 		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
+	}
+
+	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
@@ -851,6 +923,12 @@ public partial class ElasticsearchClient
 		return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse, ExistsSourceRequestParameters>(descriptor);
 	}
 
+	public virtual ExistsSourceResponse ExistsSource<TDocument>(ExistsSourceRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse, ExistsSourceRequestParameters>(descriptor);
+	}
+
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(index, id);
@@ -891,6 +969,12 @@ public partial class ElasticsearchClient
 	{
 		var descriptor = new ExistsSourceRequestDescriptor<TDocument>(typeof(TDocument), id);
 		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse, ExistsSourceRequestParameters>(descriptor);
+	}
+
+	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(ExistsSourceRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceResponse, ExistsSourceRequestParameters>(descriptor);
 	}
@@ -1036,6 +1120,12 @@ public partial class ElasticsearchClient
 		return DoRequest<FieldCapsRequestDescriptor, FieldCapsResponse, FieldCapsRequestParameters>(descriptor);
 	}
 
+	public virtual FieldCapsResponse FieldCaps<TDocument>(FieldCapsRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse, FieldCapsRequestParameters>(descriptor);
+	}
+
 	public virtual FieldCapsResponse FieldCaps<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new FieldCapsRequestDescriptor<TDocument>();
@@ -1063,6 +1153,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<FieldCapsRequestDescriptor, FieldCapsResponse, FieldCapsRequestParameters>(descriptor);
+	}
+
+	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(FieldCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldCapsRequestDescriptor<TDocument>, FieldCapsResponse, FieldCapsRequestParameters>(descriptor);
 	}
 
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1330,6 +1426,12 @@ public partial class ElasticsearchClient
 		return DoRequest<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
 	}
 
+	public virtual GetScriptResponse GetScript<TDocument>(GetScriptRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetScriptRequestDescriptor<TDocument>, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
 	public virtual GetScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new GetScriptRequestDescriptor<TDocument>(id);
@@ -1357,6 +1459,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetScriptRequestDescriptor, GetScriptResponse, GetScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(GetScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetScriptRequestDescriptor<TDocument>, GetScriptResponse, GetScriptRequestParameters>(descriptor);
 	}
 
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1812,6 +1920,12 @@ public partial class ElasticsearchClient
 		return DoRequest<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse, OpenPointInTimeRequestParameters>(descriptor);
 	}
 
+	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse, OpenPointInTimeRequestParameters>(descriptor);
+	}
+
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new OpenPointInTimeRequestDescriptor<TDocument>(indices);
@@ -1839,6 +1953,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<OpenPointInTimeRequestDescriptor, OpenPointInTimeResponse, OpenPointInTimeRequestParameters>(descriptor);
+	}
+
+	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenPointInTimeRequestDescriptor<TDocument>, OpenPointInTimeResponse, OpenPointInTimeRequestParameters>(descriptor);
 	}
 
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1945,6 +2065,12 @@ public partial class ElasticsearchClient
 		return DoRequest<PutScriptRequestDescriptor, PutScriptResponse, PutScriptRequestParameters>(descriptor);
 	}
 
+	public virtual PutScriptResponse PutScript<TDocument>(PutScriptRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutScriptRequestDescriptor<TDocument>, PutScriptResponse, PutScriptRequestParameters>(descriptor);
+	}
+
 	public virtual PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new PutScriptRequestDescriptor<TDocument>(id);
@@ -1965,6 +2091,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutScriptRequestDescriptor, PutScriptResponse, PutScriptRequestParameters>(descriptor);
+	}
+
+	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(PutScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutScriptRequestDescriptor<TDocument>, PutScriptResponse, PutScriptRequestParameters>(descriptor);
 	}
 
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2016,6 +2148,12 @@ public partial class ElasticsearchClient
 		return DoRequest<RankEvalRequestDescriptor, RankEvalResponse, RankEvalRequestParameters>(descriptor);
 	}
 
+	public virtual RankEvalResponse RankEval<TDocument>(RankEvalRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RankEvalRequestDescriptor<TDocument>, RankEvalResponse, RankEvalRequestParameters>(descriptor);
+	}
+
 	public virtual RankEvalResponse RankEval<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new RankEvalRequestDescriptor<TDocument>();
@@ -2043,6 +2181,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RankEvalRequestDescriptor, RankEvalResponse, RankEvalRequestParameters>(descriptor);
+	}
+
+	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(RankEvalRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RankEvalRequestDescriptor<TDocument>, RankEvalResponse, RankEvalRequestParameters>(descriptor);
 	}
 
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2087,6 +2231,12 @@ public partial class ElasticsearchClient
 		return DoRequest<ReindexRequestDescriptor, ReindexResponse, ReindexRequestParameters>(descriptor);
 	}
 
+	public virtual ReindexResponse Reindex<TDocument>(ReindexRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ReindexRequestDescriptor<TDocument>, ReindexResponse, ReindexRequestParameters>(descriptor);
+	}
+
 	public virtual ReindexResponse Reindex<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new ReindexRequestDescriptor<TDocument>();
@@ -2107,6 +2257,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ReindexRequestDescriptor, ReindexResponse, ReindexRequestParameters>(descriptor);
+	}
+
+	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(ReindexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReindexRequestDescriptor<TDocument>, ReindexResponse, ReindexRequestParameters>(descriptor);
 	}
 
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2344,6 +2500,12 @@ public partial class ElasticsearchClient
 		return DoRequest<SearchShardsRequestDescriptor, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
 	}
 
+	public virtual SearchShardsResponse SearchShards<TDocument>(SearchShardsRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
+	}
+
 	public virtual SearchShardsResponse SearchShards<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new SearchShardsRequestDescriptor<TDocument>();
@@ -2371,6 +2533,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SearchShardsRequestDescriptor, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
+	}
+
+	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(SearchShardsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
 	}
 
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2437,6 +2605,12 @@ public partial class ElasticsearchClient
 		return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse, TermsEnumRequestParameters>(descriptor);
 	}
 
+	public virtual TermsEnumResponse TermsEnum<TDocument>(TermsEnumRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse, TermsEnumRequestParameters>(descriptor);
+	}
+
 	public virtual TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new TermsEnumRequestDescriptor<TDocument>(index);
@@ -2477,6 +2651,12 @@ public partial class ElasticsearchClient
 	{
 		var descriptor = new TermsEnumRequestDescriptor<TDocument>(typeof(TDocument));
 		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse, TermsEnumRequestParameters>(descriptor);
+	}
+
+	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(TermsEnumRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
 		descriptor.BeforeRequest();
 		return DoRequestAsync<TermsEnumRequestDescriptor<TDocument>, TermsEnumResponse, TermsEnumRequestParameters>(descriptor);
 	}
@@ -2530,6 +2710,12 @@ public partial class ElasticsearchClient
 		return DoRequest<UpdateByQueryRequestDescriptor, UpdateByQueryResponse, UpdateByQueryRequestParameters>(descriptor);
 	}
 
+	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(UpdateByQueryRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse, UpdateByQueryRequestParameters>(descriptor);
+	}
+
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new UpdateByQueryRequestDescriptor<TDocument>(indices);
@@ -2557,6 +2743,12 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse, UpdateByQueryRequestParameters>(descriptor);
+	}
+
+	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(UpdateByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryResponse, UpdateByQueryRequestParameters>(descriptor);
 	}
 
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
