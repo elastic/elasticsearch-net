@@ -22,7 +22,7 @@ public partial class ElasticsearchClient
 {
 	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
 
-	private readonly ActivitySource _activitySource = new("Elastic.Clients.Elasticsearch.ElasticsearchClient");
+	private static readonly ActivitySource _activitySource = new("Elastic.Clients.Elasticsearch.ElasticsearchClient");
 
 	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
