@@ -1,0 +1,17 @@
+{
+  aggregations: {
+    centroid: {
+      geo_centroid: {
+        field: locationPoint
+      }
+    }
+  },
+  query: {
+    term: {
+      name: {
+        value: noresult
+      }
+    }
+  },
+  size: 0
+}
