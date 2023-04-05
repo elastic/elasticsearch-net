@@ -140,6 +140,8 @@ public sealed partial class PrefixQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(PrefixQuery prefixQuery) => QueryDsl.Query.Prefix(prefixQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("prefix", this);
 }
 
 public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
