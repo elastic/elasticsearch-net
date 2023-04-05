@@ -1,0 +1,18 @@
+{
+  query: {
+    pinned: {
+      boost: 1.1,
+      ids: [
+        1,
+        11,
+        22
+      ],
+      organic: {
+        match_all: {
+          _name: organic_query
+        }
+      },
+      _name: named_query
+    }
+  }
+}
