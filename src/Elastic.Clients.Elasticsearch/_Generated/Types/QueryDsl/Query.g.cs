@@ -72,6 +72,7 @@ public sealed partial class Query
 	public static Query Nested(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery nestedQuery) => new Query("nested", nestedQuery);
 	public static Query ParentId(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery parentIdQuery) => new Query("parent_id", parentIdQuery);
 	public static Query Percolate(Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery percolateQuery) => new Query("percolate", percolateQuery);
+	public static Query Pinned(Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery pinnedQuery) => new Query("pinned", pinnedQuery);
 	public static Query Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery prefixQuery) => new Query("prefix", prefixQuery);
 	public static Query QueryString(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery queryStringQuery) => new Query("query_string", queryStringQuery);
 	public static Query Range(Elastic.Clients.Elasticsearch.QueryDsl.RangeQuery rangeQuery) => new Query("range", rangeQuery);
@@ -298,6 +299,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 		if (propertyName == "percolate")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
+		if (propertyName == "pinned")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery?>(ref reader, options);
 			reader.Read();
 			return new Query(propertyName, variant);
 		}
@@ -554,6 +562,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "percolate":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery)value.Variant, options);
 					break;
+				case "pinned":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery)value.Variant, options);
+					break;
 				case "prefix":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)value.Variant, options);
 					break;
@@ -712,6 +723,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> ParentId(Action<ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
 	public QueryDescriptor<TDocument> Percolate(PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
 	public QueryDescriptor<TDocument> Percolate(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
+	public QueryDescriptor<TDocument> Pinned(PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
+	public QueryDescriptor<TDocument> Pinned(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
 	public QueryDescriptor<TDocument> Prefix(PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
 	public QueryDescriptor<TDocument> Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 	public QueryDescriptor<TDocument> QueryString(QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
@@ -892,6 +905,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Percolate(PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
 	public QueryDescriptor Percolate(Action<PercolateQueryDescriptor> configure) => Set(configure, "percolate");
 	public QueryDescriptor Percolate<TDocument>(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
+	public QueryDescriptor Pinned(PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
+	public QueryDescriptor Pinned(Action<PinnedQueryDescriptor> configure) => Set(configure, "pinned");
+	public QueryDescriptor Pinned<TDocument>(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
 	public QueryDescriptor Prefix(PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
 	public QueryDescriptor Prefix(Action<PrefixQueryDescriptor> configure) => Set(configure, "prefix");
 	public QueryDescriptor Prefix<TDocument>(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
