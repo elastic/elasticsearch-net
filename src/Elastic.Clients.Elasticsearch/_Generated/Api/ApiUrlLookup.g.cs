@@ -109,6 +109,9 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SqlGetAsync = new ApiUrls(new[] { "/_sql/async/{id}" });
 	internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "/_sql/async/status/{id}" });
 	internal static ApiUrls SqlQuery = new ApiUrls(new[] { "/_sql" });
+	internal static ApiUrls TasksCancel = new ApiUrls(new[] { "/_tasks/_cancel", "/_tasks/{task_id}/_cancel" });
+	internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
+	internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
 	internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "/{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "/_update_by_query/{task_id}/_rethrottle" });
