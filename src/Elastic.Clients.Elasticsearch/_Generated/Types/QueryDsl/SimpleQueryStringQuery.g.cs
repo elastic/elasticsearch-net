@@ -59,6 +59,8 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	public string? QuoteFieldSuffix { get; set; }
 
 	public static implicit operator Query(SimpleQueryStringQuery simpleQueryStringQuery) => QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("simple_query_string", this);
 }
 
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>

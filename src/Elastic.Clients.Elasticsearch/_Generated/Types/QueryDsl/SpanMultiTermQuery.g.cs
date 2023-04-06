@@ -39,6 +39,8 @@ public sealed partial class SpanMultiTermQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_multi", this);
 }
 
 public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : SerializableDescriptor<SpanMultiTermQueryDescriptor<TDocument>>

@@ -47,6 +47,8 @@ public sealed partial class FunctionScoreQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
 	public static implicit operator Query(FunctionScoreQuery functionScoreQuery) => QueryDsl.Query.FunctionScore(functionScoreQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("function_score", this);
 }
 
 public sealed partial class FunctionScoreQueryDescriptor<TDocument> : SerializableDescriptor<FunctionScoreQueryDescriptor<TDocument>>

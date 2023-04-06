@@ -1,0 +1,61 @@
+{
+  query: {
+    bool: {
+      should: [
+        {
+          bool: {
+            minimum_should_match: 2,
+            should: [
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              },
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              },
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              },
+              {
+                term: {
+                  name: {
+                    value: x
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          bool: {
+            must_not: {
+              term: {
+                name: {
+                  value: x
+                }
+              }
+            }
+          }
+        },
+        {
+          term: {
+            name: {
+              value: x
+            }
+          }
+        }
+      ]
+    }
+  }
+}
