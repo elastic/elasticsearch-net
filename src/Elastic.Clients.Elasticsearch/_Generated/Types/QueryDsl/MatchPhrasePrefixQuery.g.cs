@@ -166,6 +166,8 @@ public sealed partial class MatchPhrasePrefixQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(MatchPhrasePrefixQuery matchPhrasePrefixQuery) => QueryDsl.Query.MatchPhrasePrefix(matchPhrasePrefixQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("match_phrase_prefix", this);
 }
 
 public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhrasePrefixQueryDescriptor<TDocument>>

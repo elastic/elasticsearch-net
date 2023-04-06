@@ -45,6 +45,8 @@ public sealed partial class RankFeatureQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
 	public static implicit operator Query(RankFeatureQuery rankFeatureQuery) => QueryDsl.Query.RankFeature(rankFeatureQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("rank_feature", this);
 }
 
 public sealed partial class RankFeatureQueryDescriptor<TDocument> : SerializableDescriptor<RankFeatureQueryDescriptor<TDocument>>

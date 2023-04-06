@@ -56,6 +56,8 @@ public sealed partial class PinnedQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 
 	public static implicit operator Query(PinnedQuery pinnedQuery) => QueryDsl.Query.Pinned(pinnedQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("pinned", this);
 }
 
 internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
