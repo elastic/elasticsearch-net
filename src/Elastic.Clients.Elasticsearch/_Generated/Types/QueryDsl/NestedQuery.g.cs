@@ -45,6 +45,8 @@ public sealed partial class NestedQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 
 	public static implicit operator Query(NestedQuery nestedQuery) => QueryDsl.Query.Nested(nestedQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("nested", this);
 }
 
 public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescriptor<NestedQueryDescriptor<TDocument>>

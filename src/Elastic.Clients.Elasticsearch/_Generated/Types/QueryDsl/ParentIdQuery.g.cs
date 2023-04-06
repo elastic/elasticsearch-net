@@ -41,6 +41,8 @@ public sealed partial class ParentIdQuery : SearchQuery
 	public string? Type { get; set; }
 
 	public static implicit operator Query(ParentIdQuery parentIdQuery) => QueryDsl.Query.ParentId(parentIdQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("parent_id", this);
 }
 
 public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<ParentIdQueryDescriptor>

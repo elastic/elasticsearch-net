@@ -179,6 +179,8 @@ public sealed partial class FuzzyQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(FuzzyQuery fuzzyQuery) => QueryDsl.Query.Fuzzy(fuzzyQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("fuzzy", this);
 }
 
 public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptor<FuzzyQueryDescriptor<TDocument>>

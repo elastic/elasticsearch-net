@@ -126,6 +126,8 @@ public sealed partial class GeoBoundingBoxQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoBoundingBoxQuery geoBoundingBoxQuery) => QueryDsl.Query.GeoBoundingBox(geoBoundingBoxQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("geo_bounding_box", this);
 }
 
 public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : SerializableDescriptor<GeoBoundingBoxQueryDescriptor<TDocument>>

@@ -35,6 +35,8 @@ public sealed partial class MatchNoneQuery : SearchQuery
 	public float? Boost { get; set; }
 
 	public static implicit operator Query(MatchNoneQuery matchNoneQuery) => QueryDsl.Query.MatchNone(matchNoneQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("match_none", this);
 }
 
 public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptor<MatchNoneQueryDescriptor>

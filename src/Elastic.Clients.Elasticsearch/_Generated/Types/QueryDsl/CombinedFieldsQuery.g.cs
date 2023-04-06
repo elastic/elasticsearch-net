@@ -47,6 +47,8 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
 	public static implicit operator Query(CombinedFieldsQuery combinedFieldsQuery) => QueryDsl.Query.CombinedFields(combinedFieldsQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("combined_fields", this);
 }
 
 public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>

@@ -39,6 +39,8 @@ public sealed partial class DisMaxQuery : SearchQuery
 	public double? TieBreaker { get; set; }
 
 	public static implicit operator Query(DisMaxQuery disMaxQuery) => QueryDsl.Query.DisMax(disMaxQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("dis_max", this);
 }
 
 public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
