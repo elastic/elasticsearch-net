@@ -218,6 +218,8 @@ public sealed partial class MatchBoolPrefixQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(MatchBoolPrefixQuery matchBoolPrefixQuery) => QueryDsl.Query.MatchBoolPrefix(matchBoolPrefixQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("match_bool_prefix", this);
 }
 
 public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : SerializableDescriptor<MatchBoolPrefixQueryDescriptor<TDocument>>

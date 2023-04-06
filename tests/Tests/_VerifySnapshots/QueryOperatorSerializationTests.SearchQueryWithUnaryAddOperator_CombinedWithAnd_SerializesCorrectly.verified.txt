@@ -1,0 +1,22 @@
+{
+  query: {
+    bool: {
+      filter: [
+        {
+          term: {
+            name: {
+              value: x
+            }
+          }
+        },
+        {
+          term: {
+            name: {
+              value: y
+            }
+          }
+        }
+      ]
+    }
+  }
+}

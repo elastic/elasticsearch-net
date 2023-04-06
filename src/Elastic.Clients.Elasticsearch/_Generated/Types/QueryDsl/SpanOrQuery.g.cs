@@ -35,6 +35,8 @@ public sealed partial class SpanOrQuery : SearchQuery
 	public float? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_or", this);
 }
 
 public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescriptor<SpanOrQueryDescriptor<TDocument>>
