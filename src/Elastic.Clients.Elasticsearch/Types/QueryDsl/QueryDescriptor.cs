@@ -14,11 +14,16 @@ public sealed partial class QueryDescriptor<TDocument>
 	/// </summary>
 	public QueryDescriptor<TDocument> RawJson(string rawJson) => Set(new RawJsonQuery(rawJson), "raw_json");
 
-	public void MatchAll() =>
+	public QueryDescriptor<TDocument> MatchAll() =>
 		Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
 
-	public void Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
+	public QueryDescriptor<TDocument> Term<TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
 		Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
+
+	/// <summary>
+	/// Used purely for testing (for now).
+	/// </summary>
+	internal bool TestHasVariant => ContainsVariant;
 }
 
 public sealed partial class QueryDescriptor
@@ -28,9 +33,14 @@ public sealed partial class QueryDescriptor
 	/// </summary>
 	public QueryDescriptor RawJson(string rawJson) => Set(new RawJsonQuery(rawJson), "raw_json");
 
-	public void MatchAll() =>
+	public QueryDescriptor MatchAll() =>
 		Set<MatchAllQueryDescriptor>(_ => { }, "match_all");
 
-	public void Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
-			Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
+	public QueryDescriptor Term<TDocument, TValue>(Expression<Func<TDocument, TValue>> field, object value, float? boost = null) =>
+		Term(t => t.Field(field).Value(FieldValue.Composite(value)).Boost(boost));
+
+	/// <summary>
+	/// Used purely for testing (for now).
+	/// </summary>
+	internal bool TestHasVariant => ContainsVariant;
 }

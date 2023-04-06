@@ -35,6 +35,8 @@ public sealed partial class MatchAllQuery : SearchQuery
 	public float? Boost { get; set; }
 
 	public static implicit operator Query(MatchAllQuery matchAllQuery) => QueryDsl.Query.MatchAll(matchAllQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("match_all", this);
 }
 
 public sealed partial class MatchAllQueryDescriptor : SerializableDescriptor<MatchAllQueryDescriptor>

@@ -41,6 +41,8 @@ public sealed partial class ScriptScoreQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public static implicit operator Query(ScriptScoreQuery scriptScoreQuery) => QueryDsl.Query.ScriptScore(scriptScoreQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("script_score", this);
 }
 
 public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptor<ScriptScoreQueryDescriptor<TDocument>>

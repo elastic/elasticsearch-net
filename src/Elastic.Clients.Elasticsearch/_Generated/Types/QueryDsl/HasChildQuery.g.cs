@@ -49,6 +49,8 @@ public sealed partial class HasChildQuery : SearchQuery
 	public string Type { get; set; }
 
 	public static implicit operator Query(HasChildQuery hasChildQuery) => QueryDsl.Query.HasChild(hasChildQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("has_child", this);
 }
 
 public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
