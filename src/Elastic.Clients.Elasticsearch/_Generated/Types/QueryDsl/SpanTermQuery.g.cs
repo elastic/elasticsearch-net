@@ -112,6 +112,8 @@ public sealed partial class SpanTermQuery : SearchQuery
 	public float? Boost { get; set; }
 	public string Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_term", this);
 }
 
 public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptor<SpanTermQueryDescriptor<TDocument>>

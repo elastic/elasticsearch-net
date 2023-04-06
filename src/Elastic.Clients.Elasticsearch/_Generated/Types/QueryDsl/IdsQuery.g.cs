@@ -37,6 +37,8 @@ public sealed partial class IdsQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 
 	public static implicit operator Query(IdsQuery idsQuery) => QueryDsl.Query.Ids(idsQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("ids", this);
 }
 
 public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQueryDescriptor>
