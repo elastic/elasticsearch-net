@@ -74,6 +74,8 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
 	public static implicit operator Query(MoreLikeThisQuery moreLikeThisQuery) => QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("more_like_this", this);
 }
 
 public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptor<MoreLikeThisQueryDescriptor<TDocument>>

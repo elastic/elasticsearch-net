@@ -166,6 +166,8 @@ public sealed partial class RegexpQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(RegexpQuery regexpQuery) => QueryDsl.Query.Regexp(regexpQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("regexp", this);
 }
 
 public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptor<RegexpQueryDescriptor<TDocument>>

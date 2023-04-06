@@ -45,6 +45,8 @@ public sealed partial class BoolQuery : SearchQuery
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
 	public static implicit operator Query(BoolQuery boolQuery) => QueryDsl.Query.Bool(boolQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("bool", this);
 }
 
 public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescriptor<BoolQueryDescriptor<TDocument>>

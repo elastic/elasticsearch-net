@@ -1,0 +1,29 @@
+{
+  query: {
+    bool: {
+      must: [
+        {
+          term: {
+            name: {
+              value: x
+            }
+          }
+        },
+        {
+          term: {
+            name: {
+              value: y
+            }
+          }
+        }
+      ],
+      must_not: {
+        term: {
+          name: {
+            value: z
+          }
+        }
+      }
+    }
+  }
+}
