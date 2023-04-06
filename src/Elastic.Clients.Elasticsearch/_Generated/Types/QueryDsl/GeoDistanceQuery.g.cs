@@ -139,6 +139,8 @@ public sealed partial class GeoDistanceQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoDistanceQuery geoDistanceQuery) => QueryDsl.Query.GeoDistance(geoDistanceQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("geo_distance", this);
 }
 
 public sealed partial class GeoDistanceQueryDescriptor<TDocument> : SerializableDescriptor<GeoDistanceQueryDescriptor<TDocument>>

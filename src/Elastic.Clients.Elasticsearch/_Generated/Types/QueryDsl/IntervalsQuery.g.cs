@@ -64,6 +64,8 @@ public sealed partial class IntervalsQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(IntervalsQuery intervalsQuery) => QueryDsl.Query.Intervals(intervalsQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("intervals", this);
 }
 
 internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQuery>
