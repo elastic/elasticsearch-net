@@ -53,6 +53,8 @@ public sealed partial class PercolateQuery : SearchQuery
 	public long? Version { get; set; }
 
 	public static implicit operator Query(PercolateQuery percolateQuery) => QueryDsl.Query.Percolate(percolateQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("percolate", this);
 }
 
 public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>

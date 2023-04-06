@@ -39,6 +39,8 @@ public sealed partial class SpanNearQuery : SearchQuery
 	public bool? InOrder { get; set; }
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_near", this);
 }
 
 public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDescriptor<SpanNearQueryDescriptor<TDocument>>

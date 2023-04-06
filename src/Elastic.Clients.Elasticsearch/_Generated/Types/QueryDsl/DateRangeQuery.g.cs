@@ -222,6 +222,8 @@ public sealed partial class DateRangeQuery : RangeQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(DateRangeQuery dateRangeQuery) => QueryDsl.Query.Range(dateRangeQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("range", this);
 }
 
 public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptor<DateRangeQueryDescriptor<TDocument>>

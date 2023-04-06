@@ -37,6 +37,8 @@ public sealed partial class SpanWithinQuery : SearchQuery
 	public float? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("little")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_within", this);
 }
 
 public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableDescriptor<SpanWithinQueryDescriptor<TDocument>>
