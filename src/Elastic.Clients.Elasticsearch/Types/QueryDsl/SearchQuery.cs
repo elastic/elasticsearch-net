@@ -17,7 +17,7 @@ public abstract partial class SearchQuery
 	//always evaluate to false so that each side of && equation is evaluated
 	public static bool operator true(SearchQuery _) => false;
 
-	//public static SearchQuery operator &(SearchQuery leftQuery, SearchQuery rightQuery) => Combine(leftQuery, rightQuery, (l, r) => l && r);
+	public static SearchQuery operator &(SearchQuery leftQuery, SearchQuery rightQuery) => Combine(leftQuery, rightQuery, (l, r) => l && r);
 
 	public static SearchQuery? operator |(SearchQuery leftQuery, SearchQuery rightQuery) => Combine(leftQuery, rightQuery, (l, r) => l || r);
 
@@ -32,12 +32,13 @@ public abstract partial class SearchQuery
 	private static SearchQuery Combine(SearchQuery leftQuery, SearchQuery rightQuery, Func<Query?, Query?, Query> combine)
 	{
 		if (leftQuery is null && rightQuery is null)
-		{
-			throw new ArgumentException("Queries to combine should not be null.");
-		}
+			return null;
 
-		//if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftQuery, rightQuery, out var q))
-		//	return q;
+		if (leftQuery is null)
+			return rightQuery;
+
+		if (rightQuery is null)
+			return leftQuery;
 
 		var container = combine(leftQuery, rightQuery);
 

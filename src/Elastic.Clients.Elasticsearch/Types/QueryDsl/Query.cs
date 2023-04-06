@@ -30,31 +30,53 @@ public partial class Query
 		return false;
 	}
 
+	internal bool HoldsOnlyShouldMusts { get; set; }
+
 	public static bool operator false(Query _) => false;
 	public static bool operator true(Query _) => false;
 
-	//public static Query operator &(Query leftContainer, Query rightContainer) =>
-	//	And(leftContainer, rightContainer);
+	public static Query operator &(Query leftContainer, Query rightContainer) =>
+		And(leftContainer, rightContainer);
 
-	//internal static Query And(Query leftContainer, Query rightContainer)
-	//{
-	//	if (leftContainer is null || rightContainer is null)
-	//	{
-	//		throw new ArgumentException("Queries to combine should not be null.");
-	//	}
+	internal static Query And(Query leftContainer, Query rightContainer)
+	{
+		if (leftContainer is null && rightContainer is null)
+		{
+			throw new ArgumentException("Queries to combine should not both be null.");
+		}
 
-	//	return leftContainer.CombineAsMust(rightContainer);
-	//}
+		if (rightContainer is null)
+			return leftContainer;
+
+		if (leftContainer is null)
+			return rightContainer;
+
+		return leftContainer.CombineAsMust(rightContainer);
+	}
 
 	public static Query operator |(Query leftContainer, Query rightContainer) => Or(leftContainer, rightContainer);
 
 	internal static Query Or(Query leftContainer, Query rightContainer)
 	{
-		if (leftContainer is null || rightContainer is null)
+		if (leftContainer is null && rightContainer is null)
 		{
-			throw new ArgumentException("Queries to combine should not be null.");
+			throw new ArgumentException("Queries to combine should not both be null.");
 		}
+
+		if (rightContainer is null)
+			return leftContainer;
+
+		if (leftContainer is null)
+			return rightContainer;
 
 		return leftContainer.CombineAsShould(rightContainer);
 	}
+
+	public static Query operator !(Query queryContainer) => queryContainer is null
+			? null
+			: new Query(new BoolQuery { MustNot = new[] { queryContainer } });
+
+	public static Query operator +(Query queryContainer) => queryContainer is null
+		? null
+		: new Query(new BoolQuery { Filter = new[] { queryContainer } });
 }
