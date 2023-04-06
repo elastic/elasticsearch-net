@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
 {
-	internal Query(string variantName, object variant)
+	internal Query(string variantName, SearchQuery variant)
 	{
 		if (variantName is null)
 			throw new ArgumentNullException(nameof(variantName));
@@ -42,8 +42,14 @@ public sealed partial class Query
 		Variant = variant;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	internal object Variant { get; private set; }
+	internal string VariantName { get; private set; }
+
+	internal void WrapVariant(string variantName, SearchQuery variant)
+	{
+		VariantName = variantName;
+		Variant = variant;
+	}
 
 	public static Query Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery boolQuery) => new Query("bool", boolQuery);
 	public static Query Boosting(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery boostingQuery) => new Query("boosting", boostingQuery);

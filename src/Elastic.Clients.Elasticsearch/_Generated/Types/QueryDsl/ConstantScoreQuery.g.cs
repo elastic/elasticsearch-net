@@ -37,6 +37,8 @@ public sealed partial class ConstantScoreQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 
 	public static implicit operator Query(ConstantScoreQuery constantScoreQuery) => QueryDsl.Query.ConstantScore(constantScoreQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("constant_score", this);
 }
 
 public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>

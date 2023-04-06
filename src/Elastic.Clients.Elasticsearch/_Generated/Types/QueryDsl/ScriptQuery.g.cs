@@ -37,6 +37,8 @@ public sealed partial class ScriptQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public static implicit operator Query(ScriptQuery scriptQuery) => QueryDsl.Query.Script(scriptQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("script", this);
 }
 
 public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<ScriptQueryDescriptor>
