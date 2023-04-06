@@ -140,6 +140,8 @@ public sealed partial class TermsSetQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(TermsSetQuery termsSetQuery) => QueryDsl.Query.TermsSet(termsSetQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("terms_set", this);
 }
 
 public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDescriptor<TermsSetQueryDescriptor<TDocument>>
