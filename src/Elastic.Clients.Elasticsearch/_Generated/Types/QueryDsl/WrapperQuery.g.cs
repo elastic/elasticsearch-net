@@ -41,6 +41,8 @@ public sealed partial class WrapperQuery : SearchQuery
 	public string Query { get; set; }
 
 	public static implicit operator Query(WrapperQuery wrapperQuery) => QueryDsl.Query.Wrapper(wrapperQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("wrapper", this);
 }
 
 public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>

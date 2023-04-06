@@ -41,6 +41,8 @@ public sealed partial class BoostingQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 
 	public static implicit operator Query(BoostingQuery boostingQuery) => QueryDsl.Query.Boosting(boostingQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("boosting", this);
 }
 
 public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDescriptor<BoostingQueryDescriptor<TDocument>>

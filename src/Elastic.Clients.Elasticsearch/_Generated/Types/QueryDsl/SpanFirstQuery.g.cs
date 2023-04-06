@@ -37,6 +37,8 @@ public sealed partial class SpanFirstQuery : SearchQuery
 	public int End { get; set; }
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_first", this);
 }
 
 public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDescriptor<SpanFirstQueryDescriptor<TDocument>>

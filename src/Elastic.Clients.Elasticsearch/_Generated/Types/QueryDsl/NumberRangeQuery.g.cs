@@ -196,6 +196,8 @@ public sealed partial class NumberRangeQuery : RangeQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => QueryDsl.Query.Range(numberRangeQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("range", this);
 }
 
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>

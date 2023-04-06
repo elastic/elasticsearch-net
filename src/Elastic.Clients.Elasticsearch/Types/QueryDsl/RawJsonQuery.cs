@@ -20,6 +20,8 @@ public sealed class RawJsonQuery : SearchQuery
 	/// </summary>
 	public string Raw { get; }
 
+	internal override void InternalWrapInContainer(Query container) => new Query("raw_json", this);
+
 	public static implicit operator Query(RawJsonQuery rawJsonQuery) => Query.RawJson(rawJsonQuery);
 }
 

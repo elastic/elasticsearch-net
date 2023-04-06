@@ -15,7 +15,9 @@ public class RangeQuery : SearchQuery
 {
 	internal RangeQuery() { }
 
-	public static implicit operator Query(RangeQuery rangeQuery) => QueryDsl.Query.Range(rangeQuery);
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("range", this);
+
+	public static implicit operator Query(RangeQuery rangeQuery) => Query.Range(rangeQuery);
 }
 
 internal sealed class RangeQueryConverter : JsonConverter<RangeQuery>

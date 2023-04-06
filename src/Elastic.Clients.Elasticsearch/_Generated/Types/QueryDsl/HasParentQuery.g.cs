@@ -45,6 +45,8 @@ public sealed partial class HasParentQuery : SearchQuery
 	public bool? Score { get; set; }
 
 	public static implicit operator Query(HasParentQuery hasParentQuery) => QueryDsl.Query.HasParent(hasParentQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("has_parent", this);
 }
 
 public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDescriptor<HasParentQueryDescriptor<TDocument>>
