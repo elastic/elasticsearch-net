@@ -43,6 +43,8 @@ public sealed partial class SpanNotQuery : SearchQuery
 	public int? Post { get; set; }
 	[JsonInclude, JsonPropertyName("pre")]
 	public int? Pre { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_not", this);
 }
 
 public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDescriptor<SpanNotQueryDescriptor<TDocument>>

@@ -67,6 +67,8 @@ public sealed partial class MultiMatchQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 	public static implicit operator Query(MultiMatchQuery multiMatchQuery) => QueryDsl.Query.MultiMatch(multiMatchQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("multi_match", this);
 }
 
 public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableDescriptor<MultiMatchQueryDescriptor<TDocument>>

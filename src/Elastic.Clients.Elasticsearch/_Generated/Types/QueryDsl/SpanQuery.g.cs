@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 [JsonConverter(typeof(SpanQueryConverter))]
-public sealed partial class SpanQuery : SearchQuery
+public sealed partial class SpanQuery
 {
 	internal SpanQuery(string variantName, object variant)
 	{

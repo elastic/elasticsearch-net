@@ -85,6 +85,8 @@ public sealed partial class QueryStringQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
 	public static implicit operator Query(QueryStringQuery queryStringQuery) => QueryDsl.Query.QueryString(queryStringQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("query_string", this);
 }
 
 public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptor<QueryStringQueryDescriptor<TDocument>>

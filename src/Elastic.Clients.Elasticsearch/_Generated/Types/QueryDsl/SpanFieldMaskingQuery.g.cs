@@ -37,6 +37,8 @@ public sealed partial class SpanFieldMaskingQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("field_masking_span", this);
 }
 
 public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : SerializableDescriptor<SpanFieldMaskingQueryDescriptor<TDocument>>
