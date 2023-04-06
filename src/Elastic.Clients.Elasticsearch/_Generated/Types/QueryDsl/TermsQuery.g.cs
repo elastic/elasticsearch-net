@@ -100,6 +100,8 @@ public sealed partial class TermsQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 
 	public static implicit operator Query(TermsQuery termsQuery) => QueryDsl.Query.Terms(termsQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("terms", this);
 }
 
 public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescriptor<TermsQueryDescriptor<TDocument>>

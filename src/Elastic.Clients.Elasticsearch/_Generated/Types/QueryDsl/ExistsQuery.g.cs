@@ -37,6 +37,8 @@ public sealed partial class ExistsQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(ExistsQuery existsQuery) => QueryDsl.Query.Exists(existsQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("exists", this);
 }
 
 public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>
