@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
@@ -14,17 +15,23 @@ internal static class BoolQueryAndExtensions
 		var hasLeftBool = leftContainer.TryGet<BoolQuery>(out var leftBool);
 		var hasRightBool = rightContainer.TryGet<BoolQuery>(out var rightBool);
 
-		//neither side is a bool, no special handling needed wrap in a bool must
+		// neither side is a bool, no special handling needed wrap in a bool must
 		if (!hasLeftBool && !hasRightBool)
+		{
 			return CreateMustContainer(new List<Query> { leftContainer, rightContainer });
+		}
 
 		else if (TryHandleBoolsWithOnlyShouldClauses(leftContainer, rightContainer, leftBool, rightBool, out var query))
+		{
 			return query;
+		}
 
 		else if (TryHandleUnmergableBools(leftContainer, rightContainer, leftBool, rightBool, out query))
+		{
 			return query;
+		}
 
-		//neither side is unmergable so neither is a bool with should clauses
+		// neither side is unmergable so neither is a bool with should clauses
 
 		var mustNotClauses = OrphanMustNots(leftContainer).EagerConcat(OrphanMustNots(rightContainer));
 		var filterClauses = OrphanFilters(leftContainer).EagerConcat(OrphanFilters(rightContainer));
@@ -36,45 +43,92 @@ internal static class BoolQueryAndExtensions
 	}
 
 	/// <summary>
-	/// Handles cases where either side is a bool which indicates it can't be merged yet the other side is mergable.
+	/// Handles cases where either side is a bool which indicates it can't be merged, yet the other side is mergable.
 	/// A side is considered unmergable if its locked (has important metadata) or has should clauses.
-	/// Instead of always wrapping these cases in another bool we merge to unmergable side into to others must clause therefor flattening the
-	/// generated graph
+	/// Instead of always wrapping these cases in another bool we merge the unmergable side into to others must clause therefore flattening the
+	/// generated graph. In such cases, we copy the existing BoolQuery so as not to cause a potentially surprising side-effect. (see https://github.com/elastic/elasticsearch-net/issues/5076).
 	/// </summary>
-	private static bool TryHandleUnmergableBools(Query leftContainer, Query rightContainer, BoolQuery leftBool, BoolQuery rightBool, out Query query)
+	private static bool TryHandleUnmergableBools(Query leftContainer, Query rightContainer, BoolQuery? leftBool, BoolQuery? rightBool, [NotNullWhen(true)] out Query? query)
 	{
 		query = null;
-		var leftCantMergeAnd = leftBool != null && !leftBool.CanMergeAnd();
-		var rightCantMergeAnd = rightBool != null && !rightBool.CanMergeAnd();
+
+		var leftCantMergeAnd = leftBool is not null && !leftBool.CanMergeAnd();
+		var rightCantMergeAnd = rightBool is not null && !rightBool.CanMergeAnd();
+
 		if (!leftCantMergeAnd && !rightCantMergeAnd)
-			return false;
-
-		if (leftCantMergeAnd && rightCantMergeAnd)
-			query = CreateMustContainer(leftContainer, rightContainer);
-
-		//right can't merge but left can and is a bool so we add left to the must clause of right
-		else if (!leftCantMergeAnd && leftBool != null && rightCantMergeAnd)
 		{
-			leftBool.Must = leftBool.Must.AddIfNotNull(rightContainer).ToArray();
-			query = leftContainer;
+			return false;
 		}
 
-		//right can't merge and left is not a bool, we forcefully create a wrapped must container
-		else if (!leftCantMergeAnd && leftBool == null && rightCantMergeAnd)
-			query = CreateMustContainer(leftContainer, rightContainer);
-
-		//left can't merge but right can and is a bool so we add left to the must clause of right
-		else if (leftCantMergeAnd && !rightCantMergeAnd && rightBool != null)
+		if (leftCantMergeAnd && rightCantMergeAnd)
 		{
-			rightBool.Must = rightBool.Must.AddIfNotNull(leftContainer).ToArray();
-			query = rightContainer;
+			query = CreateMustContainer(leftContainer, rightContainer);
+		}
+
+		// right can't merge but left can and is a bool so we add left to the must clause of right
+		else if (!leftCantMergeAnd && leftBool != null && rightCantMergeAnd)
+		{
+			if (rightContainer is null)
+			{
+				query = leftContainer;
+			}
+			else
+			{
+				// We create a copy here to avoid side-effects on a user provided bool query such as
+				// adding a must clause where one did not previously exist.
+
+				var leftBoolCopy = new BoolQuery
+				{
+					Boost = leftBool.Boost,
+					MinimumShouldMatch = leftBool.MinimumShouldMatch,
+					QueryName = leftBool.QueryName,
+					Should = leftBool.Should,
+					Must = leftBool.Must.AddIfNotNull(rightContainer).ToArray(),
+					MustNot = leftBool.MustNot,
+					Filter = leftBool.Filter
+				};
+
+				query = leftBoolCopy;
+			}
+		}
+
+		// right can't merge and left is not a bool, we forcefully create a wrapped must container
+		else if (!leftCantMergeAnd && leftBool is null && rightCantMergeAnd)
+		{
+			query = CreateMustContainer(leftContainer, rightContainer);
+		}
+
+		// left can't merge but right can and is a bool so we add left to the must clause of right
+		else if (leftCantMergeAnd && !rightCantMergeAnd && rightBool is not null)
+		{
+			if (leftContainer is null)
+			{
+				query = rightContainer;
+			}
+			else
+			{
+				var rightBoolCopy = new BoolQuery
+				{
+					Boost = rightBool.Boost,
+					MinimumShouldMatch = rightBool.MinimumShouldMatch,
+					QueryName = rightBool.QueryName,
+					Should = rightBool.Should,
+					Must = rightBool.Must.AddIfNotNull(leftContainer).ToArray(),
+					MustNot = rightBool.MustNot,
+					Filter = rightBool.Filter
+				};
+
+				query = rightBoolCopy;
+			}
 		}
 
 		//left can't merge and right is not a bool, we forcefully create a wrapped must container
 		else if (leftCantMergeAnd && !rightCantMergeAnd && rightBool == null)
+		{
 			query = CreateMustContainer(new List<Query> { leftContainer, rightContainer });
+		}
 
-		return query != null;
+		return query is not null;
 	}
 
 	/// <summary>
@@ -86,10 +140,14 @@ internal static class BoolQueryAndExtensions
 	private static bool TryHandleBoolsWithOnlyShouldClauses(Query leftContainer, Query rightContainer, BoolQuery leftBool, BoolQuery rightBool, out Query query)
 	{
 		query = null;
+
 		var leftHasOnlyShoulds = leftBool.HasOnlyShouldClauses();
 		var rightHasOnlyShoulds = rightBool.HasOnlyShouldClauses();
+
 		if (!leftHasOnlyShoulds && !rightHasOnlyShoulds)
+		{
 			return false;
+		}
 
 		if (leftContainer.HoldsOnlyShouldMusts && rightHasOnlyShoulds)
 		{
@@ -106,6 +164,7 @@ internal static class BoolQueryAndExtensions
 			query = CreateMustContainer(new List<Query> { leftContainer, rightContainer });
 			query.HoldsOnlyShouldMusts = rightHasOnlyShoulds && leftHasOnlyShoulds;
 		}
+
 		return true;
 	}
 
@@ -113,18 +172,18 @@ internal static class BoolQueryAndExtensions
 		CreateMustContainer(new List<Query> { left, right });
 
 	private static Query CreateMustContainer(List<Query> mustClauses) =>
-		new Query(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
+		new(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
 
 	private static Query CreateMustContainer(
 		List<Query> mustClauses,
 		List<Query> mustNotClauses,
 		List<Query> filters
-		) => new Query(new BoolQuery
-	{
-		Must = mustClauses.ToListOrNullIfEmpty(),
-		MustNot = mustNotClauses.ToListOrNullIfEmpty(),
-		Filter = filters.ToListOrNullIfEmpty()
-	});
+		) => new(new BoolQuery
+		{
+			Must = mustClauses.ToListOrNullIfEmpty(),
+			MustNot = mustNotClauses.ToListOrNullIfEmpty(),
+			Filter = filters.ToListOrNullIfEmpty()
+		});
 
 	private static bool CanMergeAnd(this BoolQuery boolQuery) =>
 		boolQuery != null && !boolQuery.Locked && !boolQuery.Should.HasAny();
