@@ -53,6 +53,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "/_script_language" });
 	internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "/_scripts/{id}" });
 	internal static ApiUrls NoNamespaceGetSource = new ApiUrls(new[] { "/{index}/_source/{id}" });
+	internal static ApiUrls GraphExplore = new ApiUrls(new[] { "/{index}/_graph/explore" });
 	internal static ApiUrls IndexManagementClone = new ApiUrls(new[] { "/{index}/_clone/{target}" });
 	internal static ApiUrls IndexManagementClose = new ApiUrls(new[] { "/{index}/_close" });
 	internal static ApiUrls IndexManagementCreateDataStream = new ApiUrls(new[] { "/_data_stream/{name}" });
