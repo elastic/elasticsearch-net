@@ -115,6 +115,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls TasksGet = new ApiUrls(new[] { "/_tasks/{task_id}" });
 	internal static ApiUrls TasksList = new ApiUrls(new[] { "/_tasks" });
 	internal static ApiUrls NoNamespaceTermsEnum = new ApiUrls(new[] { "/{index}/_terms_enum" });
+	internal static ApiUrls NoNamespaceTermvectors = new ApiUrls(new[] { "/{index}/_termvectors/{id}", "/{index}/_termvectors" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "/{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "/_update_by_query/{task_id}/_rethrottle" });
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "/{index}/_update/{id}" });

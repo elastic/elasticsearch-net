@@ -4006,6 +4006,138 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TermVectorsRequest<TDocument> request)
+	{
+		request.BeforeRequest();
+		return DoRequest<TermVectorsRequest<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TermVectorsRequest<TDocument> request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequest<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequest<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TermVectorsRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document, index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TDocument document)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequest<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual TermVectorsResponse TermVectors<TDocument>(TDocument document, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document, index);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TermVectorsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document, index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TermVectorsResponse> TermVectorsAsync<TDocument>(TDocument document, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TermVectorsRequestDescriptor<TDocument>(document);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TermVectorsRequestDescriptor<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
 	/// <para>Performs an update on every document in the index without changing the source,<br/>for example to pick up a mapping change.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
