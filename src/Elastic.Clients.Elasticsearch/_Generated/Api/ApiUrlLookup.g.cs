@@ -28,7 +28,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "/_bulk", "/{index}/_bulk" });
 	internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "/_search/scroll" });
 	internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "/_pit" });
+	internal static ApiUrls ClusterAllocationExplain = new ApiUrls(new[] { "/_cluster/allocation/explain" });
+	internal static ApiUrls ClusterStats = new ApiUrls(new[] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" });
+	internal static ApiUrls ClusterGetSettings = new ApiUrls(new[] { "/_cluster/settings" });
 	internal static ApiUrls ClusterHealth = new ApiUrls(new[] { "/_cluster/health", "/_cluster/health/{index}" });
+	internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[] { "/_cluster/pending_tasks" });
 	internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "/_count", "/{index}/_count" });
 	internal static ApiUrls NoNamespaceCreate = new ApiUrls(new[] { "/{index}/_create/{id}" });
 	internal static ApiUrls NoNamespaceDeleteByQuery = new ApiUrls(new[] { "/{index}/_delete_by_query" });
