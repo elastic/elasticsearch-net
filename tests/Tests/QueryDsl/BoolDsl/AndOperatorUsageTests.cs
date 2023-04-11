@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.QueryDsl;
 using Tests.Domain;
+using Xunit;
 
 namespace Tests.QueryDsl.BoolDsl;
 
@@ -294,6 +295,49 @@ public class AndOperatorUsageTests : OperatorUsageBase
 			(BoolQuery)s.Variant != null &&
 			((BoolQuery)s.Variant).Should != null &&
 			((BoolQuery)s.Variant).QueryName == "name");
+	}
+
+	[U]
+	public void AndAssigningShouldNotModifyOriginalBoolQuery()
+	{
+		// Based on https://github.com/elastic/elasticsearch-net/issues/5076
+
+		// create a bool query with a filter that might be reused by the consuming code and expected not to change.
+		Query filterQueryContainerExpectedToNotChange = +new TermQuery("do-not") { Value = "change" };
+
+		filterQueryContainerExpectedToNotChange.TryGet<BoolQuery>(out var boolQueryBefore).Should().BeTrue();
+
+		boolQueryBefore.Must.Should().BeNull();
+		boolQueryBefore.Filter.Single().TryGet<TermQuery>(out var termQueryBefore).Should().BeTrue();
+		termQueryBefore.Field.Should().Be("do-not");
+		termQueryBefore.Value.TryGetString(out var termValue).Should().BeTrue();
+		termValue.Should().Be("change");
+		
+		var queryToExecute = new BoolQuery
+		{
+			Should = new Query[] { new MatchAllQuery() },
+			Filter = new Query[] { new MatchAllQuery() } // if either of these are removed, it works as expected
+		}
+		&& filterQueryContainerExpectedToNotChange;
+
+		filterQueryContainerExpectedToNotChange.TryGet<BoolQuery>(out var boolQueryAfter).Should().BeTrue();
+		boolQueryAfter.Must.Should().BeNull();
+		boolQueryAfter.Filter.Single().TryGet<TermQuery>(out var termQueryAfter).Should().BeTrue();
+		termQueryAfter.Field.Should().Be("do-not");
+		termQueryAfter.Value.TryGetString(out termValue).Should().BeTrue();
+		termValue.Should().Be("change");
+
+		queryToExecute.TryGet<BoolQuery>(out var boolToExecute).Should().BeTrue();
+		boolToExecute.Filter.Should().HaveCount(1);
+		boolToExecute.Must.Should().HaveCount(1);
+		boolToExecute.Filter.Single().TryGet<TermQuery>(out var queryToExecuteTermQuery).Should().BeTrue();
+		queryToExecuteTermQuery.Field.Should().Be("do-not");
+		queryToExecuteTermQuery.Value.TryGetString(out termValue).Should().BeTrue();
+		termValue.Should().Be("change");
+
+		boolToExecute.Must.Single().TryGet<BoolQuery>(out var mustClauseBool).Should().BeTrue();
+		mustClauseBool.Filter.Should().HaveCount(1);
+		mustClauseBool.Should.Should().HaveCount(1);
 	}
 
 	private static void AssertLotsOfAnds(Query lotsOfAnds)

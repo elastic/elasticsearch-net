@@ -201,6 +201,7 @@ resharper_redundant_case_label_highlighting=do_not_show
 resharper_redundant_argument_default_value_highlighting=do_not_show
 
 spelling_languages=en-us,en-gb
+spelling_exclusion_path=exclusion.dic
 
 [Jenkinsfile]
 indent_style = space
