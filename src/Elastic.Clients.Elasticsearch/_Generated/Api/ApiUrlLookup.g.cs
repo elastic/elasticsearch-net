@@ -35,6 +35,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceDeleteByQueryRethrottle = new ApiUrls(new[] { "/_delete_by_query/{task_id}/_rethrottle" });
 	internal static ApiUrls NoNamespaceDelete = new ApiUrls(new[] { "/{index}/_doc/{id}" });
 	internal static ApiUrls NoNamespaceDeleteScript = new ApiUrls(new[] { "/_scripts/{id}" });
+	internal static ApiUrls EnrichDeletePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
+	internal static ApiUrls EnrichStats = new ApiUrls(new[] { "/_enrich/_stats" });
+	internal static ApiUrls EnrichExecutePolicy = new ApiUrls(new[] { "/_enrich/policy/{name}/_execute" });
+	internal static ApiUrls EnrichGetPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}", "/_enrich/policy" });
+	internal static ApiUrls EnrichPutPolicy = new ApiUrls(new[] { "/_enrich/policy/{name}" });
 	internal static ApiUrls EqlDelete = new ApiUrls(new[] { "/_eql/search/{id}" });
 	internal static ApiUrls EqlGet = new ApiUrls(new[] { "/_eql/search/{id}" });
 	internal static ApiUrls EqlSearch = new ApiUrls(new[] { "/{index}/_eql/search" });
