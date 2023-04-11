@@ -101,6 +101,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceMget = new ApiUrls(new[] { "/_mget", "/{index}/_mget" });
 	internal static ApiUrls NoNamespaceMsearch = new ApiUrls(new[] { "/_msearch", "/{index}/_msearch" });
 	internal static ApiUrls NoNamespaceMsearchTemplate = new ApiUrls(new[] { "/_msearch/template", "/{index}/_msearch/template" });
+	internal static ApiUrls NoNamespaceMtermvectors = new ApiUrls(new[] { "/_mtermvectors", "/{index}/_mtermvectors" });
 	internal static ApiUrls NoNamespaceOpenPointInTime = new ApiUrls(new[] { "/{index}/_pit" });
 	internal static ApiUrls NoNamespacePing = new ApiUrls(new[] { "/" });
 	internal static ApiUrls NoNamespacePutScript = new ApiUrls(new[] { "/_scripts/{id}", "/_scripts/{id}/{context}" });

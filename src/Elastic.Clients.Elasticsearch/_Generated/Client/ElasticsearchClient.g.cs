@@ -2668,6 +2668,136 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors(MultiTermVectorsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequest, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync(MultiTermVectorsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequest, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors()
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors(MultiTermVectorsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors(Action<MultiTermVectorsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors<TDocument>(MultiTermVectorsRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual MultiTermVectorsResponse MultiTermVectors<TDocument>(Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync(MultiTermVectorsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync(Action<MultiTermVectorsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequestDescriptor, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync<TDocument>(MultiTermVectorsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns multiple termvectors in one request.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MultiTermVectorsResponse> MultiTermVectorsAsync<TDocument>(Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MultiTermVectorsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MultiTermVectorsRequestDescriptor<TDocument>, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
