@@ -101,9 +101,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceRankEval = new ApiUrls(new[] { "/_rank_eval", "/{index}/_rank_eval" });
 	internal static ApiUrls NoNamespaceReindex = new ApiUrls(new[] { "/_reindex" });
 	internal static ApiUrls NoNamespaceReindexRethrottle = new ApiUrls(new[] { "/_reindex/{task_id}/_rethrottle" });
+	internal static ApiUrls NoNamespaceRenderSearchTemplate = new ApiUrls(new[] { "/_render/template", "/_render/template/{id}" });
 	internal static ApiUrls NoNamespaceScroll = new ApiUrls(new[] { "/_search/scroll" });
 	internal static ApiUrls NoNamespaceSearch = new ApiUrls(new[] { "/_search", "/{index}/_search" });
 	internal static ApiUrls NoNamespaceSearchShards = new ApiUrls(new[] { "/_search_shards", "/{index}/_search_shards" });
+	internal static ApiUrls NoNamespaceSearchTemplate = new ApiUrls(new[] { "/_search/template", "/{index}/_search/template" });
 	internal static ApiUrls SqlClearCursor = new ApiUrls(new[] { "/_sql/close" });
 	internal static ApiUrls SqlDeleteAsync = new ApiUrls(new[] { "/_sql/async/delete/{id}" });
 	internal static ApiUrls SqlGetAsync = new ApiUrls(new[] { "/_sql/async/{id}" });

@@ -47,7 +47,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual BulkResponse Bulk(BulkRequest request)
 	{
@@ -57,7 +57,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
@@ -67,7 +67,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual BulkResponse Bulk(BulkRequestDescriptor descriptor)
 	{
@@ -77,7 +77,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
 	{
@@ -89,7 +89,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual BulkResponse Bulk<TDocument>(BulkRequestDescriptor<TDocument> descriptor)
 	{
@@ -99,7 +99,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
 	{
@@ -111,7 +111,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -121,7 +121,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -133,7 +133,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -143,7 +143,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -155,7 +155,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
 	{
@@ -165,7 +165,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -175,7 +175,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClearScrollResponse ClearScroll()
 	{
@@ -186,7 +186,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequestDescriptor descriptor)
 	{
@@ -196,7 +196,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
 	{
@@ -208,7 +208,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
 	{
@@ -219,7 +219,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -229,7 +229,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -241,7 +241,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
 	{
@@ -251,7 +251,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -261,7 +261,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClosePointInTimeResponse ClosePointInTime()
 	{
@@ -272,7 +272,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequestDescriptor descriptor)
 	{
@@ -282,7 +282,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
 	{
@@ -294,7 +294,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
 	{
@@ -305,7 +305,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -315,7 +315,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2665,7 +2665,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
 	{
@@ -2675,7 +2675,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2685,7 +2685,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -2696,7 +2696,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequestDescriptor descriptor)
 	{
@@ -2706,7 +2706,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
 	{
@@ -2718,7 +2718,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor)
 	{
@@ -2728,7 +2728,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
 	{
@@ -2740,7 +2740,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -2751,7 +2751,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2761,7 +2761,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2773,7 +2773,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2783,7 +2783,7 @@ public partial class ElasticsearchClient
 
 	/// <summary>
 	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.6/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3312,6 +3312,136 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequest, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(RenderSearchTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequest, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate()
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate(Action<RenderSearchTemplateRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate<TDocument>(RenderSearchTemplateRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual RenderSearchTemplateResponse RenderSearchTemplate<TDocument>(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(RenderSearchTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Action<RenderSearchTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync<TDocument>(RenderSearchTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync<TDocument>(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RenderSearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
 	/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3611,6 +3741,92 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SearchShardsRequestDescriptor<TDocument>, SearchShardsResponse, SearchShardsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SearchTemplateRequest, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(SearchTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SearchTemplateRequest, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>()
+	{
+		var descriptor = new SearchTemplateRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchTemplateRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(SearchTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SearchTemplateRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
