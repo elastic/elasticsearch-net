@@ -19,6 +19,7 @@
 
 using Elastic.Clients.Elasticsearch.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Cluster;
+using Elastic.Clients.Elasticsearch.DanglingIndices;
 using Elastic.Clients.Elasticsearch.Enrich;
 using Elastic.Clients.Elasticsearch.Eql;
 using Elastic.Clients.Elasticsearch.Graph;
@@ -36,6 +37,7 @@ public partial class ElasticsearchClient
 {
 	public virtual AsyncSearchNamespacedClient AsyncSearch { get; private set; }
 	public virtual ClusterNamespacedClient Cluster { get; private set; }
+	public virtual DanglingIndicesNamespacedClient DanglingIndices { get; private set; }
 	public virtual EnrichNamespacedClient Enrich { get; private set; }
 	public virtual EqlNamespacedClient Eql { get; private set; }
 	public virtual GraphNamespacedClient Graph { get; private set; }
@@ -46,7 +48,7 @@ public partial class ElasticsearchClient
 
 	private partial void SetupNamespaces()
 	{
-		AsyncSearch = new AsyncSearchNamespacedClient(this); Cluster = new ClusterNamespacedClient(this); Enrich = new EnrichNamespacedClient(this); Eql = new EqlNamespacedClient(this); Graph = new GraphNamespacedClient(this); Indices = new IndicesNamespacedClient(this); Ingest = new IngestNamespacedClient(this); Sql = new SqlNamespacedClient(this); Tasks = new TasksNamespacedClient(this);
+		AsyncSearch = new AsyncSearchNamespacedClient(this); Cluster = new ClusterNamespacedClient(this); DanglingIndices = new DanglingIndicesNamespacedClient(this); Enrich = new EnrichNamespacedClient(this); Eql = new EqlNamespacedClient(this); Graph = new GraphNamespacedClient(this); Indices = new IndicesNamespacedClient(this); Ingest = new IngestNamespacedClient(this); Sql = new SqlNamespacedClient(this); Tasks = new TasksNamespacedClient(this);
 	}
 
 	/// <summary>
