@@ -138,10 +138,15 @@ public partial class ElasticsearchClient
 
 		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
 		{
-			activity?.AddTag("db.system", "elasticsearch");
-			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters);
+			activity?.SetTag("db.system", "elasticsearch");
+			activity?.SetCustomProperty("elastic.transport.client", true);
+
+			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters);
+
+			if (response.ApiCallDetails.RequestBodyInBytes is not null)
+				activity?.SetTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
 		}
-		
+
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
 
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -206,13 +211,13 @@ public partial class ElasticsearchClient
 
 		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
 		{
-			activity?.AddTag("db.system", "elasticsearch");
+			activity?.SetTag("db.system", "elasticsearch");
 			activity?.SetCustomProperty("elastic.transport.client", true);
 
 			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters);
 
 			if (response.ApiCallDetails.RequestBodyInBytes is not null)
-				activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
+				activity?.SetTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
 		}
 
 		PostRequestProductCheck<TRequest, TResponse>(request, response);
