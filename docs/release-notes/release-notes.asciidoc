@@ -3,6 +3,14 @@
 
 * <<breaking-changes-policy,Breaking changes policy>>
 
+include::breaking-change-policy.asciidoc[]
+
+[discrete]
+== Version 8.1
+
+<<release-notes-8.1.0,Release notes v8.1.0>>
+include::release-notes-8.1.0.asciidoc[]
+
 [discrete]
 == Version 8.0
 
@@ -18,7 +26,6 @@
 * <<release-notes-8.0.1,Release notes v8.0.1>>
 * <<release-notes-8.0.0,Release notes v8.0.0>>
 
-include::breaking-change-policy.asciidoc[]
 include::release-notes-8.0.10.asciidoc[]
 include::release-notes-8.0.9.asciidoc[]
 include::release-notes-8.0.8.asciidoc[]
