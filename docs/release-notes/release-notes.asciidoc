@@ -6,7 +6,7 @@
 [discrete]
 == Version 8.1
 
-<<release-notes-8.1.0,Release notes v8.1.0>>
+* <<release-notes-8.1.0,Release notes v8.1.0>>
 
 [discrete]
 == Version 8.0
