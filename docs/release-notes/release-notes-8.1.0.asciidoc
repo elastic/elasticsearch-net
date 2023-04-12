@@ -71,24 +71,20 @@ Adds support for the following aggregations:
 - Weighted average
 
 [discrete]
-==== Misc
+==== Other enhancements
 
-*Add support for geo distance sorting.*
+- *Add support for geo distance sorting.*
 Adds support for specifying a `GeoDistanceSort` on `SortOptions`.
-
-*Add support for weight score on FunctionScore.*
+- *Add support for weight score on FunctionScore.*
 Adds support for specifying a weight score value on the `FunctionScore` type.
-
-*Code generate XML doc comments.*
+- *Code generate XML doc comments.*
 The code generator now adds XML doc comments to types and members when present in 
 the Elasticsearch specification. This acts as an aid when exploring the API in an 
 IDE such as Visual Studio.
-
-*Add additional client overloads.*
+- *Add additional client overloads.*
 Adds additional overloads to the `ElasticsearchClient` and namespaced sub-clients 
 that allow consumers to provide a descriptor instance used when building requests.
-
-*Add support for bool query operators in Query DSL for object initializer syntax*
+- *Add support for bool query operators in Query DSL for object initializer syntax*
 Adds support for using operators `&&``, `||`, `!` and `+` to build up bool queries 
 using the object initializer syntax. NOTE: Operators are not yet supported for 
 combining queires defined using the fluent descriptor syntax.
