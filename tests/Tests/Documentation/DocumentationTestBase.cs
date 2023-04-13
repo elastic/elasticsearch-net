@@ -2,9 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-namespace Tests.Documentation;
-
-public abstract class DocumentationTestBase
+namespace Tests.Documentation
 {
-	public static readonly ElasticsearchClient Client = new(new ElasticsearchClientSettings(new InMemoryConnection()).DisableDirectStreaming());
+	public abstract class DocumentationTestBase
+	{
+	}
 }
