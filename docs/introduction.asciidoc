@@ -14,7 +14,10 @@ please modify the original csharp file found at the link and submit the PR with 
 == Introduction
 
 This is the documentation page for `Elasticsearch.Net` and `NEST`, the two 
-official .NET clients for {es}.
+official .NET clients for {es} v7.
+
+For documentation relating to the new .NET client for {es} v8, please visit our 
+https://www.elastic.co/guide/en/elasticsearch/client/net-api/current[latest documentation].
 
 [discrete]
 === Why two clients?
