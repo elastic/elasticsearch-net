@@ -1,8 +1,24 @@
+:github: https://github.com/elastic/elasticsearch-net
+
 [[introduction]]
 == Introduction
 
-This is the documentation for the .NET client for {es}. This page gives you a 
-quick overview of the main features of the client.
+*Rapidly develop applications with the .NET client for {es}.*
+
+Designed for .NET client-application developers, you can utilize the .NET language client 
+library, which provides a strongly-typed API and query DSL to interact with {es}. 
+The .NET client library is designed to make it easy to use {es} from your .NET 
+applications. The .NET client includes higher-level abstractions, such as 
+helpers for coordinating bulk indexing and update operations. It also comes with 
+built-in, configurable cluster failover retry mechanisms.
+
+The {es} .NET client is available as a https://www.nuget.org/packages/Elastic.Clients.Elasticsearch[NuGet] 
+package that can be used in .NET Core, .NET 5+ and .NET Framework (4.6.1 and higher) 
+applications.
+
+_NOTE: This documentation relates to the v8 .NET client for {es}, designed for use 
+with {es} 8.x versions. To develop applications targetting {es} v7, you should 
+use the https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17[v7 (NEST) client]._
 
 [discrete]
 [[features]]
@@ -11,6 +27,7 @@ quick overview of the main features of the client.
 * One-to-one mapping with REST API.
 * Strongly typed requests and responses for {es} APIs.
 * Fluent API for building requests.
+* Query DSL to assist with constructing search queries.
 * Helpers for common tasks such as bulk indexing of documents. 
 * Pluggable serialization of requests and responses based on System.Text.Json.
 * Diagnostics, auditing, and .NET activity integration.
@@ -19,3 +36,21 @@ The .NET {es} client is built upon the Elastic Transport library which provides:
 
 * Connection management and load balancing across all available nodes.
 * Request retries and dead connections handling.
+
+[discrete]
+=== {es} version compatibility
+
+Language clients are forward compatible; meaning that clients support communicating 
+with greater or equal minor versions of {es}. {es} language clients are only 
+backwards compatible with default distributions and without guarantees made.
+
+[discrete]
+=== Questions, bugs, comments, feature requests
+
+Bug reports and feature requests are more than welcome on the 
+{github}/issues[github issues pages]!
+
+For more general questions and comments, we monitor questions and discussions 
+opened on our community forum, https://discuss.elastic.co/c/elasticsearch[discuss.elastic.co]. 
+Mentioning `.NET` in the title helps folks quickly identify what 
+the question is about.
