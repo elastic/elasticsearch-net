@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public partial class SqlQueryResponse
+public partial class QueryResponse
 {
 	[JsonInclude]
 	[JsonPropertyName("rows")]
