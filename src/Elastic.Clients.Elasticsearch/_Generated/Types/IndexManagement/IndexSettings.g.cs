@@ -294,7 +294,7 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 
 				if (property == "routing_partition_size")
 				{
-					variant.RoutingPartitionSize = JsonSerializer.Deserialize<int?>(ref reader, options);
+					variant.RoutingPartitionSize = StringifiedIntegerConverter.ReadStringifiedInteger(ref reader);
 					continue;
 				}
 
@@ -656,10 +656,10 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 			JsonSerializer.Serialize(writer, value.Routing, options);
 		}
 
-		if (value.RoutingPartitionSize.HasValue)
+		if (value.RoutingPartitionSize is not null)
 		{
 			writer.WritePropertyName("routing_partition_size");
-			writer.WriteNumberValue(value.RoutingPartitionSize.Value);
+			JsonSerializer.Serialize(writer, value.RoutingPartitionSize, options);
 		}
 
 		if (value.RoutingPath is not null)
@@ -809,6 +809,7 @@ public sealed partial class IndexSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsQueryString? QueryString { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? RefreshInterval { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? RoutingPartitionSize { get; set; }
 	public ICollection<string>? RoutingPath { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch? Search { get; set; }
@@ -2121,10 +2122,10 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		if (RoutingPartitionSizeValue.HasValue)
+		if (RoutingPartitionSizeValue is not null)
 		{
 			writer.WritePropertyName("routing_partition_size");
-			writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
+			JsonSerializer.Serialize(writer, RoutingPartitionSizeValue, options);
 		}
 
 		if (RoutingPathValue is not null)
@@ -3569,10 +3570,10 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		if (RoutingPartitionSizeValue.HasValue)
+		if (RoutingPartitionSizeValue is not null)
 		{
 			writer.WritePropertyName("routing_partition_size");
-			writer.WriteNumberValue(RoutingPartitionSizeValue.Value);
+			JsonSerializer.Serialize(writer, RoutingPartitionSizeValue, options);
 		}
 
 		if (RoutingPathValue is not null)
