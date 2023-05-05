@@ -30,8 +30,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class MergeScheduler
 {
 	[JsonInclude, JsonPropertyName("max_merge_count")]
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? MaxMergeCount { get; set; }
 	[JsonInclude, JsonPropertyName("max_thread_count")]
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? MaxThreadCount { get; set; }
 }
 
@@ -61,16 +63,16 @@ public sealed partial class MergeSchedulerDescriptor : SerializableDescriptor<Me
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MaxMergeCountValue.HasValue)
+		if (MaxMergeCountValue is not null)
 		{
 			writer.WritePropertyName("max_merge_count");
-			writer.WriteNumberValue(MaxMergeCountValue.Value);
+			JsonSerializer.Serialize(writer, MaxMergeCountValue, options);
 		}
 
-		if (MaxThreadCountValue.HasValue)
+		if (MaxThreadCountValue is not null)
 		{
 			writer.WritePropertyName("max_thread_count");
-			writer.WriteNumberValue(MaxThreadCountValue.Value);
+			JsonSerializer.Serialize(writer, MaxThreadCountValue, options);
 		}
 
 		writer.WriteEndObject();
