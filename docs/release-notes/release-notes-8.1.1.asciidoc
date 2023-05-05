@@ -1,0 +1,72 @@
+[[release-notes-8.1.1]]
+== Release notes v8.1.1
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7667[#7667] Fix SQL missing 
+Rows on QueryResponse (issue: https://github.com/elastic/elasticsearch-net/issues/7663[#7663])
+- https://github.com/elastic/elasticsearch-net/pull/7676[#7676] Ensure async client 
+methods pass through cancellation token (issue: https://github.com/elastic/elasticsearch-net/issues/7665[#7665])
+
+[discrete]
+=== Enhancements
+
+- https://github.com/elastic/elasticsearch-net/pull/7684[#7684] Regenerated code 
+with latest spec fixes for 8.7
+
+[discrete]
+=== Breaking changes
+
+This release includes the following breaking changes as a result of specification fixes:
+
+[discrete]
+==== AsyncSearch and MultisearchBody KnnQuery
+
+The type for the `SubmitAsyncSearchRequest.Knn` and `MultisearchBody.Knn` properties 
+has changed to an `ICollection<KnnQuery>` from a single `KnnQuery` since it is 
+possible to include more than one query in a request.
+
+*_Before_*
+
+[source,csharp]
+----
+public sealed partial class SubmitAsyncSearchRequest
+{
+   ...
+   public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
+   ...
+}
+----
+
+[source,csharp]
+----
+public sealed partial class MultisearchBody
+{
+   ...
+   public Elastic.Clients.Elasticsearch.KnnQuery? Knn { get; set; }
+   ...
+}
+----
+
+*_After_*
+
+[source,csharp]
+----
+public sealed partial class SubmitAsyncSearchRequest
+{
+   ...
+   public ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? Knn { get; set; }
+   ...
+}
+----
+
+[source,csharp]
+----
+public sealed partial class MultisearchBody
+{
+   ...
+   public ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? Knn { get; set; }
+   ...
+}
+----
