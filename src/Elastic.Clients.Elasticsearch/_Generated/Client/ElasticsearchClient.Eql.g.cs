@@ -119,7 +119,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new EqlDeleteRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -129,7 +129,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<EqlDeleteResponse> DeleteAsync(EqlDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -141,7 +141,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new EqlDeleteRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -151,7 +151,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(EqlDeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -163,7 +163,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -227,7 +227,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new EqlGetRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -237,7 +237,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -249,7 +249,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new EqlGetRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -313,7 +313,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -323,7 +323,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -335,7 +335,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new EqlSearchRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		return DoRequestAsync<EqlSearchRequestDescriptor, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -421,7 +421,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -431,7 +431,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -443,7 +443,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -453,7 +453,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(GetEqlStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -465,6 +465,6 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
 }
