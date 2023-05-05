@@ -97,7 +97,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new AllocationExplainRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -107,7 +107,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -119,7 +119,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new AllocationExplainRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor);
+		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -183,7 +183,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new ClusterStatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -193,7 +193,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -205,7 +205,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new ClusterStatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -269,7 +269,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetClusterSettingsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -279,7 +279,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -291,7 +291,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetClusterSettingsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor);
+		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -377,7 +377,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new HealthRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -387,7 +387,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<HealthResponse> HealthAsync(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -399,7 +399,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new HealthRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -409,7 +409,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -421,7 +421,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new HealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -485,7 +485,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new PendingTasksRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -495,7 +495,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -507,6 +507,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		var descriptor = new PendingTasksRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor);
+		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
 	}
 }
