@@ -85,7 +85,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(ClearCursorRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor);
+		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -97,7 +97,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new ClearCursorRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor);
+		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -183,7 +183,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new DeleteAsyncRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -193,7 +193,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncSearchAsync(DeleteAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -205,7 +205,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new DeleteAsyncRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<DeleteAsyncRequestDescriptor, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -215,7 +215,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncSearchAsync<TDocument>(DeleteAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -227,7 +227,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new DeleteAsyncRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<DeleteAsyncRequestDescriptor<TDocument>, DeleteAsyncResponse, DeleteAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -313,7 +313,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetAsyncRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -323,7 +323,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetAsyncResponse> GetAsyncSearchAsync(GetAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -335,7 +335,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetAsyncRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -345,7 +345,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetAsyncResponse> GetAsyncSearchAsync<TDocument>(GetAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -357,7 +357,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetAsyncRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncRequestDescriptor<TDocument>, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -443,7 +443,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetAsyncStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -453,7 +453,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetAsyncStatusResponse> GetAsyncSearchStatusAsync(GetAsyncStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -465,7 +465,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetAsyncStatusRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -475,7 +475,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetAsyncStatusResponse> GetAsyncSearchStatusAsync<TDocument>(GetAsyncStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -487,7 +487,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetAsyncStatusRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor);
+		return DoRequestAsync<GetAsyncStatusRequestDescriptor<TDocument>, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -573,7 +573,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new QueryRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor);
+		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -583,7 +583,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<QueryResponse> QueryAsync(QueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor);
+		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -595,7 +595,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new QueryRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor);
+		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -605,7 +605,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	public virtual Task<QueryResponse> QueryAsync<TDocument>(QueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor);
+		return DoRequestAsync<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -617,6 +617,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		var descriptor = new QueryRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor);
+		return DoRequestAsync<QueryRequestDescriptor<TDocument>, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
 	}
 }
