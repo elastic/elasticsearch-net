@@ -97,7 +97,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new DeletePolicyRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -107,7 +107,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<DeletePolicyResponse> DeletePolicyAsync(DeletePolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -119,7 +119,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new DeletePolicyRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<DeletePolicyRequestDescriptor, DeletePolicyResponse, DeletePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -183,7 +183,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new EnrichStatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor);
+		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -193,7 +193,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<EnrichStatsResponse> StatsAsync(EnrichStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor);
+		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -205,7 +205,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new EnrichStatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor);
+		return DoRequestAsync<EnrichStatsRequestDescriptor, EnrichStatsResponse, EnrichStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -269,7 +269,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new ExecutePolicyRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -279,7 +279,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<ExecutePolicyResponse> ExecutePolicyAsync(ExecutePolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -291,7 +291,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new ExecutePolicyRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor);
+		return DoRequestAsync<ExecutePolicyRequestDescriptor, ExecutePolicyResponse, ExecutePolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -355,7 +355,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetPolicyRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -365,7 +365,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(GetPolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -377,7 +377,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetPolicyRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<GetPolicyRequestDescriptor, GetPolicyResponse, GetPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -451,7 +451,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<PutPolicyResponse> PutPolicyAsync(PutPolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPolicyRequestDescriptor, PutPolicyResponse, PutPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<PutPolicyRequestDescriptor, PutPolicyResponse, PutPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -463,7 +463,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new PutPolicyRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPolicyRequestDescriptor, PutPolicyResponse, PutPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<PutPolicyRequestDescriptor, PutPolicyResponse, PutPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -473,7 +473,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	public virtual Task<PutPolicyResponse> PutPolicyAsync<TDocument>(PutPolicyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPolicyRequestDescriptor<TDocument>, PutPolicyResponse, PutPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<PutPolicyRequestDescriptor<TDocument>, PutPolicyResponse, PutPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -485,6 +485,6 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 		var descriptor = new PutPolicyRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPolicyRequestDescriptor<TDocument>, PutPolicyResponse, PutPolicyRequestParameters>(descriptor);
+		return DoRequestAsync<PutPolicyRequestDescriptor<TDocument>, PutPolicyResponse, PutPolicyRequestParameters>(descriptor, cancellationToken);
 	}
 }

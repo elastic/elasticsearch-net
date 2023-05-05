@@ -103,7 +103,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new CancelRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -114,7 +114,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -127,7 +127,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 		var descriptor = new CancelRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -197,7 +197,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new GetTasksRequestDescriptor(task_id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
+		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -208,7 +208,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
+		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -221,7 +221,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 		var descriptor = new GetTasksRequestDescriptor(task_id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
+		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -291,7 +291,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -302,7 +302,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -315,6 +315,6 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 		var descriptor = new ListRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
 }
