@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingBlocks
 {
 	[JsonInclude, JsonPropertyName("metadata")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Metadata { get; set; }
 	[JsonInclude, JsonPropertyName("read")]
 	public bool? Read { get; set; }
@@ -88,10 +89,10 @@ public sealed partial class IndexSettingBlocksDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetadataValue.HasValue)
+		if (MetadataValue is not null)
 		{
 			writer.WritePropertyName("metadata");
-			writer.WriteBooleanValue(MetadataValue.Value);
+			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
 		if (ReadValue.HasValue)
