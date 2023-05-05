@@ -97,7 +97,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
+		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -107,7 +107,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
+		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -119,6 +119,6 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
+		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
 	}
 }
