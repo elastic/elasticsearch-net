@@ -119,7 +119,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	{
 		var descriptor = new ExploreRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -129,7 +129,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -141,7 +141,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 		var descriptor = new ExploreRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -151,7 +151,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(ExploreRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor);
+		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -163,6 +163,6 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 		var descriptor = new ExploreRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor);
+		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 }
