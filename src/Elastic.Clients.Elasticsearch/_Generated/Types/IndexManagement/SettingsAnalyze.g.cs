@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class SettingsAnalyze
 {
 	[JsonInclude, JsonPropertyName("max_token_count")]
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? MaxTokenCount { get; set; }
 }
 
@@ -52,10 +53,10 @@ public sealed partial class SettingsAnalyzeDescriptor : SerializableDescriptor<S
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MaxTokenCountValue.HasValue)
+		if (MaxTokenCountValue is not null)
 		{
 			writer.WritePropertyName("max_token_count");
-			writer.WriteNumberValue(MaxTokenCountValue.Value);
+			JsonSerializer.Serialize(writer, MaxTokenCountValue, options);
 		}
 
 		writer.WriteEndObject();
