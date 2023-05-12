@@ -33,13 +33,17 @@ public sealed partial class IndexSettingBlocks
 	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Metadata { get; set; }
 	[JsonInclude, JsonPropertyName("read")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Read { get; set; }
 	[JsonInclude, JsonPropertyName("read_only")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? ReadOnly { get; set; }
 	[JsonInclude, JsonPropertyName("read_only_allow_delete")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? ReadOnlyAllowDelete { get; set; }
 	[JsonInclude, JsonPropertyName("write")]
-	public Union<bool?, string?>? Write { get; set; }
+	[JsonConverter(typeof(StringifiedBoolConverter))]
+	public bool? Write { get; set; }
 }
 
 public sealed partial class IndexSettingBlocksDescriptor : SerializableDescriptor<IndexSettingBlocksDescriptor>
@@ -54,7 +58,7 @@ public sealed partial class IndexSettingBlocksDescriptor : SerializableDescripto
 	private bool? ReadValue { get; set; }
 	private bool? ReadOnlyValue { get; set; }
 	private bool? ReadOnlyAllowDeleteValue { get; set; }
-	private Union<bool?, string?>? WriteValue { get; set; }
+	private bool? WriteValue { get; set; }
 
 	public IndexSettingBlocksDescriptor Metadata(bool? metadata = true)
 	{
@@ -80,7 +84,7 @@ public sealed partial class IndexSettingBlocksDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public IndexSettingBlocksDescriptor Write(Union<bool?, string?>? write)
+	public IndexSettingBlocksDescriptor Write(bool? write = true)
 	{
 		WriteValue = write;
 		return Self;
@@ -95,22 +99,22 @@ public sealed partial class IndexSettingBlocksDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, MetadataValue, options);
 		}
 
-		if (ReadValue.HasValue)
+		if (ReadValue is not null)
 		{
 			writer.WritePropertyName("read");
-			writer.WriteBooleanValue(ReadValue.Value);
+			JsonSerializer.Serialize(writer, ReadValue, options);
 		}
 
-		if (ReadOnlyValue.HasValue)
+		if (ReadOnlyValue is not null)
 		{
 			writer.WritePropertyName("read_only");
-			writer.WriteBooleanValue(ReadOnlyValue.Value);
+			JsonSerializer.Serialize(writer, ReadOnlyValue, options);
 		}
 
-		if (ReadOnlyAllowDeleteValue.HasValue)
+		if (ReadOnlyAllowDeleteValue is not null)
 		{
 			writer.WritePropertyName("read_only_allow_delete");
-			writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
+			JsonSerializer.Serialize(writer, ReadOnlyAllowDeleteValue, options);
 		}
 
 		if (WriteValue is not null)
