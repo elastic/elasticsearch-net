@@ -70,7 +70,16 @@ public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
 	}
 
 	/// <inheritdoc />
-	public override int GetHashCode() => Values != null ? Values.GetHashCode() : 0;
+	public override int GetHashCode()
+	{
+		// Lifting the minimal target framework to .NET Standard 2.1
+		// would be the best solution ever due to the HashCode type.
+		var hashCode = 0;
+		foreach (var metric in Values)
+			hashCode ^= metric.GetHashCode();
+
+		return hashCode;
+	}
 
 	public static bool operator ==(Metrics left, Metrics right) => Equals(left, right);
 	public static bool operator !=(Metrics left, Metrics right) => !Equals(left, right);
