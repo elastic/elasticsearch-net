@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -83,43 +82,4 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 	public static bool operator ==(Ids left, Ids right) => Equals(left, right);
 
 	public static bool operator !=(Ids left, Ids right) => !Equals(left, right);
-}
-
-internal sealed class IdsConverter : JsonConverter<Ids>
-{
-	public override Ids? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Unexpected JSON token. Expected {JsonTokenType.StartArray} but read {reader.TokenType}");
-
-		var ids = new List<Id>();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-		{
-			var id = JsonSerializer.Deserialize<Id>(ref reader, options);
-
-			if (id is not null)
-				ids.Add(id);
-		}
-
-		return new Ids(ids);
-	}
-
-	public override void Write(Utf8JsonWriter writer, Ids value, JsonSerializerOptions options)
-	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		writer.WriteStartArray();
-
-		foreach (var id in value.IdsToSerialize)
-		{
-			JsonSerializer.Serialize<Id>(writer, id, options);
-		}
-
-		writer.WriteEndArray();
-	}
 }
