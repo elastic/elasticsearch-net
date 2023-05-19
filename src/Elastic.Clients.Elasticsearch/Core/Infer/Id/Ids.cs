@@ -21,7 +21,7 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 
 	public Ids(IList<Id> ids) => _ids = ids;
 
-	public Ids(IEnumerable<string> ids) => _ids = ids?.Select(i  => new Id(i)).ToList();
+	public Ids(IEnumerable<string> ids) => _ids = ids.Select(i  => new Id(i)).ToList();
 
 	public Ids(string value)
 	{
