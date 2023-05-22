@@ -96,10 +96,8 @@ internal sealed class FieldConverter : JsonConverter<Field>
 		else
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(FieldProperty);
-			writer.WriteStringValue(fieldName);
-			writer.WritePropertyName(FormatProperty);
-			writer.WriteStringValue(value.Format);
+			writer.WriteString(FieldProperty, fieldName);
+			writer.WriteString(FormatProperty, value.Format);
 			writer.WriteEndObject();
 		}
 	}
