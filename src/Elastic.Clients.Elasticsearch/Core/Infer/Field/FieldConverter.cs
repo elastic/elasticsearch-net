@@ -81,12 +81,6 @@ internal sealed class FieldConverter : JsonConverter<Field>
 	{
 		InitializeSettings(options);
 
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		var fieldName = _settings.Inferrer.Field(value);
 
 		if (string.IsNullOrEmpty(value.Format))
