@@ -64,7 +64,7 @@ internal sealed class FieldConverter : JsonConverter<Field>
 				}
 				else
 				{
-					throw new JsonException("Unexpected property while reading `Field`.");
+					throw new JsonException($"Unexpected property while reading `{nameof(Field)}`.");
 				}
 			}
 		}
@@ -74,7 +74,7 @@ internal sealed class FieldConverter : JsonConverter<Field>
 			return new Field(field, format);
 		}
 
-		throw new JsonException("Unable to read `Field` from JSON.");
+		throw new JsonException($"Unable to read `{nameof(Field)}` from JSON.");
 	}
 
 	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
