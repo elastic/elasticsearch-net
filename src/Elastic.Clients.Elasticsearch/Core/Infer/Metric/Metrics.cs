@@ -76,7 +76,7 @@ public sealed class Metrics : IEquatable<Metrics>, IUrlParameter
 		// would be the best solution ever due to the HashCode type.
 		var hashCode = 0;
 		foreach (var metric in Values)
-			hashCode ^= metric.GetHashCode();
+			hashCode = (hashCode * 397) ^ metric.GetHashCode();
 
 		return hashCode;
 	}
