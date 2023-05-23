@@ -122,12 +122,6 @@ internal sealed class UnionConverter : JsonConverterFactory
 		public override void Write(Utf8JsonWriter writer, TType value,
 			JsonSerializerOptions options)
 		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
 			if (value.Item1 is not null)
 			{
 				JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
