@@ -214,13 +214,13 @@ internal sealed class UnionConverter : JsonConverterFactory
 	{
 		public override Buckets<TBucket>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			// TODO - Read ahead to establish the type - For now, hardcoded for lists
-
-			var bucketType = typeToConvert.GetGenericArguments()[0];
-
-			var item = JsonSerializer.Deserialize(ref reader, typeof(IReadOnlyCollection<TBucket>), options);
-
-			return (Buckets<TBucket>)Activator.CreateInstance(typeof(Buckets<>).MakeGenericType(bucketType), item);
+			return reader.TokenType switch
+			{
+				JsonTokenType.Null => null,
+				JsonTokenType.StartArray => new(JsonSerializer.Deserialize<IReadOnlyCollection<TBucket>>(ref reader, options)),
+				JsonTokenType.StartObject => new(JsonSerializer.Deserialize<IReadOnlyDictionary<string, TBucket>>(ref reader, options)),
+				_ => throw new JsonException("Invalid bucket type")
+			};
 		}
 
 		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options) => throw new NotImplementedException();
