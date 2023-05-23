@@ -24,7 +24,7 @@ internal sealed class EnumStructConverter<T> : JsonConverter<T> where T : struct
 		var enumValue = value.ToString();
 
 		if (!string.IsNullOrEmpty(enumValue))
-			writer.WriteStringValue(value.ToString());
+			writer.WriteStringValue(enumValue);
 		else
 			writer.WriteNullValue();
 	}
