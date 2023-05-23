@@ -223,6 +223,21 @@ internal sealed class UnionConverter : JsonConverterFactory
 			};
 		}
 
-		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options)
+		{
+			if (value.Item1 is { } item1)
+			{
+				JsonSerializer.Serialize(writer, item1, options);
+				return;
+			}
+
+			if (value.Item2 is { } item2)
+			{
+				JsonSerializer.Serialize(writer, item2, options);
+				return;
+			}
+
+			writer.WriteNullValue();
+		}
 	}
 }
