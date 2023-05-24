@@ -51,15 +51,14 @@ internal sealed class FieldConverter : JsonConverter<Field>
 		{
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				var propertyName = reader.GetString();
-				reader.Read();
-
 				if (reader.ValueTextEquals(FieldProperty.EncodedUtf8Bytes))
 				{
+					reader.Read();
 					field = reader.GetString();
 				}
 				else if (reader.ValueTextEquals(FormatProperty.EncodedUtf8Bytes))
 				{
+					reader.Read();
 					format = reader.GetString();
 				}
 				else
