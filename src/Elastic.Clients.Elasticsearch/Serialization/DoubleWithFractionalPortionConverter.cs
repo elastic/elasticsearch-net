@@ -75,6 +75,7 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 				if (bytes.Length < utf8bytes.Length)
 				{
 					bytes.CopyTo(utf8bytes);
+					return;
 				}
 			}
 			catch
