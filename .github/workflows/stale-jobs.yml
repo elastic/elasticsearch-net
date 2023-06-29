@@ -23,9 +23,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '5.0.408'
+          # In case both dotnet-version and global-json-file inputs are used, versions from both inputs will be installed.
+          # dotnet-version: '5.0.408'
+          global-json-file: global.json
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
@@ -40,5 +42,3 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then echo Error: changes found after running documentation; git diff; git status; exit 1; fi
         name: 'Ensure no stale docs'
         if: github.event_name == 'pull_request' && startswith(github.ref, 'refs/heads') && github.repository == 'elastic/elasticsearch-net'
-
-

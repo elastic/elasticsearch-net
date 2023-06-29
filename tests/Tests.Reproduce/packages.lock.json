@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "System.Reactive": {
         "type": "Direct",
         "requested": "[3.1.1, )",
@@ -1276,53 +1276,54 @@
       "elasticsearch.net": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CSharp": "4.6.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0"
+          "Microsoft.CSharp": "[4.6.0, )",
+          "System.Buffers": "[4.5.1, )",
+          "System.Diagnostics.DiagnosticSource": "[5.0.0, )"
         }
       },
       "nest": {
         "type": "Project",
         "dependencies": {
-          "Elasticsearch.Net": "7.0.0"
+          "Elasticsearch.Net": "[7.0.0, )"
         }
       },
       "nest.jsonnetserializer": {
         "type": "Project",
         "dependencies": {
-          "NEST": "7.0.0",
-          "Newtonsoft.Json": "13.0.1"
+          "NEST": "[7.0.0, )",
+          "Newtonsoft.Json": "[13.0.1, )"
         }
       },
       "tests.configuration": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Elasticsearch.Managed": "0.2.6"
+          "Elastic.Elasticsearch.Managed": "[0.2.6, )"
         }
       },
       "tests.core": {
         "type": "Project",
         "dependencies": {
-          "DiffPlex": "1.4.1",
-          "Elastic.Elasticsearch.Xunit": "0.2.6",
-          "FluentAssertions": "5.10.3",
-          "JunitXml.TestLogger": "2.1.78",
-          "Microsoft.NET.Test.Sdk": "17.3.2",
-          "NEST.JsonNetSerializer": "7.0.0",
-          "Nullean.VsTest.Pretty.TestLogger": "0.3.0",
-          "Proc": "0.6.1",
-          "Tests.Domain": "7.0.0",
-          "xunit": "2.3.1"
+          "DiffPlex": "[1.4.1, )",
+          "Elastic.Elasticsearch.Xunit": "[0.2.6, )",
+          "FluentAssertions": "[5.10.3, )",
+          "JunitXml.TestLogger": "[2.1.78, )",
+          "Microsoft.CodeCoverage": "[17.3.2, )",
+          "Microsoft.NET.Test.Sdk": "[17.3.2, )",
+          "NEST.JsonNetSerializer": "[7.0.0, )",
+          "Nullean.VsTest.Pretty.TestLogger": "[0.3.0, )",
+          "Proc": "[0.6.1, )",
+          "Tests.Domain": "[7.0.0, )",
+          "xunit": "[2.3.1, )"
         }
       },
       "tests.domain": {
         "type": "Project",
         "dependencies": {
-          "Bogus": "22.1.2",
-          "Elastic.Elasticsearch.Managed": "0.2.6",
-          "NEST": "7.0.0",
-          "Newtonsoft.Json": "13.0.1",
-          "Tests.Configuration": "7.0.0"
+          "Bogus": "[22.1.2, )",
+          "Elastic.Elasticsearch.Managed": "[0.2.6, )",
+          "NEST": "[7.0.0, )",
+          "Newtonsoft.Json": "[13.0.1, )",
+          "Tests.Configuration": "[7.0.0, )"
         }
       }
     }

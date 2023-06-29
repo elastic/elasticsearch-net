@@ -48,9 +48,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '5.0.408'
+          global-json-file: global.json
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
@@ -76,4 +76,3 @@ jobs:
           fail_on_failure: true
           require_tests: true
           check_name: ${{ matrix.stack_version }}
-          

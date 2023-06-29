@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "Argu": {
         "type": "Direct",
         "requested": "[5.5.0, )",
@@ -263,9 +263,9 @@
       "elasticsearch.net": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CSharp": "4.6.0",
-          "System.Buffers": "4.5.1",
-          "System.Diagnostics.DiagnosticSource": "5.0.0"
+          "Microsoft.CSharp": "[4.6.0, )",
+          "System.Buffers": "[4.5.1, )",
+          "System.Diagnostics.DiagnosticSource": "[5.0.0, )"
         }
       }
     }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    ".NETCoreApp,Version=v5.0": {
+    "net6.0": {
       "Bullseye": {
         "type": "Direct",
         "requested": "[3.3.0, )",
