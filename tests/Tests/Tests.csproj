@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <NoWarn>$(NoWarn);xUnit1013</NoWarn>
     <DebugSymbols>True</DebugSymbols>
     <IsTestProject>True</IsTestProject>
@@ -23,9 +23,13 @@
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
     <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
     <PackageReference Include="SemanticVersioning" Version="0.8.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.2" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Document\Single\Index\Attachment_Test_Document.pdf" />

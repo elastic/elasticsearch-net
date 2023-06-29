@@ -23,9 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.408'
+      - uses: actions/setup-dotnet@v3 # reads version from 'global.json'
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
@@ -53,9 +51,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '5.0.408'
+          # In case both dotnet-version and global-json-file inputs are used, versions from both inputs will be installed
+          global-json-file: global.json
+          dotnet-version: '5.0.408' # for tooling
       - uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
