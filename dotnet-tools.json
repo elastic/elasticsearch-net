@@ -3,25 +3,25 @@
   "isRoot": true,
   "tools": {
     "assembly-rewriter": {
-      "version": "0.12.0",
+      "version": "0.13.0",
       "commands": [
         "assembly-rewriter"
       ]
     },
     "assembly-differ": {
-      "version": "0.13.0",
+      "version": "0.14.0",
       "commands": [
         "assembly-differ"
       ]
     },
     "nupkg-validator": {
-      "version": "0.4.0",
+      "version": "0.5.0",
       "commands": [
         "nupkg-validator"
       ]
     },
     "release-notes": {
-      "version": "0.3.1",
+      "version": "0.5.2",
       "commands": [
         "release-notes"
       ]

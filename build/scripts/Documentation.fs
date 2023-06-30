@@ -13,7 +13,7 @@ module Documentation =
 
     exception DocGenError of string 
     let Generate args = 
-        let path = Paths.InplaceBuildOutput "DocGenerator" "net5.0"
+        let path = Paths.InplaceBuildOutput "DocGenerator" "net6.0"
         let generator = sprintf "%s.dll" "DocGenerator"
         
         printfn "==> %s" path

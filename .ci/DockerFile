@@ -1,4 +1,4 @@
-ARG DOTNET_VERSION=5.0.408
+ARG DOTNET_VERSION=6.0.411
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
 
 ARG USER_ID
@@ -35,12 +35,13 @@ RUN dotnet restore
 RUN dotnet tool restore
 
 RUN chown -R $GROUP_ID:$USER_ID $(pwd)
-RUN chown -R $GROUP_ID:$USER_ID /tmp/NuGetScratch
+RUN chown -R $GROUP_ID:$USER_ID /tmp/NuGetScratch; exit 0
 
 # copy relevant files (see .dockerignore)
 COPY . .
 
 # making sure enough git info is available inside the container
+RUN git config --global --add safe.directory /sln
 RUN git rev-parse HEAD .
 
 # USER user
