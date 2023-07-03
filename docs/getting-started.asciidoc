@@ -72,7 +72,14 @@ This is a simple way of indexing a document:
 
 [source,net]
 ----
+var doc = new MyDoc
+{
+    Id = 1,
+    User = "flobernd",
+    Message = "Trying out the client, so far so good?"
+};
 
+var response = await client.IndexAsync(doc, "my_index"); 
 ----
 
 
