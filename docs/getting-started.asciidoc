@@ -150,7 +150,7 @@ var response = await client.DeleteAsync("my_index", 1);
 
 [source,net]
 ----
-
+var response = await client.Indices.DeleteAsync("my_index");
 ----
 
 
