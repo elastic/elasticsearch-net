@@ -13,7 +13,7 @@ operations with it.
 [discrete]
 === Installation 
 
-To install the latest version of the client, run the following command:
+To install the latest version of the client for SDK style projects, run the following command:
 
 [source,shell]
 --------------------------
