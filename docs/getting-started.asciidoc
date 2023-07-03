@@ -31,7 +31,7 @@ endpoint.
 
 [source,net]
 ----
-
+var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); 
 ----
 
 Your Elasticsearch endpoint can be found on the **My deployment** page of your 
