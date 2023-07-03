@@ -61,7 +61,7 @@ This is how you create the `my_index` index:
 
 [source,net]
 ----
-
+var response = await client.Indices.CreateAsync("my_index");
 ----
 
 
