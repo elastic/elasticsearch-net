@@ -106,7 +106,19 @@ This is how you can create a single match query with the .NET client:
 
 [source,net]
 ----
+var response = await client.SearchAsync<MyDoc>(s => s 
+    .Index("my_index") 
+    .From(0)
+    .Size(10)
+    .Query(q => q
+        .Term(t => t.User, "flobernd") 
+    )
+);
 
+if (response.IsValidResponse)
+{
+    var doc = response.Documents.FirstOrDefault(); 
+}
 ----
 
 
