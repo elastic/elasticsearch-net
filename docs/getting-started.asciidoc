@@ -90,7 +90,12 @@ You can get documents by using the following code:
 
 [source,net]
 ----
+var response = await client.GetAsync<MyDoc>(id, idx => idx.Index("my_index"));
 
+if (response.IsValidResponse) 
+{
+    var doc = response.Source;
+}
 ----
 
 
