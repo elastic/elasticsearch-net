@@ -141,7 +141,7 @@ var response = await client.UpdateAsync<MyDoc, MyDoc>("my_index", 1, u => u
 
 [source,net]
 ----
-
+var response = await client.DeleteAsync("my_index", 1);
 ----
 
 
