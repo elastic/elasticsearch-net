@@ -17,7 +17,7 @@ To install the latest version of the client, run the following command:
 
 [source,shell]
 --------------------------
-
+dotnet add package Elastic.Clients.Elasticsearch
 --------------------------
 
 Refer to the <<installation>> page to learn more.
