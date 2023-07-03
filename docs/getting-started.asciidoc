@@ -129,7 +129,10 @@ This is how you can update a document, for example to add a new field:
 
 [source,net]
 ----
+doc.Message = "This is a new message"; 
 
+var response = await client.UpdateAsync<MyDoc, MyDoc>("my_index", 1, u => u
+    .Doc(doc)); 
 ----
 
 
