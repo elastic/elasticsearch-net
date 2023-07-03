@@ -10,6 +10,8 @@ include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
 include::intro.asciidoc[]
 
+include::getting-started.asciidoc[]
+
 include::install.asciidoc[]
 
 include::connecting.asciidoc[]
