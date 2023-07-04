@@ -8,16 +8,16 @@ operations with it.
 [discrete]
 === Requirements
 
-* (...)
+.NET Core, .NET 5+ or .NET Framework (4.6.1 and higher).
 
 [discrete]
 === Installation 
 
-To install the latest version of the client, run the following command:
+To install the latest version of the client for SDK style projects, run the following command:
 
 [source,shell]
 --------------------------
-
+dotnet add package Elastic.Clients.Elasticsearch
 --------------------------
 
 Refer to the <<installation>> page to learn more.
@@ -31,7 +31,7 @@ endpoint.
 
 [source,net]
 ----
-
+var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>"));
 ----
 
 Your Elasticsearch endpoint can be found on the **My deployment** page of your 
@@ -61,7 +61,7 @@ This is how you create the `my_index` index:
 
 [source,net]
 ----
-
+var response = await client.Indices.CreateAsync("my_index");
 ----
 
 
@@ -72,7 +72,14 @@ This is a simple way of indexing a document:
 
 [source,net]
 ----
+var doc = new MyDoc
+{
+    Id = 1,
+    User = "flobernd",
+    Message = "Trying out the client, so far so good?"
+};
 
+var response = await client.IndexAsync(doc, "my_index");
 ----
 
 
@@ -83,7 +90,12 @@ You can get documents by using the following code:
 
 [source,net]
 ----
+var response = await client.GetAsync<MyDoc>(id, idx => idx.Index("my_index"));
 
+if (response.IsValidResponse) 
+{
+    var doc = response.Source;
+}
 ----
 
 
@@ -94,7 +106,19 @@ This is how you can create a single match query with the .NET client:
 
 [source,net]
 ----
+var response = await client.SearchAsync<MyDoc>(s => s 
+    .Index("my_index") 
+    .From(0)
+    .Size(10)
+    .Query(q => q
+        .Term(t => t.User, "flobernd") 
+    )
+);
 
+if (response.IsValidResponse)
+{
+    var doc = response.Documents.FirstOrDefault(); 
+}
 ----
 
 
@@ -105,7 +129,10 @@ This is how you can update a document, for example to add a new field:
 
 [source,net]
 ----
+doc.Message = "This is a new message";
 
+var response = await client.UpdateAsync<MyDoc, MyDoc>("my_index", 1, u => u
+    .Doc(doc)); 
 ----
 
 
@@ -114,7 +141,7 @@ This is how you can update a document, for example to add a new field:
 
 [source,net]
 ----
-
+var response = await client.DeleteAsync("my_index", 1);
 ----
 
 
@@ -123,7 +150,7 @@ This is how you can update a document, for example to add a new field:
 
 [source,net]
 ----
-
+var response = await client.Indices.DeleteAsync("my_index");
 ----
 
 
