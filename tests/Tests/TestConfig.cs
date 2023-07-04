@@ -8,16 +8,16 @@ using VerifyTests;
 
 namespace Tests;
 
-public static class TestConfig
-{
-	[ModuleInitializer]
-	public static void Init() =>
-		VerifierSettings.DerivePathInfo(
-			(sourceFile, projectDirectory, type, method) =>
-			{
-				return new(
-					directory: Path.Combine(projectDirectory, "_VerifySnapshots"),
-					typeName: type.Name,
-					methodName: method.Name);
-			});
-}
+//public static class TestConfig
+//{
+//	[ModuleInitializer]
+//	public static void Init() =>
+//		VerifierSettings.DerivePathInfo(
+//			(sourceFile, projectDirectory, type, method) =>
+//			{
+//				return new(
+//					directory: Path.Combine(projectDirectory, "_VerifySnapshots"),
+//					typeName: type.Name,
+//					methodName: method.Name);
+//			});
+//}

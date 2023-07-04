@@ -6,11 +6,13 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Elastic.Elasticsearch.Xunit;
 using Tests.Configuration;
+using VerifyTests;
 
 namespace Tests.Core.Xunit
 {
@@ -29,7 +31,16 @@ namespace Tests.Core.Xunit
 			Generators.Initialize();
 		}
 
-		public override void OnBeforeTestsRun() => TestConfiguration.Instance.DumpConfiguration();
+		public override void OnBeforeTestsRun()
+		{
+			VerifierSettings.DerivePathInfo(
+				(sourceFile, projectDirectory, type, method) => new(
+					directory: Path.Combine(projectDirectory, "_VerifySnapshots"),
+					typeName: type.Name,
+					methodName: method.Name));
+
+			TestConfiguration.Instance.DumpConfiguration();
+		}
 
 		public override void OnTestsFinished(Dictionary<string, Stopwatch> clusterTotals, ConcurrentBag<Tuple<string, string>> failedCollections)
 		{

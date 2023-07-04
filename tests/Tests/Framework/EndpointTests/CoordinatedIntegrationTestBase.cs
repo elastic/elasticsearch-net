@@ -11,6 +11,9 @@ using Elastic.Transport.Products.Elasticsearch;
 using Tests.Core.Client;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
+#if NETFRAMEWORK
+using Tests.Framework.Extensions;
+#endif
 using Xunit;
 
 namespace Tests.Framework.EndpointTests;

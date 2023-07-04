@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Globalization;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Aggregations;
 using Tests.Core.Extensions;
@@ -63,7 +64,11 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 			//.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 			.Order(new[] { AggregateOrder.KeyAscending })
+#if NETFRAMEWORK
+			.Missing(DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", CultureInfo.InvariantCulture))
+#else
 			.Missing(DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal))
+#endif
 			.Aggregations(childAggs => childAggs
 				.Nested("project_tags", n => n
 					.Path(p => p.Tags)
@@ -87,7 +92,11 @@ public class DateHistogramAggregationUsageTests : ProjectsOnlyAggregationUsageTe
 			//	Maximum = FixedDate.AddYears(1),
 			//},
 			Order = new[] { AggregateOrder.KeyAscending },
+#if NETFRAMEWORK
+			Missing = DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", CultureInfo.InvariantCulture),
+#else
 			Missing = DateTimeOffset.Parse("2015-06-06T12:01:02.1230000", styles: System.Globalization.DateTimeStyles.AssumeUniversal),
+#endif
 			Aggregations = new NestedAggregation("project_tags")
 			{
 				Path = Field<Project>(p => p.Tags),

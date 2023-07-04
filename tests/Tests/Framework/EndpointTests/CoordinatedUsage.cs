@@ -11,6 +11,9 @@ using Tests.Configuration;
 using Tests.Core.Extensions;
 using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Framework.EndpointTests.TestState;
+#if NETFRAMEWORK
+using Tests.Framework.Extensions;
+#endif
 
 namespace Tests.Framework.EndpointTests
 {
