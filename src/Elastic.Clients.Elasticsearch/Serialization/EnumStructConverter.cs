@@ -10,7 +10,7 @@ using Elastic.Clients.Elasticsearch.Core;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal sealed class EnumStructConverter<T> : JsonConverter<T> where T : struct, IEnumStruct<T>
-{	
+{
 	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		var value = reader.GetString();
