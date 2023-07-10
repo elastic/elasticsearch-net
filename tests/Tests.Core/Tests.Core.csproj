@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <DebugSymbols>True</DebugSymbols>
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.3.5" />
+    <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.4.1" />
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="JunitXml.TestLogger" Version="3.0.110" />
