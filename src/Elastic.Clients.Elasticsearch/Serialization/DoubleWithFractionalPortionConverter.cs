@@ -25,7 +25,7 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 		{
 			var value = reader.GetString();
 
-			if (!double.TryParse(value, out var parsedValue))
+			if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var parsedValue))
 				ThrowHelper.ThrowJsonException($"Unable to parse '{value}' as a double.");
 
 			return parsedValue;
@@ -67,7 +67,7 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 		var utf16Text = value.ToString("G17", CultureInfo.InvariantCulture);
 
 		if (utf16Text.Length < utf8bytes.Length)
-        {
+		{
 			try
 			{
 				var bytes = Encoding.UTF8.GetBytes(utf16Text);
