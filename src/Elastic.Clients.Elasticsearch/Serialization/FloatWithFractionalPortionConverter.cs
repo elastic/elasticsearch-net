@@ -25,7 +25,7 @@ internal sealed class FloatWithFractionalPortionConverter : JsonConverter<float>
 		{
 			var value = reader.GetString();
 
-			if (!float.TryParse(value, out var parsedValue))
+			if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var parsedValue))
 				ThrowHelper.ThrowJsonException($"Unable to parse '{value}' as a float.");
 
 			return parsedValue;
@@ -67,7 +67,7 @@ internal sealed class FloatWithFractionalPortionConverter : JsonConverter<float>
 		var utf16Text = value.ToString("G9", CultureInfo.InvariantCulture);
 
 		if (utf16Text.Length < utf8bytes.Length)
-        {
+		{
 			try
 			{
 				var bytes = Encoding.UTF8.GetBytes(utf16Text);
