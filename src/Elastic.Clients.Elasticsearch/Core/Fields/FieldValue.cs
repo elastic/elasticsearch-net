@@ -7,6 +7,7 @@ using System.Text.Json;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.Globalization;
 using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -246,37 +247,18 @@ public readonly struct FieldValue : IEquatable<FieldValue>
 		return true;
 	}
 
-	public override string ToString()
-	{
-		if (Kind == ValueKind.String)
+	public override string ToString() =>
+		Kind switch
 		{
-			return Value as string;
-		}
-		else if (Kind == ValueKind.Double)
-		{
-			return ((double)Value).ToString();
-		}
-		else if (Kind == ValueKind.Long)
-		{
-			return ((long)Value).ToString();
-		}
-		else if (Kind == ValueKind.Boolean)
-		{
-			return ((bool)Value).ToString();
-		}
-		else if (Kind == ValueKind.Null)
-		{
-			return "null";
-		}
-		else if (Kind == ValueKind.LazyDocument || Kind == ValueKind.Composite)
-		{
-			throw new InvalidOperationException("Composite field value cannot be formatted as a string.");
-		}
-		else
-		{
-			throw new InvalidOperationException($"Unknown kind '{Kind}'");
-		}
-	}
+			ValueKind.Null => "null",
+			ValueKind.Double => ((double)Value).ToString(CultureInfo.InvariantCulture),
+			ValueKind.Long => ((long)Value).ToString(CultureInfo.InvariantCulture),
+			ValueKind.Boolean => ((bool)Value).ToString(CultureInfo.InvariantCulture),
+			ValueKind.String => Value as string,
+			ValueKind.LazyDocument or ValueKind.Composite => throw new InvalidOperationException(
+				"Composite field value cannot be formatted as a string."),
+			_ => throw new InvalidOperationException($"Unknown kind '{Kind}'")
+		};
 
 	public override bool Equals(object? obj) => obj is FieldValue value && Equals(value);
 	public bool Equals(FieldValue other) => Kind == other.Kind && EqualityComparer<object?>.Default.Equals(Value, other.Value);
