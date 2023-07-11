@@ -22,6 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
@@ -497,9 +498,11 @@ internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingSta
 }
 
 [JsonConverter(typeof(EnumStructConverter<StorageType>))]
-public readonly partial struct StorageType
+public readonly partial struct StorageType : IEnumStruct<StorageType>
 {
 	public StorageType(string value) => Value = value;
+
+	StorageType IEnumStruct<StorageType>.Create(string value) => value;
 
 	public readonly string Value { get; }
 

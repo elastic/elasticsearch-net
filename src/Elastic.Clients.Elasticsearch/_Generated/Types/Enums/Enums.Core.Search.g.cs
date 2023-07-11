@@ -22,6 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
@@ -225,9 +226,11 @@ internal sealed class HighlighterTagsSchemaConverter : JsonConverter<Highlighter
 }
 
 [JsonConverter(typeof(EnumStructConverter<HighlighterType>))]
-public readonly partial struct HighlighterType
+public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 {
 	public HighlighterType(string value) => Value = value;
+
+	HighlighterType IEnumStruct<HighlighterType>.Create(string value) => value;
 
 	public readonly string Value { get; }
 	public static HighlighterType Unified { get; } = new HighlighterType("unified");
