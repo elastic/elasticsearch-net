@@ -22,6 +22,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Runtime.Serialization;
 using Elastic.Transport;
+using Elastic.Clients.Elasticsearch.Core;
 using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -997,9 +998,11 @@ internal sealed class ResultConverter : JsonConverter<Result>
 }
 
 [JsonConverter(typeof(EnumStructConverter<ScriptLanguage>))]
-public readonly partial struct ScriptLanguage
+public readonly partial struct ScriptLanguage : IEnumStruct<ScriptLanguage>
 {
 	public ScriptLanguage(string value) => Value = value;
+
+	ScriptLanguage IEnumStruct<ScriptLanguage>.Create(string value) => value;
 
 	public readonly string Value { get; }
 	public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
