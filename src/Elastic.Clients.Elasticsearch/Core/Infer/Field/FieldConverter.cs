@@ -12,6 +12,9 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed class FieldConverter : JsonConverter<Field>
 {
+	private static readonly JsonEncodedText FieldProperty = JsonEncodedText.Encode("field");
+	private static readonly JsonEncodedText FormatProperty = JsonEncodedText.Encode("format");
+
 	private IElasticsearchClientSettings _settings;
 
 	public override void WriteAsPropertyName(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
@@ -48,19 +51,19 @@ internal sealed class FieldConverter : JsonConverter<Field>
 		{
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				var propertyName = reader.GetString();
-				reader.Read();
-
-				switch (propertyName)
+				if (reader.ValueTextEquals(FieldProperty.EncodedUtf8Bytes))
 				{
-					case "field":
-						field = reader.GetString();
-						break;
-					case "format":
-						format = reader.GetString();
-						break;
-					default:
-						throw new JsonException("Unexpected property while reading `Field`.");
+					reader.Read();
+					field = reader.GetString();
+				}
+				else if (reader.ValueTextEquals(FormatProperty.EncodedUtf8Bytes))
+				{
+					reader.Read();
+					format = reader.GetString();
+				}
+				else
+				{
+					throw new JsonException($"Unexpected property while reading `{nameof(Field)}`.");
 				}
 			}
 		}
@@ -70,18 +73,12 @@ internal sealed class FieldConverter : JsonConverter<Field>
 			return new Field(field, format);
 		}
 
-		throw new JsonException("Unable to read `Field` from JSON.");
+		throw new JsonException($"Unable to read `{nameof(Field)}` from JSON.");
 	}
 
 	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
 	{
 		InitializeSettings(options);
-
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
 
 		var fieldName = _settings.Inferrer.Field(value);
 
@@ -92,10 +89,8 @@ internal sealed class FieldConverter : JsonConverter<Field>
 		else
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName("field");
-			writer.WriteStringValue(fieldName);
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
+			writer.WriteString(FieldProperty, fieldName);
+			writer.WriteString(FormatProperty, value.Format);
 			writer.WriteEndObject();
 		}
 	}
