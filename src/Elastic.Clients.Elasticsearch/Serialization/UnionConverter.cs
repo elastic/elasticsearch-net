@@ -122,12 +122,6 @@ internal sealed class UnionConverter : JsonConverterFactory
 		public override void Write(Utf8JsonWriter writer, TType value,
 			JsonSerializerOptions options)
 		{
-			if (value is null)
-			{
-				writer.WriteNullValue();
-				return;
-			}
-
 			if (value.Item1 is not null)
 			{
 				JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
@@ -214,15 +208,30 @@ internal sealed class UnionConverter : JsonConverterFactory
 	{
 		public override Buckets<TBucket>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
-			// TODO - Read ahead to establish the type - For now, hardcoded for lists
-
-			var bucketType = typeToConvert.GetGenericArguments()[0];
-
-			var item = JsonSerializer.Deserialize(ref reader, typeof(IReadOnlyCollection<TBucket>), options);
-
-			return (Buckets<TBucket>)Activator.CreateInstance(typeof(Buckets<>).MakeGenericType(bucketType), item);
+			return reader.TokenType switch
+			{
+				JsonTokenType.Null => null,
+				JsonTokenType.StartArray => new(JsonSerializer.Deserialize<IReadOnlyCollection<TBucket>>(ref reader, options)),
+				JsonTokenType.StartObject => new(JsonSerializer.Deserialize<IReadOnlyDictionary<string, TBucket>>(ref reader, options)),
+				_ => throw new JsonException("Invalid bucket type")
+			};
 		}
 
-		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options) => throw new NotImplementedException();
+		public override void Write(Utf8JsonWriter writer, Buckets<TBucket> value, JsonSerializerOptions options)
+		{
+			if (value.Item1 is { } item1)
+			{
+				JsonSerializer.Serialize(writer, item1, options);
+				return;
+			}
+
+			if (value.Item2 is { } item2)
+			{
+				JsonSerializer.Serialize(writer, item2, options);
+				return;
+			}
+
+			writer.WriteNullValue();
+		}
 	}
 }
