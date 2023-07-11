@@ -75,6 +75,7 @@ internal sealed class FloatWithFractionalPortionConverter : JsonConverter<float>
 				if (bytes.Length < utf8bytes.Length)
 				{
 					bytes.CopyTo(utf8bytes);
+					return;
 				}
 			}
 			catch

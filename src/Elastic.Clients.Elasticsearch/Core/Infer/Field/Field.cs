@@ -73,7 +73,6 @@ public sealed class Field : IEquatable<Field>, IUrlParameter
 	/// </remarks>
 	public string? Format { get; set; }
 
-	[JsonIgnore]
 	internal bool CachableExpression { get; }
 
 	/// <summary>
