@@ -99,6 +99,7 @@ public sealed partial class Query
 	public static Query Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery termQuery) => new Query("term", termQuery);
 	public static Query Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery termsQuery) => new Query("terms", termsQuery);
 	public static Query TermsSet(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery termsSetQuery) => new Query("terms_set", termsSetQuery);
+	public static Query TextExpansion(Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery textExpansionQuery) => new Query("text_expansion", textExpansionQuery);
 	public static Query Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery wildcardQuery) => new Query("wildcard", wildcardQuery);
 	public static Query Wrapper(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery wrapperQuery) => new Query("wrapper", wrapperQuery);
 }
@@ -456,6 +457,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			return new Query(propertyName, variant);
 		}
 
+		if (propertyName == "text_expansion")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
 		if (propertyName == "wildcard")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery?>(ref reader, options);
@@ -631,6 +639,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "terms_set":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery)value.Variant, options);
 					break;
+				case "text_expansion":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery)value.Variant, options);
+					break;
 				case "wildcard":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)value.Variant, options);
 					break;
@@ -770,6 +781,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Terms(Action<TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
 	public QueryDescriptor<TDocument> TermsSet(TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
 	public QueryDescriptor<TDocument> TermsSet(Action<TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
+	public QueryDescriptor<TDocument> TextExpansion(TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
+	public QueryDescriptor<TDocument> TextExpansion(Action<TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
 	public QueryDescriptor<TDocument> Wildcard(WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
 	public QueryDescriptor<TDocument> Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
 	public QueryDescriptor<TDocument> Wrapper(WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
@@ -971,6 +984,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor TermsSet(TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
 	public QueryDescriptor TermsSet(Action<TermsSetQueryDescriptor> configure) => Set(configure, "terms_set");
 	public QueryDescriptor TermsSet<TDocument>(Action<TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
+	public QueryDescriptor TextExpansion(TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
+	public QueryDescriptor TextExpansion(Action<TextExpansionQueryDescriptor> configure) => Set(configure, "text_expansion");
+	public QueryDescriptor TextExpansion<TDocument>(Action<TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
 	public QueryDescriptor Wildcard(WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
 	public QueryDescriptor Wildcard(Action<WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
 	public QueryDescriptor Wildcard<TDocument>(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");

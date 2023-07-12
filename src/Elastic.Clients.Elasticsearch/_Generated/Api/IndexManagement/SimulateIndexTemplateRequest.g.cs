@@ -40,6 +40,11 @@ public sealed class SimulateIndexTemplateRequestParameters : RequestParameters
 	/// <para>Period to wait for a connection to the master node. If no response is received<br/>before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
@@ -68,6 +73,12 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 	[JsonInclude, JsonPropertyName("allow_auto_create")]
 	public bool? AllowAutoCreate { get; set; }
 	[JsonInclude, JsonPropertyName("index_patterns")]
@@ -108,6 +119,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	internal override bool SupportsBody => true;
 
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
+	public SimulateIndexTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
@@ -310,6 +322,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	internal override bool SupportsBody => true;
 
 	public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
+	public SimulateIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public SimulateIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)

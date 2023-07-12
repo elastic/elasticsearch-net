@@ -25,26 +25,28 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShardStatistics
+public sealed partial class DlmRolloverConditions
 {
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	[JsonInclude, JsonPropertyName("max_age")]
+	public string? MaxAge { get; init; }
+	[JsonInclude, JsonPropertyName("max_docs")]
+	public long? MaxDocs { get; init; }
+	[JsonInclude, JsonPropertyName("max_primary_shard_docs")]
+	public long? MaxPrimaryShardDocs { get; init; }
+	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxPrimaryShardSize { get; init; }
+	[JsonInclude, JsonPropertyName("max_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxSize { get; init; }
+	[JsonInclude, JsonPropertyName("min_age")]
+	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("min_docs")]
+	public long? MinDocs { get; init; }
+	[JsonInclude, JsonPropertyName("min_primary_shard_docs")]
+	public long? MinPrimaryShardDocs { get; init; }
+	[JsonInclude, JsonPropertyName("min_primary_shard_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MinPrimaryShardSize { get; init; }
+	[JsonInclude, JsonPropertyName("min_size")]
+	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; init; }
 }

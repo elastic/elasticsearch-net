@@ -735,6 +735,100 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(DeleteDataLifecycleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteDataLifecycleRequest, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(DeleteDataLifecycleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteDataLifecycleRequest, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var descriptor = new DeleteDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(DeleteDataLifecycleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataLifecycleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(DeleteDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Deletes the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleResponse, DeleteDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
 	/// <para>Deletes a data stream.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1555,6 +1649,148 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(ExplainDataLifecycleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequest, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(ExplainDataLifecycleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequest, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(ExplainDataLifecycleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(ExplainDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/dlm-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
 	/// <para>Performs the flush operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1942,6 +2178,100 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual GetDataLifecycleResponse GetDataLifecycle(GetDataLifecycleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetDataLifecycleRequest, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(GetDataLifecycleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetDataLifecycleRequest, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var descriptor = new GetDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual GetDataLifecycleResponse GetDataLifecycle(GetDataLifecycleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<GetDataLifecycleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(GetDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Returns the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<GetDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetDataLifecycleRequestDescriptor, GetDataLifecycleResponse, GetDataLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3066,6 +3396,100 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PutDataLifecycleResponse PutDataLifecycle(PutDataLifecycleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutDataLifecycleRequest, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(PutDataLifecycleRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutDataLifecycleRequest, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var descriptor = new PutDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PutDataLifecycleResponse PutDataLifecycle(PutDataLifecycleRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<PutDataLifecycleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutDataLifecycleRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(PutDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+	/// <para>Updates the data lifecycle of the selected data streams.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/dlm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<PutDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutDataLifecycleRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutDataLifecycleRequestDescriptor, PutDataLifecycleResponse, PutDataLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
