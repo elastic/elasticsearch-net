@@ -1,0 +1,19 @@
+[[release-notes-8.1.3]]
+== Release notes v8.1.3
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7737[#7737] Boosted non-exhaustive enum deserialization (issue: https://github.com/elastic/elasticsearch-net/issues/7729[#7729])
+- https://github.com/elastic/elasticsearch-net/pull/7738[#7738] Complted buckets JSON converter (issue: https://github.com/elastic/elasticsearch-net/issues/7713[#7713])
+- https://github.com/elastic/elasticsearch-net/pull/7753[#7753] Number converters should not fall through and throw exceptions in non NETCore builds (issue: https://github.com/elastic/elasticsearch-net/issues/7757[#7757])
+- https://github.com/elastic/elasticsearch-net/pull/7811[#7811] Fix localization issue with floating-point deserialization from string
+
+[discrete]
+=== Enhancements
+
+- https://github.com/elastic/elasticsearch-net/pull/7730[#7730] Refactoring and tiny behavior fix for Ids
+- https://github.com/elastic/elasticsearch-net/pull/7731[#7731] No allocations in `ResponseItem.IsValid`` property
+- https://github.com/elastic/elasticsearch-net/pull/7733[#7733] Fixed the equality contract on Metrics type
+- https://github.com/elastic/elasticsearch-net/pull/7735[#7735] Removed unused `JsonIgnore`
+- https://github.com/elastic/elasticsearch-net/pull/7736[#7736] Optimized `FieldConverter`
