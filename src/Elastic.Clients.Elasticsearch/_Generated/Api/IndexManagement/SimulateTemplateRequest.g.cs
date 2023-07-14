@@ -40,6 +40,11 @@ public sealed class SimulateTemplateRequestParameters : RequestParameters
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
@@ -72,6 +77,12 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
@@ -92,6 +103,7 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 	internal override bool SupportsBody => false;
 
 	public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
+	public SimulateTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)

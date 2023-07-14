@@ -843,6 +843,8 @@ public enum TimeSeriesMetricType
 {
 	[EnumMember(Value = "summary")]
 	Summary,
+	[EnumMember(Value = "position")]
+	Position,
 	[EnumMember(Value = "histogram")]
 	Histogram,
 	[EnumMember(Value = "gauge")]
@@ -860,6 +862,8 @@ internal sealed class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMe
 		{
 			case "summary":
 				return TimeSeriesMetricType.Summary;
+			case "position":
+				return TimeSeriesMetricType.Position;
 			case "histogram":
 				return TimeSeriesMetricType.Histogram;
 			case "gauge":
@@ -877,6 +881,9 @@ internal sealed class TimeSeriesMetricTypeConverter : JsonConverter<TimeSeriesMe
 		{
 			case TimeSeriesMetricType.Summary:
 				writer.WriteStringValue("summary");
+				return;
+			case TimeSeriesMetricType.Position:
+				writer.WriteStringValue("position");
 				return;
 			case TimeSeriesMetricType.Histogram:
 				writer.WriteStringValue("histogram");

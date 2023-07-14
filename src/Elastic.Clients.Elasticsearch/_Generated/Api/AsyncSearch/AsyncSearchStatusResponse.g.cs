@@ -28,6 +28,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>If the async search completed, this field shows the status code of the search.<br/>For example, 200 indicates that the async search was successfully completed.<br/>503 indicates that the async search was completed with an error.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
 	public int? CompletionStatus { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time")]
@@ -40,6 +43,10 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	public bool IsPartial { get; init; }
 	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
+
+	/// <summary>
+	/// <para>Indicates how many shards have run the query so far.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("start_time")]

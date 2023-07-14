@@ -64,6 +64,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementCreateDataStream = new ApiUrls(new[] { "/_data_stream/{name}" });
 	internal static ApiUrls IndexManagementCreate = new ApiUrls(new[] { "/{index}" });
 	internal static ApiUrls IndexManagementDeleteAlias = new ApiUrls(new[] { "/{index}/_alias/{name}" });
+	internal static ApiUrls IndexManagementDeleteDataLifecycle = new ApiUrls(new[] { "/_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementDeleteDataStream = new ApiUrls(new[] { "/_data_stream/{name}" });
 	internal static ApiUrls IndexManagementDelete = new ApiUrls(new[] { "/{index}" });
 	internal static ApiUrls IndexManagementDeleteIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
@@ -72,9 +73,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementExistsIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
 	internal static ApiUrls IndexManagementExists = new ApiUrls(new[] { "/{index}" });
 	internal static ApiUrls IndexManagementExistsTemplate = new ApiUrls(new[] { "/_template/{name}" });
+	internal static ApiUrls IndexManagementExplainDataLifecycle = new ApiUrls(new[] { "/{index}/_lifecycle/explain" });
 	internal static ApiUrls IndexManagementFlush = new ApiUrls(new[] { "/_flush", "/{index}/_flush" });
 	internal static ApiUrls IndexManagementForcemerge = new ApiUrls(new[] { "/_forcemerge", "/{index}/_forcemerge" });
 	internal static ApiUrls IndexManagementGetAlias = new ApiUrls(new[] { "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" });
+	internal static ApiUrls IndexManagementGetDataLifecycle = new ApiUrls(new[] { "/_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "/_data_stream", "/_data_stream/{name}" });
 	internal static ApiUrls IndexManagementGetFieldMapping = new ApiUrls(new[] { "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}" });
 	internal static ApiUrls IndexManagementGet = new ApiUrls(new[] { "/{index}" });
@@ -85,6 +88,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementMigrateToDataStream = new ApiUrls(new[] { "/_data_stream/_migrate/{name}" });
 	internal static ApiUrls IndexManagementOpen = new ApiUrls(new[] { "/{index}/_open" });
 	internal static ApiUrls IndexManagementPutAlias = new ApiUrls(new[] { "/{index}/_alias/{name}" });
+	internal static ApiUrls IndexManagementPutDataLifecycle = new ApiUrls(new[] { "/_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "/_index_template/{name}" });
 	internal static ApiUrls IndexManagementPutMapping = new ApiUrls(new[] { "/{index}/_mapping" });
 	internal static ApiUrls IndexManagementPutTemplate = new ApiUrls(new[] { "/_template/{name}" });

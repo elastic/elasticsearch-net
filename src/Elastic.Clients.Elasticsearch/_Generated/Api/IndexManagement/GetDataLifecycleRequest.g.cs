@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class GetDataStreamRequestParameters : RequestParameters
+public sealed class GetDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
@@ -37,25 +37,22 @@ public sealed class GetDataStreamRequestParameters : RequestParameters
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// <para>Return all relevant default configurations for the data stream (default: false)</para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
-/// <para>Returns data streams.</para>
+/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+/// <para>Retrieves the data lifecycle configuration of one or more data streams.</para>
 /// </summary>
-public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamRequestParameters>
+public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecycleRequestParameters>
 {
-	public GetDataStreamRequest()
+	public GetDataLifecycleRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 	{
 	}
 
-	public GetDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamNames? name) : base(r => r.Optional("name", name))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataStream;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
@@ -68,35 +65,40 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// <para>Return all relevant default configurations for the data stream (default: false)</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
-/// <para>Returns data streams.</para>
+/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+/// <para>Retrieves the data lifecycle configuration of one or more data streams.</para>
 /// </summary>
-public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<GetDataStreamRequestDescriptor, GetDataStreamRequestParameters>
+public sealed partial class GetDataLifecycleRequestDescriptor : RequestDescriptor<GetDataLifecycleRequestDescriptor, GetDataLifecycleRequestParameters>
 {
-	internal GetDataStreamRequestDescriptor(Action<GetDataStreamRequestDescriptor> configure) => configure.Invoke(this);
+	internal GetDataLifecycleRequestDescriptor(Action<GetDataLifecycleRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetDataStreamRequestDescriptor()
+	public GetDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataStream;
+	internal GetDataLifecycleRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
-	public GetDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public GetDataStreamRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+	public GetDataLifecycleRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
+	public GetDataLifecycleRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 
-	public GetDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames? name)
+	public GetDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
-		RouteValues.Optional("name", name);
+		RouteValues.Required("name", name);
 		return Self;
 	}
 

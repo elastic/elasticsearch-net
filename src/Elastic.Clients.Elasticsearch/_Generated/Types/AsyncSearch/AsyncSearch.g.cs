@@ -33,8 +33,16 @@ public sealed partial class AsyncSearch<TDocument>
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
 	[JsonInclude, JsonPropertyName("_scroll_id")]
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
+
+	/// <summary>
+	/// <para>Indicates how many shards have run the query.<br/>Note that in order for shard results to be included in the search response, they need to be reduced first.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+
+	/// <summary>
+	/// <para>Partial aggregations results, coming from the shards that have already completed the execution of the query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; init; }
 	[JsonInclude, JsonPropertyName("fields")]
@@ -43,6 +51,10 @@ public sealed partial class AsyncSearch<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; init; }
 	[JsonInclude, JsonPropertyName("max_score")]
 	public double? MaxScore { get; init; }
+
+	/// <summary>
+	/// <para>Indicates how many reductions of the results have been performed.<br/>If this number increases compared to the last retrieved results for a get asynch search request, you can expect additional results included in the search response.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_reduce_phases")]
 	public long? NumReducePhases { get; init; }
 	[JsonInclude, JsonPropertyName("pit_id")]
