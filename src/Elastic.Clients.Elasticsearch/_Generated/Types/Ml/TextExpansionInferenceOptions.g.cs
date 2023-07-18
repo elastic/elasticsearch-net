@@ -28,16 +28,10 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Ml;
 
 /// <summary>
-/// <para>Text embedding inference options</para>
+/// <para>Text expansion inference options</para>
 /// </summary>
-public sealed partial class TextEmbeddingInferenceOptions
+public sealed partial class TextExpansionInferenceOptions
 {
-	/// <summary>
-	/// <para>The number of dimensions in the embedding output</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("embedding_size")]
-	public int? EmbeddingSize { get; set; }
-
 	/// <summary>
 	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
 	/// </summary>
@@ -50,39 +44,29 @@ public sealed partial class TextEmbeddingInferenceOptions
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? Tokenization { get; set; }
 
-	public static implicit operator InferenceConfigCreate(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Ml.InferenceConfigCreate.TextEmbedding(textEmbeddingInferenceOptions);
+	public static implicit operator InferenceConfigCreate(TextExpansionInferenceOptions textExpansionInferenceOptions) => Ml.InferenceConfigCreate.TextExpansion(textExpansionInferenceOptions);
 }
 
 /// <summary>
-/// <para>Text embedding inference options</para>
+/// <para>Text expansion inference options</para>
 /// </summary>
-public sealed partial class TextEmbeddingInferenceOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceOptionsDescriptor>
+public sealed partial class TextExpansionInferenceOptionsDescriptor : SerializableDescriptor<TextExpansionInferenceOptionsDescriptor>
 {
-	internal TextEmbeddingInferenceOptionsDescriptor(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => configure.Invoke(this);
+	internal TextExpansionInferenceOptionsDescriptor(Action<TextExpansionInferenceOptionsDescriptor> configure) => configure.Invoke(this);
 
-	public TextEmbeddingInferenceOptionsDescriptor() : base()
+	public TextExpansionInferenceOptionsDescriptor() : base()
 	{
 	}
 
-	private int? EmbeddingSizeValue { get; set; }
 	private string? ResultsFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
 
 	/// <summary>
-	/// <para>The number of dimensions in the embedding output</para>
-	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor EmbeddingSize(int? embeddingSize)
-	{
-		EmbeddingSizeValue = embeddingSize;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.</para>
 	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public TextExpansionInferenceOptionsDescriptor ResultsField(string? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
@@ -91,7 +75,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	/// <summary>
 	/// <para>The tokenization options</para>
 	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
+	public TextExpansionInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? tokenization)
 	{
 		TokenizationDescriptor = null;
 		TokenizationDescriptorAction = null;
@@ -99,7 +83,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
+	public TextExpansionInferenceOptionsDescriptor Tokenization(TokenizationConfigDescriptor descriptor)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptorAction = null;
@@ -107,7 +91,7 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 		return Self;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
+	public TextExpansionInferenceOptionsDescriptor Tokenization(Action<TokenizationConfigDescriptor> configure)
 	{
 		TokenizationValue = null;
 		TokenizationDescriptor = null;
@@ -118,12 +102,6 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (EmbeddingSizeValue.HasValue)
-		{
-			writer.WritePropertyName("embedding_size");
-			writer.WriteNumberValue(EmbeddingSizeValue.Value);
-		}
-
 		if (!string.IsNullOrEmpty(ResultsFieldValue))
 		{
 			writer.WritePropertyName("results_field");

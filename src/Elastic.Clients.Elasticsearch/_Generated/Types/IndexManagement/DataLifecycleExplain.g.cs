@@ -25,26 +25,26 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShardStatistics
+public sealed partial class DataLifecycleExplain
 {
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	[JsonInclude, JsonPropertyName("error")]
+	public string? Error { get; init; }
+	[JsonInclude, JsonPropertyName("generation_time")]
+	public Elastic.Clients.Elasticsearch.Duration? GenerationTime { get; init; }
+	[JsonInclude, JsonPropertyName("index")]
+	public string Index { get; init; }
+	[JsonInclude, JsonPropertyName("index_creation_date_millis")]
+	public long? IndexCreationDateMillis { get; init; }
+	[JsonInclude, JsonPropertyName("lifecycle")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
+	[JsonInclude, JsonPropertyName("managed_by_dlm")]
+	public bool ManagedByDlm { get; init; }
+	[JsonInclude, JsonPropertyName("rollover_date_millis")]
+	public long? RolloverDateMillis { get; init; }
+	[JsonInclude, JsonPropertyName("time_since_index_creation")]
+	public Elastic.Clients.Elasticsearch.Duration? TimeSinceIndexCreation { get; init; }
+	[JsonInclude, JsonPropertyName("time_since_rollover")]
+	public Elastic.Clients.Elasticsearch.Duration? TimeSinceRollover { get; init; }
 }

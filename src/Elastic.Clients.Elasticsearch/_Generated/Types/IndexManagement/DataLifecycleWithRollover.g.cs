@@ -25,26 +25,15 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShardStatistics
+/// <summary>
+/// <para>Data lifecycle with rollover can be used to display the configuration including the default rollover conditions,<br/>if asked.</para>
+/// </summary>
+public sealed partial class DataLifecycleWithRollover
 {
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	[JsonInclude, JsonPropertyName("data_retention")]
+	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; init; }
+	[JsonInclude, JsonPropertyName("rollover")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DlmRolloverConditions? Rollover { get; init; }
 }
