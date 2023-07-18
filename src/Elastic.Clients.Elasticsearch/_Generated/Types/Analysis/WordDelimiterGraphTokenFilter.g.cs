@@ -44,6 +44,7 @@ public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("ignore_keywords")]
 	public bool? IgnoreKeywords { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 	[JsonInclude, JsonPropertyName("protected_words")]
 	public ICollection<string>? ProtectedWords { get; set; }
@@ -233,10 +234,10 @@ public sealed partial class WordDelimiterGraphTokenFilterDescriptor : Serializab
 			writer.WriteBooleanValue(IgnoreKeywordsValue.Value);
 		}
 
-		if (PreserveOriginalValue.HasValue)
+		if (PreserveOriginalValue is not null)
 		{
 			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
 		}
 
 		if (ProtectedWordsValue is not null)

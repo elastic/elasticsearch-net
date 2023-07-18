@@ -33,6 +33,7 @@ public sealed partial class IndexSettingsLifecycle
 	/// <para>Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.<br/>You can explicitly set it to skip rollover.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexing_complete")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? IndexingComplete { get; set; }
 
 	/// <summary>
@@ -151,10 +152,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IndexingCompleteValue.HasValue)
+		if (IndexingCompleteValue is not null)
 		{
 			writer.WritePropertyName("indexing_complete");
-			writer.WriteBooleanValue(IndexingCompleteValue.Value);
+			JsonSerializer.Serialize(writer, IndexingCompleteValue, options);
 		}
 
 		writer.WritePropertyName("name");

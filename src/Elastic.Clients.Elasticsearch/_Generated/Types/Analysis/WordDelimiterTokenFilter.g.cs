@@ -40,6 +40,7 @@ public sealed partial class WordDelimiterTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("generate_word_parts")]
 	public bool? GenerateWordParts { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 	[JsonInclude, JsonPropertyName("protected_words")]
 	public ICollection<string>? ProtectedWords { get; set; }
@@ -203,10 +204,10 @@ public sealed partial class WordDelimiterTokenFilterDescriptor : SerializableDes
 			writer.WriteBooleanValue(GenerateWordPartsValue.Value);
 		}
 
-		if (PreserveOriginalValue.HasValue)
+		if (PreserveOriginalValue is not null)
 		{
 			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
 		}
 
 		if (ProtectedWordsValue is not null)
