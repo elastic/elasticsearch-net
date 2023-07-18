@@ -249,6 +249,12 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 					continue;
 				}
 
+				if (property == "rank")
+				{
+					variant.Rank = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Rank?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "min_score")
 				{
 					variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
@@ -447,6 +453,12 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 		{
 			writer.WritePropertyName("knn");
 			JsonSerializer.Serialize(writer, value.Knn, options);
+		}
+
+		if (value.Rank is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, value.Rank, options);
 		}
 
 		if (value.MinScore.HasValue)
@@ -828,6 +840,12 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	public ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? Knn { get; set; }
 
 	/// <summary>
+	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("rank")]
+	public Elastic.Clients.Elasticsearch.Rank? Rank { get; set; }
+
+	/// <summary>
 	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
@@ -1047,6 +1065,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
 	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private bool? ProfileValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Rank? RankValue { get; set; }
+	private RankDescriptor RankDescriptor { get; set; }
+	private Action<RankDescriptor> RankDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
@@ -1487,6 +1508,33 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	/// <summary>
+	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use</para>
+	/// </summary>
+	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Rank? rank)
+	{
+		RankDescriptor = null;
+		RankDescriptorAction = null;
+		RankValue = rank;
+		return Self;
+	}
+
+	public SearchRequestDescriptor<TDocument> Rank(RankDescriptor descriptor)
+	{
+		RankValue = null;
+		RankDescriptorAction = null;
+		RankDescriptor = descriptor;
+		return Self;
+	}
+
+	public SearchRequestDescriptor<TDocument> Rank(Action<RankDescriptor> configure)
+	{
+		RankValue = null;
+		RankDescriptor = null;
+		RankDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
 	/// </summary>
 	public SearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
@@ -1921,6 +1969,22 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
+		if (RankDescriptor is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, RankDescriptor, options);
+		}
+		else if (RankDescriptorAction is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, new RankDescriptor(RankDescriptorAction), options);
+		}
+		else if (RankValue is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, RankValue, options);
+		}
+
 		if (RuntimeMappingsValue is not null)
 		{
 			writer.WritePropertyName("runtime_mappings");
@@ -2118,6 +2182,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
 	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private bool? ProfileValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Rank? RankValue { get; set; }
+	private RankDescriptor RankDescriptor { get; set; }
+	private Action<RankDescriptor> RankDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
@@ -2558,6 +2625,33 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	}
 
 	/// <summary>
+	/// <para>Defines the Reciprocal Rank Fusion (RRF) to use</para>
+	/// </summary>
+	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Rank? rank)
+	{
+		RankDescriptor = null;
+		RankDescriptorAction = null;
+		RankValue = rank;
+		return Self;
+	}
+
+	public SearchRequestDescriptor Rank(RankDescriptor descriptor)
+	{
+		RankValue = null;
+		RankDescriptorAction = null;
+		RankDescriptor = descriptor;
+		return Self;
+	}
+
+	public SearchRequestDescriptor Rank(Action<RankDescriptor> configure)
+	{
+		RankValue = null;
+		RankDescriptor = null;
+		RankDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
 	/// </summary>
 	public SearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
@@ -2990,6 +3084,22 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		{
 			writer.WritePropertyName("profile");
 			writer.WriteBooleanValue(ProfileValue.Value);
+		}
+
+		if (RankDescriptor is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, RankDescriptor, options);
+		}
+		else if (RankDescriptorAction is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, new RankDescriptor(RankDescriptorAction), options);
+		}
+		else if (RankValue is not null)
+		{
+			writer.WritePropertyName("rank");
+			JsonSerializer.Serialize(writer, RankValue, options);
 		}
 
 		if (RuntimeMappingsValue is not null)

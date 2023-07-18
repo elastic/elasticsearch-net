@@ -53,6 +53,7 @@ public sealed partial class InferenceConfigUpdate
 	public static InferenceConfigUpdate Regression(Elastic.Clients.Elasticsearch.Ml.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfigUpdate("regression", regressionInferenceOptions);
 	public static InferenceConfigUpdate TextClassification(Elastic.Clients.Elasticsearch.Ml.TextClassificationInferenceUpdateOptions textClassificationInferenceUpdateOptions) => new InferenceConfigUpdate("text_classification", textClassificationInferenceUpdateOptions);
 	public static InferenceConfigUpdate TextEmbedding(Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions textEmbeddingInferenceUpdateOptions) => new InferenceConfigUpdate("text_embedding", textEmbeddingInferenceUpdateOptions);
+	public static InferenceConfigUpdate TextExpansion(Elastic.Clients.Elasticsearch.Ml.TextExpansionInferenceUpdateOptions textExpansionInferenceUpdateOptions) => new InferenceConfigUpdate("text_expansion", textExpansionInferenceUpdateOptions);
 	public static InferenceConfigUpdate ZeroShotClassification(Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => new InferenceConfigUpdate("zero_shot_classification", zeroShotClassificationInferenceUpdateOptions);
 }
 
@@ -129,6 +130,13 @@ internal sealed partial class InferenceConfigUpdateConverter : JsonConverter<Inf
 			return new InferenceConfigUpdate(propertyName, variant);
 		}
 
+		if (propertyName == "text_expansion")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.TextExpansionInferenceUpdateOptions?>(ref reader, options);
+			reader.Read();
+			return new InferenceConfigUpdate(propertyName, variant);
+		}
+
 		if (propertyName == "zero_shot_classification")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions?>(ref reader, options);
@@ -170,6 +178,9 @@ internal sealed partial class InferenceConfigUpdateConverter : JsonConverter<Inf
 					break;
 				case "text_embedding":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextEmbeddingInferenceUpdateOptions)value.Variant, options);
+					break;
+				case "text_expansion":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.TextExpansionInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.TextExpansionInferenceUpdateOptions)value.Variant, options);
 					break;
 				case "zero_shot_classification":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions>(writer, (Elastic.Clients.Elasticsearch.Ml.ZeroShotClassificationInferenceUpdateOptions)value.Variant, options);
@@ -228,6 +239,8 @@ public sealed partial class InferenceConfigUpdateDescriptor<TDocument> : Seriali
 	public InferenceConfigUpdateDescriptor<TDocument> TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
 	public InferenceConfigUpdateDescriptor<TDocument> TextEmbedding(TextEmbeddingInferenceUpdateOptions textEmbeddingInferenceUpdateOptions) => Set(textEmbeddingInferenceUpdateOptions, "text_embedding");
 	public InferenceConfigUpdateDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
+	public InferenceConfigUpdateDescriptor<TDocument> TextExpansion(TextExpansionInferenceUpdateOptions textExpansionInferenceUpdateOptions) => Set(textExpansionInferenceUpdateOptions, "text_expansion");
+	public InferenceConfigUpdateDescriptor<TDocument> TextExpansion(Action<TextExpansionInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_expansion");
 	public InferenceConfigUpdateDescriptor<TDocument> ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => Set(zeroShotClassificationInferenceUpdateOptions, "zero_shot_classification");
 	public InferenceConfigUpdateDescriptor<TDocument> ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 
@@ -301,6 +314,8 @@ public sealed partial class InferenceConfigUpdateDescriptor : SerializableDescri
 	public InferenceConfigUpdateDescriptor TextClassification(Action<TextClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_classification");
 	public InferenceConfigUpdateDescriptor TextEmbedding(TextEmbeddingInferenceUpdateOptions textEmbeddingInferenceUpdateOptions) => Set(textEmbeddingInferenceUpdateOptions, "text_embedding");
 	public InferenceConfigUpdateDescriptor TextEmbedding(Action<TextEmbeddingInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_embedding");
+	public InferenceConfigUpdateDescriptor TextExpansion(TextExpansionInferenceUpdateOptions textExpansionInferenceUpdateOptions) => Set(textExpansionInferenceUpdateOptions, "text_expansion");
+	public InferenceConfigUpdateDescriptor TextExpansion(Action<TextExpansionInferenceUpdateOptionsDescriptor> configure) => Set(configure, "text_expansion");
 	public InferenceConfigUpdateDescriptor ZeroShotClassification(ZeroShotClassificationInferenceUpdateOptions zeroShotClassificationInferenceUpdateOptions) => Set(zeroShotClassificationInferenceUpdateOptions, "zero_shot_classification");
 	public InferenceConfigUpdateDescriptor ZeroShotClassification(Action<ZeroShotClassificationInferenceUpdateOptionsDescriptor> configure) => Set(configure, "zero_shot_classification");
 

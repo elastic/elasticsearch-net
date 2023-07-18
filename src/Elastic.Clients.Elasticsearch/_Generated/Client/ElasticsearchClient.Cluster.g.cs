@@ -38,7 +38,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
 	{
@@ -48,7 +48,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)
 	{
@@ -58,7 +58,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual AllocationExplainResponse AllocationExplain()
 	{
@@ -69,7 +69,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequestDescriptor descriptor)
 	{
@@ -79,7 +79,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual AllocationExplainResponse AllocationExplain(Action<AllocationExplainRequestDescriptor> configureRequest)
 	{
@@ -91,7 +91,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(CancellationToken cancellationToken = default)
 	{
@@ -102,7 +102,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -112,7 +112,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(Action<AllocationExplainRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -124,7 +124,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
 	{
@@ -134,7 +134,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -144,7 +144,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClusterStatsResponse Stats()
 	{
@@ -155,7 +155,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClusterStatsResponse Stats(ClusterStatsRequestDescriptor descriptor)
 	{
@@ -165,7 +165,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest)
 	{
@@ -177,7 +177,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -188,7 +188,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -198,7 +198,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -210,7 +210,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
 	{
@@ -220,7 +220,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -230,7 +230,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetClusterSettingsResponse GetSettings()
 	{
@@ -241,7 +241,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequestDescriptor descriptor)
 	{
@@ -251,7 +251,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetClusterSettingsResponse GetSettings(Action<GetClusterSettingsRequestDescriptor> configureRequest)
 	{
@@ -263,7 +263,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -274,7 +274,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -284,7 +284,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(Action<GetClusterSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -296,7 +296,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health(HealthRequest request)
 	{
@@ -306,7 +306,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{
@@ -316,7 +316,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health()
 	{
@@ -327,7 +327,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health(HealthRequestDescriptor descriptor)
 	{
@@ -337,7 +337,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health(Action<HealthRequestDescriptor> configureRequest)
 	{
@@ -349,7 +349,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
 	{
@@ -359,7 +359,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
 	{
@@ -371,7 +371,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
@@ -382,7 +382,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -392,7 +392,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -404,7 +404,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -414,7 +414,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -426,7 +426,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
 	{
@@ -436,7 +436,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)
 	{
@@ -446,7 +446,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PendingTasksResponse PendingTasks()
 	{
@@ -457,7 +457,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequestDescriptor descriptor)
 	{
@@ -467,7 +467,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PendingTasksResponse PendingTasks(Action<PendingTasksRequestDescriptor> configureRequest)
 	{
@@ -479,7 +479,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(CancellationToken cancellationToken = default)
 	{
@@ -490,7 +490,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -500,7 +500,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(Action<PendingTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

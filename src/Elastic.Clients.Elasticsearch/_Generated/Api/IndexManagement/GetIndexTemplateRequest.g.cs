@@ -45,6 +45,11 @@ public sealed class GetIndexTemplateRequestParameters : RequestParameters
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
@@ -83,6 +88,12 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>If true, returns all relevant default configurations for the index template.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
 
 /// <summary>
@@ -103,6 +114,7 @@ public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescripto
 	internal override bool SupportsBody => false;
 
 	public GetIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public GetIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public GetIndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public GetIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 

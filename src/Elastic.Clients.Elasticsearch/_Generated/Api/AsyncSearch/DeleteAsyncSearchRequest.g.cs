@@ -34,7 +34,7 @@ public sealed class DeleteAsyncSearchRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
 /// </summary>
 public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncSearchRequestParameters>
 {
@@ -50,7 +50,7 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 }
 
 /// <summary>
-/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
 /// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchRequestParameters>
 {
@@ -82,7 +82,7 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+/// <para>Deletes an async search by identifier.<br/>If the search is still running, the search request will be cancelled.<br/>Otherwise, the saved search results are deleted.<br/>If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.</para>
 /// </summary>
 public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescriptor<DeleteAsyncSearchRequestDescriptor, DeleteAsyncSearchRequestParameters>
 {

@@ -39,7 +39,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual CancelResponse Cancel(CancelRequest request)
 	{
@@ -50,7 +50,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequest request, CancellationToken cancellationToken = default)
 	{
@@ -61,7 +61,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual CancelResponse Cancel()
 	{
@@ -73,7 +73,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual CancelResponse Cancel(CancelRequestDescriptor descriptor)
 	{
@@ -84,7 +84,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual CancelResponse Cancel(Action<CancelRequestDescriptor> configureRequest)
 	{
@@ -97,7 +97,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
 	{
@@ -109,7 +109,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -120,7 +120,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CancelResponse> CancelAsync(Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -133,7 +133,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetTasksResponse Get(GetTasksRequest request)
 	{
@@ -144,7 +144,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequest request, CancellationToken cancellationToken = default)
 	{
@@ -155,7 +155,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id task_id)
 	{
@@ -167,7 +167,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetTasksResponse Get(GetTasksRequestDescriptor descriptor)
 	{
@@ -178,7 +178,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id task_id, Action<GetTasksRequestDescriptor> configureRequest)
 	{
@@ -191,7 +191,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id task_id, CancellationToken cancellationToken = default)
 	{
@@ -203,7 +203,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -214,7 +214,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns information about a task.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id task_id, Action<GetTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -227,7 +227,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ListResponse List(ListRequest request)
 	{
@@ -238,7 +238,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequest request, CancellationToken cancellationToken = default)
 	{
@@ -249,7 +249,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ListResponse List()
 	{
@@ -261,7 +261,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ListResponse List(ListRequestDescriptor descriptor)
 	{
@@ -272,7 +272,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ListResponse List(Action<ListRequestDescriptor> configureRequest)
 	{
@@ -285,7 +285,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
 	{
@@ -297,7 +297,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -308,7 +308,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 	/// <para>Returns a list of tasks.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.7/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListResponse> ListAsync(Action<ListRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
