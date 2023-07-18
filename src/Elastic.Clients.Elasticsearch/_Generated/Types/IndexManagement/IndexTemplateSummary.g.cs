@@ -32,6 +32,8 @@ public sealed partial class IndexTemplateSummary
 	[JsonInclude, JsonPropertyName("aliases")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; init; }
+	[JsonInclude, JsonPropertyName("lifecycle")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; init; }
 	[JsonInclude, JsonPropertyName("settings")]

@@ -41,6 +41,8 @@ public sealed partial class DataStream
 	public string? IlmPolicy { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; init; }
+	[JsonInclude, JsonPropertyName("lifecycle")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 	[JsonInclude, JsonPropertyName("replicated")]

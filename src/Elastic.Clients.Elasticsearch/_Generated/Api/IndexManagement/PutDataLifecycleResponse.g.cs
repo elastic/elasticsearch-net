@@ -19,32 +19,20 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using System;
+using Elastic.Transport.Products.Elasticsearch;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShardStatistics
+/// <summary>
+/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
+/// </summary>
+public sealed partial class PutDataLifecycleResponse : ElasticsearchResponse
 {
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
-
 	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
+	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	[JsonInclude, JsonPropertyName("acknowledged")]
+	public bool Acknowledged { get; init; }
 }

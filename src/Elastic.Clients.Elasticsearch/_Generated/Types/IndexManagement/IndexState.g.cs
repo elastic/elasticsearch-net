@@ -39,6 +39,12 @@ public sealed partial class IndexState
 	/// </summary>
 	[JsonInclude, JsonPropertyName("defaults")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
+
+	/// <summary>
+	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("lifecycle")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? Lifecycle { get; set; }
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	[JsonInclude, JsonPropertyName("settings")]
@@ -64,6 +70,9 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
+	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
@@ -152,6 +161,33 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// </summary>
+	public IndexStateDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexStateDescriptor<TDocument> Lifecycle(DataLifecycleDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexStateDescriptor<TDocument> Lifecycle(Action<DataLifecycleDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -215,6 +251,22 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 			JsonSerializer.Serialize(writer, DataStreamValue, options);
 		}
 
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -238,6 +290,9 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DataStreamName? DataStreamValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
+	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Default settings, included when the request's `include_default` is `true`.</para>
@@ -326,6 +381,33 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// </summary>
+	public IndexStateDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexStateDescriptor Lifecycle(DataLifecycleDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexStateDescriptor Lifecycle(Action<DataLifecycleDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -387,6 +469,22 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		{
 			writer.WritePropertyName("data_stream");
 			JsonSerializer.Serialize(writer, DataStreamValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
 		}
 
 		writer.WriteEndObject();

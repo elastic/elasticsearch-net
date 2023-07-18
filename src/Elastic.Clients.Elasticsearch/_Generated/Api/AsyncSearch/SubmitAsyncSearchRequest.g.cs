@@ -32,17 +32,17 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
 	/// <summary>
-	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
 	/// </summary>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
 	/// <summary>
-	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
@@ -67,9 +67,13 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// <para>Affects how often partial results become available, which happens whenever shard results are reduced.<br/>A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).</para>
 	/// </summary>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+
+	/// <summary>
+	/// <para>The default value is the only supported value.</para>
+	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
@@ -112,6 +116,10 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>The default value cannot be changed, which enforces the execution of a pre-filter roundtrip to retrieve statistics from each shard so that the ones that surely don’t hold any document matching the query get skipped.</para>
+	/// </summary>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
@@ -582,7 +590,7 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 
 [JsonConverter(typeof(SubmitAsyncSearchRequestConverter))]
 /// <summary>
-/// <para>Executes a search request asynchronously.</para>
+/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
 /// </summary>
 public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncSearchRequestParameters>
 {
@@ -601,19 +609,19 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	internal override bool SupportsBody => true;
 
 	/// <summary>
-	/// <para>Specify the time that the request should block waiting for the final response</para>
+	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 
 	/// <summary>
-	/// <para>Control whether the response should be stored in the cluster if it completed within the provided [wait_for_completion] time (default: false)</para>
+	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 
 	/// <summary>
-	/// <para>Update the time interval in which the results (partial or final) for this search will be available</para>
+	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
@@ -643,10 +651,14 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The number of shard results that should be reduced at once on the coordinating node. This value should be used as the granularity at which progress results will be made available.</para>
+	/// <para>Affects how often partial results become available, which happens whenever shard results are reduced.<br/>A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default).</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
+
+	/// <summary>
+	/// <para>The default value is the only supported value.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
@@ -699,6 +711,10 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>The default value cannot be changed, which enforces the execution of a pre-filter roundtrip to retrieve statistics from each shard so that the ones that surely don’t hold any document matching the query get skipped.</para>
+	/// </summary>
 	[JsonIgnore]
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
@@ -926,7 +942,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 }
 
 /// <summary>
-/// <para>Executes a search request asynchronously.</para>
+/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
 /// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : RequestDescriptor<SubmitAsyncSearchRequestDescriptor<TDocument>, SubmitAsyncSearchRequestParameters>
 {
@@ -1996,7 +2012,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Executes a search request asynchronously.</para>
+/// <para>Runs a search request asynchronously.<br/>When the primary sort of the results is an indexed field, shards get sorted based on minimum and maximum value that they hold for that field, hence partial results become available following the sort criteria that was requested.<br/>Warning: Async search does not support scroll nor search requests that only include the suggest section.<br/>By default, Elasticsearch doesn’t allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.<br/>The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.</para>
 /// </summary>
 public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescriptor<SubmitAsyncSearchRequestDescriptor, SubmitAsyncSearchRequestParameters>
 {

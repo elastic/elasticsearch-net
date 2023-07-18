@@ -31,6 +31,8 @@ public sealed partial class IndexTemplateMapping
 {
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	[JsonInclude, JsonPropertyName("lifecycle")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? Lifecycle { get; set; }
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	[JsonInclude, JsonPropertyName("settings")]
@@ -52,6 +54,9 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
+	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
@@ -107,6 +112,30 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(DataLifecycleDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Action<DataLifecycleDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -148,6 +177,22 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, AliasesValue, options);
 		}
 
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -167,6 +212,9 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
+	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
 	{
@@ -222,6 +270,30 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	public IndexTemplateMappingDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexTemplateMappingDescriptor Lifecycle(DataLifecycleDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateMappingDescriptor Lifecycle(Action<DataLifecycleDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -261,6 +333,22 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("aliases");
 			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
 		}
 
 		writer.WriteEndObject();

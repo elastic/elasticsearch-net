@@ -34,7 +34,7 @@ public sealed class AsyncSearchStatusRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// <para>Retreives the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchStatusRequestParameters>
 {
@@ -50,7 +50,7 @@ public sealed partial class AsyncSearchStatusRequest : PlainRequest<AsyncSearchS
 }
 
 /// <summary>
-/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// <para>Retreives the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : RequestDescriptor<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusRequestParameters>
 {
@@ -82,7 +82,7 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+/// <para>Retreives the status of a previously submitted async search request given its identifier, without retrieving search results.<br/>If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.</para>
 /// </summary>
 public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescriptor<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusRequestParameters>
 {

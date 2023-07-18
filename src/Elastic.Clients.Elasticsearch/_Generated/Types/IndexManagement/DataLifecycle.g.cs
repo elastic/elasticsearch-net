@@ -25,26 +25,45 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShardStatistics
+/// <summary>
+/// <para>Data lifecycle denotes that a data stream is managed by DLM and contains the configuration.</para>
+/// </summary>
+public sealed partial class DataLifecycle
 {
-	[JsonInclude, JsonPropertyName("failed")]
-	public int Failed { get; init; }
-	[JsonInclude, JsonPropertyName("failures")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int? Skipped { get; init; }
+	[JsonInclude, JsonPropertyName("data_retention")]
+	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
+}
 
-	/// <summary>
-	/// <para>Indicates how many shards have successfully run the search.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
+/// <summary>
+/// <para>Data lifecycle denotes that a data stream is managed by DLM and contains the configuration.</para>
+/// </summary>
+public sealed partial class DataLifecycleDescriptor : SerializableDescriptor<DataLifecycleDescriptor>
+{
+	internal DataLifecycleDescriptor(Action<DataLifecycleDescriptor> configure) => configure.Invoke(this);
 
-	/// <summary>
-	/// <para>Indicates how many shards the search will run on overall.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	public DataLifecycleDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Duration? DataRetentionValue { get; set; }
+
+	public DataLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? dataRetention)
+	{
+		DataRetentionValue = dataRetention;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (DataRetentionValue is not null)
+		{
+			writer.WritePropertyName("data_retention");
+			JsonSerializer.Serialize(writer, DataRetentionValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }
