@@ -23,12 +23,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
-internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<double>
+internal sealed class SingleWithFractionalPortionConverter : JsonConverter<float>
 {
-	public override double Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override float Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.String)
-			return reader.GetDouble();
+			return reader.GetSingle();
 
 		if (options.NumberHandling.HasFlag(JsonNumberHandling.AllowNamedFloatingPointLiterals))
 		{
@@ -45,30 +45,30 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 		{
 			var value = reader.GetString();
 
-			if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
-				throw new Exception($"Unable to parse '{value}' as a double.");
+			if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+				throw new Exception($"Unable to parse '{value}' as a single.");
 
 			return result;
 		}
 
-		return reader.GetDouble();
+		return reader.GetSingle();
 	}
 
-	public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, float value, JsonSerializerOptions options)
 	{
 		if (options.NumberHandling.HasFlag(JsonNumberHandling.AllowNamedFloatingPointLiterals))
 		{
 			switch (value)
 			{
-				case double.NaN:
+				case float.NaN:
 					writer.WriteStringValue(JsonConstants.EncodedNaN);
 					return;
 
-				case double.PositiveInfinity:
+				case float.PositiveInfinity:
 					writer.WriteStringValue(JsonConstants.EncodedPositiveInfinity);
 					return;
 
-				case double.NegativeInfinity:
+				case float.NegativeInfinity:
 					writer.WriteStringValue(JsonConstants.EncodedNegativeInfinity);
 					return;
 			}
@@ -84,9 +84,9 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 		// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Text.Json/src/System/Text/Json/Writer/Utf8JsonWriter.WriteValues.Double.cs#L101
 
 #if NETCOREAPP
-		Span<byte> utf8Text = stackalloc byte[JsonConstants.MaximumFormatDoubleLength];
+		Span<byte> utf8Text = stackalloc byte[JsonConstants.MaximumFormatSingleLength];
 
-		if (Utf8Formatter.TryFormat(value, utf8Text, out var bytesWritten, JsonConstants.DoubleStandardFormat))
+		if (Utf8Formatter.TryFormat(value, utf8Text, out var bytesWritten, JsonConstants.SingleStandardFormat))
 		{
 			if (utf8Text.IndexOfAny(JsonConstants.NonIntegerChars) == -1)
 			{
@@ -98,7 +98,7 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 			return;
 		}
 #else
-		var utf16Text = value.ToString(JsonConstants.DoubleFormatString, CultureInfo.InvariantCulture);
+		var utf16Text = value.ToString(JsonConstants.SingleFormatString, CultureInfo.InvariantCulture);
 		if (utf16Text.IndexOfAny(JsonConstants.NonIntegerChars) == -1)
 		{
 			utf16Text += ".0";
