@@ -27,7 +27,7 @@ public class SourceSerializationForNumericPropertiesTests : SerializerTestBase
 
 		var json = SourceSerializeAndGetJsonString(numericTests);
 
-		json.Should().Be("{\"float\":-3.4028235E+38}");
+		json.Should().Be("{\"float\":-3.40282347E+38}");
 
 		var deserialized = SourceDeserializeJsonString<NumericTests>(json);
 
@@ -41,7 +41,7 @@ public class SourceSerializationForNumericPropertiesTests : SerializerTestBase
 
 		var json = SourceSerializeAndGetJsonString(numericTests);
 
-		json.Should().Be("{\"float\":3.4028235E+38}");
+		json.Should().Be("{\"float\":3.40282347E+38}");
 
 		var deserialized = SourceDeserializeJsonString<NumericTests>(json);
 

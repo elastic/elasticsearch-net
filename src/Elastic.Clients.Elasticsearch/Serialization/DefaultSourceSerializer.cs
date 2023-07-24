@@ -22,7 +22,7 @@ public class DefaultSourceSerializer : SystemTextJsonSerializer
 	{
 		new JsonStringEnumConverter(),
 		new DoubleWithFractionalPortionConverter(),
-		new FloatWithFractionalPortionConverter()
+		new SingleWithFractionalPortionConverter()
 	};
 
 	private readonly JsonSerializerOptions _jsonSerializerOptions;

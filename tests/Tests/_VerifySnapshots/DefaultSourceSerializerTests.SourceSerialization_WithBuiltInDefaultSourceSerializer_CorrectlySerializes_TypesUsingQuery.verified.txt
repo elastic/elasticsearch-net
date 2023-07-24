@@ -1,1 +1,1 @@
-{"query":{"match_all":{"boost":2.1}}}
+{"query":{"match_all":{"boost":2.0999999}}}
