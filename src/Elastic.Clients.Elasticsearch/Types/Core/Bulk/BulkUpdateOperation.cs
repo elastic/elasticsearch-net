@@ -19,7 +19,7 @@ public abstract class BulkUpdateOperation : BulkOperation
 	private static byte _newline => (byte)'\n';
 
 	[JsonPropertyName("retry_on_conflict")]
-	public bool? RetryOnConflict { get; set; }
+	public int? RetryOnConflict { get; set; }
 
 	protected override string Operation => "update";
 
