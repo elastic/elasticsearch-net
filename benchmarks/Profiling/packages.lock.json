@@ -31,8 +31,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.12",
-        "contentHash": "Z4CWaO8CH23KMOAcUuevAeOHv9PWBBycWQxYXYgltHcKsEOityrxmGO4ytdIppVrGeBc4RaIclnjV8PKiHtWfQ=="
+        "resolved": "0.4.14",
+        "contentHash": "VjfChM++MnfljqKnCN75h2huIlg7HkUgrc4VyLh8HMyMKPxaK9LrxbUH8xeDm7bIqEd/qSCeujatfwhfYEhD6w=="
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
@@ -88,7 +88,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.12, )"
+          "Elastic.Transport": "[0.4.14, )"
         }
       }
     }
