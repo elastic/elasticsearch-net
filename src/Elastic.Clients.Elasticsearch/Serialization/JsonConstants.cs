@@ -32,8 +32,8 @@ internal static class JsonConstants
 	public const string SingleFormatString = "G9";  // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#round-trip-format-specifier-r
 
 #if NETCOREAPP
-	public static StandardFormat DoubleStandardFormat = StandardFormat.Parse(DoubleFormatString);
-	public static StandardFormat SingleStandardFormat = StandardFormat.Parse(SingleFormatString);
+	public static readonly StandardFormat DoubleStandardFormat = StandardFormat.Parse(DoubleFormatString);
+	public static readonly StandardFormat SingleStandardFormat = StandardFormat.Parse(SingleFormatString);
 
 	public const int MaximumFormatDoubleLength = 128; // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Text.Json/src/System/Text/Json/JsonConstants.cs#L78
 	public const int MaximumFormatSingleLength = 128; // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Text.Json/src/System/Text/Json/JsonConstants.cs#L79
