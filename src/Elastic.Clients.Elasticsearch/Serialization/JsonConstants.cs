@@ -29,7 +29,7 @@ internal static class JsonConstants
 #endif
 
 	public const string DoubleFormatString = "G17"; // 'R' does not roundtrip correctly in some cases prior to .NET Core 3
-	public const string SingleFormatString = "G9";
+	public const string SingleFormatString = "G9";  // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#round-trip-format-specifier-r
 
 #if NETCOREAPP
 	public static StandardFormat DoubleStandardFormat = StandardFormat.Parse(DoubleFormatString);
