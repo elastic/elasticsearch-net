@@ -46,7 +46,7 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 			var value = reader.GetString();
 
 			if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
-				throw new Exception($"Unable to parse '{value}' as a double.");
+				ThrowHelper.ThrowJsonException($"Unable to parse '{value}' as a double.");
 
 			return result;
 		}
@@ -117,6 +117,6 @@ internal sealed class DoubleWithFractionalPortionConverter : JsonConverter<doubl
 		}
 #endif
 
-		throw new Exception("Unable to serialize double value.");
+		ThrowHelper.ThrowJsonException("Unable to serialize double value.");
 	}
 }

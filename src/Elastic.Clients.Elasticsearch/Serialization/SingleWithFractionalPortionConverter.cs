@@ -46,7 +46,7 @@ internal sealed class SingleWithFractionalPortionConverter : JsonConverter<float
 			var value = reader.GetString();
 
 			if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
-				throw new Exception($"Unable to parse '{value}' as a single.");
+				ThrowHelper.ThrowJsonException($"Unable to parse '{value}' as a single.");
 
 			return result;
 		}
@@ -117,6 +117,6 @@ internal sealed class SingleWithFractionalPortionConverter : JsonConverter<float
 		}
 #endif
 
-		throw new Exception("Unable to serialize double value.");
+		ThrowHelper.ThrowJsonException("Unable to serialize single value.");
 	}
 }
