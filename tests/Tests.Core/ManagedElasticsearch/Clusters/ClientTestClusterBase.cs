@@ -57,7 +57,7 @@ namespace Tests.Core.ManagedElasticsearch.Clusters
 		{
 			TestConfiguration = TestClient.Configuration;
 			ShowElasticsearchOutputAfterStarted = TestConfiguration.ShowElasticsearchOutputAfterStarted;
-			HttpFiddlerAware = true;
+			AutoWireKnownProxies = true;
 
 			CacheEsHomeInstallation = true;
 
