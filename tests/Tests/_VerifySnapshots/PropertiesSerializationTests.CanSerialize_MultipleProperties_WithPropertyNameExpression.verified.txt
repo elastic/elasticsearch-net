@@ -4,7 +4,7 @@
     type: text
   },
   name: {
-    boost: 1.2,
+    boost: 1.25
     type: text
   }
 }

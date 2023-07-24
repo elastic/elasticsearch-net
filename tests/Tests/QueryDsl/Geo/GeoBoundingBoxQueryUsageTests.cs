@@ -15,7 +15,7 @@ public class GeoBoundingBoxQueryUsageTests : QueryDslUsageTestsBase
 
 	protected override Query QueryInitializer => new GeoBoundingBoxQuery
 	{
-		Boost = 1.1f,
+		Boost = 1.25f,
 		QueryName = "named_query",
 		Field = Infer.Field<Project>(p => p.LocationPoint),
 		BoundingBox = new TopLeftBottomRightGeoBounds
@@ -29,7 +29,7 @@ public class GeoBoundingBoxQueryUsageTests : QueryDslUsageTestsBase
 
 	protected override QueryDescriptor<Project> QueryFluent(QueryDescriptor<Project> queryDescriptor) => queryDescriptor
 		.GeoBoundingBox(g => g
-			.Boost(1.1f)
+			.Boost(1.25f)
 			.QueryName("named_query")
 			.Field(p => p.LocationPoint)
 			.BoundingBox(new TopLeftBottomRightGeoBounds

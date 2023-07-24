@@ -1,7 +1,7 @@
 {
   query: {
     geo_polygon: {
-      boost: 1.1,
+      boost: 1.25,
       ignore_unmapped: true,
       locationPoint: {
         points: [

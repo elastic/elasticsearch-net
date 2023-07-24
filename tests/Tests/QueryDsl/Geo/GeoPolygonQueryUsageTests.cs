@@ -15,7 +15,7 @@ public class GeoPolygonQueryUsageTests : QueryDslUsageTestsBase
 
 	protected override Query QueryInitializer => new GeoPolygonQuery
 	{
-		Boost = 1.1f,
+		Boost = 1.25f,
 		QueryName = "named_query",
 		ValidationMethod = GeoValidationMethod.Strict,
 		Polygon = new GeoPolygonPoints
@@ -34,7 +34,7 @@ public class GeoPolygonQueryUsageTests : QueryDslUsageTestsBase
 	protected override QueryDescriptor<Project> QueryFluent(QueryDescriptor<Project> queryDescriptor) => queryDescriptor
 		.GeoPolygon(c => c
 				.QueryName("named_query")
-				.Boost(1.1f)
+				.Boost(1.25f)
 				.Field(p => p.LocationPoint)
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Polygon(p => p.Points(new[]

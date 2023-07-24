@@ -20,7 +20,7 @@ public class PinnedQueryUsageTests : QueryDslUsageTestsBase
 			var query = PinnedQuery.Ids(new Id[] { 1, 11, 22 });
 
 			query.QueryName = "named_query";
-			query.Boost = 1.1f;
+			query.Boost = 1.25f;
 			query.Organic = new MatchAllQuery { QueryName = "organic_query" };
 
 			return query;
@@ -35,7 +35,7 @@ public class PinnedQueryUsageTests : QueryDslUsageTestsBase
 		var query = PinnedQuery.Ids(new Id[] { 1, 11, 22 });
 
 		query.QueryName = "named_query";
-		query.Boost = 1.1f;
+		query.Boost = 1.25f;
 		query.Organic = new MatchAllQuery { QueryName = "organic_query" };
 
 		return queryDescriptor.Pinned(query);

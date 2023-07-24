@@ -1,7 +1,7 @@
 {
   query: {
     geo_bounding_box: {
-      boost: 1.1,
+      boost: 1.25,
       ignore_unmapped: true,
       locationPoint: {
         bottom_right: {

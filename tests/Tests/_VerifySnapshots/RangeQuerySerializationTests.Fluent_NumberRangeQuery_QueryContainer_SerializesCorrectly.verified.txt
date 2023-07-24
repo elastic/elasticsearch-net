@@ -1,7 +1,7 @@
 {
   range: {
     my-field: {
-      boost: 1.1,
+      boost: 1.25,
       gte: 100,
       lt: 1000,
       _name: named_query

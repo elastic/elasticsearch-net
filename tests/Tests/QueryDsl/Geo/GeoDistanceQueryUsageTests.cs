@@ -17,7 +17,7 @@ public class GeoDistanceQueryUsageTests : QueryDslUsageTestsBase
 
 	protected override Query QueryInitializer => new GeoDistanceQuery
 	{
-		Boost = 1.1f,
+		Boost = 1.25f,
 		QueryName = "named_query",
 		Field = Infer.Field<Project>(p => p.LocationPoint),
 		DistanceType = GeoDistanceType.Arc,
@@ -29,7 +29,7 @@ public class GeoDistanceQueryUsageTests : QueryDslUsageTestsBase
 	protected override QueryDescriptor<Project> QueryFluent(QueryDescriptor<Project> queryDescriptor) =>
 		queryDescriptor
 			.GeoDistance(g => g
-				.Boost(1.1f)
+				.Boost(1.25f)
 				.QueryName("named_query")
 				.Field(p => p.LocationPoint)
 				.DistanceType(GeoDistanceType.Arc)
