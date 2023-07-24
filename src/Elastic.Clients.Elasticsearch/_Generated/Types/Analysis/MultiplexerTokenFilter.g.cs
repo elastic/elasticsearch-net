@@ -32,6 +32,7 @@ public sealed partial class MultiplexerTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("filters")]
 	public ICollection<string> Filters { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -76,10 +77,10 @@ public sealed partial class MultiplexerTokenFilterDescriptor : SerializableDescr
 		writer.WriteStartObject();
 		writer.WritePropertyName("filters");
 		JsonSerializer.Serialize(writer, FiltersValue, options);
-		if (PreserveOriginalValue.HasValue)
+		if (PreserveOriginalValue is not null)
 		{
 			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue.Value);
+			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
 		}
 
 		writer.WritePropertyName("type");
