@@ -1,7 +1,7 @@
 ---
 
 STACK_VERSION:
-  - master-SNAPSHOT
+  - 8.9-SNAPSHOT
 
 TEST_SUITE:
   - free
