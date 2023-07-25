@@ -1,0 +1,15 @@
+[[release-notes-8.9.0]]
+== Release notes v8.9.0
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7839[#7839] Use `Stringified<boolean>` for `preserve_original` and `indexing_complete` (issue: https://github.com/elastic/elasticsearch-net/issues/7755[#7755])
+- https://github.com/elastic/elasticsearch-net/pull/7840[#7840] Update `Elastic.*` dependencies (issue: https://github.com/elastic/elasticsearch-net/issues/7823[#7823])
+- https://github.com/elastic/elasticsearch-net/pull/7841[#7841] Fix typing of `BulkUpdateOperation.RetryOnConflict` (issue: https://github.com/elastic/elasticsearch-net/issues/7838[#7838])
+- https://github.com/elastic/elasticsearch-net/pull/7854[#7854] Fix custom floating-point JSON converters (issue: https://github.com/elastic/elasticsearch-net/issues/7757[#7757])
+
+[discrete]
+=== Enhancements
+
+- https://github.com/elastic/elasticsearch-net/pull/7836[#7836] Regenerate client using 8.9 specification
