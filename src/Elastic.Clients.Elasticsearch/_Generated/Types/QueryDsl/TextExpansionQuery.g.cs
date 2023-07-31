@@ -27,30 +27,108 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextExpansionQuery>
+{
+	public override TextExpansionQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
+		var variant = new TextExpansionQuery(fieldName);
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				var property = reader.GetString();
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "boost")
+				{
+					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "model_id")
+				{
+					variant.ModelId = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+
+				if (property == "model_text")
+				{
+					variant.ModelText = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+			}
+		}
+
+		reader.Read();
+		return variant;
+	}
+
+	public override void Write(Utf8JsonWriter writer, TextExpansionQuery value, JsonSerializerOptions options)
+	{
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize TextExpansionQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (options.TryGetClientSettings(out var settings))
+		{
+			writer.WriteStartObject();
+			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+			writer.WriteStartObject();
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
+			if (value.Boost.HasValue)
+			{
+				writer.WritePropertyName("boost");
+				writer.WriteNumberValue(value.Boost.Value);
+			}
+
+			writer.WritePropertyName("model_id");
+			writer.WriteStringValue(value.ModelId);
+			writer.WritePropertyName("model_text");
+			writer.WriteStringValue(value.ModelText);
+			writer.WriteEndObject();
+			writer.WriteEndObject();
+			return;
+		}
+
+		throw new JsonException("Unable to retrieve client settings required to infer field.");
+	}
+}
+
+[JsonConverter(typeof(TextExpansionQueryConverter))]
 public sealed partial class TextExpansionQuery : SearchQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
+	public TextExpansionQuery(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		Field = field;
+	}
+
 	public string? QueryName { get; set; }
-	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
 	/// <summary>
 	/// <para>The text expansion NLP model to use</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
 	public string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>The query text</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_text")]
 	public string ModelText { get; set; }
-
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("value")]
-	public Elastic.Clients.Elasticsearch.Field Value { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	public static implicit operator Query(TextExpansionQuery textExpansionQuery) => QueryDsl.Query.TextExpansion(textExpansionQuery);
 
@@ -61,15 +139,29 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 {
 	internal TextExpansionQueryDescriptor(Action<TextExpansionQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public TextExpansionQueryDescriptor() : base()
+	internal TextExpansionQueryDescriptor() : base()
 	{
+	}
+
+	public TextExpansionQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
+	}
+
+	public TextExpansionQueryDescriptor(Expression<Func<TDocument, object>> field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
 	}
 
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string ModelIdValue { get; set; }
 	private string ModelTextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field ValueValue { get; set; }
 
 	public TextExpansionQueryDescriptor<TDocument> QueryName(string? queryName)
 	{
@@ -80,6 +172,18 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	public TextExpansionQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
 		return Self;
 	}
 
@@ -101,26 +205,12 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	public TextExpansionQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Field value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	public TextExpansionQueryDescriptor<TDocument> Value<TValue>(Expression<Func<TDocument, TValue>> value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
 		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
@@ -138,8 +228,7 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		writer.WriteStringValue(ModelIdValue);
 		writer.WritePropertyName("model_text");
 		writer.WriteStringValue(ModelTextValue);
-		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
+		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
@@ -148,15 +237,22 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 {
 	internal TextExpansionQueryDescriptor(Action<TextExpansionQueryDescriptor> configure) => configure.Invoke(this);
 
-	public TextExpansionQueryDescriptor() : base()
+	internal TextExpansionQueryDescriptor() : base()
 	{
+	}
+
+	public TextExpansionQueryDescriptor(Field field)
+	{
+		if (field is null)
+			throw new ArgumentNullException(nameof(field));
+		FieldValue = field;
 	}
 
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string ModelIdValue { get; set; }
 	private string ModelTextValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field ValueValue { get; set; }
 
 	public TextExpansionQueryDescriptor QueryName(string? queryName)
 	{
@@ -167,6 +263,24 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 	public TextExpansionQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
 		return Self;
 	}
 
@@ -188,35 +302,12 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	public TextExpansionQueryDescriptor Value(Elastic.Clients.Elasticsearch.Field value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	public TextExpansionQueryDescriptor Value<TDocument, TValue>(Expression<Func<TDocument, TValue>> value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the rank features field to search against</para>
-	/// </summary>
-	public TextExpansionQueryDescriptor Value<TDocument>(Expression<Func<TDocument, object>> value)
-	{
-		ValueValue = value;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
 		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
@@ -234,8 +325,7 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		writer.WriteStringValue(ModelIdValue);
 		writer.WritePropertyName("model_text");
 		writer.WriteStringValue(ModelTextValue);
-		writer.WritePropertyName("value");
-		JsonSerializer.Serialize(writer, ValueValue, options);
+		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
