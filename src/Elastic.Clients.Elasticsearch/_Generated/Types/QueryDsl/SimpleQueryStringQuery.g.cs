@@ -43,6 +43,8 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields? Fields { get; set; }
+	[JsonInclude, JsonPropertyName("flags")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? Flags { get; set; }
 	[JsonInclude, JsonPropertyName("fuzzy_max_expansions")]
 	public int? FuzzyMaxExpansions { get; set; }
 	[JsonInclude, JsonPropertyName("fuzzy_prefix_length")]
@@ -78,6 +80,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private Fields? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
 	private bool? FuzzyTranspositionsValue { get; set; }
@@ -125,6 +128,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	public SimpleQueryStringQueryDescriptor<TDocument> Fields(Fields? fields)
 	{
 		FieldsValue = fields;
+		return Self;
+	}
+
+	public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+	{
+		FlagsValue = flags;
 		return Self;
 	}
 
@@ -215,6 +224,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
+		if (FlagsValue is not null)
+		{
+			writer.WritePropertyName("flags");
+			JsonSerializer.Serialize(writer, FlagsValue, options);
+		}
+
 		if (FuzzyMaxExpansionsValue.HasValue)
 		{
 			writer.WritePropertyName("fuzzy_max_expansions");
@@ -272,6 +287,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private Fields? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
 	private bool? FuzzyTranspositionsValue { get; set; }
@@ -319,6 +335,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	public SimpleQueryStringQueryDescriptor Fields(Fields? fields)
 	{
 		FieldsValue = fields;
+		return Self;
+	}
+
+	public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+	{
+		FlagsValue = flags;
 		return Self;
 	}
 
@@ -407,6 +429,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("fields");
 			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FlagsValue is not null)
+		{
+			writer.WritePropertyName("flags");
+			JsonSerializer.Serialize(writer, FlagsValue, options);
 		}
 
 		if (FuzzyMaxExpansionsValue.HasValue)

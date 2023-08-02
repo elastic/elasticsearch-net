@@ -19,6 +19,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Core;
@@ -542,6 +543,172 @@ internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
 		}
 
 		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(SimpleQueryStringFlagsConverter))]
+[Flags]
+public enum SimpleQueryStringFlags
+{
+	[EnumMember(Value = "WHITESPACE")]
+	Whitespace = 1 << 0,
+	[EnumMember(Value = "SLOP")]
+	Slop = 1 << 1,
+	[EnumMember(Value = "PREFIX")]
+	Prefix = 1 << 2,
+	[EnumMember(Value = "PRECEDENCE")]
+	Precedence = 1 << 3,
+	[EnumMember(Value = "PHRASE")]
+	Phrase = 1 << 4,
+	[EnumMember(Value = "OR")]
+	Or = 1 << 5,
+	[EnumMember(Value = "NOT")]
+	Not = 1 << 6,
+	[EnumMember(Value = "NONE")]
+	None = 1 << 7,
+	[EnumMember(Value = "NEAR")]
+	Near = 1 << 8,
+	[EnumMember(Value = "FUZZY")]
+	Fuzzy = 1 << 9,
+	[EnumMember(Value = "ESCAPE")]
+	Escape = 1 << 10,
+	[EnumMember(Value = "AND")]
+	And = 1 << 11,
+	[EnumMember(Value = "ALL")]
+	All = 1 << 12
+}
+
+internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQueryStringFlags>
+{
+	public override SimpleQueryStringFlags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var s = reader.GetString();
+		if (string.IsNullOrEmpty(s))
+		{
+			return default;
+		}
+
+		var flags = s.Split('|');
+		var result = default(SimpleQueryStringFlags);
+		foreach (var flag in flags)
+		{
+			result |= flag switch
+			{
+				"WHITESPACE" => SimpleQueryStringFlags.Whitespace,
+				"SLOP" => SimpleQueryStringFlags.Slop,
+				"PREFIX" => SimpleQueryStringFlags.Prefix,
+				"PRECEDENCE" => SimpleQueryStringFlags.Precedence,
+				"PHRASE" => SimpleQueryStringFlags.Phrase,
+				"OR" => SimpleQueryStringFlags.Or,
+				"NOT" => SimpleQueryStringFlags.Not,
+				"NONE" => SimpleQueryStringFlags.None,
+				"NEAR" => SimpleQueryStringFlags.Near,
+				"FUZZY" => SimpleQueryStringFlags.Fuzzy,
+				"ESCAPE" => SimpleQueryStringFlags.Escape,
+				"AND" => SimpleQueryStringFlags.And,
+				"ALL" => SimpleQueryStringFlags.All,
+				_ => throw new JsonException($"Invalid flag value '{flag}' for type '{typeToConvert.Name}'.")
+			};
+		}
+
+		return result;
+	}
+
+	public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlags value, JsonSerializerOptions options)
+	{
+		if (value == default)
+		{
+			writer.WriteStringValue(string.Empty);
+			return;
+		}
+
+		var sb = new StringBuilder();
+		if (value.HasFlag(SimpleQueryStringFlags.Whitespace))
+		{
+			sb.Append("WHITESPACE|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Slop))
+		{
+			sb.Append("SLOP|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Prefix))
+		{
+			sb.Append("PREFIX|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Precedence))
+		{
+			sb.Append("PRECEDENCE|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Phrase))
+		{
+			sb.Append("PHRASE|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Or))
+		{
+			sb.Append("OR|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Not))
+		{
+			sb.Append("NOT|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.None))
+		{
+			sb.Append("NONE|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Near))
+		{
+			sb.Append("NEAR|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Fuzzy))
+		{
+			sb.Append("FUZZY|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.Escape))
+		{
+			sb.Append("ESCAPE|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.And))
+		{
+			sb.Append("AND|");
+			return;
+		}
+
+		if (value.HasFlag(SimpleQueryStringFlags.All))
+		{
+			sb.Append("ALL|");
+			return;
+		}
+
+		if (sb.Length == 0)
+		{
+			writer.WriteStringValue(string.Empty);
+			return;
+		}
+
+		sb.Remove(sb.Length - 1, 1);
+		writer.WriteStringValue(sb.ToString());
 	}
 }
 
