@@ -1,0 +1,7 @@
+[[release-notes-8.9.1]]
+== Release notes v8.9.1
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7864[#7864] Fix `TextExpansionQuery` definition
