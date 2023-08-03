@@ -624,83 +624,31 @@ internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQuer
 
 		var sb = new StringBuilder();
 		if (value.HasFlag(SimpleQueryStringFlags.Whitespace))
-		{
 			sb.Append("WHITESPACE|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Slop))
-		{
 			sb.Append("SLOP|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Prefix))
-		{
 			sb.Append("PREFIX|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Precedence))
-		{
 			sb.Append("PRECEDENCE|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Phrase))
-		{
 			sb.Append("PHRASE|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Or))
-		{
 			sb.Append("OR|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Not))
-		{
 			sb.Append("NOT|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.None))
-		{
 			sb.Append("NONE|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Near))
-		{
 			sb.Append("NEAR|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Fuzzy))
-		{
 			sb.Append("FUZZY|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.Escape))
-		{
 			sb.Append("ESCAPE|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.And))
-		{
 			sb.Append("AND|");
-			return;
-		}
-
 		if (value.HasFlag(SimpleQueryStringFlags.All))
-		{
 			sb.Append("ALL|");
-			return;
-		}
-
 		if (sb.Length == 0)
 		{
 			writer.WriteStringValue(string.Empty);
