@@ -138,7 +138,7 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 
 				if (property == "indexing.slowlog")
 				{
-					variant.IndexingSlowlog = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings?>(ref reader, options);
+					variant.IndexingSlowlog = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings?>(ref reader, options);
 					continue;
 				}
 
@@ -778,7 +778,7 @@ public sealed partial class IndexSettings
 	/// <para>Configure indexing back pressure limits.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressure { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlog { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? IndexingSlowlog { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? Lifecycle { get; set; }
 	public bool? LoadFixedBitsetFiltersEagerly { get; set; }
 
@@ -877,9 +877,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
-	private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
-	private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? IndexingSlowlogValue { get; set; }
+	private IndexingSlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
+	private Action<IndexingSlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
 	private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
 	private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
@@ -1204,7 +1204,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? indexingSlowlog)
+	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? indexingSlowlog)
 	{
 		IndexingSlowlogDescriptor = null;
 		IndexingSlowlogDescriptorAction = null;
@@ -1212,7 +1212,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(SlowlogSettingsDescriptor descriptor)
+	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(IndexingSlowlogSettingsDescriptor descriptor)
 	{
 		IndexingSlowlogValue = null;
 		IndexingSlowlogDescriptorAction = null;
@@ -1220,7 +1220,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Action<SlowlogSettingsDescriptor> configure)
+	public IndexSettingsDescriptor<TDocument> IndexingSlowlog(Action<IndexingSlowlogSettingsDescriptor> configure)
 	{
 		IndexingSlowlogValue = null;
 		IndexingSlowlogDescriptor = null;
@@ -1904,7 +1904,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		else if (IndexingSlowlogDescriptorAction is not null)
 		{
 			writer.WritePropertyName("indexing.slowlog");
-			JsonSerializer.Serialize(writer, new SlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new IndexingSlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
 		}
 		else if (IndexingSlowlogValue is not null)
 		{
@@ -2325,9 +2325,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? IndexingSlowlogValue { get; set; }
-	private SlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
-	private Action<SlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? IndexingSlowlogValue { get; set; }
+	private IndexingSlowlogSettingsDescriptor IndexingSlowlogDescriptor { get; set; }
+	private Action<IndexingSlowlogSettingsDescriptor> IndexingSlowlogDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle? LifecycleValue { get; set; }
 	private IndexSettingsLifecycleDescriptor LifecycleDescriptor { get; set; }
 	private Action<IndexSettingsLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
@@ -2652,7 +2652,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
-	public IndexSettingsDescriptor IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? indexingSlowlog)
+	public IndexSettingsDescriptor IndexingSlowlog(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogSettings? indexingSlowlog)
 	{
 		IndexingSlowlogDescriptor = null;
 		IndexingSlowlogDescriptorAction = null;
@@ -2660,7 +2660,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
-	public IndexSettingsDescriptor IndexingSlowlog(SlowlogSettingsDescriptor descriptor)
+	public IndexSettingsDescriptor IndexingSlowlog(IndexingSlowlogSettingsDescriptor descriptor)
 	{
 		IndexingSlowlogValue = null;
 		IndexingSlowlogDescriptorAction = null;
@@ -2668,7 +2668,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
-	public IndexSettingsDescriptor IndexingSlowlog(Action<SlowlogSettingsDescriptor> configure)
+	public IndexSettingsDescriptor IndexingSlowlog(Action<IndexingSlowlogSettingsDescriptor> configure)
 	{
 		IndexingSlowlogValue = null;
 		IndexingSlowlogDescriptor = null;
@@ -3352,7 +3352,7 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		else if (IndexingSlowlogDescriptorAction is not null)
 		{
 			writer.WritePropertyName("indexing.slowlog");
-			JsonSerializer.Serialize(writer, new SlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new IndexingSlowlogSettingsDescriptor(IndexingSlowlogDescriptorAction), options);
 		}
 		else if (IndexingSlowlogValue is not null)
 		{

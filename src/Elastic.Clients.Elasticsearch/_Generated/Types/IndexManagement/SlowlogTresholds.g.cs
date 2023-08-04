@@ -31,12 +31,6 @@ public sealed partial class SlowlogTresholds
 {
 	[JsonInclude, JsonPropertyName("fetch")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Fetch { get; set; }
-
-	/// <summary>
-	/// <para>The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.json`.<br/>Log and the thresholds are configured in the same way as the search slowlog.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Index { get; set; }
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Query { get; set; }
 }
@@ -52,9 +46,6 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? FetchValue { get; set; }
 	private SlowlogTresholdLevelsDescriptor FetchDescriptor { get; set; }
 	private Action<SlowlogTresholdLevelsDescriptor> FetchDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? IndexValue { get; set; }
-	private SlowlogTresholdLevelsDescriptor IndexDescriptor { get; set; }
-	private Action<SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? QueryValue { get; set; }
 	private SlowlogTresholdLevelsDescriptor QueryDescriptor { get; set; }
 	private Action<SlowlogTresholdLevelsDescriptor> QueryDescriptorAction { get; set; }
@@ -80,33 +71,6 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		FetchValue = null;
 		FetchDescriptor = null;
 		FetchDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.json`.<br/>Log and the thresholds are configured in the same way as the search slowlog.</para>
-	/// </summary>
-	public SlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? index)
-	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
-	}
-
-	public SlowlogTresholdsDescriptor Index(SlowlogTresholdLevelsDescriptor descriptor)
-	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
-	}
-
-	public SlowlogTresholdsDescriptor Index(Action<SlowlogTresholdLevelsDescriptor> configure)
-	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
 		return Self;
 	}
 
@@ -151,22 +115,6 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("fetch");
 			JsonSerializer.Serialize(writer, FetchValue, options);
-		}
-
-		if (IndexDescriptor is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new SlowlogTresholdLevelsDescriptor(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (QueryDescriptor is not null)
