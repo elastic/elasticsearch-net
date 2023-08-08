@@ -25,23 +25,15 @@ public abstract class NamespacedClientProxy
 
 	internal NamespacedClientProxy(ElasticsearchClient client) => _client = client;
 
-	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		TRequestParameters parameters,
-		Action<IRequestConfiguration>? forceConfiguration = null)
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
-	{
-		if (_client is null)
-			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
-
-		return _client.DoRequest<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration);
-	}
+			=> DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		Action<IRequestConfiguration>? forceConfiguration = null)
+		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
@@ -58,30 +50,10 @@ public abstract class NamespacedClientProxy
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
-	{
-		if (_client is null)
-			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
-
-		return _client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, cancellationToken: cancellationToken);
-	}
+			=> DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, null, cancellationToken);
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		TRequestParameters parameters,
-		CancellationToken cancellationToken = default)
-		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : RequestParameters, new()
-	{
-		if (_client is null)
-			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
-
-		return _client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, cancellationToken: cancellationToken);
-	}
-
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		TRequestParameters parameters,
 		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
@@ -91,6 +63,6 @@ public abstract class NamespacedClientProxy
 		if (_client is null)
 			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
 
-		return _client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, parameters, forceConfiguration, cancellationToken);
+		return _client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, forceConfiguration, cancellationToken);
 	}
 }
