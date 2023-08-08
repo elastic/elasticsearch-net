@@ -97,7 +97,7 @@ public partial class ElasticsearchClient
 		where TRequestParameters : RequestParameters, new() =>
 			DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
-	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
@@ -115,6 +115,7 @@ public partial class ElasticsearchClient
 		if (_productCheckStatus == ProductCheckStatus.NotChecked)
 		{
 			requestModified = true;
+
 			if (request.RequestParameters.RequestConfiguration is null)
 			{
 				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
@@ -139,7 +140,7 @@ public partial class ElasticsearchClient
 
 		TResponse response;
 
-		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} /{urlTemplate}", ActivityKind.Client))
+		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
 		{
 			activity?.SetTag("db.system", "elasticsearch");
 			activity?.SetCustomProperty("elastic.transport.client", true);
@@ -228,12 +229,12 @@ public partial class ElasticsearchClient
 		{
 			TResponse response;
 
-			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} /{urlTemplate}", ActivityKind.Client))
+			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
 			{
 				activity?.AddTag("db.system", "elasticsearch");
 				activity?.SetCustomProperty("elastic.transport.client", true);
 
-				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken).ConfigureAwait(false);
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
 
 				if (response.ApiCallDetails.RequestBodyInBytes is not null)
 					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
