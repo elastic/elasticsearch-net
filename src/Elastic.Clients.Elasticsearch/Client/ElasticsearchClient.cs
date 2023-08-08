@@ -233,7 +233,7 @@ public partial class ElasticsearchClient
 				activity?.AddTag("db.system", "elasticsearch");
 				activity?.SetCustomProperty("elastic.transport.client", true);
 
-				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken).ConfigureAwait(false);
 
 				if (response.ApiCallDetails.RequestBodyInBytes is not null)
 					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
