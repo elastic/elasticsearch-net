@@ -76,10 +76,8 @@ public partial class ElasticsearchClient
 
 	public IElasticsearchClientSettings ElasticsearchClientSettings => _transport.Settings;
 	public Inferrer Infer => _transport.Settings.Inferrer;
-
 	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
 	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
-
 	public HttpTransport Transport => _transport;
 
 	private ProductCheckStatus _productCheckStatus;
@@ -93,83 +91,15 @@ public partial class ElasticsearchClient
 
 	private partial void SetupNamespaces();
 
-	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		TRequestParameters? parameters,
-		Action<IRequestConfiguration>? forceConfiguration = null)
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : RequestParameters, new()
-	{
-		if (_productCheckStatus == ProductCheckStatus.Failed)
-			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-		var requestModified = false;
-		var hadRequestConfig = false;
-		HeadersList? originalHeaders = null;
-
-		// If we have not yet checked the product name, add the product header to the list of headers to parse.
-		if (_productCheckStatus == ProductCheckStatus.NotChecked)
-		{
-			requestModified = true;
-			if (request.RequestParameters.RequestConfiguration is null)
-			{
-				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
-			}
-			else
-			{
-				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
-				hadRequestConfig = true;
-			}
-
-			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
-			}
-			else
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
-			}
-		}
-
-		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
-
-		TResponse response;
-
-		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
-		{
-			activity?.SetTag("db.system", "elasticsearch");
-			activity?.SetCustomProperty("elastic.transport.client", true);
-
-			response = _transport.Request<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters);
-
-			if (response.ApiCallDetails.RequestBodyInBytes is not null)
-				activity?.SetTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
-		}
-
-		PostRequestProductCheck<TRequest, TResponse>(request, response);
-
-		if (_productCheckStatus == ProductCheckStatus.Failed)
-			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-		if (requestModified)
-		{
-			if (!hadRequestConfig)
-			{
-				request.RequestParameters.RequestConfiguration = null;
-			}
-			else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
-			}
-		}
-
-		return response;
-	}
+		where TRequestParameters : RequestParameters, new() =>
+			DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		Action<IRequestConfiguration>? forceConfiguration = null)
+		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
@@ -242,7 +172,15 @@ public partial class ElasticsearchClient
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
-		RequestParameters? parameters,
+		CancellationToken cancellationToken = default)
+		where TRequest : Request<TRequestParameters>
+		where TResponse : ElasticsearchResponse, new()
+		where TRequestParameters : RequestParameters, new()
+			=> DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, null, cancellationToken);
+
+	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
+		TRequest request,
+		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : ElasticsearchResponse, new()
@@ -280,12 +218,11 @@ public partial class ElasticsearchClient
 			}
 		}
 
-		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
+		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, forceConfiguration);
 
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters, cancellationToken);
-
-		return SendRequest(request, parameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
+		return _productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners()
+			? _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, cancellationToken)
+			: SendRequest(request, request.RequestParameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
 
 		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
 		{
@@ -296,173 +233,7 @@ public partial class ElasticsearchClient
 				activity?.AddTag("db.system", "elasticsearch");
 				activity?.SetCustomProperty("elastic.transport.client", true);
 
-				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
-
-				if (response.ApiCallDetails.RequestBodyInBytes is not null)
-					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
-			}
-
-			PostRequestProductCheck<TRequest, TResponse>(request, response);
-
-			if (_productCheckStatus == ProductCheckStatus.Failed)
-				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-			if (request.RequestParameters.RequestConfiguration is not null)
-			{
-				if (!hadRequestConfig)
-				{
-					request.RequestParameters.RequestConfiguration = null;
-				}
-				else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
-				{
-					request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
-				}
-			}
-
-			return response;
-		}
-	}
-
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		CancellationToken cancellationToken = default)
-		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : RequestParameters, new()
-	{
-		if (_productCheckStatus == ProductCheckStatus.Failed)
-			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-		var requestModified = false;
-		var hadRequestConfig = false;
-		HeadersList? originalHeaders = null;
-
-		// If we have not yet checked the product name, add the product header to the list of headers to parse.
-		if (_productCheckStatus == ProductCheckStatus.NotChecked)
-		{
-			requestModified = true;
-
-			if (request.RequestParameters.RequestConfiguration is null)
-			{
-				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
-			}
-			else
-			{
-				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
-				hadRequestConfig = true;
-			}
-
-			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
-			}
-			else
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
-			}
-		}
-
-		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
-
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, request.RequestParameters, cancellationToken);
-
-		return SendRequest(request, request.RequestParameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
-
-		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
-		{
-			TResponse response;
-
-			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
-			{
-				activity?.AddTag("db.system", "elasticsearch");				
-				activity?.SetCustomProperty("elastic.transport.client", true);
-
-				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
-
-				if (response.ApiCallDetails.RequestBodyInBytes is not null)
-					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
-			}
-
-			PostRequestProductCheck<TRequest, TResponse>(request, response);
-
-			if (_productCheckStatus == ProductCheckStatus.Failed)
-				throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-			if (request.RequestParameters.RequestConfiguration is not null)
-			{
-				if (!hadRequestConfig)
-				{
-					request.RequestParameters.RequestConfiguration = null;
-				}
-				else if (originalHeaders.HasValue && originalHeaders.Value.Count > 0)
-				{
-					request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = originalHeaders.Value;
-				}
-			}
-
-			return response;
-		}
-	}
-
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		RequestParameters? parameters,
-		Action<IRequestConfiguration>? forceConfiguration = null,
-		CancellationToken cancellationToken = default)
-		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
-		where TRequestParameters : RequestParameters, new()
-	{
-		if (_productCheckStatus == ProductCheckStatus.Failed)
-			throw new UnsupportedProductException(UnsupportedProductException.InvalidProductError);
-
-		var requestModified = false;
-		var hadRequestConfig = false;
-		HeadersList? originalHeaders = null;
-
-		// If we have not yet checked the product name, add the product header to the list of headers to parse.
-		if (_productCheckStatus == ProductCheckStatus.NotChecked)
-		{
-			requestModified = true;
-
-			if (request.RequestParameters.RequestConfiguration is null)
-			{
-				request.RequestParameters.RequestConfiguration = new RequestConfiguration();
-			}
-			else
-			{
-				originalHeaders = request.RequestParameters.RequestConfiguration.ResponseHeadersToParse;
-				hadRequestConfig = true;
-			}
-
-			if (request.RequestParameters.RequestConfiguration.ResponseHeadersToParse.Count == 0)
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList("x-elastic-product");
-			}
-			else
-			{
-				request.RequestParameters.RequestConfiguration.ResponseHeadersToParse = new HeadersList(request.RequestParameters.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product");
-			}
-		}
-
-		var (resolvedUrl, urlTemplate, postData) = PrepareRequest<TRequest, TRequestParameters>(request, null);
-
-		if (_productCheckStatus == ProductCheckStatus.Succeeded && !requestModified && !_activitySource.HasListeners())
-			return _transport.RequestAsync<TResponse>(request.HttpMethod, resolvedUrl, postData, parameters, cancellationToken);
-
-		return SendRequest(request, parameters, resolvedUrl, postData, hadRequestConfig, originalHeaders);
-
-		async Task<TResponse> SendRequest(TRequest request, RequestParameters? parameters, string url, PostData postData, bool hadRequestConfig, HeadersList? originalHeaders)
-		{
-			TResponse response;
-
-			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
-			{
-				activity?.AddTag("db.system", "elasticsearch");
-				activity?.SetCustomProperty("elastic.transport.client", true);
-
-				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters).ConfigureAwait(false);
+				response = await _transport.RequestAsync<TResponse>(request.HttpMethod, url, postData, parameters, cancellationToken).ConfigureAwait(false);
 
 				if (response.ApiCallDetails.RequestBodyInBytes is not null)
 					activity?.AddTag("db.statement", System.Text.Encoding.UTF8.GetString(response.ApiCallDetails.RequestBodyInBytes));
