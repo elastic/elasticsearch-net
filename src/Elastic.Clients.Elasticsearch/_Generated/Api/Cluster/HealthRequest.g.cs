@@ -106,6 +106,8 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "cluster.health";
+
 	/// <summary>
 	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
 	/// </summary>
@@ -190,6 +192,8 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "cluster.health";
+
 	public HealthRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public HealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
 	public HealthRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
@@ -229,6 +233,8 @@ public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "cluster.health";
 
 	public HealthRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public HealthRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);

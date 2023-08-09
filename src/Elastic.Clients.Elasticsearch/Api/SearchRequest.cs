@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using Elastic.Clients.Elasticsearch.Requests;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -17,7 +18,7 @@ public partial class SearchRequest
 		}
 	}
 
-	protected override (string ResolvedUrl, string UrlTemplate) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
+	protected override (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
 		if (Pit is not null && !string.IsNullOrEmpty(Pit.Id ?? string.Empty) && routeValues.ContainsKey("index"))
 		{
@@ -61,7 +62,7 @@ public sealed partial class SearchRequestDescriptor<TDocument>
 		}
 	}
 
-	protected override (string ResolvedUrl, string UrlTemplate) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
+	protected override (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
 		if ((Self.PitValue is not null || Self.PitDescriptor is not null || Self.PitDescriptorAction is not null) && routeValues.ContainsKey("index"))
 		{
