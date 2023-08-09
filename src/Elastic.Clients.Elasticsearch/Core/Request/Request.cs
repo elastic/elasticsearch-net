@@ -5,6 +5,7 @@
 using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Diagnostics;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
@@ -54,6 +55,9 @@ public abstract class Request
 	internal virtual void BeforeRequest() { }
 
 	internal (string ResolvedUrl, string UrlTemplate) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
+
+	[JsonIgnore]
+	internal virtual string? OperationName { get; }
 }
 
 public abstract class Request<TParameters> : Request
