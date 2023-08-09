@@ -62,7 +62,7 @@ public sealed partial class PointInTimeReferenceDescriptor : SerializableDescrip
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("id");
-		JsonSerializer.Serialize(writer, IdValue, options);
+		writer.WriteStringValue(IdValue);
 		if (KeepAliveValue is not null)
 		{
 			writer.WritePropertyName("keep_alive");
