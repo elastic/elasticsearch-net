@@ -139,7 +139,7 @@ public partial class ElasticsearchClient
 
 		TResponse response;
 
-		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+		using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} /{urlTemplate}", ActivityKind.Client))
 		{
 			activity?.SetTag("db.system", "elasticsearch");
 			activity?.SetCustomProperty("elastic.transport.client", true);
@@ -228,7 +228,7 @@ public partial class ElasticsearchClient
 		{
 			TResponse response;
 
-			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} {urlTemplate}", ActivityKind.Client))
+			using (var activity = _activitySource.StartActivity($"Elasticsearch: {request.HttpMethod} /{urlTemplate}", ActivityKind.Client))
 			{
 				activity?.AddTag("db.system", "elasticsearch");
 				activity?.SetCustomProperty("elastic.transport.client", true);
