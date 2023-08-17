@@ -27,9 +27,9 @@ of the wider .NET community.
 ==== New Elastic.Clients.Elasticsearch NuGet package
 
 We have shipped the new code-generated client as a 
-https://www.nuget.org/packages/Elastic.Clients.Elasticsearch/[new NuGet package]
+https://www.nuget.org/packages/Elastic.Clients.Elasticsearch/[NuGet package]
 with a new root namespace, `Elastic.Clients.Elasticsearch`. 
-The new v8 client is built upon the foundations of the v7 `NEST` client, but there 
+The v8 client is built upon the foundations of the v7 `NEST` client, but there 
 are changes. By shipping as a new package, the expectation is that migration can 
 be managed with a phased approach.
 
