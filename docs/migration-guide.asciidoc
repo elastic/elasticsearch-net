@@ -246,12 +246,11 @@ via the v8 {net-client}.
 [discrete]
 ===== Interface removal
 
-We have removed several interfaces that previously shipped as part of `NEST`. This 
-is a design decision to simplify the library and avoid interfaces where only a 
+Several interfaces are removed to simplify the library and avoid interfaces where only a 
 single implementation of that interface is expected to exist, such as 
-`IElasticClient` in `NEST`. We have also switched to prefer abstract base classes 
-over interfaces across the library, as this allows us to add enhancements more 
-easily without introducing breaking changes for derived types.
+`IElasticClient` in `NEST`. Abstract base classes are preferred
+over interfaces across the library, as this makes it easier to add enhancements 
+without introducing breaking changes for derived types.
 
 [discrete]
 ==== Missing features
