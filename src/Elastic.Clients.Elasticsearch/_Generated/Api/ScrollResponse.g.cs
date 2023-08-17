@@ -47,6 +47,8 @@ public sealed partial class ScrollResponse<TDocument> : ElasticsearchResponse
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; init; }
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; init; }
+	[JsonInclude, JsonPropertyName("suggest")]
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; init; }
 	[JsonInclude, JsonPropertyName("terminated_early")]
 	public bool? TerminatedEarly { get; init; }
 	[JsonInclude, JsonPropertyName("timed_out")]
