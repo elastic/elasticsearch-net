@@ -148,7 +148,7 @@ testing against real {es} instances.
 [WARNING]
 --
 The version 8 client does not currently have full-feature parity with `NEST`. The 
-client primary use case is for application developers communitating with {es}.
+client primary use case is for application developers communicating with {es}.
 -- 
 
 The version 8 client focuses on core endpoints, more specifically for common CRUD 
