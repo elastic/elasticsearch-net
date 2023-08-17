@@ -224,8 +224,8 @@ extension of types that could inadvertently be broken in the future.
 [discrete]
 ==== Removed features
 
-As part of the clean-slate redesign of the new client, we have opted to remove 
-certain features from the v8.0 client. These are listed below:
+As part of the clean-slate redesign of the new client,
+certain features are removed from the v8.0 client. These are listed below:
 
 [discrete]
 ===== Attribute mappings
