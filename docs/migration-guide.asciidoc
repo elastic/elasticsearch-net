@@ -155,9 +155,7 @@ The version 8 client focuses on core endpoints, more specifically for common CRU
 scenarios. The intention is to reduce the feature gap in subsequent versions. Review this documentation carefully to learn about the missing features and reduced API surface details before migrating from the v7 `NEST` client!
 
 The choice to code-generate a new evolution of the {net-client} introduces some 
-significant breaking changes. We consciously took the opportunity to refactor 
-and reconsider historic design choices as part of this major release, intending 
-to limit future breaking changes.
+significant breaking changes.
 
 The v8 client is shipped as a new https://www.nuget.org/packages/Elastic.Clients.Elasticsearch/[NuGet package] 
 which can be installed alongside v7 `NEST`. We  
