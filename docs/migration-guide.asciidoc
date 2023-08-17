@@ -128,7 +128,7 @@ that consumers prefer introducing an abstraction for their use of the {net-clien
 as the prefered way to decouple consuming code from client types and support unit 
 testing. 
 
-In order to support user testing scenarios, we have unsealed the `ElasticsearchClient` 
+To support user testing scenarios, we have unsealed the `ElasticsearchClient` 
 type and made its methods virtual. This supports mocking the type directly for unit 
 testing. This is an improvement over the original `IElasticClient` interface from
 `NEST` (v7) which only supported mocking of top-level client methods.
