@@ -152,7 +152,7 @@ client primary use case is for application developers communicating with {es}.
 -- 
 
 The version 8 client focuses on core endpoints, more specifically for common CRUD 
-scenarios. We intend to reduce the feature gap in subsequent versions. We recommend reviewing this documentation carefully to learn about the missing features and reduced API surface details before migrating from the v7 `NEST` client.
+scenarios. The intention is to reduce the feature gap in subsequent versions. Review this documentation carefully to learn about the missing features and reduced API surface details before migrating from the v7 `NEST` client!
 
 The choice to code-generate a new evolution of the {net-client} introduces some 
 significant breaking changes. We consciously took the opportunity to refactor 
