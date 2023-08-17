@@ -60,7 +60,7 @@ help us prioritise our roadmap.
 
 Given the size of the {es} API surface today, it is no longer practical 
 to maintain thousands of types (requests, responses, queries, aggregations, etc.) 
-by hand. To ensure consistent, accurate and timely alignment between language 
+by hand. To ensure consistent, accurate, and timely alignment between language 
 clients and {es}, the 8.x clients, and many of the associated types are now 
 automatically code-generated from a https://github.com/elastic/elasticsearch-specification[shared specification]. This is a common solution to maintaining alignment between 
 client and server among SDKs and libraries, such as those for Azure, AWS and the 
