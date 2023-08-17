@@ -231,9 +231,9 @@ certain features are removed from the v8.0 client. These are listed below:
 ===== Attribute mappings
 
 In previous versions of the `NEST` client, attributes could be used to configure 
-the mapping behaviour and inference for user types. We have removed support for
-these attributes and recommend that mapping be completed via the fluent API when 
-configuring client instances. `System.Text.Json` attributes may be used to rename 
+the mapping behaviour and inference for user types. It is recommended that 
+mapping be completed via the fluent API when configuring client instances. 
+`System.Text.Json` attributes may be used to rename 
 and ignore properties during source serialization.
 
 [discrete]
