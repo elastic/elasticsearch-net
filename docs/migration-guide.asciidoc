@@ -51,7 +51,7 @@ high-level client.
 --
 
 If a feature you depend on is missing (and not explicitly documented below as a 
-feature that we do not plan to reintroduce), please open https://github.com/elastic/elasticsearch-net/issues/new/choose[an issue] 
+feature that we do not plan to reintroduce), open https://github.com/elastic/elasticsearch-net/issues/new/choose[an issue] 
 or comment on a relevant existing issue to highlight your need to us. This will 
 help us prioritise our roadmap.
 
