@@ -273,11 +273,10 @@ in future releases.
 [discrete]
 === Reduced API surface
 
-In the current versions of the code-generated .NET client, we have specifically 
-focused on supporting commonly used endpoints. We have also skipped specific 
-queries and aggregations which need further work to generate code correctly. 
-Before migrating, please ensure that the features you are using are currently 
-supported.
+In the current versions of the code-generated .NET client, supporting commonly used 
+endpoints is critical. Some specific queries and aggregations need further work to generate code correctly, 
+hence they are not included yet. 
+Ensure that the features you are using are currently supported before migrating.
 
 An up to date list of all supported and unsupported endpoints can be found on https://github.com/elastic/elasticsearch-net/issues/7890[GitHub].
 
