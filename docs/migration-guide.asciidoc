@@ -58,7 +58,7 @@ help us prioritise our roadmap.
 [discrete]
 === Code generation
 
-Given the size of the Elasticsearch API surface today, it is no longer practical 
+Given the size of the {es} API surface today, it is no longer practical 
 to maintain thousands of types (requests, responses, queries, aggregations, etc.) 
 by hand. To ensure consistent, accurate and timely alignment between language 
 clients and {es}, the 8.x clients, and many of the associated types are now 
