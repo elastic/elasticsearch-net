@@ -14,12 +14,11 @@ a new start for the client design. It is important to review how this may affect
 your code and usage. 
 --
 
-Mature code becomes increasingly hard to maintain over time, and 
-our ability to make timely releases has diminished as code complexity has increased. 
+Mature code becomes increasingly hard to maintain over time. 
 Major releases allow us to simplify and better align our language clients with 
-each other in terms of design. Here, it is crucial to find the right balance 
+each other in terms of design. It is crucial to find the right balance 
 between uniformity across programming languages and the idiomatic concerns of 
-each language. For .NET, we will typically compare and contrast with https://github.com/elastic/elasticsearch-java[Java] and https://github.com/elastic/go-elasticsearch[Go] 
+each language. For .NET, we typically compare and contrast with https://github.com/elastic/elasticsearch-java[Java] and https://github.com/elastic/go-elasticsearch[Go] 
 to make sure that our approach is equivalent for each of these. We also take 
 heavy inspiration from Microsoft framework design guidelines and the conventions 
 of the wider .NET community.
