@@ -253,9 +253,9 @@ without introducing breaking changes for derived types.
 [discrete]
 ==== Missing features
 
-While not an exhaustive list, the following are some of the main features which 
+The following are some of the main features which 
 have not been re-implemented for the v8 client. 
-These remain on our roadmap and will be reviewed and prioritized for inclusion in
+These might be reviewed and prioritized for inclusion in
 future releases.
 
 * Query DSL operators for combining queries.
