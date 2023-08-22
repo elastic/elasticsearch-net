@@ -158,8 +158,7 @@ The choice to code-generate a new evolution of the {net-client} introduces some
 significant breaking changes.
 
 The v8 client is shipped as a new https://www.nuget.org/packages/Elastic.Clients.Elasticsearch/[NuGet package] 
-which can be installed alongside v7 `NEST`. We  
-anticipate that some consumers may prefer a phased migration with both 
+which can be installed alongside v7 `NEST`. Some consumers may prefer a phased migration with both 
 packages side-by-side for a short period of time to manage complex migrations. In addition, `NEST` 7.17.x can continue to be used in 
 https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17/connecting-to-elasticsearch-v8.html[compatibility mode] 
 with {es} 8.x servers until the v8 {net-client} features 
