@@ -16,7 +16,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 public sealed partial class SuggestDictionary<TDocument> :
 	IsAReadOnlyDictionary<string, IReadOnlyCollection<ISuggest>>
 {
-	public SuggestDictionary(IReadOnlyDictionary<string, IReadOnlyCollection<ISuggest>> backingDictionary) :
+	internal SuggestDictionary(IReadOnlyDictionary<string, IReadOnlyCollection<ISuggest>> backingDictionary) :
 		base(backingDictionary)
 	{
 	}
