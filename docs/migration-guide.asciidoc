@@ -181,7 +181,7 @@ through code-generation are subject to change between `NEST` (v7) and the new
 [discrete]
 ==== Namespaces
 
-We have renamed the package and top-level namespace for the v8 client to 
+The package and top-level namespace for the v8 client have been renamed to 
 `Elastic.Clients.Elasticsearch`. All types belong to this namespace. When 
 necessary, to avoid potential conflicts, types are generated into suitable 
 sub-namespaces based on the https://github.com/elastic/elasticsearch-specification[{es} specification]. Additional `using` directives may be required to access such types 
