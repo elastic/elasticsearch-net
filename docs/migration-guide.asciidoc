@@ -1,5 +1,5 @@
 [[migration-guide]]
-== Migration guide NEST -> v8.*
+== Migration guide: From NEST v7 to .NET Client v8
 
 The following migration guide explains the current state of the client, missing 
 features, breaking changes and our rationale for some of the design choices we have introduced.
