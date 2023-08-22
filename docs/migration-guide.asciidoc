@@ -193,8 +193,7 @@ namespace.
 [discrete]
 ==== Type names
 
-Type names may have changed from previous versions. We are not listing these 
-explicitly due to the potentially vast number of subtle differences. 
+Type names may have changed from previous versions. These are not listed explicitly due to the potentially vast number of subtle differences. 
 Type names will now more closely align to those used in the JSON and as documented 
 in the {es} documentation.
 
