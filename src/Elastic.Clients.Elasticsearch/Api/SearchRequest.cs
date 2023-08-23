@@ -11,7 +11,7 @@ public partial class SearchRequest
 {
 	internal override void BeforeRequest()
 	{
-		if (Aggregations is not null)
+		if (Aggregations is not null || Suggest is not null)
 		{
 			TypedKeys = true;
 		}
@@ -54,7 +54,8 @@ public sealed partial class SearchRequestDescriptor<TDocument>
 
 	internal override void BeforeRequest()
 	{
-		if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null)
+		if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null ||
+		    SuggestValue is not null || SuggestDescriptor is not null || SuggestDescriptorAction is not null)
 		{
 			TypedKeys(true);
 		}
