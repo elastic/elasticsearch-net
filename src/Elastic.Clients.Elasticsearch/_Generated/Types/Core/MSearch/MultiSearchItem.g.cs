@@ -51,6 +51,8 @@ public sealed partial class MultiSearchItem<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public int? Status { get; init; }
+	[JsonInclude, JsonPropertyName("suggest")]
+	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; init; }
 	[JsonInclude, JsonPropertyName("terminated_early")]
 	public bool? TerminatedEarly { get; init; }
 	[JsonInclude, JsonPropertyName("timed_out")]
