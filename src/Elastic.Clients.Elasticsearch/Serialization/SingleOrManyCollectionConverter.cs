@@ -16,4 +16,6 @@ internal class SingleOrManyCollectionConverter<TItem> : JsonConverter<ICollectio
 
 	public override void Write(Utf8JsonWriter writer, ICollection<TItem> value, JsonSerializerOptions options) => 
 		SingleOrManySerializationHelper.Serialize<TItem>(value, writer, options);
+
+	public override bool CanConvert(Type typeToConvert) => true;
 }
