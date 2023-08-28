@@ -22,6 +22,8 @@ include::client-concepts/client-concepts.asciidoc[]
 
 include::usage/index.asciidoc[]
 
+include::migration-guide.asciidoc[]
+
 include::troubleshooting.asciidoc[]
 
 include::redirects.asciidoc[]
