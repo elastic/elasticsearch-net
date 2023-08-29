@@ -31,11 +31,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.4.14, )",
-        "resolved": "0.4.14",
-        "contentHash": "EZSqu9xzkF3uY5XiOMExiWjeec+dl177hQ/qANrwCeb41A6K4cTwAeqLUVEu1E39n3/FNutPRwUOREwhd1VGLA==",
+        "requested": "[0.4.15, )",
+        "resolved": "0.4.15",
+        "contentHash": "JxPHmjHQnTQNdppNKfyrvUZoVq/q83Q921zyZ01qqfySKqkTrZQRUfeCu746SSf0xeeTuqFdCTpGN3CTwz2XqQ==",
         "dependencies": {
-          "Elastic.Transport": "0.4.14"
+          "Elastic.Transport": "0.4.15"
         }
       },
       "FSharp.Core": {
@@ -195,8 +195,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.14",
-        "contentHash": "VjfChM++MnfljqKnCN75h2huIlg7HkUgrc4VyLh8HMyMKPxaK9LrxbUH8xeDm7bIqEd/qSCeujatfwhfYEhD6w=="
+        "resolved": "0.4.15",
+        "contentHash": "XSuqHDVZ5Qd2A4g7JUa2zpYJaJgT2/dQUe3UdgcMXZ1NSrVTFHTE9pkTbf60l38JAlW38Ecfzve4H/YY7KG/2A=="
       },
       "EmptyFiles": {
         "type": "Transitive",
@@ -1478,7 +1478,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.14, )"
+          "Elastic.Transport": "[0.4.15, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
