@@ -100,8 +100,6 @@ public class DeleteByQueryRethrottleApiTests
 		task.Type.Should().NotBeNullOrEmpty();
 		task.Action.Should().NotBeNullOrEmpty();
 
-		task.Status.RequestsPerSecond.Should().Be(-1);
-
 		task.StartTimeInMillis.Should().BeGreaterThan(0);
 		task.RunningTimeInNanos.Should().BeGreaterThan(0);
 		task.Cancellable.Should().BeTrue();

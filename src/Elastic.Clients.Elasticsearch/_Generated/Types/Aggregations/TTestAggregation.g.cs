@@ -143,10 +143,21 @@ public sealed partial class TTestAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>Test population A.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
+
+	/// <summary>
+	/// <para>Test population B.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The type of test.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
 }
 
@@ -167,6 +178,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Test population A.</para>
+	/// </summary>
 	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
 	{
 		aDescriptor = null;
@@ -191,6 +205,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Test population B.</para>
+	/// </summary>
 	public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
 	{
 		bDescriptor = null;
@@ -221,6 +238,9 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The type of test.</para>
+	/// </summary>
 	public TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
 	{
 		TypeValue = type;
@@ -298,6 +318,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Test population A.</para>
+	/// </summary>
 	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
 	{
 		aDescriptor = null;
@@ -322,6 +345,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Test population B.</para>
+	/// </summary>
 	public TTestAggregationDescriptor b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
 	{
 		bDescriptor = null;
@@ -352,6 +378,9 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The type of test.</para>
+	/// </summary>
 	public TTestAggregationDescriptor Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
 	{
 		TypeValue = type;

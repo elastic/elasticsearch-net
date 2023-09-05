@@ -29,12 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class ClusterJvm
 {
+	/// <summary>
+	/// <para>Uptime duration, in milliseconds, since JVM last started.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_uptime_in_millis")]
 	public long MaxUptimeInMillis { get; init; }
+
+	/// <summary>
+	/// <para>Contains statistics about memory used by selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("mem")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; init; }
+
+	/// <summary>
+	/// <para>Number of active threads in use by JVM across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("threads")]
 	public long Threads { get; init; }
+
+	/// <summary>
+	/// <para>Contains statistics about the JVM versions used by selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("versions")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; init; }
 }

@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class AliasDefinition
 {
+	/// <summary>
+	/// <para>Query used to limit documents the alias can access.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
+
+	/// <summary>
+	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public string? IndexRouting { get; init; }
+
+	/// <summary>
+	/// <para>If `true`, the alias is hidden.<br/>All indices for the alias must have the same `is_hidden` value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; init; }
+
+	/// <summary>
+	/// <para>If `true`, the index is the write index for the alias.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; init; }
+
+	/// <summary>
+	/// <para>Value used to route indexing and search operations to a specific shard.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public string? Routing { get; init; }
+
+	/// <summary>
+	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public string? SearchRouting { get; init; }
 }

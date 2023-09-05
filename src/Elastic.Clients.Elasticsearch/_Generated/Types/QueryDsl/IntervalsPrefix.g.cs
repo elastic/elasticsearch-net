@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class IntervalsPrefix
 {
+	/// <summary>
+	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string Prefix { get; set; }
+
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -49,24 +60,36 @@ public sealed partial class IntervalsPrefixDescriptor<TDocument> : SerializableD
 	private string PrefixValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> Prefix(string prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
@@ -106,30 +129,45 @@ public sealed partial class IntervalsPrefixDescriptor : SerializableDescriptor<I
 	private string PrefixValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to analyze the `prefix`.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the top-level field.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor Prefix(string prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `prefix` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsPrefixDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
 	{
 		UseFieldValue = useField;

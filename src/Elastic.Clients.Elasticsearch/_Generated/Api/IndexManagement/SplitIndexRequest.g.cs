@@ -32,23 +32,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class SplitIndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Set the number of active shards to wait for on the shrunken index before the operation returns.</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// <para>Splits an existing index into a new index with more primary shards.</para>
 /// </summary>
 public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestParameters>
 {
@@ -63,30 +63,38 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 	internal override bool SupportsBody => true;
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Set the number of active shards to wait for on the shrunken index before the operation returns.</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	/// <summary>
+	/// <para>Aliases for the resulting index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+
+	/// <summary>
+	/// <para>Configuration options for the target index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
-/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// <para>Splits an existing index into a new index with more primary shards.</para>
 /// </summary>
 public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDescriptor<SplitIndexRequestDescriptor<TDocument>, SplitIndexRequestParameters>
 {
@@ -125,12 +133,18 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
+	/// <summary>
+	/// <para>Aliases for the resulting index.</para>
+	/// </summary>
 	public SplitIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
 		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration options for the target index.</para>
+	/// </summary>
 	public SplitIndexRequestDescriptor<TDocument> Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -157,7 +171,7 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
+/// <para>Splits an existing index into a new index with more primary shards.</para>
 /// </summary>
 public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<SplitIndexRequestDescriptor, SplitIndexRequestParameters>
 {
@@ -196,12 +210,18 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
+	/// <summary>
+	/// <para>Aliases for the resulting index.</para>
+	/// </summary>
 	public SplitIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
 		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration options for the target index.</para>
+	/// </summary>
 	public SplitIndexRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());

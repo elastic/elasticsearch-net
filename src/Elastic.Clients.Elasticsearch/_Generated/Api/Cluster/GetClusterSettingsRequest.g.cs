@@ -32,28 +32,28 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed class GetClusterSettingsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Whether to return all default clusters setting.</para>
+	/// <para>If `true`, returns default cluster settings from the local node.</para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster settings.</para>
+/// <para>Returns cluster-wide settings.<br/>By default, it returns only settings that have been explicitly defined.</para>
 /// </summary>
 public sealed partial class GetClusterSettingsRequest : PlainRequest<GetClusterSettingsRequestParameters>
 {
@@ -64,32 +64,32 @@ public sealed partial class GetClusterSettingsRequest : PlainRequest<GetClusterS
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Whether to return all default clusters setting.</para>
+	/// <para>If `true`, returns default cluster settings from the local node.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns cluster settings.</para>
+/// <para>Returns cluster-wide settings.<br/>By default, it returns only settings that have been explicitly defined.</para>
 /// </summary>
 public sealed partial class GetClusterSettingsRequestDescriptor : RequestDescriptor<GetClusterSettingsRequestDescriptor, GetClusterSettingsRequestParameters>
 {

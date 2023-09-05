@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed class PendingTasksRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
+/// <para>Returns cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet been executed.<br/>NOTE: This API returns a list of any pending updates to the cluster state.<br/>These are distinct from the tasks reported by the Task Management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.<br/>However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.</para>
 /// </summary>
 public sealed partial class PendingTasksRequest : PlainRequest<PendingTasksRequestParameters>
 {
@@ -54,20 +54,20 @@ public sealed partial class PendingTasksRequest : PlainRequest<PendingTasksReque
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
+/// <para>Returns cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet been executed.<br/>NOTE: This API returns a list of any pending updates to the cluster state.<br/>These are distinct from the tasks reported by the Task Management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.<br/>However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.</para>
 /// </summary>
 public sealed partial class PendingTasksRequestDescriptor : RequestDescriptor<PendingTasksRequestDescriptor, PendingTasksRequestParameters>
 {

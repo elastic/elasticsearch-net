@@ -122,7 +122,15 @@ public sealed partial class GeoBoundingBoxQuery : SearchQuery
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoBounds BoundingBox { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
+
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoBoundingBoxQuery geoBoundingBoxQuery) => QueryDsl.Query.GeoBoundingBox(geoBoundingBoxQuery);
@@ -157,12 +165,18 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;
@@ -252,12 +266,18 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;

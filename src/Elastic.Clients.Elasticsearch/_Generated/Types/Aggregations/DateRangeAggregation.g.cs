@@ -197,12 +197,32 @@ public sealed partial class DateRangeAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>The date format used to format `from` and `to` in the response.</para>
+	/// </summary>
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Array of date ranges.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
+
+	/// <summary>
+	/// <para>Time zone used to convert dates from another time zone to UTC.</para>
+	/// </summary>
 	public string? TimeZone { get; set; }
 }
 
@@ -251,18 +271,27 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date format used to format `from` and `to` in the response.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -275,12 +304,18 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Missing(FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of date ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 	{
 		RangesDescriptor = null;
@@ -317,6 +352,9 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time zone used to convert dates from another time zone to UTC.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;
@@ -455,24 +493,36 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date format used to format `from` and `to` in the response.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
@@ -485,12 +535,18 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Missing(FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of date ranges.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? ranges)
 	{
 		RangesDescriptor = null;
@@ -527,6 +583,9 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time zone used to convert dates from another time zone to UTC.</para>
+	/// </summary>
 	public DateRangeAggregationDescriptor TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;

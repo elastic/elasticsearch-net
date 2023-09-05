@@ -31,22 +31,42 @@ public sealed partial class CircleProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for `geo_shape`, unit-less for `shape`).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("error_distance")]
 	public double ErrorDistance { get; set; }
+
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Which field mapping type is to be used when processing the circle: `geo_shape` or `shape`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("shape_type")]
 	public Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -117,18 +137,27 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for `geo_shape`, unit-less for `shape`).</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> ErrorDistance(double errorDistance)
 	{
 		ErrorDistanceValue = errorDistance;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -147,12 +176,18 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Which field mapping type is to be used when processing the circle: `geo_shape` or `shape`.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType)
 	{
 		ShapeTypeValue = shapeType;
@@ -165,12 +200,18 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -321,24 +362,36 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for `geo_shape`, unit-less for `shape`).</para>
+	/// </summary>
 	public CircleProcessorDescriptor ErrorDistance(double errorDistance)
 	{
 		ErrorDistanceValue = errorDistance;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	public CircleProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	public CircleProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
 	public CircleProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -357,12 +410,18 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public CircleProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Which field mapping type is to be used when processing the circle: `geo_shape` or `shape`.</para>
+	/// </summary>
 	public CircleProcessorDescriptor ShapeType(Elastic.Clients.Elasticsearch.Ingest.ShapeType shapeType)
 	{
 		ShapeTypeValue = shapeType;
@@ -375,18 +434,27 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public CircleProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public CircleProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public CircleProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

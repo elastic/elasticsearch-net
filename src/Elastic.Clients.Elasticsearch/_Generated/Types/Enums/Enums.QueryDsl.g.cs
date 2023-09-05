@@ -134,8 +134,14 @@ internal sealed class CombinedFieldsOperatorConverter : JsonConverter<CombinedFi
 [JsonConverter(typeof(CombinedFieldsZeroTermsConverter))]
 public enum CombinedFieldsZeroTerms
 {
+	/// <summary>
+	/// <para>No documents are returned if the analyzer removes all tokens.</para>
+	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
+	/// <summary>
+	/// <para>Returns all documents, similar to a `match_all` query.</para>
+	/// </summary>
 	[EnumMember(Value = "all")]
 	All
 }
@@ -175,24 +181,54 @@ internal sealed class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedF
 [JsonConverter(typeof(FieldValueFactorModifierConverter))]
 public enum FieldValueFactorModifier
 {
+	/// <summary>
+	/// <para>Square the field value (multiply it by itself).</para>
+	/// </summary>
 	[EnumMember(Value = "square")]
 	Square,
+	/// <summary>
+	/// <para>Take the square root of the field value.</para>
+	/// </summary>
 	[EnumMember(Value = "sqrt")]
 	Sqrt,
+	/// <summary>
+	/// <para>Reciprocate the field value, same as `1/x` where `x` is the field’s value.</para>
+	/// </summary>
 	[EnumMember(Value = "reciprocal")]
 	Reciprocal,
+	/// <summary>
+	/// <para>Do not apply any multiplier to the field value.</para>
+	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
+	/// <summary>
+	/// <para>Add 2 to the field value and take the common logarithm.</para>
+	/// </summary>
 	[EnumMember(Value = "log2p")]
 	Log2p,
+	/// <summary>
+	/// <para>Add 1 to the field value and take the common logarithm.</para>
+	/// </summary>
 	[EnumMember(Value = "log1p")]
 	Log1p,
+	/// <summary>
+	/// <para>Take the common logarithm of the field value.<br/>Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use `log1p` instead.</para>
+	/// </summary>
 	[EnumMember(Value = "log")]
 	Log,
+	/// <summary>
+	/// <para>Add 2 to the field value and take the natural logarithm.</para>
+	/// </summary>
 	[EnumMember(Value = "ln2p")]
 	Ln2p,
+	/// <summary>
+	/// <para>Add 1 to the field value and take the natural logarithm.</para>
+	/// </summary>
 	[EnumMember(Value = "ln1p")]
 	Ln1p,
+	/// <summary>
+	/// <para>Take the natural logarithm of the field value.<br/>Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use `ln1p` instead.</para>
+	/// </summary>
 	[EnumMember(Value = "ln")]
 	Ln
 }
@@ -272,16 +308,34 @@ internal sealed class FieldValueFactorModifierConverter : JsonConverter<FieldVal
 [JsonConverter(typeof(FunctionBoostModeConverter))]
 public enum FunctionBoostMode
 {
+	/// <summary>
+	/// <para>Query score and function score are added</para>
+	/// </summary>
 	[EnumMember(Value = "sum")]
 	Sum,
+	/// <summary>
+	/// <para>Only the function score is used.<br/>The query score is ignored.</para>
+	/// </summary>
 	[EnumMember(Value = "replace")]
 	Replace,
+	/// <summary>
+	/// <para>Query score and function score are multiplied</para>
+	/// </summary>
 	[EnumMember(Value = "multiply")]
 	Multiply,
+	/// <summary>
+	/// <para>Min of query score and function score</para>
+	/// </summary>
 	[EnumMember(Value = "min")]
 	Min,
+	/// <summary>
+	/// <para>Max of query score and function score</para>
+	/// </summary>
 	[EnumMember(Value = "max")]
 	Max,
+	/// <summary>
+	/// <para>Query score and function score are averaged</para>
+	/// </summary>
 	[EnumMember(Value = "avg")]
 	Avg
 }
@@ -341,16 +395,34 @@ internal sealed class FunctionBoostModeConverter : JsonConverter<FunctionBoostMo
 [JsonConverter(typeof(FunctionScoreModeConverter))]
 public enum FunctionScoreMode
 {
+	/// <summary>
+	/// <para>Scores are summed.</para>
+	/// </summary>
 	[EnumMember(Value = "sum")]
 	Sum,
+	/// <summary>
+	/// <para>Scores are multiplied.</para>
+	/// </summary>
 	[EnumMember(Value = "multiply")]
 	Multiply,
+	/// <summary>
+	/// <para>Minimum score is used.</para>
+	/// </summary>
 	[EnumMember(Value = "min")]
 	Min,
+	/// <summary>
+	/// <para>Maximum score is used.</para>
+	/// </summary>
 	[EnumMember(Value = "max")]
 	Max,
+	/// <summary>
+	/// <para>The first function that has a matching filter is applied.</para>
+	/// </summary>
 	[EnumMember(Value = "first")]
 	First,
+	/// <summary>
+	/// <para>Scores are averaged.</para>
+	/// </summary>
 	[EnumMember(Value = "avg")]
 	Avg
 }
@@ -412,8 +484,14 @@ public enum GeoValidationMethod
 {
 	[EnumMember(Value = "strict")]
 	Strict,
+	/// <summary>
+	/// <para>Accept geo points with invalid latitude or longitude.</para>
+	/// </summary>
 	[EnumMember(Value = "ignore_malformed")]
 	IgnoreMalformed,
+	/// <summary>
+	/// <para>Accept geo points with invalid latitude or longitude and additionally try and infer correct coordinates.</para>
+	/// </summary>
 	[EnumMember(Value = "coerce")]
 	Coerce
 }
@@ -501,10 +579,19 @@ internal sealed class OperatorConverter : JsonConverter<Operator>
 [JsonConverter(typeof(RangeRelationConverter))]
 public enum RangeRelation
 {
+	/// <summary>
+	/// <para>Matches documents with a range field value entirely within the query’s range.</para>
+	/// </summary>
 	[EnumMember(Value = "within")]
 	Within,
+	/// <summary>
+	/// <para>Matches documents with a range field value that intersects the query’s range.</para>
+	/// </summary>
 	[EnumMember(Value = "intersects")]
 	Intersects,
+	/// <summary>
+	/// <para>Matches documents with a range field value that entirely contains the query’s range.</para>
+	/// </summary>
 	[EnumMember(Value = "contains")]
 	Contains
 }
@@ -550,30 +637,69 @@ internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
 [Flags]
 public enum SimpleQueryStringFlags
 {
+	/// <summary>
+	/// <para>Enables whitespace as split characters.</para>
+	/// </summary>
 	[EnumMember(Value = "WHITESPACE")]
 	Whitespace = 1 << 0,
+	/// <summary>
+	/// <para>Enables the `~N` operator, after a phrase where `N` is maximum number of positions allowed between matching tokens.<br/>Synonymous to `NEAR`.</para>
+	/// </summary>
 	[EnumMember(Value = "SLOP")]
 	Slop = 1 << 1,
+	/// <summary>
+	/// <para>Enables the `*` prefix operator.</para>
+	/// </summary>
 	[EnumMember(Value = "PREFIX")]
 	Prefix = 1 << 2,
+	/// <summary>
+	/// <para>Enables the `(` and `)` operators to control operator precedence.</para>
+	/// </summary>
 	[EnumMember(Value = "PRECEDENCE")]
 	Precedence = 1 << 3,
+	/// <summary>
+	/// <para>Enables the `"` quotes operator used to search for phrases.</para>
+	/// </summary>
 	[EnumMember(Value = "PHRASE")]
 	Phrase = 1 << 4,
+	/// <summary>
+	/// <para>Enables the `\|` OR operator.</para>
+	/// </summary>
 	[EnumMember(Value = "OR")]
 	Or = 1 << 5,
+	/// <summary>
+	/// <para>Enables the `-` NOT operator.</para>
+	/// </summary>
 	[EnumMember(Value = "NOT")]
 	Not = 1 << 6,
+	/// <summary>
+	/// <para>Disables all operators.</para>
+	/// </summary>
 	[EnumMember(Value = "NONE")]
 	None = 1 << 7,
+	/// <summary>
+	/// <para>Enables the `~N` operator, after a phrase where `N` is the maximum number of positions allowed between matching tokens.<br/>Synonymous to `SLOP`.</para>
+	/// </summary>
 	[EnumMember(Value = "NEAR")]
 	Near = 1 << 8,
+	/// <summary>
+	/// <para>Enables the `~N` operator after a word, where `N` is an integer denoting the allowed edit distance for matching.</para>
+	/// </summary>
 	[EnumMember(Value = "FUZZY")]
 	Fuzzy = 1 << 9,
+	/// <summary>
+	/// <para>Enables `\` as an escape character.</para>
+	/// </summary>
 	[EnumMember(Value = "ESCAPE")]
 	Escape = 1 << 10,
+	/// <summary>
+	/// <para>Enables the `+` AND operator.</para>
+	/// </summary>
 	[EnumMember(Value = "AND")]
 	And = 1 << 11,
+	/// <summary>
+	/// <para>Enables all optional operators.</para>
+	/// </summary>
 	[EnumMember(Value = "ALL")]
 	All = 1 << 12
 }
@@ -663,16 +789,34 @@ internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQuer
 [JsonConverter(typeof(TextQueryTypeConverter))]
 public enum TextQueryType
 {
+	/// <summary>
+	/// <para>Runs a `match_phrase_prefix` query on each field and uses the `_score` from the best field.</para>
+	/// </summary>
 	[EnumMember(Value = "phrase_prefix")]
 	PhrasePrefix,
+	/// <summary>
+	/// <para>Runs a `match_phrase` query on each field and uses the `_score` from the best field.</para>
+	/// </summary>
 	[EnumMember(Value = "phrase")]
 	Phrase,
+	/// <summary>
+	/// <para>Finds documents that match any field and combines the `_score` from each field.</para>
+	/// </summary>
 	[EnumMember(Value = "most_fields")]
 	MostFields,
+	/// <summary>
+	/// <para>Treats fields with the same analyzer as though they were one big field.<br/>Looks for each word in any field.</para>
+	/// </summary>
 	[EnumMember(Value = "cross_fields")]
 	CrossFields,
+	/// <summary>
+	/// <para>Creates a `match_bool_prefix` query on each field and combines the `_score` from each field.</para>
+	/// </summary>
 	[EnumMember(Value = "bool_prefix")]
 	BoolPrefix,
+	/// <summary>
+	/// <para>Finds documents that match any field, but uses the `_score` from the best field.</para>
+	/// </summary>
 	[EnumMember(Value = "best_fields")]
 	BestFields
 }
@@ -732,8 +876,14 @@ internal sealed class TextQueryTypeConverter : JsonConverter<TextQueryType>
 [JsonConverter(typeof(ZeroTermsQueryConverter))]
 public enum ZeroTermsQuery
 {
+	/// <summary>
+	/// <para>No documents are returned if the `analyzer` removes all tokens.</para>
+	/// </summary>
 	[EnumMember(Value = "none")]
 	None,
+	/// <summary>
+	/// <para>Returns all documents, similar to a `match_all` query.</para>
+	/// </summary>
 	[EnumMember(Value = "all")]
 	All
 }

@@ -34,7 +34,7 @@ public sealed class EnrichStatsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Gets enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 /// </summary>
 public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequestParameters>
 {
@@ -46,7 +46,7 @@ public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequest
 }
 
 /// <summary>
-/// <para>Gets enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 /// </summary>
 public sealed partial class EnrichStatsRequestDescriptor : RequestDescriptor<EnrichStatsRequestDescriptor, EnrichStatsRequestParameters>
 {

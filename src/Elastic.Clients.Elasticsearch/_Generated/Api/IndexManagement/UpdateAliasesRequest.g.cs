@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class UpdateAliasesRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Request timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Updates index aliases.</para>
+/// <para>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesRequestParameters>
 {
@@ -54,22 +54,26 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	internal override bool SupportsBody => true;
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Request timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Actions to perform.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? Actions { get; set; }
 }
 
 /// <summary>
-/// <para>Updates index aliases.</para>
+/// <para>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestDescriptor<UpdateAliasesRequestDescriptor<TDocument>, UpdateAliasesRequestParameters>
 {
@@ -93,6 +97,9 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
 	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
+	/// <summary>
+	/// <para>Actions to perform.</para>
+	/// </summary>
 	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? actions)
 	{
 		ActionsDescriptor = null;
@@ -168,7 +175,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Updates index aliases.</para>
+/// <para>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<UpdateAliasesRequestDescriptor, UpdateAliasesRequestParameters>
 {
@@ -192,6 +199,9 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
 	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
+	/// <summary>
+	/// <para>Actions to perform.</para>
+	/// </summary>
 	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.IndexManagement.Action>? actions)
 	{
 		ActionsDescriptor = null;

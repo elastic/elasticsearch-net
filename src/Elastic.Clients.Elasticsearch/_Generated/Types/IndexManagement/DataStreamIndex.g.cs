@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class DataStreamIndex
 {
+	/// <summary>
+	/// <para>Name of the backing index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name")]
 	public string IndexName { get; init; }
+
+	/// <summary>
+	/// <para>Universally unique identifier (UUID) for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_uuid")]
 	public string IndexUuid { get; init; }
 }

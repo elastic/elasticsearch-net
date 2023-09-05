@@ -31,22 +31,38 @@ public sealed partial class UserAgentProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("options")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>? Options { get; set; }
+
+	/// <summary>
+	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("regex_file")]
 	public string? RegexFile { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -117,12 +133,18 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -141,6 +163,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -153,6 +178,9 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> RegexFile(string? regexFile)
 	{
 		RegexFileValue = regexFile;
@@ -165,12 +193,18 @@ public sealed partial class UserAgentProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -329,18 +363,27 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field containing the user agent string.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -359,6 +402,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -371,6 +417,9 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the file in the `config/ingest-user-agent` directory containing the regular expressions for parsing the user agent string. Both the directory and the file have to be created before starting Elasticsearch. If not specified, ingest-user-agent will use the `regexes.yaml` from uap-core it ships with.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor RegexFile(string? regexFile)
 	{
 		RegexFileValue = regexFile;
@@ -383,18 +432,27 @@ public sealed partial class UserAgentProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will be filled with the user agent details.</para>
+	/// </summary>
 	public UserAgentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

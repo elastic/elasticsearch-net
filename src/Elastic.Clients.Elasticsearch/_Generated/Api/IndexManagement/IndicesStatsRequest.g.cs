@@ -78,7 +78,7 @@ public sealed class IndicesStatsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Provides statistics on operations happening in an index.</para>
+/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsRequestParameters>
 {
@@ -160,7 +160,7 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 }
 
 /// <summary>
-/// <para>Provides statistics on operations happening in an index.</para>
+/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDescriptor<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsRequestParameters>
 {
@@ -212,7 +212,7 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Provides statistics on operations happening in an index.</para>
+/// <para>Returns statistics for one or more indices.<br/>For data streams, the API retrieves statistics for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<IndicesStatsRequestDescriptor, IndicesStatsRequestParameters>
 {

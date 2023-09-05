@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class Document
 {
+	/// <summary>
+	/// <para>Unique identifier for the document.<br/>This ID must be unique within the `_index`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+	/// <summary>
+	/// <para>Name of the index containing the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>JSON body for the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public object Source { get; set; }
 }
@@ -49,18 +60,27 @@ public sealed partial class DocumentDescriptor : SerializableDescriptor<Document
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private object SourceValue { get; set; }
 
+	/// <summary>
+	/// <para>Unique identifier for the document.<br/>This ID must be unique within the `_index`.</para>
+	/// </summary>
 	public DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the index containing the document.</para>
+	/// </summary>
 	public DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>JSON body for the document.</para>
+	/// </summary>
 	public DocumentDescriptor Source(object source)
 	{
 		SourceValue = source;

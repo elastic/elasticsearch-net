@@ -161,11 +161,22 @@ public sealed partial class WeightedAverageAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>A numeric response formatter.</para>
+	/// </summary>
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Configuration for the field that provides the values.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
+
+	/// <summary>
+	/// <para>Configuration for the field or script that provides the weights.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? Weight { get; set; }
 }
 
@@ -187,6 +198,9 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Configuration for the field that provides the values.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		ValueDescriptor = null;
@@ -211,6 +225,9 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration for the field or script that provides the weights.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor<TDocument> Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? weight)
 	{
 		WeightDescriptor = null;
@@ -235,6 +252,9 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A numeric response formatter.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -331,6 +351,9 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Configuration for the field that provides the values.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor Value(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? value)
 	{
 		ValueDescriptor = null;
@@ -355,6 +378,9 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration for the field or script that provides the weights.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor Weight(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? weight)
 	{
 		WeightDescriptor = null;
@@ -379,6 +405,9 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A numeric response formatter.</para>
+	/// </summary>
 	public WeightedAverageAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;

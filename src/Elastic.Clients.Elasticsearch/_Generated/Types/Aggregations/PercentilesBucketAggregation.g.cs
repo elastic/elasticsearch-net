@@ -166,6 +166,10 @@ public sealed partial class PercentilesBucketAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The list of percentiles to calculate.</para>
+	/// </summary>
 	public ICollection<double>? Percents { get; set; }
 }
 
@@ -207,6 +211,9 @@ public sealed partial class PercentilesBucketAggregationDescriptor : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The list of percentiles to calculate.</para>
+	/// </summary>
 	public PercentilesBucketAggregationDescriptor Percents(ICollection<double>? percents)
 	{
 		PercentsValue = percents;

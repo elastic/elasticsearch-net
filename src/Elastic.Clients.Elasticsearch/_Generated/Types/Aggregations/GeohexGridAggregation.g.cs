@@ -196,7 +196,7 @@ public sealed partial class GeohexGridAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
@@ -270,7 +270,7 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -279,7 +279,7 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -430,7 +430,7 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -439,7 +439,7 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -448,7 +448,7 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Field containing indexed geo-point values. Must be explicitly<br/>mapped as a `geo_point` field. If the field contains an array<br/>`geohex_grid` aggregates all array values.</para>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohex_grid` aggregates all array values.</para>
 	/// </summary>
 	public GeohexGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{

@@ -31,18 +31,42 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public Fields Fields { get; set; }
+
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("operator")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? Operator { get; set; }
+
+	/// <summary>
+	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
@@ -74,6 +98,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
 		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
@@ -86,30 +113,45 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Fields(Fields fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op)
 	{
 		OperatorValue = op;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;
@@ -186,6 +228,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
 		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
@@ -198,30 +243,45 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor Fields(Fields fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? op)
 	{
 		OperatorValue = op;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text to search for in the provided `fields`.<br/>The `combined_fields` query analyzes the provided text before performing a search.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;

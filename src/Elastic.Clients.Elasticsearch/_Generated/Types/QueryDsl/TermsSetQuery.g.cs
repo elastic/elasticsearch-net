@@ -134,8 +134,20 @@ public sealed partial class TermsSetQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchField { get; set; }
+
+	/// <summary>
+	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScript { get; set; }
+
+	/// <summary>
+	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public ICollection<string> Terms { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -197,24 +209,36 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript)
 	{
 		MinimumShouldMatchScriptValue = minimumShouldMatchScript;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;
@@ -311,30 +335,45 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument, TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchField<TDocument>(Expression<Func<TDocument, object>> minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Custom script containing the number of matching terms required to return a document.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? minimumShouldMatchScript)
 	{
 		MinimumShouldMatchScriptValue = minimumShouldMatchScript;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor Terms(ICollection<string> terms)
 	{
 		TermsValue = terms;

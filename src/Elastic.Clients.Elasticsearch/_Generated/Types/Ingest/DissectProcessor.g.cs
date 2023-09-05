@@ -29,20 +29,35 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class DissectProcessor
 {
+	/// <summary>
+	/// <para>The character(s) that separate the appended fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("append_separator")]
 	public string? AppendSeparator { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>The pattern to apply to the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
@@ -108,6 +123,9 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The character(s) that separate the appended fields.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> AppendSeparator(string? appendSeparator)
 	{
 		AppendSeparatorValue = appendSeparator;
@@ -120,12 +138,18 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -144,12 +168,18 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The pattern to apply to the field.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> Pattern(string pattern)
 	{
 		PatternValue = pattern;
@@ -297,6 +327,9 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The character(s) that separate the appended fields.</para>
+	/// </summary>
 	public DissectProcessorDescriptor AppendSeparator(string? appendSeparator)
 	{
 		AppendSeparatorValue = appendSeparator;
@@ -309,18 +342,27 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -339,12 +381,18 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public DissectProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The pattern to apply to the field.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Pattern(string pattern)
 	{
 		PatternValue = pattern;

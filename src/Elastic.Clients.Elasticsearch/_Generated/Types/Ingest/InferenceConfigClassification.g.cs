@@ -29,14 +29,33 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class InferenceConfigClassification
 {
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prediction_field_type")]
 	public string? PredictionFieldType { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
 
@@ -57,42 +76,63 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> NumTopClasses(int? numTopClasses)
 	{
 		NumTopClassesValue = numTopClasses;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> PredictionFieldType(string? predictionFieldType)
 	{
 		PredictionFieldTypeValue = predictionFieldType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField<TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
@@ -150,54 +190,81 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TopClassesResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the number of top class predictions to return.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor NumTopClasses(int? numTopClasses)
 	{
 		NumTopClassesValue = numTopClasses;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the type of the predicted field to write.<br/>Valid values are: `string`, `number`, `boolean`.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor PredictionFieldType(string? predictionFieldType)
 	{
 		PredictionFieldTypeValue = predictionFieldType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the field to which the top classes are written.</para>
+	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument>(Expression<Func<TDocument, object>> topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;

@@ -32,23 +32,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class CreateIndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation. <br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
-/// <para>Creates an index with optional settings and mappings.</para>
+/// <para>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
 {
@@ -63,22 +63,26 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	internal override bool SupportsBody => true;
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Set the number of active shards to wait for before the operation returns.</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation. <br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+
+	/// <summary>
+	/// <para>Aliases for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
@@ -87,12 +91,16 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
+
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
 /// <summary>
-/// <para>Creates an index with optional settings and mappings.</para>
+/// <para>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 {
@@ -161,6 +169,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 	{
 		SettingsDescriptor = null;
@@ -185,6 +196,9 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Aliases for the index.</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
 		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
@@ -237,7 +251,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Creates an index with optional settings and mappings.</para>
+/// <para>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 {
@@ -302,6 +316,9 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
 	{
 		SettingsDescriptor = null;
@@ -326,6 +343,9 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Aliases for the index.</para>
+	/// </summary>
 	public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
 	{
 		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());

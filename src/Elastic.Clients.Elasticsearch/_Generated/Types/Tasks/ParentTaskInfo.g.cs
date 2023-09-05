@@ -54,7 +54,7 @@ public sealed partial class ParentTaskInfo
 	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.Tasks.TaskStatus? Status { get; init; }
+	public object? Status { get; init; }
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

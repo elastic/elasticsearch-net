@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed class DeletePipelineRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes a pipeline.</para>
+/// <para>Deletes one or more existing ingest pipeline.</para>
 /// </summary>
 public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineRequestParameters>
 {
@@ -58,20 +58,20 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes a pipeline.</para>
+/// <para>Deletes one or more existing ingest pipeline.</para>
 /// </summary>
 public sealed partial class DeletePipelineRequestDescriptor<TDocument> : RequestDescriptor<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineRequestParameters>
 {
@@ -106,7 +106,7 @@ public sealed partial class DeletePipelineRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Deletes a pipeline.</para>
+/// <para>Deletes one or more existing ingest pipeline.</para>
 /// </summary>
 public sealed partial class DeletePipelineRequestDescriptor : RequestDescriptor<DeletePipelineRequestDescriptor, DeletePipelineRequestParameters>
 {

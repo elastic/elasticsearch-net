@@ -34,7 +34,7 @@ public sealed class CreateDataStreamRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a data stream</para>
+/// <para>Creates a data stream.<br/>You must have a matching index template with data stream enabled.</para>
 /// </summary>
 public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStreamRequestParameters>
 {
@@ -50,7 +50,7 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 }
 
 /// <summary>
-/// <para>Creates a data stream</para>
+/// <para>Creates a data stream.<br/>You must have a matching index template with data stream enabled.</para>
 /// </summary>
 public sealed partial class CreateDataStreamRequestDescriptor : RequestDescriptor<CreateDataStreamRequestDescriptor, CreateDataStreamRequestParameters>
 {

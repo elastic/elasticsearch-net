@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class DeleteTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes an index template.</para>
+/// <para>Deletes a legacy index template.</para>
 /// </summary>
 public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateRequestParameters>
 {
@@ -58,20 +58,20 @@ public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateR
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Deletes an index template.</para>
+/// <para>Deletes a legacy index template.</para>
 /// </summary>
 public sealed partial class DeleteTemplateRequestDescriptor : RequestDescriptor<DeleteTemplateRequestDescriptor, DeleteTemplateRequestParameters>
 {

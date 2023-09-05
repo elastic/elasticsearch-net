@@ -33,14 +33,34 @@ public sealed partial class BoolQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("minimum_should_match")]
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents and will contribute to the score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("must"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
+
+	/// <summary>
+	/// <para>The clause (query) must not appear in the matching documents.<br/>Because scoring is ignored, a score of `0` is returned for all documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("must_not"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
+
+	/// <summary>
+	/// <para>The clause (query) should appear in the matching document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("should"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
@@ -77,6 +97,9 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
+	/// </summary>
 	public BoolQueryDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
@@ -113,6 +136,9 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents and will contribute to the score.</para>
+	/// </summary>
 	public BoolQueryDescriptor<TDocument> Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
 	{
 		MustDescriptor = null;
@@ -149,6 +175,9 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) must not appear in the matching documents.<br/>Because scoring is ignored, a score of `0` is returned for all documents.</para>
+	/// </summary>
 	public BoolQueryDescriptor<TDocument> MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
 	{
 		MustNotDescriptor = null;
@@ -185,6 +214,9 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) should appear in the matching document.</para>
+	/// </summary>
 	public BoolQueryDescriptor<TDocument> Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
 	{
 		ShouldDescriptor = null;
@@ -233,6 +265,9 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
+	/// </summary>
 	public BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;
@@ -408,6 +443,9 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
+	/// </summary>
 	public BoolQueryDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
 	{
 		FilterDescriptor = null;
@@ -444,6 +482,9 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) must appear in matching documents and will contribute to the score.</para>
+	/// </summary>
 	public BoolQueryDescriptor Must(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? must)
 	{
 		MustDescriptor = null;
@@ -480,6 +521,9 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) must not appear in the matching documents.<br/>Because scoring is ignored, a score of `0` is returned for all documents.</para>
+	/// </summary>
 	public BoolQueryDescriptor MustNot(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? mustNot)
 	{
 		MustNotDescriptor = null;
@@ -516,6 +560,9 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The clause (query) should appear in the matching document.</para>
+	/// </summary>
 	public BoolQueryDescriptor Should(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? should)
 	{
 		ShouldDescriptor = null;
@@ -564,6 +611,9 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
+	/// </summary>
 	public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;

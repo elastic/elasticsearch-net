@@ -32,17 +32,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class PutDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `hidden`, `open`, `closed`, `none`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an<br/>error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit timestamp for the document</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
@@ -64,22 +64,26 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 	internal override bool SupportsBody => true;
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `hidden`, `open`, `closed`, `none`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an<br/>error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit timestamp for the document</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>If defined, every document added to this data stream will be stored at least for this time frame.<br/>Any time after this duration the document could be deleted.<br/>When empty, every document in this data stream will be stored indefinitely.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("data_retention")]
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 }
@@ -118,6 +122,9 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 
 	private Elastic.Clients.Elasticsearch.Duration? DataRetentionValue { get; set; }
 
+	/// <summary>
+	/// <para>If defined, every document added to this data stream will be stored at least for this time frame.<br/>Any time after this duration the document could be deleted.<br/>When empty, every document in this data stream will be stored indefinitely.</para>
+	/// </summary>
 	public PutDataLifecycleRequestDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? dataRetention)
 	{
 		DataRetentionValue = dataRetention;

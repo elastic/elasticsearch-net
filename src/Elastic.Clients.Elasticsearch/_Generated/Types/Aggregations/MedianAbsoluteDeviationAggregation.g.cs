@@ -180,6 +180,9 @@ public sealed partial class MedianAbsoluteDeviationAggregation : SearchAggregati
 	{
 	}
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public double? Compression { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
@@ -204,6 +207,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor<TDocume
 	private FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? compression)
 	{
 		CompressionValue = compression;
@@ -307,6 +313,9 @@ public sealed partial class MedianAbsoluteDeviationAggregationDescriptor : Seria
 	private FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public MedianAbsoluteDeviationAggregationDescriptor Compression(double? compression)
 	{
 		CompressionValue = compression;

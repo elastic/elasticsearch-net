@@ -360,22 +360,69 @@ public sealed partial class TopHitsAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>Selects the fields of the source that are returned.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
+
+	/// <summary>
+	/// <para>Fields for which to return doc values.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public bool? Explain { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Starting document offset.</para>
+	/// </summary>
 	public int? From { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Returns the result of one or more script evaluations for each hit.</para>
+	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// </summary>
 	public bool? SeqNoPrimaryTerm { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of top matching hits to return per bucket.</para>
+	/// </summary>
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>Sort order of the top matching hits.<br/>By default, the hits are sorted by the score of the main query.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+
+	/// <summary>
+	/// <para>Returns values for the specified stored fields (fields that use the `store` mapping option).</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, calculates and returns document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public bool? TrackScores { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, returns document version as part of a hit.</para>
+	/// </summary>
 	public bool? Version { get; set; }
 }
 
@@ -409,6 +456,9 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	private bool? TrackScoresValue { get; set; }
 	private bool? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -433,6 +483,9 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sort order of the top matching hits.<br/>By default, the hits are sorted by the score of the main query.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -469,18 +522,27 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Selects the fields of the source that are returned.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fields for which to return doc values.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields)
 	{
 		DocvalueFieldsValue = docvalueFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
@@ -499,6 +561,9 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> From(int? from)
 	{
 		FromValue = from;
@@ -523,36 +588,54 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Returns the result of one or more script evaluations for each hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of top matching hits to return per bucket.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Returns values for the specified stored fields (fields that use the `store` mapping option).</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, calculates and returns document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns document version as part of a hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Version(bool? version = true)
 	{
 		VersionValue = version;
@@ -728,6 +811,9 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	private bool? TrackScoresValue { get; set; }
 	private bool? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -752,6 +838,9 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sort order of the top matching hits.<br/>By default, the hits are sorted by the score of the main query.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -788,18 +877,27 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Selects the fields of the source that are returned.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fields for which to return doc values.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields)
 	{
 		DocvalueFieldsValue = docvalueFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
@@ -824,6 +922,9 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor From(int? from)
 	{
 		FromValue = from;
@@ -848,36 +949,54 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Returns the result of one or more script evaluations for each hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>> selector)
 	{
 		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
 	{
 		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of top matching hits to return per bucket.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Returns values for the specified stored fields (fields that use the `store` mapping option).</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
 	{
 		StoredFieldsValue = storedFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, calculates and returns document scores, even if the scores are not used for sorting.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor TrackScores(bool? trackScores = true)
 	{
 		TrackScoresValue = trackScores;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns document version as part of a hit.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Version(bool? version = true)
 	{
 		VersionValue = version;

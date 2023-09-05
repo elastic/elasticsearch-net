@@ -161,11 +161,26 @@ public sealed partial class VariableWidthHistogramAggregation : SearchAggregatio
 	{
 	}
 
+	/// <summary>
+	/// <para>The target number of buckets.</para>
+	/// </summary>
 	public int? Buckets { get; set; }
+
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// </summary>
 	public int? InitialBuffer { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
 }
 
@@ -183,24 +198,36 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The target number of buckets.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? buckets)
 	{
 		BucketsValue = buckets;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? initialBuffer)
 	{
 		InitialBufferValue = initialBuffer;
@@ -213,6 +240,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
@@ -273,30 +303,45 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The target number of buckets.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Buckets(int? buckets)
 	{
 		BucketsValue = buckets;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.<br/>Defaults to `min(10 * shard_size, 50000)`.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor InitialBuffer(int? initialBuffer)
 	{
 		InitialBufferValue = initialBuffer;
@@ -309,6 +354,9 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
+	/// </summary>
 	public VariableWidthHistogramAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;

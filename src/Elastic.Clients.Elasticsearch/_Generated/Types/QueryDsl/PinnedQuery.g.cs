@@ -52,6 +52,10 @@ public sealed partial class PinnedQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("organic")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 
@@ -203,6 +207,9 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// </summary>
 	public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
 	{
 		OrganicDescriptor = null;
@@ -324,6 +331,9 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
+	/// </summary>
 	public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
 	{
 		OrganicDescriptor = null;

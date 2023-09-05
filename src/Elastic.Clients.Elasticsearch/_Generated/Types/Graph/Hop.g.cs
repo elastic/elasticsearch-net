@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public sealed partial class Hop
 {
+	/// <summary>
+	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("connections")]
 	public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
+
+	/// <summary>
+	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+
+	/// <summary>
+	/// <para>Contains the fields you are interested in.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("vertices")]
 	public ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 }
@@ -56,6 +67,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 	private Action<VertexDefinitionDescriptor<TDocument>> VerticesDescriptorAction { get; set; }
 	private Action<VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
 
+	/// <summary>
+	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// </summary>
 	public HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 	{
 		ConnectionsDescriptor = null;
@@ -80,6 +94,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// </summary>
 	public HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -104,6 +121,9 @@ public sealed partial class HopDescriptor<TDocument> : SerializableDescriptor<Ho
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Contains the fields you are interested in.</para>
+	/// </summary>
 	public HopDescriptor<TDocument> Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
 	{
 		VerticesDescriptor = null;
@@ -229,6 +249,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 	private Action<VertexDefinitionDescriptor> VerticesDescriptorAction { get; set; }
 	private Action<VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
 
+	/// <summary>
+	/// <para>Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.</para>
+	/// </summary>
 	public HopDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? connections)
 	{
 		ConnectionsDescriptor = null;
@@ -253,6 +276,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An optional guiding query that constrains the Graph API as it explores connected terms.</para>
+	/// </summary>
 	public HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -277,6 +303,9 @@ public sealed partial class HopDescriptor : SerializableDescriptor<HopDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Contains the fields you are interested in.</para>
+	/// </summary>
 	public HopDescriptor Vertices(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
 	{
 		VerticesDescriptor = null;

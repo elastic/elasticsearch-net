@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class TopMetricsValue
 {
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
@@ -43,12 +46,18 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	public TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -74,18 +83,27 @@ public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<T
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	public TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	public TopMetricsValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
 	public TopMetricsValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;

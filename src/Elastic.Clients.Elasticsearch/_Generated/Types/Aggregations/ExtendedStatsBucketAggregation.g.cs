@@ -166,6 +166,10 @@ public sealed partial class ExtendedStatsBucketAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// </summary>
 	public double? Sigma { get; set; }
 }
 
@@ -207,6 +211,9 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor Sigma(double? sigma)
 	{
 		SigmaValue = sigma;
