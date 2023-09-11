@@ -251,15 +251,38 @@ public sealed partial class HistogramAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
+
+	/// <summary>
+	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// </summary>
 	public double? Interval { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// </summary>
 	public int? MinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public double? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// </summary>
 	public double? Offset { get; set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
+	/// <summary>
+	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// </summary>
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
@@ -309,12 +332,18 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -327,6 +356,9 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Interval(double? interval)
 	{
 		IntervalValue = interval;
@@ -339,24 +371,36 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Missing(double? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Offset(double? offset)
 	{
 		OffsetValue = offset;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
@@ -494,18 +538,27 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -518,6 +571,9 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Interval(double? interval)
 	{
 		IntervalValue = interval;
@@ -530,24 +586,36 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Missing(double? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Offset(double? offset)
 	{
 		OffsetValue = offset;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
+	/// </summary>
 	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;

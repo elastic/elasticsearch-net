@@ -29,26 +29,49 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class SetProcessor
 {
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_from")]
 	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_empty_value")]
 	public bool? IgnoreEmptyValue { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("media_type")]
 	public string? MediaType { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public object? Value { get; set; }
 
@@ -114,12 +137,18 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> CopyFrom(Elastic.Clients.Elasticsearch.Field? copyFrom)
 	{
 		CopyFromValue = copyFrom;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> CopyFrom<TValue>(Expression<Func<TDocument, TValue>> copyFrom)
 	{
 		CopyFromValue = copyFrom;
@@ -132,12 +161,18 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -150,6 +185,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> IgnoreEmptyValue(bool? ignoreEmptyValue = true)
 	{
 		IgnoreEmptyValueValue = ignoreEmptyValue;
@@ -162,12 +200,18 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> MediaType(string? mediaType)
 	{
 		MediaTypeValue = mediaType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> Override(bool? overrideValue = true)
 	{
 		OverrideValue = overrideValue;
@@ -180,6 +224,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> Value(object? value)
 	{
 		ValueValue = value;
@@ -339,18 +386,27 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	public SetProcessorDescriptor CopyFrom(Elastic.Clients.Elasticsearch.Field? copyFrom)
 	{
 		CopyFromValue = copyFrom;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	public SetProcessorDescriptor CopyFrom<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyFrom)
 	{
 		CopyFromValue = copyFrom;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// </summary>
 	public SetProcessorDescriptor CopyFrom<TDocument>(Expression<Func<TDocument, object>> copyFrom)
 	{
 		CopyFromValue = copyFrom;
@@ -363,18 +419,27 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	public SetProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	public SetProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// </summary>
 	public SetProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -387,6 +452,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `value` is a template snippet that evaluates to `null` or the empty string, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public SetProcessorDescriptor IgnoreEmptyValue(bool? ignoreEmptyValue = true)
 	{
 		IgnoreEmptyValueValue = ignoreEmptyValue;
@@ -399,12 +467,18 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The media type for encoding `value`.<br/>Applies only when value is a template snippet.<br/>Must be one of `application/json`, `text/plain`, or `application/x-www-form-urlencoded`.</para>
+	/// </summary>
 	public SetProcessorDescriptor MediaType(string? mediaType)
 	{
 		MediaTypeValue = mediaType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	public SetProcessorDescriptor Override(bool? overrideValue = true)
 	{
 		OverrideValue = overrideValue;
@@ -417,6 +491,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to be set for the field.<br/>Supports template snippets.<br/>May specify only one of `value` or `copy_from`.</para>
+	/// </summary>
 	public SetProcessorDescriptor Value(object? value)
 	{
 		ValueValue = value;

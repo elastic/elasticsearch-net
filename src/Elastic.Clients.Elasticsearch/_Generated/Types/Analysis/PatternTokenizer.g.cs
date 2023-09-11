@@ -30,11 +30,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PatternTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("flags")]
-	public string Flags { get; set; }
+	public string? Flags { get; set; }
 	[JsonInclude, JsonPropertyName("group")]
-	public int Group { get; set; }
+	public int? Group { get; set; }
 	[JsonInclude, JsonPropertyName("pattern")]
-	public string Pattern { get; set; }
+	public string? Pattern { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern";
@@ -51,24 +51,24 @@ public sealed partial class PatternTokenizerDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private string FlagsValue { get; set; }
-	private int GroupValue { get; set; }
-	private string PatternValue { get; set; }
+	private string? FlagsValue { get; set; }
+	private int? GroupValue { get; set; }
+	private string? PatternValue { get; set; }
 	private string? VersionValue { get; set; }
 
-	public PatternTokenizerDescriptor Flags(string flags)
+	public PatternTokenizerDescriptor Flags(string? flags)
 	{
 		FlagsValue = flags;
 		return Self;
 	}
 
-	public PatternTokenizerDescriptor Group(int group)
+	public PatternTokenizerDescriptor Group(int? group)
 	{
 		GroupValue = group;
 		return Self;
 	}
 
-	public PatternTokenizerDescriptor Pattern(string pattern)
+	public PatternTokenizerDescriptor Pattern(string? pattern)
 	{
 		PatternValue = pattern;
 		return Self;
@@ -83,12 +83,24 @@ public sealed partial class PatternTokenizerDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("flags");
-		writer.WriteStringValue(FlagsValue);
-		writer.WritePropertyName("group");
-		writer.WriteNumberValue(GroupValue);
-		writer.WritePropertyName("pattern");
-		writer.WriteStringValue(PatternValue);
+		if (!string.IsNullOrEmpty(FlagsValue))
+		{
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(FlagsValue);
+		}
+
+		if (GroupValue.HasValue)
+		{
+			writer.WritePropertyName("group");
+			writer.WriteNumberValue(GroupValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(PatternValue))
+		{
+			writer.WritePropertyName("pattern");
+			writer.WriteStringValue(PatternValue);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("pattern");
 		if (VersionValue is not null)

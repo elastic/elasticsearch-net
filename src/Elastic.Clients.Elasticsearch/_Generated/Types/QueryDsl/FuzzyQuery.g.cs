@@ -170,11 +170,35 @@ public sealed partial class FuzzyQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of variations created.</para>
+	/// </summary>
 	public int? MaxExpansions { get; set; }
+
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public int? PrefixLength { get; set; }
+
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public string? Rewrite { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// </summary>
 	public bool? Transpositions { get; set; }
+
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public object Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -239,36 +263,54 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of variations created.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
 		MaxExpansionsValue = maxExpansions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Transpositions(bool? transpositions = true)
 	{
 		TranspositionsValue = transpositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Value(object value)
 	{
 		ValueValue = value;
@@ -386,36 +428,54 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of variations created.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
 		MaxExpansionsValue = maxExpansions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example `ab` to `ba`).</para>
+	/// </summary>
 	public FuzzyQueryDescriptor Transpositions(bool? transpositions = true)
 	{
 		TranspositionsValue = transpositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor Value(object value)
 	{
 		ValueValue = value;

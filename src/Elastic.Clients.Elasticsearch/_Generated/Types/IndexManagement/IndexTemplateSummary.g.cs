@@ -29,13 +29,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class IndexTemplateSummary
 {
+	/// <summary>
+	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; init; }
 	[JsonInclude, JsonPropertyName("lifecycle")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
+
+	/// <summary>
+	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; init; }
+
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; init; }
 }

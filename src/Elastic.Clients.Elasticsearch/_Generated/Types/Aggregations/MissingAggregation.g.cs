@@ -143,6 +143,10 @@ public sealed partial class MissingAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
@@ -188,12 +192,18 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public MissingAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public MissingAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -295,18 +305,27 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public MissingAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public MissingAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the field.</para>
+	/// </summary>
 	public MissingAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;

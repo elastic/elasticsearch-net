@@ -31,6 +31,10 @@ public sealed partial class JoinProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
@@ -39,10 +43,18 @@ public sealed partial class JoinProcessor
 	public bool? IgnoreFailure { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>The separator character.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -111,12 +123,18 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -135,6 +153,9 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The separator character.</para>
+	/// </summary>
 	public JoinProcessorDescriptor<TDocument> Separator(string separator)
 	{
 		SeparatorValue = separator;
@@ -147,12 +168,18 @@ public sealed partial class JoinProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public JoinProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public JoinProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -293,18 +320,27 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	public JoinProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	public JoinProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array values to join.</para>
+	/// </summary>
 	public JoinProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -323,6 +359,9 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The separator character.</para>
+	/// </summary>
 	public JoinProcessorDescriptor Separator(string separator)
 	{
 		SeparatorValue = separator;
@@ -335,18 +374,27 @@ public sealed partial class JoinProcessorDescriptor : SerializableDescriptor<Joi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public JoinProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public JoinProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the joined value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public JoinProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

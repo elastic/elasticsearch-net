@@ -32,13 +32,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class DeleteDataStreamRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Deletes a data stream.</para>
+/// <para>Deletes one or more data streams and their backing indices.</para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
 {
@@ -53,14 +53,14 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
 /// <summary>
-/// <para>Deletes a data stream.</para>
+/// <para>Deletes one or more data streams and their backing indices.</para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
 {

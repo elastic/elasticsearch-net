@@ -241,18 +241,66 @@ public sealed partial class MatchQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public string? FuzzyRewrite { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	public bool? FuzzyTranspositions { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// </summary>
 	public bool? Lenient { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// </summary>
 	public int? MaxExpansions { get; set; }
+
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
+
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// </summary>
 	public int? PrefixLength { get; set; }
+
+	/// <summary>
+	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// </summary>
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -305,12 +353,18 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
 		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
@@ -335,60 +389,90 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> FuzzyRewrite(string? fuzzyRewrite)
 	{
 		FuzzyRewriteValue = fuzzyRewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
 		FuzzyTranspositionsValue = fuzzyTranspositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> Lenient(bool? lenient = true)
 	{
 		LenientValue = lenient;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> MaxExpansions(int? maxExpansions)
 	{
 		MaxExpansionsValue = maxExpansions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
 	{
 		OperatorValue = op;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public MatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;
@@ -524,12 +608,18 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public MatchQueryDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
+	/// </summary>
 	public MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? autoGenerateSynonymsPhraseQuery = true)
 	{
 		AutoGenerateSynonymsPhraseQueryValue = autoGenerateSynonymsPhraseQuery;
@@ -560,60 +650,90 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public MatchQueryDescriptor FuzzyRewrite(string? fuzzyRewrite)
 	{
 		FuzzyRewriteValue = fuzzyRewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, edits for fuzzy matching include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	public MatchQueryDescriptor FuzzyTranspositions(bool? fuzzyTranspositions = true)
 	{
 		FuzzyTranspositionsValue = fuzzyTranspositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, format-based errors, such as providing a text query value for a numeric field, are ignored.</para>
+	/// </summary>
 	public MatchQueryDescriptor Lenient(bool? lenient = true)
 	{
 		LenientValue = lenient;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of terms to which the query will expand.</para>
+	/// </summary>
 	public MatchQueryDescriptor MaxExpansions(int? maxExpansions)
 	{
 		MaxExpansionsValue = maxExpansions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
+	/// </summary>
 	public MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
 	{
 		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Boolean logic used to interpret text in the query value.</para>
+	/// </summary>
 	public MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
 	{
 		OperatorValue = op;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged for fuzzy matching.</para>
+	/// </summary>
 	public MatchQueryDescriptor PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text, number, boolean value or date you wish to find in the provided field.</para>
+	/// </summary>
 	public MatchQueryDescriptor Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;

@@ -29,10 +29,17 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class AppendProcessor
 {
+	/// <summary>
+	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_duplicates")]
 	public bool? AllowDuplicates { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
@@ -43,6 +50,10 @@ public sealed partial class AppendProcessor
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The value to be appended. Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public ICollection<object> Value { get; set; }
 
@@ -105,6 +116,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// </summary>
 	public AppendProcessorDescriptor<TDocument> AllowDuplicates(bool? allowDuplicates = true)
 	{
 		AllowDuplicatesValue = allowDuplicates;
@@ -117,12 +131,18 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -147,6 +167,9 @@ public sealed partial class AppendProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to be appended. Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor<TDocument> Value(ICollection<object> value)
 	{
 		ValueValue = value;
@@ -281,6 +304,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `false`, the processor does not append values already present in the field.</para>
+	/// </summary>
 	public AppendProcessorDescriptor AllowDuplicates(bool? allowDuplicates = true)
 	{
 		AllowDuplicatesValue = allowDuplicates;
@@ -293,18 +319,27 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be appended to.<br/>Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -329,6 +364,9 @@ public sealed partial class AppendProcessorDescriptor : SerializableDescriptor<A
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to be appended. Supports template snippets.</para>
+	/// </summary>
 	public AppendProcessorDescriptor Value(ICollection<object> value)
 	{
 		ValueValue = value;

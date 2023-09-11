@@ -31,10 +31,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [JsonConverter(typeof(BoundaryScannerConverter))]
 public enum BoundaryScanner
 {
+	/// <summary>
+	/// <para>Break highlighted fragments at the next word boundary, as determined by Java’s `BreakIterator`.<br/>You can specify the locale to use with `boundary_scanner_locale`.</para>
+	/// </summary>
 	[EnumMember(Value = "word")]
 	Word,
+	/// <summary>
+	/// <para>Break highlighted fragments at the next sentence boundary, as determined by Java’s `BreakIterator`.<br/>You can specify the locale to use with `boundary_scanner_locale`.<br/>When used with the `unified` highlighter, the `sentence` scanner splits sentences bigger than `fragment_size` at the first word boundary next to fragment_size.<br/>You can set `fragment_size` to `0` to never split any sentence.</para>
+	/// </summary>
 	[EnumMember(Value = "sentence")]
 	Sentence,
+	/// <summary>
+	/// <para>Use the characters specified by `boundary_chars` as highlighting boundaries.<br/>The `boundary_max_scan` setting controls how far to scan for boundary characters.<br/>Only valid for the `fvh` highlighter.</para>
+	/// </summary>
 	[EnumMember(Value = "chars")]
 	Chars
 }
@@ -234,8 +243,20 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 	HighlighterType IEnumStruct<HighlighterType>.Create(string value) => value;
 
 	public readonly string Value { get; }
+
+	/// <summary>
+	/// <para>The unified highlighter uses the Lucene Unified Highlighter.</para>
+	/// </summary>
 	public static HighlighterType Unified { get; } = new HighlighterType("unified");
+
+	/// <summary>
+	/// <para>The `plain` highlighter uses the standard Lucene highlighter</para>
+	/// </summary>
 	public static HighlighterType Plain { get; } = new HighlighterType("plain");
+
+	/// <summary>
+	/// <para>The fvh highlighter uses the Lucene Fast Vector highlighter.</para>
+	/// </summary>
 	public static HighlighterType FastVector { get; } = new HighlighterType("fvh");
 
 	public override string ToString() => Value ?? string.Empty;
@@ -254,14 +275,29 @@ public readonly partial struct HighlighterType : IEnumStruct<HighlighterType>
 [JsonConverter(typeof(ScoreModeConverter))]
 public enum ScoreMode
 {
+	/// <summary>
+	/// <para>Add the original score and the rescore query score.</para>
+	/// </summary>
 	[EnumMember(Value = "total")]
 	Total,
+	/// <summary>
+	/// <para>Multiply the original score by the rescore query score.<br/>Useful for `function` query rescores.</para>
+	/// </summary>
 	[EnumMember(Value = "multiply")]
 	Multiply,
+	/// <summary>
+	/// <para>Take the min of the original score and the rescore query score.</para>
+	/// </summary>
 	[EnumMember(Value = "min")]
 	Min,
+	/// <summary>
+	/// <para>Take the max of original score and the rescore query score.</para>
+	/// </summary>
 	[EnumMember(Value = "max")]
 	Max,
+	/// <summary>
+	/// <para>Average the original score and the rescore query score.</para>
+	/// </summary>
 	[EnumMember(Value = "avg")]
 	Avg
 }

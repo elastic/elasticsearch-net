@@ -32,6 +32,7 @@ public sealed partial class ElisionTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("articles")]
 	public ICollection<string>? Articles { get; set; }
 	[JsonInclude, JsonPropertyName("articles_case")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? ArticlesCase { get; set; }
 	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
@@ -89,10 +90,10 @@ public sealed partial class ElisionTokenFilterDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, ArticlesValue, options);
 		}
 
-		if (ArticlesCaseValue.HasValue)
+		if (ArticlesCaseValue is not null)
 		{
 			writer.WritePropertyName("articles_case");
-			writer.WriteBooleanValue(ArticlesCaseValue.Value);
+			JsonSerializer.Serialize(writer, ArticlesCaseValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(ArticlesPathValue))

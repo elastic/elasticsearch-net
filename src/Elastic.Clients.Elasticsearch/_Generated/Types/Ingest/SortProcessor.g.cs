@@ -31,6 +31,10 @@ public sealed partial class SortProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
@@ -39,10 +43,18 @@ public sealed partial class SortProcessor
 	public bool? IgnoreFailure { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -111,12 +123,18 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	public SortProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	public SortProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -135,6 +153,9 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// </summary>
 	public SortProcessorDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
 		OrderValue = order;
@@ -147,12 +168,18 @@ public sealed partial class SortProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SortProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SortProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -297,18 +324,27 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	public SortProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	public SortProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be sorted.</para>
+	/// </summary>
 	public SortProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -327,6 +363,9 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order to use.<br/>Accepts `"asc"` or `"desc"`.</para>
+	/// </summary>
 	public SortProcessorDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
 		OrderValue = order;
@@ -339,18 +378,27 @@ public sealed partial class SortProcessorDescriptor : SerializableDescriptor<Sor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SortProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SortProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the sorted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SortProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

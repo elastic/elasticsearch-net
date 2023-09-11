@@ -160,11 +160,22 @@ public sealed partial class CompositeAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// </summary>
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? After { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The number of composite buckets that should be returned.</para>
+	/// </summary>
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// </summary>
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }
 
@@ -208,6 +219,9 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
 	{
 		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
@@ -220,12 +234,18 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of composite buckets that should be returned.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor<TDocument> Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{
 		SourcesValue = sources;
@@ -322,6 +342,9 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
 	{
 		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
@@ -334,12 +357,18 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of composite buckets that should be returned.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value sources used to build composite buckets.<br/>Keys are returned in the order of the `sources` definition.</para>
+	/// </summary>
 	public CompositeAggregationDescriptor Sources(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? sources)
 	{
 		SourcesValue = sources;

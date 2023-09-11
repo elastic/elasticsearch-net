@@ -33,7 +33,7 @@ public sealed partial class GetTasksResponse : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("completed")]
 	public bool Completed { get; init; }
 	[JsonInclude, JsonPropertyName("response")]
-	public Elastic.Clients.Elasticsearch.Tasks.TaskStatus? Response { get; init; }
+	public object? Response { get; init; }
 	[JsonInclude, JsonPropertyName("task")]
 	public Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; init; }
 }

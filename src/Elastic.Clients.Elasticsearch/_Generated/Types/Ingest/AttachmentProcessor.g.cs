@@ -31,26 +31,54 @@ public sealed partial class AttachmentProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_chars")]
 	public long? IndexedChars { get; set; }
+
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_chars_field")]
 	public Elastic.Clients.Elasticsearch.Field? IndexedCharsField { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
+
+	/// <summary>
+	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("resource_name")]
 	public string? ResourceName { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -123,12 +151,18 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -147,36 +181,54 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedChars(long? indexedChars)
 	{
 		IndexedCharsValue = indexedChars;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField)
 	{
 		IndexedCharsFieldValue = indexedCharsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField<TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
 	{
 		IndexedCharsFieldValue = indexedCharsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> ResourceName(string? resourceName)
 	{
 		ResourceNameValue = resourceName;
@@ -189,12 +241,18 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -367,18 +425,27 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -397,42 +464,63 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and field does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of chars being used for extraction to prevent huge fields.<br/>Use `-1` for no limit.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IndexedChars(long? indexedChars)
 	{
 		IndexedCharsValue = indexedChars;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField(Elastic.Clients.Elasticsearch.Field? indexedCharsField)
 	{
 		IndexedCharsFieldValue = indexedCharsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> indexedCharsField)
 	{
 		IndexedCharsFieldValue = indexedCharsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IndexedCharsField<TDocument>(Expression<Func<TDocument, object>> indexedCharsField)
 	{
 		IndexedCharsFieldValue = indexedCharsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor ResourceName(string? resourceName)
 	{
 		ResourceNameValue = resourceName;
@@ -445,18 +533,27 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class ChiSquareHeuristic
 {
+	/// <summary>
+	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("background_is_superset")]
 	public bool BackgroundIsSuperset { get; set; }
+
+	/// <summary>
+	/// <para>Set to `false` to filter out the terms that appear less often in the subset than in documents outside the subset.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("include_negatives")]
 	public bool IncludeNegatives { get; set; }
 }
@@ -46,12 +53,18 @@ public sealed partial class ChiSquareHeuristicDescriptor : SerializableDescripto
 	private bool BackgroundIsSupersetValue { get; set; }
 	private bool IncludeNegativesValue { get; set; }
 
+	/// <summary>
+	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// </summary>
 	public ChiSquareHeuristicDescriptor BackgroundIsSuperset(bool backgroundIsSuperset = true)
 	{
 		BackgroundIsSupersetValue = backgroundIsSuperset;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `false` to filter out the terms that appear less often in the subset than in documents outside the subset.</para>
+	/// </summary>
 	public ChiSquareHeuristicDescriptor IncludeNegatives(bool includeNegatives = true)
 	{
 		IncludeNegativesValue = includeNegatives;

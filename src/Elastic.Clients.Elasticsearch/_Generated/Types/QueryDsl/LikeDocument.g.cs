@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class LikeDocument
 {
+	/// <summary>
+	/// <para>ID of a document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+	/// <summary>
+	/// <para>Index of a document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>A document not present in the index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
@@ -64,18 +75,27 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>ID of a document.</para>
+	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Index of a document.</para>
+	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A document not present in the index.</para>
+	/// </summary>
 	public LikeDocumentDescriptor<TDocument> Doc(object? doc)
 	{
 		DocValue = doc;
@@ -184,18 +204,27 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>ID of a document.</para>
+	/// </summary>
 	public LikeDocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Index of a document.</para>
+	/// </summary>
 	public LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A document not present in the index.</para>
+	/// </summary>
 	public LikeDocumentDescriptor Doc(object? doc)
 	{
 		DocValue = doc;

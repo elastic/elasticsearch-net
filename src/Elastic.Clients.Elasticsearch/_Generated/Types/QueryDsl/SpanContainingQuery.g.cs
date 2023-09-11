@@ -31,10 +31,18 @@ public sealed partial class SpanContainingQuery : SearchQuery
 {
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("big")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("little")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 
@@ -58,6 +66,9 @@ public sealed partial class SpanContainingQueryDescriptor<TDocument> : Serializa
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	public SpanContainingQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
 	{
 		BigDescriptor = null;
@@ -82,6 +93,9 @@ public sealed partial class SpanContainingQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	public SpanContainingQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
 	{
 		LittleDescriptor = null;
@@ -186,6 +200,9 @@ public sealed partial class SpanContainingQueryDescriptor : SerializableDescript
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	public SpanContainingQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery big)
 	{
 		BigDescriptor = null;
@@ -210,6 +227,9 @@ public sealed partial class SpanContainingQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Can be any span query.<br/>Matching spans from `big` that contain matches from `little` are returned.</para>
+	/// </summary>
 	public SpanContainingQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery little)
 	{
 		LittleDescriptor = null;

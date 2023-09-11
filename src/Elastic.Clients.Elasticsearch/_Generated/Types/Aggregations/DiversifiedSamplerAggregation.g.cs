@@ -197,12 +197,28 @@ public sealed partial class DiversifiedSamplerAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The type of value used for de-duplication.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHint { get; set; }
+
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Limits how many documents are permitted per choice of de-duplicating value.</para>
+	/// </summary>
 	public int? MaxDocsPerValue { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
 }
 
@@ -248,24 +264,36 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The type of value used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint)
 	{
 		ExecutionHintValue = executionHint;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many documents are permitted per choice of de-duplicating value.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor<TDocument> MaxDocsPerValue(int? maxDocsPerValue)
 	{
 		MaxDocsPerValueValue = maxDocsPerValue;
@@ -284,6 +312,9 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
@@ -394,30 +425,45 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The type of value used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? executionHint)
 	{
 		ExecutionHintValue = executionHint;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field used to provide values used for de-duplication.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many documents are permitted per choice of de-duplicating value.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor MaxDocsPerValue(int? maxDocsPerValue)
 	{
 		MaxDocsPerValueValue = maxDocsPerValue;
@@ -436,6 +482,9 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public DiversifiedSamplerAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;

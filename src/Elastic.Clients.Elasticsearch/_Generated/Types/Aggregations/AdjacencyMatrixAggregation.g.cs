@@ -125,6 +125,10 @@ public sealed partial class AdjacencyMatrixAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
@@ -168,6 +172,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor<TDocument> Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>, FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>> selector)
 	{
 		FiltersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>());
@@ -256,6 +263,9 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
+	/// </summary>
 	public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>, FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>> selector)
 	{
 		FiltersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>());

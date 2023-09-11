@@ -29,6 +29,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ClusterStatistics
 {
+	[JsonInclude, JsonPropertyName("details")]
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ClusterDetails>? Details { get; init; }
 	[JsonInclude, JsonPropertyName("skipped")]
 	public int Skipped { get; init; }
 	[JsonInclude, JsonPropertyName("successful")]
