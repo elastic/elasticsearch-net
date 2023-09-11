@@ -51,7 +51,7 @@ public class FunctionScoreQueryUsageTests : QueryDslUsageTestsBase
 	protected override Query QueryInitializer => new FunctionScoreQuery
 	{
 		QueryName = "named_query",
-		Boost = 1.1f,
+		Boost = 1.25f,
 		Query = new MatchAllQuery(),
 		BoostMode = FunctionBoostMode.Multiply,
 		ScoreMode = FunctionScoreMode.Sum,
@@ -71,7 +71,7 @@ public class FunctionScoreQueryUsageTests : QueryDslUsageTestsBase
 		queryDescriptor
 			.FunctionScore(c => c
 				.QueryName("named_query")
-				.Boost(1.1f)
+				.Boost(1.25f)
 				.Query(qq => qq.MatchAll())
 				.BoostMode(FunctionBoostMode.Multiply)
 				.ScoreMode(FunctionScoreMode.Sum)

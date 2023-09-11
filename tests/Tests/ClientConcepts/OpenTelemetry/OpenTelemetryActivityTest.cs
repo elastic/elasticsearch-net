@@ -63,6 +63,8 @@ public class OpenTelemetryActivityTest : ApiIntegrationTestBase<OpenTelemtryClus
 		_oTelActivity.Tags.Should().Contain(n => n.Key == "http.url" && n.Value == $"http://{TestElasticsearchClientSettings.LocalOrProxyHost}:9200/?pretty=true&error_trace=true");
 		_oTelActivity.Tags.Should().Contain(n => n.Key == "net.peer.name" && n.Value == TestElasticsearchClientSettings.LocalOrProxyHost);
 
+#if !NETFRAMEWORK
 		_oTelActivity.Status.Should().Be(ActivityStatusCode.Ok);
+#endif
 	}
 }

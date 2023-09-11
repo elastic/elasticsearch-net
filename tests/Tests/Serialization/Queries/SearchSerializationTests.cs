@@ -32,7 +32,7 @@ public class SearchSerializationTests : SerializerTestBase
 		{
 			Field = Infer.Field<Project>(d => d.Description),
 			Terms = new TermsQueryField(new FieldValue[] { "term1", "term2" }),
-			Boost = 1.2f
+			Boost = 1.25f
 		});
 
 		var json = SerializeAndGetJsonString(container);
@@ -45,7 +45,7 @@ public class SearchSerializationTests : SerializerTestBase
 	{
 		var container = new QueryDescriptor<Project>(q => q.
 			Terms(t => t
-				.Boost(1.2f)
+				.Boost(1.25f)
 				.Field(f => f.Description)
 				.Terms(new TermsQueryField(new FieldValue[] { "term1", "term2" }))));
 

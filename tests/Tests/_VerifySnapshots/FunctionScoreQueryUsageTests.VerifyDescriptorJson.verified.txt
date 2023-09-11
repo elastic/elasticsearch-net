@@ -1,7 +1,7 @@
 {
   query: {
     function_score: {
-      boost: 1.1,
+      boost: 1.25,
       boost_mode: multiply,
       functions: [
         {

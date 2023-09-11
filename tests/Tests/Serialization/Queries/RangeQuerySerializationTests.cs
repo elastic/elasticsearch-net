@@ -18,7 +18,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 	private static readonly DateRangeQuery DateRangeQueryWithoutFormat = new(Field)
 	{
 		QueryName = QueryName,
-		Boost = 1.1f,
+		Boost = 1.25f,
 		Gte = DateMath.Now.Subtract("1y").RoundTo(DateMathTimeUnit.Month),
 		Lt = DateMath.Now
 	};
@@ -26,7 +26,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 	private static readonly NumberRangeQuery NumberRangeQuery = new(Field)
 	{
 		QueryName = QueryName,
-		Boost = 1.1f,
+		Boost = 1.25f,
 		Gte = 100,
 		Lt = 1000
 	};
@@ -36,7 +36,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 		dateRangeQuery.Should().NotBeNull();
 		dateRangeQuery.QueryName.Should().Be(QueryName);
 		dateRangeQuery.Field.Should().Be(Field);
-		dateRangeQuery.Boost.Should().Be(1.1f);
+		dateRangeQuery.Boost.Should().Be(1.25f);
 		dateRangeQuery.Gte.ToString().Should().Be("now-1y/M");
 		dateRangeQuery.Lt.ToString().Should().Be("now");
 	}
@@ -46,7 +46,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 		dateRangeQuery.Should().NotBeNull();
 		dateRangeQuery.QueryName.Should().Be(QueryName);
 		dateRangeQuery.Field.Should().Be(Field);
-		dateRangeQuery.Boost.Should().Be(1.1f);
+		dateRangeQuery.Boost.Should().Be(1.25f);
 		dateRangeQuery.Gte.Should().Be(100);
 		dateRangeQuery.Lt.Should().Be(1000);
 	}
@@ -132,7 +132,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 				.DateRange(d => d
 					.Field(Field)
 					.QueryName(QueryName)
-					.Boost(1.1f)
+					.Boost(1.25f)
 					.Gte(DateMath.Now.Subtract("1y").RoundTo(DateMathTimeUnit.Month))
 					.Lt(DateMath.Now))));
 
@@ -167,7 +167,7 @@ public class RangeQuerySerializationTests : SerializerTestBase
 				.NumberRange(d => d
 					.Field(Field)
 					.QueryName(QueryName)
-					.Boost(1.1f)
+					.Boost(1.25f)
 					.Gte(100)
 					.Lt(1000))));
 

@@ -25,7 +25,15 @@ public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 
 		public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
+#if NETFRAMEWORK
+		public override void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None)
+		{
+			var buf = Encoding.UTF8.GetBytes(@"{""fromSourceSerializer"":true}");
+			stream.Write(buf, 0, buf.Length);
+		}
+#else
 		public override void Serialize<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None) => stream.Write(Encoding.UTF8.GetBytes(@"{""fromSourceSerializer"":true}"));
+#endif
 
 		public override Task SerializeAsync<T>(T data, Stream stream, SerializationFormatting formatting = SerializationFormatting.None, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 	}
@@ -64,6 +72,7 @@ public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 		await Verifier.VerifyJson(json);
 	}
 
+#if !NETFRAMEWORK
 	[U]
 	public async Task SerializesRawJson()
 	{
@@ -78,6 +87,7 @@ public class ScriptParamsSerializationTests : InstanceSerializerTestBase
 
 		await Verifier.VerifyJson(json);
 	}
+#endif
 
 	private class Person
 	{

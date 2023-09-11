@@ -1,6 +1,6 @@
 {
   shape: {
-    boost: 1.2,
+    boost: 1.25
     description: {
       indexed_shape: {
         id: deu,

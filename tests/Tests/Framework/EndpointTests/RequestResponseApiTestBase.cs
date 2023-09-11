@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Elastic.Elasticsearch.Ephemeral;
@@ -14,6 +15,9 @@ using Tests.Core.ManagedElasticsearch.Clusters;
 using Tests.Core.Serialization;
 using Tests.Domain.Helpers;
 using Tests.Framework.EndpointTests.TestState;
+#if NETFRAMEWORK
+using Tests.Framework.Extensions;
+#endif
 using Xunit;
 
 namespace Tests.Framework.EndpointTests

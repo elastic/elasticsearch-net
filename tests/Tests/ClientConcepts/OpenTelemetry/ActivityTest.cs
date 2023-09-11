@@ -51,7 +51,9 @@ public class ActivityTest
 			oTelActivity.Tags.Should().Contain(n => n.Key == "http.url" && n.Value == (url ?? "http://localhost:9200/?pretty=true&error_trace=true"));
 			oTelActivity.Tags.Should().Contain(n => n.Key == "net.peer.name" && n.Value == "localhost");
 
+#if !NETFRAMEWORK
 			oTelActivity.Status.Should().Be(ActivityStatusCode.Ok);
+#endif
 		}
 	}
 }

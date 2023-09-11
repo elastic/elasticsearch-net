@@ -1,0 +1,71 @@
+name: Windows tests
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+      - '*.asciidoc'
+      - '.editorconfig'
+      - 'docs/**'
+    branches:
+      - main
+    tags:
+      - "*.*.*"
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - '*.asciidoc'
+      - '.editorconfig'
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+defaults:
+  run:
+    shell: cmd
+
+jobs:
+  tests:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Fetch Tags
+        run: |
+          git fetch --prune --unshallow --tags
+          echo exit code $?
+          git tag --list
+
+      - name: NuGet package cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.[cf]sproj*') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: global.json
+
+      - name: Test
+        run: ./build.bat test --report
+
+      - name: Test Results
+        if: success() || failure()
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: 'build/output/junit-*.xml'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_failure: true
+          require_tests: true
+          check_name: Test Results
