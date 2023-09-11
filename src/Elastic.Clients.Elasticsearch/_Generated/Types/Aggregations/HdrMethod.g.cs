@@ -25,16 +25,45 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class ClusterStatistics
+public sealed partial class HdrMethod
 {
-	[JsonInclude, JsonPropertyName("details")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ClusterDetails>? Details { get; init; }
-	[JsonInclude, JsonPropertyName("skipped")]
-	public int Skipped { get; init; }
-	[JsonInclude, JsonPropertyName("successful")]
-	public int Successful { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public int Total { get; init; }
+	/// <summary>
+	/// <para>Specifies the resolution of values for the histogram in number of significant digits.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("number_of_significant_value_digits")]
+	public int? NumberOfSignificantValueDigits { get; set; }
+}
+
+public sealed partial class HdrMethodDescriptor : SerializableDescriptor<HdrMethodDescriptor>
+{
+	internal HdrMethodDescriptor(Action<HdrMethodDescriptor> configure) => configure.Invoke(this);
+
+	public HdrMethodDescriptor() : base()
+	{
+	}
+
+	private int? NumberOfSignificantValueDigitsValue { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the resolution of values for the histogram in number of significant digits.</para>
+	/// </summary>
+	public HdrMethodDescriptor NumberOfSignificantValueDigits(int? numberOfSignificantValueDigits)
+	{
+		NumberOfSignificantValueDigitsValue = numberOfSignificantValueDigits;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (NumberOfSignificantValueDigitsValue.HasValue)
+		{
+			writer.WritePropertyName("number_of_significant_value_digits");
+			writer.WriteNumberValue(NumberOfSignificantValueDigitsValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }
