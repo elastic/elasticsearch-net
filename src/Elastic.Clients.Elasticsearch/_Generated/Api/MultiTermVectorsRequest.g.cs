@@ -106,6 +106,8 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "mtermvectors";
+
 	/// <summary>
 	/// <para>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
 	/// </summary>
@@ -193,6 +195,8 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "mtermvectors";
 
 	public MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
@@ -320,6 +324,8 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "mtermvectors";
 
 	public MultiTermVectorsRequestDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);

@@ -43,6 +43,8 @@ public sealed partial class ListDanglingIndicesRequest : PlainRequest<ListDangli
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "dangling_indices.list_dangling_indices";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class ListDanglingIndicesRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "dangling_indices.list_dangling_indices";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

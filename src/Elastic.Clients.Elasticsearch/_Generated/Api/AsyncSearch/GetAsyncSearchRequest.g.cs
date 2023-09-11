@@ -62,6 +62,8 @@ public sealed partial class GetAsyncSearchRequest : PlainRequest<GetAsyncSearchR
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "async_search.get";
+
 	/// <summary>
 	/// <para>Specifies how long the async search should be available in the cluster.<br/>When not specified, the `keep_alive` set with the corresponding submit async request will be used.<br/>Otherwise, it is possible to override the value and extend the validity of the request.<br/>When this period expires, the search, if still running, is cancelled.<br/>If the search is completed, its saved results are deleted.</para>
 	/// </summary>
@@ -102,6 +104,8 @@ public sealed partial class GetAsyncSearchRequestDescriptor<TDocument> : Request
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "async_search.get";
+
 	public GetAsyncSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public GetAsyncSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 	public GetAsyncSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
@@ -137,6 +141,8 @@ public sealed partial class GetAsyncSearchRequestDescriptor : RequestDescriptor<
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "async_search.get";
 
 	public GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public GetAsyncSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);

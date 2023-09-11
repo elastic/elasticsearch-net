@@ -48,6 +48,8 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "scroll";
+
 	/// <summary>
 	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>
 	/// </summary>
@@ -83,6 +85,8 @@ public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "scroll";
 
 	public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 

@@ -92,6 +92,8 @@ public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "exists_source";
+
 	/// <summary>
 	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
 	/// </summary>
@@ -188,6 +190,8 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "exists_source";
+
 	public ExistsSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExistsSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -235,6 +239,8 @@ public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<Ex
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "exists_source";
 
 	public ExistsSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExistsSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

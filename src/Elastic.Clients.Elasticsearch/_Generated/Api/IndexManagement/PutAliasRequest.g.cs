@@ -57,6 +57,8 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.put_alias";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -120,6 +122,8 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_alias";
 
 	public PutAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutAliasRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -274,6 +278,8 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_alias";
 
 	public PutAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutAliasRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

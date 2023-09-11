@@ -71,6 +71,8 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_index_template";
+
 	/// <summary>
 	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
 	/// </summary>
@@ -112,6 +114,8 @@ public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.get_index_template";
 
 	public GetIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

@@ -63,6 +63,8 @@ public sealed partial class GetClusterSettingsRequest : PlainRequest<GetClusterS
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "cluster.get_settings";
+
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
@@ -104,6 +106,8 @@ public sealed partial class GetClusterSettingsRequestDescriptor : RequestDescrip
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "cluster.get_settings";
 
 	public GetClusterSettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetClusterSettingsRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

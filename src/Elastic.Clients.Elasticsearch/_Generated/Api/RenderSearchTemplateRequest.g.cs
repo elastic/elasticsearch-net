@@ -52,6 +52,8 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "render_search_template";
+
 	[JsonInclude, JsonPropertyName("file")]
 	public string? File { get; set; }
 	[JsonInclude, JsonPropertyName("params")]
@@ -76,6 +78,8 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "render_search_template";
 
 	public RenderSearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -146,6 +150,8 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "render_search_template";
 
 	public RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{

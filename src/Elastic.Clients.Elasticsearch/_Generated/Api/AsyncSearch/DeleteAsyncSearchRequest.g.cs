@@ -47,6 +47,8 @@ public sealed partial class DeleteAsyncSearchRequest : PlainRequest<DeleteAsyncS
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "async_search.delete";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor<TDocument> : Requ
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "async_search.delete";
 
 	public DeleteAsyncSearchRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -101,6 +105,8 @@ public sealed partial class DeleteAsyncSearchRequestDescriptor : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "async_search.delete";
 
 	public DeleteAsyncSearchRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

@@ -43,6 +43,8 @@ public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequest
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.stats";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class EnrichStatsRequestDescriptor : RequestDescriptor<Enr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.stats";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

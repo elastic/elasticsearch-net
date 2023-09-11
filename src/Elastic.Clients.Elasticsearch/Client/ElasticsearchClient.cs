@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -100,7 +99,7 @@ public partial class ElasticsearchClient
 		where TRequestParameters : RequestParameters, new() =>
 			DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
+	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>

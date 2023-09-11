@@ -67,6 +67,8 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.put_template";
+
 	/// <summary>
 	/// <para>If true, this request cannot replace or update existing index templates.</para>
 	/// </summary>
@@ -149,6 +151,8 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_template";
 
 	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);

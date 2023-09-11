@@ -71,6 +71,8 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.rollover";
+
 	/// <summary>
 	/// <para>If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover.</para>
 	/// </summary>
@@ -144,6 +146,8 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.rollover";
 
 	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
 	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

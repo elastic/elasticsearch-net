@@ -72,6 +72,8 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "open_point_in_time";
+
 	/// <summary>
 	/// <para>Specific the time to live for the point in time</para>
 	/// </summary>
@@ -124,6 +126,8 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "open_point_in_time";
+
 	public OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
@@ -161,6 +165,8 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "open_point_in_time";
 
 	public OpenPointInTimeRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);

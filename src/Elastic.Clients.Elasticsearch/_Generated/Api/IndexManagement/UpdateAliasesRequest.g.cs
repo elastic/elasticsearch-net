@@ -53,6 +53,8 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.update_aliases";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -88,6 +90,8 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.update_aliases";
 
 	public UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -190,6 +194,8 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.update_aliases";
 
 	public UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

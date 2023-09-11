@@ -83,6 +83,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "create";
+
 	[JsonIgnore]
 	public TDocument Document { get; set; }
 
@@ -159,6 +161,8 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "create";
 
 	public CreateRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public CreateRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);

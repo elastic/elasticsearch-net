@@ -57,6 +57,8 @@ public sealed partial class ExploreRequest : PlainRequest<ExploreRequestParamete
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "graph.explore";
+
 	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
@@ -114,6 +116,8 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "graph.explore";
 
 	public ExploreRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public ExploreRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -364,6 +368,8 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "graph.explore";
 
 	public ExploreRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public ExploreRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

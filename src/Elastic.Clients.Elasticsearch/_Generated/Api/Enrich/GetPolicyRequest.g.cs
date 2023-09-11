@@ -51,6 +51,8 @@ public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestPara
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.get_policy";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class GetPolicyRequestDescriptor : RequestDescriptor<GetPo
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.get_policy";
 
 	public GetPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
 	{

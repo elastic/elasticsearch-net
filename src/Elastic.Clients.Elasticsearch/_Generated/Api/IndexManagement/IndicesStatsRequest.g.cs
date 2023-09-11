@@ -104,6 +104,8 @@ public sealed partial class IndicesStatsRequest : PlainRequest<IndicesStatsReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.stats";
+
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>
 	/// </summary>
@@ -184,6 +186,8 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.stats";
+
 	public IndicesStatsRequestDescriptor<TDocument> CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public IndicesStatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public IndicesStatsRequestDescriptor<TDocument> FielddataFields(Elastic.Clients.Elasticsearch.Fields? fielddataFields) => Qs("fielddata_fields", fielddataFields);
@@ -235,6 +239,8 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.stats";
 
 	public IndicesStatsRequestDescriptor CompletionFields(Elastic.Clients.Elasticsearch.Fields? completionFields) => Qs("completion_fields", completionFields);
 	public IndicesStatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

@@ -66,6 +66,8 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_template";
+
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
@@ -101,6 +103,8 @@ public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<Get
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.get_template";
 
 	public GetTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public GetTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);

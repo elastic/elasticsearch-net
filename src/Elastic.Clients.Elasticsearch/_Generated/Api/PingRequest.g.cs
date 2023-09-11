@@ -43,6 +43,8 @@ public sealed partial class PingRequest : PlainRequest<PingRequestParameters>
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ping";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class PingRequestDescriptor : RequestDescriptor<PingReques
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ping";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

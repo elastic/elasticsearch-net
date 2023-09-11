@@ -62,6 +62,8 @@ public sealed partial class SplitIndexRequest : PlainRequest<SplitIndexRequestPa
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.split";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -113,6 +115,8 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.split";
 
 	public SplitIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -190,6 +194,8 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.split";
 
 	public SplitIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public SplitIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

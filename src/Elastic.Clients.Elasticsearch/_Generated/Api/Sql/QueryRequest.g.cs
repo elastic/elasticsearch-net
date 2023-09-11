@@ -44,6 +44,8 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "sql.query";
+
 	/// <summary>
 	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
 	/// </summary>
@@ -153,6 +155,8 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "sql.query";
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
@@ -461,6 +465,8 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "sql.query";
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }

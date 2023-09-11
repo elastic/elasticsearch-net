@@ -62,6 +62,8 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.create";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -123,6 +125,8 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.create";
 
 	public CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -270,6 +274,8 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.create";
 
 	public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

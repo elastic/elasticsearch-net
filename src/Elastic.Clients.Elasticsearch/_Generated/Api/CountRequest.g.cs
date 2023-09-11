@@ -121,6 +121,8 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "count";
+
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
@@ -229,6 +231,8 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "count";
+
 	public CountRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -321,6 +325,8 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "count";
 
 	public CountRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);

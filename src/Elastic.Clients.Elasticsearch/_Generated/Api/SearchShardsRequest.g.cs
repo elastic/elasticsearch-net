@@ -81,6 +81,8 @@ public sealed partial class SearchShardsRequest : PlainRequest<SearchShardsReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "search_shards";
+
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
@@ -135,6 +137,8 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "search_shards";
+
 	public SearchShardsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public SearchShardsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -169,6 +173,8 @@ public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<Se
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "search_shards";
 
 	public SearchShardsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchShardsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
