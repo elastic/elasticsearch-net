@@ -33,6 +33,10 @@ public sealed partial class ConstantScoreQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 
@@ -55,6 +59,9 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// </summary>
 	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)
 	{
 		FilterDescriptor = null;
@@ -140,6 +147,9 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
+	/// </summary>
 	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query filter)
 	{
 		FilterDescriptor = null;

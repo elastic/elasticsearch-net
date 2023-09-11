@@ -31,22 +31,42 @@ public sealed partial class DateProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("formats")]
 	public ICollection<string> Formats { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+
+	/// <summary>
+	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
 
@@ -117,18 +137,27 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Formats(ICollection<string> formats)
 	{
 		FormatsValue = formats;
@@ -147,6 +176,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Locale(string? locale)
 	{
 		LocaleValue = locale;
@@ -159,18 +191,27 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Timezone(string? timezone)
 	{
 		TimezoneValue = timezone;
@@ -325,24 +366,36 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	public DateProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	public DateProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
 	public DateProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	public DateProcessorDescriptor Formats(ICollection<string> formats)
 	{
 		FormatsValue = formats;
@@ -361,6 +414,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The locale to use when parsing the date, relevant when parsing month names or week days.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateProcessorDescriptor Locale(string? locale)
 	{
 		LocaleValue = locale;
@@ -373,24 +429,36 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	public DateProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	public DateProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
 	public DateProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timezone to use when parsing the date.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateProcessorDescriptor Timezone(string? timezone)
 	{
 		TimezoneValue = timezone;

@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class TermsPartition
 {
+	/// <summary>
+	/// <para>The number of partitions.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_partitions")]
 	public long NumPartitions { get; set; }
+
+	/// <summary>
+	/// <para>The partition number for this request.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("partition")]
 	public long Partition { get; set; }
 }
@@ -46,12 +53,18 @@ public sealed partial class TermsPartitionDescriptor : SerializableDescriptor<Te
 	private long NumPartitionsValue { get; set; }
 	private long PartitionValue { get; set; }
 
+	/// <summary>
+	/// <para>The number of partitions.</para>
+	/// </summary>
 	public TermsPartitionDescriptor NumPartitions(long numPartitions)
 	{
 		NumPartitionsValue = numPartitions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The partition number for this request.</para>
+	/// </summary>
 	public TermsPartitionDescriptor Partition(long partition)
 	{
 		PartitionValue = partition;

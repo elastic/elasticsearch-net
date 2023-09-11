@@ -31,6 +31,10 @@ public sealed partial class DotExpanderProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
@@ -39,6 +43,10 @@ public sealed partial class DotExpanderProcessor
 	public bool? IgnoreFailure { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("path")]
 	public string? Path { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
@@ -108,12 +116,18 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -132,6 +146,9 @@ public sealed partial class DotExpanderProcessorDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor<TDocument> Path(string? path)
 	{
 		PathValue = path;
@@ -275,18 +292,27 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to expand into an object field.<br/>If set to `*`, all top-level fields will be expanded.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -305,6 +331,9 @@ public sealed partial class DotExpanderProcessorDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that contains the field to expand.<br/>Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.</para>
+	/// </summary>
 	public DotExpanderProcessorDescriptor Path(string? path)
 	{
 		PathValue = path;

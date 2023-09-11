@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class GeoLinePoint
 {
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
@@ -43,12 +46,18 @@ public sealed partial class GeoLinePointDescriptor<TDocument> : SerializableDesc
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLinePointDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLinePointDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -74,18 +83,27 @@ public sealed partial class GeoLinePointDescriptor : SerializableDescriptor<GeoL
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLinePointDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLinePointDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLinePointDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;

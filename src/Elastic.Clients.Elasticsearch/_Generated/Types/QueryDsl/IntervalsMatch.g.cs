@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class IntervalsMatch
 {
+	/// <summary>
+	/// <para>Analyzer used to analyze terms in the query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>An optional interval filter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of positions between the matching terms.<br/>Terms further apart than this are not considered matches.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_gaps")]
 	public int? MaxGaps { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, matching terms must appear in their specified order.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ordered")]
 	public bool? Ordered { get; set; }
+
+	/// <summary>
+	/// <para>Text you wish to find in the provided field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -60,12 +83,18 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to analyze terms in the query.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An optional interval filter.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 	{
 		FilterDescriptor = null;
@@ -90,30 +119,45 @@ public sealed partial class IntervalsMatchDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of positions between the matching terms.<br/>Terms further apart than this are not considered matches.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> MaxGaps(int? maxGaps)
 	{
 		MaxGapsValue = maxGaps;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, matching terms must appear in their specified order.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> Ordered(bool? ordered = true)
 	{
 		OrderedValue = ordered;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text you wish to find in the provided field.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
@@ -186,12 +230,18 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to analyze terms in the query.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An optional interval filter.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
 	{
 		FilterDescriptor = null;
@@ -216,36 +266,54 @@ public sealed partial class IntervalsMatchDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of positions between the matching terms.<br/>Terms further apart than this are not considered matches.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor MaxGaps(int? maxGaps)
 	{
 		MaxGapsValue = maxGaps;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, matching terms must appear in their specified order.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor Ordered(bool? ordered = true)
 	{
 		OrderedValue = ordered;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Text you wish to find in the provided field.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsMatchDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
 	{
 		UseFieldValue = useField;

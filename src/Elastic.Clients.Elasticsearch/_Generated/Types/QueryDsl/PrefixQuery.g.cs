@@ -134,8 +134,20 @@ public sealed partial class PrefixQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public string? Rewrite { get; set; }
+
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public string Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -185,6 +197,9 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -203,12 +218,18 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Value(string value)
 	{
 		ValueValue = value;
@@ -287,6 +308,9 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public PrefixQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -311,12 +335,18 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public PrefixQueryDescriptor Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
+	/// </summary>
 	public PrefixQueryDescriptor Value(string value)
 	{
 		ValueValue = value;

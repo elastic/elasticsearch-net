@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class WeightedAverageValue
 {
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>A value or weight to use if the field is missing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
@@ -49,18 +56,27 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	private double? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A value or weight to use if the field is missing.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)
 	{
 		MissingValue = missing;
@@ -110,24 +126,36 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	private double? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A value or weight to use if the field is missing.</para>
+	/// </summary>
 	public WeightedAverageValueDescriptor Missing(double? missing)
 	{
 		MissingValue = missing;

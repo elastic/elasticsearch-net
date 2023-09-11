@@ -33,10 +33,22 @@ public sealed partial class ParentIdQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>ID of the parent document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
+
+	/// <summary>
+	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; set; }
 
@@ -71,18 +83,27 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>ID of the parent document.</para>
+	/// </summary>
 	public ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// </summary>
 	public ParentIdQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the child relationship mapped for the `join` field.</para>
+	/// </summary>
 	public ParentIdQueryDescriptor Type(string? type)
 	{
 		TypeValue = type;

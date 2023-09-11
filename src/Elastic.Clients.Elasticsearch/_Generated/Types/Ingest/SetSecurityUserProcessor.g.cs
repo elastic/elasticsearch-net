@@ -31,6 +31,10 @@ public sealed partial class SetSecurityUserProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
@@ -39,6 +43,10 @@ public sealed partial class SetSecurityUserProcessor
 	public bool? IgnoreFailure { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Controls what user related properties are added to the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
@@ -108,12 +116,18 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -132,6 +146,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what user related properties are added to the field.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;
@@ -275,18 +292,27 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to store the user information into.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -305,6 +331,9 @@ public sealed partial class SetSecurityUserProcessorDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what user related properties are added to the field.</para>
+	/// </summary>
 	public SetSecurityUserProcessorDescriptor Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;

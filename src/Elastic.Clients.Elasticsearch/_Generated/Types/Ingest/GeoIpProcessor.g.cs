@@ -29,26 +29,49 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class GeoIpProcessor
 {
+	/// <summary>
+	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("database_file")]
 	public string? DatabaseFile { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("first_only")]
 	public bool? FirstOnly { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -114,6 +137,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> DatabaseFile(string? databaseFile)
 	{
 		DatabaseFileValue = databaseFile;
@@ -126,18 +152,27 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> FirstOnly(bool? firstOnly = true)
 	{
 		FirstOnlyValue = firstOnly;
@@ -156,12 +191,18 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;
@@ -174,12 +215,18 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -339,6 +386,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor DatabaseFile(string? databaseFile)
 	{
 		DatabaseFileValue = databaseFile;
@@ -351,24 +401,36 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the ip address from for the geographical lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor FirstOnly(bool? firstOnly = true)
 	{
 		FirstOnlyValue = firstOnly;
@@ -387,12 +449,18 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what properties are added to the `target_field` based on the geoip lookup.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Properties(ICollection<string>? properties)
 	{
 		PropertiesValue = properties;
@@ -405,18 +473,27 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

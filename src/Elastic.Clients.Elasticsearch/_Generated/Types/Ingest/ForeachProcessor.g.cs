@@ -31,16 +31,28 @@ public sealed partial class ForeachProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Ingest processor to run on each element.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("processor")]
 	public Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
@@ -107,6 +119,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ingest processor to run on each element.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Processor(Elastic.Clients.Elasticsearch.Ingest.Processor processor)
 	{
 		ProcessorDescriptor = null;
@@ -137,12 +152,18 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -161,6 +182,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -317,6 +341,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ingest processor to run on each element.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.Processor processor)
 	{
 		ProcessorDescriptor = null;
@@ -347,18 +374,27 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -377,6 +413,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;

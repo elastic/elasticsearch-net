@@ -30,14 +30,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PathHierarchyTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int BufferSize { get; set; }
 	[JsonInclude, JsonPropertyName("delimiter")]
 	public string Delimiter { get; set; }
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string Replacement { get; set; }
 	[JsonInclude, JsonPropertyName("reverse")]
+	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool Reverse { get; set; }
 	[JsonInclude, JsonPropertyName("skip")]
+	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int Skip { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -102,15 +105,15 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("buffer_size");
-		writer.WriteNumberValue(BufferSizeValue);
+		JsonSerializer.Serialize(writer, BufferSizeValue, options);
 		writer.WritePropertyName("delimiter");
 		writer.WriteStringValue(DelimiterValue);
 		writer.WritePropertyName("replacement");
 		writer.WriteStringValue(ReplacementValue);
 		writer.WritePropertyName("reverse");
-		writer.WriteBooleanValue(ReverseValue);
+		JsonSerializer.Serialize(writer, ReverseValue, options);
 		writer.WritePropertyName("skip");
-		writer.WriteNumberValue(SkipValue);
+		JsonSerializer.Serialize(writer, SkipValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("path_hierarchy");
 		if (VersionValue is not null)

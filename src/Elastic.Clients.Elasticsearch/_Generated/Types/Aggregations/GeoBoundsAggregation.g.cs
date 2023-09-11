@@ -167,6 +167,10 @@ public sealed partial class GeoBoundsAggregation : SearchAggregation
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// </summary>
 	public bool? WrapLongitude { get; set; }
 }
 
@@ -214,6 +218,9 @@ public sealed partial class GeoBoundsAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// </summary>
 	public GeoBoundsAggregationDescriptor<TDocument> WrapLongitude(bool? wrapLongitude = true)
 	{
 		WrapLongitudeValue = wrapLongitude;
@@ -310,6 +317,9 @@ public sealed partial class GeoBoundsAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies whether the bounding box should be allowed to overlap the international date line.</para>
+	/// </summary>
 	public GeoBoundsAggregationDescriptor WrapLongitude(bool? wrapLongitude = true)
 	{
 		WrapLongitudeValue = wrapLongitude;

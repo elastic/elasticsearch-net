@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class Alias
 {
+	/// <summary>
+	/// <para>Query used to limit documents the alias can access.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
+
+	/// <summary>
+	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the alias is hidden.<br/>All indices for the alias must have the same `is_hidden` value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_hidden")]
 	public bool? IsHidden { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the index is the write index for the alias.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_write_index")]
 	public bool? IsWriteIndex { get; set; }
+
+	/// <summary>
+	/// <para>Value used to route indexing and search operations to a specific shard.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+	/// <summary>
+	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
 }
@@ -60,6 +83,9 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
+	/// <summary>
+	/// <para>Query used to limit documents the alias can access.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -84,30 +110,45 @@ public sealed partial class AliasDescriptor<TDocument> : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
 	{
 		IndexRoutingValue = indexRouting;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the alias is hidden.<br/>All indices for the alias must have the same `is_hidden` value.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> IsHidden(bool? isHidden = true)
 	{
 		IsHiddenValue = isHidden;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the index is the write index for the alias.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> IsWriteIndex(bool? isWriteIndex = true)
 	{
 		IsWriteIndexValue = isWriteIndex;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route indexing and search operations to a specific shard.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.</para>
+	/// </summary>
 	public AliasDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
 	{
 		SearchRoutingValue = searchRouting;
@@ -184,6 +225,9 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? SearchRoutingValue { get; set; }
 
+	/// <summary>
+	/// <para>Query used to limit documents the alias can access.</para>
+	/// </summary>
 	public AliasDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -208,30 +252,45 @@ public sealed partial class AliasDescriptor : SerializableDescriptor<AliasDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route indexing operations to a specific shard.<br/>If specified, this overwrites the `routing` value for indexing operations.</para>
+	/// </summary>
 	public AliasDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? indexRouting)
 	{
 		IndexRoutingValue = indexRouting;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the alias is hidden.<br/>All indices for the alias must have the same `is_hidden` value.</para>
+	/// </summary>
 	public AliasDescriptor IsHidden(bool? isHidden = true)
 	{
 		IsHiddenValue = isHidden;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the index is the write index for the alias.</para>
+	/// </summary>
 	public AliasDescriptor IsWriteIndex(bool? isWriteIndex = true)
 	{
 		IsWriteIndexValue = isWriteIndex;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route indexing and search operations to a specific shard.</para>
+	/// </summary>
 	public AliasDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to route search operations to a specific shard.<br/>If specified, this overwrites the `routing` value for search operations.</para>
+	/// </summary>
 	public AliasDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? searchRouting)
 	{
 		SearchRoutingValue = searchRouting;

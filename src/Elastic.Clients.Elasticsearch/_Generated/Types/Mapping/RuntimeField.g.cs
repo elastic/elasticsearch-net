@@ -34,6 +34,10 @@ public sealed partial class RuntimeField
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fetch_fields")]
 	public ICollection<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>? FetchFields { get; set; }
+
+	/// <summary>
+	/// <para>A custom format for `date` type runtime fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
@@ -42,6 +46,10 @@ public sealed partial class RuntimeField
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input_field")]
 	public Elastic.Clients.Elasticsearch.Field? InputField { get; set; }
+
+	/// <summary>
+	/// <para>Painless script executed at query time.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -56,6 +64,10 @@ public sealed partial class RuntimeField
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? TargetIndex { get; set; }
+
+	/// <summary>
+	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
@@ -118,6 +130,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A custom format for `date` type runtime fields.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -142,6 +157,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Painless script executed at query time.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -175,6 +193,9 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
 	{
 		TypeValue = type;
@@ -309,6 +330,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A custom format for `date` type runtime fields.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor Format(string? format)
 	{
 		FormatValue = format;
@@ -342,6 +366,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Painless script executed at query time.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -384,6 +411,9 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field type, which can be: `boolean`, `composite`, `date`, `double`, `geo_point`, `ip`,`keyword`, `long`, or `lookup`.</para>
+	/// </summary>
 	public RuntimeFieldDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType type)
 	{
 		TypeValue = type;

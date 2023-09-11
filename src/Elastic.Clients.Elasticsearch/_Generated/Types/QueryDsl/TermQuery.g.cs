@@ -122,7 +122,15 @@ public sealed partial class TermQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -171,6 +179,9 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public TermQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -189,6 +200,9 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public TermQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.FieldValue value)
 	{
 		ValueValue = value;
@@ -260,6 +274,9 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public TermQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -284,6 +301,9 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Term you wish to find in the provided field.</para>
+	/// </summary>
 	public TermQueryDescriptor Value(Elastic.Clients.Elasticsearch.FieldValue value)
 	{
 		ValueValue = value;

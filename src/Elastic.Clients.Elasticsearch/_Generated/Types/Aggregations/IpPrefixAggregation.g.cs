@@ -206,7 +206,7 @@ public sealed partial class IpPrefixAggregation : SearchAggregation
 	public bool? AppendPrefixLength { get; set; }
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -222,7 +222,7 @@ public sealed partial class IpPrefixAggregation : SearchAggregation
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
-	/// <para>Minimum number of documents for buckets to be included in the response.</para>
+	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	public long? MinDocCount { get; set; }
 	override public string? Name { get; internal set; }
@@ -286,7 +286,7 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -295,7 +295,7 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -328,7 +328,7 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
-	/// <para>Minimum number of documents for buckets to be included in the response.</para>
+	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
@@ -458,7 +458,7 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
@@ -467,7 +467,7 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
@@ -476,7 +476,7 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>The document IP address field to aggregation on. The field mapping type must be `ip`</para>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
@@ -509,7 +509,7 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	}
 
 	/// <summary>
-	/// <para>Minimum number of documents for buckets to be included in the response.</para>
+	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor MinDocCount(long? minDocCount)
 	{

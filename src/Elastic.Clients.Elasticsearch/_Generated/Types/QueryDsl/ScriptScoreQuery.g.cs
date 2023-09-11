@@ -33,10 +33,22 @@ public sealed partial class ScriptScoreQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>Query used to return documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+
+	/// <summary>
+	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
@@ -61,6 +73,9 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Query used to return documents.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -97,12 +112,18 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptValue = script;
@@ -168,6 +189,9 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Query used to return documents.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -204,12 +228,18 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor MinScore(float? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptValue = script;

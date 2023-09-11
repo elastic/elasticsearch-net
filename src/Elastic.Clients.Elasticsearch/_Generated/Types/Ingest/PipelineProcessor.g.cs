@@ -35,8 +35,16 @@ public sealed partial class PipelineProcessor
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing_pipeline")]
 	public bool? IgnoreMissingPipeline { get; set; }
+
+	/// <summary>
+	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
@@ -120,12 +128,18 @@ public sealed partial class PipelineProcessorDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> IgnoreMissingPipeline(bool? ignoreMissingPipeline = true)
 	{
 		IgnoreMissingPipelineValue = ignoreMissingPipeline;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// </summary>
 	public PipelineProcessorDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		NameValue = name;
@@ -281,12 +295,18 @@ public sealed partial class PipelineProcessorDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Whether to ignore missing pipelines instead of failing.</para>
+	/// </summary>
 	public PipelineProcessorDescriptor IgnoreMissingPipeline(bool? ignoreMissingPipeline = true)
 	{
 		IgnoreMissingPipelineValue = ignoreMissingPipeline;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the pipeline to execute.<br/>Supports template snippets.</para>
+	/// </summary>
 	public PipelineProcessorDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
 		NameValue = name;

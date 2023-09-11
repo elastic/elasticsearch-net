@@ -232,6 +232,16 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>("parent", ref reader, options);
 		}
 
+		if (propertyName == "percentile_ranks")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>("percentile_ranks", ref reader, options);
+		}
+
+		if (propertyName == "percentiles")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation?>("percentiles", ref reader, options);
+		}
+
 		if (propertyName == "percentiles_bucket")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>("percentiles_bucket", ref reader, options);
@@ -543,6 +553,16 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	public AggregationDescriptor<TDocument> Parent(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("parent", configure));
+	}
+
+	public AggregationDescriptor<TDocument> PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
+	}
+
+	public AggregationDescriptor<TDocument> Percentiles(string name, Action<PercentilesAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
 	}
 
 	public AggregationDescriptor<TDocument> PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
@@ -997,6 +1017,26 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	public AggregationDescriptor Parent<TDocument>(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
 	{
 		return SetContainer(name, Aggregation.CreateWithAction("parent", configure));
+	}
+
+	public AggregationDescriptor PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
+	}
+
+	public AggregationDescriptor PercentileRanks<TDocument>(string name, Action<PercentileRanksAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
+	}
+
+	public AggregationDescriptor Percentiles(string name, Action<PercentilesAggregationDescriptor> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
+	}
+
+	public AggregationDescriptor Percentiles<TDocument>(string name, Action<PercentilesAggregationDescriptor<TDocument>> configure)
+	{
+		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
 	}
 
 	public AggregationDescriptor PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)

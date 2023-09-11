@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class DateIndexNameProcessor
 {
+	/// <summary>
+	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("date_formats")]
 	public ICollection<string> DateFormats { get; set; }
 
@@ -39,22 +42,42 @@ public sealed partial class DateIndexNameProcessor
 	public string DateRounding { get; set; }
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name_format")]
 	public string? IndexNameFormat { get; set; }
+
+	/// <summary>
+	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index_name_prefix")]
 	public string? IndexNamePrefix { get; set; }
+
+	/// <summary>
+	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
 
@@ -121,6 +144,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> DateFormats(ICollection<string> dateFormats)
 	{
 		DateFormatsValue = dateFormats;
@@ -142,12 +168,18 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -166,18 +198,27 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> IndexNameFormat(string? indexNameFormat)
 	{
 		IndexNameFormatValue = indexNameFormat;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> IndexNamePrefix(string? indexNamePrefix)
 	{
 		IndexNamePrefixValue = indexNamePrefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Locale(string? locale)
 	{
 		LocaleValue = locale;
@@ -190,6 +231,9 @@ public sealed partial class DateIndexNameProcessorDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor<TDocument> Timezone(string? timezone)
 	{
 		TimezoneValue = timezone;
@@ -348,6 +392,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of the expected date formats for parsing dates / timestamps in the document being preprocessed.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor DateFormats(ICollection<string> dateFormats)
 	{
 		DateFormatsValue = dateFormats;
@@ -369,18 +416,27 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to get the date or timestamp from.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -399,18 +455,27 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The format to be used when printing the parsed date into the index name.<br/>A valid java time pattern is expected here.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor IndexNameFormat(string? indexNameFormat)
 	{
 		IndexNameFormatValue = indexNameFormat;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A prefix of the index name to be prepended before the printed date.<br/>Supports template snippets.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor IndexNamePrefix(string? indexNamePrefix)
 	{
 		IndexNamePrefixValue = indexNamePrefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The locale to use when parsing the date from the document being preprocessed, relevant when parsing month names or week days.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor Locale(string? locale)
 	{
 		LocaleValue = locale;
@@ -423,6 +488,9 @@ public sealed partial class DateIndexNameProcessorDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The timezone to use when parsing the date and when date math index supports resolves expressions into concrete index names.</para>
+	/// </summary>
 	public DateIndexNameProcessorDescriptor Timezone(string? timezone)
 	{
 		TimezoneValue = timezone;

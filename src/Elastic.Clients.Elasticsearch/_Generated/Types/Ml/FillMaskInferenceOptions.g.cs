@@ -33,6 +33,12 @@ namespace Elastic.Clients.Elasticsearch.Ml;
 public sealed partial class FillMaskInferenceOptions
 {
 	/// <summary>
+	/// <para>The string/token which will be removed from incoming documents and replaced with the inference prediction(s).<br/>In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer<br/>has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.<br/>However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,<br/>otherwise the request will fail.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("mask_token")]
+	public string? MaskToken { get; set; }
+
+	/// <summary>
 	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_classes")]
@@ -64,11 +70,21 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	{
 	}
 
+	private string? MaskTokenValue { get; set; }
 	private int? NumTopClassesValue { get; set; }
 	private string? ResultsFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ml.TokenizationConfig? TokenizationValue { get; set; }
 	private TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>The string/token which will be removed from incoming documents and replaced with the inference prediction(s).<br/>In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer<br/>has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.<br/>However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,<br/>otherwise the request will fail.</para>
+	/// </summary>
+	public FillMaskInferenceOptionsDescriptor MaskToken(string? maskToken)
+	{
+		MaskTokenValue = maskToken;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the number of top class predictions to return. Defaults to 0.</para>
@@ -118,6 +134,12 @@ public sealed partial class FillMaskInferenceOptionsDescriptor : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(MaskTokenValue))
+		{
+			writer.WritePropertyName("mask_token");
+			writer.WriteStringValue(MaskTokenValue);
+		}
+
 		if (NumTopClassesValue.HasValue)
 		{
 			writer.WritePropertyName("num_top_classes");

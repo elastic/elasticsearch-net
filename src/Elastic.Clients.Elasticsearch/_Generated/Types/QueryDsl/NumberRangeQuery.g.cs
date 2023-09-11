@@ -187,9 +187,25 @@ public sealed partial class NumberRangeQuery : RangeQuery
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
 	public double? From { get; set; }
+
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public double? Gt { get; set; }
+
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public double? Gte { get; set; }
+
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public double? Lt { get; set; }
+
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public double? Lte { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	public double? To { get; set; }
@@ -263,24 +279,36 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Gt(double? gt)
 	{
 		GtValue = gt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Gte(double? gte)
 	{
 		GteValue = gte;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Lt(double? lt)
 	{
 		LtValue = lt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Lte(double? lte)
 	{
 		LteValue = lte;
@@ -427,24 +455,36 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Gt(double? gt)
 	{
 		GtValue = gt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Gte(double? gte)
 	{
 		GteValue = gte;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Lt(double? lt)
 	{
 		LtValue = lt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Lte(double? lte)
 	{
 		LteValue = lte;

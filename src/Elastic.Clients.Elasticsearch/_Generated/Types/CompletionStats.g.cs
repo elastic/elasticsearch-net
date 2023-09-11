@@ -32,8 +32,16 @@ public sealed partial class CompletionStats
 	[JsonInclude, JsonPropertyName("fields")]
 	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.FieldSizeUsage))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldSizeUsage>? Fields { get; init; }
+
+	/// <summary>
+	/// <para>Total amount of memory used for completion across all shards assigned to selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; init; }
+
+	/// <summary>
+	/// <para>Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size_in_bytes")]
 	public long SizeInBytes { get; init; }
 }

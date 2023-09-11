@@ -29,12 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class Pipeline
 {
+	/// <summary>
+	/// <para>Description of the ingest pipeline.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Processors to run immediately after a processor failure.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Processors used to perform transformations on documents before indexing.<br/>Processors run sequentially in the order specified.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("processors")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? Processors { get; set; }
+
+	/// <summary>
+	/// <para>Version number used by external systems to track ingest pipelines.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 }
@@ -58,6 +73,9 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 	private string? DescriptionValue { get; set; }
 	private long? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Processors to run immediately after a processor failure.</para>
+	/// </summary>
 	public PipelineDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -94,6 +112,9 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Processors used to perform transformations on documents before indexing.<br/>Processors run sequentially in the order specified.</para>
+	/// </summary>
 	public PipelineDescriptor<TDocument> Processors(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? processors)
 	{
 		ProcessorsDescriptor = null;
@@ -130,12 +151,18 @@ public sealed partial class PipelineDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the ingest pipeline.</para>
+	/// </summary>
 	public PipelineDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Version number used by external systems to track ingest pipelines.</para>
+	/// </summary>
 	public PipelineDescriptor<TDocument> Version(long? version)
 	{
 		VersionValue = version;
@@ -242,6 +269,9 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 	private string? DescriptionValue { get; set; }
 	private long? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Processors to run immediately after a processor failure.</para>
+	/// </summary>
 	public PipelineDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -278,6 +308,9 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Processors used to perform transformations on documents before indexing.<br/>Processors run sequentially in the order specified.</para>
+	/// </summary>
 	public PipelineDescriptor Processors(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? processors)
 	{
 		ProcessorsDescriptor = null;
@@ -314,12 +347,18 @@ public sealed partial class PipelineDescriptor : SerializableDescriptor<Pipeline
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the ingest pipeline.</para>
+	/// </summary>
 	public PipelineDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Version number used by external systems to track ingest pipelines.</para>
+	/// </summary>
 	public PipelineDescriptor Version(long? version)
 	{
 		VersionValue = version;

@@ -29,12 +29,19 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class InlineScript
 {
+	/// <summary>
+	/// <para>Specifies the language the script is written in.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Language { get; set; }
 	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, string>? Options { get; set; }
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>The script source.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; set; }
 }
@@ -52,6 +59,9 @@ public sealed partial class InlineScriptDescriptor : SerializableDescriptor<Inli
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private string SourceValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the language the script is written in.</para>
+	/// </summary>
 	public InlineScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage? language)
 	{
 		LanguageValue = language;
@@ -70,6 +80,9 @@ public sealed partial class InlineScriptDescriptor : SerializableDescriptor<Inli
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The script source.</para>
+	/// </summary>
 	public InlineScriptDescriptor Source(string source)
 	{
 		SourceValue = source;

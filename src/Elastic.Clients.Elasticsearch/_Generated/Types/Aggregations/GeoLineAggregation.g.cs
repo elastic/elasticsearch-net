@@ -163,12 +163,31 @@ public sealed partial class GeoLineAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
+	/// </summary>
 	public bool? IncludeSort { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
+
+	/// <summary>
+	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
+	/// </summary>
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>The name of the numeric field to use as the sort key for ordering the points.<br/>When the `geo_line` aggregation is nested inside a `time_series` aggregation, this field defaults to `@timestamp`, and any other value will result in error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
+
+	/// <summary>
+	/// <para>The order in which the line is sorted (ascending or descending).</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
 }
 
@@ -191,6 +210,9 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? SortOrderValue { get; set; }
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
 	{
 		PointDescriptor = null;
@@ -215,6 +237,9 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the numeric field to use as the sort key for ordering the points.<br/>When the `geo_line` aggregation is nested inside a `time_series` aggregation, this field defaults to `@timestamp`, and any other value will result in error.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
 	{
 		SortDescriptor = null;
@@ -239,6 +264,9 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true)
 	{
 		IncludeSortValue = includeSort;
@@ -251,12 +279,18 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The order in which the line is sorted (ascending or descending).</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder)
 	{
 		SortOrderValue = sortOrder;
@@ -348,6 +382,9 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? SortOrderValue { get; set; }
 
+	/// <summary>
+	/// <para>The name of the geo_point field.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
 	{
 		PointDescriptor = null;
@@ -372,6 +409,9 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the numeric field to use as the sort key for ordering the points.<br/>When the `geo_line` aggregation is nested inside a `time_series` aggregation, this field defaults to `@timestamp`, and any other value will result in error.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
 	{
 		SortDescriptor = null;
@@ -396,6 +436,9 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor IncludeSort(bool? includeSort = true)
 	{
 		IncludeSortValue = includeSort;
@@ -408,12 +451,18 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The order in which the line is sorted (ascending or descending).</para>
+	/// </summary>
 	public GeoLineAggregationDescriptor SortOrder(Elastic.Clients.Elasticsearch.SortOrder? sortOrder)
 	{
 		SortOrderValue = sortOrder;

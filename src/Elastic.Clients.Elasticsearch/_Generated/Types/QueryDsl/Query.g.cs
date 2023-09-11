@@ -85,6 +85,7 @@ public sealed partial class Query
 	public static Query RankFeature(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery rankFeatureQuery) => new Query("rank_feature", rankFeatureQuery);
 	public static Query RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery rawJsonQuery) => new Query("raw_json", rawJsonQuery);
 	public static Query Regexp(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery regexpQuery) => new Query("regexp", regexpQuery);
+	public static Query RuleQuery(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery ruleQuery) => new Query("rule_query", ruleQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
 	public static Query SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new Query("simple_query_string", simpleQueryStringQuery);
@@ -359,6 +360,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			return new Query(propertyName, variant);
 		}
 
+		if (propertyName == "rule_query")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
 		if (propertyName == "script")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery?>(ref reader, options);
@@ -597,6 +605,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "regexp":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery)value.Variant, options);
 					break;
+				case "rule_query":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery)value.Variant, options);
+					break;
 				case "script":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery)value.Variant, options);
 					break;
@@ -753,6 +764,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> RawJson(Elastic.Clients.Elasticsearch.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
 	public QueryDescriptor<TDocument> Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor<TDocument> Regexp(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
+	public QueryDescriptor<TDocument> RuleQuery(RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
+	public QueryDescriptor<TDocument> RuleQuery(Action<RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
 	public QueryDescriptor<TDocument> Script(ScriptQuery scriptQuery) => Set(scriptQuery, "script");
 	public QueryDescriptor<TDocument> Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor<TDocument> ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
@@ -943,6 +956,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor Regexp(Action<RegexpQueryDescriptor> configure) => Set(configure, "regexp");
 	public QueryDescriptor Regexp<TDocument>(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
+	public QueryDescriptor RuleQuery(RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
+	public QueryDescriptor RuleQuery(Action<RuleQueryDescriptor> configure) => Set(configure, "rule_query");
+	public QueryDescriptor RuleQuery<TDocument>(Action<RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
 	public QueryDescriptor Script(ScriptQuery scriptQuery) => Set(scriptQuery, "script");
 	public QueryDescriptor Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");

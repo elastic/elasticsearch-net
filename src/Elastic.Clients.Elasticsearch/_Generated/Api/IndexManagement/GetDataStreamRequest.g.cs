@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class GetDataStreamRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
@@ -43,7 +43,7 @@ public sealed class GetDataStreamRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns data streams.</para>
+/// <para>Retrieves information about one or more data streams.</para>
 /// </summary>
 public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -75,7 +75,7 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 }
 
 /// <summary>
-/// <para>Returns data streams.</para>
+/// <para>Retrieves information about one or more data streams.</para>
 /// </summary>
 public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<GetDataStreamRequestDescriptor, GetDataStreamRequestParameters>
 {

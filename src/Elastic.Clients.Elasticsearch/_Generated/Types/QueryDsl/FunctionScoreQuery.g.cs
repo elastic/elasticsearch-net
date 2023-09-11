@@ -33,16 +33,40 @@ public sealed partial class FunctionScoreQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Defines how he newly computed score is combined with the score of the query</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostMode { get; set; }
+
+	/// <summary>
+	/// <para>One or more functions that compute a new score for each document returned by the query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("functions")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? Functions { get; set; }
+
+	/// <summary>
+	/// <para>Restricts the new score to not exceed the provided limit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_boost")]
 	public double? MaxBoost { get; set; }
+
+	/// <summary>
+	/// <para>Excludes documents that do not meet the provided score threshold.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>A query that determines the documents for which a new score is computed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
+
+	/// <summary>
+	/// <para>Specifies how the computed scores are combined</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
@@ -73,6 +97,9 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
+	/// <summary>
+	/// <para>One or more functions that compute a new score for each document returned by the query.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? functions)
 	{
 		FunctionsDescriptor = null;
@@ -109,6 +136,9 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A query that determines the documents for which a new score is computed.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -145,24 +175,36 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines how he newly computed score is combined with the score of the query</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? boostMode)
 	{
 		BoostModeValue = boostMode;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Restricts the new score to not exceed the provided limit.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> MaxBoost(double? maxBoost)
 	{
 		MaxBoostValue = maxBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Excludes documents that do not meet the provided score threshold.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how the computed scores are combined</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? scoreMode)
 	{
 		ScoreModeValue = scoreMode;
@@ -281,6 +323,9 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
+	/// <summary>
+	/// <para>One or more functions that compute a new score for each document returned by the query.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor Functions(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? functions)
 	{
 		FunctionsDescriptor = null;
@@ -317,6 +362,9 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A query that determines the documents for which a new score is computed.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -353,24 +401,36 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines how he newly computed score is combined with the score of the query</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor BoostMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? boostMode)
 	{
 		BoostModeValue = boostMode;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Restricts the new score to not exceed the provided limit.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor MaxBoost(double? maxBoost)
 	{
 		MaxBoostValue = maxBoost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Excludes documents that do not meet the provided score threshold.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor MinScore(double? minScore)
 	{
 		MinScoreValue = minScore;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how the computed scores are combined</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? scoreMode)
 	{
 		ScoreModeValue = scoreMode;
