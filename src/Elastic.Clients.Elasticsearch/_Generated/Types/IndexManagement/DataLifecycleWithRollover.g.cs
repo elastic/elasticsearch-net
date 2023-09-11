@@ -32,8 +32,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 /// </summary>
 public sealed partial class DataLifecycleWithRollover
 {
+	/// <summary>
+	/// <para>If defined, every document added to this data stream will be stored at least for this time frame.<br/>Any time after this duration the document could be deleted.<br/>When empty, every document in this data stream will be stored indefinitely.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("data_retention")]
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; init; }
+
+	/// <summary>
+	/// <para>The conditions which will trigger the rollover of a backing index as configured by the cluster setting `cluster.lifecycle.default.rollover`.<br/>This property is an implementation detail and it will only be retrieved when the query param `include_defaults` is set to true.<br/>The contents of this field are subject to change.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rollover")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DlmRolloverConditions? Rollover { get; init; }
 }

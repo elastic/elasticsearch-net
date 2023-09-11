@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class StoredScriptId
 {
+	/// <summary>
+	/// <para>The `id` for a stored script.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 	[JsonInclude, JsonPropertyName("params")]
@@ -46,6 +49,9 @@ public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<St
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 
+	/// <summary>
+	/// <para>The `id` for a stored script.</para>
+	/// </summary>
 	public StoredScriptIdDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;

@@ -34,7 +34,7 @@ public sealed class MigrateToDataStreamRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Migrates an alias to a data stream</para>
+/// <para>Converts an index alias to a data stream.<br/>You must have a matching index template that is data stream enabled.<br/>The alias must meet the following criteria:<br/>The alias must have a write index;<br/>All indices for the alias must have a `@timestamp` field mapping of a `date` or `date_nanos` field type;<br/>The alias must not have any filters;<br/>The alias must not use custom routing.<br/>If successful, the request removes the alias and creates a data stream with the same name.<br/>The indices for the alias become hidden backing indices for the stream.<br/>The write index for the alias becomes the write index for the stream.</para>
 /// </summary>
 public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToDataStreamRequestParameters>
 {
@@ -50,7 +50,7 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 }
 
 /// <summary>
-/// <para>Migrates an alias to a data stream</para>
+/// <para>Converts an index alias to a data stream.<br/>You must have a matching index template that is data stream enabled.<br/>The alias must meet the following criteria:<br/>The alias must have a write index;<br/>All indices for the alias must have a `@timestamp` field mapping of a `date` or `date_nanos` field type;<br/>The alias must not have any filters;<br/>The alias must not use custom routing.<br/>If successful, the request removes the alias and creates a data stream with the same name.<br/>The indices for the alias become hidden backing indices for the stream.<br/>The write index for the alias becomes the write index for the stream.</para>
 /// </summary>
 public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescriptor<MigrateToDataStreamRequestDescriptor, MigrateToDataStreamRequestParameters>
 {

@@ -161,10 +161,22 @@ public sealed partial class FiltersAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>Collection of queries from which to build buckets.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filters { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Set to `true` to add a bucket to the response which will contain all documents that do not match any of the given filters.</para>
+	/// </summary>
 	public bool? OtherBucket { get; set; }
+
+	/// <summary>
+	/// <para>The key with which the other bucket is returned.</para>
+	/// </summary>
 	public string? OtherBucketKey { get; set; }
 }
 
@@ -208,6 +220,9 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Collection of queries from which to build buckets.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
@@ -220,12 +235,18 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `true` to add a bucket to the response which will contain all documents that do not match any of the given filters.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor<TDocument> OtherBucket(bool? otherBucket = true)
 	{
 		OtherBucketValue = otherBucket;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The key with which the other bucket is returned.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor<TDocument> OtherBucketKey(string? otherBucketKey)
 	{
 		OtherBucketKeyValue = otherBucketKey;
@@ -322,6 +343,9 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Collection of queries from which to build buckets.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
@@ -334,12 +358,18 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `true` to add a bucket to the response which will contain all documents that do not match any of the given filters.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor OtherBucket(bool? otherBucket = true)
 	{
 		OtherBucketValue = otherBucket;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The key with which the other bucket is returned.</para>
+	/// </summary>
 	public FiltersAggregationDescriptor OtherBucketKey(string? otherBucketKey)
 	{
 		OtherBucketKeyValue = otherBucketKey;

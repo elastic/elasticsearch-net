@@ -31,26 +31,54 @@ public sealed partial class EnrichProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_matches")]
 	public int? MaxMatches { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
+
+	/// <summary>
+	/// <para>The name of the enrich policy to use.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("policy_name")]
 	public string PolicyName { get; set; }
+
+	/// <summary>
+	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("shape_relation")]
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelation { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 
@@ -123,12 +151,18 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -147,30 +181,45 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> MaxMatches(int? maxMatches)
 	{
 		MaxMatchesValue = maxMatches;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> Override(bool? overrideValue = true)
 	{
 		OverrideValue = overrideValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the enrich policy to use.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> PolicyName(string policyName)
 	{
 		PolicyNameValue = policyName;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
 	{
 		ShapeRelationValue = shapeRelation;
@@ -183,12 +232,18 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -353,18 +408,27 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field in the input document that matches the policies match_field used to retrieve the enrichment data.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -383,30 +447,45 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of matched documents to include under the configured target field.<br/>The `target_field` will be turned into a json array if `max_matches` is higher than 1, otherwise `target_field` will become a json object.<br/>In order to avoid documents getting too large, the maximum allowed value is 128.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor MaxMatches(int? maxMatches)
 	{
 		MaxMatchesValue = maxMatches;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor Override(bool? overrideValue = true)
 	{
 		OverrideValue = overrideValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the enrich policy to use.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor PolicyName(string policyName)
 	{
 		PolicyNameValue = policyName;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.<br/>This option is only used for `geo_match` enrich policy types.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? shapeRelation)
 	{
 		ShapeRelationValue = shapeRelation;
@@ -419,18 +498,27 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain enrich data. This field contains both the `match_field` and `enrich_fields` specified in the enrich policy.<br/>Supports template snippets.</para>
+	/// </summary>
 	public EnrichProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

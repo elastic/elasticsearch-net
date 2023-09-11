@@ -210,13 +210,37 @@ public sealed partial class DateRangeQuery : RangeQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Date format used to convert `date` values in the query.</para>
+	/// </summary>
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.DateMath? From { get; set; }
+
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Gt { get; set; }
+
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Gte { get; set; }
+
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Lt { get; set; }
+
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.DateMath? Lte { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
+
+	/// <summary>
+	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// </summary>
 	public string? TimeZone { get; set; }
 	public Elastic.Clients.Elasticsearch.DateMath? To { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
@@ -285,6 +309,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Date format used to convert `date` values in the query.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -297,24 +324,36 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Gt(Elastic.Clients.Elasticsearch.DateMath? gt)
 	{
 		GtValue = gt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Gte(Elastic.Clients.Elasticsearch.DateMath? gte)
 	{
 		GteValue = gte;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Lt(Elastic.Clients.Elasticsearch.DateMath? lt)
 	{
 		LtValue = lt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Lte(Elastic.Clients.Elasticsearch.DateMath? lte)
 	{
 		LteValue = lte;
@@ -327,6 +366,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;
@@ -475,6 +517,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Date format used to convert `date` values in the query.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Format(string? format)
 	{
 		FormatValue = format;
@@ -487,24 +532,36 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Gt(Elastic.Clients.Elasticsearch.DateMath? gt)
 	{
 		GtValue = gt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Greater than or equal to.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Gte(Elastic.Clients.Elasticsearch.DateMath? gte)
 	{
 		GteValue = gte;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Lt(Elastic.Clients.Elasticsearch.DateMath? lt)
 	{
 		LtValue = lt;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Less than or equal to.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Lte(Elastic.Clients.Elasticsearch.DateMath? lte)
 	{
 		LteValue = lte;
@@ -517,6 +574,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Coordinated Universal Time (UTC) offset or IANA time zone used to convert `date` values in the query to UTC.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;

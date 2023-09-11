@@ -197,12 +197,32 @@ public sealed partial class GeotileGridAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>A bounding box to filter the geo-points or geo-shapes in each bucket.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
+
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Integer zoom of the key used to define cells/buckets in the results.<br/>Values outside of the range [0,29] will be rejected.</para>
+	/// </summary>
 	public double? Precision { get; set; }
+
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of buckets to return.</para>
+	/// </summary>
 	public int? Size { get; set; }
 }
 
@@ -248,18 +268,27 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A bounding box to filter the geo-points or geo-shapes in each bucket.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
 		BoundsValue = bounds;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -272,18 +301,27 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Integer zoom of the key used to define cells/buckets in the results.<br/>Values outside of the range [0,29] will be rejected.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> Precision(double? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of buckets to return.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -394,24 +432,36 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A bounding box to filter the geo-points or geo-shapes in each bucket.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
 		BoundsValue = bounds;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geotile_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -424,18 +474,27 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Integer zoom of the key used to define cells/buckets in the results.<br/>Values outside of the range [0,29] will be rejected.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Precision(double? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of buckets to return.</para>
+	/// </summary>
 	public GeotileGridAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;

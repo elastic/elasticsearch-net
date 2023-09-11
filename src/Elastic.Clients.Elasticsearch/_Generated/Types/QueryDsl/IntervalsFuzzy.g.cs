@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class IntervalsFuzzy
 {
+	/// <summary>
+	/// <para>Analyzer used to normalize the term.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzziness")]
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
+
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
+
+	/// <summary>
+	/// <para>The term to match.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("term")]
 	public string Term { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("transpositions")]
 	public bool? Transpositions { get; set; }
+
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
@@ -58,42 +81,63 @@ public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDe
 	private bool? TranspositionsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to normalize the term.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The term to match.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> Term(string term)
 	{
 		TermValue = term;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> Transpositions(bool? transpositions = true)
 	{
 		TranspositionsValue = transpositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
@@ -154,48 +198,72 @@ public sealed partial class IntervalsFuzzyDescriptor : SerializableDescriptor<In
 	private bool? TranspositionsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? UseFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Analyzer used to normalize the term.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum edit distance allowed for matching.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? fuzziness)
 	{
 		FuzzinessValue = fuzziness;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The term to match.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor Term(string term)
 	{
 		TermValue = term;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether edits include transpositions of two adjacent characters (for example, `ab` to `ba`).</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor Transpositions(bool? transpositions = true)
 	{
 		TranspositionsValue = transpositions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor UseField(Elastic.Clients.Elasticsearch.Field? useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor UseField<TDocument, TValue>(Expression<Func<TDocument, TValue>> useField)
 	{
 		UseFieldValue = useField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
 	public IntervalsFuzzyDescriptor UseField<TDocument>(Expression<Func<TDocument, object>> useField)
 	{
 		UseFieldValue = useField;

@@ -157,7 +157,7 @@ public sealed partial class WildcardQuery : SearchQuery
 	public bool? CaseInsensitive { get; set; }
 
 	/// <summary>
-	/// <para>Method used to rewrite the query</para>
+	/// <para>Method used to rewrite the query.</para>
 	/// </summary>
 	public string? Rewrite { get; set; }
 
@@ -241,7 +241,7 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query</para>
+	/// <para>Method used to rewrite the query.</para>
 	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
@@ -378,7 +378,7 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	}
 
 	/// <summary>
-	/// <para>Method used to rewrite the query</para>
+	/// <para>Method used to rewrite the query.</para>
 	/// </summary>
 	public WildcardQueryDescriptor Rewrite(string? rewrite)
 	{

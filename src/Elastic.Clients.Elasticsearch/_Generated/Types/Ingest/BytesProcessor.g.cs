@@ -31,18 +31,30 @@ public sealed partial class BytesProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -111,12 +123,18 @@ public sealed partial class BytesProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	public BytesProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	public BytesProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -135,6 +153,9 @@ public sealed partial class BytesProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public BytesProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -147,12 +168,18 @@ public sealed partial class BytesProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public BytesProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public BytesProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -297,18 +324,27 @@ public sealed partial class BytesProcessorDescriptor : SerializableDescriptor<By
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	public BytesProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	public BytesProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to convert.</para>
+	/// </summary>
 	public BytesProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -327,6 +363,9 @@ public sealed partial class BytesProcessorDescriptor : SerializableDescriptor<By
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public BytesProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -339,18 +378,27 @@ public sealed partial class BytesProcessorDescriptor : SerializableDescriptor<By
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public BytesProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public BytesProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public BytesProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

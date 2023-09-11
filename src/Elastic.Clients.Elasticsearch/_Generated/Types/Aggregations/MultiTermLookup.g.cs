@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class MultiTermLookup
 {
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public FieldValue? Missing { get; set; }
 }
@@ -46,18 +53,27 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private FieldValue? MissingValue { get; set; }
 
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor<TDocument> Missing(FieldValue? missing)
 	{
 		MissingValue = missing;
@@ -90,24 +106,36 @@ public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<M
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private FieldValue? MissingValue { get; set; }
 
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public MultiTermLookupDescriptor Missing(FieldValue? missing)
 	{
 		MissingValue = missing;

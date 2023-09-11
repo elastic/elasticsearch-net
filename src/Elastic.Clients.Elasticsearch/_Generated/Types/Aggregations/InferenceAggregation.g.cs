@@ -174,8 +174,16 @@ public sealed partial class InferenceAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>The ID or alias for the trained model.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 	override public string? Name { get; internal set; }
 }
@@ -197,6 +205,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
@@ -245,6 +256,9 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The ID or alias for the trained model.</para>
+	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name modelId)
 	{
 		ModelIdValue = modelId;
@@ -320,6 +334,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	public InferenceAggregationDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
@@ -368,6 +385,9 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The ID or alias for the trained model.</para>
+	/// </summary>
 	public InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Name modelId)
 	{
 		ModelIdValue = modelId;

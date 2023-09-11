@@ -33,10 +33,22 @@ public sealed partial class SpanNearQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
+
+	/// <summary>
+	/// <para>Controls whether matches are required to be in-order.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
+
+	/// <summary>
+	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 
@@ -60,6 +72,9 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	private bool? InOrderValue { get; set; }
 	private int? SlopValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
@@ -108,12 +123,18 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether matches are required to be in-order.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> InOrder(bool? inOrder = true)
 	{
 		InOrderValue = inOrder;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Slop(int? slop)
 	{
 		SlopValue = slop;
@@ -199,6 +220,9 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	private bool? InOrderValue { get; set; }
 	private int? SlopValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
@@ -247,12 +271,18 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls whether matches are required to be in-order.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor InOrder(bool? inOrder = true)
 	{
 		InOrderValue = inOrder;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor Slop(int? slop)
 	{
 		SlopValue = slop;

@@ -32,12 +32,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class GetDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return all relevant default configurations for the data stream (default: false)</para>
+	/// <para>If `true`, return all default settings in the response.</para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 }
@@ -59,13 +59,13 @@ public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecy
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return all relevant default configurations for the data stream (default: false)</para>
+	/// <para>If `true`, return all default settings in the response.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }

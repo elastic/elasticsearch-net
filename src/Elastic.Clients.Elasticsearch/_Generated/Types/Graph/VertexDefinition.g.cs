@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 
 public sealed partial class VertexDefinition
 {
+	/// <summary>
+	/// <para>Prevents the specified terms from being included in the results.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude")]
 	public ICollection<string>? Exclude { get; set; }
+
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Identifies the terms of interest that form the starting points from which you want to spider out.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? Include { get; set; }
+
+	/// <summary>
+	/// <para>Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.<br/>This setting acts as a certainty threshold.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>Specifies the maximum number of vertex terms returned for each field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
@@ -61,24 +84,36 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	private long? ShardMinDocCountValue { get; set; }
 	private int? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>Prevents the specified terms from being included in the results.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Exclude(ICollection<string>? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies the terms of interest that form the starting points from which you want to spider out.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Include(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
 	{
 		IncludeDescriptor = null;
@@ -115,18 +150,27 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.<br/>This setting acts as a certainty threshold.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
 	{
 		ShardMinDocCountValue = shardMinDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the maximum number of vertex terms returned for each field.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -215,30 +259,45 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	private long? ShardMinDocCountValue { get; set; }
 	private int? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>Prevents the specified terms from being included in the results.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Exclude(ICollection<string>? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifies the terms of interest that form the starting points from which you want to spider out.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Include(ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? include)
 	{
 		IncludeDescriptor = null;
@@ -275,18 +334,27 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how many documents must contain a pair of terms before it is considered to be a useful connection.<br/>This setting acts as a certainty threshold.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls how many documents on a particular shard have to contain a pair of terms before the connection is returned for global consideration.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor ShardMinDocCount(long? shardMinDocCount)
 	{
 		ShardMinDocCountValue = shardMinDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies the maximum number of vertex terms returned for each field.</para>
+	/// </summary>
 	public VertexDefinitionDescriptor Size(int? size)
 	{
 		SizeValue = size;

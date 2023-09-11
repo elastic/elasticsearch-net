@@ -377,22 +377,82 @@ public sealed partial class SignificantTermsAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilter { get; set; }
+
+	/// <summary>
+	/// <para>Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
+
+	/// <summary>
+	/// <para>Terms to exclude.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
+
+	/// <summary>
+	/// <para>Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
+
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
+
+	/// <summary>
+	/// <para>Terms to include.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
+
+	/// <summary>
+	/// <para>Use JLH score as the significance score.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.EmptyObject? Jlh { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>Only return terms that are found in more than `min_doc_count` hits.</para>
+	/// </summary>
 	public long? MinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
+
+	/// <summary>
+	/// <para>Customized score, implemented via a script.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
+
+	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
 	public long? ShardMinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>Can be used to control the volumes of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
+
+	/// <summary>
+	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// </summary>
 	public int? Size { get; set; }
 }
 
@@ -462,6 +522,9 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? backgroundFilter)
 	{
 		BackgroundFilterDescriptor = null;
@@ -486,6 +549,9 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? chiSquare)
 	{
 		ChiSquareDescriptor = null;
@@ -510,30 +576,45 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms to exclude.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
 	{
 		ExecutionHintValue = executionHint;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? gnd)
 	{
 		GndDescriptor = null;
@@ -558,12 +639,18 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms to include.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
 		IncludeValue = include;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use JLH score as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Jlh(Elastic.Clients.Elasticsearch.EmptyObject? jlh)
 	{
 		JlhDescriptor = null;
@@ -594,12 +681,18 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only return terms that are found in more than `min_doc_count` hits.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? mutualInformation)
 	{
 		MutualInformationDescriptor = null;
@@ -624,6 +717,9 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? percentage)
 	{
 		PercentageDescriptor = null;
@@ -648,6 +744,9 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Customized score, implemented via a script.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? scriptHeuristic)
 	{
 		ScriptHeuristicDescriptor = null;
@@ -672,18 +771,27 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
 	{
 		ShardMinDocCountValue = shardMinDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Can be used to control the volumes of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -948,6 +1056,9 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? backgroundFilter)
 	{
 		BackgroundFilterDescriptor = null;
@@ -972,6 +1083,9 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? chiSquare)
 	{
 		ChiSquareDescriptor = null;
@@ -996,36 +1110,54 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms to exclude.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? executionHint)
 	{
 		ExecutionHintValue = executionHint;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? gnd)
 	{
 		GndDescriptor = null;
@@ -1050,12 +1182,18 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms to include.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
 		IncludeValue = include;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use JLH score as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Jlh(Elastic.Clients.Elasticsearch.EmptyObject? jlh)
 	{
 		JlhDescriptor = null;
@@ -1086,12 +1224,18 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only return terms that are found in more than `min_doc_count` hits.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? mutualInformation)
 	{
 		MutualInformationDescriptor = null;
@@ -1116,6 +1260,9 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? percentage)
 	{
 		PercentageDescriptor = null;
@@ -1140,6 +1287,9 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Customized score, implemented via a script.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? scriptHeuristic)
 	{
 		ScriptHeuristicDescriptor = null;
@@ -1164,18 +1314,27 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor ShardMinDocCount(long? shardMinDocCount)
 	{
 		ShardMinDocCountValue = shardMinDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Can be used to control the volumes of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of buckets returned out of the overall terms list.</para>
+	/// </summary>
 	public SignificantTermsAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;

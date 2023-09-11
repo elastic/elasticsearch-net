@@ -202,9 +202,17 @@ public sealed partial class RateAggregation : SearchAggregation
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
+
+	/// <summary>
+	/// <para>How the rate is calculated.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RateMode? Mode { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? Unit { get; set; }
 }
 
@@ -254,6 +262,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How the rate is calculated.</para>
+	/// </summary>
 	public RateAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
 	{
 		ModeValue = mode;
@@ -266,6 +277,9 @@ public sealed partial class RateAggregationDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// </summary>
 	public RateAggregationDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 	{
 		UnitValue = unit;
@@ -376,6 +390,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How the rate is calculated.</para>
+	/// </summary>
 	public RateAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.Aggregations.RateMode? mode)
 	{
 		ModeValue = mode;
@@ -388,6 +405,9 @@ public sealed partial class RateAggregationDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The interval used to calculate the rate.<br/>By default, the interval of the `date_histogram` is used.</para>
+	/// </summary>
 	public RateAggregationDescriptor Unit(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? unit)
 	{
 		UnitValue = unit;

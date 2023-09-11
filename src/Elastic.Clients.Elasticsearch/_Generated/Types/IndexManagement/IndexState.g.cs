@@ -41,7 +41,7 @@ public sealed partial class IndexState
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
 
 	/// <summary>
-	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// <para>Data lifecycle applicable if this is a data stream.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lifecycle")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? Lifecycle { get; set; }
@@ -162,7 +162,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	}
 
 	/// <summary>
-	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// <para>Data lifecycle applicable if this is a data stream.</para>
 	/// </summary>
 	public IndexStateDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
 	{
@@ -382,7 +382,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	}
 
 	/// <summary>
-	/// <para>Data lifecycle applicable iff this is a data stream.</para>
+	/// <para>Data lifecycle applicable if this is a data stream.</para>
 	/// </summary>
 	public IndexStateDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
 	{

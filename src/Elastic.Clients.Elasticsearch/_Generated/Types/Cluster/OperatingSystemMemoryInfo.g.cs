@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class OperatingSystemMemoryInfo
 {
+	/// <summary>
+	/// <para>Total amount, in bytes, of memory across all selected nodes, but using the value specified using the `es.total_memory_bytes` system property instead of measured total memory for those nodes where that system property was set.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("adjusted_total_in_bytes")]
 	public long? AdjustedTotalInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Amount, in bytes, of free physical memory across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("free_in_bytes")]
 	public long FreeInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Percentage of free physical memory across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("free_percent")]
 	public int FreePercent { get; init; }
+
+	/// <summary>
+	/// <para>Total amount, in bytes, of physical memory across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total_in_bytes")]
 	public long TotalInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Amount, in bytes, of physical memory in use across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("used_in_bytes")]
 	public long UsedInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Percentage of physical memory in use across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("used_percent")]
 	public int UsedPercent { get; init; }
 }

@@ -32,38 +32,38 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class ExistsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Ignore if a wildcard expression resolves to no concrete indices (default: false)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Ignore unavailable indexes (default: false)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Whether to return all default setting for each of the indices.</para>
+	/// <para>If `true`, return all default settings in the response.</para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>If `true`, the request retrieves information from the local node only.</para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
-/// <para>Returns information about whether a particular index exists.</para>
+/// <para>Checks if a data stream, index, or alias exists.</para>
 /// </summary>
 public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters>
 {
@@ -78,44 +78,44 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Ignore if a wildcard expression resolves to no concrete indices (default: false)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Ignore unavailable indexes (default: false)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Whether to return all default setting for each of the indices.</para>
+	/// <para>If `true`, return all default settings in the response.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
-	/// <para>Return local information, do not retrieve the state from master node (default: false)</para>
+	/// <para>If `true`, the request retrieves information from the local node only.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
-/// <para>Returns information about whether a particular index exists.</para>
+/// <para>Checks if a data stream, index, or alias exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescriptor<ExistsRequestDescriptor<TDocument>, ExistsRequestParameters>
 {
@@ -154,7 +154,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Returns information about whether a particular index exists.</para>
+/// <para>Checks if a data stream, index, or alias exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRequestDescriptor, ExistsRequestParameters>
 {
