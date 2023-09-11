@@ -28,6 +28,68 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
+[JsonConverter(typeof(ClusterSearchStatusConverter))]
+public enum ClusterSearchStatus
+{
+	[EnumMember(Value = "successful")]
+	Successful,
+	[EnumMember(Value = "skipped")]
+	Skipped,
+	[EnumMember(Value = "running")]
+	Running,
+	[EnumMember(Value = "partial")]
+	Partial,
+	[EnumMember(Value = "failed")]
+	Failed
+}
+
+internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearchStatus>
+{
+	public override ClusterSearchStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "successful":
+				return ClusterSearchStatus.Successful;
+			case "skipped":
+				return ClusterSearchStatus.Skipped;
+			case "running":
+				return ClusterSearchStatus.Running;
+			case "partial":
+				return ClusterSearchStatus.Partial;
+			case "failed":
+				return ClusterSearchStatus.Failed;
+		}
+
+		ThrowHelper.ThrowJsonException(); return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ClusterSearchStatus value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ClusterSearchStatus.Successful:
+				writer.WriteStringValue("successful");
+				return;
+			case ClusterSearchStatus.Skipped:
+				writer.WriteStringValue("skipped");
+				return;
+			case ClusterSearchStatus.Running:
+				writer.WriteStringValue("running");
+				return;
+			case ClusterSearchStatus.Partial:
+				writer.WriteStringValue("partial");
+				return;
+			case ClusterSearchStatus.Failed:
+				writer.WriteStringValue("failed");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(ConflictsConverter))]
 public enum Conflicts
 {
