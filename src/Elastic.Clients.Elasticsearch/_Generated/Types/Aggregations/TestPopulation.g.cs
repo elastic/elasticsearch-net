@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class TestPopulation
 {
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
@@ -51,6 +58,9 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// </summary>
 	public TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -75,12 +85,18 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -138,6 +154,9 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// </summary>
 	public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
 		FilterDescriptor = null;
@@ -162,18 +181,27 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	public TestPopulationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	public TestPopulationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
 	public TestPopulationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;

@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class RemoveIndexAction
 {
+	/// <summary>
+	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
@@ -51,18 +62,27 @@ public sealed partial class RemoveIndexActionDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
 	private bool? MustExistValue { get; set; }
 
+	/// <summary>
+	/// <para>Data stream or index for the action.<br/>Supports wildcards (`*`).</para>
+	/// </summary>
 	public RemoveIndexActionDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Data streams or indices for the action.<br/>Supports wildcards (`*`).</para>
+	/// </summary>
 	public RemoveIndexActionDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		IndicesValue = indices;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the alias must exist to perform the action.</para>
+	/// </summary>
 	public RemoveIndexActionDescriptor MustExist(bool? mustExist = true)
 	{
 		MustExistValue = mustExist;

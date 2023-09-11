@@ -28,6 +28,68 @@ using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
+[JsonConverter(typeof(ClusterSearchStatusConverter))]
+public enum ClusterSearchStatus
+{
+	[EnumMember(Value = "successful")]
+	Successful,
+	[EnumMember(Value = "skipped")]
+	Skipped,
+	[EnumMember(Value = "running")]
+	Running,
+	[EnumMember(Value = "partial")]
+	Partial,
+	[EnumMember(Value = "failed")]
+	Failed
+}
+
+internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearchStatus>
+{
+	public override ClusterSearchStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "successful":
+				return ClusterSearchStatus.Successful;
+			case "skipped":
+				return ClusterSearchStatus.Skipped;
+			case "running":
+				return ClusterSearchStatus.Running;
+			case "partial":
+				return ClusterSearchStatus.Partial;
+			case "failed":
+				return ClusterSearchStatus.Failed;
+		}
+
+		ThrowHelper.ThrowJsonException(); return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ClusterSearchStatus value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ClusterSearchStatus.Successful:
+				writer.WriteStringValue("successful");
+				return;
+			case ClusterSearchStatus.Skipped:
+				writer.WriteStringValue("skipped");
+				return;
+			case ClusterSearchStatus.Running:
+				writer.WriteStringValue("running");
+				return;
+			case ClusterSearchStatus.Partial:
+				writer.WriteStringValue("partial");
+				return;
+			case ClusterSearchStatus.Failed:
+				writer.WriteStringValue("failed");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(ConflictsConverter))]
 public enum Conflicts
 {
@@ -466,8 +528,14 @@ internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNum
 [JsonConverter(typeof(GeoDistanceTypeConverter))]
 public enum GeoDistanceType
 {
+	/// <summary>
+	/// <para>The `plane` calculation is faster but less accurate.</para>
+	/// </summary>
 	[EnumMember(Value = "plane")]
 	Plane,
+	/// <summary>
+	/// <para>The `arc` calculation is the most accurate.</para>
+	/// </summary>
 	[EnumMember(Value = "arc")]
 	Arc
 }
@@ -507,12 +575,24 @@ internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
 [JsonConverter(typeof(GeoShapeRelationConverter))]
 public enum GeoShapeRelation
 {
+	/// <summary>
+	/// <para>Return all documents whose `geo_shape` or `geo_point` field is within the query geometry.<br/>Line geometries are not supported.</para>
+	/// </summary>
 	[EnumMember(Value = "within")]
 	Within,
+	/// <summary>
+	/// <para>Return all documents whose `geo_shape` or `geo_point` field intersects the query geometry.</para>
+	/// </summary>
 	[EnumMember(Value = "intersects")]
 	Intersects,
+	/// <summary>
+	/// <para>Return all documents whose `geo_shape` or `geo_point` field has nothing in common with the query geometry.</para>
+	/// </summary>
 	[EnumMember(Value = "disjoint")]
 	Disjoint,
+	/// <summary>
+	/// <para>Return all documents whose `geo_shape` or `geo_point` field contains the query geometry.</para>
+	/// </summary>
 	[EnumMember(Value = "contains")]
 	Contains
 }
@@ -1006,9 +1086,25 @@ public readonly partial struct ScriptLanguage : IEnumStruct<ScriptLanguage>
 	ScriptLanguage IEnumStruct<ScriptLanguage>.Create(string value) => value;
 
 	public readonly string Value { get; }
+
+	/// <summary>
+	/// <para>Painless scripting language, purpose-built for Elasticsearch.</para>
+	/// </summary>
 	public static ScriptLanguage Painless { get; } = new ScriptLanguage("painless");
+
+	/// <summary>
+	/// <para>Mustache templated, used for templates.</para>
+	/// </summary>
 	public static ScriptLanguage Mustache { get; } = new ScriptLanguage("mustache");
+
+	/// <summary>
+	/// <para>Expert Java API</para>
+	/// </summary>
 	public static ScriptLanguage Java { get; } = new ScriptLanguage("java");
+
+	/// <summary>
+	/// <para>Lucene’s expressions language, compiles a JavaScript expression to bytecode.</para>
+	/// </summary>
 	public static ScriptLanguage Expression { get; } = new ScriptLanguage("expression");
 
 	public override string ToString() => Value ?? string.Empty;
@@ -1221,8 +1317,14 @@ internal sealed class SortModeConverter : JsonConverter<SortMode>
 [JsonConverter(typeof(SortOrderConverter))]
 public enum SortOrder
 {
+	/// <summary>
+	/// <para>Descending (largest to smallest)</para>
+	/// </summary>
 	[EnumMember(Value = "desc")]
 	Desc,
+	/// <summary>
+	/// <para>Ascending (smallest to largest)</para>
+	/// </summary>
 	[EnumMember(Value = "asc")]
 	Asc
 }

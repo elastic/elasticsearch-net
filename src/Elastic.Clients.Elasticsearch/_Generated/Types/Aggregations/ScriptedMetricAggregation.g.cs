@@ -234,14 +234,33 @@ public sealed partial class ScriptedMetricAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
+
+	/// <summary>
+	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// </summary>
 	public IDictionary<string, object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
@@ -264,6 +283,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
 	{
 		CombineScriptValue = combineScript;
@@ -282,12 +304,18 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
 	{
 		InitScriptValue = initScript;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
 	{
 		MapScriptValue = mapScript;
@@ -306,12 +334,18 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
 	{
 		ReduceScriptValue = reduceScript;
@@ -406,6 +440,9 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor CombineScript(Elastic.Clients.Elasticsearch.Script? combineScript)
 	{
 		CombineScriptValue = combineScript;
@@ -430,12 +467,18 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor InitScript(Elastic.Clients.Elasticsearch.Script? initScript)
 	{
 		InitScriptValue = initScript;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor MapScript(Elastic.Clients.Elasticsearch.Script? mapScript)
 	{
 		MapScriptValue = mapScript;
@@ -454,12 +497,18 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor ReduceScript(Elastic.Clients.Elasticsearch.Script? reduceScript)
 	{
 		ReduceScriptValue = reduceScript;

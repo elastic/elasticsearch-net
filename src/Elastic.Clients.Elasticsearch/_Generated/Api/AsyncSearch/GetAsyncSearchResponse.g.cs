@@ -28,6 +28,10 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchResponse
 {
+	[JsonInclude, JsonPropertyName("completion_time")]
+	public DateTimeOffset? CompletionTime { get; init; }
+	[JsonInclude, JsonPropertyName("completion_time_in_millis")]
+	public long? CompletionTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]

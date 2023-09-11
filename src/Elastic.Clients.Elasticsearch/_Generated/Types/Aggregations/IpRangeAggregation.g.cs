@@ -143,9 +143,17 @@ public sealed partial class IpRangeAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Array of IP ranges.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? Ranges { get; set; }
 }
 
@@ -191,12 +199,18 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -209,6 +223,9 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of IP ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor<TDocument> Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{
 		RangesDescriptor = null;
@@ -356,18 +373,27 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are used to build ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -380,6 +406,9 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array of IP ranges.</para>
+	/// </summary>
 	public IpRangeAggregationDescriptor Ranges(ICollection<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>? ranges)
 	{
 		RangesDescriptor = null;

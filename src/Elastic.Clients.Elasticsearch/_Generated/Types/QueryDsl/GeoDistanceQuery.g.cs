@@ -53,7 +53,7 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 
 				if (property == "distance")
 				{
-					variant.Distance = JsonSerializer.Deserialize<string?>(ref reader, options);
+					variant.Distance = JsonSerializer.Deserialize<string>(ref reader, options);
 					continue;
 				}
 
@@ -105,12 +105,8 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		if (value.Distance is not null)
-		{
-			writer.WritePropertyName("distance");
-			JsonSerializer.Serialize(writer, value.Distance, options);
-		}
-
+		writer.WritePropertyName("distance");
+		JsonSerializer.Serialize(writer, value.Distance, options);
 		if (value.DistanceType is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -132,10 +128,22 @@ public sealed partial class GeoDistanceQuery : SearchQuery
 {
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
-	public string? Distance { get; set; }
+
+	/// <summary>
+	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// </summary>
+	public string Distance { get; set; }
+
+	/// <summary>
+	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
+
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
 	public static implicit operator Query(GeoDistanceQuery geoDistanceQuery) => QueryDsl.Query.GeoDistance(geoDistanceQuery);
@@ -153,7 +161,7 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
-	private string? DistanceValue { get; set; }
+	private string DistanceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
@@ -171,18 +179,27 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public GeoDistanceQueryDescriptor<TDocument> Distance(string? distance)
+	/// <summary>
+	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// </summary>
+	public GeoDistanceQueryDescriptor<TDocument> Distance(string distance)
 	{
 		DistanceValue = distance;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
 		DistanceTypeValue = distanceType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;
@@ -229,12 +246,8 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (DistanceValue is not null)
-		{
-			writer.WritePropertyName("distance");
-			JsonSerializer.Serialize(writer, DistanceValue, options);
-		}
-
+		writer.WritePropertyName("distance");
+		JsonSerializer.Serialize(writer, DistanceValue, options);
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -261,7 +274,7 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
-	private string? DistanceValue { get; set; }
+	private string DistanceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
@@ -279,18 +292,27 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public GeoDistanceQueryDescriptor Distance(string? distance)
+	/// <summary>
+	/// <para>The radius of the circle centred on the specified location.<br/>Points which fall into this circle are considered to be matches.</para>
+	/// </summary>
+	public GeoDistanceQueryDescriptor Distance(string distance)
 	{
 		DistanceValue = distance;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How to compute the distance.<br/>Set to `plane` for a faster calculation that's inaccurate on long distances and close to the poles.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor DistanceType(Elastic.Clients.Elasticsearch.GeoDistanceType? distanceType)
 	{
 		DistanceTypeValue = distanceType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;
@@ -343,12 +365,8 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (DistanceValue is not null)
-		{
-			writer.WritePropertyName("distance");
-			JsonSerializer.Serialize(writer, DistanceValue, options);
-		}
-
+		writer.WritePropertyName("distance");
+		JsonSerializer.Serialize(writer, DistanceValue, options);
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");

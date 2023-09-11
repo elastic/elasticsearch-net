@@ -33,6 +33,10 @@ public sealed partial class SpanOrQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("clauses")]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
@@ -54,6 +58,9 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	public SpanOrQueryDescriptor<TDocument> Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;
@@ -167,6 +174,9 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of one or more other span type queries.</para>
+	/// </summary>
 	public SpanOrQueryDescriptor Clauses(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> clauses)
 	{
 		ClausesDescriptor = null;

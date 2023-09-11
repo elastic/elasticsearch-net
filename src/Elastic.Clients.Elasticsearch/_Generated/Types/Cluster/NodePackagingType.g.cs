@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class NodePackagingType
 {
+	/// <summary>
+	/// <para>Number of selected nodes using the distribution flavor and file type.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
+
+	/// <summary>
+	/// <para>Type of Elasticsearch distribution. This is always `default`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("flavor")]
 	public string Flavor { get; init; }
+
+	/// <summary>
+	/// <para>File type (such as `tar` or `zip`) used for the distribution package.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; init; }
 }

@@ -162,6 +162,9 @@ public sealed partial class BoxplotAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public double? Compression { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
@@ -184,6 +187,9 @@ public sealed partial class BoxplotAggregationDescriptor<TDocument> : Serializab
 	private FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public BoxplotAggregationDescriptor<TDocument> Compression(double? compression)
 	{
 		CompressionValue = compression;
@@ -274,6 +280,9 @@ public sealed partial class BoxplotAggregationDescriptor : SerializableDescripto
 	private FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Limits the maximum number of nodes used by the underlying TDigest algorithm to `20 * compression`, enabling control of memory usage and approximation error.</para>
+	/// </summary>
 	public BoxplotAggregationDescriptor Compression(double? compression)
 	{
 		CompressionValue = compression;

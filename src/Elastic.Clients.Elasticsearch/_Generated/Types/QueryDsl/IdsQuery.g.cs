@@ -33,6 +33,10 @@ public sealed partial class IdsQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>An array of document IDs.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 
@@ -65,6 +69,9 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of document IDs.</para>
+	/// </summary>
 	public IdsQueryDescriptor Values(Elastic.Clients.Elasticsearch.Ids? values)
 	{
 		ValuesValue = values;

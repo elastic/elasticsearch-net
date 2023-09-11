@@ -31,22 +31,42 @@ public sealed partial class SplitProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Preserves empty trailing fields, if any.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_trailing")]
 	public bool? PreserveTrailing { get; set; }
+
+	/// <summary>
+	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -117,12 +137,18 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -141,18 +167,27 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Preserves empty trailing fields, if any.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> PreserveTrailing(bool? preserveTrailing = true)
 	{
 		PreserveTrailingValue = preserveTrailing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> Separator(string separator)
 	{
 		SeparatorValue = separator;
@@ -165,12 +200,18 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SplitProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -325,18 +366,27 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	public SplitProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	public SplitProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to split.</para>
+	/// </summary>
 	public SplitProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -355,18 +405,27 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public SplitProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Preserves empty trailing fields, if any.</para>
+	/// </summary>
 	public SplitProcessorDescriptor PreserveTrailing(bool? preserveTrailing = true)
 	{
 		PreserveTrailingValue = preserveTrailing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A regex which matches the separator, for example, `,` or `\s+`.</para>
+	/// </summary>
 	public SplitProcessorDescriptor Separator(string separator)
 	{
 		SeparatorValue = separator;
@@ -379,18 +438,27 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SplitProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SplitProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the split value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
 	public SplitProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

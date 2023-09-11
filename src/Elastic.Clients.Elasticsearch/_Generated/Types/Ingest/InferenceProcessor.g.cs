@@ -31,20 +31,36 @@ public sealed partial class InferenceProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field_map")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
+
+	/// <summary>
+	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -74,6 +90,9 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
@@ -140,6 +159,9 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
 	{
 		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
@@ -158,6 +180,9 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id modelId)
 	{
 		ModelIdValue = modelId;
@@ -170,12 +195,18 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -297,6 +328,9 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Contains the inference type and its options.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
 	{
 		InferenceConfigDescriptor = null;
@@ -363,6 +397,9 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
 	{
 		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
@@ -381,6 +418,9 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
 	{
 		ModelIdValue = modelId;
@@ -393,18 +433,27 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

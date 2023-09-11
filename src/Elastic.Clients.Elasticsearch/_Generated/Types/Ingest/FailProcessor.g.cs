@@ -35,6 +35,10 @@ public sealed partial class FailProcessor
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("message")]
 	public string Message { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
@@ -117,6 +121,9 @@ public sealed partial class FailProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
+	/// </summary>
 	public FailProcessorDescriptor<TDocument> Message(string message)
 	{
 		MessageValue = message;
@@ -265,6 +272,9 @@ public sealed partial class FailProcessorDescriptor : SerializableDescriptor<Fai
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
+	/// </summary>
 	public FailProcessorDescriptor Message(string message)
 	{
 		MessageValue = message;

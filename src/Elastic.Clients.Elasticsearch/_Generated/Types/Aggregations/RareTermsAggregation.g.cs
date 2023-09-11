@@ -233,13 +233,37 @@ public sealed partial class RareTermsAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>Terms that should be excluded from the aggregation.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
+
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Terms that should be included in the aggregation.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of documents a term should appear in.</para>
+	/// </summary>
 	public long? MaxDocCount { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The precision of the internal CuckooFilters.<br/>Smaller precision leads to better approximation, but higher memory usage.</para>
+	/// </summary>
 	public double? Precision { get; set; }
 	public string? ValueType { get; set; }
 }
@@ -288,30 +312,45 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms that should be excluded from the aggregation.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms that should be included in the aggregation.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
 		IncludeValue = include;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of documents a term should appear in.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> MaxDocCount(long? maxDocCount)
 	{
 		MaxDocCountValue = maxDocCount;
@@ -324,12 +363,18 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The precision of the internal CuckooFilters.<br/>Smaller precision leads to better approximation, but higher memory usage.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Precision(double? precision)
 	{
 		PrecisionValue = precision;
@@ -460,36 +505,54 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms that should be excluded from the aggregation.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? exclude)
 	{
 		ExcludeValue = exclude;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return rare terms.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Terms that should be included in the aggregation.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? include)
 	{
 		IncludeValue = include;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of documents a term should appear in.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor MaxDocCount(long? maxDocCount)
 	{
 		MaxDocCountValue = maxDocCount;
@@ -502,12 +565,18 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Missing(FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The precision of the internal CuckooFilters.<br/>Smaller precision leads to better approximation, but higher memory usage.</para>
+	/// </summary>
 	public RareTermsAggregationDescriptor Precision(double? precision)
 	{
 		PrecisionValue = precision;

@@ -186,6 +186,10 @@ public sealed partial class ExtendedStatsAggregation : SearchAggregation
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// </summary>
 	public double? Sigma { get; set; }
 }
 
@@ -240,6 +244,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Sigma(double? sigma)
 	{
 		SigmaValue = sigma;
@@ -349,6 +356,9 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of standard deviations above/below the mean to display.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor Sigma(double? sigma)
 	{
 		SigmaValue = sigma;

@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 public sealed class ExecutePolicyRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Should the request should block until the execution is complete.</para>
+	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
@@ -53,7 +53,7 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Should the request should block until the execution is complete.</para>
+	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }

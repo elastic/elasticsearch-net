@@ -31,26 +31,54 @@ public sealed partial class CsvProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("empty_value")]
 	public object? EmptyValue { get; set; }
+
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("quote")]
 	public string? Quote { get; set; }
+
+	/// <summary>
+	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The array of fields to assign extracted values to.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_fields")]
 	public Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
+
+	/// <summary>
+	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("trim")]
 	public bool? Trim { get; set; }
 
@@ -123,18 +151,27 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> EmptyValue(object? emptyValue)
 	{
 		EmptyValueValue = emptyValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -153,18 +190,27 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Quote(string? quote)
 	{
 		QuoteValue = quote;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Separator(string? separator)
 	{
 		SeparatorValue = separator;
@@ -177,12 +223,18 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The array of fields to assign extracted values to.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields)
 	{
 		TargetFieldsValue = targetFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// </summary>
 	public CsvProcessorDescriptor<TDocument> Trim(bool? trim = true)
 	{
 		TrimValue = trim;
@@ -351,24 +403,36 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Value used to fill empty fields.<br/>Empty fields are skipped if this is not provided.<br/>An empty field is one with no value (2 consecutive separators) or empty quotes (`""`).</para>
+	/// </summary>
 	public CsvProcessorDescriptor EmptyValue(object? emptyValue)
 	{
 		EmptyValueValue = emptyValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to extract data from.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -387,18 +451,27 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public CsvProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Quote used in CSV, has to be single character string.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Quote(string? quote)
 	{
 		QuoteValue = quote;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Separator used in CSV, has to be single character string.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Separator(string? separator)
 	{
 		SeparatorValue = separator;
@@ -411,12 +484,18 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The array of fields to assign extracted values to.</para>
+	/// </summary>
 	public CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields)
 	{
 		TargetFieldsValue = targetFields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Trim whitespaces in unquoted fields.</para>
+	/// </summary>
 	public CsvProcessorDescriptor Trim(bool? trim = true)
 	{
 		TrimValue = trim;

@@ -127,6 +127,10 @@ public sealed partial class SamplerAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
 }
 
@@ -174,6 +178,9 @@ public sealed partial class SamplerAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public SamplerAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
@@ -262,6 +269,9 @@ public sealed partial class SamplerAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
+	/// </summary>
 	public SamplerAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;

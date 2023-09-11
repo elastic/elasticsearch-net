@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class PendingTask
 {
+	/// <summary>
+	/// <para>Indicates whether the pending tasks are currently executing or not.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("executing")]
 	public bool Executing { get; init; }
+
+	/// <summary>
+	/// <para>The number that represents when the task has been inserted into the task queue.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("insert_order")]
 	public int InsertOrder { get; init; }
+
+	/// <summary>
+	/// <para>The priority of the pending task.<br/>The valid priorities in descending priority order are: `IMMEDIATE` > `URGENT` > `HIGH` > `NORMAL` > `LOW` > `LANGUID`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("priority")]
 	public string Priority { get; init; }
+
+	/// <summary>
+	/// <para>A general description of the cluster task that may include a reason and origin.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public string Source { get; init; }
+
+	/// <summary>
+	/// <para>The time since the task is waiting for being performed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_in_queue")]
 	public Elastic.Clients.Elasticsearch.Duration? TimeInQueue { get; init; }
+
+	/// <summary>
+	/// <para>The time expressed in milliseconds since the task is waiting for being performed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_in_queue_millis")]
 	public long TimeInQueueMillis { get; init; }
 }

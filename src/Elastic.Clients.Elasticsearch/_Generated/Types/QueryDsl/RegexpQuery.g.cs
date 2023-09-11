@@ -158,10 +158,30 @@ public sealed partial class RegexpQuery : SearchQuery
 
 	public string? QueryName { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
+	/// <para>Enables optional operators for the regular expression.</para>
+	/// </summary>
 	public string? Flags { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of automaton states required for the query.</para>
+	/// </summary>
 	public int? MaxDeterminizedStates { get; set; }
+
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public string? Rewrite { get; set; }
+
+	/// <summary>
+	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// </summary>
 	public string Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -213,6 +233,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -231,24 +254,36 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enables optional operators for the regular expression.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Flags(string? flags)
 	{
 		FlagsValue = flags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of automaton states required for the query.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
 		MaxDeterminizedStatesValue = maxDeterminizedStates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Value(string value)
 	{
 		ValueValue = value;
@@ -341,6 +376,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
+	/// </summary>
 	public RegexpQueryDescriptor CaseInsensitive(bool? caseInsensitive = true)
 	{
 		CaseInsensitiveValue = caseInsensitive;
@@ -365,24 +403,36 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enables optional operators for the regular expression.</para>
+	/// </summary>
 	public RegexpQueryDescriptor Flags(string? flags)
 	{
 		FlagsValue = flags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of automaton states required for the query.</para>
+	/// </summary>
 	public RegexpQueryDescriptor MaxDeterminizedStates(int? maxDeterminizedStates)
 	{
 		MaxDeterminizedStatesValue = maxDeterminizedStates;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Method used to rewrite the query.</para>
+	/// </summary>
 	public RegexpQueryDescriptor Rewrite(string? rewrite)
 	{
 		RewriteValue = rewrite;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regular expression for terms you wish to find in the provided field.</para>
+	/// </summary>
 	public RegexpQueryDescriptor Value(string value)
 	{
 		ValueValue = value;

@@ -31,34 +31,78 @@ public sealed partial class KeyValueProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>List of keys to exclude from document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude_keys")]
 	public ICollection<string>? ExcludeKeys { get; set; }
+
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field_split")]
 	public string FieldSplit { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("include_keys")]
 	public ICollection<string>? IncludeKeys { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Prefix to be added to extracted keys.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
+
+	/// <summary>
+	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("strip_brackets")]
 	public bool? StripBrackets { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
+
+	/// <summary>
+	/// <para>String of characters to trim from extracted keys.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("trim_key")]
 	public string? TrimKey { get; set; }
+
+	/// <summary>
+	/// <para>String of characters to trim from extracted values.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("trim_value")]
 	public string? TrimValue { get; set; }
+
+	/// <summary>
+	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value_split")]
 	public string ValueSplit { get; set; }
 
@@ -135,24 +179,36 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of keys to exclude from document.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> ExcludeKeys(ICollection<string>? excludeKeys)
 	{
 		ExcludeKeysValue = excludeKeys;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> FieldSplit(string fieldSplit)
 	{
 		FieldSplitValue = fieldSplit;
@@ -171,24 +227,36 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> IncludeKeys(ICollection<string>? includeKeys)
 	{
 		IncludeKeysValue = includeKeys;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Prefix to be added to extracted keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> Prefix(string? prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> StripBrackets(bool? stripBrackets = true)
 	{
 		StripBracketsValue = stripBrackets;
@@ -201,30 +269,45 @@ public sealed partial class KeyValueProcessorDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>String of characters to trim from extracted keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TrimKey(string? trimKey)
 	{
 		TrimKeyValue = trimKey;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>String of characters to trim from extracted values.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> TrimValue(string? trimValue)
 	{
 		TrimValueValue = trimValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor<TDocument> ValueSplit(string valueSplit)
 	{
 		ValueSplitValue = valueSplit;
@@ -417,30 +500,45 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of keys to exclude from document.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor ExcludeKeys(ICollection<string>? excludeKeys)
 	{
 		ExcludeKeysValue = excludeKeys;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to be parsed.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regex pattern to use for splitting key-value pairs.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor FieldSplit(string fieldSplit)
 	{
 		FieldSplitValue = fieldSplit;
@@ -459,24 +557,36 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>List of keys to filter and insert into document.<br/>Defaults to including all keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor IncludeKeys(ICollection<string>? includeKeys)
 	{
 		IncludeKeysValue = includeKeys;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Prefix to be added to extracted keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor Prefix(string? prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`. strip brackets `()`, `<>`, `[]` as well as quotes `'` and `"` from extracted values.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor StripBrackets(bool? stripBrackets = true)
 	{
 		StripBracketsValue = stripBrackets;
@@ -489,36 +599,54 @@ public sealed partial class KeyValueProcessorDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to insert the extracted keys into.<br/>Defaults to the root of the document.<br/>Supports template snippets.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>String of characters to trim from extracted keys.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor TrimKey(string? trimKey)
 	{
 		TrimKeyValue = trimKey;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>String of characters to trim from extracted values.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor TrimValue(string? trimValue)
 	{
 		TrimValueValue = trimValue;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Regex pattern to use for splitting the key from the value within a key-value pair.</para>
+	/// </summary>
 	public KeyValueProcessorDescriptor ValueSplit(string valueSplit)
 	{
 		ValueSplitValue = valueSplit;

@@ -198,11 +198,18 @@ public sealed partial class CardinalityAggregation : SearchAggregation
 	{
 	}
 
+	/// <summary>
+	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? ExecutionHint { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// </summary>
 	public int? PrecisionThreshold { get; set; }
 	public bool? Rehash { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
@@ -224,6 +231,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 	private bool? RehashValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 	{
 		ExecutionHintValue = executionHint;
@@ -254,6 +264,9 @@ public sealed partial class CardinalityAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// </summary>
 	public CardinalityAggregationDescriptor<TDocument> PrecisionThreshold(int? precisionThreshold)
 	{
 		PrecisionThresholdValue = precisionThreshold;
@@ -340,6 +353,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 	private bool? RehashValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Mechanism by which cardinality aggregations is run.</para>
+	/// </summary>
 	public CardinalityAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? executionHint)
 	{
 		ExecutionHintValue = executionHint;
@@ -376,6 +392,9 @@ public sealed partial class CardinalityAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A unique count below which counts are expected to be close to accurate.<br/>This allows to trade memory for accuracy.</para>
+	/// </summary>
 	public CardinalityAggregationDescriptor PrecisionThreshold(int? precisionThreshold)
 	{
 		PrecisionThresholdValue = precisionThreshold;

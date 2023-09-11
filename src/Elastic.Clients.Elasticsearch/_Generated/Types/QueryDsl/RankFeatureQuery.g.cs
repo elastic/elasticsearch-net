@@ -33,14 +33,34 @@ public sealed partial class RankFeatureQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("linear")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
+
+	/// <summary>
+	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("log")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
+
+	/// <summary>
+	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("saturation")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
+
+	/// <summary>
+	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
@@ -85,18 +105,27 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
 	{
 		LinearDescriptor = null;
@@ -121,6 +150,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? log)
 	{
 		LogDescriptor = null;
@@ -145,6 +177,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
 	{
 		SaturationDescriptor = null;
@@ -169,6 +204,9 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
 	{
 		SigmoidDescriptor = null;
@@ -314,24 +352,36 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
 	{
 		LinearDescriptor = null;
@@ -356,6 +406,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Logarithmic function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? log)
 	{
 		LogDescriptor = null;
@@ -380,6 +433,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? saturation)
 	{
 		SaturationDescriptor = null;
@@ -404,6 +460,9 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sigmoid function used to boost relevance scores based on the value of the rank feature `field`.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? sigmoid)
 	{
 		SigmoidDescriptor = null;

@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class AggregationRange
 {
+	/// <summary>
+	/// <para>Start of the range (inclusive).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
 	public object? From { get; set; }
+
+	/// <summary>
+	/// <para>Custom key to return the range with.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("key")]
 	public string? Key { get; set; }
+
+	/// <summary>
+	/// <para>End of the range (exclusive).</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("to")]
 	public object? To { get; set; }
 }
@@ -49,18 +60,27 @@ public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<
 	private string? KeyValue { get; set; }
 	private object? ToValue { get; set; }
 
+	/// <summary>
+	/// <para>Start of the range (inclusive).</para>
+	/// </summary>
 	public AggregationRangeDescriptor From(object? from)
 	{
 		FromValue = from;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Custom key to return the range with.</para>
+	/// </summary>
 	public AggregationRangeDescriptor Key(string? key)
 	{
 		KeyValue = key;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>End of the range (exclusive).</para>
+	/// </summary>
 	public AggregationRangeDescriptor To(object? to)
 	{
 		ToValue = to;

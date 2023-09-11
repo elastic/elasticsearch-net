@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class RankFeatureFunctionSaturation
 {
+	/// <summary>
+	/// <para>Configurable pivot value so that the result will be less than 0.5.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public float? Pivot { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class RankFeatureFunctionSaturationDescriptor : Serializab
 
 	private float? PivotValue { get; set; }
 
+	/// <summary>
+	/// <para>Configurable pivot value so that the result will be less than 0.5.</para>
+	/// </summary>
 	public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot)
 	{
 		PivotValue = pivot;

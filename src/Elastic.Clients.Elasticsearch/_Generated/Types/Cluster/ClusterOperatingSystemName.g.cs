@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class ClusterOperatingSystemName
 {
+	/// <summary>
+	/// <para>Number of selected nodes using the operating system.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("count")]
 	public int Count { get; init; }
+
+	/// <summary>
+	/// <para>Name of an operating system used by one or more selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
 	public string Name { get; init; }
 }

@@ -88,6 +88,10 @@ public sealed partial class ClusterIndices
 	/// </summary>
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats Store { get; init; }
+
+	/// <summary>
+	/// <para>Contains statistics about analyzers and analyzer components used in selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("versions")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>? Versions { get; init; }
 }
