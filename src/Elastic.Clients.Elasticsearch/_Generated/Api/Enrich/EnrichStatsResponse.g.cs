@@ -27,10 +27,21 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public sealed partial class EnrichStatsResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>Objects containing information about the enrich cache stats on each ingest node.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("cache_stats")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CacheStats>? CacheStats { get; init; }
+
+	/// <summary>
+	/// <para>Objects containing information about each coordinating ingest node for configured enrich processors.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("coordinator_stats")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats> CoordinatorStats { get; init; }
+
+	/// <summary>
+	/// <para>Objects containing information about each enrich policy that is currently executing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("executing_policies")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.ExecutingPolicy> ExecutingPolicies { get; init; }
 }

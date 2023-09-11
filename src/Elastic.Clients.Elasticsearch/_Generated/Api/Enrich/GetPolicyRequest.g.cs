@@ -34,7 +34,7 @@ public sealed class GetPolicyRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Gets information about an enrich policy.</para>
+/// <para>Returns information about an enrich policy.</para>
 /// </summary>
 public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestParameters>
 {
@@ -54,7 +54,7 @@ public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestPara
 }
 
 /// <summary>
-/// <para>Gets information about an enrich policy.</para>
+/// <para>Returns information about an enrich policy.</para>
 /// </summary>
 public sealed partial class GetPolicyRequestDescriptor : RequestDescriptor<GetPolicyRequestDescriptor, GetPolicyRequestParameters>
 {

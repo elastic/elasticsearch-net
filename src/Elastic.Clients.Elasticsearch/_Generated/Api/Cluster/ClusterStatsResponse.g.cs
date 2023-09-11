@@ -28,7 +28,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Name of the cluster, based on the Cluster name setting setting.</para>
+	/// <para>Name of the cluster, based on the cluster name setting.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cluster_name")]
 	public string ClusterName { get; init; }
@@ -60,7 +60,7 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 
 	/// <summary>
-	/// <para>Unix timestamp, in milliseconds, of the last time the cluster statistics were refreshed.</para>
+	/// <para>Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
 	public long Timestamp { get; init; }

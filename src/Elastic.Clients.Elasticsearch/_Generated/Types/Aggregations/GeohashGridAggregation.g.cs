@@ -197,12 +197,32 @@ public sealed partial class GeohashGridAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>The bounding box to filter the points in each bucket.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
+
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The string length of the geohashes used to define cells/buckets in the results.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
+
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public int? ShardSize { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of geohash buckets to return.</para>
+	/// </summary>
 	public int? Size { get; set; }
 }
 
@@ -248,18 +268,27 @@ public sealed partial class GeohashGridAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The bounding box to filter the points in each bucket.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
 		BoundsValue = bounds;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -272,18 +301,27 @@ public sealed partial class GeohashGridAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string length of the geohashes used to define cells/buckets in the results.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of geohash buckets to return.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -394,24 +432,36 @@ public sealed partial class GeohashGridAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The bounding box to filter the points in each bucket.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? bounds)
 	{
 		BoundsValue = bounds;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field containing indexed `geo_point` or `geo_shape` values.<br/>If the field contains an array, `geohash_grid` aggregates all array values.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -424,18 +474,27 @@ public sealed partial class GeohashGridAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string length of the geohashes used to define cells/buckets in the results.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Allows for more accurate counting of the top cells returned in the final result the aggregation.<br/>Defaults to returning `max(10,(size x number-of-shards))` buckets from each shard.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor ShardSize(int? shardSize)
 	{
 		ShardSizeValue = shardSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of geohash buckets to return.</para>
+	/// </summary>
 	public GeohashGridAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;

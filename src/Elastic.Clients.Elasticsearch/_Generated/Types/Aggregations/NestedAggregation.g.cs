@@ -127,6 +127,10 @@ public sealed partial class NestedAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 }
 
@@ -174,12 +178,18 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public NestedAggregationDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
 		PathValue = path;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public NestedAggregationDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
 	{
 		PathValue = path;
@@ -268,18 +278,27 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public NestedAggregationDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
 	{
 		PathValue = path;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public NestedAggregationDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
 	{
 		PathValue = path;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
 	public NestedAggregationDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
 	{
 		PathValue = path;

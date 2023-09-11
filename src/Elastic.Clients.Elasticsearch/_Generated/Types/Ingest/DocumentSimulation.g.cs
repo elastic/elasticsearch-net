@@ -109,10 +109,25 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 /// </summary>
 public sealed partial class DocumentSimulation
 {
+	/// <summary>
+	/// <para>Unique identifier for the document. This ID must be unique within the `_index`.</para>
+	/// </summary>
 	public string Id { get; init; }
+
+	/// <summary>
+	/// <para>Name of the index containing the document.</para>
+	/// </summary>
 	public string Index { get; init; }
 	public Elastic.Clients.Elasticsearch.Ingest.IngestInfo Ingest { get; init; }
+
+	/// <summary>
+	/// <para>Value used to send the document to a specific primary shard.</para>
+	/// </summary>
 	public string? Routing { get; init; }
+
+	/// <summary>
+	/// <para>JSON body for the document.</para>
+	/// </summary>
 	public IReadOnlyDictionary<string, object> Source { get; init; }
 	[JsonConverter(typeof(StringifiedLongConverter))]
 	public long? Version { get; init; }

@@ -305,19 +305,54 @@ public sealed partial class DateHistogramAggregation : SearchAggregation
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? CalendarInterval { get; set; }
+
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
+
+	/// <summary>
+	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// </summary>
 	public string? Format { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// </summary>
 	public int? MinDocCount { get; set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public DateTimeOffset? Missing { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 	[JsonConverter(typeof(AggregateOrderConverter))]
+	/// <summary>
+	/// <para>The sort order of the returned buckets.</para>
+	/// </summary>
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	public IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// </summary>
 	public string? TimeZone { get; set; }
 }
 
@@ -369,30 +404,45 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
 	{
 		CalendarIntervalValue = calendarInterval;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 	{
 		FixedIntervalValue = fixedInterval;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -405,24 +455,36 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Offset(Elastic.Clients.Elasticsearch.Duration? offset)
 	{
 		OffsetValue = offset;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the returned buckets.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
@@ -441,6 +503,9 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor<TDocument> TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;
@@ -593,36 +658,54 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Calendar-aware interval.<br/>Can be specified using the unit name, such as `month`, or as a single unit quantity, such as `1M`.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? calendarInterval)
 	{
 		CalendarIntervalValue = calendarInterval;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date field whose values are use to build a histogram.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? fixedInterval)
 	{
 		FixedIntervalValue = fixedInterval;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The date format used to format `key_as_string` in the response.<br/>If no `format` is specified, the first date format specified in the field mapping is used.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
@@ -635,24 +718,36 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Offset(Elastic.Clients.Elasticsearch.Duration? offset)
 	{
 		OffsetValue = offset;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the returned buckets.</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
@@ -671,6 +766,9 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Time zone used for bucketing and rounding.<br/>Defaults to Coordinated Universal Time (UTC).</para>
+	/// </summary>
 	public DateHistogramAggregationDescriptor TimeZone(string? timeZone)
 	{
 		TimeZoneValue = timeZone;

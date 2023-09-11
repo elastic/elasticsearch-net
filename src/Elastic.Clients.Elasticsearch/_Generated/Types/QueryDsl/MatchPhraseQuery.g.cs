@@ -145,10 +145,26 @@ public sealed partial class MatchPhraseQuery : SearchQuery
 	}
 
 	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public string? Analyzer { get; set; }
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Query terms that are analyzed and turned into a phrase query.</para>
+	/// </summary>
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// </summary>
 	public int? Slop { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -193,6 +209,9 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -217,18 +236,27 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Query terms that are analyzed and turned into a phrase query.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor<TDocument> Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor<TDocument> Slop(int? slop)
 	{
 		SlopValue = slop;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;
@@ -308,6 +336,9 @@ public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -338,18 +369,27 @@ public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Query terms that are analyzed and turned into a phrase query.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor Query(string query)
 	{
 		QueryValue = query;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of positions allowed between matching tokens.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor Slop(int? slop)
 	{
 		SlopValue = slop;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? zeroTermsQuery)
 	{
 		ZeroTermsQueryValue = zeroTermsQuery;

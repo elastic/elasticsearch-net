@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class InferenceConfigRegression
 {
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("num_top_feature_importance_values")]
 	public int? NumTopFeatureImportanceValues { get; set; }
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 
@@ -48,18 +55,27 @@ public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : Ser
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
@@ -96,24 +112,36 @@ public sealed partial class InferenceConfigRegressionDescriptor : SerializableDe
 	private int? NumTopFeatureImportanceValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? ResultsFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Specifies the maximum number of feature importance values per document.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? numTopFeatureImportanceValues)
 	{
 		NumTopFeatureImportanceValuesValue = numTopFeatureImportanceValues;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
 	public InferenceConfigRegressionDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
 	{
 		ResultsFieldValue = resultsField;

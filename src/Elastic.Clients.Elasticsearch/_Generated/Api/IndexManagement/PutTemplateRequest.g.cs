@@ -35,17 +35,25 @@ public sealed class PutTemplateRequestParameters : RequestParameters
 	/// <para>If true, this request cannot replace or update existing index templates.</para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	/// <summary>
+	/// <para>If `true`, returns settings in flat format.</para>
+	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates an index template.</para>
+/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 /// </summary>
 public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequestParameters>
 {
@@ -64,6 +72,10 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// </summary>
 	[JsonIgnore]
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	/// <summary>
+	/// <para>If `true`, returns settings in flat format.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
@@ -72,6 +84,10 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
@@ -114,7 +130,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 }
 
 /// <summary>
-/// <para>Creates or updates an index template.</para>
+/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 /// </summary>
 public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<PutTemplateRequestDescriptor, PutTemplateRequestParameters>
 {

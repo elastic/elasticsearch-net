@@ -31,12 +31,20 @@ public sealed partial class RemoveProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
@@ -108,6 +116,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields field)
 	{
 		FieldValue = field;
@@ -126,6 +137,9 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public RemoveProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
@@ -269,6 +283,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Fields to be removed. Supports template snippets.</para>
+	/// </summary>
 	public RemoveProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Fields field)
 	{
 		FieldValue = field;
@@ -287,6 +304,9 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public RemoveProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;

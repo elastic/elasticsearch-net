@@ -31,22 +31,42 @@ public sealed partial class GsubProcessor
 {
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
+
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>The pattern to be replaced.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
+
+	/// <summary>
+	/// <para>The string to replace the matching patterns with.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string Replacement { get; set; }
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
+
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
@@ -117,12 +137,18 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -141,18 +167,27 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The pattern to be replaced.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Pattern(string pattern)
 	{
 		PatternValue = pattern;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to replace the matching patterns with.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> Replacement(string replacement)
 	{
 		ReplacementValue = replacement;
@@ -165,12 +200,18 @@ public sealed partial class GsubProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	public GsubProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
@@ -321,18 +362,27 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	public GsubProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	public GsubProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to apply the replacement to.</para>
+	/// </summary>
 	public GsubProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -351,18 +401,27 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document.</para>
+	/// </summary>
 	public GsubProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The pattern to be replaced.</para>
+	/// </summary>
 	public GsubProcessorDescriptor Pattern(string pattern)
 	{
 		PatternValue = pattern;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The string to replace the matching patterns with.</para>
+	/// </summary>
 	public GsubProcessorDescriptor Replacement(string replacement)
 	{
 		ReplacementValue = replacement;
@@ -375,18 +434,27 @@ public sealed partial class GsubProcessorDescriptor : SerializableDescriptor<Gsu
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	public GsubProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	public GsubProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to assign the converted value to<br/>By default, the `field` is updated in-place.</para>
+	/// </summary>
 	public GsubProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;

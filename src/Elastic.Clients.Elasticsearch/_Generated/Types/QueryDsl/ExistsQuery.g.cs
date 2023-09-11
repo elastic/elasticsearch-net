@@ -33,6 +33,10 @@ public sealed partial class ExistsQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -65,12 +69,18 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
@@ -122,18 +132,27 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	public ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	public ExistsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
 	public ExistsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;

@@ -127,6 +127,10 @@ public sealed partial class ChildrenAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The child type that should be selected.</para>
+	/// </summary>
 	public string? Type { get; set; }
 }
 
@@ -174,6 +178,9 @@ public sealed partial class ChildrenAggregationDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The child type that should be selected.</para>
+	/// </summary>
 	public ChildrenAggregationDescriptor<TDocument> Type(string? type)
 	{
 		TypeValue = type;
@@ -262,6 +269,9 @@ public sealed partial class ChildrenAggregationDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The child type that should be selected.</para>
+	/// </summary>
 	public ChildrenAggregationDescriptor Type(string? type)
 	{
 		TypeValue = type;

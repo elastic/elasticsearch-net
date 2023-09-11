@@ -33,6 +33,10 @@ public sealed partial class ScriptQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Contains a script to run as a query.<br/>This script must return a boolean value, `true` or `false`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
@@ -65,6 +69,9 @@ public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<Scrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Contains a script to run as a query.<br/>This script must return a boolean value, `true` or `false`.</para>
+	/// </summary>
 	public ScriptQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptValue = script;

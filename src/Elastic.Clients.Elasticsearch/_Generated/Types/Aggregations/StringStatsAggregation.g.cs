@@ -167,6 +167,10 @@ public sealed partial class StringStatsAggregation : SearchAggregation
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>Shows the probability distribution for all characters.</para>
+	/// </summary>
 	public bool? ShowDistribution { get; set; }
 }
 
@@ -214,6 +218,9 @@ public sealed partial class StringStatsAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Shows the probability distribution for all characters.</para>
+	/// </summary>
 	public StringStatsAggregationDescriptor<TDocument> ShowDistribution(bool? showDistribution = true)
 	{
 		ShowDistributionValue = showDistribution;
@@ -310,6 +317,9 @@ public sealed partial class StringStatsAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Shows the probability distribution for all characters.</para>
+	/// </summary>
 	public StringStatsAggregationDescriptor ShowDistribution(bool? showDistribution = true)
 	{
 		ShowDistributionValue = showDistribution;

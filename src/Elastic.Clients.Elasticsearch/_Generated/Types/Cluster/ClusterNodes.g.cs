@@ -76,7 +76,7 @@ public sealed partial class ClusterNodes
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; init; }
 
 	/// <summary>
-	/// <para>Contains statistics about installed plugins and modules by selected nodes.</para>
+	/// <para>Contains statistics about installed plugins and modules by selected nodes.<br/>If no plugins or modules are installed, this array is empty.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("plugins")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; init; }

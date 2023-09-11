@@ -29,10 +29,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class ClusterProcessOpenFileDescriptors
 {
+	/// <summary>
+	/// <para>Average number of concurrently open file descriptors.<br/>Returns `-1` if not supported.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("avg")]
 	public long Avg { get; init; }
+
+	/// <summary>
+	/// <para>Maximum number of concurrently open file descriptors allowed across all selected nodes.<br/>Returns `-1` if not supported.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public long Max { get; init; }
+
+	/// <summary>
+	/// <para>Minimum number of concurrently open file descriptors across all selected nodes.<br/>Returns -1 if not supported.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public long Min { get; init; }
 }

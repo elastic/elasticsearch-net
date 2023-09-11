@@ -200,11 +200,23 @@ public sealed partial class TopMetricsAggregation : SearchAggregation
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>The fields of the top document to return.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? Metrics { get; set; }
 	public FieldValue? Missing { get; set; }
 	override public string? Name { get; internal set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	/// <summary>
+	/// <para>The number of top documents from which to return metrics.</para>
+	/// </summary>
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>The sort order of the documents.</para>
+	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
@@ -230,6 +242,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The fields of the top document to return.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
 		MetricsDescriptor = null;
@@ -266,6 +281,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the documents.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -332,6 +350,9 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of top documents from which to return metrics.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -458,6 +479,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The fields of the top document to return.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? metrics)
 	{
 		MetricsDescriptor = null;
@@ -494,6 +518,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The sort order of the documents.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -566,6 +593,9 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of top documents from which to return metrics.</para>
+	/// </summary>
 	public TopMetricsAggregationDescriptor Size(int? size)
 	{
 		SizeValue = size;

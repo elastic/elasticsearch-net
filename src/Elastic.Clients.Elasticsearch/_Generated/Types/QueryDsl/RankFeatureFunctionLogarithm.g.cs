@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class RankFeatureFunctionLogarithm
 {
+	/// <summary>
+	/// <para>Configurable scaling factor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scaling_factor")]
 	public float ScalingFactor { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class RankFeatureFunctionLogarithmDescriptor : Serializabl
 
 	private float ScalingFactorValue { get; set; }
 
+	/// <summary>
+	/// <para>Configurable scaling factor.</para>
+	/// </summary>
 	public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor)
 	{
 		ScalingFactorValue = scalingFactor;

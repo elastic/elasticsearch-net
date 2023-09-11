@@ -122,14 +122,29 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 [JsonConverter(typeof(CardinalityExecutionModeConverter))]
 public enum CardinalityExecutionMode
 {
+	/// <summary>
+	/// <para>Run the aggregation by using segment ordinal values and resolving those values after each segment.</para>
+	/// </summary>
 	[EnumMember(Value = "segment_ordinals")]
 	SegmentOrdinals,
+	/// <summary>
+	/// <para>Heuristic-based mode, default in Elasticsearch 8.4 and later.</para>
+	/// </summary>
 	[EnumMember(Value = "save_time_heuristic")]
 	SaveTimeHeuristic,
+	/// <summary>
+	/// <para>Heuristic-based mode, default in Elasticsearch 8.3 and earlier.</para>
+	/// </summary>
 	[EnumMember(Value = "save_memory_heuristic")]
 	SaveMemoryHeuristic,
+	/// <summary>
+	/// <para>Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.</para>
+	/// </summary>
 	[EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
+	/// <summary>
+	/// <para>Run the aggregation by using field values directly.</para>
+	/// </summary>
 	[EnumMember(Value = "direct")]
 	Direct
 }
@@ -358,8 +373,14 @@ internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 [JsonConverter(typeof(RateModeConverter))]
 public enum RateMode
 {
+	/// <summary>
+	/// <para>Uses the number of values of the field.</para>
+	/// </summary>
 	[EnumMember(Value = "value_count")]
 	ValueCount,
+	/// <summary>
+	/// <para>Calculates the sum of all values of the field.</para>
+	/// </summary>
 	[EnumMember(Value = "sum")]
 	Sum
 }
@@ -399,10 +420,19 @@ internal sealed class RateModeConverter : JsonConverter<RateMode>
 [JsonConverter(typeof(SamplerAggregationExecutionHintConverter))]
 public enum SamplerAggregationExecutionHint
 {
+	/// <summary>
+	/// <para>Hold field values directly.</para>
+	/// </summary>
 	[EnumMember(Value = "map")]
 	Map,
+	/// <summary>
+	/// <para>Hold ordinals of the field as determined by the Lucene index.</para>
+	/// </summary>
 	[EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
+	/// <summary>
+	/// <para>Hold hashes of the field values - with potential for hash collisions.</para>
+	/// </summary>
 	[EnumMember(Value = "bytes_hash")]
 	BytesHash
 }
@@ -447,8 +477,14 @@ internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<S
 [JsonConverter(typeof(TermsAggregationCollectModeConverter))]
 public enum TermsAggregationCollectMode
 {
+	/// <summary>
+	/// <para>Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.</para>
+	/// </summary>
 	[EnumMember(Value = "depth_first")]
 	DepthFirst,
+	/// <summary>
+	/// <para>Caches the set of documents that fall into the uppermost buckets for subsequent replay.</para>
+	/// </summary>
 	[EnumMember(Value = "breadth_first")]
 	BreadthFirst
 }
@@ -543,10 +579,19 @@ internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<Ter
 [JsonConverter(typeof(TTestTypeConverter))]
 public enum TTestType
 {
+	/// <summary>
+	/// <para>Performs paired t-test.</para>
+	/// </summary>
 	[EnumMember(Value = "paired")]
 	Paired,
+	/// <summary>
+	/// <para>Performs two-sample equal variance test.</para>
+	/// </summary>
 	[EnumMember(Value = "homoscedastic")]
 	Homoscedastic,
+	/// <summary>
+	/// <para>Performs two-sample unequal variance test.</para>
+	/// </summary>
 	[EnumMember(Value = "heteroscedastic")]
 	Heteroscedastic
 }

@@ -29,10 +29,20 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 {
 	/// <summary>
+	/// <para>Metadata about clusters involved in the cross-cluster search.<br/>Not shown for local-only searches.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_clusters")]
+	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; init; }
+
+	/// <summary>
 	/// <para>If the async search completed, this field shows the status code of the search.<br/>For example, 200 indicates that the async search was successfully completed.<br/>503 indicates that the async search was completed with an error.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
 	public int? CompletionStatus { get; init; }
+	[JsonInclude, JsonPropertyName("completion_time")]
+	public DateTimeOffset? CompletionTime { get; init; }
+	[JsonInclude, JsonPropertyName("completion_time_in_millis")]
+	public long? CompletionTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]

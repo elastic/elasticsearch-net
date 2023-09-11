@@ -146,6 +146,10 @@ public sealed partial class MatrixStatsAggregation : SearchAggregation
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 	public IDictionary<string, object>? Meta { get; set; }
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
+
+	/// <summary>
+	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	override public string? Name { get; internal set; }
 }
@@ -181,6 +185,9 @@ public sealed partial class MatrixStatsAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// </summary>
 	public MatrixStatsAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 	{
 		ModeValue = mode;
@@ -252,6 +259,9 @@ public sealed partial class MatrixStatsAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Array value the aggregation will use for array or multi-valued fields.</para>
+	/// </summary>
 	public MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
 	{
 		ModeValue = mode;

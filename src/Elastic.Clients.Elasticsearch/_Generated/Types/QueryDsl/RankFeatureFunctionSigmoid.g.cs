@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class RankFeatureFunctionSigmoid
 {
+	/// <summary>
+	/// <para>Configurable Exponent.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("exponent")]
 	public float Exponent { get; set; }
+
+	/// <summary>
+	/// <para>Configurable pivot value so that the result will be less than 0.5.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pivot")]
 	public float Pivot { get; set; }
 }
@@ -46,12 +53,18 @@ public sealed partial class RankFeatureFunctionSigmoidDescriptor : SerializableD
 	private float ExponentValue { get; set; }
 	private float PivotValue { get; set; }
 
+	/// <summary>
+	/// <para>Configurable Exponent.</para>
+	/// </summary>
 	public RankFeatureFunctionSigmoidDescriptor Exponent(float exponent)
 	{
 		ExponentValue = exponent;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Configurable pivot value so that the result will be less than 0.5.</para>
+	/// </summary>
 	public RankFeatureFunctionSigmoidDescriptor Pivot(float pivot)
 	{
 		PivotValue = pivot;

@@ -33,14 +33,34 @@ public sealed partial class SpanNotQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dist")]
 	public int? Dist { get; set; }
+
+	/// <summary>
+	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
+
+	/// <summary>
+	/// <para>Span query whose matches are filtered.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
+
+	/// <summary>
+	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("post")]
 	public int? Post { get; set; }
+
+	/// <summary>
+	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pre")]
 	public int? Pre { get; set; }
 
@@ -67,6 +87,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	private int? PostValue { get; set; }
 	private int? PreValue { get; set; }
 
+	/// <summary>
+	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
 	{
 		ExcludeDescriptor = null;
@@ -91,6 +114,9 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Span query whose matches are filtered.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
 	{
 		IncludeDescriptor = null;
@@ -127,18 +153,27 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Dist(int? dist)
 	{
 		DistValue = dist;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Post(int? post)
 	{
 		PostValue = post;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor<TDocument> Pre(int? pre)
 	{
 		PreValue = pre;
@@ -234,6 +269,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	private int? PostValue { get; set; }
 	private int? PreValue { get; set; }
 
+	/// <summary>
+	/// <para>Span query whose matches must not overlap those returned.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor Exclude(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery exclude)
 	{
 		ExcludeDescriptor = null;
@@ -258,6 +296,9 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Span query whose matches are filtered.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor Include(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery include)
 	{
 		IncludeDescriptor = null;
@@ -294,18 +335,27 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor Dist(int? dist)
 	{
 		DistValue = dist;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor Post(int? post)
 	{
 		PostValue = post;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of tokens before the include span that can’t have overlap with the exclude span.</para>
+	/// </summary>
 	public SpanNotQueryDescriptor Pre(int? pre)
 	{
 		PreValue = pre;

@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed class ClusterStatsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for each node to respond. If a node does not respond before its timeout expires, the response does not include its stats. However, timed out nodes are included in the response’s _nodes.failed property. Defaults to no timeout.</para>
+	/// <para>Period to wait for each node to respond.<br/>If a node does not respond before its timeout expires, the response does not include its stats.<br/>However, timed out nodes are included in the response’s `_nodes.failed` property. Defaults to no timeout.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns high-level overview of cluster statistics.</para>
+/// <para>Returns cluster statistics.<br/>It returns basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).</para>
 /// </summary>
 public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsRequestParameters>
 {
@@ -62,20 +62,20 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Return settings in flat format (default: false)</para>
+	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for each node to respond. If a node does not respond before its timeout expires, the response does not include its stats. However, timed out nodes are included in the response’s _nodes.failed property. Defaults to no timeout.</para>
+	/// <para>Period to wait for each node to respond.<br/>If a node does not respond before its timeout expires, the response does not include its stats.<br/>However, timed out nodes are included in the response’s `_nodes.failed` property. Defaults to no timeout.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Returns high-level overview of cluster statistics.</para>
+/// <para>Returns cluster statistics.<br/>It returns basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).</para>
 /// </summary>
 public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<ClusterStatsRequestDescriptor, ClusterStatsRequestParameters>
 {

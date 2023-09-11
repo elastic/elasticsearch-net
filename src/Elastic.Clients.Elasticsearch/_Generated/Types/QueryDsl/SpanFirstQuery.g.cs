@@ -33,8 +33,16 @@ public sealed partial class SpanFirstQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("end")]
 	public int End { get; set; }
+
+	/// <summary>
+	/// <para>Can be any other span type query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Match { get; set; }
 
@@ -56,6 +64,9 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	private float? BoostValue { get; set; }
 	private int EndValue { get; set; }
 
+	/// <summary>
+	/// <para>Can be any other span type query.</para>
+	/// </summary>
 	public SpanFirstQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
 	{
 		MatchDescriptor = null;
@@ -92,6 +103,9 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// </summary>
 	public SpanFirstQueryDescriptor<TDocument> End(int end)
 	{
 		EndValue = end;
@@ -150,6 +164,9 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	private float? BoostValue { get; set; }
 	private int EndValue { get; set; }
 
+	/// <summary>
+	/// <para>Can be any other span type query.</para>
+	/// </summary>
 	public SpanFirstQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery match)
 	{
 		MatchDescriptor = null;
@@ -186,6 +203,9 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// </summary>
 	public SpanFirstQueryDescriptor End(int end)
 	{
 		EndValue = end;

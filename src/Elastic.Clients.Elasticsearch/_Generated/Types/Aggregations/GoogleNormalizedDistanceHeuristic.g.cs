@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class GoogleNormalizedDistanceHeuristic
 {
+	/// <summary>
+	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("background_is_superset")]
 	public bool? BackgroundIsSuperset { get; set; }
 }
@@ -43,6 +46,9 @@ public sealed partial class GoogleNormalizedDistanceHeuristicDescriptor : Serial
 
 	private bool? BackgroundIsSupersetValue { get; set; }
 
+	/// <summary>
+	/// <para>Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.</para>
+	/// </summary>
 	public GoogleNormalizedDistanceHeuristicDescriptor BackgroundIsSuperset(bool? backgroundIsSuperset = true)
 	{
 		BackgroundIsSupersetValue = backgroundIsSuperset;

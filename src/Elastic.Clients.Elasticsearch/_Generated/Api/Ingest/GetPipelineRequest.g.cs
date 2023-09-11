@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed class GetPipelineRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
@@ -43,7 +43,7 @@ public sealed class GetPipelineRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns a pipeline.</para>
+/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
 /// </summary>
 public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 	internal override bool SupportsBody => false;
 
 	/// <summary>
-	/// <para>Explicit operation timeout for connection to master node</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -75,7 +75,7 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 }
 
 /// <summary>
-/// <para>Returns a pipeline.</para>
+/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
 /// </summary>
 public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDescriptor<GetPipelineRequestDescriptor<TDocument>, GetPipelineRequestParameters>
 {
@@ -106,7 +106,7 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Returns a pipeline.</para>
+/// <para>Returns information about one or more ingest pipelines.<br/>This API returns a local reference of the pipeline.</para>
 /// </summary>
 public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<GetPipelineRequestDescriptor, GetPipelineRequestParameters>
 {

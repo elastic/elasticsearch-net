@@ -33,14 +33,34 @@ public sealed partial class HasParentQuery : SearchQuery
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
+
+	/// <summary>
+	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("inner_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
+
+	/// <summary>
+	/// <para>Name of the parent relationship mapped for the `join` field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("parent_type")]
 	public string ParentType { get; set; }
+
+	/// <summary>
+	/// <para>Query you wish to run on parent documents of the `parent_type` field.<br/>If a parent document matches the search, the query returns its child documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+
+	/// <summary>
+	/// <para>Indicates whether the relevance score of a matching parent document is aggregated into its child documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("score")]
 	public bool? Score { get; set; }
 
@@ -69,6 +89,9 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	private string ParentTypeValue { get; set; }
 	private bool? ScoreValue { get; set; }
 
+	/// <summary>
+	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// </summary>
 	public HasParentQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 	{
 		InnerHitsDescriptor = null;
@@ -93,6 +116,9 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Query you wish to run on parent documents of the `parent_type` field.<br/>If a parent document matches the search, the query returns its child documents.</para>
+	/// </summary>
 	public HasParentQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -129,18 +155,27 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
+	/// </summary>
 	public HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the parent relationship mapped for the `join` field.</para>
+	/// </summary>
 	public HasParentQueryDescriptor<TDocument> ParentType(string parentType)
 	{
 		ParentTypeValue = parentType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether the relevance score of a matching parent document is aggregated into its child documents.</para>
+	/// </summary>
 	public HasParentQueryDescriptor<TDocument> Score(bool? score = true)
 	{
 		ScoreValue = score;
@@ -232,6 +267,9 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	private string ParentTypeValue { get; set; }
 	private bool? ScoreValue { get; set; }
 
+	/// <summary>
+	/// <para>If defined, each search hit will contain inner hits.</para>
+	/// </summary>
 	public HasParentQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? innerHits)
 	{
 		InnerHitsDescriptor = null;
@@ -256,6 +294,9 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Query you wish to run on parent documents of the `parent_type` field.<br/>If a parent document matches the search, the query returns its child documents.</para>
+	/// </summary>
 	public HasParentQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query query)
 	{
 		QueryDescriptor = null;
@@ -292,18 +333,27 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
+	/// </summary>
 	public HasParentQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Name of the parent relationship mapped for the `join` field.</para>
+	/// </summary>
 	public HasParentQueryDescriptor ParentType(string parentType)
 	{
 		ParentTypeValue = parentType;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates whether the relevance score of a matching parent document is aggregated into its child documents.</para>
+	/// </summary>
 	public HasParentQueryDescriptor Score(bool? score = true)
 	{
 		ScoreValue = score;

@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class ClusterJvmMemory
 {
+	/// <summary>
+	/// <para>Maximum amount of memory, in bytes, available for use by the heap across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_max_in_bytes")]
 	public long HeapMaxInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Memory, in bytes, currently in use by the heap across all selected nodes.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("heap_used_in_bytes")]
 	public long HeapUsedInBytes { get; init; }
 }

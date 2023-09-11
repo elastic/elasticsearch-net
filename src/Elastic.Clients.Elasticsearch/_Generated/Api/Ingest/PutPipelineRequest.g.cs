@@ -48,7 +48,7 @@ public sealed class PutPipelineRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates or updates a pipeline.</para>
+/// <para>Creates or updates an ingest pipeline.<br/>Changes made using this API take effect immediately.</para>
 /// </summary>
 public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequestParameters>
 {
@@ -112,7 +112,7 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 }
 
 /// <summary>
-/// <para>Creates or updates a pipeline.</para>
+/// <para>Creates or updates an ingest pipeline.<br/>Changes made using this API take effect immediately.</para>
 /// </summary>
 public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDescriptor<PutPipelineRequestDescriptor<TDocument>, PutPipelineRequestParameters>
 {
@@ -347,7 +347,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Creates or updates a pipeline.</para>
+/// <para>Creates or updates an ingest pipeline.<br/>Changes made using this API take effect immediately.</para>
 /// </summary>
 public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<PutPipelineRequestDescriptor, PutPipelineRequestParameters>
 {
