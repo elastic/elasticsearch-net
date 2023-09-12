@@ -46,6 +46,11 @@
           "System.Diagnostics.EventLog": "6.0.0"
         }
       },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.4.16",
+        "contentHash": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg=="
+      },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
         "resolved": "1.1.1",
@@ -105,7 +110,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[1.0.0, )"
+          "Elastic.Transport": "[0.4.16, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -114,9 +119,6 @@
           "Elastic.Clients.Elasticsearch": "[8.0.0, )",
           "Newtonsoft.Json": "[13.0.1, )"
         }
-      },
-      "elastic.transport": {
-        "type": "Project"
       }
     }
   }

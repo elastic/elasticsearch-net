@@ -65,6 +65,11 @@
         "resolved": "2.4.3",
         "contentHash": "U2FC9Y8NyIxxU6MpFFdWWu1xwiqz/61v/Doou7kmVjpeIEMLWyiNNkzNlSE84kyJ0O1LKApuEj5z48Ow0Hi4OQ=="
       },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.4.16",
+        "contentHash": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg=="
+      },
       "Elasticsearch.Net": {
         "type": "Transitive",
         "resolved": "7.16.0",
@@ -1167,11 +1172,8 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[1.0.0, )"
+          "Elastic.Transport": "[0.4.16, )"
         }
-      },
-      "elastic.transport": {
-        "type": "Project"
       }
     }
   }

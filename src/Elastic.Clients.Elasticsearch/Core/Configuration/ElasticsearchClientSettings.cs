@@ -63,6 +63,15 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	{
 	}
 
+	/// <summary>
+	/// Instantiate connection settings using a <see cref="SingleNodePool" /> using the provided
+	/// <see cref="InMemoryTransportClient" /> that never uses any IO.
+	/// </summary>
+	public ElasticsearchClientSettings(InMemoryTransportClient inMemoryTransportClient)
+		: this(new SingleNodePool(new Uri("http://localhost:9200")), inMemoryTransportClient)
+	{
+	}
+
 	public ElasticsearchClientSettings(
 		NodePool nodePool,
 		TransportClient connection,

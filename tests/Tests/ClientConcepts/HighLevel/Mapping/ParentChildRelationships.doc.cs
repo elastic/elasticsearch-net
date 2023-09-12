@@ -68,7 +68,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		//public void SimpleParentChildMapping()
 		//{
 		//	var connectionPool = new SingleNodePool(new Uri("http://localhost:9200"));
-		//	var connectionSettings = new ElasticsearchClientSettings(connectionPool, new InMemoryConnection()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
+		//	var connectionSettings = new ElasticsearchClientSettings(connectionPool, new InMemoryTransportClient()) // <1> for the purposes of this example, an in memory connection is used which doesn't actually send a request. In your application, you'd use the default connection or your own implementation that actually sends a request.
 		//		.DefaultMappingFor<MyDocument>(m => m.IndexName("index"))
 		//		.DefaultMappingFor<MyChild>(m => m.IndexName("index"))
 		//		.DefaultMappingFor<MyParent>(m => m.IndexName("index").RelationName("parent"));

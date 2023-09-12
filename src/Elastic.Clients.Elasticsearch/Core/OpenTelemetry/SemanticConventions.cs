@@ -2,9 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.OpenTelemetry;
 
-internal static class OpenTelemetrySemanticConventions
+internal static class SemanticConventions
 {
 	public const string DbOperation = "db.operation";
 }

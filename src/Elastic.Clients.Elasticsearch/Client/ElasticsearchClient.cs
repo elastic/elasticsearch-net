@@ -185,7 +185,7 @@ public partial class ElasticsearchClient
 		where TRequestParameters : RequestParameters, new()
 	{
 		// If there are no subscribed listeners, we avoid some work and allocations
-		if (!OpenTelemetry.ElasticTransportActivitySourceHasListeners)
+		if (!Elastic.Transport.Diagnostics.OpenTelemetry.ElasticTransportActivitySourceHasListeners)
 			return default;
 
 		// We fall back to a general operation name in cases where the derived request fails to override the property
@@ -198,7 +198,7 @@ public partial class ElasticsearchClient
 		// The latter may bloat the cache as some combinations of path parts may rarely re-occur.
 		var attributes = new Dictionary<string, object>
 		{
-			[OpenTelemetrySemanticConventions.DbOperation] = !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : "unknown",
+			[OpenTelemetry.SemanticConventions.DbOperation] = !string.IsNullOrEmpty(request.OperationName) ? request.OperationName : "unknown",
 			[$"{OpenTelemetrySpanAttributePrefix}schema_url"] = OpenTelemetrySchemaVersion
 		};
 

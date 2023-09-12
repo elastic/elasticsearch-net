@@ -73,6 +73,18 @@
           "System.Text.Json": "4.6.0"
         }
       },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.4.16",
+        "contentHash": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "6.0.1",
+          "System.Text.Json": "6.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        }
+      },
       "FluentAssertions": {
         "type": "Transitive",
         "resolved": "5.10.3",
@@ -1268,7 +1280,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[1.0.0, )"
+          "Elastic.Transport": "[0.4.16, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -1276,16 +1288,6 @@
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "[8.0.0, )",
           "Newtonsoft.Json": "[13.0.1, )"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "[4.7.0, )",
-          "System.Buffers": "[4.5.1, )",
-          "System.Diagnostics.DiagnosticSource": "[6.0.1, )",
-          "System.Text.Json": "[6.0.0, )",
-          "System.Threading.Tasks.Extensions": "[4.5.4, )"
         }
       },
       "tests.configuration": {
@@ -1391,6 +1393,18 @@
         "dependencies": {
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
+        }
+      },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.4.16",
+        "contentHash": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Buffers": "4.5.1",
+          "System.Diagnostics.DiagnosticSource": "6.0.1",
+          "System.Text.Json": "6.0.0",
+          "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
       "FluentAssertions": {
@@ -2582,7 +2596,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[1.0.0, )"
+          "Elastic.Transport": "[0.4.16, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -2590,16 +2604,6 @@
         "dependencies": {
           "Elastic.Clients.Elasticsearch": "[8.0.0, )",
           "Newtonsoft.Json": "[13.0.1, )"
-        }
-      },
-      "elastic.transport": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CSharp": "[4.7.0, )",
-          "System.Buffers": "[4.5.1, )",
-          "System.Diagnostics.DiagnosticSource": "[6.0.1, )",
-          "System.Text.Json": "[6.0.0, )",
-          "System.Threading.Tasks.Extensions": "[4.5.4, )"
         }
       },
       "tests.configuration": {
@@ -2706,6 +2710,11 @@
           "SemanticVersioning": "0.8.0",
           "System.Text.Json": "4.6.0"
         }
+      },
+      "Elastic.Transport": {
+        "type": "Transitive",
+        "resolved": "0.4.16",
+        "contentHash": "O2LHqnQTWAF0+cic9zYkZJ8m95cG9AnkRbwkRZogroWXZHh8oY5ewVsQsF+wwNHs/YWnNIBTq/7yqaFklBB/Wg=="
       },
       "FluentAssertions": {
         "type": "Transitive",
@@ -3890,7 +3899,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[1.0.0, )"
+          "Elastic.Transport": "[0.4.16, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -3899,9 +3908,6 @@
           "Elastic.Clients.Elasticsearch": "[8.0.0, )",
           "Newtonsoft.Json": "[13.0.1, )"
         }
-      },
-      "elastic.transport": {
-        "type": "Project"
       },
       "tests.configuration": {
         "type": "Project",
