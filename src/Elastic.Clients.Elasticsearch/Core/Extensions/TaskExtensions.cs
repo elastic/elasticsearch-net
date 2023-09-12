@@ -1,6 +1,6 @@
 // Licensed to Elasticsearch B.V under one or more agreements.
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
-// See the LICENSE file in the project root for more information
+// See the LICENSE file in the project root for more information.
 
 // Adapted from https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src/Shared/TaskExtensions.cs
 // Copyright (c) Microsoft Corporation. All rights reserved.
