@@ -4,7 +4,7 @@
 
 namespace Tests.Core.ManagedElasticsearch.Clusters;
 
-public class OpenTelemtryCluster : ClientTestClusterBase
+public class OpenTelemetryCluster : ClientTestClusterBase
 {
-	public OpenTelemtryCluster() : base() { }
+	public OpenTelemetryCluster() : base() { }
 }
