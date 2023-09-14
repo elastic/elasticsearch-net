@@ -44,6 +44,8 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "sql.clear_cursor";
+
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string Cursor { get; set; }
 }
@@ -64,6 +66,8 @@ public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<Cle
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "sql.clear_cursor";
 
 	private string CursorValue { get; set; }
 

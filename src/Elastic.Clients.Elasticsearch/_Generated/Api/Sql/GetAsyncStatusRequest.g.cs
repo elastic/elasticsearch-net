@@ -47,6 +47,8 @@ public sealed partial class GetAsyncStatusRequest : PlainRequest<GetAsyncStatusR
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "sql.get_async_status";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class GetAsyncStatusRequestDescriptor<TDocument> : Request
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "sql.get_async_status";
 
 	public GetAsyncStatusRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -101,6 +105,8 @@ public sealed partial class GetAsyncStatusRequestDescriptor : RequestDescriptor<
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "sql.get_async_status";
 
 	public GetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

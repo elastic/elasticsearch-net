@@ -91,6 +91,8 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "mget";
+
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
 	/// </summary>
@@ -168,6 +170,8 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "mget";
 
 	public MultiGetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
@@ -298,6 +302,8 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "mget";
 
 	public MultiGetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public MultiGetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

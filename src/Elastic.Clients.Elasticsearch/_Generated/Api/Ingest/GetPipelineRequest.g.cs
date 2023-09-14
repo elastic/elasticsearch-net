@@ -61,6 +61,8 @@ public sealed partial class GetPipelineRequest : PlainRequest<GetPipelineRequest
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "ingest.get_pipeline";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.get_pipeline";
 
 	public GetPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetPipelineRequestDescriptor<TDocument> Summary(bool? summary = true) => Qs("summary", summary);
@@ -121,6 +125,8 @@ public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<Get
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.get_pipeline";
 
 	public GetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public GetPipelineRequestDescriptor Summary(bool? summary = true) => Qs("summary", summary);

@@ -61,6 +61,8 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_data_stream";
+
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<G
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.get_data_stream";
 
 	public GetDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetDataStreamRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

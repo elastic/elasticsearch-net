@@ -84,6 +84,8 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "tasks.list";
+
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
 	/// </summary>
@@ -150,6 +152,8 @@ public sealed partial class ListRequestDescriptor : RequestDescriptor<ListReques
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "tasks.list";
 
 	public ListRequestDescriptor Actions(ICollection<string>? actions) => Qs("actions", actions);
 	public ListRequestDescriptor Detailed(bool? detailed = true) => Qs("detailed", detailed);

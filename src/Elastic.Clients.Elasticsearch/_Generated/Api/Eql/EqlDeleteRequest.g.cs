@@ -47,6 +47,8 @@ public sealed partial class EqlDeleteRequest : PlainRequest<EqlDeleteRequestPara
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "eql.delete";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "eql.delete";
 
 	public EqlDeleteRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
@@ -101,6 +105,8 @@ public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "eql.delete";
 
 	public EqlDeleteRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{

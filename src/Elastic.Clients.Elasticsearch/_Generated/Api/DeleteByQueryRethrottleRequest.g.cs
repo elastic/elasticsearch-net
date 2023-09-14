@@ -52,6 +52,8 @@ public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<Delete
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "delete_by_query_rethrottle";
+
 	/// <summary>
 	/// <para>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "delete_by_query_rethrottle";
 
 	public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 

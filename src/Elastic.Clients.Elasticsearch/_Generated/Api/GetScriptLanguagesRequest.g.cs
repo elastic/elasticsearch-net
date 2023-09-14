@@ -43,6 +43,8 @@ public sealed partial class GetScriptLanguagesRequest : PlainRequest<GetScriptLa
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script_languages";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class GetScriptLanguagesRequestDescriptor : RequestDescrip
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script_languages";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

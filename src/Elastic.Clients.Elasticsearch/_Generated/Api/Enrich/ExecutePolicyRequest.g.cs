@@ -52,6 +52,8 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "enrich.execute_policy";
+
 	/// <summary>
 	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<E
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.execute_policy";
 
 	public ExecutePolicyRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 

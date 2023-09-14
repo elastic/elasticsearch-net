@@ -77,7 +77,7 @@ var client = new ElasticsearchClient(settings);
         // Any changes to the documentation code needs to be applied here also.
         settings = new ElasticsearchClientSettings(
             nodePool,
-            new InMemoryConnection(),
+            new InMemoryTransportClient(),
             sourceSerializer: (defaultSerializer, settings) =>
                 new DefaultSourceSerializer(settings, ConfigureOptions))
             .DisableDirectStreaming();
@@ -311,7 +311,7 @@ public class CustomSerializationTestsEnumAttribute : DocumentationTestBase
         // Any changes to the documentation code needs to be applied here also.
         settings = new ElasticsearchClientSettings(
             nodePool,
-            new InMemoryConnection(),
+            new InMemoryTransportClient(),
             sourceSerializer: (defaultSerializer, settings) =>
                 new MyCustomSerializer(settings))
             .DisableDirectStreaming();

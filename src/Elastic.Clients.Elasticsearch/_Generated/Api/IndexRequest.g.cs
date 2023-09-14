@@ -106,6 +106,8 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "index";
+
 	[JsonIgnore]
 	public TDocument Document { get; set; }
 
@@ -209,6 +211,8 @@ public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "index";
 
 	public IndexRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	public IndexRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);

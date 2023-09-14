@@ -106,6 +106,8 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "termvectors";
+
 	[JsonIgnore]
 	public TDocument Document { get; set; }
 
@@ -215,6 +217,8 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "termvectors";
 
 	public TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public TermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);

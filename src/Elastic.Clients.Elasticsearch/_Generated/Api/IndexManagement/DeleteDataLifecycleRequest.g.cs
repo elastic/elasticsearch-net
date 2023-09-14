@@ -63,6 +63,8 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.delete_data_lifecycle";
+
 	/// <summary>
 	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>
 	/// </summary>
@@ -103,6 +105,8 @@ public sealed partial class DeleteDataLifecycleRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.delete_data_lifecycle";
 
 	public DeleteDataLifecycleRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

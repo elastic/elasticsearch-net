@@ -52,6 +52,8 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.exists_index_template";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.exists_index_template";
 
 	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 

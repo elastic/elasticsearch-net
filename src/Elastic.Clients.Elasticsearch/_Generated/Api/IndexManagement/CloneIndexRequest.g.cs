@@ -62,6 +62,8 @@ public sealed partial class CloneIndexRequest : PlainRequest<CloneIndexRequestPa
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.clone";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -113,6 +115,8 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.clone";
 
 	public CloneIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CloneIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -190,6 +194,8 @@ public sealed partial class CloneIndexRequestDescriptor : RequestDescriptor<Clon
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.clone";
 
 	public CloneIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public CloneIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

@@ -78,6 +78,8 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "msearch_template";
+
 	/// <summary>
 	/// <para>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</para>
 	/// </summary>
@@ -149,6 +151,8 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "msearch_template";
+
 	public MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);
 	public MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
@@ -212,6 +216,8 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "msearch_template";
 
 	public MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? maxConcurrentSearches) => Qs("max_concurrent_searches", maxConcurrentSearches);

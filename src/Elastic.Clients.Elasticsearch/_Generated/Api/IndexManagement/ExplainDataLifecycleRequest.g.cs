@@ -58,6 +58,8 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.explain_data_lifecycle";
+
 	/// <summary>
 	/// <para>indicates if the API should return the default values the system uses for the index's lifecycle</para>
 	/// </summary>
@@ -92,6 +94,8 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.explain_data_lifecycle";
 
 	public ExplainDataLifecycleRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public ExplainDataLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
@@ -128,6 +132,8 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.explain_data_lifecycle";
 
 	public ExplainDataLifecycleRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public ExplainDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

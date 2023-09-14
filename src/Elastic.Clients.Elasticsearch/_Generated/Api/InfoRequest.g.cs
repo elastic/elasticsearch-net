@@ -43,6 +43,8 @@ public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "info";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoReques
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "info";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

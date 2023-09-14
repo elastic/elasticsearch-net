@@ -48,6 +48,8 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "enrich.put_policy";
+
 	/// <summary>
 	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
 	/// </summary>
@@ -87,6 +89,8 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "enrich.put_policy";
 
 	public PutPolicyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -260,6 +264,8 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "enrich.put_policy";
 
 	public PutPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

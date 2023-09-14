@@ -61,6 +61,8 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "cluster.stats";
+
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<Cl
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "cluster.stats";
 
 	public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

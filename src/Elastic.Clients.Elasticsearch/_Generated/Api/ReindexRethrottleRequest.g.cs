@@ -52,6 +52,8 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "reindex_rethrottle";
+
 	/// <summary>
 	/// <para>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "reindex_rethrottle";
 
 	public ReindexRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 

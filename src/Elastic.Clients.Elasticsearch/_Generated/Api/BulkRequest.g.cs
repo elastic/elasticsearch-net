@@ -96,6 +96,8 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "bulk";
+
 	/// <summary>
 	/// <para>The pipeline id to preprocess incoming documents with</para>
 	/// </summary>
@@ -168,6 +170,8 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "bulk";
+
 	public BulkRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public BulkRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -205,6 +209,8 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "bulk";
 
 	public BulkRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public BulkRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

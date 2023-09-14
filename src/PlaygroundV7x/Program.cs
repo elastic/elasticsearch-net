@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 
@@ -92,7 +91,7 @@ namespace PlaygroundV7x
 //				})
 //			};
 
-//			var client = new ElasticClient(new ConnectionSettings(new InMemoryConnection())
+//			var client = new ElasticClient(new ConnectionSettings(new InMemoryTransportClient())
 //				.DefaultIndex("default-index")
 //				//.DefaultMappingFor<Person>(m => m
 //					//.DisableIdInference()

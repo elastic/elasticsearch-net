@@ -61,6 +61,8 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "put_script";
+
 	/// <summary>
 	/// <para>Specify timeout for connection to master</para>
 	/// </summary>
@@ -100,6 +102,8 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "put_script";
 
 	public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -191,6 +195,8 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "put_script";
 
 	public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

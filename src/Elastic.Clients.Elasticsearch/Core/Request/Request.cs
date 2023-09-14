@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
+using Elastic.Transport.Diagnostics;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
@@ -48,12 +50,15 @@ public abstract class Request
 
 	internal abstract ApiUrls ApiUrls { get; }
 
-	protected virtual (string ResolvedUrl, string UrlTemplate) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
+	protected virtual (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) ResolveUrl(RouteValues routeValues, IElasticsearchClientSettings settings) =>
 		ApiUrls.Resolve(routeValues, settings);
 
 	internal virtual void BeforeRequest() { }
 
-	internal (string ResolvedUrl, string UrlTemplate) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
+	internal (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
+
+	[JsonIgnore]
+	internal virtual string? OperationName { get; }
 }
 
 public abstract class Request<TParameters> : Request
