@@ -72,6 +72,8 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "tasks.cancel";
+
 	/// <summary>
 	/// <para>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</para>
 	/// </summary>
@@ -114,6 +116,8 @@ public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "tasks.cancel";
 
 	public CancelRequestDescriptor Actions(ICollection<string>? actions) => Qs("actions", actions);
 	public CancelRequestDescriptor Nodes(ICollection<string>? nodes) => Qs("nodes", nodes);

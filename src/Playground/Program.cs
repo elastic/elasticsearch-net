@@ -34,7 +34,7 @@ Console.ReadKey();
 #region Hidden
 Aggregation a = new TermsAggregation("test");
 
-var settings = new ElasticsearchClientSettings(new InMemoryConnection())
+var settings = new ElasticsearchClientSettings(new InMemoryTransportClient())
 	.DefaultIndex("default-index")
 	.DefaultMappingFor<Person>(m => m
 		.DisableIdInference()
@@ -238,7 +238,7 @@ public class StockData
 
 
 
-//var settings = new ElasticsearchClientSettings(new InMemoryConnection())
+//var settings = new ElasticsearchClientSettings(new InMemoryTransportClient())
 //	.EnableDebugMode()
 //	.DefaultMappingFor<Person>(p => p
 //		.PropertyName(pn => pn.Age, "custom-name")

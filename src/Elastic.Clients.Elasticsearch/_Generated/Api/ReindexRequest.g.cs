@@ -79,6 +79,8 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "reindex";
+
 	/// <summary>
 	/// <para>Should the affected indexes be refreshed?</para>
 	/// </summary>
@@ -152,6 +154,8 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "reindex";
 
 	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -324,6 +328,8 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "reindex";
 
 	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);

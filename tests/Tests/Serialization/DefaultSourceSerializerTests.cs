@@ -17,7 +17,7 @@ namespace Tests.Serialization;
 public class DefaultSourceSerializerTests : SerializerTestBase
 {
 	private readonly ElasticsearchClient _client = new(
-		new ElasticsearchClientSettings(new InMemoryConnection())
+		new ElasticsearchClientSettings(new InMemoryTransportClient())
 			.DefaultMappingFor<MyDocument>(m => m.IndexName("index"))
 			.DefaultMappingFor<MyChild>(m => m.IndexName("index"))
 			.DefaultMappingFor<MyParent>(m => m.IndexName("index").RelationName("my_parent"))
@@ -78,7 +78,7 @@ public class DefaultSourceSerializerTests : SerializerTestBase
 
 		var settings = new ElasticsearchClientSettings(
 			nodePool,
-			new InMemoryConnection(),
+			new InMemoryTransportClient(),
 			sourceSerializer: (defaultSerializer, settings) =>
 				new MyCustomSerializer(settings))
 			.DisableDirectStreaming()

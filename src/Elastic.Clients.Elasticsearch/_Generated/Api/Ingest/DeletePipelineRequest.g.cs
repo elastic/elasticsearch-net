@@ -57,6 +57,8 @@ public sealed partial class DeletePipelineRequest : PlainRequest<DeletePipelineR
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "ingest.delete_pipeline";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class DeletePipelineRequestDescriptor<TDocument> : Request
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.delete_pipeline";
 
 	public DeletePipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeletePipelineRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -125,6 +129,8 @@ public sealed partial class DeletePipelineRequestDescriptor : RequestDescriptor<
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.delete_pipeline";
 
 	public DeletePipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeletePipelineRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

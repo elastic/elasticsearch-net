@@ -187,6 +187,8 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "delete_by_query";
+
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
@@ -383,6 +385,8 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "delete_by_query";
+
 	public DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
@@ -545,6 +549,8 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "delete_by_query";
 
 	public DeleteByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);

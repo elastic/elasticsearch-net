@@ -107,6 +107,8 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "explain";
+
 	/// <summary>
 	/// <para>The analyzer for the query string query</para>
 	/// </summary>
@@ -223,6 +225,8 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "explain";
+
 	public ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -319,6 +323,8 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "explain";
 
 	public ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

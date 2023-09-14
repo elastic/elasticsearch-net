@@ -67,6 +67,8 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "sql.get_async";
+
 	/// <summary>
 	/// <para>Separator for CSV results. The API only supports this parameter for CSV responses.</para>
 	/// </summary>
@@ -113,6 +115,8 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "sql.get_async";
+
 	public GetAsyncRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public GetAsyncRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
 	public GetAsyncRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
@@ -149,6 +153,8 @@ public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsy
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "sql.get_async";
 
 	public GetAsyncRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
 	public GetAsyncRequestDescriptor Format(string? format) => Qs("format", format);

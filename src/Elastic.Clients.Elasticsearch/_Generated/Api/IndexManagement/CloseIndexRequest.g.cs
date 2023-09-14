@@ -77,6 +77,8 @@ public sealed partial class CloseIndexRequest : PlainRequest<CloseIndexRequestPa
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.close";
+
 	/// <summary>
 	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
@@ -135,6 +137,8 @@ public sealed partial class CloseIndexRequestDescriptor<TDocument> : RequestDesc
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.close";
+
 	public CloseIndexRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CloseIndexRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public CloseIndexRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -173,6 +177,8 @@ public sealed partial class CloseIndexRequestDescriptor : RequestDescriptor<Clos
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.close";
 
 	public CloseIndexRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public CloseIndexRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

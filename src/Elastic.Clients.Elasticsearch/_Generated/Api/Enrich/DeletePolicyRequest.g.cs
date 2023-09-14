@@ -47,6 +47,8 @@ public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyReque
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.delete_policy";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class DeletePolicyRequestDescriptor : RequestDescriptor<De
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "enrich.delete_policy";
 
 	public DeletePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

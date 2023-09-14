@@ -6,5 +6,5 @@ namespace Tests.Documentation;
 
 public abstract class DocumentationTestBase
 {
-	public static readonly ElasticsearchClient Client = new(new ElasticsearchClientSettings(new InMemoryConnection()).DisableDirectStreaming());
+	public static readonly ElasticsearchClient Client = new(new ElasticsearchClientSettings(new InMemoryTransportClient()).DisableDirectStreaming());
 }

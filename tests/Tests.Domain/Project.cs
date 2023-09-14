@@ -171,7 +171,7 @@ public class Project
 
 public static class AnonymizerExtensions
 {
-	private static readonly Inferrer Infer = new(new ElasticsearchClientSettings(new InMemoryConnection()).ApplyDomainSettings());
+	private static readonly Inferrer Infer = new(new ElasticsearchClientSettings(new InMemoryTransportClient()).ApplyDomainSettings());
 
 	public static object ToAnonymousObject(this JoinField field) =>
 		field.Match<object>(p => Infer.RelationName(p.Name), c => new

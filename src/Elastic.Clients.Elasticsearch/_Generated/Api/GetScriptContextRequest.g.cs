@@ -43,6 +43,8 @@ public sealed partial class GetScriptContextRequest : PlainRequest<GetScriptCont
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script_context";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class GetScriptContextRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script_context";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

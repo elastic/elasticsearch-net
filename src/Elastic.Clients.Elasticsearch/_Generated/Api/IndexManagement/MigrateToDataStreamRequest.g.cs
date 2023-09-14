@@ -47,6 +47,8 @@ public sealed partial class MigrateToDataStreamRequest : PlainRequest<MigrateToD
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.migrate_to_data_stream";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.migrate_to_data_stream";
 
 	public MigrateToDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName name)
 	{

@@ -57,6 +57,8 @@ public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteInde
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.delete_index_template";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class DeleteIndexTemplateRequestDescriptor : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.delete_index_template";
 
 	public DeleteIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteIndexTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

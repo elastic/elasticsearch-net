@@ -58,6 +58,8 @@ public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecy
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_data_lifecycle";
+
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
@@ -92,6 +94,8 @@ public sealed partial class GetDataLifecycleRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.get_data_lifecycle";
 
 	public GetDataLifecycleRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetDataLifecycleRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

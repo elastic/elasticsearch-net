@@ -608,6 +608,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "async_search.submit";
+
 	/// <summary>
 	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
 	/// </summary>
@@ -957,6 +959,8 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "async_search.submit";
 
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -2027,6 +2031,8 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "async_search.submit";
 
 	public SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);

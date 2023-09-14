@@ -50,15 +50,6 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	{
 	}
 
-	/// <summary>
-	///     Instantiate connection settings using a <see cref="SingleNodePool" /> using the provided
-	///     <see cref="InMemoryConnection" /> that never uses any IO.
-	/// </summary>
-	public ElasticsearchClientSettings(InMemoryConnection connection)
-		: this(new SingleNodePool(new Uri("http://localhost:9200")), connection)
-	{
-	}
-
 	public ElasticsearchClientSettings(NodePool nodePool) : this(nodePool, null, null) { }
 
 	public ElasticsearchClientSettings(NodePool nodePool, SourceSerializerFactory sourceSerializer)
@@ -69,6 +60,15 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	public ElasticsearchClientSettings(NodePool nodePool, TransportClient connection, SourceSerializerFactory sourceSerializer) : this(
 		nodePool,
 		connection, sourceSerializer, null)
+	{
+	}
+
+	/// <summary>
+	/// Instantiate connection settings using a <see cref="SingleNodePool" /> using the provided
+	/// <see cref="InMemoryTransportClient" /> that never uses any IO.
+	/// </summary>
+	public ElasticsearchClientSettings(InMemoryTransportClient inMemoryTransportClient)
+		: this(new SingleNodePool(new Uri("http://localhost:9200")), inMemoryTransportClient)
 	{
 	}
 
@@ -318,15 +318,10 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	///     The default user agent for Elasticsearch.Net
 	/// </summary>
 	public static readonly UserAgent DefaultUserAgent =
-		Elastic.Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
+		Transport.UserAgent.Create("elasticsearch-net", typeof(ITransportConfiguration));
 
 	public ConnectionConfiguration(Uri uri = null)
 		: this(new SingleNodePool(uri ?? new Uri("http://localhost:9200")))
-	{
-	}
-
-	public ConnectionConfiguration(InMemoryConnection connection)
-		: this(new SingleNodePool(new Uri("http://localhost:9200")), connection)
 	{
 	}
 

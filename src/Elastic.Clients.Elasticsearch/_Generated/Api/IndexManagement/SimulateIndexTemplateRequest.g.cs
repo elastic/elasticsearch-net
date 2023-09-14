@@ -59,6 +59,8 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.simulate_index_template";
+
 	/// <summary>
 	/// <para>If `true`, the template passed in the body is only used if no existing<br/>templates match the same index patterns. If `false`, the simulation uses<br/>the template with the highest priority. Note that the template is not<br/>permanently added or updated in either case; it is only used for the<br/>simulation.</para>
 	/// </summary>
@@ -143,6 +145,8 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.simulate_index_template";
 
 	public SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
@@ -367,6 +371,8 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.simulate_index_template";
 
 	public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);

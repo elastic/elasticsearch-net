@@ -72,6 +72,8 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.delete";
+
 	/// <summary>
 	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
@@ -124,6 +126,8 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.delete";
+
 	public DeleteIndexRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteIndexRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public DeleteIndexRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -161,6 +165,8 @@ public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<Del
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.delete";
 
 	public DeleteIndexRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public DeleteIndexRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
