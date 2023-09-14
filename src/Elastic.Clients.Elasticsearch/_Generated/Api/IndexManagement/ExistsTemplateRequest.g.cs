@@ -62,6 +62,8 @@ public sealed partial class ExistsTemplateRequest : PlainRequest<ExistsTemplateR
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.exists_template";
+
 	/// <summary>
 	/// <para>Return settings in flat format (default: false)</para>
 	/// </summary>
@@ -101,6 +103,8 @@ public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.exists_template";
 
 	public ExistsTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public ExistsTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);

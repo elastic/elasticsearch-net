@@ -113,6 +113,8 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "msearch";
+
 	/// <summary>
 	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
 	/// </summary>
@@ -226,6 +228,8 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "msearch";
+
 	public MultiSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public MultiSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public MultiSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -296,6 +300,8 @@ public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<Mul
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "msearch";
 
 	public MultiSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public MultiSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);

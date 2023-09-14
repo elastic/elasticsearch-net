@@ -57,6 +57,8 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "delete_script";
+
 	/// <summary>
 	/// <para>Specify timeout for connection to master</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "delete_script";
 
 	public DeleteScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -125,6 +129,8 @@ public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<De
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "delete_script";
 
 	public DeleteScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

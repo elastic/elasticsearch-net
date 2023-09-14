@@ -53,6 +53,8 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "cluster.allocation_explain";
+
 	/// <summary>
 	/// <para>If true, returns information about disk usage and shard sizes.</para>
 	/// </summary>
@@ -106,6 +108,8 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "cluster.allocation_explain";
 
 	public AllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 	public AllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);

@@ -13,12 +13,12 @@ namespace Tests.ClientConcepts.OpenTelemetry;
 /// <summary>
 /// Asserts that <see cref="ElasticsearchClient"/> emits an OpenTelemetry compatible <see cref="Activity"/>.
 /// </summary>
-public class OpenTelemetryActivityTest : ApiIntegrationTestBase<OpenTelemtryCluster, PingResponse, PingRequestDescriptor, PingRequest>
+public class OpenTelemetryActivityTest : ApiIntegrationTestBase<OpenTelemetryCluster, PingResponse, PingRequestDescriptor, PingRequest>
 {
 	Activity _oTelActivity = null;
 	ActivityListener _listener = null;
 
-	public OpenTelemetryActivityTest(OpenTelemtryCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	public OpenTelemetryActivityTest(OpenTelemetryCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 	protected override bool ExpectIsValid => true;
 	protected override int ExpectStatusCode => 200;
@@ -31,7 +31,7 @@ public class OpenTelemetryActivityTest : ApiIntegrationTestBase<OpenTelemtryClus
 		{
 			ActivityStarted = _ => { },
 			ActivityStopped = activity => _oTelActivity = activity,
-			ShouldListenTo = activitySource => activitySource.Name == "Elastic.Clients.Elasticsearch.ElasticsearchClient",
+			ShouldListenTo = activitySource => activitySource.Name == Elastic.Transport.Diagnostics.OpenTelemetry.ElasticTransportActivitySourceName,
 			Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllData
 		};
 
@@ -56,12 +56,16 @@ public class OpenTelemetryActivityTest : ApiIntegrationTestBase<OpenTelemtryClus
 
 		_oTelActivity.Kind.Should().Be(ActivityKind.Client);
 
-		_oTelActivity.DisplayName.Should().Be("Elasticsearch: HEAD /");
-		_oTelActivity.OperationName.Should().Be("Elasticsearch: HEAD /");
+		_oTelActivity.DisplayName.Should().Be("ping");
+		_oTelActivity.OperationName.Should().Be("ping");
 
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "elastic.transport.product.name" && n.Value == "elasticsearch-net");
 		_oTelActivity.Tags.Should().Contain(n => n.Key == "db.system" && n.Value == "elasticsearch");
-		_oTelActivity.Tags.Should().Contain(n => n.Key == "http.url" && n.Value == $"http://{TestElasticsearchClientSettings.LocalOrProxyHost}:9200/?pretty=true&error_trace=true");
-		_oTelActivity.Tags.Should().Contain(n => n.Key == "net.peer.name" && n.Value == TestElasticsearchClientSettings.LocalOrProxyHost);
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "db.operation" && n.Value == "ping");
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "db.user" && n.Value == "elastic");
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "url.full" && n.Value == $"http://{TestElasticsearchClientSettings.LocalOrProxyHost}:9200/?pretty=true&error_trace=true");
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "server.address" && n.Value == TestElasticsearchClientSettings.LocalOrProxyHost);
+		_oTelActivity.Tags.Should().Contain(n => n.Key == "http.request.method" && n.Value == "HEAD");
 
 		_oTelActivity.Status.Should().Be(ActivityStatusCode.Ok);
 	}

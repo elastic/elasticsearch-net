@@ -77,6 +77,8 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.exists";
+
 	/// <summary>
 	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
@@ -135,6 +137,8 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.exists";
+
 	public ExistsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ExistsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
@@ -173,6 +177,8 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.exists";
 
 	public ExistsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ExistsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

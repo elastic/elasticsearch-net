@@ -93,6 +93,8 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "get_source";
+
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
 	/// </summary>
@@ -191,6 +193,8 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "get_source";
+
 	public GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
@@ -239,6 +243,8 @@ public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSo
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_source";
 
 	public GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? source) => Qs("_source", source);
 	public GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);

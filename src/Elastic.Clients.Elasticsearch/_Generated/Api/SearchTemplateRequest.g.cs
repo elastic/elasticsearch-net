@@ -106,6 +106,8 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "search_template";
+
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
@@ -207,6 +209,8 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "search_template";
 
 	public SearchTemplateRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
@@ -321,6 +325,8 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "search_template";
 
 	public SearchTemplateRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);

@@ -71,6 +71,8 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "rank_eval";
+
 	/// <summary>
 	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
 	/// </summary>
@@ -124,6 +126,8 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "rank_eval";
 
 	public RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RankEvalRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -280,6 +284,8 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "rank_eval";
 
 	public RankEvalRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public RankEvalRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

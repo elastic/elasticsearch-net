@@ -2,9 +2,9 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Tests.Core.ManagedElasticsearch.Clusters;
+namespace Elastic.Clients.Elasticsearch.OpenTelemetry;
 
-public class OpenTelemtryCluster : ClientTestClusterBase
+internal static class SemanticConventions
 {
-	public OpenTelemtryCluster() : base() { }
+	public const string DbOperation = "db.operation";
 }

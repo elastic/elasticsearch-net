@@ -63,6 +63,8 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.put_data_lifecycle";
+
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `hidden`, `open`, `closed`, `none`.</para>
 	/// </summary>
@@ -109,6 +111,8 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_data_lifecycle";
 
 	public PutDataLifecycleRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public PutDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

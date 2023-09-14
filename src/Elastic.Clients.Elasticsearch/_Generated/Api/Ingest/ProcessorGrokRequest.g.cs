@@ -43,6 +43,8 @@ public sealed partial class ProcessorGrokRequest : PlainRequest<ProcessorGrokReq
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.processor_grok";
 }
 
 /// <summary>
@@ -61,6 +63,8 @@ public sealed partial class ProcessorGrokRequestDescriptor : RequestDescriptor<P
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "ingest.processor_grok";
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

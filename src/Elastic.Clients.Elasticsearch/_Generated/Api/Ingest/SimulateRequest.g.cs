@@ -56,6 +56,8 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "ingest.simulate";
+
 	/// <summary>
 	/// <para>If `true`, the response includes output data for each processor in the executed pipeline.</para>
 	/// </summary>
@@ -91,6 +93,8 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "ingest.simulate";
 
 	public SimulateRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
 
@@ -244,6 +248,8 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "ingest.simulate";
 
 	public SimulateRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
 

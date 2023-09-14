@@ -58,6 +58,8 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "tasks.get";
+
 	/// <summary>
 	/// <para>Explicit operation timeout</para>
 	/// </summary>
@@ -92,6 +94,8 @@ public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTas
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "tasks.get";
 
 	public GetTasksRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public GetTasksRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);

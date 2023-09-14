@@ -24,7 +24,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		//hide
 		private class ConnectionSettings : ElasticsearchClientSettings
 		{
-			public ConnectionSettings() : base(new InMemoryConnection())
+			public ConnectionSettings() : base(new InMemoryTransportClient())
 			{
 			}
 		}

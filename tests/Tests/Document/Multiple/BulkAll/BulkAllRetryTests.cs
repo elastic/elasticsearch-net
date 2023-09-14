@@ -16,7 +16,7 @@ public class BulkAllRetryTests
         var response = @"{""took"":30,""errors"":true,""items"":[{""index"":{""_index"":""thing"",""_id"":""1"",""status"":429}}]}";
 
         var responseBytes = Encoding.UTF8.GetBytes(response);
-        var connection = new InMemoryConnection(responseBytes, 200);
+        var connection = new InMemoryTransportClient(responseBytes, 200);
         var connectionPool = new SingleNodePool(new Uri("http://localhost:9200"));
         var settings = new ElasticsearchClientSettings(connectionPool, connection).DefaultIndex("thing");
         var client = new ElasticsearchClient(settings);

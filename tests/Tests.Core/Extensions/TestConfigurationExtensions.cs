@@ -15,10 +15,10 @@ namespace Tests.Core.Extensions
 			var headers = new Dictionary<string, IEnumerable<string>> { { "x-elastic-product", new[] { "Elasticsearch" } } };
 
 			return forceInMemory
-				? new InMemoryConnection(response, headers: headers)
+				? new InMemoryTransportClient(response, headers: headers)
 				: configuration.RunIntegrationTests
 					? new HttpTransportClient()
-					: new InMemoryConnection(response, headers: headers);
+					: new InMemoryTransportClient(response, headers: headers);
 		}
 
 		public static bool InRange(this TestConfigurationBase configuration, string range) =>

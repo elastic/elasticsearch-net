@@ -44,6 +44,8 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "close_point_in_time";
+
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
@@ -64,6 +66,8 @@ public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "close_point_in_time";
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 

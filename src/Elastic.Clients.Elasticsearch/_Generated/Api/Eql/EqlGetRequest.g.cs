@@ -57,6 +57,8 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "eql.get";
+
 	/// <summary>
 	/// <para>Period for which the search and its results are stored on the cluster.<br/>Defaults to the keep_alive value set by the search’s EQL search API request.</para>
 	/// </summary>
@@ -90,6 +92,8 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "eql.get";
 
 	public EqlGetRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public EqlGetRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
@@ -125,6 +129,8 @@ public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "eql.get";
 
 	public EqlGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public EqlGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);

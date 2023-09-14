@@ -57,10 +57,10 @@ internal class ApiUrls
 	/// </summary>
 	public Dictionary<int, List<UrlLookup>> Routes { get; }
 
-	public (string ResolvedUrl, string UrlTemplate) Resolve(RouteValues routeValues, IElasticsearchClientSettings settings)
+	public (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) Resolve(RouteValues routeValues, IElasticsearchClientSettings settings)
 	{
 		if (_fixedUrl != null)
-			return (_fixedUrl, _fixedUrl);
+			return (_fixedUrl, _fixedUrl, null);
 
 		var resolved = routeValues.Resolve(settings);
 
@@ -68,13 +68,13 @@ internal class ApiUrls
 			throw new Exception($"No route taking {resolved.Count} parameters{_errorMessageSuffix}");
 
 		if (routes.Count == 1)
-			return (routes[0].ToUrl(resolved), routes[0].Route);
+			return (routes[0].ToUrl(resolved), routes[0].Route, resolved);
 
 		//find the first url with N parts that has all provided named parts
 		foreach (var u in routes)
 		{
 			if (u.Matches(resolved))
-				return (u.ToUrl(resolved), u.Route);
+				return (u.ToUrl(resolved), u.Route, resolved);
 		}
 
 		throw new Exception($"No route taking {routeValues.Count} parameters{_errorMessageSuffix}");

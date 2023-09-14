@@ -62,6 +62,8 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.shrink";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -113,6 +115,8 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.shrink";
 
 	public ShrinkIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public ShrinkIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
@@ -190,6 +194,8 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.shrink";
 
 	public ShrinkIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public ShrinkIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

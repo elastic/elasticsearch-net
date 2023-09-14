@@ -52,6 +52,8 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.delete_data_stream";
+
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.delete_data_stream";
 
 	public DeleteDataStreamRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 

@@ -102,6 +102,8 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "update";
+
 	/// <summary>
 	/// <para>Only perform the operation if the document has this primary term.</para>
 	/// </summary>
@@ -253,6 +255,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "update";
 
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);

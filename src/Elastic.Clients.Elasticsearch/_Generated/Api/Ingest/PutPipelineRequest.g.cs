@@ -62,6 +62,8 @@ public sealed partial class PutPipelineRequest : PlainRequest<PutPipelineRequest
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "ingest.put_pipeline";
+
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
@@ -131,6 +133,8 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "ingest.put_pipeline";
 
 	public PutPipelineRequestDescriptor<TDocument> IfVersion(long? ifVersion) => Qs("if_version", ifVersion);
 	public PutPipelineRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
@@ -366,6 +370,8 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "ingest.put_pipeline";
 
 	public PutPipelineRequestDescriptor IfVersion(long? ifVersion) => Qs("if_version", ifVersion);
 	public PutPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

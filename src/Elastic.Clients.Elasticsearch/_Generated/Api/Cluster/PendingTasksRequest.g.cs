@@ -53,6 +53,8 @@ public sealed partial class PendingTasksRequest : PlainRequest<PendingTasksReque
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "cluster.pending_tasks";
+
 	/// <summary>
 	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>
 	/// </summary>
@@ -82,6 +84,8 @@ public sealed partial class PendingTasksRequestDescriptor : RequestDescriptor<Pe
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "cluster.pending_tasks";
 
 	public PendingTasksRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public PendingTasksRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

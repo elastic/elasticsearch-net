@@ -47,6 +47,8 @@ public sealed partial class CreateDataStreamRequest : PlainRequest<CreateDataStr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.create_data_stream";
 }
 
 /// <summary>
@@ -69,6 +71,8 @@ public sealed partial class CreateDataStreamRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.create_data_stream";
 
 	public CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamName name)
 	{

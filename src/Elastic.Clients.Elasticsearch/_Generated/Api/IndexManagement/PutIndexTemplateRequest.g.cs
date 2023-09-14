@@ -52,6 +52,8 @@ public sealed partial class PutIndexTemplateRequest : PlainRequest<PutIndexTempl
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "indices.put_index_template";
+
 	/// <summary>
 	/// <para>If `true`, this request cannot replace or update existing index templates.</para>
 	/// </summary>
@@ -121,6 +123,8 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_index_template";
 
 	public PutIndexTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 
@@ -330,6 +334,8 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.put_index_template";
 
 	public PutIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 

@@ -81,6 +81,8 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "field_caps";
+
 	/// <summary>
 	/// <para>If false, the request returns an error if any wildcard expression, index alias,<br/>or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request<br/>targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.</para>
 	/// </summary>
@@ -152,6 +154,8 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "field_caps";
 
 	public FieldCapsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public FieldCapsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -268,6 +272,8 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "field_caps";
 
 	public FieldCapsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public FieldCapsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

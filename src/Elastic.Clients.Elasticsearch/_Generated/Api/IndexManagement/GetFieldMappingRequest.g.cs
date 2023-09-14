@@ -76,6 +76,8 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_field_mapping";
+
 	/// <summary>
 	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
@@ -132,6 +134,8 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "indices.get_field_mapping";
+
 	public GetFieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetFieldMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetFieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
@@ -179,6 +183,8 @@ public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "indices.get_field_mapping";
 
 	public GetFieldMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetFieldMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);

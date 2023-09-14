@@ -52,6 +52,8 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 
 	internal override bool SupportsBody => false;
 
+	internal override string OperationName => "get_script";
+
 	/// <summary>
 	/// <para>Specify timeout for connection to master</para>
 	/// </summary>
@@ -79,6 +81,8 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script";
 
 	public GetScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
@@ -113,6 +117,8 @@ public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetSc
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
+
+	internal override string OperationName => "get_script";
 
 	public GetScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 

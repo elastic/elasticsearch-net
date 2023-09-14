@@ -48,6 +48,8 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 
 	internal override bool SupportsBody => true;
 
+	internal override string OperationName => "terms_enum";
+
 	/// <summary>
 	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
 	/// </summary>
@@ -111,6 +113,8 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "terms_enum";
 
 	public TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -290,6 +294,8 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "terms_enum";
 
 	public TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
