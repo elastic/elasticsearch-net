@@ -3,7 +3,7 @@
 
 [partintro]
 --
-The client can provide rich details about what occurred in the request pipeline during the process
+The client can provide details about what occurred in the request pipeline during the process
 of making a request, as well as be configured to provide the raw request and response JSON
 
 * <<logging, Logging>>
@@ -15,16 +15,13 @@ of making a request, as well as be configured to provide the raw request and res
 [[logging]]
 == Logging
 
-Whilst developing with Elasticsearch using NEST, it can be extremely valuable to see the requests that
-NEST generates and sends to Elasticsearch, as well as the responses returned.
+Whilst developing with Elasticsearch .NET client, it can be extremely valuable to see the generated 
+requests sent to Elasticsearch, as well as the returned responses.
 
-There are a couple of popular ways of capturing this information
-
-* <<logging-with-on-request-completed, Using `OnRequestCompleted`>>
+One way of capturing this information during development is to capture requests and 
+responses using Fiddler.
 
 * <<logging-with-fiddler, Using Fiddler>>
-
-include::client-concepts/troubleshooting/logging-with-on-request-completed.asciidoc[]
 
 include::client-concepts/troubleshooting/logging-with-fiddler.asciidoc[]
 
@@ -42,4 +39,3 @@ include::client-concepts/troubleshooting/audit-trail.asciidoc[]
 include::client-concepts/troubleshooting/debug-information.asciidoc[]
 
 include::client-concepts/troubleshooting/debug-mode.asciidoc[]
-
