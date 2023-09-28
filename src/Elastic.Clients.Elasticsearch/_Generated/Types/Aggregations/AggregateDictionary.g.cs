@@ -38,6 +38,7 @@ public partial class AggregateDictionary : IsAReadOnlyDictionary<string, IAggreg
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate? GetCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate?>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate? GetTDigestPercentiles(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate? GetTDigestPercentileRanks(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate? GetPercentilesBucket(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate?>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate? GetMedianAbsoluteDeviation(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate?>(key);
