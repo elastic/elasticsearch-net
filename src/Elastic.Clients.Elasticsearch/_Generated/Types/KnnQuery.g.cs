@@ -70,6 +70,12 @@ public sealed partial class KnnQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query_vector_builder")]
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
+
+	/// <summary>
+	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("similarity")]
+	public float? Similarity { get; set; }
 }
 
 public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescriptor<KnnQueryDescriptor<TDocument>>
@@ -92,6 +98,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
+	private float? SimilarityValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -213,6 +220,15 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> Similarity(float? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -279,6 +295,12 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
 		}
 
+		if (SimilarityValue.HasValue)
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteNumberValue(SimilarityValue.Value);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -303,6 +325,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
+	private float? SimilarityValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -433,6 +456,15 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimum similarity for a vector to be considered a match</para>
+	/// </summary>
+	public KnnQueryDescriptor Similarity(float? similarity)
+	{
+		SimilarityValue = similarity;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -497,6 +529,12 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		{
 			writer.WritePropertyName("query_vector_builder");
 			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
+		}
+
+		if (SimilarityValue.HasValue)
+		{
+			writer.WritePropertyName("similarity");
+			writer.WriteNumberValue(SimilarityValue.Value);
 		}
 
 		writer.WriteEndObject();
