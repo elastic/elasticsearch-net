@@ -312,6 +312,13 @@ internal sealed class AggregateDictionaryConverter : JsonConverter<AggregateDict
 					break;
 				}
 
+			case "tdigest_percentiles":
+			{
+				var agg = JsonSerializer.Deserialize<TDigestPercentilesAggregate>(ref reader, options);
+				dictionary.Add(nameParts[1], agg);
+				break;
+			}
+
 			case "tdigest_percentile_ranks":
 				{
 					var agg = JsonSerializer.Deserialize<TDigestPercentileRanksAggregate>(ref reader, options);
