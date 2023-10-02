@@ -1,0 +1,144 @@
+[[opentelemetry]]
+=== Using OpenTelemetry
+
+You can use https://opentelemetry.io/[OpenTelemetry] to monitor the performance 
+and behavior of your Elasticsearch requests through the {net-client}.
+The {net-client} comes with built-in OpenTelemetry instrumentation that emits 
+https://www.elastic.co/guide/en/apm/guide/current/apm-distributed-tracing.html[distributed tracing spans] by default.
+With that, applications https://opentelemetry.io/docs/instrumentation/net/manual/[instrumented with OpenTelemetry] or 
+running the https://opentelemetry.io/docs/instrumentation/net/automatic/[OpenTelemetry .NET Agent] are inherently 
+enriched with additional spans that contain insightful information about the execution of the Elasticsearch requests. 
+
+The native instrumentation in the {net-client} follows the https://opentelemetry.io/docs/specs/semconv/database/elasticsearch/[OpenTelemetry Semantic Conventions for Elasticsearch]. 
+In particular, the instrumentation in the client covers the logical Elasticsearch 
+request layer, thus, creates a single span per request the service executes against the {net-client}. 
+The following image shows a resulting trace in which three different Elasticsearch 
+requests are executed, i.e. an `index`, `get` and a search `request`:
+
+[role="screenshot"]
+image::../images/otel-waterfall-instrumented-without-http.jpg[alt="Distributed trace with Elasticsearch spans",align="center"]
+
+Usually, OpenTelemetry agents and auto-instrumentation modules come with 
+instrumentation support for HTTP-level communication. In this case, in 
+addition to the logical Elasticsearch client requests, spans will be captured 
+for the physical HTTP requests emitted by the client. The following image shows 
+a trace with both, Elasticsearch spans (in blue) and the corresponding HTTP-level 
+spans (in red):
+
+[role="screenshot"]
+image::images/otel-waterfall-instrumented.jpg[alt="Distributed trace with Elasticsearch and HTTP spans",align="center"]
+
+Advanced {net-client} behavior such as nodes round-robin and request retries are 
+revealed through the combination of logical Elasticsearch spans and the physical 
+HTTP spans. The following example shows an `index` request in a scenario with 
+two Elasticsearch nodes:
+
+[role="screenshot"]
+image::images/otel-waterfall-retries.jpg[alt="Distributed trace with request retries",align="center"]
+
+The first node is unavailable and results in an HTTP error, while the retry 
+to the second node succeeds. Both HTTP requests are subsumed by the logical 
+Elasticsearch request span (in blue).
+
+[discrete]
+==== Span attributes
+
+In addition to the attributes defined in https://opentelemetry.io/docs/specs/semconv/database/elasticsearch/[OpenTelemetry Semantic Conventions for Elasticsearch],
+the underlying `Elastic.Transport` includes some attributes specific to its 
+implementation.
+
+| Attribute  | Type | Description  | Examples  | Requirement Level |
+|---|---|---|---|---|
+| `db.elasticsearch.schema.url` | string | The URL of the [schema version](https://opentelemetry.io/docs/specs/otel/schemas/) the {net-client} OpenTelemetry instrumentation conforms to. | `"https://opentelemetry.io/schemas/1.21.0"` | Recommended [1] |
+| `elastic.transport.schema.url` | string | The URL of the [schema version](https://opentelemetry.io/docs/specs/otel/schemas/) the Elastic transport library OpenTelemetry instrumentation conforms to. | `"https://opentelemetry.io/schemas/1.21.0"` | Recommended [1] |
+| `elastic.transport.product.name` | string | The name of the product library consuming the Elastic.Transport library. [2] | `"elasticsearch-net"`; `"elastic-transport-net"` | Recommended [3] |
+| `elastic.transport.product.version` | string | The version of the product library consuming the Elastic transport library. [4] | `"8.9.0+cd86a59fb9f0698758cec2ee1387eed90f58f493"`; `"8.9.1"`; `"8.9.2-alpha.1"` | Recommended |
+| `elastic.transport.version` | string | The version of the  Elastic transport library. | `"0.4.15-canary.0.10+fb606a1caf77757d55e71a81972387528c8983b0"`; `"0.4.14"` | Recommended |
+| `elastic.transport.attempted_nodes` | integer | The number of nodes attempted before a successful response was received for the logical operation. | `1`; `3` | Recommended |
+| `elastic.transport.prepare_request_ms` | integer | The measured wall-clock time taken to prepare and serialize an HTTP request before sending. | `42` | Recommended [5] |
+| `elastic.transport.deserialize_response_ms` | integer | The measured wall-clock time taken to deserialize a response body. [6] | `92` | Recommended [5] |
+| `elastic.transport.nodes_attempted` | integer | The number of nodes tried during a logical operation. | `1` | Recommended |
+
+**[1]:** Since version 1.4.0, OpenTelemetry defines a `schema_url` parameter that 
+should be configured on a `Tracer`. When the OpenTelemetry implementation supports 
+thie API, that should be preferred as the mechanism to emit the schema version. 
+Some languages, such as .NET, do not yet include an API to configure this; in 
+those cases, there is no standard way to provide the schema version. By convention, 
+instrumented libraries may include a custom attribute to emit this information. 
+This specification recommends that at least one attribute be included in such 
+situations. It is also possible for the schema version implemented by the transport 
+library to differ from the language client built on top of it. We should strive to 
+avoid this divergence. A single 
+`db.elasticsearch.schema.url` attribute is recommended when both libraries use the 
+same schema version. Only when the transport library uses a different version 
+should the `elastic.transport.schema.url` be sent.
+
+TODO
+
+[discrete]
+==== Setup the OpenTelemetry instrumentation
+When using the https://opentelemetry.io/docs/instrumentation/net/manual[OpenTelemetry .NET SDK manually] 
+or using the https://opentelemetry.io/docs/instrumentation/net/automatic/[OpenTelemetry .NET Agent], 
+the {net-client}'s OpenTelemetry instrumentation is enabled by default and 
+uses the _globally_ registered OpenTelemetry SDK instance (i.e. `GlobalOpenTelemetry`). 
+So, if you don't use a custom, local OpenTelemetry SDK instance, there is no 
+explicit setup required to use the {net-client}'s OpenTelemetry instrumentation.
+
+[discrete]
+===== Using a custom OpenTelemetry instance
+In case you are using https://opentelemetry.io/docs/instrumentation/net/manual/#example[manual OpenTelemetry instrumentation] 
+with a custom OpenTelemetry SDK instance that is _not registered globally_, you 
+can create the {net-client} using a custom OpenTelemetry instance. The following 
+code snippet shows an example of using a custom OpenTelemetry instance.
+
+["source","java"]
+--------------------------------------------------
+include-tagged::{doc-tests-src}/getting_started/ConnectingTest.java[create-client-otel]
+--------------------------------------------------
+
+[discrete]
+==== Configuring the OpenTelemetry instrumentation
+
+You can configure the OpenTelemetry instrumentation either through Java System properties or Environment Variables. 
+The following configuration options are available.
+
+[discrete]
+[[opentelemetry-config-enable]]
+===== Enable / Disable the OpenTelemetry instrumentation
+
+With this configuration option you can enable (default) or disable the built-in OpenTelemetry instrumentation.
+
+**Default:** `true`
+
+|============
+| Java System Property | `otel.instrumentation.elasticsearch.enabled`
+| Environment Variable | `OTEL_INSTRUMENTATION_ELASTICSEARCH_ENABLED`
+|============
+
+[discrete]
+===== Capture search request bodies
+
+Per default, the built-in OpenTelemetry instrumentation does not capture request bodies because of data privacy reasons. You can use this option to enable capturing of search queries from the the request bodies of Elasticsearch search requests in case you wish to capture this information, regardless.
+
+**Default:** `false`
+
+|============
+| Java System Property |   `otel.instrumentation.elasticsearch.capture-search-query`
+| Environment Variable | `OTEL_INSTRUMENTATION_ELASTICSEARCH_CAPTURE_SEARCH_QUERY`
+|============
+
+[discrete]
+==== Overhead
+The OpenTelemetry instrumentation (as any other monitoring approach) may come 
+with a little overhead on CPU, memory and/or latency. The overhead may only 
+occur when the instrumentation is enabled (default) and an OpenTelemetry SDK 
+(or an OpenTelemetry Agent) is active in the target application. In case that 
+either the instrumentation is disabled or no OpenTelemetry SDK 
+(or OpenTelemetry Agent) is active with the target application, 
+there is no monitoring overhead expected when using the client. 
+
+Even when the instrumentation is enabled and is being actively used (by an 
+OpenTelemetry SDK), in the vast majority of cases the overhead is very small 
+and negligible. In edge cases in which there is a noticable overhead the 
+<<opentelemetry-config-enable,instrumentation can be explicitly disabled>> to 
+eliminate any potential overhead effect of the instrumentation. 

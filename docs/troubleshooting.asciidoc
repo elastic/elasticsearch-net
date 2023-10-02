@@ -15,7 +15,7 @@ of making a request, as well as be configured to provide the raw request and res
 [[logging]]
 == Logging
 
-Whilst developing with Elasticsearch .NET client, it can be extremely valuable to see the generated 
+Whilst developing with {net-client}, it can be extremely valuable to see the generated 
 requests sent to Elasticsearch, as well as the returned responses.
 
 One way of capturing this information during development is to capture requests and 
@@ -31,7 +31,7 @@ include::client-concepts/troubleshooting/logging-with-fiddler.asciidoc[]
 When things are going awry, you want to be provided with as much information as possible, to resolve
 the issue!
 
-Elasticsearch.Net and NEST provide an <<audit-trail, audit trail>> and <<debug-information, debug information>> to 
+{net-client} provides an <<audit-trail, audit trail>> and <<debug-information, debug information>> to 
 help get you back on the happy path.
 
 include::client-concepts/troubleshooting/audit-trail.asciidoc[]
@@ -39,3 +39,11 @@ include::client-concepts/troubleshooting/audit-trail.asciidoc[]
 include::client-concepts/troubleshooting/debug-information.asciidoc[]
 
 include::client-concepts/troubleshooting/debug-mode.asciidoc[]
+
+[[observability]]
+== Observability
+
+THe {net-client} is instrumented using <<opentelemetry, OpenTelemetry>> tracing 
+to provide insight into its operations.
+
+include::client-concepts/troubleshooting/opentelemetry.asciidoc[]
