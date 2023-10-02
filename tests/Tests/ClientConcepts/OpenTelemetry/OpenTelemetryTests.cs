@@ -6,9 +6,11 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Tests.Core.Client;
 using Tests.Domain;
+using Xunit;
 
 namespace Tests.ClientConcepts.OpenTelemetry;
 
+[Collection(nameof(NonParallelCollection))]
 public class ActivityTest
 {
 	[U]
@@ -69,3 +71,6 @@ public class ActivityTest
 		}
 	}
 }
+
+[CollectionDefinition(nameof(NonParallelCollection), DisableParallelization = true)]
+public class NonParallelCollection { }
