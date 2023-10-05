@@ -4,6 +4,11 @@
 * <<breaking-changes-policy,Breaking changes policy>>
 
 [discrete]
+== Version 8.10
+
+* <<release-notes-8.10.0,Release notes v8.10.0>>
+
+[discrete]
 == Version 8.9
 
 * <<release-notes-8.9.3,Release notes v8.9.3>>
