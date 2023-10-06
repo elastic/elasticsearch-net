@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Elastic.Clients.Elasticsearch</PackageId>
+    <PackageId>Elastic.Clients.Elasticsearch.Serverless</PackageId>
     <Title>Elastic.Clients.Elasticsearch - Official Elasticsearch .NET Client</Title>
     <PackageTags>elasticsearch;elastic;client;search</PackageTags>
     <Description>
@@ -10,7 +10,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup>
-    <DefineConstants>$(DefineConstants);ELASTICSEARCH_STACK</DefineConstants>
+    <DefineConstants>$(DefineConstants);ELASTICSEARCH_SERVERLESS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <IsPackable>true</IsPackable>
