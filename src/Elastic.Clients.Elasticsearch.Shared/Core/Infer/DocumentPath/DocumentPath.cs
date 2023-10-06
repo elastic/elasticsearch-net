@@ -22,7 +22,11 @@ internal interface IDocumentPath
 // TODO - REVIEW THIS
 internal sealed class DocumentPath<T> : IEquatable<DocumentPath<T>>, IDocumentPath
 {
+#if ELASTICSEARCH_SERVERLESS
+	public DocumentPath(T document) : this(Elasticsearch.Serverless.Id.From(document)) => Document = document;
+#else
 	public DocumentPath(T document) : this(Elasticsearch.Id.From(document)) => Document = document;
+#endif
 
 	public DocumentPath(Id id)
 	{

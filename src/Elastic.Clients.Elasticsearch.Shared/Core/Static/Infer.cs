@@ -44,7 +44,11 @@ public static class Infer
 
 	public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
+#if ELASTICSEARCH_SERVERLESS
+	public static Id Id<T>(T document) where T : class => Elasticsearch.Serverless.Id.From(document);
+#else
 	public static Id Id<T>(T document) where T : class => Elasticsearch.Id.From(document);
+#endif
 
 	public static Fields Fields<T>(params Expression<Func<T, object?>>[] fields) where T : class =>
 		new(fields.Select(f => new Field(f)));

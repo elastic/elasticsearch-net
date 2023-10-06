@@ -2,25 +2,25 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+#if !ELASTICSEARCH_SERVERLESS
+
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class ElasticsearchClient
 {
 	public virtual BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Action<BulkAllRequestDescriptor<T>> configure, CancellationToken cancellationToken = default)
-    {
-        var descriptor = new BulkAllRequestDescriptor<T>(documents);
-        configure?.Invoke(descriptor);
-        return BulkAll<T>(descriptor, cancellationToken);
-    }
+	{
+		var descriptor = new BulkAllRequestDescriptor<T>(documents);
+		configure?.Invoke(descriptor);
+		return BulkAll<T>(descriptor, cancellationToken);
+	}
 
-    public virtual BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
-        new(this, request, cancellationToken);
+	public virtual BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default) =>
+		new(this, request, cancellationToken);
 }
+
+#endif

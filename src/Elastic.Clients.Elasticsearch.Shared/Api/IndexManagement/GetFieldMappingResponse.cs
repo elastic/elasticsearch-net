@@ -2,21 +2,17 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+// TODO: Move away from shared project
+
+#if !ELASTICSEARCH_SERVERLESS
+
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Mapping;
-#else
 using Elastic.Clients.Elasticsearch.Mapping;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
-#else
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
-#endif
 
 public partial class GetFieldMappingResponse
 {
@@ -98,3 +94,5 @@ public partial class GetFieldMappingResponse
 		return indexMapping.Mappings;
 	}
 }
+
+#endif
