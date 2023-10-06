@@ -9,7 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 /// <summary>
 /// The built in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize
@@ -22,7 +26,7 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings) : base(settings)
 	{
 		_jsonSerializerOptions = new JsonSerializerOptions
-		{	
+		{
 			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
 			IncludeFields = true,
 			Converters =

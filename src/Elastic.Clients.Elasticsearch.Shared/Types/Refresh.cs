@@ -4,7 +4,11 @@
 
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public partial struct Refresh : IStringable
 {

@@ -4,7 +4,11 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
+#else
 namespace Elastic.Clients.Elasticsearch.Ingest;
+#endif
 
 public partial class Processor
 {

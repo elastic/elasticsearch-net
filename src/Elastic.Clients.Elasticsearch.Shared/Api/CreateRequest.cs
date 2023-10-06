@@ -2,11 +2,19 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 using Elastic.Transport;
 using System.Text.Json;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public sealed partial class CreateRequest<TDocument> : ICustomJsonWriter
 {

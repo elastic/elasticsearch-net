@@ -9,7 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 /// <summary>
 /// An abstract implementation of the transport <see cref="Serializer"/> which serializes
@@ -25,7 +29,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	private bool _initialized;
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="SystemTextJsonSerializer"/> class, linked to an 
+	/// Initializes a new instance of the <see cref="SystemTextJsonSerializer"/> class, linked to an
 	/// instance of <see cref="IElasticsearchClientSettings"/>.
 	/// </summary>
 	/// <param name="settings">An <see cref="IElasticsearchClientSettings"/> instance to which this
@@ -54,7 +58,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	/// be used when serializing.
 	/// </summary>
 	/// <returns></returns>
-	protected abstract JsonSerializerOptions CreateJsonSerializerOptions();	
+	protected abstract JsonSerializerOptions CreateJsonSerializerOptions();
 
 	/// <inheritdoc />
 	public override T Deserialize<T>(Stream stream)

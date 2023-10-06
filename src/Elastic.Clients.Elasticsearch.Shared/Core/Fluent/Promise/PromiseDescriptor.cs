@@ -4,7 +4,11 @@
 
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Fluent;
+#else
 namespace Elastic.Clients.Elasticsearch.Fluent;
+#endif
 
 public abstract class PromiseDescriptor<TDescriptor, TValue> : Descriptor, IPromise<TValue>
 	where TDescriptor : PromiseDescriptor<TDescriptor, TValue>

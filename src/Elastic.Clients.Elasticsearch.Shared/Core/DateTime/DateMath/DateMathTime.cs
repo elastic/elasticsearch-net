@@ -8,7 +8,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 /// <summary>
 /// A time representation for use within <see cref="DateMath" /> expressions.

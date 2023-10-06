@@ -12,10 +12,22 @@ using Elastic.Transport;
 using Elastic.Transport.Diagnostics.Auditing;
 using Elastic.Transport.Extensions;
 using Elastic.Transport.Products.Elasticsearch;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
+#else
 using Elastic.Clients.Elasticsearch.Core.Bulk;
+#endif
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 using Elastic.Clients.Elasticsearch.Requests;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllResponse>
 {
@@ -118,7 +130,7 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
         _compositeCancelToken.ThrowIfCancellationRequested();
 
         var request = _partitionedBulkRequest;
-		
+
         var response = await _client.BulkAsync(s =>
         {
 			s.RequestParameters.RequestConfiguration = new RequestConfiguration { DisableAuditTrail = false };

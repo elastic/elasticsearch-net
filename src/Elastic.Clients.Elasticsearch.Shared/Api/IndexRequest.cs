@@ -4,11 +4,23 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 using Elastic.Clients.Elasticsearch.Requests;
+#endif
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public partial class IndexRequest<TDocument> : ICustomJsonWriter
 {

@@ -5,7 +5,11 @@
 using System;
 using System.Runtime.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public class DateRange
 {

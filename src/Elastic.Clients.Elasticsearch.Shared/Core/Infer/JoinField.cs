@@ -5,7 +5,11 @@
 using System;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [JsonConverter(typeof(JoinFieldConverter))]
 public class JoinField

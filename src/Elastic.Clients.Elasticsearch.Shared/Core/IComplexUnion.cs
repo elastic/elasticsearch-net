@@ -4,7 +4,11 @@
 
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Core;
+#else
 namespace Elastic.Clients.Elasticsearch.Core;
+#endif
 
 internal interface IComplexUnion<TEnum> where TEnum : Enum
 {

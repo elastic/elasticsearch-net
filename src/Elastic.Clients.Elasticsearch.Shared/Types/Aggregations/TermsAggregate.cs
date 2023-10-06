@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 public sealed class TermsAggregate<TKey> : IAggregate
 {

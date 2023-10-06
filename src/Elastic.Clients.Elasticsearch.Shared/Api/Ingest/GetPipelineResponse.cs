@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
+#else
 namespace Elastic.Clients.Elasticsearch.Ingest;
+#endif
 
 public partial class GetPipelineResponse
 {

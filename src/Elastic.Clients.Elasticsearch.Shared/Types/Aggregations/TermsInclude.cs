@@ -8,7 +8,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 #nullable enable
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 /// <summary>
 /// Filters which terms to include in the response.

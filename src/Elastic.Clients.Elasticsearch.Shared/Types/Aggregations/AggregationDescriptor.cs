@@ -4,7 +4,11 @@
 
 using System.Text.Json;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 public partial class AggregationDescriptor<TDocument>
 {

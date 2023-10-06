@@ -4,7 +4,11 @@
 
 using System.Collections.Generic;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 public static class AggregateOrder
 {

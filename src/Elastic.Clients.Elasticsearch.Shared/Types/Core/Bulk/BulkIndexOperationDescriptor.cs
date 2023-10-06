@@ -8,16 +8,28 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+#else
 using Elastic.Clients.Elasticsearch.Fluent;
+#endif
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
+#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
+#endif
 
 public sealed class BulkIndexOperationDescriptor<TSource> : BulkOperationDescriptor<BulkIndexOperationDescriptor<TSource>>
 {
 	private string _pipeline;
-	
+
 	private Dictionary<string, string> _dynamicTemplates;
 
 	private static byte _newline => (byte)'\n';

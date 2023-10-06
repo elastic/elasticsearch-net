@@ -8,9 +8,17 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Globalization;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 /// <summary>
 /// Represents a value for a field which depends on the field mapping and is only known at runtime,

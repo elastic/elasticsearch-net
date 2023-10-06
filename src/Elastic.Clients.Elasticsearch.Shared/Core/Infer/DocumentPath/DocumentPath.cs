@@ -4,7 +4,11 @@
 
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 // MARKED INTERNAL AS WE MAY NO LONGER USE THIS TYPE
 // TODO - REVIEW THIS

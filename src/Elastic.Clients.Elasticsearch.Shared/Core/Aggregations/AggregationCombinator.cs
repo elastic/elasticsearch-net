@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 /// <summary>
 /// Combines aggregations into a single list of aggregations.

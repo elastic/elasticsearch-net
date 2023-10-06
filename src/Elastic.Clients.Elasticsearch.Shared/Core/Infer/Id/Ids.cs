@@ -9,7 +9,11 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IdsConverter))]

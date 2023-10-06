@@ -10,7 +10,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [JsonConverter(typeof(DateMathConverter))]
 public abstract class DateMath
@@ -167,7 +171,7 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 
 		// TODO: Performance - Review potential to avoid allocation on DateTime path and use Span<byte>
 
-		var value = reader.GetString(); 
+		var value = reader.GetString();
 		reader.Read();
 
 		if (!value.Contains("|") && DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dateTime))
@@ -182,7 +186,7 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 		{
 			writer.WriteNullValue();
 			return;
-		}	
+		}
 
 		writer.WriteStringValue(value.ToString());
 	}

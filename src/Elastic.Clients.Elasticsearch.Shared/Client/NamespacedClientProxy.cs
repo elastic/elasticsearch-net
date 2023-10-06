@@ -5,11 +5,19 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 using Elastic.Clients.Elasticsearch.Requests;
+#endif
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public abstract class NamespacedClientProxy
 {
@@ -17,7 +25,7 @@ public abstract class NamespacedClientProxy
 		"new instance of ElasticsearchClient to perform requests over a network to Elasticsearch.";
 
 	private readonly ElasticsearchClient _client;
-	
+
 	/// <summary>
 	/// Initializes a new instance for mocking.
 	/// </summary>

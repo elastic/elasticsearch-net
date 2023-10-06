@@ -4,7 +4,11 @@
 
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
+#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+#endif
 
 /// <summary>
 /// A base type for all query variants.

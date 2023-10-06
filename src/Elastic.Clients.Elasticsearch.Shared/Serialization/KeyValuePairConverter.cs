@@ -9,7 +9,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 internal sealed class KeyValuePairConverterFactory : JsonConverterFactory
 {
@@ -43,7 +47,7 @@ internal sealed class KeyValuePairConverterFactory : JsonConverterFactory
 				throw new JsonException("Unexpected token for KeyValuePair");
 
 			reader.Read(); // property name (key)
-			var keyString = reader.GetString(); 
+			var keyString = reader.GetString();
 
 			reader.Read(); // value
 			var value = JsonSerializer.Deserialize<TItem2>(ref reader, options);

@@ -7,7 +7,11 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [JsonConverter(typeof(DateMathExpressionConverter))]
 public class DateMathExpression : DateMath

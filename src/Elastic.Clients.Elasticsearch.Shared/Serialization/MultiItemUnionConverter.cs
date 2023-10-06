@@ -6,9 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+#else
 using Elastic.Clients.Elasticsearch.Core;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 /// <summary>
 /// A base converter for any multi-item (>2 items) unions. The code-generator creates a
@@ -76,7 +84,7 @@ internal abstract class MultiItemUnionConverter<TUnion, TEnum> : JsonConverter<T
 
 			if (matchedType is null)
 				ThrowHelper.ThrowJsonException(exceptionMessage);
-						
+
 			if (!_factories.TryGetValue(matchedType, out var factory))
 				ThrowHelper.ThrowJsonException("Unable to locate factory for multi-item union object item.");
 

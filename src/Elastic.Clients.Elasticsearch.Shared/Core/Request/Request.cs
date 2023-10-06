@@ -8,7 +8,11 @@ using System.Text.Json.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Diagnostics;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 namespace Elastic.Clients.Elasticsearch.Requests;
+#endif
 
 /// <summary>
 /// Base type for requests sent by the client.
@@ -24,7 +28,7 @@ public abstract class Request
 	internal virtual string? ContentType { get; } = null;
 
 	/// <summary>
-	/// The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition. 
+	/// The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.
 	/// </summary>
 	[JsonIgnore]
 	protected abstract HttpMethod StaticHttpMethod { get; }
@@ -75,7 +79,7 @@ public abstract class Request<TParameters> : Request
 	}
 
 	[JsonIgnore] internal TParameters RequestParameters => _parameters;
-		
+
 	protected TOut Q<TOut>(string name) => RequestParameters.GetQueryStringValue<TOut>(name);
 
 	protected void Q(string name, object value) => RequestParameters.SetQueryString(name, value);

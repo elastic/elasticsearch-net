@@ -6,7 +6,11 @@ using System;
 using System.Linq;
 using System.Text;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 namespace Elastic.Clients.Elasticsearch.Requests;
+#endif
 
 internal class UrlLookup
 {

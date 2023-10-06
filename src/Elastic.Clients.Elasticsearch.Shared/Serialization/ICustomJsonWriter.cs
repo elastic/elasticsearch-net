@@ -5,9 +5,13 @@
 using System.Text.Json;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 internal interface ICustomJsonWriter
-{		
+{
 	void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer);
 }

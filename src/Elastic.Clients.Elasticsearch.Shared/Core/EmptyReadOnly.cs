@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 internal static class EmptyReadOnly<TElement>
 {

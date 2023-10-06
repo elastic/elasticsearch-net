@@ -4,7 +4,11 @@
 
 using System.Text.Json;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 /// <summary>
 /// Marks a type to provide it's own serialization code.

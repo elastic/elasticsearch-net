@@ -8,13 +8,25 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+#else
 using Elastic.Clients.Elasticsearch.Fluent;
+#endif
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 using Elastic.Transport;
 using Elastic.Transport.Products;
 using Elastic.Transport.Products.Elasticsearch;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 /// <inheritdoc cref="IElasticsearchClientSettings" />
 public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<ElasticsearchClientSettings>
@@ -172,7 +184,7 @@ public abstract class
 		{
 			dss.Options.PropertyNamingPolicy = new CustomizedNamingPolicy(fieldNameInferrer);
 		}
-		
+
 		return Assign<Func<string, string>>(fieldNameInferrer, (a, v) => a._defaultFieldNameInferrer = v);
 	}
 

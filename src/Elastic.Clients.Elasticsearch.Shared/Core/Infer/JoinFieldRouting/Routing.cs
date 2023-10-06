@@ -10,7 +10,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [JsonConverter(typeof(RoutingConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]

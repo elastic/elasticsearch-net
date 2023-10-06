@@ -6,7 +6,11 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 #if NET6_0_OR_GREATER
 public struct RawJsonString

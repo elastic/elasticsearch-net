@@ -4,7 +4,11 @@
 
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 /// <summary>
 /// Represents the union of two types, <typeparamref name="TFirst" /> and <typeparamref name="TSecond" />. Used

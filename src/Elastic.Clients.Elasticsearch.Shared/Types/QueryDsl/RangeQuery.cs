@@ -6,9 +6,17 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+#else
 using Elastic.Clients.Elasticsearch.Fluent;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
+#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+#endif
 
 [JsonConverter(typeof(RangeQueryConverter))]
 public class RangeQuery : SearchQuery

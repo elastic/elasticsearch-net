@@ -13,7 +13,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 internal static class Extensions
 {

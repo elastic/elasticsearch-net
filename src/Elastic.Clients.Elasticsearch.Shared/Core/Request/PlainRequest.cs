@@ -6,7 +6,11 @@ using System;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
+#else
 namespace Elastic.Clients.Elasticsearch.Requests;
+#endif
 
 public abstract class PlainRequest<TParameters> : Request<TParameters>
 	where TParameters : RequestParameters, new()

@@ -5,11 +5,23 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
+#else
 using Elastic.Clients.Elasticsearch.Core.MSearch;
+#endif
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearchTemplate;
+#else
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
+#endif
 
 public sealed class SearchTemplateRequestItem : IStreamSerializable
 {

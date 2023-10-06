@@ -6,7 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 
 /// <summary>
 /// Describes aggregations to execute as part of a search.

@@ -6,7 +6,11 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
+#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
+#endif
 
 public class BulkUpdateOperationWithScript : BulkUpdateOperation
 {

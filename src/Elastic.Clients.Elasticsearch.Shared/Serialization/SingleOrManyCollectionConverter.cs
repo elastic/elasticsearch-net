@@ -7,14 +7,18 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 internal class SingleOrManyCollectionConverter<TItem> : JsonConverter<ICollection<TItem>>
 {
 	public override ICollection<TItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
 		SingleOrManySerializationHelper.Deserialize<TItem>(ref reader, options);
 
-	public override void Write(Utf8JsonWriter writer, ICollection<TItem> value, JsonSerializerOptions options) => 
+	public override void Write(Utf8JsonWriter writer, ICollection<TItem> value, JsonSerializerOptions options) =>
 		SingleOrManySerializationHelper.Serialize<TItem>(value, writer, options);
 
 	public override bool CanConvert(Type typeToConvert) => true;

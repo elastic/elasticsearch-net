@@ -5,7 +5,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public interface IIsAReadOnlyDictionary { }
 

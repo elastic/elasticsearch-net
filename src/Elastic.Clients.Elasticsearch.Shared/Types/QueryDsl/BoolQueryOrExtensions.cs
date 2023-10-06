@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
+#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+#endif
 
 internal static class BoolQueryOrExtensions
 {
@@ -16,7 +20,7 @@ internal static class BoolQueryOrExtensions
 
 		if (TryFlattenShould(leftContainer, rightContainer, leftBool, rightBool, out var c))
 			return c;
-		
+
 		var lHasShouldQueries = hasLeftBool && leftBool.Should.HasAny();
 		var rHasShouldQueries = hasRightBool && rightBool.Should.HasAny();
 

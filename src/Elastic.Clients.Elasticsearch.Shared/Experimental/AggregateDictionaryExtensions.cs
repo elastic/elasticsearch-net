@@ -2,11 +2,19 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Aggregations;
+#else
 using Elastic.Clients.Elasticsearch.Aggregations;
+#endif
 using System;
 using System.Linq;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Experimental;
+#else
 namespace Elastic.Clients.Elasticsearch.Experimental;
+#endif
 
 internal static class AggregateDictionaryExtensions
 {

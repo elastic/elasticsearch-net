@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
+#else
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+#endif
 
 public partial class IndicesNamespacedClient
 {
 	/// <summary>
 	/// Refresh one or more indices. A refresh makes recent operations performed on one or more indices available for search. For data streams,
-	/// the API runs the refresh operation on the stream’s backing indices. 
+	/// the API runs the refresh operation on the stream’s backing indices.
 	/// </summary>
 	/// <param name="indices">The index and/or data streams to refresh.</param>
 	/// <returns>A <see cref="RefreshResponse"/> from the server.</returns>
@@ -25,7 +29,7 @@ public partial class IndicesNamespacedClient
 
 	/// <summary>
 	/// Refresh one or more indices. A refresh makes recent operations performed on one or more indices available for search. For data streams,
-	/// the API runs the refresh operation on the stream’s backing indices. 
+	/// the API runs the refresh operation on the stream’s backing indices.
 	/// </summary>
 	/// <param name="indices">The index and/or data streams to refresh.</param>
 	/// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the asynchronous operation.</param>

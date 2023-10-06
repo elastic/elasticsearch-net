@@ -5,7 +5,11 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Sql;
+#else
 namespace Elastic.Clients.Elasticsearch.Sql;
+#endif
 
 public partial class QueryResponse
 {

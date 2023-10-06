@@ -7,7 +7,11 @@ using System.IO;
 using System.Text.Json;
 using Elastic.Transport;
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
 /// <summary>
 /// May be used by requests that need to serialize only part of their source rather than the request object itself.

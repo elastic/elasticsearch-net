@@ -6,9 +6,17 @@ using System;
 using Elastic.Transport;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+#else
 using Elastic.Clients.Elasticsearch.Serialization;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 [JsonConverter(typeof(RelationNameConverter))]
 public sealed class RelationName : IEquatable<RelationName>, IUrlParameter

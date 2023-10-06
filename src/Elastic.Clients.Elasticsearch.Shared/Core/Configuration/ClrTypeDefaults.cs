@@ -4,9 +4,17 @@
 
 using System;
 using System.Linq.Expressions;
+#if ELASTICSEARCH_SERVERLESS
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+#else
 using Elastic.Clients.Elasticsearch.Fluent;
+#endif
 
+#if ELASTICSEARCH_SERVERLESS
+namespace Elastic.Clients.Elasticsearch.Serverless;
+#else
 namespace Elastic.Clients.Elasticsearch;
+#endif
 
 public class ClrTypeMapping
 {
