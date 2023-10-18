@@ -4,16 +4,18 @@
 You can use https://opentelemetry.io/[OpenTelemetry] to monitor the performance 
 and behavior of your Elasticsearch requests through the {net-client}.
 The {net-client} comes with built-in OpenTelemetry instrumentation that emits 
-https://www.elastic.co/guide/en/apm/guide/current/apm-distributed-tracing.html[distributed tracing spans] by default.
-With that, applications https://opentelemetry.io/docs/instrumentation/net/manual/[instrumented with OpenTelemetry] or 
-running the https://opentelemetry.io/docs/instrumentation/net/automatic/[OpenTelemetry .NET Agent] are inherently 
-enriched with additional spans that contain insightful information about the execution of the Elasticsearch requests. 
+https://www.elastic.co/guide/en/apm/guide/current/apm-distributed-tracing.html[distributed tracing spans] 
+(signals) by default. With that, applications https://opentelemetry.io/docs/instrumentation/net/manual/[instrumented with OpenTelemetry] 
+or running the https://opentelemetry.io/docs/instrumentation/net/automatic/[OpenTelemetry .NET Agent] 
+are inherently enriched with additional spans that contain insightful information 
+about the execution of the Elasticsearch requests. 
 
-The native instrumentation in the {net-client} follows the https://opentelemetry.io/docs/specs/semconv/database/elasticsearch/[OpenTelemetry Semantic Conventions for Elasticsearch]. 
+The native instrumentation in the {net-client} follows the 
+https://opentelemetry.io/docs/specs/semconv/database/elasticsearch/[OpenTelemetry Semantic Conventions for Elasticsearch]. 
 In particular, the instrumentation in the client covers the logical Elasticsearch 
-request layer, thus, creates a single span per request the service executes against the {net-client}. 
-The following image shows a resulting trace in which three different Elasticsearch 
-requests are executed, i.e. an `index`, `get` and a search `request`:
+request layer, thus, creates a single span per request the service executes against 
+the {net-client}. The following image shows a resulting trace in which three 
+different Elasticsearch requests are executed, i.e. an `index`, `get` and a search `request`:
 
 [role="screenshot"]
 image::../images/otel-waterfall-instrumented-without-http.jpg[alt="Distributed trace with Elasticsearch spans",align="center"]
@@ -28,7 +30,7 @@ spans (in red):
 [role="screenshot"]
 image::images/otel-waterfall-instrumented.jpg[alt="Distributed trace with Elasticsearch and HTTP spans",align="center"]
 
-Advanced {net-client} behavior such as nodes round-robin and request retries are 
+Advanced {net-client} behavior such as node round-robin and request retries are 
 revealed through the combination of logical Elasticsearch spans and the physical 
 HTTP spans. The following example shows an `index` request in a scenario with 
 two Elasticsearch nodes:
@@ -44,8 +46,8 @@ Elasticsearch request span (in blue).
 ==== Span attributes
 
 In addition to the attributes defined in https://opentelemetry.io/docs/specs/semconv/database/elasticsearch/[OpenTelemetry Semantic Conventions for Elasticsearch],
-the underlying `Elastic.Transport` includes some attributes specific to its 
-implementation.
+the underlying `Elastic.Transport` includes some additional attributes specific to 
+its implementation.
 
 | Attribute  | Type | Description  | Examples  | Requirement Level |
 |---|---|---|---|---|
