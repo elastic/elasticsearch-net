@@ -55,6 +55,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.ClusterLauncher", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsearch.JsonNetSerializer", "src\Elastic.Clients.Elasticsearch.JsonNetSerializer\Elastic.Clients.Elasticsearch.JsonNetSerializer.csproj", "{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elastic.Clients.Elasticsearch.Serverless", "src\Elastic.Clients.Elasticsearch.Serverless\Elastic.Clients.Elasticsearch.Serverless.csproj", "{49D7F5A7-AA32-492B-B957-0E3325861F55}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Elastic.Clients.Elasticsearch.Shared", "src\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.shproj", "{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +213,18 @@ Global
 		{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB}.Release|x64.Build.0 = Release|Any CPU
 		{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB}.Release|x86.ActiveCfg = Release|Any CPU
 		{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB}.Release|x86.Build.0 = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|x64.Build.0 = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Debug|x86.Build.0 = Debug|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|x64.ActiveCfg = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|x64.Build.0 = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|x86.ActiveCfg = Release|Any CPU
+		{49D7F5A7-AA32-492B-B957-0E3325861F55}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,8 +242,15 @@ Global
 		{68D1BFDC-F447-4D2C-AF81-537807636610} = {1FE49D14-216A-41EE-A177-E42BFF53E0DC}
 		{F6162603-D134-4121-8106-2BA4DAD7350B} = {362B2776-4B29-46AB-B237-56776B5372B6}
 		{8C9275D9-29CE-4A20-8FD5-6B26C6CAAADB} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
+		{49D7F5A7-AA32-492B-B957-0E3325861F55} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
+		{A90DD7B8-8AFB-4BE9-AA16-B159A880E79D} = {D455EC79-E1E0-4509-B297-0DA3AED8DFF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE74F821-B001-4C69-A58D-CF81F8B0B632}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.projitems*{49d7f5a7-aa32-492b-b957-0e3325861f55}*SharedItemsImports = 5
+		src\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.projitems*{a90dd7b8-8afb-4be9-aa16-b159a880e79d}*SharedItemsImports = 13
+		src\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.projitems*{f8a7e60c-0c48-4d76-af7f-7881df5a263d}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

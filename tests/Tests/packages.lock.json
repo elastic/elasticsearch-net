@@ -31,11 +31,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.4.15, )",
-        "resolved": "0.4.15",
-        "contentHash": "JxPHmjHQnTQNdppNKfyrvUZoVq/q83Q921zyZ01qqfySKqkTrZQRUfeCu746SSf0xeeTuqFdCTpGN3CTwz2XqQ==",
+        "requested": "[0.4.16, )",
+        "resolved": "0.4.16",
+        "contentHash": "CGj8Y99V+80TICiUoeHTiSCVpa9pkvSwDSHIQxRDfJ0y6f84MdeTdUvMMJqcsoLyPt+20yNJBZ/LYmIw+YWa0Q==",
         "dependencies": {
-          "Elastic.Transport": "0.4.15"
+          "Elastic.Transport": "0.4.16"
         }
       },
       "FSharp.Core": {
