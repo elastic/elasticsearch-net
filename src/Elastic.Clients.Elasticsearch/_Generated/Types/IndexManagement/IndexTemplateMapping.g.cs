@@ -35,7 +35,7 @@ public sealed partial class IndexTemplateMapping
 	[JsonInclude, JsonPropertyName("aliases")]
 	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? Lifecycle { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 
 	/// <summary>
 	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
@@ -65,9 +65,9 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
-	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
+	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
@@ -132,7 +132,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? lifecycle)
 	{
 		LifecycleDescriptor = null;
 		LifecycleDescriptorAction = null;
@@ -140,7 +140,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(DataLifecycleDescriptor descriptor)
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -148,7 +148,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Action<DataLifecycleDescriptor> configure)
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -205,7 +205,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{
@@ -232,9 +232,9 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? LifecycleValue { get; set; }
-	private DataLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
+	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
@@ -299,7 +299,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycle? lifecycle)
+	public IndexTemplateMappingDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? lifecycle)
 	{
 		LifecycleDescriptor = null;
 		LifecycleDescriptorAction = null;
@@ -307,7 +307,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Lifecycle(DataLifecycleDescriptor descriptor)
+	public IndexTemplateMappingDescriptor Lifecycle(DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -315,7 +315,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Lifecycle(Action<DataLifecycleDescriptor> configure)
+	public IndexTemplateMappingDescriptor Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -372,7 +372,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{

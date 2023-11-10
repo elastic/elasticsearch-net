@@ -32,58 +32,58 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed class ExistsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specify whether to perform the operation in realtime or search mode</para>
+	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Refresh the shard containing the document before performing the operation</para>
+	/// <para>If `true`, Elasticsearch refreshes all shards involved in the delete by query after the request completes.</para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Target the specified primary shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>True or false to return the _source field or not, or a list of fields to return</para>
+	/// <para>`true` or `false` to return the `_source` field or not, or a list of fields to return.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
-	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// <para>A comma-separated list of source fields to exclude in the response.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A list of fields to extract and return from the _source field</para>
+	/// <para>A comma-separated list of source fields to include in the response.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of stored fields to return in the response</para>
+	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to false.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type: `external`, `external_gte`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
 /// <summary>
-/// <para>Returns information about whether a document exists in an index.</para>
+/// <para>Checks if a document in an index exists.</para>
 /// </summary>
 public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters>
 {
@@ -100,68 +100,68 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 	internal override string OperationName => "exists";
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specify whether to perform the operation in realtime or search mode</para>
+	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Refresh the shard containing the document before performing the operation</para>
+	/// <para>If `true`, Elasticsearch refreshes all shards involved in the delete by query after the request completes.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Target the specified primary shard.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>True or false to return the _source field or not, or a list of fields to return</para>
+	/// <para>`true` or `false` to return the `_source` field or not, or a list of fields to return.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
 	/// <summary>
-	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// <para>A comma-separated list of source fields to exclude in the response.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
 	/// <summary>
-	/// <para>A list of fields to extract and return from the _source field</para>
+	/// <para>A comma-separated list of source fields to include in the response.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of stored fields to return in the response</para>
+	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to false.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type: `external`, `external_gte`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.Serverless.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
 /// <summary>
-/// <para>Returns information about whether a document exists in an index.</para>
+/// <para>Checks if a document in an index exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescriptor<ExistsRequestDescriptor<TDocument>, ExistsRequestParameters>
 {
@@ -232,7 +232,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Returns information about whether a document exists in an index.</para>
+/// <para>Checks if a document in an index exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRequestDescriptor, ExistsRequestParameters>
 {

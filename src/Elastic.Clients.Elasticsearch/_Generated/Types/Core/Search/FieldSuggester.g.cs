@@ -49,10 +49,21 @@ public sealed partial class FieldSuggester
 	public static FieldSuggester Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => new FieldSuggester("phrase", phraseSuggester);
 	public static FieldSuggester Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => new FieldSuggester("term", termSuggester);
 
+	/// <summary>
+	/// <para>Prefix used to search for suggestions.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public string? Prefix { get; set; }
+
+	/// <summary>
+	/// <para>A prefix expressed as a regular expression.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("regex")]
 	public string? Regex { get; set; }
+
+	/// <summary>
+	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 }
@@ -212,18 +223,27 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 	private string? RegexValue { get; set; }
 	private string? TextValue { get; set; }
 
+	/// <summary>
+	/// <para>Prefix used to search for suggestions.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Prefix(string? prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A prefix expressed as a regular expression.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Regex(string? regex)
 	{
 		RegexValue = regex;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor<TDocument> Text(string? text)
 	{
 		TextValue = text;
@@ -310,18 +330,27 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 	private string? RegexValue { get; set; }
 	private string? TextValue { get; set; }
 
+	/// <summary>
+	/// <para>Prefix used to search for suggestions.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor Prefix(string? prefix)
 	{
 		PrefixValue = prefix;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A prefix expressed as a regular expression.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor Regex(string? regex)
 	{
 		RegexValue = regex;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The text to use as input for the suggester.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public FieldSuggesterDescriptor Text(string? text)
 	{
 		TextValue = text;

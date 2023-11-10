@@ -32,39 +32,43 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class ReindexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Should the affected indexes be refreshed?</para>
+	/// <para>If `true`, the request refreshes affected shards to make this operation visible to search.</para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>The throttle to set on this request in sub-requests per second. -1 means no throttle.</para>
+	/// <para>The throttle for this request in sub-requests per second.<br/>Defaults to no throttle.</para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
-	/// <para>Control how long to keep the search context alive</para>
+	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</para>
+	/// <para>The number of slices this task should be divided into.<br/>Defaults to 1 slice, meaning the task isn’t sliced into subtasks.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
-	/// <para>Time each individual bulk request should wait for shards that are unavailable.</para>
+	/// <para>Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>Should the request should block until the reindex is complete.</para>
+	/// <para>If `true`, the request blocks until the operation is complete.</para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+	/// <summary>
+	/// <para>If `true`, the destination must be an index alias.</para>
+	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
@@ -82,58 +86,82 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	internal override string OperationName => "reindex";
 
 	/// <summary>
-	/// <para>Should the affected indexes be refreshed?</para>
+	/// <para>If `true`, the request refreshes affected shards to make this operation visible to search.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>The throttle to set on this request in sub-requests per second. -1 means no throttle.</para>
+	/// <para>The throttle for this request in sub-requests per second.<br/>Defaults to no throttle.</para>
 	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
-	/// <para>Control how long to keep the search context alive</para>
+	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
-	/// <para>The number of slices this task should be divided into. Defaults to 1, meaning the task isn't sliced into subtasks. Can be set to `auto`.</para>
+	/// <para>The number of slices this task should be divided into.<br/>Defaults to 1 slice, meaning the task isn’t sliced into subtasks.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
-	/// <para>Time each individual bulk request should wait for shards that are unavailable.</para>
+	/// <para>Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before proceeding with the reindex operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>Should the request should block until the reindex is complete.</para>
+	/// <para>If `true`, the request blocks until the operation is complete.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
+
+	/// <summary>
+	/// <para>If `true`, the destination must be an index alias.</para>
+	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
+	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
+
+	/// <summary>
+	/// <para>The destination you are copying to.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("dest")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of documents to reindex.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
+
+	/// <summary>
+	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
+
+	/// <summary>
+	/// <para>The source you are copying from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("source")]
 	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
@@ -177,6 +205,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The source you are copying from.</para>
+	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
 	{
 		SourceDescriptor = null;
@@ -201,12 +232,18 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
 	{
 		ConflictsValue = conflicts;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The destination you are copying to.</para>
+	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
 	{
 		DestDescriptor = null;
@@ -231,12 +268,18 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of documents to reindex.</para>
+	/// </summary>
 	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
 	{
 		MaxDocsValue = maxDocs;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -351,6 +394,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
 
+	/// <summary>
+	/// <para>The source you are copying from.</para>
+	/// </summary>
 	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
 	{
 		SourceDescriptor = null;
@@ -375,12 +421,18 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
+	/// </summary>
 	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
 	{
 		ConflictsValue = conflicts;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The destination you are copying to.</para>
+	/// </summary>
 	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
 	{
 		DestDescriptor = null;
@@ -405,12 +457,18 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of documents to reindex.</para>
+	/// </summary>
 	public ReindexRequestDescriptor MaxDocs(long? maxDocs)
 	{
 		MaxDocsValue = maxDocs;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The script to run to update the document source or metadata when reindexing.</para>
+	/// </summary>
 	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;

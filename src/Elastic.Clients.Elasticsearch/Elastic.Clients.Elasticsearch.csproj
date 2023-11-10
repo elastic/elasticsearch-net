@@ -40,5 +40,8 @@
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\IndexManagement\" />
+  </ItemGroup>
   <Import Project="..\Elastic.Clients.Elasticsearch.Shared\Elastic.Clients.Elasticsearch.Shared.projitems" Label="Shared" />
 </Project>

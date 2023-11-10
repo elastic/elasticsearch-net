@@ -93,8 +93,14 @@ internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearch
 [JsonConverter(typeof(ConflictsConverter))]
 public enum Conflicts
 {
+	/// <summary>
+	/// <para>Continue reindexing even if there are conflicts.</para>
+	/// </summary>
 	[EnumMember(Value = "proceed")]
 	Proceed,
+	/// <summary>
+	/// <para>Stop reindexing if there are conflicts.</para>
+	/// </summary>
 	[EnumMember(Value = "abort")]
 	Abort
 }
@@ -1364,10 +1370,19 @@ internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 [JsonConverter(typeof(SuggestModeConverter))]
 public enum SuggestMode
 {
+	/// <summary>
+	/// <para>Only suggest terms that occur in more docs on the shard than the original term.</para>
+	/// </summary>
 	[EnumMember(Value = "popular")]
 	Popular,
+	/// <summary>
+	/// <para>Only generate suggestions for terms that are not in the shard.</para>
+	/// </summary>
 	[EnumMember(Value = "missing")]
 	Missing,
+	/// <summary>
+	/// <para>Suggest any matching suggestions based on terms in the suggest text.</para>
+	/// </summary>
 	[EnumMember(Value = "always")]
 	Always
 }
@@ -1488,12 +1503,21 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 [JsonConverter(typeof(VersionTypeConverter))]
 public enum VersionType
 {
+	/// <summary>
+	/// <para>Use internal versioning that starts at 1 and increments with each update or delete.</para>
+	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
 	[EnumMember(Value = "force")]
 	Force,
+	/// <summary>
+	/// <para>Only index the document if the given version is equal or higher than the version of the stored document or if there is no existing document.<br/>Note: the external_gte version type is meant for special use cases and should be used with care.<br/>If used incorrectly, it can result in loss of data.</para>
+	/// </summary>
 	[EnumMember(Value = "external_gte")]
 	ExternalGte,
+	/// <summary>
+	/// <para>Only index the document if the given version is strictly higher than the version of the stored document or if there is no existing document.</para>
+	/// </summary>
 	[EnumMember(Value = "external")]
 	External
 }

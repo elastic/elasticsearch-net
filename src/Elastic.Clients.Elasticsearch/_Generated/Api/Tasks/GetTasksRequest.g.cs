@@ -32,12 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public sealed class GetTasksRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Wait for the matching tasks to complete (default: false)</para>
+	/// <para>If `true`, the request blocks until the task has completed.</para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
@@ -61,13 +61,13 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 	internal override string OperationName => "tasks.get";
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Wait for the matching tasks to complete (default: false)</para>
+	/// <para>If `true`, the request blocks until the task has completed.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }

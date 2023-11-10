@@ -32,17 +32,17 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public sealed class CancelRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</para>
+	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
 	/// </summary>
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</para>
+	/// <para>Comma-separated list of node IDs or names used to limit the request.</para>
 	/// </summary>
 	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
-	/// <para>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</para>
+	/// <para>Parent task ID used to limit the tasks.</para>
 	/// </summary>
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }
 
@@ -75,19 +75,19 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 	internal override string OperationName => "tasks.cancel";
 
 	/// <summary>
-	/// <para>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</para>
+	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Actions { get => Q<ICollection<string>?>("actions"); set => Q("actions", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</para>
+	/// <para>Comma-separated list of node IDs or names used to limit the request.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<string>? Nodes { get => Q<ICollection<string>?>("nodes"); set => Q("nodes", value); }
 
 	/// <summary>
-	/// <para>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</para>
+	/// <para>Parent task ID used to limit the tasks.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? ParentTaskId { get => Q<string?>("parent_task_id"); set => Q("parent_task_id", value); }

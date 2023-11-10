@@ -352,14 +352,29 @@ internal sealed class ScoreModeConverter : JsonConverter<ScoreMode>
 [JsonConverter(typeof(StringDistanceConverter))]
 public enum StringDistance
 {
+	/// <summary>
+	/// <para>String distance algorithm based on character n-grams.</para>
+	/// </summary>
 	[EnumMember(Value = "ngram")]
 	Ngram,
+	/// <summary>
+	/// <para>String distance algorithm based on the Levenshtein edit distance algorithm.</para>
+	/// </summary>
 	[EnumMember(Value = "levenshtein")]
 	Levenshtein,
+	/// <summary>
+	/// <para>String distance algorithm based on Jaro-Winkler algorithm.</para>
+	/// </summary>
 	[EnumMember(Value = "jaro_winkler")]
 	JaroWinkler,
+	/// <summary>
+	/// <para>Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.</para>
+	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
+	/// <summary>
+	/// <para>String distance algorithm based on Damerau-Levenshtein algorithm.</para>
+	/// </summary>
 	[EnumMember(Value = "damerau_levenshtein")]
 	DamerauLevenshtein
 }
@@ -414,8 +429,14 @@ internal sealed class StringDistanceConverter : JsonConverter<StringDistance>
 [JsonConverter(typeof(SuggestSortConverter))]
 public enum SuggestSort
 {
+	/// <summary>
+	/// <para>Sort by score first, then document frequency and then the term itself.</para>
+	/// </summary>
 	[EnumMember(Value = "score")]
 	Score,
+	/// <summary>
+	/// <para>Sort by document frequency first, then similarity score and then the term itself.</para>
+	/// </summary>
 	[EnumMember(Value = "frequency")]
 	Frequency
 }

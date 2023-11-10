@@ -29,18 +29,45 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors;
 
 public sealed partial class Filter
 {
+	/// <summary>
+	/// <para>Ignore words which occur in more than this many docs.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_doc_freq")]
 	public int? MaxDocFreq { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of terms that must be returned per field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_num_terms")]
 	public int? MaxNumTerms { get; set; }
+
+	/// <summary>
+	/// <para>Ignore words with more than this frequency in the source doc.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public int? MaxTermFreq { get; set; }
+
+	/// <summary>
+	/// <para>The maximum word length above which words will be ignored.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_word_length")]
 	public int? MaxWordLength { get; set; }
+
+	/// <summary>
+	/// <para>Ignore terms which do not occur in at least this many docs.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public int? MinDocFreq { get; set; }
+
+	/// <summary>
+	/// <para>Ignore words with less than this frequency in the source doc.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_term_freq")]
 	public int? MinTermFreq { get; set; }
+
+	/// <summary>
+	/// <para>The minimum word length below which words will be ignored.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
 }
@@ -61,42 +88,63 @@ public sealed partial class FilterDescriptor : SerializableDescriptor<FilterDesc
 	private int? MinTermFreqValue { get; set; }
 	private int? MinWordLengthValue { get; set; }
 
+	/// <summary>
+	/// <para>Ignore words which occur in more than this many docs.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	public FilterDescriptor MaxDocFreq(int? maxDocFreq)
 	{
 		MaxDocFreqValue = maxDocFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Maximum number of terms that must be returned per field.</para>
+	/// </summary>
 	public FilterDescriptor MaxNumTerms(int? maxNumTerms)
 	{
 		MaxNumTermsValue = maxNumTerms;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore words with more than this frequency in the source doc.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	public FilterDescriptor MaxTermFreq(int? maxTermFreq)
 	{
 		MaxTermFreqValue = maxTermFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum word length above which words will be ignored.<br/>Defaults to unbounded.</para>
+	/// </summary>
 	public FilterDescriptor MaxWordLength(int? maxWordLength)
 	{
 		MaxWordLengthValue = maxWordLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore terms which do not occur in at least this many docs.</para>
+	/// </summary>
 	public FilterDescriptor MinDocFreq(int? minDocFreq)
 	{
 		MinDocFreqValue = minDocFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore words with less than this frequency in the source doc.</para>
+	/// </summary>
 	public FilterDescriptor MinTermFreq(int? minTermFreq)
 	{
 		MinTermFreqValue = minTermFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimum word length below which words will be ignored.</para>
+	/// </summary>
 	public FilterDescriptor MinWordLength(int? minWordLength)
 	{
 		MinWordLengthValue = minWordLength;

@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
 public sealed partial class StupidBackoffSmoothingModel
 {
+	/// <summary>
+	/// <para>A constant factor that the lower order n-gram model is discounted by.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("discount")]
 	public double Discount { get; set; }
 
@@ -45,6 +48,9 @@ public sealed partial class StupidBackoffSmoothingModelDescriptor : Serializable
 
 	private double DiscountValue { get; set; }
 
+	/// <summary>
+	/// <para>A constant factor that the lower order n-gram model is discounted by.</para>
+	/// </summary>
 	public StupidBackoffSmoothingModelDescriptor Discount(double discount)
 	{
 		DiscountValue = discount;
