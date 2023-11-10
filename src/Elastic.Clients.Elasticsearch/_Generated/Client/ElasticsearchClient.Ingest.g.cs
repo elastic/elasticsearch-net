@@ -168,7 +168,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequest request)
 	{
@@ -178,7 +178,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -188,7 +188,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats()
 	{
@@ -199,7 +199,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
 	{
@@ -209,7 +209,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GeoIpStatsResponse GeoIpStats(Action<GeoIpStatsRequestDescriptor> configureRequest)
 	{
@@ -221,7 +221,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -232,7 +232,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -242,7 +242,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns statistical information about geoip databases</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(Action<GeoIpStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -384,7 +384,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequest request)
 	{
@@ -394,7 +394,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequest request, CancellationToken cancellationToken = default)
 	{
@@ -404,7 +404,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok()
 	{
@@ -415,7 +415,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
 	{
@@ -425,7 +425,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ProcessorGrokResponse ProcessorGrok(Action<ProcessorGrokRequestDescriptor> configureRequest)
 	{
@@ -437,7 +437,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
 	{
@@ -448,7 +448,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -458,7 +458,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of the built-in patterns.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(Action<ProcessorGrokRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -470,7 +470,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequest request)
 	{
@@ -480,7 +480,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequest request, CancellationToken cancellationToken = default)
 	{
@@ -490,7 +490,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
 	{
@@ -500,7 +500,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
 	{
@@ -512,7 +512,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PutPipelineResponse PutPipeline<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor)
 	{
@@ -522,7 +522,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest)
 	{
@@ -534,7 +534,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -544,7 +544,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -556,7 +556,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -566,7 +566,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.9/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.10/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
