@@ -31,16 +31,32 @@ public sealed partial class CompletionSuggester
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("contexts")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
+
+	/// <summary>
+	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("regex")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
@@ -73,6 +89,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>> selector)
 	{
 		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>());
@@ -91,6 +110,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
 	{
 		FuzzyDescriptor = null;
@@ -115,6 +137,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
 		RegexDescriptor = null;
@@ -145,6 +170,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> SkipDuplicates(bool? skipDuplicates = true)
 	{
 		SkipDuplicatesValue = skipDuplicates;
@@ -242,6 +270,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>> selector)
 	{
 		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>());
@@ -266,6 +297,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Enables fuzziness, meaning you can have a typo in your search and still get results back.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
 	{
 		FuzzyDescriptor = null;
@@ -290,6 +324,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A regex query that expresses a prefix as a regular expression.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
 	{
 		RegexDescriptor = null;
@@ -320,6 +357,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Whether duplicate suggestions should be filtered out.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor SkipDuplicates(bool? skipDuplicates = true)
 	{
 		SkipDuplicatesValue = skipDuplicates;

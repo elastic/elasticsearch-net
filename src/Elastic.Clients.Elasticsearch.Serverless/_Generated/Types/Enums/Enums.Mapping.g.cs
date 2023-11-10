@@ -90,6 +90,8 @@ public enum FieldType
 	TokenCount,
 	[EnumMember(Value = "text")]
 	Text,
+	[EnumMember(Value = "sparse_vector")]
+	SparseVector,
 	[EnumMember(Value = "short")]
 	Short,
 	[EnumMember(Value = "shape")]
@@ -183,6 +185,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.TokenCount;
 			case "text":
 				return FieldType.Text;
+			case "sparse_vector":
+				return FieldType.SparseVector;
 			case "short":
 				return FieldType.Short;
 			case "shape":
@@ -277,6 +281,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Text:
 				writer.WriteStringValue("text");
+				return;
+			case FieldType.SparseVector:
+				writer.WriteStringValue("sparse_vector");
 				return;
 			case FieldType.Short:
 				writer.WriteStringValue("short");

@@ -38,7 +38,7 @@ public sealed class GetScriptRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns a script.</para>
+/// <para>Retrieves a stored script or search template.</para>
 /// </summary>
 public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class GetScriptRequest : PlainRequest<GetScriptRequestPara
 }
 
 /// <summary>
-/// <para>Returns a script.</para>
+/// <para>Retrieves a stored script or search template.</para>
 /// </summary>
 public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescriptor<GetScriptRequestDescriptor<TDocument>, GetScriptRequestParameters>
 {
@@ -98,7 +98,7 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Returns a script.</para>
+/// <para>Retrieves a stored script or search template.</para>
 /// </summary>
 public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetScriptRequestDescriptor, GetScriptRequestParameters>
 {

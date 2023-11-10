@@ -31,6 +31,12 @@ public sealed partial class ClusterStatistics
 {
 	[JsonInclude, JsonPropertyName("details")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ClusterDetails>? Details { get; init; }
+	[JsonInclude, JsonPropertyName("failed")]
+	public int Failed { get; init; }
+	[JsonInclude, JsonPropertyName("partial")]
+	public int Partial { get; init; }
+	[JsonInclude, JsonPropertyName("running")]
+	public int Running { get; init; }
 	[JsonInclude, JsonPropertyName("skipped")]
 	public int Skipped { get; init; }
 	[JsonInclude, JsonPropertyName("successful")]

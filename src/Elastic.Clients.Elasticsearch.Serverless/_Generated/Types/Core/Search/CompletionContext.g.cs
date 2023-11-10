@@ -29,14 +29,33 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
 public sealed partial class CompletionContext
 {
+	/// <summary>
+	/// <para>The factor by which the score of the suggestion should be boosted.<br/>The score is computed by multiplying the boost with the suggestion weight.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
+
+	/// <summary>
+	/// <para>The value of the category to filter/boost on.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("context")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Context Context { get; set; }
+
+	/// <summary>
+	/// <para>An array of precision values at which neighboring geohashes should be taken into account.<br/>Precision value can be a distance value (`5m`, `10km`, etc.) or a raw geohash precision (`1`..`12`).<br/>Defaults to generating neighbors for index time precision level.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("neighbours")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.GeohashPrecision>? Neighbours { get; set; }
+
+	/// <summary>
+	/// <para>The precision of the geohash to encode the query geo point.<br/>Can be specified as a distance value (`5m`, `10km`, etc.), or as a raw geohash precision (`1`..`12`).<br/>Defaults to index time precision level.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.Serverless.GeohashPrecision? Precision { get; set; }
+
+	/// <summary>
+	/// <para>Whether the category value should be treated as a prefix or not.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
@@ -55,30 +74,45 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.Serverless.GeohashPrecision? PrecisionValue { get; set; }
 	private bool? PrefixValue { get; set; }
 
+	/// <summary>
+	/// <para>The factor by which the score of the suggestion should be boosted.<br/>The score is computed by multiplying the boost with the suggestion weight.</para>
+	/// </summary>
 	public CompletionContextDescriptor Boost(double? boost)
 	{
 		BoostValue = boost;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The value of the category to filter/boost on.</para>
+	/// </summary>
 	public CompletionContextDescriptor Context(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Context context)
 	{
 		ContextValue = context;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An array of precision values at which neighboring geohashes should be taken into account.<br/>Precision value can be a distance value (`5m`, `10km`, etc.) or a raw geohash precision (`1`..`12`).<br/>Defaults to generating neighbors for index time precision level.</para>
+	/// </summary>
 	public CompletionContextDescriptor Neighbours(ICollection<Elastic.Clients.Elasticsearch.Serverless.GeohashPrecision>? neighbours)
 	{
 		NeighboursValue = neighbours;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The precision of the geohash to encode the query geo point.<br/>Can be specified as a distance value (`5m`, `10km`, etc.), or as a raw geohash precision (`1`..`12`).<br/>Defaults to index time precision level.</para>
+	/// </summary>
 	public CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.Serverless.GeohashPrecision? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Whether the category value should be treated as a prefix or not.</para>
+	/// </summary>
 	public CompletionContextDescriptor Prefix(bool? prefix = true)
 	{
 		PrefixValue = prefix;

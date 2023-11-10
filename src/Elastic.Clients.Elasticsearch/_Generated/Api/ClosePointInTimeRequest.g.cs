@@ -34,7 +34,7 @@ public sealed class ClosePointInTimeRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Close a point in time</para>
+/// <para>Closes a point-in-time.</para>
 /// </summary>
 public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInTimeRequestParameters>
 {
@@ -46,12 +46,15 @@ public sealed partial class ClosePointInTimeRequest : PlainRequest<ClosePointInT
 
 	internal override string OperationName => "close_point_in_time";
 
+	/// <summary>
+	/// <para>The ID of the point-in-time.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
 
 /// <summary>
-/// <para>Close a point in time</para>
+/// <para>Closes a point-in-time.</para>
 /// </summary>
 public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescriptor<ClosePointInTimeRequestDescriptor, ClosePointInTimeRequestParameters>
 {
@@ -71,6 +74,9 @@ public sealed partial class ClosePointInTimeRequestDescriptor : RequestDescripto
 
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 
+	/// <summary>
+	/// <para>The ID of the point-in-time.</para>
+	/// </summary>
 	public ClosePointInTimeRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;

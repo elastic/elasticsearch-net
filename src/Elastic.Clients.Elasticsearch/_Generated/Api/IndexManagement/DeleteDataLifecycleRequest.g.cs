@@ -48,8 +48,7 @@ public sealed class DeleteDataLifecycleRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// <para>Removes the data lifecycle from a data stream rendering it not managed by DLM</para>
+/// <para>Removes the data lifecycle from a data stream rendering it not managed by the data stream lifecycle</para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteDataLifecycleRequestParameters>
 {
@@ -85,8 +84,7 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// <para>Removes the data lifecycle from a data stream rendering it not managed by DLM</para>
+/// <para>Removes the data lifecycle from a data stream rendering it not managed by the data stream lifecycle</para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequestDescriptor : RequestDescriptor<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleRequestParameters>
 {
