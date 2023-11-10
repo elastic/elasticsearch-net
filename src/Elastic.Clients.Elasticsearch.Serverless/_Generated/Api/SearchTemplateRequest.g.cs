@@ -32,32 +32,32 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed class SearchTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</para>
+	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// <para>If `true`, specified concrete, expanded, or aliased indices are not included in the response when throttled.</para>
 	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
@@ -82,13 +82,13 @@ public sealed class SearchTemplateRequestParameters : RequestParameters
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
 /// <summary>
-/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+/// <para>Runs a search with a search template.</para>
 /// </summary>
 public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateRequestParameters>
 {
@@ -109,37 +109,37 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	internal override string OperationName => "search_template";
 
 	/// <summary>
-	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.<br/>For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution</para>
+	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// <para>If `true`, specified concrete, expanded, or aliased indices are not included in the response when throttled.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -169,10 +169,14 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
+	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
+
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 
@@ -181,8 +185,16 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id? Id { get; set; }
+
+	/// <summary>
+	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the query execution is profiled.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("profile")]
 	public bool? Profile { get; set; }
 
@@ -194,7 +206,7 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 }
 
 /// <summary>
-/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+/// <para>Runs a search with a search template.</para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<SearchTemplateRequestDescriptor<TDocument>, SearchTemplateRequestParameters>
 {
@@ -236,6 +248,9 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	private bool? ProfileValue { get; set; }
 	private string? SourceValue { get; set; }
 
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
@@ -251,12 +266,18 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the query execution is profiled.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor<TDocument> Profile(bool? profile = true)
 	{
 		ProfileValue = profile;
@@ -310,7 +331,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 }
 
 /// <summary>
-/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
+/// <para>Runs a search with a search template.</para>
 /// </summary>
 public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<SearchTemplateRequestDescriptor, SearchTemplateRequestParameters>
 {
@@ -352,6 +373,9 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 	private bool? ProfileValue { get; set; }
 	private string? SourceValue { get; set; }
 
+	/// <summary>
+	/// <para>If `true`, returns detailed information about score calculation as part of each hit.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor Explain(bool? explain = true)
 	{
 		ExplainValue = explain;
@@ -367,12 +391,18 @@ public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Key-value pairs used to replace Mustache variables in the template.<br/>The key is the variable name.<br/>The value is the variable value.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the query execution is profiled.</para>
+	/// </summary>
 	public SearchTemplateRequestDescriptor Profile(bool? profile = true)
 	{
 		ProfileValue = profile;

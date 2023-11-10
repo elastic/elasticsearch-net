@@ -29,26 +29,69 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class DirectGenerator
 {
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_edits")]
 	public int? MaxEdits { get; set; }
+
+	/// <summary>
+	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_inspections")]
 	public float? MaxInspections { get; set; }
+
+	/// <summary>
+	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_term_freq")]
 	public float? MaxTermFreq { get; set; }
+
+	/// <summary>
+	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, the number cannot be fractional.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_freq")]
 	public float? MinDocFreq { get; set; }
+
+	/// <summary>
+	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
+
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public string? PostFilter { get; set; }
+
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.<br/>This filter is applied to the original token before candidates are generated.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pre_filter")]
 	public string? PreFilter { get; set; }
+
+	/// <summary>
+	/// <para>The number of minimal prefix characters that must match in order be a candidate suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int? PrefixLength { get; set; }
+
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
+
+	/// <summary>
+	/// <para>Controls what suggestions are included on the suggestions generated on each shard.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("suggest_mode")]
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
@@ -73,72 +116,108 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MaxEdits(int? maxEdits)
 	{
 		MaxEditsValue = maxEdits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MaxInspections(float? maxInspections)
 	{
 		MaxInspectionsValue = maxInspections;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MaxTermFreq(float? maxTermFreq)
 	{
 		MaxTermFreqValue = maxTermFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, the number cannot be fractional.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MinDocFreq(float? minDocFreq)
 	{
 		MinDocFreqValue = minDocFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MinWordLength(int? minWordLength)
 	{
 		MinWordLengthValue = minWordLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> PostFilter(string? postFilter)
 	{
 		PostFilterValue = postFilter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.<br/>This filter is applied to the original token before candidates are generated.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> PreFilter(string? preFilter)
 	{
 		PreFilterValue = preFilter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of minimal prefix characters that must match in order be a candidate suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what suggestions are included on the suggestions generated on each shard.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
 	{
 		SuggestModeValue = suggestMode;
@@ -234,78 +313,117 @@ public sealed partial class DirectGeneratorDescriptor : SerializableDescriptor<D
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SuggestMode? SuggestModeValue { get; set; }
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor MaxEdits(int? maxEdits)
 	{
 		MaxEditsValue = maxEdits;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.<br/>Can improve accuracy at the cost of performance.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor MaxInspections(float? maxInspections)
 	{
 		MaxInspectionsValue = maxInspections;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum threshold in number of documents in which a suggest text token can exist in order to be included.<br/>This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.<br/>Can be a relative percentage number (for example `0.4`) or an absolute number to represent document frequencies.<br/>If a value higher than 1 is specified, then fractional can not be specified.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor MaxTermFreq(float? maxTermFreq)
 	{
 		MaxTermFreqValue = maxTermFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimal threshold in number of documents a suggestion should appear in.<br/>This can improve quality by only suggesting high frequency terms.<br/>Can be specified as an absolute number or as a relative percentage of number of documents.<br/>If a value higher than 1 is specified, the number cannot be fractional.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor MinDocFreq(float? minDocFreq)
 	{
 		MinDocFreqValue = minDocFreq;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The minimum length a suggest text term must have in order to be included.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor MinWordLength(int? minWordLength)
 	{
 		MinWordLengthValue = minWordLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor PostFilter(string? postFilter)
 	{
 		PostFilterValue = postFilter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.<br/>This filter is applied to the original token before candidates are generated.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor PreFilter(string? preFilter)
 	{
 		PreFilterValue = preFilter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The number of minimal prefix characters that must match in order be a candidate suggestions.<br/>Increasing this number improves spellcheck performance.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor PrefixLength(int? prefixLength)
 	{
 		PrefixLengthValue = prefixLength;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor Size(int? size)
 	{
 		SizeValue = size;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls what suggestions are included on the suggestions generated on each shard.</para>
+	/// </summary>
 	public DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? suggestMode)
 	{
 		SuggestModeValue = suggestMode;

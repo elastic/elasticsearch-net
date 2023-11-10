@@ -69,7 +69,7 @@ public sealed partial class DataStream
 	/// <para>Contains the configuration for the data lifecycle management of this data stream.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
 
 	/// <summary>
 	/// <para>Name of the data stream.</para>

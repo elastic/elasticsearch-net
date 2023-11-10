@@ -29,30 +29,81 @@ namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 
 public sealed partial class MultiTermVectorsOperation
 {
+	/// <summary>
+	/// <para>The ID of the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	/// <summary>
+	/// <para>The index of the document.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field_statistics")]
 	public bool? FieldStatistics { get; set; }
+
+	/// <summary>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+	/// <summary>
+	/// <para>Filter terms based on their tf-idf scores.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the response includes term offsets.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("offsets")]
 	public bool? Offsets { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the response includes term payloads.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("payloads")]
 	public bool? Payloads { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the response includes term positions.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("positions")]
 	public bool? Positions { get; set; }
+
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+	/// <summary>
+	/// <para>If true, the response includes term frequency and document frequency.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("term_statistics")]
 	public bool? TermStatistics { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, returns the document version as part of a hit.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
+
+	/// <summary>
+	/// <para>Specific version type.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
@@ -81,36 +132,54 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>The ID of the document.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The index of the document.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Doc(object? doc)
 	{
 		DocValue = doc;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true)
 	{
 		FieldStatisticsValue = fieldStatistics;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Filter terms based on their tf-idf scores.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? filter)
 	{
 		FilterDescriptor = null;
@@ -135,42 +204,63 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term offsets.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Offsets(bool? offsets = true)
 	{
 		OffsetsValue = offsets;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term payloads.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Payloads(bool? payloads = true)
 	{
 		PayloadsValue = payloads;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term positions.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Positions(bool? positions = true)
 	{
 		PositionsValue = positions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the response includes term frequency and document frequency.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> TermStatistics(bool? termStatistics = true)
 	{
 		TermStatisticsValue = termStatistics;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns the document version as part of a hit.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Version(long? version)
 	{
 		VersionValue = version;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specific version type.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
 	{
 		VersionTypeValue = versionType;
@@ -292,36 +382,54 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
+	/// <summary>
+	/// <para>The ID of the document.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The index of the document.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		IndexValue = index;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Doc(object? doc)
 	{
 		DocValue = doc;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor FieldStatistics(bool? fieldStatistics = true)
 	{
 		FieldStatisticsValue = fieldStatistics;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Filter terms based on their tf-idf scores.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? filter)
 	{
 		FilterDescriptor = null;
@@ -346,42 +454,63 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term offsets.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Offsets(bool? offsets = true)
 	{
 		OffsetsValue = offsets;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term payloads.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Payloads(bool? payloads = true)
 	{
 		PayloadsValue = payloads;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, the response includes term positions.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Positions(bool? positions = true)
 	{
 		PositionsValue = positions;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Custom value used to route operations to a specific shard.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
 	{
 		RoutingValue = routing;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If true, the response includes term frequency and document frequency.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor TermStatistics(bool? termStatistics = true)
 	{
 		TermStatisticsValue = termStatistics;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If `true`, returns the document version as part of a hit.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor Version(long? version)
 	{
 		VersionValue = version;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specific version type.</para>
+	/// </summary>
 	public MultiTermVectorsOperationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
 	{
 		VersionTypeValue = versionType;

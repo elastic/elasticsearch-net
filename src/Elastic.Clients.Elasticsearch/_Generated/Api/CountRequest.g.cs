@@ -32,72 +32,72 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class CountRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>The analyzer to use for the query string</para>
+	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// <para>If `true`, wildcard and prefix queries are analyzed.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query (AND or OR)</para>
+	/// <para>The default operator for query string query: `AND` or `OR`.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// <para>If `true`, concrete, expanded or aliased indices are ignored when frozen.</para>
 	/// </summary>
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.</para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Include only documents with a specific `_score` value in the result</para>
+	/// <para>Sets the minimum `_score` value that documents must have to be included in the result.</para>
 	/// </summary>
 	public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of specific routing values</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>The maximum count for each shard, upon reaching which the query execution will terminate early</para>
+	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.</para>
 	/// </summary>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax</para>
+	/// <para>Query in the Lucene query string syntax.</para>
 	/// </summary>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
@@ -124,88 +124,92 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	internal override string OperationName => "count";
 
 	/// <summary>
-	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
+	/// <para>If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.<br/>This behavior applies even if the request targets other open indices.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
-	/// <para>The analyzer to use for the query string</para>
+	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
 	/// <summary>
-	/// <para>Specify whether wildcard and prefix queries should be analyzed (default: false)</para>
+	/// <para>If `true`, wildcard and prefix queries are analyzed.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
 	/// <summary>
-	/// <para>The default operator for query string query (AND or OR)</para>
+	/// <para>The default operator for query string query: `AND` or `OR`.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
 	/// <summary>
-	/// <para>The field to use as default where no field prefix is given in the query string</para>
+	/// <para>Field to use as default where no field prefix is given in the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete, expanded or aliased indices should be ignored when throttled</para>
+	/// <para>If `true`, concrete, expanded or aliased indices are ignored when frozen.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
+	/// <para>If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
 	/// <summary>
-	/// <para>Include only documents with a specific `_score` value in the result</para>
+	/// <para>Sets the minimum `_score` value that documents must have to be included in the result.</para>
 	/// </summary>
 	[JsonIgnore]
 	public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of specific routing values</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>The maximum count for each shard, upon reaching which the query execution will terminate early</para>
+	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
 	/// <summary>
-	/// <para>Query in the Lucene query string syntax</para>
+	/// <para>Query in the Lucene query string syntax.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
@@ -258,6 +262,9 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public CountRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;
@@ -353,6 +360,9 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Defines the search definition using the Query DSL.</para>
+	/// </summary>
 	public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
 	{
 		QueryDescriptor = null;

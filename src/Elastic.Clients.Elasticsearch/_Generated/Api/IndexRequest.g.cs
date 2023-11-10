@@ -32,63 +32,63 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class IndexRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>only perform the index operation if the last operation that has changed the document has the specified primary term</para>
+	/// <para>Only perform the operation if the document has this primary term.</para>
 	/// </summary>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 	/// <summary>
-	/// <para>only perform the index operation if the last operation that has changed the document has the specified sequence number</para>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
 	/// </summary>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 	/// <summary>
-	/// <para>Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID</para>
+	/// <para>Set to create to only index the document if it does not already exist (put if absent).<br/>If a document with the specified `_id` already exists, the indexing operation will fail.<br/>Same as using the `<index>/_create` endpoint.<br/>Valid values: `index`, `create`.<br/>If document id is specified, it defaults to `index`.<br/>Otherwise, it defaults to `create`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
-	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>
 	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
-	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// <para>If `true`, Elasticsearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.<br/>Valid values: `true`, `false`, `wait_for`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type: `external`, `external_gte`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>When true, requires destination to be an alias. Default is false</para>
+	/// <para>If `true`, the destination must be an index alias.</para>
 	/// </summary>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a document in an index.</para>
+/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 /// </summary>
 public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>
 {
@@ -112,74 +112,74 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	public TDocument Document { get; set; }
 
 	/// <summary>
-	/// <para>only perform the index operation if the last operation that has changed the document has the specified primary term</para>
+	/// <para>Only perform the operation if the document has this primary term.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
 	/// <summary>
-	/// <para>only perform the index operation if the last operation that has changed the document has the specified sequence number</para>
+	/// <para>Only perform the operation if the document has this sequence number.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
 	/// <summary>
-	/// <para>Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID</para>
+	/// <para>Set to create to only index the document if it does not already exist (put if absent).<br/>If a document with the specified `_id` already exists, the indexing operation will fail.<br/>Same as using the `<index>/_create` endpoint.<br/>Valid values: `index`, `create`.<br/>If document id is specified, it defaults to `index`.<br/>Otherwise, it defaults to `create`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
-	/// <para>The pipeline id to preprocess incoming documents with</para>
+	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
 	/// <summary>
-	/// <para>If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.</para>
+	/// <para>If `true`, Elasticsearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.<br/>Valid values: `true`, `false`, `wait_for`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>Explicit version number for concurrency control.<br/>The specified version must match the current version of the document for the request to succeed.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type: `external`, `external_gte`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 
 	/// <summary>
-	/// <para>Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
-	/// <para>When true, requires destination to be an alias. Default is false</para>
+	/// <para>If `true`, the destination must be an index alias.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a document in an index.</para>
+/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 /// </summary>
 public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptor<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 {

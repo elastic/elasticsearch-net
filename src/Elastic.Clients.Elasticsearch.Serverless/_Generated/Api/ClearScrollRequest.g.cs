@@ -34,7 +34,7 @@ public sealed class ClearScrollRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Explicitly clears the search context for a scroll.</para>
+/// <para>Clears the search context and results for a scrolling search.</para>
 /// </summary>
 public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequestParameters>
 {
@@ -46,12 +46,15 @@ public sealed partial class ClearScrollRequest : PlainRequest<ClearScrollRequest
 
 	internal override string OperationName => "clear_scroll";
 
+	/// <summary>
+	/// <para>Scroll IDs to clear.<br/>To clear all scroll IDs, use `_all`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("scroll_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.ScrollIds? ScrollId { get; set; }
 }
 
 /// <summary>
-/// <para>Explicitly clears the search context for a scroll.</para>
+/// <para>Clears the search context and results for a scrolling search.</para>
 /// </summary>
 public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<ClearScrollRequestDescriptor, ClearScrollRequestParameters>
 {
@@ -71,6 +74,9 @@ public sealed partial class ClearScrollRequestDescriptor : RequestDescriptor<Cle
 
 	private Elastic.Clients.Elasticsearch.Serverless.ScrollIds? ScrollIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Scroll IDs to clear.<br/>To clear all scroll IDs, use `_all`.</para>
+	/// </summary>
 	public ClearScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.Serverless.ScrollIds? scrollId)
 	{
 		ScrollIdValue = scrollId;

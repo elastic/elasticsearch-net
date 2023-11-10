@@ -25,9 +25,6 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-/// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// </summary>
 public sealed partial class PutDataLifecycleResponse : ElasticsearchResponse
 {
 	/// <summary>

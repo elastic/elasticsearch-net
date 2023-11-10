@@ -25,12 +25,9 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-/// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// </summary>
 public sealed partial class ExplainDataLifecycleResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("indices")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataLifecycleExplain))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataLifecycleExplain> Indices { get; init; }
+	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleExplain))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleExplain> Indices { get; init; }
 }

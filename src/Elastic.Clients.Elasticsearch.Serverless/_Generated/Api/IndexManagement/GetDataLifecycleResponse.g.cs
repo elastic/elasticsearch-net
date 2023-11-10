@@ -25,11 +25,8 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-/// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// </summary>
 public sealed partial class GetDataLifecycleResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("data_streams")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle> DataStreams { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamWithLifecycle> DataStreams { get; init; }
 }
