@@ -32,18 +32,18 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed class PutScriptRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
-/// <para>Creates or updates a script.</para>
+/// <para>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestParameters>
 {
@@ -64,22 +64,26 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 	internal override string OperationName => "put_script";
 
 	/// <summary>
-	/// <para>Specify timeout for connection to master</para>
+	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
-	/// <para>Explicit operation timeout</para>
+	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.StoredScript Script { get; set; }
 }
 
 /// <summary>
-/// <para>Creates or updates a script.</para>
+/// <para>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescriptor<PutScriptRequestDescriptor<TDocument>, PutScriptRequestParameters>
 {
@@ -124,6 +128,9 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	private StoredScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// </summary>
 	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.StoredScript script)
 	{
 		ScriptDescriptor = null;
@@ -172,7 +179,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Creates or updates a script.</para>
+/// <para>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutScriptRequestDescriptor, PutScriptRequestParameters>
 {
@@ -217,6 +224,9 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	private StoredScriptDescriptor ScriptDescriptor { get; set; }
 	private Action<StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Contains the script or search template, its parameters, and its language.</para>
+	/// </summary>
 	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.StoredScript script)
 	{
 		ScriptDescriptor = null;

@@ -36,7 +36,7 @@ public sealed partial class IndexTemplateSummary
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? Aliases { get; init; }
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataLifecycleWithRollover? Lifecycle { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
 
 	/// <summary>
 	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>

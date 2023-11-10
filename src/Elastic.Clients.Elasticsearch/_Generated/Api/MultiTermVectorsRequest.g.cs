@@ -32,57 +32,57 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class MultiTermVectorsRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
 	/// </summary>
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
 	/// <summary>
-	/// <para>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term offsets.</para>
 	/// </summary>
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
 	/// <summary>
-	/// <para>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term payloads.</para>
 	/// </summary>
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
 	/// <summary>
-	/// <para>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term positions.</para>
 	/// </summary>
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specifies if requests are real-time as opposed to near-real-time (default: true).</para>
+	/// <para>If true, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Specific routing value. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If true, the response includes term frequency and document frequency.</para>
 	/// </summary>
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>If `true`, returns the document version as part of a hit.</para>
 	/// </summary>
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
@@ -109,72 +109,80 @@ public sealed partial class MultiTermVectorsRequest : PlainRequest<MultiTermVect
 	internal override string OperationName => "mtermvectors";
 
 	/// <summary>
-	/// <para>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
 
 	/// <summary>
-	/// <para>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
 
 	/// <summary>
-	/// <para>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term offsets.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
 
 	/// <summary>
-	/// <para>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term payloads.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
 
 	/// <summary>
-	/// <para>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If `true`, the response includes term positions.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specifies if requests are real-time as opposed to near-real-time (default: true).</para>
+	/// <para>If true, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
 	/// <summary>
-	/// <para>Specific routing value. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs".</para>
+	/// <para>If true, the response includes term frequency and document frequency.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
 
 	/// <summary>
-	/// <para>Explicit version number for concurrency control</para>
+	/// <para>If `true`, returns the document version as part of a hit.</para>
 	/// </summary>
 	[JsonIgnore]
 	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
 
 	/// <summary>
-	/// <para>Specific version type</para>
+	/// <para>Specific version type.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
+
+	/// <summary>
+	/// <para>Array of existing or artificial documents.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("docs")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? Docs { get; set; }
+
+	/// <summary>
+	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ids")]
 	public ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 }
@@ -222,6 +230,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] DocsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of existing or artificial documents.</para>
+	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
 	{
 		DocsDescriptor = null;
@@ -258,6 +269,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// </summary>
 	public MultiTermVectorsRequestDescriptor<TDocument> Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
 	{
 		IdsValue = ids;
@@ -351,6 +365,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] DocsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
 
+	/// <summary>
+	/// <para>Array of existing or artificial documents.</para>
+	/// </summary>
 	public MultiTermVectorsRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Core.Mtermvectors.MultiTermVectorsOperation>? docs)
 	{
 		DocsDescriptor = null;
@@ -387,6 +404,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Simplified syntax to specify documents by their ID if they're in the same index.</para>
+	/// </summary>
 	public MultiTermVectorsRequestDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
 	{
 		IdsValue = ids;

@@ -43,8 +43,7 @@ public sealed class ExplainDataLifecycleRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDataLifecycleRequestParameters>
 {
@@ -74,8 +73,7 @@ public sealed partial class ExplainDataLifecycleRequest : PlainRequest<ExplainDa
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleRequestParameters>
 {
@@ -112,8 +110,7 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// <para>Retrieves information about the index's current DLM lifecycle, such as any potential encountered error, time since creation etc.</para>
+/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 /// </summary>
 public sealed partial class ExplainDataLifecycleRequestDescriptor : RequestDescriptor<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleRequestParameters>
 {

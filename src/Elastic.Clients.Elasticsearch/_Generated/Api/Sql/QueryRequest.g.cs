@@ -57,6 +57,10 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
+
+	/// <summary>
+	/// <para>Cursor used to retrieve a set of paginated results.<br/>If you specify a cursor, the API only uses the `columnar` and `time_zone` request body parameters.<br/>It ignores other request body parameters.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; set; }
 
@@ -67,13 +71,13 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	public int? FetchSize { get; set; }
 
 	/// <summary>
-	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>SQL query to execute</para>
+	/// <para>SQL query to run.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
@@ -91,7 +95,7 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
 
 	/// <summary>
-	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// <para>ISO-8601 time zone ID for the search.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
@@ -178,7 +182,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
@@ -222,6 +226,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Cursor used to retrieve a set of paginated results.<br/>If you specify a cursor, the API only uses the `columnar` and `time_zone` request body parameters.<br/>It ignores other request body parameters.</para>
+	/// </summary>
 	public QueryRequestDescriptor<TDocument> Cursor(string? cursor)
 	{
 		CursorValue = cursor;
@@ -292,7 +299,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>SQL query to execute</para>
+	/// <para>SQL query to run.</para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> Query(string? query)
 	{
@@ -319,7 +326,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	/// <summary>
-	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// <para>ISO-8601 time zone ID for the search.</para>
 	/// </summary>
 	public QueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
 	{
@@ -488,7 +495,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	/// <summary>
-	/// <para>Optional Elasticsearch query DSL for additional filtering.</para>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
 	/// </summary>
 	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
 	{
@@ -532,6 +539,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Cursor used to retrieve a set of paginated results.<br/>If you specify a cursor, the API only uses the `columnar` and `time_zone` request body parameters.<br/>It ignores other request body parameters.</para>
+	/// </summary>
 	public QueryRequestDescriptor Cursor(string? cursor)
 	{
 		CursorValue = cursor;
@@ -602,7 +612,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	}
 
 	/// <summary>
-	/// <para>SQL query to execute</para>
+	/// <para>SQL query to run.</para>
 	/// </summary>
 	public QueryRequestDescriptor Query(string? query)
 	{
@@ -629,7 +639,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	}
 
 	/// <summary>
-	/// <para>Time-zone in ISO 8601 used for executing the query on the server. More information available here.</para>
+	/// <para>ISO-8601 time zone ID for the search.</para>
 	/// </summary>
 	public QueryRequestDescriptor TimeZone(string? timeZone)
 	{

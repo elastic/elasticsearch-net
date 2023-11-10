@@ -32,27 +32,27 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 public sealed class OpenPointInTimeRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Specific the time to live for the point in time</para>
+	/// <para>Extends the time to live of the corresponding point in time.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
@@ -75,31 +75,31 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 	internal override string OperationName => "open_point_in_time";
 
 	/// <summary>
-	/// <para>Specific the time to live for the point in time</para>
+	/// <para>Extends the time to live of the corresponding point in time.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
-	/// <para>Whether specified concrete indices should be ignored when unavailable (missing or closed)</para>
+	/// <para>If `false`, the request returns an error if it targets a missing or closed index.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
-	/// <para>Specify the node or shard the operation should be performed on (default: random)</para>
+	/// <para>Specifies the node or shard the operation should be performed on.<br/>Random by default.</para>
 	/// </summary>
 	[JsonIgnore]
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Specific routing value</para>
+	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
+	/// <para>Type of index that wildcard patterns can match.<br/>If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.<br/>Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
 	/// </summary>
 	[JsonIgnore]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }

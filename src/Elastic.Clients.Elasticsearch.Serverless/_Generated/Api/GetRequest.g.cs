@@ -37,7 +37,7 @@ public sealed class GetRequestParameters : RequestParameters
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Boolean) If true, the request is real-time as opposed to near-real-time.</para>
+	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
@@ -67,7 +67,7 @@ public sealed class GetRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of stored fields to return in the response</para>
+	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to false.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
@@ -106,7 +106,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
-	/// <para>Boolean) If true, the request is real-time as opposed to near-real-time.</para>
+	/// <para>If `true`, the request is real-time as opposed to near-real-time.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
@@ -142,7 +142,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
-	/// <para>A comma-separated list of stored fields to return in the response</para>
+	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to false.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }

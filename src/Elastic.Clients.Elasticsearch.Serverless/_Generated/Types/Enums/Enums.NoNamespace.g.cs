@@ -93,8 +93,14 @@ internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearch
 [JsonConverter(typeof(ConflictsConverter))]
 public enum Conflicts
 {
+	/// <summary>
+	/// <para>Continue reindexing even if there are conflicts.</para>
+	/// </summary>
 	[EnumMember(Value = "proceed")]
 	Proceed,
+	/// <summary>
+	/// <para>Stop reindexing if there are conflicts.</para>
+	/// </summary>
 	[EnumMember(Value = "abort")]
 	Abort
 }
@@ -829,6 +835,131 @@ internal sealed class LevelConverter : JsonConverter<Level>
 	}
 }
 
+[JsonConverter(typeof(NodeRoleConverter))]
+public enum NodeRole
+{
+	[EnumMember(Value = "voting_only")]
+	VotingOnly,
+	[EnumMember(Value = "transform")]
+	Transform,
+	[EnumMember(Value = "remote_cluster_client")]
+	RemoteClusterClient,
+	[EnumMember(Value = "ml")]
+	Ml,
+	[EnumMember(Value = "master")]
+	Master,
+	[EnumMember(Value = "ingest")]
+	Ingest,
+	[EnumMember(Value = "data_warm")]
+	DataWarm,
+	[EnumMember(Value = "data_hot")]
+	DataHot,
+	[EnumMember(Value = "data_frozen")]
+	DataFrozen,
+	[EnumMember(Value = "data_content")]
+	DataContent,
+	[EnumMember(Value = "data_cold")]
+	DataCold,
+	[EnumMember(Value = "data")]
+	Data,
+	[EnumMember(Value = "coordinating_only")]
+	CoordinatingOnly,
+	[EnumMember(Value = "client")]
+	Client
+}
+
+internal sealed class NodeRoleConverter : JsonConverter<NodeRole>
+{
+	public override NodeRole Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "voting_only":
+				return NodeRole.VotingOnly;
+			case "transform":
+				return NodeRole.Transform;
+			case "remote_cluster_client":
+				return NodeRole.RemoteClusterClient;
+			case "ml":
+				return NodeRole.Ml;
+			case "master":
+				return NodeRole.Master;
+			case "ingest":
+				return NodeRole.Ingest;
+			case "data_warm":
+				return NodeRole.DataWarm;
+			case "data_hot":
+				return NodeRole.DataHot;
+			case "data_frozen":
+				return NodeRole.DataFrozen;
+			case "data_content":
+				return NodeRole.DataContent;
+			case "data_cold":
+				return NodeRole.DataCold;
+			case "data":
+				return NodeRole.Data;
+			case "coordinating_only":
+				return NodeRole.CoordinatingOnly;
+			case "client":
+				return NodeRole.Client;
+		}
+
+		ThrowHelper.ThrowJsonException(); return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, NodeRole value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case NodeRole.VotingOnly:
+				writer.WriteStringValue("voting_only");
+				return;
+			case NodeRole.Transform:
+				writer.WriteStringValue("transform");
+				return;
+			case NodeRole.RemoteClusterClient:
+				writer.WriteStringValue("remote_cluster_client");
+				return;
+			case NodeRole.Ml:
+				writer.WriteStringValue("ml");
+				return;
+			case NodeRole.Master:
+				writer.WriteStringValue("master");
+				return;
+			case NodeRole.Ingest:
+				writer.WriteStringValue("ingest");
+				return;
+			case NodeRole.DataWarm:
+				writer.WriteStringValue("data_warm");
+				return;
+			case NodeRole.DataHot:
+				writer.WriteStringValue("data_hot");
+				return;
+			case NodeRole.DataFrozen:
+				writer.WriteStringValue("data_frozen");
+				return;
+			case NodeRole.DataContent:
+				writer.WriteStringValue("data_content");
+				return;
+			case NodeRole.DataCold:
+				writer.WriteStringValue("data_cold");
+				return;
+			case NodeRole.Data:
+				writer.WriteStringValue("data");
+				return;
+			case NodeRole.CoordinatingOnly:
+				writer.WriteStringValue("coordinating_only");
+				return;
+			case NodeRole.Client:
+				writer.WriteStringValue("client");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(NormalizationConverter))]
 public enum Normalization
 {
@@ -1239,10 +1370,19 @@ internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 [JsonConverter(typeof(SuggestModeConverter))]
 public enum SuggestMode
 {
+	/// <summary>
+	/// <para>Only suggest terms that occur in more docs on the shard than the original term.</para>
+	/// </summary>
 	[EnumMember(Value = "popular")]
 	Popular,
+	/// <summary>
+	/// <para>Only generate suggestions for terms that are not in the shard.</para>
+	/// </summary>
 	[EnumMember(Value = "missing")]
 	Missing,
+	/// <summary>
+	/// <para>Suggest any matching suggestions based on terms in the suggest text.</para>
+	/// </summary>
 	[EnumMember(Value = "always")]
 	Always
 }
@@ -1363,12 +1503,21 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 [JsonConverter(typeof(VersionTypeConverter))]
 public enum VersionType
 {
+	/// <summary>
+	/// <para>Use internal versioning that starts at 1 and increments with each update or delete.</para>
+	/// </summary>
 	[EnumMember(Value = "internal")]
 	Internal,
 	[EnumMember(Value = "force")]
 	Force,
+	/// <summary>
+	/// <para>Only index the document if the given version is equal or higher than the version of the stored document or if there is no existing document.<br/>Note: the external_gte version type is meant for special use cases and should be used with care.<br/>If used incorrectly, it can result in loss of data.</para>
+	/// </summary>
 	[EnumMember(Value = "external_gte")]
 	ExternalGte,
+	/// <summary>
+	/// <para>Only index the document if the given version is strictly higher than the version of the stored document or if there is no existing document.</para>
+	/// </summary>
 	[EnumMember(Value = "external")]
 	External
 }

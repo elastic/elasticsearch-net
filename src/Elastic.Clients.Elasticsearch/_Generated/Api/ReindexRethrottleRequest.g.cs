@@ -32,13 +32,13 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed class ReindexRethrottleRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</para>
+	/// <para>The throttle for this request in sub-requests per second.</para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Reindex operation.</para>
+/// <para>Copies documents from a source to a destination.</para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethrottleRequestParameters>
 {
@@ -55,14 +55,14 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 	internal override string OperationName => "reindex_rethrottle";
 
 	/// <summary>
-	/// <para>The throttle to set on this request in floating sub-requests per second. -1 means set no throttle.</para>
+	/// <para>The throttle for this request in sub-requests per second.</para>
 	/// </summary>
 	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
 /// <summary>
-/// <para>Changes the number of requests per second for a particular Reindex operation.</para>
+/// <para>Copies documents from a source to a destination.</para>
 /// </summary>
 public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescriptor<ReindexRethrottleRequestDescriptor, ReindexRethrottleRequestParameters>
 {

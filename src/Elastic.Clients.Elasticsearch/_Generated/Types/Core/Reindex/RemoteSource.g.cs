@@ -29,16 +29,39 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
 public sealed partial class RemoteSource
 {
+	/// <summary>
+	/// <para>The remote connection timeout.<br/>Defaults to 30 seconds.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("connect_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? ConnectTimeout { get; set; }
+
+	/// <summary>
+	/// <para>An object containing the headers of the request.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("headers")]
 	public IDictionary<string, string>? Headers { get; set; }
+
+	/// <summary>
+	/// <para>The URL for the remote instance of Elasticsearch that you want to index from.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("host")]
 	public string Host { get; set; }
+
+	/// <summary>
+	/// <para>The password to use for authentication with the remote host.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
+
+	/// <summary>
+	/// <para>The remote socket read timeout. Defaults to 30 seconds.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("socket_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? SocketTimeout { get; set; }
+
+	/// <summary>
+	/// <para>The username to use for authentication with the remote host.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
@@ -58,36 +81,54 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 	private Elastic.Clients.Elasticsearch.Duration? SocketTimeoutValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
 
+	/// <summary>
+	/// <para>The remote connection timeout.<br/>Defaults to 30 seconds.</para>
+	/// </summary>
 	public RemoteSourceDescriptor ConnectTimeout(Elastic.Clients.Elasticsearch.Duration? connectTimeout)
 	{
 		ConnectTimeoutValue = connectTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>An object containing the headers of the request.</para>
+	/// </summary>
 	public RemoteSourceDescriptor Headers(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		HeadersValue = selector?.Invoke(new FluentDictionary<string, string>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The URL for the remote instance of Elasticsearch that you want to index from.</para>
+	/// </summary>
 	public RemoteSourceDescriptor Host(string host)
 	{
 		HostValue = host;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The password to use for authentication with the remote host.</para>
+	/// </summary>
 	public RemoteSourceDescriptor Password(string? password)
 	{
 		PasswordValue = password;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The remote socket read timeout. Defaults to 30 seconds.</para>
+	/// </summary>
 	public RemoteSourceDescriptor SocketTimeout(Elastic.Clients.Elasticsearch.Duration? socketTimeout)
 	{
 		SocketTimeoutValue = socketTimeout;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The username to use for authentication with the remote host.</para>
+	/// </summary>
 	public RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
 	{
 		UsernameValue = username;

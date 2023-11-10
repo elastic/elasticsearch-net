@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class LaplaceSmoothingModel
 {
+	/// <summary>
+	/// <para>A constant that is added to all counts to balance weights.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("alpha")]
 	public double Alpha { get; set; }
 
@@ -45,6 +48,9 @@ public sealed partial class LaplaceSmoothingModelDescriptor : SerializableDescri
 
 	private double AlphaValue { get; set; }
 
+	/// <summary>
+	/// <para>A constant that is added to all counts to balance weights.</para>
+	/// </summary>
 	public LaplaceSmoothingModelDescriptor Alpha(double alpha)
 	{
 		AlphaValue = alpha;
