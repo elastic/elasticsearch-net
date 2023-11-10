@@ -12,11 +12,11 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serialization;
 #endif
 
-internal sealed class StringifiedLongConverter : JsonConverter<long?>
+internal sealed class StringifiedLongConverter : JsonConverter<long>
 {
-	public override long? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedLong(ref reader);
+	public override long Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedLong(ref reader);
 
-	public override void Write(Utf8JsonWriter writer, long? value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+	public override void Write(Utf8JsonWriter writer, long value, JsonSerializerOptions options) => writer.WriteNumberValue(value);
 
 	public static long ReadStringifiedLong(ref Utf8JsonReader reader)
 	{
@@ -39,11 +39,11 @@ internal sealed class StringifiedLongConverter : JsonConverter<long?>
 	}
 }
 
-internal sealed class StringifiedIntegerConverter : JsonConverter<int?>
+internal sealed class StringifiedIntegerConverter : JsonConverter<int>
 {
-	public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedInteger(ref reader);
+	public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedInteger(ref reader);
 
-	public override void Write(Utf8JsonWriter writer, int? value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+	public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options) => writer.WriteNumberValue(value);
 
 	public static int ReadStringifiedInteger(ref Utf8JsonReader reader)
 	{
@@ -66,11 +66,11 @@ internal sealed class StringifiedIntegerConverter : JsonConverter<int?>
 	}
 }
 
-internal sealed class StringifiedBoolConverter : JsonConverter<bool?>
+internal sealed class StringifiedBoolConverter : JsonConverter<bool>
 {
-	public override bool? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedBool(ref reader);
+	public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => ReadStringifiedBool(ref reader);
 
-	public override void Write(Utf8JsonWriter writer, bool? value, JsonSerializerOptions options) => writer.WriteBooleanValue(value.Value);
+	public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options) => writer.WriteBooleanValue(value);
 
 	public static bool ReadStringifiedBool(ref Utf8JsonReader reader)
 	{
