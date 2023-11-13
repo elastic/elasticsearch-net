@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Elastic.Transport;
 
 #if ELASTICSEARCH_SERVERLESS
@@ -42,7 +43,11 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 					new IsADictionaryConverterFactory(),
 					new ResponseItemConverterFactory(),
 					new DictionaryResponseConverterFactory(settings),
-					new UnionConverter()
+					new UnionConverter(),
+					// TODO: Remove after https://github.com/elastic/elasticsearch-specification/issues/2238 is implemented
+					new StringifiedLongConverter(),
+					new StringifiedIntegerConverter(),
+					new StringifiedBoolConverter()
 				},
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 			NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals
