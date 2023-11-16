@@ -1,3 +1,14 @@
 steps:
-  - label: ":dotnet: Greetings"
-    command: "echo 'Hello, world!'"
+  - label: ":dotnet: Elasticsearch-Net {{ matrix.suite }}"
+    agents:
+      provider: "gcp"
+    env:
+      TEST_SUITE: "{{ matrix.suite }}"
+      STACK_VERSION: master-SNAPSHOT
+      DOTNET_VERSION: 6.0.403
+    matrix:
+      setup:
+        suite:
+          - "free"
+          - "platinum"
+    command: ./.buildkite/run-tests
