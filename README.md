@@ -1,4 +1,13 @@
-Repository for **Elastic.Clients.Elasticsearch** the official .NET client for [Elasticsearch](https://github.com/elastic/elasticsearch). *Older branches include both previous clients, **NEST** and **Elasticsearch.Net**.*
+# Elasticsearch .NET Client
+
+Repository for **Elastic.Clients.Elasticsearch** the official .NET client for
+[Elasticsearch](https://github.com/elastic/elasticsearch).
+*Older branches include both previous clients, **NEST** and **Elasticsearch.Net**.*
+
+**[Download the latest version of Elasticsearch](https://www.elastic.co/downloads/elasticsearch)**
+or
+**[sign-up](https://cloud.elastic.co/registration?elektra=en-ess-sign-up-page)**
+**for a free trial of Elastic Cloud**.
 
 The .NET client for Elasticsearch provides strongly typed requests and responses
  for Elasticsearch APIs. It delegates protocol handling to the 
