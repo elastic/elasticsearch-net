@@ -89,6 +89,8 @@ public class ApiVersionMetaHeaderProducer : MetaHeaderProducer
 			return;
 		}
 
-		_apiVersion = $"{meta.Substring(0, 4)}-{meta.Substring(4, 2)}-{meta.Substring(2, 2)}";
+		// Metadata format: 20231031
+
+		_apiVersion = $"{meta.Substring(0, 4)}-{meta.Substring(4, 2)}-{meta.Substring(6, 2)}";
 	}
 }
