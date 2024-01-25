@@ -27,7 +27,7 @@ public sealed class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Field
 
 	internal Fields() => ListOfFields = new List<Field>();
 
-	internal Fields(IEnumerable<Field> fieldNames) => ListOfFields = fieldNames.ToList();
+	internal Fields(IEnumerable<Field> fieldNames) => ListOfFields = new List<Field>(fieldNames);
 
 	private string DebugDisplay =>
 		$"Count: {ListOfFields.Count} [" +
