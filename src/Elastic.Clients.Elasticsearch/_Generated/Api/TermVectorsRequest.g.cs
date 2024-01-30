@@ -232,8 +232,8 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 
 	internal override string OperationName => "termvectors";
 
-	public TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public TermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
+	public TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public TermVectorsRequestDescriptor<TDocument> Offsets(bool? offsets = true) => Qs("offsets", offsets);
 	public TermVectorsRequestDescriptor<TDocument> Payloads(bool? payloads = true) => Qs("payloads", payloads);
 	public TermVectorsRequestDescriptor<TDocument> Positions(bool? positions = true) => Qs("positions", positions);

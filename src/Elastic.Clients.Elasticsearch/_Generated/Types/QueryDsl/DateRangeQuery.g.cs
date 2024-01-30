@@ -42,12 +42,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -90,6 +84,12 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 					continue;
 				}
 
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "relation")
 				{
 					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
@@ -123,12 +123,6 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -169,6 +163,12 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 			{
 				writer.WritePropertyName("lte");
 				JsonSerializer.Serialize(writer, value.Lte, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			if (value.Relation is not null)
@@ -272,7 +272,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
@@ -281,15 +280,10 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LteValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
-
-	public DateRangeQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public DateRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -360,6 +354,12 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	public DateRangeQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	public DateRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;
@@ -388,12 +388,6 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -436,6 +430,12 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, LteValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (RelationValue is not null)
 		{
 			writer.WritePropertyName("relation");
@@ -474,7 +474,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? FormatValue { get; set; }
@@ -483,15 +482,10 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	private Elastic.Clients.Elasticsearch.DateMath? GteValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LtValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? LteValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.DateMath? ToValue { get; set; }
-
-	public DateRangeQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public DateRangeQueryDescriptor Boost(float? boost)
 	{
@@ -568,6 +562,12 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
+	public DateRangeQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	public DateRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;
@@ -596,12 +596,6 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -642,6 +636,12 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		{
 			writer.WritePropertyName("lte");
 			JsonSerializer.Serialize(writer, LteValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RelationValue is not null)

@@ -53,15 +53,9 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private string QueryValue { get; set; }
-
-	public WrapperQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public WrapperQueryDescriptor Boost(float? boost)
 	{
@@ -78,15 +72,15 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 		return Self;
 	}
 
+	public WrapperQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -95,6 +89,12 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 	}
 }

@@ -51,8 +51,8 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.Analysis.Analyzers? AnalyzersValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFiltersValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFiltersValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.Normalizers? NormalizersValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFiltersValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.Tokenizers? TokenizersValue { get; set; }
 
 	public IndexSettingsAnalysisDescriptor Analyzers(Elastic.Clients.Elasticsearch.Analysis.Analyzers? analyzers)
@@ -95,26 +95,6 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor TokenFilters(Elastic.Clients.Elasticsearch.Analysis.TokenFilters? tokenFilters)
-	{
-		TokenFiltersValue = tokenFilters;
-		return Self;
-	}
-
-	public IndexSettingsAnalysisDescriptor TokenFilters(Analysis.TokenFiltersDescriptor descriptor)
-	{
-		TokenFiltersValue = descriptor.PromisedValue;
-		return Self;
-	}
-
-	public IndexSettingsAnalysisDescriptor TokenFilters(Action<Analysis.TokenFiltersDescriptor> configure)
-	{
-		var descriptor = new Analysis.TokenFiltersDescriptor();
-		configure?.Invoke(descriptor);
-		TokenFiltersValue = descriptor.PromisedValue;
-		return Self;
-	}
-
 	public IndexSettingsAnalysisDescriptor Normalizers(Elastic.Clients.Elasticsearch.Analysis.Normalizers? normalizers)
 	{
 		NormalizersValue = normalizers;
@@ -132,6 +112,26 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		var descriptor = new Analysis.NormalizersDescriptor();
 		configure?.Invoke(descriptor);
 		NormalizersValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor TokenFilters(Elastic.Clients.Elasticsearch.Analysis.TokenFilters? tokenFilters)
+	{
+		TokenFiltersValue = tokenFilters;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor TokenFilters(Analysis.TokenFiltersDescriptor descriptor)
+	{
+		TokenFiltersValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public IndexSettingsAnalysisDescriptor TokenFilters(Action<Analysis.TokenFiltersDescriptor> configure)
+	{
+		var descriptor = new Analysis.TokenFiltersDescriptor();
+		configure?.Invoke(descriptor);
+		TokenFiltersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
@@ -170,16 +170,16 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 			JsonSerializer.Serialize(writer, CharFiltersValue, options);
 		}
 
-		if (TokenFiltersValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, TokenFiltersValue, options);
-		}
-
 		if (NormalizersValue is not null)
 		{
 			writer.WritePropertyName("normalizer");
 			JsonSerializer.Serialize(writer, NormalizersValue, options);
+		}
+
+		if (TokenFiltersValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, TokenFiltersValue, options);
 		}
 
 		if (TokenizersValue is not null)

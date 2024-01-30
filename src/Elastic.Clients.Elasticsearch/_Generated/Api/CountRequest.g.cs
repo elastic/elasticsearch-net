@@ -87,6 +87,11 @@ public sealed class CountRequestParameters : RequestParameters
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -95,11 +100,6 @@ public sealed class CountRequestParameters : RequestParameters
 	/// <para>Maximum number of documents to collect for each shard.<br/>If a query reaches this limit, Elasticsearch terminates the query early.<br/>Elasticsearch collects documents before sorting.</para>
 	/// </summary>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
 /// <summary>
@@ -190,6 +190,12 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -200,12 +206,6 @@ public partial class CountRequest : PlainRequest<CountRequestParameters>
 	/// </summary>
 	[JsonIgnore]
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	[JsonIgnore]
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -238,8 +238,8 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	internal override string OperationName => "count";
 
 	public CountRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public CountRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
 	public CountRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -248,7 +248,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	public CountRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public CountRequestDescriptor<TDocument> MinScore(double? minScore) => Qs("min_score", minScore);
 	public CountRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public CountRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+	public CountRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public CountRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public CountRequestDescriptor<TDocument> TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 
@@ -336,8 +336,8 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	internal override string OperationName => "count";
 
 	public CountRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public CountRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public CountRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public CountRequestDescriptor Df(string? df) => Qs("df", df);
 	public CountRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -346,7 +346,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	public CountRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public CountRequestDescriptor MinScore(double? minScore) => Qs("min_score", minScore);
 	public CountRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public CountRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+	public CountRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public CountRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 	public CountRequestDescriptor TerminateAfter(long? terminateAfter) => Qs("terminate_after", terminateAfter);
 

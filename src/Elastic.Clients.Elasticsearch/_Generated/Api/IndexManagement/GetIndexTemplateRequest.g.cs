@@ -32,24 +32,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed class GetIndexTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
-	/// </summary>
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-	/// <summary>
 	/// <para>If true, returns settings in flat format.</para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
 	/// <para>If true, returns all relevant default configurations for the index template.</para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	/// <summary>
+	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// </summary>
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -74,28 +74,28 @@ public sealed partial class GetIndexTemplateRequest : PlainRequest<GetIndexTempl
 	internal override string OperationName => "indices.get_index_template";
 
 	/// <summary>
-	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-	/// <summary>
 	/// <para>If true, returns settings in flat format.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
 	/// <para>If true, returns all relevant default configurations for the index template.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
+
+	/// <summary>
+	/// <para>If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>

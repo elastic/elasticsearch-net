@@ -47,14 +47,8 @@ public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptor<Ma
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
-
-	public MatchNoneQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public MatchNoneQueryDescriptor Boost(float? boost)
 	{
@@ -62,19 +56,25 @@ public sealed partial class MatchNoneQueryDescriptor : SerializableDescriptor<Ma
 		return Self;
 	}
 
+	public MatchNoneQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WriteEndObject();

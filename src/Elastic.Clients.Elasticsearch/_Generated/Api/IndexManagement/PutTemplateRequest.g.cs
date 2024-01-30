@@ -102,7 +102,8 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	/// <summary>
 	/// <para>Array of wildcard expressions used to match the names<br/>of indices during creation.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_patterns"), SingleOrManyCollectionConverter(typeof(string))]
+	[JsonInclude, JsonPropertyName("index_patterns")]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? IndexPatterns { get; set; }
 
 	/// <summary>

@@ -136,7 +136,8 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// <summary>
 	/// <para>Specify dynamic templates for the mapping.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dynamic_templates"), SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>))]
+	[JsonInclude, JsonPropertyName("dynamic_templates")]
+	[SingleOrManyCollectionConverter(typeof(IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>))]
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	/// <summary>
@@ -171,16 +172,16 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? Routing { get; set; }
 
 	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
-	public Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? Source { get; set; }
-
-	/// <summary>
 	/// <para>Mapping of runtime fields for the index.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? Runtime { get; set; }
+
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_source")]
+	public Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? Source { get; set; }
 }
 
 /// <summary>
@@ -219,113 +220,23 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? RoutingValue { get; set; }
-	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? SourceValue { get; set; }
-	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? FieldNamesValue { get; set; }
+	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private bool? NumericDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? RoutingValue { get; set; }
+	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeValue { get; set; }
-
-	/// <summary>
-	/// <para>Control whether field names are enabled for the index.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
-	{
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesValue = fieldNames;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
-	{
-		FieldNamesValue = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
-	{
-		FieldNamesValue = null;
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Enable making a routing value required on indexed documents.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
-	{
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = null;
-		RoutingValue = routing;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> Routing(Mapping.RoutingFieldDescriptor descriptor)
-	{
-		RoutingValue = null;
-		RoutingDescriptorAction = null;
-		RoutingDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> Routing(Action<Mapping.RoutingFieldDescriptor> configure)
-	{
-		RoutingValue = null;
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
-	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> Source(Mapping.SourceFieldDescriptor descriptor)
-	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor<TDocument> Source(Action<Mapping.SourceFieldDescriptor> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? SourceValue { get; set; }
+	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Controls whether dynamic date detection is enabled.</para>
@@ -360,6 +271,42 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Control whether field names are enabled for the index.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
+	{
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesValue = fieldNames;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -405,6 +352,33 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	}
 
 	/// <summary>
+	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
+	{
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = null;
+		RoutingValue = routing;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Routing(Mapping.RoutingFieldDescriptor descriptor)
+	{
+		RoutingValue = null;
+		RoutingDescriptorAction = null;
+		RoutingDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Routing(Action<Mapping.RoutingFieldDescriptor> configure)
+	{
+		RoutingValue = null;
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Mapping of runtime fields for the index.</para>
 	/// </summary>
 	public PutMappingRequestDescriptor<TDocument> Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
@@ -413,63 +387,36 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Source(Mapping.SourceFieldDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor<TDocument> Source(Action<Mapping.SourceFieldDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldNamesDescriptor is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-		}
-		else if (FieldNamesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-		}
-		else if (FieldNamesValue is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (RoutingDescriptor is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-		}
-		else if (RoutingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-		}
-		else if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (DateDetectionValue.HasValue)
 		{
 			writer.WritePropertyName("date_detection");
@@ -494,6 +441,28 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
+		if (FieldNamesDescriptor is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
+		}
+		else if (FieldNamesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+		}
+		else if (FieldNamesValue is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (NumericDetectionValue.HasValue)
 		{
 			writer.WritePropertyName("numeric_detection");
@@ -506,10 +475,42 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (RoutingDescriptor is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+		}
+		else if (RoutingDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
+		}
+		else if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
 		if (RuntimeValue is not null)
 		{
 			writer.WritePropertyName("runtime");
 			JsonSerializer.Serialize(writer, RuntimeValue, options);
+		}
+
+		if (SourceDescriptor is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
+		}
+		else if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -552,113 +553,23 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? RoutingValue { get; set; }
-	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? SourceValue { get; set; }
-	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? FieldNamesValue { get; set; }
+	private Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+	private Action<Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private bool? NumericDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? RoutingValue { get; set; }
+	private Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+	private Action<Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeValue { get; set; }
-
-	/// <summary>
-	/// <para>Control whether field names are enabled for the index.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
-	{
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesValue = fieldNames;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
-	{
-		FieldNamesValue = null;
-		FieldNamesDescriptorAction = null;
-		FieldNamesDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
-	{
-		FieldNamesValue = null;
-		FieldNamesDescriptor = null;
-		FieldNamesDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Enable making a routing value required on indexed documents.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
-	{
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = null;
-		RoutingValue = routing;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
-	{
-		RoutingValue = null;
-		RoutingDescriptorAction = null;
-		RoutingDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
-	{
-		RoutingValue = null;
-		RoutingDescriptor = null;
-		RoutingDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Control whether the _source field is enabled on the index.</para>
-	/// </summary>
-	public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
-	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
-	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? SourceValue { get; set; }
+	private Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+	private Action<Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Controls whether dynamic date detection is enabled.</para>
@@ -693,6 +604,42 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	public PutMappingRequestDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Control whether field names are enabled for the index.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor FieldNames(Elastic.Clients.Elasticsearch.Serverless.Mapping.FieldNamesField? fieldNames)
+	{
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesValue = fieldNames;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor FieldNames(Mapping.FieldNamesFieldDescriptor descriptor)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptorAction = null;
+		FieldNamesDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor FieldNames(Action<Mapping.FieldNamesFieldDescriptor> configure)
+	{
+		FieldNamesValue = null;
+		FieldNamesDescriptor = null;
+		FieldNamesDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A mapping type can have custom meta data associated with it. These are<br/>not used at all by Elasticsearch, but can be used to store<br/>application-specific metadata.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
 		return Self;
 	}
 
@@ -738,6 +685,33 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	}
 
 	/// <summary>
+	/// <para>Enable making a routing value required on indexed documents.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Mapping.RoutingField? routing)
+	{
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = null;
+		RoutingValue = routing;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Routing(Mapping.RoutingFieldDescriptor descriptor)
+	{
+		RoutingValue = null;
+		RoutingDescriptorAction = null;
+		RoutingDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Routing(Action<Mapping.RoutingFieldDescriptor> configure)
+	{
+		RoutingValue = null;
+		RoutingDescriptor = null;
+		RoutingDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Mapping of runtime fields for the index.</para>
 	/// </summary>
 	public PutMappingRequestDescriptor Runtime(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
@@ -746,63 +720,36 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Control whether the _source field is enabled on the index.</para>
+	/// </summary>
+	public PutMappingRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Mapping.SourceField? source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Source(Mapping.SourceFieldDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public PutMappingRequestDescriptor Source(Action<Mapping.SourceFieldDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldNamesDescriptor is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
-		}
-		else if (FieldNamesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
-		}
-		else if (FieldNamesValue is not null)
-		{
-			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, FieldNamesValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("_meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (RoutingDescriptor is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
-		}
-		else if (RoutingDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
-		}
-		else if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
-		}
-		else if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (DateDetectionValue.HasValue)
 		{
 			writer.WritePropertyName("date_detection");
@@ -827,6 +774,28 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 			SingleOrManySerializationHelper.Serialize<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicTemplate>>(DynamicTemplatesValue, writer, options);
 		}
 
+		if (FieldNamesDescriptor is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesDescriptor, options);
+		}
+		else if (FieldNamesDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, new Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+		}
+		else if (FieldNamesValue is not null)
+		{
+			writer.WritePropertyName("_field_names");
+			JsonSerializer.Serialize(writer, FieldNamesValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("_meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (NumericDetectionValue.HasValue)
 		{
 			writer.WritePropertyName("numeric_detection");
@@ -839,10 +808,42 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
+		if (RoutingDescriptor is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingDescriptor, options);
+		}
+		else if (RoutingDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, new Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
+		}
+		else if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("_routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
 		if (RuntimeValue is not null)
 		{
 			writer.WritePropertyName("runtime");
 			JsonSerializer.Serialize(writer, RuntimeValue, options);
+		}
+
+		if (SourceDescriptor is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, new Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
+		}
+		else if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		writer.WriteEndObject();

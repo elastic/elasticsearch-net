@@ -44,14 +44,14 @@ public sealed class MultiSearchTemplateRequestParameters : RequestParameters
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <summary>
 	/// <para>If `true`, the response returns `hits.total` as an integer.<br/>If `false`, it returns `hits.total` as an object.</para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
+	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
 	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
@@ -93,16 +93,16 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
 	/// <summary>
-	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <summary>
 	/// <para>If `true`, the response returns `hits.total` as an integer.<br/>If `false`, it returns `hits.total` as an object.</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
+	/// <para>The type of the search operation.<br/>Available options: `query_then_fetch`, `dfs_query_then_fetch`.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
 	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>

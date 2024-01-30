@@ -66,7 +66,8 @@ public sealed partial class Source
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
+	[JsonInclude, JsonPropertyName("sort")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
@@ -78,9 +79,15 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
+	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
+	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
@@ -89,12 +96,15 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
-	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
-	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
+
+	/// <summary>
+	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
+	/// </summary>
+	public SourceDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Indices index)
+	{
+		IndexValue = index;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to reindex using the Query DSL.</para>
@@ -120,6 +130,48 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
+	/// </summary>
+	public SourceDescriptor<TDocument> Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
+	{
+		RemoteDescriptor = null;
+		RemoteDescriptorAction = null;
+		RemoteValue = remote;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Remote(RemoteSourceDescriptor descriptor)
+	{
+		RemoteValue = null;
+		RemoteDescriptorAction = null;
+		RemoteDescriptor = descriptor;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> Remote(Action<RemoteSourceDescriptor> configure)
+	{
+		RemoteValue = null;
+		RemoteDescriptor = null;
+		RemoteDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
+	/// </summary>
+	public SourceDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -195,60 +247,11 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
-	/// </summary>
-	public SourceDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Indices index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
-	/// </summary>
-	public SourceDescriptor<TDocument> Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
-	{
-		RemoteDescriptor = null;
-		RemoteDescriptorAction = null;
-		RemoteValue = remote;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Remote(RemoteSourceDescriptor descriptor)
-	{
-		RemoteValue = null;
-		RemoteDescriptorAction = null;
-		RemoteDescriptor = descriptor;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> Remote(Action<RemoteSourceDescriptor> configure)
-	{
-		RemoteValue = null;
-		RemoteDescriptor = null;
-		RemoteDescriptorAction = configure;
-		return Self;
-	}
-
-	public SourceDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
-	/// </summary>
-	public SourceDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		writer.WritePropertyName("index");
+		JsonSerializer.Serialize(writer, IndexValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -263,6 +266,34 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, QueryValue, options);
+		}
+
+		if (RemoteDescriptor is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, RemoteDescriptor, options);
+		}
+		else if (RemoteDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, new RemoteSourceDescriptor(RemoteDescriptorAction), options);
+		}
+		else if (RemoteValue is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, RemoteValue, options);
+		}
+
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SliceDescriptor is not null)
@@ -316,36 +347,6 @@ public sealed partial class SourceDescriptor<TDocument> : SerializableDescriptor
 			JsonSerializer.Serialize(writer, SourceFieldsValue, options);
 		}
 
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (RemoteDescriptor is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, RemoteDescriptor, options);
-		}
-		else if (RemoteDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, new RemoteSourceDescriptor(RemoteDescriptorAction), options);
-		}
-		else if (RemoteValue is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, RemoteValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -358,9 +359,15 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
+	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
+	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
@@ -369,12 +376,15 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? SourceFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Indices IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? RemoteValue { get; set; }
-	private RemoteSourceDescriptor RemoteDescriptor { get; set; }
-	private Action<RemoteSourceDescriptor> RemoteDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
+
+	/// <summary>
+	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
+	/// </summary>
+	public SourceDescriptor Index(Elastic.Clients.Elasticsearch.Indices index)
+	{
+		IndexValue = index;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to reindex using the Query DSL.</para>
@@ -400,6 +410,48 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
+	/// </summary>
+	public SourceDescriptor Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
+	{
+		RemoteDescriptor = null;
+		RemoteDescriptorAction = null;
+		RemoteValue = remote;
+		return Self;
+	}
+
+	public SourceDescriptor Remote(RemoteSourceDescriptor descriptor)
+	{
+		RemoteValue = null;
+		RemoteDescriptorAction = null;
+		RemoteDescriptor = descriptor;
+		return Self;
+	}
+
+	public SourceDescriptor Remote(Action<RemoteSourceDescriptor> configure)
+	{
+		RemoteValue = null;
+		RemoteDescriptor = null;
+		RemoteDescriptorAction = configure;
+		return Self;
+	}
+
+	public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
+	/// </summary>
+	public SourceDescriptor Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -475,60 +527,11 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the data stream, index, or alias you are copying from.<br/>Accepts a comma-separated list to reindex from multiple sources.</para>
-	/// </summary>
-	public SourceDescriptor Index(Elastic.Clients.Elasticsearch.Indices index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A remote instance of Elasticsearch that you want to index from.</para>
-	/// </summary>
-	public SourceDescriptor Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? remote)
-	{
-		RemoteDescriptor = null;
-		RemoteDescriptorAction = null;
-		RemoteValue = remote;
-		return Self;
-	}
-
-	public SourceDescriptor Remote(RemoteSourceDescriptor descriptor)
-	{
-		RemoteValue = null;
-		RemoteDescriptorAction = null;
-		RemoteDescriptor = descriptor;
-		return Self;
-	}
-
-	public SourceDescriptor Remote(Action<RemoteSourceDescriptor> configure)
-	{
-		RemoteValue = null;
-		RemoteDescriptor = null;
-		RemoteDescriptorAction = configure;
-		return Self;
-	}
-
-	public SourceDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of documents to index per batch.<br/>Use when indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.</para>
-	/// </summary>
-	public SourceDescriptor Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		writer.WritePropertyName("index");
+		JsonSerializer.Serialize(writer, IndexValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -543,6 +546,34 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		{
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, QueryValue, options);
+		}
+
+		if (RemoteDescriptor is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, RemoteDescriptor, options);
+		}
+		else if (RemoteDescriptorAction is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, new RemoteSourceDescriptor(RemoteDescriptorAction), options);
+		}
+		else if (RemoteValue is not null)
+		{
+			writer.WritePropertyName("remote");
+			JsonSerializer.Serialize(writer, RemoteValue, options);
+		}
+
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SliceDescriptor is not null)
@@ -594,36 +625,6 @@ public sealed partial class SourceDescriptor : SerializableDescriptor<SourceDesc
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceFieldsValue, options);
-		}
-
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (RemoteDescriptor is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, RemoteDescriptor, options);
-		}
-		else if (RemoteDescriptorAction is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, new RemoteSourceDescriptor(RemoteDescriptorAction), options);
-		}
-		else if (RemoteValue is not null)
-		{
-			writer.WritePropertyName("remote");
-			JsonSerializer.Serialize(writer, RemoteValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		writer.WriteEndObject();

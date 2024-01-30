@@ -42,12 +42,6 @@ internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -69,6 +63,12 @@ internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 				if (property == "prefix_length")
 				{
 					variant.PrefixLength = JsonSerializer.Deserialize<int?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -105,12 +105,6 @@ internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -133,6 +127,12 @@ internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 			{
 				writer.WritePropertyName("prefix_length");
 				writer.WriteNumberValue(value.PrefixLength.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			if (value.Rewrite is not null)
@@ -229,21 +229,15 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fuzziness? FuzzinessValue { get; set; }
 	private int? MaxExpansionsValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private bool? TranspositionsValue { get; set; }
 	private object ValueValue { get; set; }
-
-	public FuzzyQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public FuzzyQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -290,6 +284,12 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	public FuzzyQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
 	/// </summary>
@@ -324,12 +324,6 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -352,6 +346,12 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 		{
 			writer.WritePropertyName("prefix_length");
 			writer.WriteNumberValue(PrefixLengthValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)
@@ -388,21 +388,15 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fuzziness? FuzzinessValue { get; set; }
 	private int? MaxExpansionsValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private bool? TranspositionsValue { get; set; }
 	private object ValueValue { get; set; }
-
-	public FuzzyQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public FuzzyQueryDescriptor Boost(float? boost)
 	{
@@ -455,6 +449,12 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 		return Self;
 	}
 
+	public FuzzyQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
 	/// </summary>
@@ -489,12 +489,6 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -517,6 +511,12 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 		{
 			writer.WritePropertyName("prefix_length");
 			writer.WriteNumberValue(PrefixLengthValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)

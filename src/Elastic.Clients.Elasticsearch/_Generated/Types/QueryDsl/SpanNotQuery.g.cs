@@ -75,17 +75,32 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private int? DistValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
 	private SpanQueryDescriptor<TDocument> ExcludeDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> ExcludeDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
 	private SpanQueryDescriptor<TDocument> IncludeDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> IncludeDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private int? DistValue { get; set; }
 	private int? PostValue { get; set; }
 	private int? PreValue { get; set; }
+	private string? QueryNameValue { get; set; }
+
+	public SpanNotQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// </summary>
+	public SpanNotQueryDescriptor<TDocument> Dist(int? dist)
+	{
+		DistValue = dist;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Span query whose matches must not overlap those returned.</para>
@@ -141,27 +156,6 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public SpanNotQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public SpanNotQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
-	/// </summary>
-	public SpanNotQueryDescriptor<TDocument> Dist(int? dist)
-	{
-		DistValue = dist;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
 	/// </summary>
@@ -180,9 +174,27 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	public SpanNotQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (DistValue.HasValue)
+		{
+			writer.WritePropertyName("dist");
+			writer.WriteNumberValue(DistValue.Value);
+		}
+
 		if (ExcludeDescriptor is not null)
 		{
 			writer.WritePropertyName("exclude");
@@ -215,24 +227,6 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DistValue.HasValue)
-		{
-			writer.WritePropertyName("dist");
-			writer.WriteNumberValue(DistValue.Value);
-		}
-
 		if (PostValue.HasValue)
 		{
 			writer.WritePropertyName("post");
@@ -243,6 +237,12 @@ public sealed partial class SpanNotQueryDescriptor<TDocument> : SerializableDesc
 		{
 			writer.WritePropertyName("pre");
 			writer.WriteNumberValue(PreValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WriteEndObject();
@@ -257,17 +257,32 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private int? DistValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery ExcludeValue { get; set; }
 	private SpanQueryDescriptor ExcludeDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> ExcludeDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery IncludeValue { get; set; }
 	private SpanQueryDescriptor IncludeDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> IncludeDescriptorAction { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private int? DistValue { get; set; }
 	private int? PostValue { get; set; }
 	private int? PreValue { get; set; }
+	private string? QueryNameValue { get; set; }
+
+	public SpanNotQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
+	/// </summary>
+	public SpanNotQueryDescriptor Dist(int? dist)
+	{
+		DistValue = dist;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Span query whose matches must not overlap those returned.</para>
@@ -323,27 +338,6 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 		return Self;
 	}
 
-	public SpanNotQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public SpanNotQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of tokens from within the include span that can’t have overlap with the exclude span.<br/>Equivalent to setting both `pre` and `post`.</para>
-	/// </summary>
-	public SpanNotQueryDescriptor Dist(int? dist)
-	{
-		DistValue = dist;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The number of tokens after the include span that can’t have overlap with the exclude span.</para>
 	/// </summary>
@@ -362,9 +356,27 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 		return Self;
 	}
 
+	public SpanNotQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (DistValue.HasValue)
+		{
+			writer.WritePropertyName("dist");
+			writer.WriteNumberValue(DistValue.Value);
+		}
+
 		if (ExcludeDescriptor is not null)
 		{
 			writer.WritePropertyName("exclude");
@@ -397,24 +409,6 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (DistValue.HasValue)
-		{
-			writer.WritePropertyName("dist");
-			writer.WriteNumberValue(DistValue.Value);
-		}
-
 		if (PostValue.HasValue)
 		{
 			writer.WritePropertyName("post");
@@ -425,6 +419,12 @@ public sealed partial class SpanNotQueryDescriptor : SerializableDescriptor<Span
 		{
 			writer.WritePropertyName("pre");
 			writer.WriteNumberValue(PreValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WriteEndObject();

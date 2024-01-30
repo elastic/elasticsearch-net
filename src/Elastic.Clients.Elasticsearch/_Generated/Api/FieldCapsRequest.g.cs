@@ -42,6 +42,11 @@ public sealed class FieldCapsRequestParameters : RequestParameters
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
+	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// </summary>
+	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+
+	/// <summary>
 	/// <para>If `true`, missing or closed indices are not included in the response.</para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -50,11 +55,6 @@ public sealed class FieldCapsRequestParameters : RequestParameters
 	/// <para>If true, unmapped fields are included in the response.</para>
 	/// </summary>
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
-
-	/// <summary>
-	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
-	/// </summary>
-	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
 	/// <para>Only return results for fields that have one of the types in the list</para>
@@ -96,6 +96,12 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
+	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+
+	/// <summary>
 	/// <para>If `true`, missing or closed indices are not included in the response.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -106,12 +112,6 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeUnmapped { get => Q<bool?>("include_unmapped"); set => Q("include_unmapped", value); }
-
-	/// <summary>
-	/// <para>An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent</para>
-	/// </summary>
-	[JsonIgnore]
-	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
 	/// <para>Only return results for fields that have one of the types in the list</para>
@@ -170,11 +170,20 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+
+	/// <summary>
+	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// </summary>
+	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
@@ -204,15 +213,6 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
-	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
-	/// </summary>
-	public FieldCapsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
-	{
-		FieldsValue = fields;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
 	/// </summary>
 	public FieldCapsRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
@@ -224,6 +224,12 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
 		if (IndexFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("index_filter");
@@ -238,12 +244,6 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 		{
 			writer.WritePropertyName("index_filter");
 			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
 		if (RuntimeMappingsValue is not null)
@@ -288,11 +288,20 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+
+	/// <summary>
+	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
+	/// </summary>
+	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Allows to filter indices if the provided query rewrites to match_none on every shard.</para>
@@ -322,15 +331,6 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	}
 
 	/// <summary>
-	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
-	/// </summary>
-	public FieldCapsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
-	{
-		FieldsValue = fields;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Defines ad-hoc runtime fields in the request similar to the way it is done in search requests.<br/>These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.</para>
 	/// </summary>
 	public FieldCapsRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
@@ -342,6 +342,12 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
 		if (IndexFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("index_filter");
@@ -356,12 +362,6 @@ public sealed partial class FieldCapsRequestDescriptor : RequestDescriptor<Field
 		{
 			writer.WritePropertyName("index_filter");
 			JsonSerializer.Serialize(writer, IndexFilterValue, options);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
 		if (RuntimeMappingsValue is not null)

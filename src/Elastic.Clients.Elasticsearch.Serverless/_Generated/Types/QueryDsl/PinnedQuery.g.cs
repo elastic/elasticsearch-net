@@ -201,11 +201,17 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
 	private QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public PinnedQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
@@ -240,15 +246,15 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public PinnedQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (OrganicDescriptor is not null)
 		{
 			writer.WritePropertyName("organic");
@@ -269,12 +275,6 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(ContainedVariantName))
@@ -325,11 +325,17 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 		return Self;
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
 	private QueryDescriptor OrganicDescriptor { get; set; }
 	private Action<QueryDescriptor> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public PinnedQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Any choice of query used to rank documents which will be ranked below the "pinned" documents.</para>
@@ -364,15 +370,15 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 		return Self;
 	}
 
-	public PinnedQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (OrganicDescriptor is not null)
 		{
 			writer.WritePropertyName("organic");
@@ -393,12 +399,6 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(ContainedVariantName))

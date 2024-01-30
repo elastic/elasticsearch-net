@@ -72,11 +72,11 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	{
 	}
 
+	private string? AnalyzerValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? ContextsValue { get; set; }
 	private SuggestContextDescriptor<TDocument> ContextsDescriptor { get; set; }
 	private Action<SuggestContextDescriptor<TDocument>> ContextsDescriptorAction { get; set; }
 	private Action<SuggestContextDescriptor<TDocument>>[] ContextsDescriptorActions { get; set; }
-	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? CopyToValue { get; set; }
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
@@ -90,6 +90,12 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+
+	public CompletionPropertyDescriptor<TDocument> Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
 
 	public CompletionPropertyDescriptor<TDocument> Contexts(ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? contexts)
 	{
@@ -124,12 +130,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		ContextsDescriptor = null;
 		ContextsDescriptorAction = null;
 		ContextsDescriptorActions = configure;
-		return Self;
-	}
-
-	public CompletionPropertyDescriptor<TDocument> Analyzer(string? analyzer)
-	{
-		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -242,6 +242,12 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
 		if (ContextsDescriptor is not null)
 		{
 			writer.WritePropertyName("contexts");
@@ -271,12 +277,6 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("contexts");
 			JsonSerializer.Serialize(writer, ContextsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (CopyToValue is not null)
@@ -390,11 +390,11 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	{
 	}
 
+	private string? AnalyzerValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? ContextsValue { get; set; }
 	private SuggestContextDescriptor ContextsDescriptor { get; set; }
 	private Action<SuggestContextDescriptor> ContextsDescriptorAction { get; set; }
 	private Action<SuggestContextDescriptor>[] ContextsDescriptorActions { get; set; }
-	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? CopyToValue { get; set; }
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
@@ -408,6 +408,12 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+
+	public CompletionPropertyDescriptor Analyzer(string? analyzer)
+	{
+		AnalyzerValue = analyzer;
+		return Self;
+	}
 
 	public CompletionPropertyDescriptor Contexts(ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? contexts)
 	{
@@ -442,12 +448,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		ContextsDescriptor = null;
 		ContextsDescriptorAction = null;
 		ContextsDescriptorActions = configure;
-		return Self;
-	}
-
-	public CompletionPropertyDescriptor Analyzer(string? analyzer)
-	{
-		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -560,6 +560,12 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
 		if (ContextsDescriptor is not null)
 		{
 			writer.WritePropertyName("contexts");
@@ -589,12 +595,6 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("contexts");
 			JsonSerializer.Serialize(writer, ContextsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (CopyToValue is not null)

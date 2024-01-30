@@ -228,19 +228,37 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 	private TopMetricsValueDescriptor<TDocument> MetricsDescriptor { get; set; }
 	private Action<TopMetricsValueDescriptor<TDocument>> MetricsDescriptorAction { get; set; }
 	private Action<TopMetricsValueDescriptor<TDocument>>[] MetricsDescriptorActions { get; set; }
+	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
 	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-	private int? SizeValue { get; set; }
+
+	public TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The fields of the top document to return.</para>
@@ -278,6 +296,27 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
 		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of top documents from which to return metrics.</para>
+	/// </summary>
+	public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -320,50 +359,17 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
-	{
-		ScriptValue = script;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of top documents from which to return metrics.</para>
-	/// </summary>
-	public TopMetricsAggregationDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("top_metrics");
 		writer.WriteStartObject();
+		if (FieldValue is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
 		if (MetricsDescriptor is not null)
 		{
 			writer.WritePropertyName("metrics");
@@ -391,6 +397,24 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		{
 			writer.WritePropertyName("metrics");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsValue>(MetricsValue, writer, options);
+		}
+
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SortDescriptor is not null)
@@ -422,30 +446,6 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(SortValue, writer, options);
 		}
 
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
 		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
@@ -465,19 +465,43 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsValue>? MetricsValue { get; set; }
 	private TopMetricsValueDescriptor MetricsDescriptor { get; set; }
 	private Action<TopMetricsValueDescriptor> MetricsDescriptorAction { get; set; }
 	private Action<TopMetricsValueDescriptor>[] MetricsDescriptorActions { get; set; }
+	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
 	private SortOptionsDescriptor SortDescriptor { get; set; }
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-	private int? SizeValue { get; set; }
+
+	public TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The fields of the top document to return.</para>
@@ -515,6 +539,27 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		MetricsDescriptor = null;
 		MetricsDescriptorAction = null;
 		MetricsDescriptorActions = configure;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Missing(FieldValue? missing)
+	{
+		MissingValue = missing;
+		return Self;
+	}
+
+	public TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of top documents from which to return metrics.</para>
+	/// </summary>
+	public TopMetricsAggregationDescriptor Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -557,56 +602,17 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public TopMetricsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor Missing(FieldValue? missing)
-	{
-		MissingValue = missing;
-		return Self;
-	}
-
-	public TopMetricsAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
-	{
-		ScriptValue = script;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of top documents from which to return metrics.</para>
-	/// </summary>
-	public TopMetricsAggregationDescriptor Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("top_metrics");
 		writer.WriteStartObject();
+		if (FieldValue is not null)
+		{
+			writer.WritePropertyName("field");
+			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
 		if (MetricsDescriptor is not null)
 		{
 			writer.WritePropertyName("metrics");
@@ -636,6 +642,24 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TopMetricsValue>(MetricsValue, writer, options);
 		}
 
+		if (MissingValue is not null)
+		{
+			writer.WritePropertyName("missing");
+			JsonSerializer.Serialize(writer, MissingValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -663,30 +687,6 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		{
 			writer.WritePropertyName("sort");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(SortValue, writer, options);
-		}
-
-		if (FieldValue is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MissingValue is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		writer.WriteEndObject();

@@ -51,13 +51,19 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
 	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
 	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
+
+	public ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
 
 	public ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
 	{
@@ -83,12 +89,6 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-	{
-		ModeValue = mode;
-		return Self;
-	}
-
 	public ScriptSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
 		OrderValue = order;
@@ -110,6 +110,12 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
 		if (NestedDescriptor is not null)
 		{
 			writer.WritePropertyName("nested");
@@ -124,12 +130,6 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
 		if (OrderValue is not null)
@@ -158,13 +158,19 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
 	private NestedSortValueDescriptor NestedDescriptor { get; set; }
 	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
+
+	public ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
 
 	public ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValue? nested)
 	{
@@ -190,12 +196,6 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 		return Self;
 	}
 
-	public ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
-	{
-		ModeValue = mode;
-		return Self;
-	}
-
 	public ScriptSortDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? order)
 	{
 		OrderValue = order;
@@ -217,6 +217,12 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ModeValue is not null)
+		{
+			writer.WritePropertyName("mode");
+			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
 		if (NestedDescriptor is not null)
 		{
 			writer.WritePropertyName("nested");
@@ -231,12 +237,6 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
 		if (OrderValue is not null)

@@ -47,6 +47,11 @@ public sealed class ListRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
 	/// <para>Comma-separated list of node IDs or names used to limit returned information.</para>
 	/// </summary>
 	public ICollection<string>? NodeId { get => Q<ICollection<string>?>("node_id"); set => Q("node_id", value); }
@@ -55,11 +60,6 @@ public sealed class ListRequestParameters : RequestParameters
 	/// <para>Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
-
-	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>
@@ -105,6 +105,12 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
+	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
 	/// <para>Comma-separated list of node IDs or names used to limit returned information.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -115,12 +121,6 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Id? ParentTaskId { get => Q<Elastic.Clients.Elasticsearch.Id?>("parent_task_id"); set => Q("parent_task_id", value); }
-
-	/// <summary>
-	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.</para>

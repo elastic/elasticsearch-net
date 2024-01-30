@@ -192,14 +192,47 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+
+	/// <summary>
+	/// <para>Buckets in positions prior to `from` will be truncated.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor<TDocument> From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The policy to apply when gaps are found in the data.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
+
+	public BucketSortAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The list of fields to sort on.</para>
@@ -240,44 +273,29 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Buckets in positions prior to `from` will be truncated.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The policy to apply when gaps are found in the data.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
-	{
-		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("bucket_sort");
 		writer.WriteStartObject();
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
+		if (GapPolicyValue is not null)
+		{
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -307,24 +325,6 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(SortValue, writer, options);
 		}
 
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (GapPolicyValue is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
 		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
@@ -344,14 +344,47 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+
+	/// <summary>
+	/// <para>Buckets in positions prior to `from` will be truncated.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The policy to apply when gaps are found in the data.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
+
+	public BucketSortAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
+	/// </summary>
+	public BucketSortAggregationDescriptor Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The list of fields to sort on.</para>
@@ -392,44 +425,29 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Buckets in positions prior to `from` will be truncated.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The policy to apply when gaps are found in the data.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
-	{
-		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
-	/// </summary>
-	public BucketSortAggregationDescriptor Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("bucket_sort");
 		writer.WriteStartObject();
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
+		if (GapPolicyValue is not null)
+		{
+			writer.WritePropertyName("gap_policy");
+			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -457,24 +475,6 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 		{
 			writer.WritePropertyName("sort");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(SortValue, writer, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (GapPolicyValue is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		writer.WriteEndObject();

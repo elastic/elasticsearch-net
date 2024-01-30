@@ -116,14 +116,14 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private object? DocValue { get; set; }
-	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
+	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors.Filter? FilterValue { get; set; }
 	private Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
 	private Action<Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
 	private bool? PayloadsValue { get; set; }
 	private bool? PositionsValue { get; set; }
@@ -131,24 +131,6 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	private bool? TermStatisticsValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
-
-	/// <summary>
-	/// <para>The ID of the document.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
-	{
-		IdValue = id;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The index of the document.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
-	{
-		IndexValue = index;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
@@ -160,20 +142,20 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	}
 
 	/// <summary>
-	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true)
-	{
-		FieldStatisticsValue = fieldStatistics;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
 	/// </summary>
 	public MultiTermVectorsOperationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
 		FieldsValue = fields;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true)
+	{
+		FieldStatisticsValue = fieldStatistics;
 		return Self;
 	}
 
@@ -201,6 +183,24 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		FilterValue = null;
 		FilterDescriptor = null;
 		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The ID of the document.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
+	{
+		IdValue = id;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The index of the document.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
+	{
+		IndexValue = index;
 		return Self;
 	}
 
@@ -270,30 +270,22 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
 			JsonSerializer.Serialize(writer, DocValue, options);
 		}
 
-		if (FieldStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("field_statistics");
-			writer.WriteBooleanValue(FieldStatisticsValue.Value);
-		}
-
 		if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
 			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FieldStatisticsValue.HasValue)
+		{
+			writer.WritePropertyName("field_statistics");
+			writer.WriteBooleanValue(FieldStatisticsValue.Value);
 		}
 
 		if (FilterDescriptor is not null)
@@ -310,6 +302,14 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		{
 			writer.WritePropertyName("filter");
 			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		writer.WritePropertyName("_id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		if (IndexValue is not null)
+		{
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (OffsetsValue.HasValue)
@@ -366,14 +366,14 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private object? DocValue { get; set; }
-	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
+	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors.Filter? FilterValue { get; set; }
 	private Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
 	private Action<Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
 	private bool? PayloadsValue { get; set; }
 	private bool? PositionsValue { get; set; }
@@ -381,24 +381,6 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	private bool? TermStatisticsValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
-
-	/// <summary>
-	/// <para>The ID of the document.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
-	{
-		IdValue = id;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The index of the document.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
-	{
-		IndexValue = index;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
@@ -410,20 +392,20 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
-	/// </summary>
-	public MultiTermVectorsOperationDescriptor FieldStatistics(bool? fieldStatistics = true)
-	{
-		FieldStatisticsValue = fieldStatistics;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
 	/// </summary>
 	public MultiTermVectorsOperationDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
 		FieldsValue = fields;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor FieldStatistics(bool? fieldStatistics = true)
+	{
+		FieldStatisticsValue = fieldStatistics;
 		return Self;
 	}
 
@@ -451,6 +433,24 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		FilterValue = null;
 		FilterDescriptor = null;
 		FilterDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The ID of the document.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
+	{
+		IdValue = id;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The index of the document.</para>
+	/// </summary>
+	public MultiTermVectorsOperationDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
+	{
+		IndexValue = index;
 		return Self;
 	}
 
@@ -520,30 +520,22 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
 			JsonSerializer.Serialize(writer, DocValue, options);
 		}
 
-		if (FieldStatisticsValue.HasValue)
-		{
-			writer.WritePropertyName("field_statistics");
-			writer.WriteBooleanValue(FieldStatisticsValue.Value);
-		}
-
 		if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
 			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FieldStatisticsValue.HasValue)
+		{
+			writer.WritePropertyName("field_statistics");
+			writer.WriteBooleanValue(FieldStatisticsValue.Value);
 		}
 
 		if (FilterDescriptor is not null)
@@ -560,6 +552,14 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		{
 			writer.WritePropertyName("filter");
 			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
+		writer.WritePropertyName("_id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		if (IndexValue is not null)
+		{
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (OffsetsValue.HasValue)

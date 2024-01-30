@@ -71,58 +71,22 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	public int? FetchSize { get; set; }
 
 	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
-
-	/// <summary>
-	/// <para>SQL query to run.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string? Query { get; set; }
-
-	/// <summary>
-	/// <para>The timeout before the request fails.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("request_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
-
-	/// <summary>
-	/// <para>The timeout before a pagination request fails.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("page_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
-
-	/// <summary>
-	/// <para>ISO-8601 time zone ID for the search.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
-	public string? TimeZone { get; set; }
-
-	/// <summary>
 	/// <para>Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
 	public bool? FieldMultiValueLeniency { get; set; }
 
 	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	[JsonInclude, JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
-	/// <para>Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.</para>
+	/// <para>If true, the search can run on frozen indices. Defaults to false.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
-
-	/// <summary>
-	/// <para>Values for parameters in the query.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	[JsonInclude, JsonPropertyName("index_using_frozen")]
+	public bool? IndexUsingFrozen { get; set; }
 
 	/// <summary>
 	/// <para>Retention period for an async or saved synchronous search.</para>
@@ -137,10 +101,46 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	public bool? KeepOnCompletion { get; set; }
 
 	/// <summary>
-	/// <para>If true, the search can run on frozen indices. Defaults to false.</para>
+	/// <para>The timeout before a pagination request fails.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_using_frozen")]
-	public bool? IndexUsingFrozen { get; set; }
+	[JsonInclude, JsonPropertyName("page_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
+
+	/// <summary>
+	/// <para>Values for parameters in the query.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("params")]
+	public IDictionary<string, object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>SQL query to run.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("query")]
+	public string? Query { get; set; }
+
+	/// <summary>
+	/// <para>The timeout before the request fails.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("request_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+	/// <summary>
+	/// <para>ISO-8601 time zone ID for the search.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("time_zone")]
+	public string? TimeZone { get; set; }
+
+	/// <summary>
+	/// <para>Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
 /// <summary>
@@ -162,14 +162,14 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	internal override string OperationName => "sql.query";
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private bool? FieldMultiValueLeniencyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private bool? IndexUsingFrozenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
@@ -180,33 +180,6 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
-	/// </summary>
-	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public QueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
@@ -250,6 +223,33 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	public QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
 	{
 		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
+	/// </summary>
+	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public QueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public QueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
 		return Self;
 	}
 
@@ -346,22 +346,6 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(CatalogValue))
 		{
 			writer.WritePropertyName("catalog");
@@ -390,6 +374,22 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		{
 			writer.WritePropertyName("field_multi_value_leniency");
 			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
+		}
+
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
 		if (IndexUsingFrozenValue.HasValue)
@@ -475,14 +475,14 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	internal override string OperationName => "sql.query";
 
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private bool? FieldMultiValueLeniencyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
+	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private bool? IndexUsingFrozenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
@@ -493,33 +493,6 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-	/// <summary>
-	/// <para>Elasticsearch query DSL for additional filtering.</para>
-	/// </summary>
-	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public QueryRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
@@ -563,6 +536,33 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	public QueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
 	{
 		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Elasticsearch query DSL for additional filtering.</para>
+	/// </summary>
+	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public QueryRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public QueryRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
 		return Self;
 	}
 
@@ -659,22 +659,6 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(CatalogValue))
 		{
 			writer.WritePropertyName("catalog");
@@ -703,6 +687,22 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		{
 			writer.WritePropertyName("field_multi_value_leniency");
 			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
+		}
+
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
 		if (IndexUsingFrozenValue.HasValue)

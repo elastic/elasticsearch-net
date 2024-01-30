@@ -51,14 +51,32 @@ public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDes
 	{
 	}
 
+	private string? DescriptionValue { get; set; }
+	private string? IfValue { get; set; }
+	private bool? IgnoreFailureValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
 	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
 	private string? TagValue { get; set; }
+
+	public DropProcessorDescriptor<TDocument> Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	public DropProcessorDescriptor<TDocument> If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public DropProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
 
 	public DropProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -96,24 +114,6 @@ public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public DropProcessorDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	public DropProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public DropProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
 	public DropProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -123,6 +123,24 @@ public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -154,24 +172,6 @@ public sealed partial class DropProcessorDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
@@ -190,14 +190,32 @@ public sealed partial class DropProcessorDescriptor : SerializableDescriptor<Dro
 	{
 	}
 
+	private string? DescriptionValue { get; set; }
+	private string? IfValue { get; set; }
+	private bool? IgnoreFailureValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
 	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? DescriptionValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
 	private string? TagValue { get; set; }
+
+	public DropProcessorDescriptor Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	public DropProcessorDescriptor If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public DropProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
 
 	public DropProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
@@ -235,24 +253,6 @@ public sealed partial class DropProcessorDescriptor : SerializableDescriptor<Dro
 		return Self;
 	}
 
-	public DropProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	public DropProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public DropProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
 	public DropProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -262,6 +262,24 @@ public sealed partial class DropProcessorDescriptor : SerializableDescriptor<Dro
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -291,24 +309,6 @@ public sealed partial class DropProcessorDescriptor : SerializableDescriptor<Dro
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(TagValue))

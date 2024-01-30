@@ -75,20 +75,47 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>? FieldMapValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
+	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id ModelIdValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
+
+	public InferenceProcessorDescriptor<TDocument> Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>> selector)
+	{
+		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>());
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor<TDocument> If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Contains the inference type and its options.</para>
@@ -114,6 +141,15 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Serverless.Id modelId)
+	{
+		ModelIdValue = modelId;
 		return Self;
 	}
 
@@ -153,42 +189,6 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>> selector)
-	{
-		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>());
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Serverless.Id modelId)
-	{
-		ModelIdValue = modelId;
-		return Self;
-	}
-
 	public InferenceProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -216,6 +216,30 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (FieldMapValue is not null)
+		{
+			writer.WritePropertyName("field_map");
+			JsonSerializer.Serialize(writer, FieldMapValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
 		if (InferenceConfigDescriptor is not null)
 		{
 			writer.WritePropertyName("inference_config");
@@ -232,6 +256,8 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
+		writer.WritePropertyName("model_id");
+		JsonSerializer.Serialize(writer, ModelIdValue, options);
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -263,32 +289,6 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (FieldMapValue is not null)
-		{
-			writer.WritePropertyName("field_map");
-			JsonSerializer.Serialize(writer, FieldMapValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		writer.WritePropertyName("model_id");
-		JsonSerializer.Serialize(writer, ModelIdValue, options);
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
@@ -313,20 +313,47 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>? FieldMapValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
+	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
+	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id ModelIdValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
+
+	public InferenceProcessorDescriptor Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>> selector)
+	{
+		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>());
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Contains the inference type and its options.</para>
@@ -352,6 +379,15 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Serverless.Id modelId)
+	{
+		ModelIdValue = modelId;
 		return Self;
 	}
 
@@ -391,42 +427,6 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maps the document field names to the known field names of the model.<br/>This mapping takes precedence over any default mappings provided in the model configuration.</para>
-	/// </summary>
-	public InferenceProcessorDescriptor FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>> selector)
-	{
-		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>());
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The ID or alias for the trained model, or the ID of the deployment.</para>
-	/// </summary>
-	public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Serverless.Id modelId)
-	{
-		ModelIdValue = modelId;
-		return Self;
-	}
-
 	public InferenceProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -463,6 +463,30 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (FieldMapValue is not null)
+		{
+			writer.WritePropertyName("field_map");
+			JsonSerializer.Serialize(writer, FieldMapValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
 		if (InferenceConfigDescriptor is not null)
 		{
 			writer.WritePropertyName("inference_config");
@@ -479,6 +503,8 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
+		writer.WritePropertyName("model_id");
+		JsonSerializer.Serialize(writer, ModelIdValue, options);
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -510,32 +536,6 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (FieldMapValue is not null)
-		{
-			writer.WritePropertyName("field_map");
-			JsonSerializer.Serialize(writer, FieldMapValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		writer.WritePropertyName("model_id");
-		JsonSerializer.Serialize(writer, ModelIdValue, options);
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");

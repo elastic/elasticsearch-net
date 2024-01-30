@@ -42,12 +42,6 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<Ma
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "analyzer")
 				{
 					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -69,6 +63,12 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<Ma
 				if (property == "query")
 				{
 					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -99,12 +99,6 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<Ma
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (!string.IsNullOrEmpty(value.Analyzer))
 			{
 				writer.WritePropertyName("analyzer");
@@ -125,6 +119,12 @@ internal sealed partial class MatchPhrasePrefixQueryConverter : JsonConverter<Ma
 
 			writer.WritePropertyName("query");
 			writer.WriteStringValue(value.Query);
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
 			if (value.Slop.HasValue)
 			{
 				writer.WritePropertyName("slop");
@@ -212,20 +212,14 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private int? MaxExpansionsValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert text in the query value into tokens.</para>
@@ -272,6 +266,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	public MatchPhrasePrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
 	/// </summary>
@@ -297,12 +297,6 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -323,6 +317,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor<TDocument> : Serial
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (SlopValue.HasValue)
 		{
 			writer.WritePropertyName("slop");
@@ -355,20 +355,14 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private int? MaxExpansionsValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MatchPhrasePrefixQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert text in the query value into tokens.</para>
@@ -421,6 +415,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 		return Self;
 	}
 
+	public MatchPhrasePrefixQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
 	/// </summary>
@@ -446,12 +446,6 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -472,6 +466,12 @@ public sealed partial class MatchPhrasePrefixQueryDescriptor : SerializableDescr
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (SlopValue.HasValue)
 		{
 			writer.WritePropertyName("slop");

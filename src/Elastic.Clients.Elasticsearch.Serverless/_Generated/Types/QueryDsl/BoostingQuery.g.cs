@@ -65,15 +65,21 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query NegativeValue { get; set; }
 	private QueryDescriptor<TDocument> NegativeDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> NegativeDescriptorAction { get; set; }
+	private double NegativeBoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query PositiveValue { get; set; }
 	private QueryDescriptor<TDocument> PositiveDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> PositiveDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private double NegativeBoostValue { get; set; }
+
+	public BoostingQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Query used to decrease the relevance score of matching documents.</para>
@@ -99,6 +105,15 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 		NegativeValue = null;
 		NegativeDescriptor = null;
 		NegativeDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
+	/// </summary>
+	public BoostingQueryDescriptor<TDocument> NegativeBoost(double negativeBoost)
+	{
+		NegativeBoostValue = negativeBoost;
 		return Self;
 	}
 
@@ -135,24 +150,15 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public BoostingQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
-	/// </summary>
-	public BoostingQueryDescriptor<TDocument> NegativeBoost(double negativeBoost)
-	{
-		NegativeBoostValue = negativeBoost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (NegativeDescriptor is not null)
 		{
 			writer.WritePropertyName("negative");
@@ -169,6 +175,8 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, NegativeValue, options);
 		}
 
+		writer.WritePropertyName("negative_boost");
+		writer.WriteNumberValue(NegativeBoostValue);
 		if (PositiveDescriptor is not null)
 		{
 			writer.WritePropertyName("positive");
@@ -191,14 +199,6 @@ public sealed partial class BoostingQueryDescriptor<TDocument> : SerializableDes
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("negative_boost");
-		writer.WriteNumberValue(NegativeBoostValue);
 		writer.WriteEndObject();
 	}
 }
@@ -211,15 +211,21 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query NegativeValue { get; set; }
 	private QueryDescriptor NegativeDescriptor { get; set; }
 	private Action<QueryDescriptor> NegativeDescriptorAction { get; set; }
+	private double NegativeBoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query PositiveValue { get; set; }
 	private QueryDescriptor PositiveDescriptor { get; set; }
 	private Action<QueryDescriptor> PositiveDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private double NegativeBoostValue { get; set; }
+
+	public BoostingQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Query used to decrease the relevance score of matching documents.</para>
@@ -245,6 +251,15 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 		NegativeValue = null;
 		NegativeDescriptor = null;
 		NegativeDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
+	/// </summary>
+	public BoostingQueryDescriptor NegativeBoost(double negativeBoost)
+	{
+		NegativeBoostValue = negativeBoost;
 		return Self;
 	}
 
@@ -281,24 +296,15 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 		return Self;
 	}
 
-	public BoostingQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the `negative` query.</para>
-	/// </summary>
-	public BoostingQueryDescriptor NegativeBoost(double negativeBoost)
-	{
-		NegativeBoostValue = negativeBoost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (NegativeDescriptor is not null)
 		{
 			writer.WritePropertyName("negative");
@@ -315,6 +321,8 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 			JsonSerializer.Serialize(writer, NegativeValue, options);
 		}
 
+		writer.WritePropertyName("negative_boost");
+		writer.WriteNumberValue(NegativeBoostValue);
 		if (PositiveDescriptor is not null)
 		{
 			writer.WritePropertyName("positive");
@@ -337,14 +345,6 @@ public sealed partial class BoostingQueryDescriptor : SerializableDescriptor<Boo
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("negative_boost");
-		writer.WriteNumberValue(NegativeBoostValue);
 		writer.WriteEndObject();
 	}
 }

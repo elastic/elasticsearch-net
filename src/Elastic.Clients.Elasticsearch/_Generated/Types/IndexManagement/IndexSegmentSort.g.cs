@@ -31,11 +31,14 @@ public sealed partial class IndexSegmentSort
 {
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Fields? Field { get; set; }
-	[JsonInclude, JsonPropertyName("missing"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing))]
+	[JsonInclude, JsonPropertyName("missing")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("mode"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode))]
+	[JsonInclude, JsonPropertyName("mode")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>? Mode { get; set; }
-	[JsonInclude, JsonPropertyName("order"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder))]
+	[JsonInclude, JsonPropertyName("order")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
 }
 
