@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
 using Elastic.Transport;
 using Elastic.Transport.Products.Elasticsearch;
 
@@ -11,13 +12,22 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 
 internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProductRegistration
 {
-	public ElasticsearchClientProductRegistration(Type markerType) : base(markerType) { }
+	private readonly MetaHeaderProvider _metaHeaderProvider;
+
+	public ElasticsearchClientProductRegistration(Type markerType) : base(markerType)
+	{
+		var identifier = ServiceIdentifier;
+		if (!string.IsNullOrEmpty(identifier))
+			_metaHeaderProvider = new ServerlessMetaHeaderProvider(markerType, identifier);
+	}
 
 	public static ElasticsearchClientProductRegistration DefaultForElasticsearchClientsElasticsearch { get; } = new(typeof(ElasticsearchClient));
 
 	public override string ServiceIdentifier => "esv";
 
 	public override string DefaultMimeType => null; // Prevent base 'ElasticsearchProductRegistration' from sending the compatibility header
+
+	public override MetaHeaderProvider MetaHeaderProvider => _metaHeaderProvider;
 
 	/// <summary>
 	///     Elastic.Clients.Elasticsearch handles 404 in its <see cref="ElasticsearchResponse.IsValidResponse" />, we do not want the low level client throwing
@@ -39,5 +49,48 @@ internal sealed class ElasticsearchClientProductRegistration : ElasticsearchProd
 			return base.TryGetServerErrorReason(response, out reason);
 		reason = r.ElasticsearchServerError?.Error?.ToString();
 		return !string.IsNullOrEmpty(reason);
+	}
+}
+
+public sealed class ServerlessMetaHeaderProvider : MetaHeaderProvider
+{
+	private readonly MetaHeaderProducer[] _producers;
+
+	/// <inheritdoc cref="MetaHeaderProvider.Producers"/>
+	public override MetaHeaderProducer[] Producers => _producers;
+
+	public ServerlessMetaHeaderProvider(Type clientType, string serviceIdentifier)
+	{
+		var version = ReflectionVersionInfo.Create(clientType);
+
+		_producers = new MetaHeaderProducer[]
+		{
+			new DefaultMetaHeaderProducer(version, serviceIdentifier),
+			new ApiVersionMetaHeaderProducer(version)
+		};
+	}
+}
+
+public class ApiVersionMetaHeaderProducer : MetaHeaderProducer
+{
+	private readonly string _apiVersion;
+
+	public override string HeaderName => "Elastic-Api-Version";
+
+	public override string ProduceHeaderValue(RequestData requestData) => _apiVersion;
+
+	public ApiVersionMetaHeaderProducer(VersionInfo version)
+	{
+		var meta = version.Metadata;
+
+		if (meta is null || meta.Length != 8)
+		{
+			_apiVersion = "2023-10-31"; // Fall back to the earliest version
+			return;
+		}
+
+		// Metadata format: 20231031
+
+		_apiVersion = $"{meta.Substring(0, 4)}-{meta.Substring(4, 2)}-{meta.Substring(6, 2)}";
 	}
 }
