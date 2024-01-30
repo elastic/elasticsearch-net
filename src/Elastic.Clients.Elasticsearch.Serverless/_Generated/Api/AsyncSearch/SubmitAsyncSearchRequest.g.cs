@@ -32,21 +32,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 {
 	/// <summary>
-	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-
-	/// <summary>
-	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
-	/// </summary>
-	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-	/// <summary>
-	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -102,6 +87,16 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
+	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
+	/// </summary>
+	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+	/// <summary>
 	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
 	/// </summary>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
@@ -123,9 +118,15 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
 	/// </summary>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>A comma-separated list of specific routing values</para>
@@ -137,6 +138,16 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	/// <para>Search operation type</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.Serverless.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
 	/// <para>Specifies which field to use for suggestions.</para>
@@ -162,22 +173,11 @@ public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
 	/// <para>Specify whether aggregation and suggester names should be prefixed by their respective types in the response</para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-	/// <summary>
-	/// <para>A list of fields to extract and return from the _source field</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax</para>
-	/// </summary>
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<SubmitAsyncSearchRequest>
@@ -204,6 +204,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 					continue;
 				}
 
+				if (property == "docvalue_fields")
+				{
+					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "explain")
 				{
 					variant.Explain = JsonSerializer.Deserialize<bool?>(ref reader, options);
@@ -213,6 +219,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 				if (property == "ext")
 				{
 					variant.Ext = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "fields")
+				{
+					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -228,21 +240,9 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 					continue;
 				}
 
-				if (property == "track_total_hits")
-				{
-					variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "indices_boost")
 				{
 					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "docvalue_fields")
-				{
-					variant.DocvalueFields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>?>(ref reader, options);
 					continue;
 				}
 
@@ -255,6 +255,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 				if (property == "min_score")
 				{
 					variant.MinScore = JsonSerializer.Deserialize<double?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "pit")
+				{
+					variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference?>(ref reader, options);
 					continue;
 				}
 
@@ -282,6 +288,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 					continue;
 				}
 
+				if (property == "runtime_mappings")
+				{
+					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "script_fields")
 				{
 					variant.ScriptFields = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>?>(ref reader, options);
@@ -291,6 +303,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 				if (property == "search_after")
 				{
 					variant.SearchAfter = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "seq_no_primary_term")
+				{
+					variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
 					continue;
 				}
 
@@ -318,9 +336,15 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 					continue;
 				}
 
-				if (property == "fields")
+				if (property == "stats")
 				{
-					variant.Fields = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>?>(ref reader, options);
+					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "stored_fields")
+				{
+					variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Fields?>(ref reader, options);
 					continue;
 				}
 
@@ -348,39 +372,15 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 					continue;
 				}
 
+				if (property == "track_total_hits")
+				{
+					variant.TrackTotalHits = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "version")
 				{
 					variant.Version = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "seq_no_primary_term")
-				{
-					variant.SeqNoPrimaryTerm = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stored_fields")
-				{
-					variant.StoredFields = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Fields?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "pit")
-				{
-					variant.Pit = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "runtime_mappings")
-				{
-					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "stats")
-				{
-					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
 					continue;
 				}
 			}
@@ -404,6 +404,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 			JsonSerializer.Serialize(writer, value.Collapse, options);
 		}
 
+		if (value.DocvalueFields is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
+		}
+
 		if (value.Explain.HasValue)
 		{
 			writer.WritePropertyName("explain");
@@ -414,6 +420,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 		{
 			writer.WritePropertyName("ext");
 			JsonSerializer.Serialize(writer, value.Ext, options);
+		}
+
+		if (value.Fields is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, value.Fields, options);
 		}
 
 		if (value.From.HasValue)
@@ -428,22 +440,10 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 			JsonSerializer.Serialize(writer, value.Highlight, options);
 		}
 
-		if (value.TrackTotalHits is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
-		}
-
 		if (value.IndicesBoost is not null)
 		{
 			writer.WritePropertyName("indices_boost");
 			JsonSerializer.Serialize(writer, value.IndicesBoost, options);
-		}
-
-		if (value.DocvalueFields is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
 		}
 
 		if (value.Knn is not null)
@@ -456,6 +456,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 		{
 			writer.WritePropertyName("min_score");
 			writer.WriteNumberValue(value.MinScore.Value);
+		}
+
+		if (value.Pit is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, value.Pit, options);
 		}
 
 		if (value.PostFilter is not null)
@@ -482,6 +488,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 			JsonSerializer.Serialize(writer, value.Rescore, options);
 		}
 
+		if (value.RuntimeMappings is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
+		}
+
 		if (value.ScriptFields is not null)
 		{
 			writer.WritePropertyName("script_fields");
@@ -492,6 +504,12 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 		{
 			writer.WritePropertyName("search_after");
 			JsonSerializer.Serialize(writer, value.SearchAfter, options);
+		}
+
+		if (value.SeqNoPrimaryTerm.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
 		}
 
 		if (value.Size.HasValue)
@@ -518,10 +536,16 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 			JsonSerializer.Serialize(writer, value.Source, options);
 		}
 
-		if (value.Fields is not null)
+		if (value.Stats is not null)
 		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, value.Fields, options);
+			writer.WritePropertyName("stats");
+			JsonSerializer.Serialize(writer, value.Stats, options);
+		}
+
+		if (value.StoredFields is not null)
+		{
+			writer.WritePropertyName("stored_fields");
+			JsonSerializer.Serialize(writer, value.StoredFields, options);
 		}
 
 		if (value.Suggest is not null)
@@ -548,40 +572,16 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 			writer.WriteBooleanValue(value.TrackScores.Value);
 		}
 
+		if (value.TrackTotalHits is not null)
+		{
+			writer.WritePropertyName("track_total_hits");
+			JsonSerializer.Serialize(writer, value.TrackTotalHits, options);
+		}
+
 		if (value.Version.HasValue)
 		{
 			writer.WritePropertyName("version");
 			writer.WriteBooleanValue(value.Version.Value);
-		}
-
-		if (value.SeqNoPrimaryTerm.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
-		}
-
-		if (value.StoredFields is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, value.StoredFields, options);
-		}
-
-		if (value.Pit is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, value.Pit, options);
-		}
-
-		if (value.RuntimeMappings is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, value.RuntimeMappings, options);
-		}
-
-		if (value.Stats is not null)
-		{
-			writer.WritePropertyName("stats");
-			JsonSerializer.Serialize(writer, value.Stats, options);
 		}
 
 		writer.WriteEndObject();
@@ -611,24 +611,6 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	internal override string OperationName => "async_search.submit";
 
 	/// <summary>
-	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-
-	/// <summary>
-	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-	/// <summary>
-	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>
 	/// </summary>
 	[JsonIgnore]
@@ -695,6 +677,18 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
+	/// <para>Specifies how long the async search needs to be available.<br/>Ongoing async searches and any saved search results are deleted after this period.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>If `true`, results are stored for later retrieval when the search completes within the `wait_for_completion_timeout`.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
+
+	/// <summary>
 	/// <para>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</para>
 	/// </summary>
 	[JsonIgnore]
@@ -721,10 +715,18 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Specify if request cache should be used for this request or not, defaults to true</para>
 	/// </summary>
 	[JsonIgnore]
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
+	[JsonIgnore]
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>A comma-separated list of specific routing values</para>
@@ -739,6 +741,18 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.Serverless.SearchType?>("search_type"); set => Q("search_type", value); }
+
+	/// <summary>
+	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>A list of fields to extract and return from the _source field</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
 	/// <summary>
 	/// <para>Specifies which field to use for suggestions.</para>
@@ -769,30 +783,22 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	[JsonIgnore]
-	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
-	/// <para>A list of fields to exclude from the returned _source field</para>
+	/// <para>Blocks and waits until the search is completed up to a certain timeout.<br/>When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster.</para>
 	/// </summary>
 	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
-
-	/// <summary>
-	/// <para>A list of fields to extract and return from the _source field</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax</para>
-	/// </summary>
-	[JsonIgnore]
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? Aggregations { get; set; }
 	[JsonInclude, JsonPropertyName("collapse")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldCollapse? Collapse { get; set; }
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("docvalue_fields")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
@@ -807,6 +813,12 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public IDictionary<string, object>? Ext { get; set; }
 
 	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
+
+	/// <summary>
 	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
@@ -815,27 +827,16 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
-	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("track_total_hits")]
-	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? TrackTotalHits { get; set; }
-
-	/// <summary>
 	/// <para>Boosts the _score of documents from specified indices.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
 	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns doc values for field<br/>names matching these patterns in the hits.fields property of the response.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("docvalue_fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
-
-	/// <summary>
 	/// <para>Defines the approximate kNN search to run.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("knn"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.KnnQuery))]
+	[JsonInclude, JsonPropertyName("knn")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.KnnQuery))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>? Knn { get; set; }
 
 	/// <summary>
@@ -843,6 +844,12 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_score")]
 	public double? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("pit")]
+	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? Pit { get; set; }
 	[JsonInclude, JsonPropertyName("post_filter")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilter { get; set; }
 	[JsonInclude, JsonPropertyName("profile")]
@@ -853,8 +860,15 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
-	[JsonInclude, JsonPropertyName("rescore"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore))]
+	[JsonInclude, JsonPropertyName("rescore")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>? Rescore { get; set; }
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
+	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
@@ -865,13 +879,20 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
+	public bool? SeqNoPrimaryTerm { get; set; }
+
+	/// <summary>
 	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? Slice { get; set; }
-	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
+	[JsonInclude, JsonPropertyName("sort")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? Sort { get; set; }
 
 	/// <summary>
@@ -881,10 +902,16 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	[JsonInclude, JsonPropertyName("stats")]
+	public ICollection<string>? Stats { get; set; }
+
+	/// <summary>
+	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("stored_fields")]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? Suggest { get; set; }
 
@@ -907,40 +934,16 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
+	/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("track_total_hits")]
+	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.TrackHits? TrackTotalHits { get; set; }
+
+	/// <summary>
 	/// <para>If true, returns document version as part of a hit.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
-
-	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
-	public bool? SeqNoPrimaryTerm { get; set; }
-
-	/// <summary>
-	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("stored_fields")]
-	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
-
-	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("pit")]
-	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? Pit { get; set; }
-
-	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
-
-	/// <summary>
-	/// <para>Stats groups to associate with the search. Each group maintains a statistics<br/>aggregation for its associated searches. You can retrieve these stats using<br/>the indices stats API.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("stats")]
-	public ICollection<string>? Stats { get; set; }
 }
 
 /// <summary>
@@ -962,12 +965,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 
 	internal override string OperationName => "async_search.submit";
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
@@ -980,14 +981,16 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Serverless.Duration? scroll) => Qs("scroll", scroll);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.Serverless.SearchType? searchType) => Qs("search_type", searchType);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public SubmitAsyncSearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Serverless.Field? suggestField) => Qs("suggest_field", suggestField);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.Serverless.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 	public SubmitAsyncSearchRequestDescriptor<TDocument> SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
@@ -1011,20 +1014,29 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
+	private bool? ExplainValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
+	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
 	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>? KnnValue { get; set; }
 	private KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
 	private Action<KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
 	private Action<KnnQueryDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
+	private double? MinScoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
+	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
+	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
@@ -1032,6 +1044,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 	private Action<Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
 	private Action<Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
+	private bool? SeqNoPrimaryTermValue { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
@@ -1040,20 +1057,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private int? FromValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? SuggestValue { get; set; }
@@ -1153,6 +1156,24 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	}
 
 	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
 	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
@@ -1191,6 +1212,15 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -1212,6 +1242,15 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
+	{
+		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
@@ -1254,6 +1293,42 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
+	{
+		PitDescriptor = null;
+		PitDescriptorAction = null;
+		PitValue = pit;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	{
+		PitValue = null;
+		PitDescriptorAction = null;
+		PitDescriptor = descriptor;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	{
+		PitValue = null;
+		PitDescriptor = null;
+		PitDescriptorAction = configure;
+		return Self;
+	}
+
 	public SubmitAsyncSearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
@@ -1275,6 +1350,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -1338,6 +1419,48 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
 		RescoreDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
+	{
+		SearchAfterValue = searchAfter;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -1407,126 +1530,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	public SubmitAsyncSearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
-	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
-	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
-	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
-	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -1683,6 +1686,18 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (ExtValue is not null)
+		{
+			writer.WritePropertyName("ext");
+			JsonSerializer.Serialize(writer, ExtValue, options);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -1714,6 +1729,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -1728,6 +1749,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndicesBoostValue is not null)
+		{
+			writer.WritePropertyName("indices_boost");
+			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
 		}
 
 		if (KnnDescriptor is not null)
@@ -1759,6 +1786,28 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>(KnnValue, writer, options);
 		}
 
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
+		if (PitDescriptor is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitDescriptor, options);
+		}
+		else if (PitDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+		}
+		else if (PitValue is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitValue, options);
+		}
+
 		if (PostFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("post_filter");
@@ -1773,6 +1822,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		{
 			writer.WritePropertyName("post_filter");
 			JsonSerializer.Serialize(writer, PostFilterValue, options);
+		}
+
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -1818,6 +1873,36 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		{
 			writer.WritePropertyName("rescore");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>(RescoreValue, writer, options);
+		}
+
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SearchAfterValue is not null)
+		{
+			writer.WritePropertyName("search_after");
+			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SliceDescriptor is not null)
@@ -1869,88 +1954,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StatsValue is not null)
@@ -2034,12 +2037,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 
 	internal override string OperationName => "async_search.submit";
 
-	public SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public SubmitAsyncSearchRequestDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true) => Qs("allow_partial_search_results", allowPartialSearchResults);
-	public SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public SubmitAsyncSearchRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public SubmitAsyncSearchRequestDescriptor BatchedReduceSize(long? batchedReduceSize) => Qs("batched_reduce_size", batchedReduceSize);
 	public SubmitAsyncSearchRequestDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true) => Qs("ccs_minimize_roundtrips", ccsMinimizeRoundtrips);
 	public SubmitAsyncSearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
@@ -2052,14 +2053,16 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	public SubmitAsyncSearchRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 	public SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? minCompatibleShardNode) => Qs("min_compatible_shard_node", minCompatibleShardNode);
-	public SubmitAsyncSearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
 	public SubmitAsyncSearchRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+	public SubmitAsyncSearchRequestDescriptor PreFilterShardSize(long? preFilterShardSize) => Qs("pre_filter_shard_size", preFilterShardSize);
+	public SubmitAsyncSearchRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public SubmitAsyncSearchRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public SubmitAsyncSearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
 	public SubmitAsyncSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
 	public SubmitAsyncSearchRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Serverless.Duration? scroll) => Qs("scroll", scroll);
 	public SubmitAsyncSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.Serverless.SearchType? searchType) => Qs("search_type", searchType);
+	public SubmitAsyncSearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public SubmitAsyncSearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public SubmitAsyncSearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Serverless.Field? suggestField) => Qs("suggest_field", suggestField);
 	public SubmitAsyncSearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.Serverless.SuggestMode? suggestMode) => Qs("suggest_mode", suggestMode);
 	public SubmitAsyncSearchRequestDescriptor SuggestSize(long? suggestSize) => Qs("suggest_size", suggestSize);
@@ -2083,20 +2086,29 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
+	private bool? ExplainValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
+	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
 	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>? KnnValue { get; set; }
 	private KnnQueryDescriptor KnnDescriptor { get; set; }
 	private Action<KnnQueryDescriptor> KnnDescriptorAction { get; set; }
 	private Action<KnnQueryDescriptor>[] KnnDescriptorActions { get; set; }
+	private double? MinScoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
+	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
+	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
@@ -2104,6 +2116,11 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 	private Action<Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
 	private Action<Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
+	private bool? SeqNoPrimaryTermValue { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
@@ -2112,20 +2129,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
 	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private int? FromValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
-	private bool? SeqNoPrimaryTermValue { get; set; }
-	private int? SizeValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? SuggestValue { get; set; }
@@ -2225,6 +2228,24 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	}
 
 	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
 	/// </summary>
 	public SubmitAsyncSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
@@ -2263,6 +2284,15 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public SubmitAsyncSearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -2284,6 +2314,15 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
+	{
+		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
@@ -2326,6 +2365,42 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
+	{
+		PitDescriptor = null;
+		PitDescriptorAction = null;
+		PitValue = pit;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	{
+		PitValue = null;
+		PitDescriptorAction = null;
+		PitDescriptor = descriptor;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	{
+		PitValue = null;
+		PitDescriptor = null;
+		PitDescriptorAction = configure;
+		return Self;
+	}
+
 	public SubmitAsyncSearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
@@ -2347,6 +2422,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -2410,6 +2491,48 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
 		RescoreDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public SubmitAsyncSearchRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
+	{
+		SearchAfterValue = searchAfter;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
+	public SubmitAsyncSearchRequestDescriptor Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -2479,126 +2602,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	public SubmitAsyncSearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
-	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
-	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
-	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
-	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public SubmitAsyncSearchRequestDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
-	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -2755,6 +2758,18 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (ExtValue is not null)
+		{
+			writer.WritePropertyName("ext");
+			JsonSerializer.Serialize(writer, ExtValue, options);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -2786,6 +2801,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -2800,6 +2821,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndicesBoostValue is not null)
+		{
+			writer.WritePropertyName("indices_boost");
+			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
 		}
 
 		if (KnnDescriptor is not null)
@@ -2831,6 +2858,28 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>(KnnValue, writer, options);
 		}
 
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
+		if (PitDescriptor is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitDescriptor, options);
+		}
+		else if (PitDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+		}
+		else if (PitValue is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitValue, options);
+		}
+
 		if (PostFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("post_filter");
@@ -2845,6 +2894,12 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		{
 			writer.WritePropertyName("post_filter");
 			JsonSerializer.Serialize(writer, PostFilterValue, options);
+		}
+
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -2890,6 +2945,36 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		{
 			writer.WritePropertyName("rescore");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>(RescoreValue, writer, options);
+		}
+
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SearchAfterValue is not null)
+		{
+			writer.WritePropertyName("search_after");
+			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SliceDescriptor is not null)
@@ -2941,88 +3026,6 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StatsValue is not null)

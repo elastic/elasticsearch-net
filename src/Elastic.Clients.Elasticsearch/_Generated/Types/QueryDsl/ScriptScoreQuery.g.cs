@@ -65,13 +65,28 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+
+	public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// </summary>
+	public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Query used to return documents.</para>
@@ -106,21 +121,6 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
-	/// </summary>
-	public ScriptScoreQueryDescriptor<TDocument> MinScore(float? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
 	/// </summary>
@@ -133,6 +133,18 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -155,18 +167,6 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
 		writer.WritePropertyName("script");
 		JsonSerializer.Serialize(writer, ScriptValue, options);
 		writer.WriteEndObject();
@@ -181,13 +181,28 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+
+	public ScriptScoreQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
+	/// </summary>
+	public ScriptScoreQueryDescriptor MinScore(float? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Query used to return documents.</para>
@@ -222,21 +237,6 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Documents with a score lower than this floating point number are excluded from the search results.</para>
-	/// </summary>
-	public ScriptScoreQueryDescriptor MinScore(float? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
 	/// </summary>
@@ -249,6 +249,18 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -269,18 +281,6 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
 		}
 
 		writer.WritePropertyName("script");

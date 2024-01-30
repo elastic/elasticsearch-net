@@ -143,7 +143,6 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
@@ -157,16 +156,11 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? TypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MultiMatchQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -282,6 +276,12 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public MultiMatchQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
 	/// </summary>
@@ -321,12 +321,6 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -401,6 +395,12 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (SlopValue.HasValue)
 		{
 			writer.WritePropertyName("slop");
@@ -437,7 +437,6 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
@@ -451,16 +450,11 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? TypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MultiMatchQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -576,6 +570,12 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	public MultiMatchQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
 	/// </summary>
@@ -615,12 +615,6 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -695,6 +689,12 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (SlopValue.HasValue)
 		{
 			writer.WritePropertyName("slop");

@@ -195,13 +195,13 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 
 	internal override string OperationName => "get_source";
 
-	public GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetSourceRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public GetSourceRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetSourceRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public GetSourceRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public GetSourceRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public GetSourceRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public GetSourceRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetSourceRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 	public GetSourceRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 	public GetSourceRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.Serverless.VersionType? versionType) => Qs("version_type", versionType);
@@ -246,13 +246,13 @@ public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSo
 
 	internal override string OperationName => "get_source";
 
-	public GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetSourceRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public GetSourceRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetSourceRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public GetSourceRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public GetSourceRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public GetSourceRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public GetSourceRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetSourceRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 	public GetSourceRequestDescriptor Version(long? version) => Qs("version", version);
 	public GetSourceRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.Serverless.VersionType? versionType) => Qs("version_type", versionType);

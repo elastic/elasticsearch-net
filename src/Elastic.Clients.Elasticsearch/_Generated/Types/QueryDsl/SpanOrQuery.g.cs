@@ -51,12 +51,18 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public SpanOrQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of one or more other span type queries.</para>
@@ -103,15 +109,15 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public SpanOrQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (ClausesDescriptor is not null)
 		{
 			writer.WritePropertyName("clauses");
@@ -149,12 +155,6 @@ public sealed partial class SpanOrQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -167,12 +167,18 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> ClausesValue { get; set; }
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
 	private Action<SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public SpanOrQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of one or more other span type queries.</para>
@@ -219,15 +225,15 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 		return Self;
 	}
 
-	public SpanOrQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (ClausesDescriptor is not null)
 		{
 			writer.WritePropertyName("clauses");
@@ -263,12 +269,6 @@ public sealed partial class SpanOrQueryDescriptor : SerializableDescriptor<SpanO
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		writer.WriteEndObject();

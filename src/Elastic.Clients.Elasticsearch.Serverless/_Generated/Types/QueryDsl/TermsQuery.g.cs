@@ -39,15 +39,15 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -75,16 +75,16 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 			JsonSerializer.Serialize(writer, value.Terms, options);
 		}
 
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
 		if (value.Boost.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(value.Boost.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
 		}
 
 		writer.WriteEndObject();
@@ -112,20 +112,20 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
-
-	public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermsQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -157,16 +157,16 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WriteEndObject();
@@ -181,20 +181,20 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
-
-	public TermsQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public TermsQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -232,16 +232,16 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 			JsonSerializer.Serialize(writer, TermsValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WriteEndObject();

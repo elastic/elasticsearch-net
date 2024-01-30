@@ -50,10 +50,10 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? NestedValue { get; set; }
 	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
 	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
@@ -80,6 +80,12 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public NestedSortValueDescriptor<TDocument> MaxChildren(int? maxChildren)
+	{
+		MaxChildrenValue = maxChildren;
+		return Self;
+	}
+
 	public NestedSortValueDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? nested)
 	{
 		NestedDescriptor = null;
@@ -101,12 +107,6 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		NestedValue = null;
 		NestedDescriptor = null;
 		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public NestedSortValueDescriptor<TDocument> MaxChildren(int? maxChildren)
-	{
-		MaxChildrenValue = maxChildren;
 		return Self;
 	}
 
@@ -141,6 +141,12 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
+		if (MaxChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("max_children");
+			writer.WriteNumberValue(MaxChildrenValue.Value);
+		}
+
 		if (NestedDescriptor is not null)
 		{
 			writer.WritePropertyName("nested");
@@ -155,12 +161,6 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
 		}
 
 		writer.WritePropertyName("path");
@@ -180,10 +180,10 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? NestedValue { get; set; }
 	private NestedSortValueDescriptor NestedDescriptor { get; set; }
 	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
-	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? filter)
@@ -210,6 +210,12 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		return Self;
 	}
 
+	public NestedSortValueDescriptor MaxChildren(int? maxChildren)
+	{
+		MaxChildrenValue = maxChildren;
+		return Self;
+	}
+
 	public NestedSortValueDescriptor Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? nested)
 	{
 		NestedDescriptor = null;
@@ -231,12 +237,6 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		NestedValue = null;
 		NestedDescriptor = null;
 		NestedDescriptorAction = configure;
-		return Self;
-	}
-
-	public NestedSortValueDescriptor MaxChildren(int? maxChildren)
-	{
-		MaxChildrenValue = maxChildren;
 		return Self;
 	}
 
@@ -277,6 +277,12 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
+		if (MaxChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("max_children");
+			writer.WriteNumberValue(MaxChildrenValue.Value);
+		}
+
 		if (NestedDescriptor is not null)
 		{
 			writer.WritePropertyName("nested");
@@ -291,12 +297,6 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		{
 			writer.WritePropertyName("nested");
 			JsonSerializer.Serialize(writer, NestedValue, options);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
 		}
 
 		writer.WritePropertyName("path");

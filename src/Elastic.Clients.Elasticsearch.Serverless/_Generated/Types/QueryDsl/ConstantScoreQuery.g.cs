@@ -53,11 +53,17 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query FilterValue { get; set; }
 	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
@@ -92,15 +98,15 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -123,12 +129,6 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -141,11 +141,17 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query FilterValue { get; set; }
 	private QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public ConstantScoreQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Filter query you wish to run. Any returned documents must match this query.<br/>Filter queries do not calculate relevance scores.<br/>To speed up performance, Elasticsearch automatically caches frequently used filter queries.</para>
@@ -180,15 +186,15 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -209,12 +215,6 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		writer.WriteEndObject();

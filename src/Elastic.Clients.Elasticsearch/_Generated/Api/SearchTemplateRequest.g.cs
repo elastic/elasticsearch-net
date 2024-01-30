@@ -62,6 +62,11 @@ public sealed class SearchTemplateRequestParameters : RequestParameters
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>If true, hits.total are rendered as an integer in the response.</para>
+	/// </summary>
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
@@ -75,11 +80,6 @@ public sealed class SearchTemplateRequestParameters : RequestParameters
 	/// <para>The type of the search operation.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <summary>
-	/// <para>If true, hits.total are rendered as an integer in the response.</para>
-	/// </summary>
-	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>
@@ -145,6 +145,12 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>If true, hits.total are rendered as an integer in the response.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -161,12 +167,6 @@ public sealed partial class SearchTemplateRequest : PlainRequest<SearchTemplateR
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
-
-	/// <summary>
-	/// <para>If true, hits.total are rendered as an integer in the response.</para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>If `true`, the response prefixes aggregation and suggester names with their respective types.</para>

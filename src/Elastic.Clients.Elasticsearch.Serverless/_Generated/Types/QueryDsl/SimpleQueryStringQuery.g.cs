@@ -125,9 +125,8 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
 	private string? AnalyzerValue { get; set; }
+	private bool? AnalyzeWildcardValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperatorValue { get; set; }
@@ -139,11 +138,15 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	private bool? LenientValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? QuoteFieldSuffixValue { get; set; }
 
-	public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
+	/// <summary>
+	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// </summary>
+	public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
-		QueryNameValue = queryName;
+		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -153,15 +156,6 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	public SimpleQueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
 		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
-	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
-	{
-		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -261,6 +255,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	public SimpleQueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Suffix appended to quoted text in the query string.</para>
 	/// </summary>
@@ -273,22 +273,16 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (AnalyzeWildcardValue.HasValue)
 		{
 			writer.WritePropertyName("analyze_wildcard");
 			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -353,6 +347,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (!string.IsNullOrEmpty(QuoteFieldSuffixValue))
 		{
 			writer.WritePropertyName("quote_field_suffix");
@@ -371,9 +371,8 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
 	private string? AnalyzerValue { get; set; }
+	private bool? AnalyzeWildcardValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperatorValue { get; set; }
@@ -385,11 +384,15 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	private bool? LenientValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? QuoteFieldSuffixValue { get; set; }
 
-	public SimpleQueryStringQueryDescriptor QueryName(string? queryName)
+	/// <summary>
+	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// </summary>
+	public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer)
 	{
-		QueryNameValue = queryName;
+		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -399,15 +402,6 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
 	{
 		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
-	/// </summary>
-	public SimpleQueryStringQueryDescriptor Analyzer(string? analyzer)
-	{
-		AnalyzerValue = analyzer;
 		return Self;
 	}
 
@@ -507,6 +501,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 		return Self;
 	}
 
+	public SimpleQueryStringQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Suffix appended to quoted text in the query string.</para>
 	/// </summary>
@@ -519,22 +519,16 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
+		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (AnalyzeWildcardValue.HasValue)
 		{
 			writer.WritePropertyName("analyze_wildcard");
 			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
 		}
 
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -599,6 +593,12 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (!string.IsNullOrEmpty(QuoteFieldSuffixValue))
 		{
 			writer.WritePropertyName("quote_field_suffix");

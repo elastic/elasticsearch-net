@@ -39,12 +39,6 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -54,6 +48,12 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 				if (property == "ignore_unmapped")
 				{
 					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -87,12 +87,6 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 			JsonSerializer.Serialize(writer, value.BoundingBox, options);
 		}
 
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
 		if (value.Boost.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -103,6 +97,12 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
 		}
 
 		if (value.ValidationMethod is not null)
@@ -146,18 +146,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
-
-	public GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public GeoBoundingBoxQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -171,6 +165,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	public GeoBoundingBoxQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -211,12 +211,6 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, BoundingBoxValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -227,6 +221,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (ValidationMethodValue is not null)
@@ -247,18 +247,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoBounds BoundingBoxValue { get; set; }
-
-	public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 
 	public GeoBoundingBoxQueryDescriptor Boost(float? boost)
 	{
@@ -272,6 +266,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -318,12 +318,6 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, BoundingBoxValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -334,6 +328,12 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (ValidationMethodValue is not null)
