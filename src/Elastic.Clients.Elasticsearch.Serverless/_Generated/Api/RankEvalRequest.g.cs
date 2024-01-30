@@ -98,16 +98,16 @@ public sealed partial class RankEvalRequest : PlainRequest<RankEvalRequestParame
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
-	/// <para>A set of typical search requests, together with their provided ratings.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("requests")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
-
-	/// <summary>
 	/// <para>Definition of the evaluation metric to calculate.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metric")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? Metric { get; set; }
+
+	/// <summary>
+	/// <para>A set of typical search requests, together with their provided ratings.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("requests")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 }
 
 /// <summary>
@@ -140,13 +140,40 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
+	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
+	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
 	private Core.RankEval.RankEvalRequestItemDescriptor<TDocument> RequestsDescriptor { get; set; }
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor<TDocument>> RequestsDescriptorAction { get; set; }
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] RequestsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
+	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
+	{
+		MetricDescriptor = null;
+		MetricDescriptorAction = null;
+		MetricValue = metric;
+		return Self;
+	}
+
+	public RankEvalRequestDescriptor<TDocument> Metric(Core.RankEval.RankEvalMetricDescriptor descriptor)
+	{
+		MetricValue = null;
+		MetricDescriptorAction = null;
+		MetricDescriptor = descriptor;
+		return Self;
+	}
+
+	public RankEvalRequestDescriptor<TDocument> Metric(Action<Core.RankEval.RankEvalMetricDescriptor> configure)
+	{
+		MetricValue = null;
+		MetricDescriptor = null;
+		MetricDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>A set of typical search requests, together with their provided ratings.</para>
@@ -187,36 +214,25 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Definition of the evaluation metric to calculate.</para>
-	/// </summary>
-	public RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
-	{
-		MetricDescriptor = null;
-		MetricDescriptorAction = null;
-		MetricValue = metric;
-		return Self;
-	}
-
-	public RankEvalRequestDescriptor<TDocument> Metric(Core.RankEval.RankEvalMetricDescriptor descriptor)
-	{
-		MetricValue = null;
-		MetricDescriptorAction = null;
-		MetricDescriptor = descriptor;
-		return Self;
-	}
-
-	public RankEvalRequestDescriptor<TDocument> Metric(Action<Core.RankEval.RankEvalMetricDescriptor> configure)
-	{
-		MetricValue = null;
-		MetricDescriptor = null;
-		MetricDescriptorAction = configure;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (MetricDescriptor is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, MetricDescriptor, options);
+		}
+		else if (MetricDescriptorAction is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, new Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
+		}
+		else if (MetricValue is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, MetricValue, options);
+		}
+
 		if (RequestsDescriptor is not null)
 		{
 			writer.WritePropertyName("requests");
@@ -246,22 +262,6 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 		{
 			writer.WritePropertyName("requests");
 			JsonSerializer.Serialize(writer, RequestsValue, options);
-		}
-
-		if (MetricDescriptor is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricDescriptor, options);
-		}
-		else if (MetricDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, new Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
-		}
-		else if (MetricValue is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -298,13 +298,40 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
+	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
+	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalRequestItem> RequestsValue { get; set; }
 	private Core.RankEval.RankEvalRequestItemDescriptor RequestsDescriptor { get; set; }
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor> RequestsDescriptorAction { get; set; }
 	private Action<Core.RankEval.RankEvalRequestItemDescriptor>[] RequestsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? MetricValue { get; set; }
-	private Core.RankEval.RankEvalMetricDescriptor MetricDescriptor { get; set; }
-	private Action<Core.RankEval.RankEvalMetricDescriptor> MetricDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Definition of the evaluation metric to calculate.</para>
+	/// </summary>
+	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
+	{
+		MetricDescriptor = null;
+		MetricDescriptorAction = null;
+		MetricValue = metric;
+		return Self;
+	}
+
+	public RankEvalRequestDescriptor Metric(Core.RankEval.RankEvalMetricDescriptor descriptor)
+	{
+		MetricValue = null;
+		MetricDescriptorAction = null;
+		MetricDescriptor = descriptor;
+		return Self;
+	}
+
+	public RankEvalRequestDescriptor Metric(Action<Core.RankEval.RankEvalMetricDescriptor> configure)
+	{
+		MetricValue = null;
+		MetricDescriptor = null;
+		MetricDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>A set of typical search requests, together with their provided ratings.</para>
@@ -345,36 +372,25 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Definition of the evaluation metric to calculate.</para>
-	/// </summary>
-	public RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetric? metric)
-	{
-		MetricDescriptor = null;
-		MetricDescriptorAction = null;
-		MetricValue = metric;
-		return Self;
-	}
-
-	public RankEvalRequestDescriptor Metric(Core.RankEval.RankEvalMetricDescriptor descriptor)
-	{
-		MetricValue = null;
-		MetricDescriptorAction = null;
-		MetricDescriptor = descriptor;
-		return Self;
-	}
-
-	public RankEvalRequestDescriptor Metric(Action<Core.RankEval.RankEvalMetricDescriptor> configure)
-	{
-		MetricValue = null;
-		MetricDescriptor = null;
-		MetricDescriptorAction = configure;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (MetricDescriptor is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, MetricDescriptor, options);
+		}
+		else if (MetricDescriptorAction is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, new Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
+		}
+		else if (MetricValue is not null)
+		{
+			writer.WritePropertyName("metric");
+			JsonSerializer.Serialize(writer, MetricValue, options);
+		}
+
 		if (RequestsDescriptor is not null)
 		{
 			writer.WritePropertyName("requests");
@@ -404,22 +420,6 @@ public sealed partial class RankEvalRequestDescriptor : RequestDescriptor<RankEv
 		{
 			writer.WritePropertyName("requests");
 			JsonSerializer.Serialize(writer, RequestsValue, options);
-		}
-
-		if (MetricDescriptor is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricDescriptor, options);
-		}
-		else if (MetricDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, new Core.RankEval.RankEvalMetricDescriptor(MetricDescriptorAction), options);
-		}
-		else if (MetricValue is not null)
-		{
-			writer.WritePropertyName("metric");
-			JsonSerializer.Serialize(writer, MetricValue, options);
 		}
 
 		writer.WriteEndObject();

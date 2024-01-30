@@ -316,12 +316,6 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 					continue;
 				}
 
-				if (property == "shards")
-				{
-					variant.Shards = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "similarity")
 				{
 					variant.Similarity = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarity?>(ref reader, options);
@@ -680,12 +674,6 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 			JsonSerializer.Serialize(writer, value.Settings, options);
 		}
 
-		if (value.Shards.HasValue)
-		{
-			writer.WritePropertyName("shards");
-			writer.WriteNumberValue(value.Shards.Value);
-		}
-
 		if (value.Similarity is not null)
 		{
 			writer.WritePropertyName("similarity");
@@ -814,7 +802,6 @@ public sealed partial class IndexSettings
 	public ICollection<string>? RoutingPath { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSearch? Search { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; set; }
-	public int? Shards { get; set; }
 
 	/// <summary>
 	/// <para>Configure custom similarity settings to customize how search results are scored.</para>
@@ -843,15 +830,6 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? IndexValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> IndexDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? SortValue { get; set; }
-	private IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
 	private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
 	private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
@@ -874,6 +852,9 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
 	private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? IndexValue { get; set; }
+	private IndexSettingsDescriptor<TDocument> IndexDescriptor { get; set; }
+	private Action<IndexSettingsDescriptor<TDocument>> IndexDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
@@ -923,13 +904,18 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSearch? SearchValue { get; set; }
 	private SettingsSearchDescriptor SearchDescriptor { get; set; }
 	private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
-	private int? ShardsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
+	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
+	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
 	private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
 	private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
 	private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
 	private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? SortValue { get; set; }
+	private IndexSegmentSortDescriptor<TDocument> SortDescriptor { get; set; }
+	private Action<IndexSegmentSortDescriptor<TDocument>> SortDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Storage? StoreValue { get; set; }
 	private StorageDescriptor StoreDescriptor { get; set; }
 	private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
@@ -945,78 +931,6 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexVersioning? VersionValue { get; set; }
 	private IndexVersioningDescriptor VersionDescriptor { get; set; }
 	private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
-
-	public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? index)
-	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Index(IndexSettingsDescriptor<TDocument> descriptor)
-	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Index(Action<IndexSettingsDescriptor<TDocument>> configure)
-	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
-	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Settings(IndexSettingsDescriptor<TDocument> descriptor)
-	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
-	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Sort(IndexSegmentSortDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor<TDocument> Sort(Action<IndexSegmentSortDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
 
 	public IndexSettingsDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsAnalysis? analysis)
 	{
@@ -1174,6 +1088,30 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? index)
+	{
+		IndexDescriptor = null;
+		IndexDescriptorAction = null;
+		IndexValue = index;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Index(IndexSettingsDescriptor<TDocument> descriptor)
+	{
+		IndexValue = null;
+		IndexDescriptorAction = null;
+		IndexDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Index(Action<IndexSettingsDescriptor<TDocument>> configure)
+	{
+		IndexValue = null;
+		IndexDescriptor = null;
+		IndexDescriptorAction = configure;
 		return Self;
 	}
 
@@ -1531,9 +1469,27 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public IndexSettingsDescriptor<TDocument> Shards(int? shards)
+	public IndexSettingsDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
 	{
-		ShardsValue = shards;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = null;
+		SettingsValue = settings;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Settings(IndexSettingsDescriptor<TDocument> descriptor)
+	{
+		SettingsValue = null;
+		SettingsDescriptorAction = null;
+		SettingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
+	{
+		SettingsValue = null;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -1585,6 +1541,30 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		SoftDeletesValue = null;
 		SoftDeletesDescriptor = null;
 		SoftDeletesDescriptorAction = configure;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Sort(IndexSegmentSortDescriptor<TDocument> descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor<TDocument> Sort(Action<IndexSegmentSortDescriptor<TDocument>> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = configure;
 		return Self;
 	}
 
@@ -1708,54 +1688,6 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IndexDescriptor is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new IndexSegmentSortDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
 		if (AnalysisDescriptor is not null)
 		{
 			writer.WritePropertyName("analysis");
@@ -1878,6 +1810,22 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndexDescriptor is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, IndexDescriptor, options);
+		}
+		else if (IndexDescriptorAction is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(IndexDescriptorAction), options);
+		}
+		else if (IndexValue is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (IndexingPressureDescriptor is not null)
@@ -2150,10 +2098,20 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, SearchValue, options);
 		}
 
-		if (ShardsValue.HasValue)
+		if (SettingsDescriptor is not null)
 		{
-			writer.WritePropertyName("shards");
-			writer.WriteNumberValue(ShardsValue.Value);
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+		}
+		else if (SettingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+		}
+		else if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
 		}
 
 		if (SimilarityDescriptor is not null)
@@ -2186,6 +2144,22 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("soft_deletes");
 			JsonSerializer.Serialize(writer, SoftDeletesValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new IndexSegmentSortDescriptor<TDocument>(SortDescriptorAction), options);
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortValue, options);
 		}
 
 		if (StoreDescriptor is not null)
@@ -2291,15 +2265,6 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? IndexValue { get; set; }
-	private IndexSettingsDescriptor IndexDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> IndexDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? SortValue { get; set; }
-	private IndexSegmentSortDescriptor SortDescriptor { get; set; }
-	private Action<IndexSegmentSortDescriptor> SortDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsAnalysis? AnalysisValue { get; set; }
 	private IndexSettingsAnalysisDescriptor AnalysisDescriptor { get; set; }
 	private Action<IndexSettingsAnalysisDescriptor> AnalysisDescriptorAction { get; set; }
@@ -2322,6 +2287,9 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsHighlight? HighlightValue { get; set; }
 	private SettingsHighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<SettingsHighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? IndexValue { get; set; }
+	private IndexSettingsDescriptor IndexDescriptor { get; set; }
+	private Action<IndexSettingsDescriptor> IndexDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressure? IndexingPressureValue { get; set; }
 	private IndexingPressureDescriptor IndexingPressureDescriptor { get; set; }
 	private Action<IndexingPressureDescriptor> IndexingPressureDescriptorAction { get; set; }
@@ -2371,13 +2339,18 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSearch? SearchValue { get; set; }
 	private SettingsSearchDescriptor SearchDescriptor { get; set; }
 	private Action<SettingsSearchDescriptor> SearchDescriptorAction { get; set; }
-	private int? ShardsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
+	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
+	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SettingsSimilarity? SimilarityValue { get; set; }
 	private SettingsSimilarityDescriptor SimilarityDescriptor { get; set; }
 	private Action<SettingsSimilarityDescriptor> SimilarityDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SoftDeletes? SoftDeletesValue { get; set; }
 	private SoftDeletesDescriptor SoftDeletesDescriptor { get; set; }
 	private Action<SoftDeletesDescriptor> SoftDeletesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? SortValue { get; set; }
+	private IndexSegmentSortDescriptor SortDescriptor { get; set; }
+	private Action<IndexSegmentSortDescriptor> SortDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Storage? StoreValue { get; set; }
 	private StorageDescriptor StoreDescriptor { get; set; }
 	private Action<StorageDescriptor> StoreDescriptorAction { get; set; }
@@ -2393,78 +2366,6 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexVersioning? VersionValue { get; set; }
 	private IndexVersioningDescriptor VersionDescriptor { get; set; }
 	private Action<IndexVersioningDescriptor> VersionDescriptorAction { get; set; }
-
-	public IndexSettingsDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? index)
-	{
-		IndexDescriptor = null;
-		IndexDescriptorAction = null;
-		IndexValue = index;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Index(IndexSettingsDescriptor descriptor)
-	{
-		IndexValue = null;
-		IndexDescriptorAction = null;
-		IndexDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Index(Action<IndexSettingsDescriptor> configure)
-	{
-		IndexValue = null;
-		IndexDescriptor = null;
-		IndexDescriptorAction = configure;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
-	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Settings(IndexSettingsDescriptor descriptor)
-	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Settings(Action<IndexSettingsDescriptor> configure)
-	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? sort)
-	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Sort(IndexSegmentSortDescriptor descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public IndexSettingsDescriptor Sort(Action<IndexSegmentSortDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
 
 	public IndexSettingsDescriptor Analysis(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsAnalysis? analysis)
 	{
@@ -2622,6 +2523,30 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? index)
+	{
+		IndexDescriptor = null;
+		IndexDescriptorAction = null;
+		IndexValue = index;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Index(IndexSettingsDescriptor descriptor)
+	{
+		IndexValue = null;
+		IndexDescriptorAction = null;
+		IndexDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Index(Action<IndexSettingsDescriptor> configure)
+	{
+		IndexValue = null;
+		IndexDescriptor = null;
+		IndexDescriptorAction = configure;
 		return Self;
 	}
 
@@ -2979,9 +2904,27 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		return Self;
 	}
 
-	public IndexSettingsDescriptor Shards(int? shards)
+	public IndexSettingsDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
 	{
-		ShardsValue = shards;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = null;
+		SettingsValue = settings;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Settings(IndexSettingsDescriptor descriptor)
+	{
+		SettingsValue = null;
+		SettingsDescriptorAction = null;
+		SettingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Settings(Action<IndexSettingsDescriptor> configure)
+	{
+		SettingsValue = null;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -3033,6 +2976,30 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		SoftDeletesValue = null;
 		SoftDeletesDescriptor = null;
 		SoftDeletesDescriptorAction = configure;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSegmentSort? sort)
+	{
+		SortDescriptor = null;
+		SortDescriptorAction = null;
+		SortValue = sort;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Sort(IndexSegmentSortDescriptor descriptor)
+	{
+		SortValue = null;
+		SortDescriptorAction = null;
+		SortDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexSettingsDescriptor Sort(Action<IndexSegmentSortDescriptor> configure)
+	{
+		SortValue = null;
+		SortDescriptor = null;
+		SortDescriptorAction = configure;
 		return Self;
 	}
 
@@ -3156,54 +3123,6 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IndexDescriptor is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexDescriptor, options);
-		}
-		else if (IndexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(IndexDescriptorAction), options);
-		}
-		else if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new IndexSegmentSortDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
 		if (AnalysisDescriptor is not null)
 		{
 			writer.WritePropertyName("analysis");
@@ -3326,6 +3245,22 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndexDescriptor is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, IndexDescriptor, options);
+		}
+		else if (IndexDescriptorAction is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(IndexDescriptorAction), options);
+		}
+		else if (IndexValue is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (IndexingPressureDescriptor is not null)
@@ -3598,10 +3533,20 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 			JsonSerializer.Serialize(writer, SearchValue, options);
 		}
 
-		if (ShardsValue.HasValue)
+		if (SettingsDescriptor is not null)
 		{
-			writer.WritePropertyName("shards");
-			writer.WriteNumberValue(ShardsValue.Value);
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+		}
+		else if (SettingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(SettingsDescriptorAction), options);
+		}
+		else if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
 		}
 
 		if (SimilarityDescriptor is not null)
@@ -3634,6 +3579,22 @@ public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<Ind
 		{
 			writer.WritePropertyName("soft_deletes");
 			JsonSerializer.Serialize(writer, SoftDeletesValue, options);
+		}
+
+		if (SortDescriptor is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortDescriptor, options);
+		}
+		else if (SortDescriptorAction is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, new IndexSegmentSortDescriptor(SortDescriptorAction), options);
+		}
+		else if (SortValue is not null)
+		{
+			writer.WritePropertyName("sort");
+			JsonSerializer.Serialize(writer, SortValue, options);
 		}
 
 		if (StoreDescriptor is not null)

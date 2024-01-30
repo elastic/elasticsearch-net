@@ -83,19 +83,34 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
 	private FunctionScoreDescriptor<TDocument> FunctionsDescriptor { get; set; }
 	private Action<FunctionScoreDescriptor<TDocument>> FunctionsDescriptorAction { get; set; }
 	private Action<FunctionScoreDescriptor<TDocument>>[] FunctionsDescriptorActions { get; set; }
+	private double? MaxBoostValue { get; set; }
+	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
-	private double? MaxBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
+
+	public FunctionScoreQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Defines how he newly computed score is combined with the score of the query</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor<TDocument> BoostMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? boostMode)
+	{
+		BoostModeValue = boostMode;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>One or more functions that compute a new score for each document returned by the query.</para>
@@ -137,6 +152,24 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
+	/// <para>Restricts the new score to not exceed the provided limit.</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor<TDocument> MaxBoost(double? maxBoost)
+	{
+		MaxBoostValue = maxBoost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Excludes documents that do not meet the provided score threshold.</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor<TDocument> MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>A query that determines the documents for which a new score is computed.</para>
 	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
@@ -169,39 +202,6 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines how he newly computed score is combined with the score of the query</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor<TDocument> BoostMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? boostMode)
-	{
-		BoostModeValue = boostMode;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Restricts the new score to not exceed the provided limit.</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor<TDocument> MaxBoost(double? maxBoost)
-	{
-		MaxBoostValue = maxBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Excludes documents that do not meet the provided score threshold.</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor<TDocument> MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Specifies how the computed scores are combined</para>
 	/// </summary>
@@ -214,6 +214,18 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (BoostModeValue is not null)
+		{
+			writer.WritePropertyName("boost_mode");
+			JsonSerializer.Serialize(writer, BoostModeValue, options);
+		}
+
 		if (FunctionsDescriptor is not null)
 		{
 			writer.WritePropertyName("functions");
@@ -245,6 +257,18 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, FunctionsValue, options);
 		}
 
+		if (MaxBoostValue.HasValue)
+		{
+			writer.WritePropertyName("max_boost");
+			writer.WriteNumberValue(MaxBoostValue.Value);
+		}
+
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -267,30 +291,6 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (BoostModeValue is not null)
-		{
-			writer.WritePropertyName("boost_mode");
-			JsonSerializer.Serialize(writer, BoostModeValue, options);
-		}
-
-		if (MaxBoostValue.HasValue)
-		{
-			writer.WritePropertyName("max_boost");
-			writer.WriteNumberValue(MaxBoostValue.Value);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
 		if (ScoreModeValue is not null)
 		{
 			writer.WritePropertyName("score_mode");
@@ -309,19 +309,34 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
 	private FunctionScoreDescriptor FunctionsDescriptor { get; set; }
 	private Action<FunctionScoreDescriptor> FunctionsDescriptorAction { get; set; }
 	private Action<FunctionScoreDescriptor>[] FunctionsDescriptorActions { get; set; }
+	private double? MaxBoostValue { get; set; }
+	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
-	private double? MaxBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
+
+	public FunctionScoreQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Defines how he newly computed score is combined with the score of the query</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor BoostMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? boostMode)
+	{
+		BoostModeValue = boostMode;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>One or more functions that compute a new score for each document returned by the query.</para>
@@ -363,6 +378,24 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
+	/// <para>Restricts the new score to not exceed the provided limit.</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor MaxBoost(double? maxBoost)
+	{
+		MaxBoostValue = maxBoost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Excludes documents that do not meet the provided score threshold.</para>
+	/// </summary>
+	public FunctionScoreQueryDescriptor MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>A query that determines the documents for which a new score is computed.</para>
 	/// </summary>
 	public FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
@@ -395,39 +428,6 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines how he newly computed score is combined with the score of the query</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor BoostMode(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionBoostMode? boostMode)
-	{
-		BoostModeValue = boostMode;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Restricts the new score to not exceed the provided limit.</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor MaxBoost(double? maxBoost)
-	{
-		MaxBoostValue = maxBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Excludes documents that do not meet the provided score threshold.</para>
-	/// </summary>
-	public FunctionScoreQueryDescriptor MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Specifies how the computed scores are combined</para>
 	/// </summary>
@@ -440,6 +440,18 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (BoostModeValue is not null)
+		{
+			writer.WritePropertyName("boost_mode");
+			JsonSerializer.Serialize(writer, BoostModeValue, options);
+		}
+
 		if (FunctionsDescriptor is not null)
 		{
 			writer.WritePropertyName("functions");
@@ -471,6 +483,18 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, FunctionsValue, options);
 		}
 
+		if (MaxBoostValue.HasValue)
+		{
+			writer.WritePropertyName("max_boost");
+			writer.WriteNumberValue(MaxBoostValue.Value);
+		}
+
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -491,30 +515,6 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (BoostModeValue is not null)
-		{
-			writer.WritePropertyName("boost_mode");
-			JsonSerializer.Serialize(writer, BoostModeValue, options);
-		}
-
-		if (MaxBoostValue.HasValue)
-		{
-			writer.WritePropertyName("max_boost");
-			writer.WriteNumberValue(MaxBoostValue.Value);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
 		}
 
 		if (ScoreModeValue is not null)

@@ -196,14 +196,32 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
+	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name ModelIdValue { get; set; }
+
+	public InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
+	{
+		BucketsPathValue = bucketsPath;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Contains the inference type and its options.</para>
@@ -232,24 +250,6 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor<TDocument> BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
-	{
-		BucketsPathValue = bucketsPath;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor<TDocument> Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor<TDocument> GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
-	{
-		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
 	public InferenceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -270,22 +270,6 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		writer.WriteStartObject();
 		writer.WritePropertyName("inference");
 		writer.WriteStartObject();
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
-
 		if (BucketsPathValue is not null)
 		{
 			writer.WritePropertyName("buckets_path");
@@ -302,6 +286,22 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+		}
+
+		if (InferenceConfigDescriptor is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+		}
+		else if (InferenceConfigDescriptorAction is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+		}
+		else if (InferenceConfigValue is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
 		writer.WritePropertyName("model_id");
@@ -325,14 +325,32 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
+	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
+	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name ModelIdValue { get; set; }
+
+	public InferenceAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
+	{
+		BucketsPathValue = bucketsPath;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
+	{
+		GapPolicyValue = gapPolicy;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Contains the inference type and its options.</para>
@@ -361,24 +379,6 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
-	{
-		BucketsPathValue = bucketsPath;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
-	{
-		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
 	public InferenceAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -399,22 +399,6 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		writer.WriteStartObject();
 		writer.WritePropertyName("inference");
 		writer.WriteStartObject();
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
-
 		if (BucketsPathValue is not null)
 		{
 			writer.WritePropertyName("buckets_path");
@@ -431,6 +415,22 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
+		}
+
+		if (InferenceConfigDescriptor is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
+		}
+		else if (InferenceConfigDescriptorAction is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+		}
+		else if (InferenceConfigValue is not null)
+		{
+			writer.WritePropertyName("inference_config");
+			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
 		writer.WritePropertyName("model_id");

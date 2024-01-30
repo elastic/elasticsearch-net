@@ -63,14 +63,20 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> ClausesValue { get; set; }
 	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 	private bool? InOrderValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
+
+	public SpanNearQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of one or more other span type queries.</para>
@@ -111,24 +117,18 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public SpanNearQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Controls whether matches are required to be in-order.</para>
 	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> InOrder(bool? inOrder = true)
 	{
 		InOrderValue = inOrder;
+		return Self;
+	}
+
+	public SpanNearQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -144,6 +144,12 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (ClausesDescriptor is not null)
 		{
 			writer.WritePropertyName("clauses");
@@ -175,22 +181,16 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, ClausesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		if (InOrderValue.HasValue)
 		{
 			writer.WritePropertyName("in_order");
 			writer.WriteBooleanValue(InOrderValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (SlopValue.HasValue)
@@ -211,14 +211,20 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> ClausesValue { get; set; }
 	private SpanQueryDescriptor ClausesDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
 	private Action<SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 	private bool? InOrderValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
+
+	public SpanNearQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of one or more other span type queries.</para>
@@ -259,24 +265,18 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public SpanNearQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Controls whether matches are required to be in-order.</para>
 	/// </summary>
 	public SpanNearQueryDescriptor InOrder(bool? inOrder = true)
 	{
 		InOrderValue = inOrder;
+		return Self;
+	}
+
+	public SpanNearQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -292,6 +292,12 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (ClausesDescriptor is not null)
 		{
 			writer.WritePropertyName("clauses");
@@ -323,22 +329,16 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 			JsonSerializer.Serialize(writer, ClausesValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		if (InOrderValue.HasValue)
 		{
 			writer.WritePropertyName("in_order");
 			writer.WriteBooleanValue(InOrderValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (SlopValue.HasValue)

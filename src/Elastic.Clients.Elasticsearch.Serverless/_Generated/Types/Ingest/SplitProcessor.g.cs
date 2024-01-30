@@ -81,55 +81,19 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private bool? PreserveTrailingValue { get; set; }
 	private string SeparatorValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
-
-	public SplitProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public SplitProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -173,6 +137,42 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	public SplitProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
 		return Self;
 	}
 
@@ -221,6 +221,32 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -250,32 +276,6 @@ public sealed partial class SplitProcessorDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
 		if (PreserveTrailingValue.HasValue)
@@ -310,55 +310,19 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private bool? PreserveTrailingValue { get; set; }
 	private string SeparatorValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
-
-	public SplitProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public SplitProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public SplitProcessorDescriptor Description(string? description)
 	{
@@ -411,6 +375,42 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	public SplitProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public SplitProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
 		return Self;
 	}
 
@@ -468,6 +468,32 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -497,32 +523,6 @@ public sealed partial class SplitProcessorDescriptor : SerializableDescriptor<Sp
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
 		if (PreserveTrailingValue.HasValue)

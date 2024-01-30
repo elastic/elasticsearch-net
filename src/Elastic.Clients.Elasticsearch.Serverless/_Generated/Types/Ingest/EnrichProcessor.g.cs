@@ -93,57 +93,21 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private int? MaxMatchesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private bool? OverrideValue { get; set; }
 	private string PolicyNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.GeoShapeRelation? ShapeRelationValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field TargetFieldValue { get; set; }
-
-	public EnrichProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public EnrichProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -196,6 +160,42 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	public EnrichProcessorDescriptor<TDocument> MaxMatches(int? maxMatches)
 	{
 		MaxMatchesValue = maxMatches;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
 		return Self;
 	}
 
@@ -253,37 +253,6 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");
@@ -314,6 +283,37 @@ public sealed partial class EnrichProcessorDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("max_matches");
 			writer.WriteNumberValue(MaxMatchesValue.Value);
+		}
+
+		if (OnFailureDescriptor is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorAction is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorActions is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			foreach (var action in OnFailureDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (OnFailureValue is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
 		if (OverrideValue.HasValue)
@@ -350,57 +350,21 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private int? MaxMatchesValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private bool? OverrideValue { get; set; }
 	private string PolicyNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.GeoShapeRelation? ShapeRelationValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field TargetFieldValue { get; set; }
-
-	public EnrichProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public EnrichProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public EnrichProcessorDescriptor Description(string? description)
 	{
@@ -462,6 +426,42 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	public EnrichProcessorDescriptor MaxMatches(int? maxMatches)
 	{
 		MaxMatchesValue = maxMatches;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public EnrichProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
 		return Self;
 	}
 
@@ -528,37 +528,6 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");
@@ -589,6 +558,37 @@ public sealed partial class EnrichProcessorDescriptor : SerializableDescriptor<E
 		{
 			writer.WritePropertyName("max_matches");
 			writer.WriteNumberValue(MaxMatchesValue.Value);
+		}
+
+		if (OnFailureDescriptor is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorAction is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorActions is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			foreach (var action in OnFailureDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (OnFailureValue is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
 		if (OverrideValue.HasValue)

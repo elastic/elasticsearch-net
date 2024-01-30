@@ -104,40 +104,13 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? PipelineValue { get; set; }
-	private PipelineDescriptor<TDocument> PipelineDescriptor { get; set; }
-	private Action<PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? DocsValue { get; set; }
 	private DocumentDescriptor DocsDescriptor { get; set; }
 	private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
 	private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
-	/// </summary>
-	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? pipeline)
-	{
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = null;
-		PipelineValue = pipeline;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor<TDocument> Pipeline(PipelineDescriptor<TDocument> descriptor)
-	{
-		PipelineValue = null;
-		PipelineDescriptorAction = null;
-		PipelineDescriptor = descriptor;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor<TDocument> Pipeline(Action<PipelineDescriptor<TDocument>> configure)
-	{
-		PipelineValue = null;
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? PipelineValue { get; set; }
+	private PipelineDescriptor<TDocument> PipelineDescriptor { get; set; }
+	private Action<PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Sample documents to test in the pipeline.</para>
@@ -178,25 +151,36 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
+	/// </summary>
+	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? pipeline)
+	{
+		PipelineDescriptor = null;
+		PipelineDescriptorAction = null;
+		PipelineValue = pipeline;
+		return Self;
+	}
+
+	public SimulateRequestDescriptor<TDocument> Pipeline(PipelineDescriptor<TDocument> descriptor)
+	{
+		PipelineValue = null;
+		PipelineDescriptorAction = null;
+		PipelineDescriptor = descriptor;
+		return Self;
+	}
+
+	public SimulateRequestDescriptor<TDocument> Pipeline(Action<PipelineDescriptor<TDocument>> configure)
+	{
+		PipelineValue = null;
+		PipelineDescriptor = null;
+		PipelineDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (PipelineDescriptor is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
-		}
-		else if (PipelineDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, new PipelineDescriptor<TDocument>(PipelineDescriptorAction), options);
-		}
-		else if (PipelineValue is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineValue, options);
-		}
-
 		if (DocsDescriptor is not null)
 		{
 			writer.WritePropertyName("docs");
@@ -226,6 +210,22 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 		{
 			writer.WritePropertyName("docs");
 			JsonSerializer.Serialize(writer, DocsValue, options);
+		}
+
+		if (PipelineDescriptor is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
+		}
+		else if (PipelineDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, new PipelineDescriptor<TDocument>(PipelineDescriptorAction), options);
+		}
+		else if (PipelineValue is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, PipelineValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -259,40 +259,13 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? PipelineValue { get; set; }
-	private PipelineDescriptor PipelineDescriptor { get; set; }
-	private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Document>? DocsValue { get; set; }
 	private DocumentDescriptor DocsDescriptor { get; set; }
 	private Action<DocumentDescriptor> DocsDescriptorAction { get; set; }
 	private Action<DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-
-	/// <summary>
-	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
-	/// </summary>
-	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? pipeline)
-	{
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = null;
-		PipelineValue = pipeline;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor Pipeline(PipelineDescriptor descriptor)
-	{
-		PipelineValue = null;
-		PipelineDescriptorAction = null;
-		PipelineDescriptor = descriptor;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor Pipeline(Action<PipelineDescriptor> configure)
-	{
-		PipelineValue = null;
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? PipelineValue { get; set; }
+	private PipelineDescriptor PipelineDescriptor { get; set; }
+	private Action<PipelineDescriptor> PipelineDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Sample documents to test in the pipeline.</para>
@@ -333,25 +306,36 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Pipeline to test.<br/>If you don’t specify the `pipeline` request path parameter, this parameter is required.<br/>If you specify both this and the request path parameter, the API only uses the request path parameter.</para>
+	/// </summary>
+	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.Pipeline? pipeline)
+	{
+		PipelineDescriptor = null;
+		PipelineDescriptorAction = null;
+		PipelineValue = pipeline;
+		return Self;
+	}
+
+	public SimulateRequestDescriptor Pipeline(PipelineDescriptor descriptor)
+	{
+		PipelineValue = null;
+		PipelineDescriptorAction = null;
+		PipelineDescriptor = descriptor;
+		return Self;
+	}
+
+	public SimulateRequestDescriptor Pipeline(Action<PipelineDescriptor> configure)
+	{
+		PipelineValue = null;
+		PipelineDescriptor = null;
+		PipelineDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (PipelineDescriptor is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
-		}
-		else if (PipelineDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
-		}
-		else if (PipelineValue is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineValue, options);
-		}
-
 		if (DocsDescriptor is not null)
 		{
 			writer.WritePropertyName("docs");
@@ -381,6 +365,22 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 		{
 			writer.WritePropertyName("docs");
 			JsonSerializer.Serialize(writer, DocsValue, options);
+		}
+
+		if (PipelineDescriptor is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
+		}
+		else if (PipelineDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, new PipelineDescriptor(PipelineDescriptorAction), options);
+		}
+		else if (PipelineValue is not null)
+		{
+			writer.WritePropertyName("pipeline");
+			JsonSerializer.Serialize(writer, PipelineValue, options);
 		}
 
 		writer.WriteEndObject();

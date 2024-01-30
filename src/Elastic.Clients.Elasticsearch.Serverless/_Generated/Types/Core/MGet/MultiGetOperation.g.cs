@@ -74,8 +74,8 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 
 	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
@@ -99,20 +99,20 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>If `false`, excludes all _source fields.</para>
-	/// </summary>
-	public MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
-	{
-		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
 	/// </summary>
 	public MultiGetOperationDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
 		RoutingValue = routing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `false`, excludes all _source fields.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
+	{
+		SourceValue = source;
 		return Self;
 	}
 
@@ -148,16 +148,16 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
-		if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (RoutingValue is not null)
 		{
 			writer.WritePropertyName("routing");
 			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
+		if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		if (StoredFieldsValue is not null)

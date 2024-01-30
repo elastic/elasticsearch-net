@@ -201,9 +201,9 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 	public HealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 	public HealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public HealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.Serverless.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
+	public HealthRequestDescriptor<TDocument> WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 	public HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
-	public HealthRequestDescriptor<TDocument> WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.Serverless.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 
 	public HealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
@@ -243,9 +243,9 @@ public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRe
 	public HealthRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 	public HealthRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public HealthRequestDescriptor WaitForEvents(Elastic.Clients.Elasticsearch.Serverless.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
+	public HealthRequestDescriptor WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 	public HealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
-	public HealthRequestDescriptor WaitForNodes(Union<string?, int?>? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.Serverless.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
 
 	public HealthRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)

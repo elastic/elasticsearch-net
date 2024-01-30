@@ -271,6 +271,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> ShortNumber(PropertyName propertyName, ShortNumberProperty shortNumberProperty) => AssignVariant(propertyName, shortNumberProperty);
 	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName, Action<SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName, SparseVectorProperty sparseVectorProperty) => AssignVariant(propertyName, sparseVectorProperty);
+	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName, Action<SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName, Action<TextPropertyDescriptor<TDocument>> configure) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName, TextProperty textProperty) => AssignVariant(propertyName, textProperty);
@@ -370,6 +375,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<NestedProperty>(ref reader, options);
 			case "flattened":
 				return JsonSerializer.Deserialize<FlattenedProperty>(ref reader, options);
+			case "sparse_vector":
+				return JsonSerializer.Deserialize<SparseVectorProperty>(ref reader, options);
 			case "dense_vector":
 				return JsonSerializer.Deserialize<DenseVectorProperty>(ref reader, options);
 			case "aggregate_metric_double":
@@ -508,6 +515,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "flattened":
 				JsonSerializer.Serialize(writer, value, typeof(FlattenedProperty), options);
+				return;
+			case "sparse_vector":
+				JsonSerializer.Serialize(writer, value, typeof(SparseVectorProperty), options);
 				return;
 			case "dense_vector":
 				JsonSerializer.Serialize(writer, value, typeof(DenseVectorProperty), options);

@@ -206,8 +206,8 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 
 	internal override string OperationName => "mtermvectors";
 
-	public MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields) => Qs("fields", fields);
+	public MultiTermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor<TDocument> Offsets(bool? offsets = true) => Qs("offsets", offsets);
 	public MultiTermVectorsRequestDescriptor<TDocument> Payloads(bool? payloads = true) => Qs("payloads", payloads);
 	public MultiTermVectorsRequestDescriptor<TDocument> Positions(bool? positions = true) => Qs("positions", positions);
@@ -341,8 +341,8 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 
 	internal override string OperationName => "mtermvectors";
 
-	public MultiTermVectorsRequestDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields) => Qs("fields", fields);
+	public MultiTermVectorsRequestDescriptor FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
 	public MultiTermVectorsRequestDescriptor Offsets(bool? offsets = true) => Qs("offsets", offsets);
 	public MultiTermVectorsRequestDescriptor Payloads(bool? payloads = true) => Qs("payloads", payloads);
 	public MultiTermVectorsRequestDescriptor Positions(bool? positions = true) => Qs("positions", positions);

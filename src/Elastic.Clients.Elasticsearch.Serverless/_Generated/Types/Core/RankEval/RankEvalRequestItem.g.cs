@@ -68,43 +68,16 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-	private RankEvalQueryDescriptor<TDocument> RequestDescriptor { get; set; }
-	private Action<RankEvalQueryDescriptor<TDocument>> RequestDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
 	private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
 	private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
+	private RankEvalQueryDescriptor<TDocument> RequestDescriptor { get; set; }
+	private Action<RankEvalQueryDescriptor<TDocument>> RequestDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id? TemplateIdValue { get; set; }
-
-	/// <summary>
-	/// <para>The query being evaluated.</para>
-	/// </summary>
-	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
-	{
-		RequestDescriptor = null;
-		RequestDescriptorAction = null;
-		RequestValue = request;
-		return Self;
-	}
-
-	public RankEvalRequestItemDescriptor<TDocument> Request(RankEvalQueryDescriptor<TDocument> descriptor)
-	{
-		RequestValue = null;
-		RequestDescriptorAction = null;
-		RequestDescriptor = descriptor;
-		return Self;
-	}
-
-	public RankEvalRequestItemDescriptor<TDocument> Request(Action<RankEvalQueryDescriptor<TDocument>> configure)
-	{
-		RequestValue = null;
-		RequestDescriptor = null;
-		RequestDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The search request’s ID, used to group result details later.</para>
@@ -164,6 +137,33 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
+	/// <para>The query being evaluated.</para>
+	/// </summary>
+	public RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
+	{
+		RequestDescriptor = null;
+		RequestDescriptorAction = null;
+		RequestValue = request;
+		return Self;
+	}
+
+	public RankEvalRequestItemDescriptor<TDocument> Request(RankEvalQueryDescriptor<TDocument> descriptor)
+	{
+		RequestValue = null;
+		RequestDescriptorAction = null;
+		RequestDescriptor = descriptor;
+		return Self;
+	}
+
+	public RankEvalRequestItemDescriptor<TDocument> Request(Action<RankEvalQueryDescriptor<TDocument>> configure)
+	{
+		RequestValue = null;
+		RequestDescriptor = null;
+		RequestDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The search template Id</para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor<TDocument> TemplateId(Elastic.Clients.Elasticsearch.Serverless.Id? templateId)
@@ -175,22 +175,6 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (RequestDescriptor is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestDescriptor, options);
-		}
-		else if (RequestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, new RankEvalQueryDescriptor<TDocument>(RequestDescriptorAction), options);
-		}
-		else if (RequestValue is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestValue, options);
-		}
-
 		writer.WritePropertyName("id");
 		JsonSerializer.Serialize(writer, IdValue, options);
 		if (ParamsValue is not null)
@@ -230,6 +214,22 @@ public sealed partial class RankEvalRequestItemDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, RatingsValue, options);
 		}
 
+		if (RequestDescriptor is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, RequestDescriptor, options);
+		}
+		else if (RequestDescriptorAction is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, new RankEvalQueryDescriptor<TDocument>(RequestDescriptorAction), options);
+		}
+		else if (RequestValue is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, RequestValue, options);
+		}
+
 		if (TemplateIdValue is not null)
 		{
 			writer.WritePropertyName("template_id");
@@ -248,43 +248,16 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
-	private RankEvalQueryDescriptor RequestDescriptor { get; set; }
-	private Action<RankEvalQueryDescriptor> RequestDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id IdValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.DocumentRating> RatingsValue { get; set; }
 	private DocumentRatingDescriptor RatingsDescriptor { get; set; }
 	private Action<DocumentRatingDescriptor> RatingsDescriptorAction { get; set; }
 	private Action<DocumentRatingDescriptor>[] RatingsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? RequestValue { get; set; }
+	private RankEvalQueryDescriptor RequestDescriptor { get; set; }
+	private Action<RankEvalQueryDescriptor> RequestDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id? TemplateIdValue { get; set; }
-
-	/// <summary>
-	/// <para>The query being evaluated.</para>
-	/// </summary>
-	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
-	{
-		RequestDescriptor = null;
-		RequestDescriptorAction = null;
-		RequestValue = request;
-		return Self;
-	}
-
-	public RankEvalRequestItemDescriptor Request(RankEvalQueryDescriptor descriptor)
-	{
-		RequestValue = null;
-		RequestDescriptorAction = null;
-		RequestDescriptor = descriptor;
-		return Self;
-	}
-
-	public RankEvalRequestItemDescriptor Request(Action<RankEvalQueryDescriptor> configure)
-	{
-		RequestValue = null;
-		RequestDescriptor = null;
-		RequestDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The search request’s ID, used to group result details later.</para>
@@ -344,6 +317,33 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	}
 
 	/// <summary>
+	/// <para>The query being evaluated.</para>
+	/// </summary>
+	public RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalQuery? request)
+	{
+		RequestDescriptor = null;
+		RequestDescriptorAction = null;
+		RequestValue = request;
+		return Self;
+	}
+
+	public RankEvalRequestItemDescriptor Request(RankEvalQueryDescriptor descriptor)
+	{
+		RequestValue = null;
+		RequestDescriptorAction = null;
+		RequestDescriptor = descriptor;
+		return Self;
+	}
+
+	public RankEvalRequestItemDescriptor Request(Action<RankEvalQueryDescriptor> configure)
+	{
+		RequestValue = null;
+		RequestDescriptor = null;
+		RequestDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The search template Id</para>
 	/// </summary>
 	public RankEvalRequestItemDescriptor TemplateId(Elastic.Clients.Elasticsearch.Serverless.Id? templateId)
@@ -355,22 +355,6 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (RequestDescriptor is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestDescriptor, options);
-		}
-		else if (RequestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, new RankEvalQueryDescriptor(RequestDescriptorAction), options);
-		}
-		else if (RequestValue is not null)
-		{
-			writer.WritePropertyName("request");
-			JsonSerializer.Serialize(writer, RequestValue, options);
-		}
-
 		writer.WritePropertyName("id");
 		JsonSerializer.Serialize(writer, IdValue, options);
 		if (ParamsValue is not null)
@@ -408,6 +392,22 @@ public sealed partial class RankEvalRequestItemDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("ratings");
 			JsonSerializer.Serialize(writer, RatingsValue, options);
+		}
+
+		if (RequestDescriptor is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, RequestDescriptor, options);
+		}
+		else if (RequestDescriptorAction is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, new RankEvalQueryDescriptor(RequestDescriptorAction), options);
+		}
+		else if (RequestValue is not null)
+		{
+			writer.WritePropertyName("request");
+			JsonSerializer.Serialize(writer, RequestValue, options);
 		}
 
 		if (TemplateIdValue is not null)

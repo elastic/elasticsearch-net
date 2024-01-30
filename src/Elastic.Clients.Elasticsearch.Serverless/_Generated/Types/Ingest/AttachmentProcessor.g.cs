@@ -93,10 +93,6 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
@@ -104,46 +100,14 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	private bool? IgnoreMissingValue { get; set; }
 	private long? IndexedCharsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? IndexedCharsFieldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
 	private string? ResourceNameValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
-
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public AttachmentProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -217,6 +181,42 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
 	/// </summary>
@@ -262,37 +262,6 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");
@@ -331,6 +300,37 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, IndexedCharsFieldValue, options);
 		}
 
+		if (OnFailureDescriptor is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorAction is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorActions is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			foreach (var action in OnFailureDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (OnFailureValue is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			JsonSerializer.Serialize(writer, OnFailureValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
@@ -367,10 +367,6 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
@@ -378,46 +374,14 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	private bool? IgnoreMissingValue { get; set; }
 	private long? IndexedCharsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? IndexedCharsFieldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
 	private string? ResourceNameValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
-
-	public AttachmentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public AttachmentProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public AttachmentProcessorDescriptor Description(string? description)
 	{
@@ -509,6 +473,42 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public AttachmentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public AttachmentProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Array of properties to select to be stored.<br/>Can be `content`, `title`, `name`, `author`, `keywords`, `date`, `content_type`, `content_length`, `language`.</para>
 	/// </summary>
@@ -563,37 +563,6 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(DescriptionValue))
 		{
 			writer.WritePropertyName("description");
@@ -630,6 +599,37 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("indexed_chars_field");
 			JsonSerializer.Serialize(writer, IndexedCharsFieldValue, options);
+		}
+
+		if (OnFailureDescriptor is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorAction is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (OnFailureDescriptorActions is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			writer.WriteStartArray();
+			foreach (var action in OnFailureDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (OnFailureValue is not null)
+		{
+			writer.WritePropertyName("on_failure");
+			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
 		if (PropertiesValue is not null)

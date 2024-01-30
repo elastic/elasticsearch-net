@@ -62,6 +62,11 @@ public sealed class ExplainRequestParameters : RequestParameters
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Serverless.Routing?>("routing"); set => Q("routing", value); }
@@ -85,11 +90,6 @@ public sealed class ExplainRequestParameters : RequestParameters
 	/// <para>A comma-separated list of stored fields to return in the response.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 }
 
 /// <summary>
@@ -146,6 +146,12 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -174,12 +180,6 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Serverless.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	[JsonIgnore]
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -231,17 +231,17 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 
 	internal override string OperationName => "explain";
 
-	public ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public ExplainRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public ExplainRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public ExplainRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public ExplainRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public ExplainRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
 	public ExplainRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public ExplainRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+	public ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public ExplainRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public ExplainRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 
 	public ExplainRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
@@ -333,17 +333,17 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 
 	internal override string OperationName => "explain";
 
-	public ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public ExplainRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
-	public ExplainRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public ExplainRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public ExplainRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public ExplainRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public ExplainRequestDescriptor Df(string? df) => Qs("df", df);
 	public ExplainRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public ExplainRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public ExplainRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+	public ExplainRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public ExplainRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public ExplainRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public ExplainRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 
 	public ExplainRequestDescriptor Id(Elastic.Clients.Elasticsearch.Serverless.Id id)

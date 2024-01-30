@@ -83,20 +83,14 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Fields FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
-
-	public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
@@ -149,6 +143,12 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public CombinedFieldsQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
 	/// </summary>
@@ -161,12 +161,6 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
 		{
 			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
@@ -195,6 +189,12 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ZeroTermsQueryValue is not null)
 		{
 			writer.WritePropertyName("zero_terms_query");
@@ -213,20 +213,14 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Fields FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQueryValue { get; set; }
-
-	public CombinedFieldsQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
@@ -279,6 +273,12 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public CombinedFieldsQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
 	/// </summary>
@@ -291,12 +291,6 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
 		{
 			writer.WritePropertyName("auto_generate_synonyms_phrase_query");
@@ -325,6 +319,12 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ZeroTermsQueryValue is not null)
 		{
 			writer.WritePropertyName("zero_terms_query");

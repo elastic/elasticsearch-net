@@ -59,13 +59,19 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> QueriesValue { get; set; }
 	private QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
 	private Action<QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 	private double? TieBreakerValue { get; set; }
+
+	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>One or more query clauses.<br/>Returned documents must match one or more of these queries.<br/>If a document matches multiple queries, Elasticsearch uses the highest relevance score.</para>
@@ -112,12 +118,6 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
 	/// </summary>
@@ -130,6 +130,12 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (QueriesDescriptor is not null)
 		{
 			writer.WritePropertyName("queries");
@@ -167,12 +173,6 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		if (TieBreakerValue.HasValue)
 		{
 			writer.WritePropertyName("tie_breaker");
@@ -191,13 +191,19 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> QueriesValue { get; set; }
 	private QueryDescriptor QueriesDescriptor { get; set; }
 	private Action<QueryDescriptor> QueriesDescriptorAction { get; set; }
 	private Action<QueryDescriptor>[] QueriesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 	private double? TieBreakerValue { get; set; }
+
+	public DisMaxQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>One or more query clauses.<br/>Returned documents must match one or more of these queries.<br/>If a document matches multiple queries, Elasticsearch uses the highest relevance score.</para>
@@ -244,12 +250,6 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
 	/// </summary>
@@ -262,6 +262,12 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (QueriesDescriptor is not null)
 		{
 			writer.WritePropertyName("queries");
@@ -297,12 +303,6 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		if (TieBreakerValue.HasValue)

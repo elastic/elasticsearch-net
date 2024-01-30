@@ -42,12 +42,6 @@ internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQue
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -57,6 +51,12 @@ internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQue
 				if (property == "case_insensitive")
 				{
 					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -93,12 +93,6 @@ internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQue
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -109,6 +103,12 @@ internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQue
 			{
 				writer.WritePropertyName("case_insensitive");
 				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			if (value.Rewrite is not null)
@@ -199,19 +199,13 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private string? ValueValue { get; set; }
 	private string? WildcardValue { get; set; }
-
-	public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public WildcardQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -237,6 +231,12 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	public WildcardQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -274,12 +274,6 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -290,6 +284,12 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)
@@ -330,19 +330,13 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private string? ValueValue { get; set; }
 	private string? WildcardValue { get; set; }
-
-	public WildcardQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public WildcardQueryDescriptor Boost(float? boost)
 	{
@@ -374,6 +368,12 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	public WildcardQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -411,12 +411,6 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -427,6 +421,12 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)
