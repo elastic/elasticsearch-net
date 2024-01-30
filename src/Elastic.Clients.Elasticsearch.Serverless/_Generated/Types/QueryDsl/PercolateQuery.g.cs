@@ -101,7 +101,6 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private object? DocumentValue { get; set; }
 	private ICollection<object>? DocumentsValue { get; set; }
@@ -110,14 +109,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private string? NameValue { get; set; }
 	private string? PreferenceValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
-
-	public PercolateQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public PercolateQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -197,6 +191,12 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	public PercolateQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Routing used to fetch document to percolate.</para>
 	/// </summary>
@@ -218,12 +218,6 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -268,6 +262,12 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(PreferenceValue);
 		}
 
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (RoutingValue is not null)
 		{
 			writer.WritePropertyName("routing");
@@ -292,7 +292,6 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private object? DocumentValue { get; set; }
 	private ICollection<object>? DocumentsValue { get; set; }
@@ -301,14 +300,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private string? NameValue { get; set; }
 	private string? PreferenceValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
-
-	public PercolateQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public PercolateQueryDescriptor Boost(float? boost)
 	{
@@ -397,6 +391,12 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 		return Self;
 	}
 
+	public PercolateQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Routing used to fetch document to percolate.</para>
 	/// </summary>
@@ -418,12 +418,6 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -466,6 +460,12 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 		{
 			writer.WritePropertyName("preference");
 			writer.WriteStringValue(PreferenceValue);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RoutingValue is not null)

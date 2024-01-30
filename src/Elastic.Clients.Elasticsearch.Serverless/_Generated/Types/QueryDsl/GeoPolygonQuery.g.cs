@@ -39,12 +39,6 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -54,6 +48,12 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 				if (property == "ignore_unmapped")
 				{
 					variant.IgnoreUnmapped = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -87,12 +87,6 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 			JsonSerializer.Serialize(writer, value.Polygon, options);
 		}
 
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
 		if (value.Boost.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -103,6 +97,12 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(value.IgnoreUnmapped.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
 		}
 
 		if (value.ValidationMethod is not null)
@@ -138,20 +138,14 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
 	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
 	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
-
-	public GeoPolygonQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public GeoPolygonQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -162,6 +156,12 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 	public GeoPolygonQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -227,12 +227,6 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 			}
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -243,6 +237,12 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (ValidationMethodValue is not null)
@@ -263,20 +263,14 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
 	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
 	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
-
-	public GeoPolygonQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public GeoPolygonQueryDescriptor Boost(float? boost)
 	{
@@ -287,6 +281,12 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 	public GeoPolygonQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -358,12 +358,6 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 			}
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -374,6 +368,12 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (ValidationMethodValue is not null)

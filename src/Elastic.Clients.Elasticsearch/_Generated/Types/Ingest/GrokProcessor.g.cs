@@ -81,55 +81,19 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
 	private ICollection<string> PatternsValue { get; set; }
 	private string? TagValue { get; set; }
 	private bool? TraceMatchValue { get; set; }
-
-	public GrokProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public GrokProcessorDescriptor<TDocument> Description(string? description)
 	{
@@ -176,6 +140,42 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public GrokProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.<br/>Patterns matching existing names will override the pre-existing definition.</para>
 	/// </summary>
@@ -212,6 +212,32 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -241,32 +267,6 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
 		if (PatternDefinitionsValue is not null)
@@ -301,55 +301,19 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
 	private ICollection<string> PatternsValue { get; set; }
 	private string? TagValue { get; set; }
 	private bool? TraceMatchValue { get; set; }
-
-	public GrokProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public GrokProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
 
 	public GrokProcessorDescriptor Description(string? description)
 	{
@@ -405,6 +369,42 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
+	public GrokProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	{
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureValue = onFailure;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptor = descriptor;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorActions = null;
+		OnFailureDescriptorAction = configure;
+		return Self;
+	}
+
+	public GrokProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	{
+		OnFailureValue = null;
+		OnFailureDescriptor = null;
+		OnFailureDescriptorAction = null;
+		OnFailureDescriptorActions = configure;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor.<br/>Patterns matching existing names will override the pre-existing definition.</para>
 	/// </summary>
@@ -441,6 +441,32 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -470,32 +496,6 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		{
 			writer.WritePropertyName("on_failure");
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
 		if (PatternDefinitionsValue is not null)

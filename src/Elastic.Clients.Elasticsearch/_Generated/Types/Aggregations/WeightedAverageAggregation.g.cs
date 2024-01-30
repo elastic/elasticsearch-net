@@ -188,15 +188,30 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 	{
 	}
 
+	private string? FormatValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? ValueValue { get; set; }
 	private WeightedAverageValueDescriptor<TDocument> ValueDescriptor { get; set; }
 	private Action<WeightedAverageValueDescriptor<TDocument>> ValueDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? WeightValue { get; set; }
 	private WeightedAverageValueDescriptor<TDocument> WeightDescriptor { get; set; }
 	private Action<WeightedAverageValueDescriptor<TDocument>> WeightDescriptorAction { get; set; }
-	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
+
+	/// <summary>
+	/// <para>A numeric response formatter.</para>
+	/// </summary>
+	public WeightedAverageAggregationDescriptor<TDocument> Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public WeightedAverageAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Configuration for the field that provides the values.</para>
@@ -222,6 +237,12 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 		ValueValue = null;
 		ValueDescriptor = null;
 		ValueDescriptorAction = configure;
+		return Self;
+	}
+
+	public WeightedAverageAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	{
+		ValueTypeValue = valueType;
 		return Self;
 	}
 
@@ -252,32 +273,17 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>A numeric response formatter.</para>
-	/// </summary>
-	public WeightedAverageAggregationDescriptor<TDocument> Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor<TDocument> ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
-	{
-		ValueTypeValue = valueType;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("weighted_avg");
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(FormatValue))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
+		}
+
 		if (ValueDescriptor is not null)
 		{
 			writer.WritePropertyName("value");
@@ -294,6 +300,12 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, ValueValue, options);
 		}
 
+		if (ValueTypeValue is not null)
+		{
+			writer.WritePropertyName("value_type");
+			JsonSerializer.Serialize(writer, ValueTypeValue, options);
+		}
+
 		if (WeightDescriptor is not null)
 		{
 			writer.WritePropertyName("weight");
@@ -308,18 +320,6 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 		{
 			writer.WritePropertyName("weight");
 			JsonSerializer.Serialize(writer, WeightValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -341,15 +341,30 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 	{
 	}
 
+	private string? FormatValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? ValueValue { get; set; }
 	private WeightedAverageValueDescriptor ValueDescriptor { get; set; }
 	private Action<WeightedAverageValueDescriptor> ValueDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue? WeightValue { get; set; }
 	private WeightedAverageValueDescriptor WeightDescriptor { get; set; }
 	private Action<WeightedAverageValueDescriptor> WeightDescriptorAction { get; set; }
-	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueTypeValue { get; set; }
+
+	/// <summary>
+	/// <para>A numeric response formatter.</para>
+	/// </summary>
+	public WeightedAverageAggregationDescriptor Format(string? format)
+	{
+		FormatValue = format;
+		return Self;
+	}
+
+	public WeightedAverageAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Configuration for the field that provides the values.</para>
@@ -375,6 +390,12 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		ValueValue = null;
 		ValueDescriptor = null;
 		ValueDescriptorAction = configure;
+		return Self;
+	}
+
+	public WeightedAverageAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
+	{
+		ValueTypeValue = valueType;
 		return Self;
 	}
 
@@ -405,32 +426,17 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>A numeric response formatter.</para>
-	/// </summary>
-	public WeightedAverageAggregationDescriptor Format(string? format)
-	{
-		FormatValue = format;
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor ValueType(Elastic.Clients.Elasticsearch.Aggregations.ValueType? valueType)
-	{
-		ValueTypeValue = valueType;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("weighted_avg");
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(FormatValue))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(FormatValue);
+		}
+
 		if (ValueDescriptor is not null)
 		{
 			writer.WritePropertyName("value");
@@ -447,6 +453,12 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 			JsonSerializer.Serialize(writer, ValueValue, options);
 		}
 
+		if (ValueTypeValue is not null)
+		{
+			writer.WritePropertyName("value_type");
+			JsonSerializer.Serialize(writer, ValueTypeValue, options);
+		}
+
 		if (WeightDescriptor is not null)
 		{
 			writer.WritePropertyName("weight");
@@ -461,18 +473,6 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		{
 			writer.WritePropertyName("weight");
 			JsonSerializer.Serialize(writer, WeightValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (ValueTypeValue is not null)
-		{
-			writer.WritePropertyName("value_type");
-			JsonSerializer.Serialize(writer, ValueTypeValue, options);
 		}
 
 		writer.WriteEndObject();

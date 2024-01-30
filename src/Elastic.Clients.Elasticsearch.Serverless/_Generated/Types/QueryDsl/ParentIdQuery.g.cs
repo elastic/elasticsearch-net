@@ -65,17 +65,11 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id? IdValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? TypeValue { get; set; }
-
-	public ParentIdQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public ParentIdQueryDescriptor Boost(float? boost)
 	{
@@ -101,6 +95,12 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 		return Self;
 	}
 
+	public ParentIdQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Name of the child relationship mapped for the `join` field.</para>
 	/// </summary>
@@ -113,12 +113,6 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -135,6 +129,12 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 		{
 			writer.WritePropertyName("ignore_unmapped");
 			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (TypeValue is not null)

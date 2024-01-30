@@ -42,6 +42,11 @@ public sealed class ReindexRequestParameters : RequestParameters
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
+	/// <para>If `true`, the destination must be an index alias.</para>
+	/// </summary>
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
 	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("scroll"); set => Q("scroll", value); }
@@ -65,11 +70,6 @@ public sealed class ReindexRequestParameters : RequestParameters
 	/// <para>If `true`, the request blocks until the operation is complete.</para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
-	/// <summary>
-	/// <para>If `true`, the destination must be an index alias.</para>
-	/// </summary>
-	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 }
 
 /// <summary>
@@ -98,6 +98,12 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
+	/// <para>If `true`, the destination must be an index alias.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
+
+	/// <summary>
 	/// <para>Specifies how long a consistent view of the index should be maintained for scrolled search.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -126,12 +132,6 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// </summary>
 	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-
-	/// <summary>
-	/// <para>If `true`, the destination must be an index alias.</para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
 	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
@@ -194,9 +194,6 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
-	private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination DestValue { get; set; }
 	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
@@ -204,33 +201,9 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
-
-	/// <summary>
-	/// <para>The source you are copying from.</para>
-	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
-	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
-	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
+	private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
+	private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
@@ -292,25 +265,36 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The source you are copying from.</para>
+	/// </summary>
+	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (ConflictsValue is not null)
 		{
 			writer.WritePropertyName("conflicts");
@@ -351,6 +335,22 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 			writer.WriteNumberValue(SizeValue.Value);
 		}
 
+		if (SourceDescriptor is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -383,9 +383,6 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
-	private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-	private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination DestValue { get; set; }
 	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
@@ -393,33 +390,9 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
-
-	/// <summary>
-	/// <para>The source you are copying from.</para>
-	/// </summary>
-	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
-	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
-	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
+	private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
+	private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
@@ -481,25 +454,36 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The source you are copying from.</para>
+	/// </summary>
+	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source source)
+	{
+		SourceDescriptor = null;
+		SourceDescriptorAction = null;
+		SourceValue = source;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
+	{
+		SourceValue = null;
+		SourceDescriptorAction = null;
+		SourceDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
+	{
+		SourceValue = null;
+		SourceDescriptor = null;
+		SourceDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (ConflictsValue is not null)
 		{
 			writer.WritePropertyName("conflicts");
@@ -538,6 +522,22 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
+		}
+
+		if (SourceDescriptor is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceDescriptor, options);
+		}
+		else if (SourceDescriptorAction is not null)
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		writer.WriteEndObject();

@@ -70,6 +70,7 @@ public sealed partial class Processor
 	public static Processor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => new Processor("pipeline", pipelineProcessor);
 	public static Processor Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => new Processor("remove", removeProcessor);
 	public static Processor Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => new Processor("rename", renameProcessor);
+	public static Processor Reroute(Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor rerouteProcessor) => new Processor("reroute", rerouteProcessor);
 	public static Processor Set(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor setProcessor) => new Processor("set", setProcessor);
 	public static Processor SetSecurityUser(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => new Processor("set_security_user", setSecurityUserProcessor);
 	public static Processor Sort(Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor sortProcessor) => new Processor("sort", sortProcessor);
@@ -272,6 +273,13 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			return new Processor(propertyName, variant);
 		}
 
+		if (propertyName == "reroute")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor?>(ref reader, options);
+			reader.Read();
+			return new Processor(propertyName, variant);
+		}
+
 		if (propertyName == "set")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor?>(ref reader, options);
@@ -414,6 +422,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "rename":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor)value.Variant, options);
 					break;
+				case "reroute":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor)value.Variant, options);
+					break;
 				case "set":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor)value.Variant, options);
 					break;
@@ -526,6 +537,8 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 	public ProcessorDescriptor<TDocument> Remove(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
 	public ProcessorDescriptor<TDocument> Rename(RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
 	public ProcessorDescriptor<TDocument> Rename(Action<RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
+	public ProcessorDescriptor<TDocument> Reroute(RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
+	public ProcessorDescriptor<TDocument> Reroute(Action<RerouteProcessorDescriptor<TDocument>> configure) => Set(configure, "reroute");
 	public ProcessorDescriptor<TDocument> Set(SetProcessor setProcessor) => Set(setProcessor, "set");
 	public ProcessorDescriptor<TDocument> Set(Action<SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");
 	public ProcessorDescriptor<TDocument> SetSecurityUser(SetSecurityUserProcessor setSecurityUserProcessor) => Set(setSecurityUserProcessor, "set_security_user");
@@ -671,6 +684,9 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 	public ProcessorDescriptor Rename(RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
 	public ProcessorDescriptor Rename(Action<RenameProcessorDescriptor> configure) => Set(configure, "rename");
 	public ProcessorDescriptor Rename<TDocument>(Action<RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
+	public ProcessorDescriptor Reroute(RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
+	public ProcessorDescriptor Reroute(Action<RerouteProcessorDescriptor> configure) => Set(configure, "reroute");
+	public ProcessorDescriptor Reroute<TDocument>(Action<RerouteProcessorDescriptor<TDocument>> configure) => Set(configure, "reroute");
 	public ProcessorDescriptor Set(SetProcessor setProcessor) => Set(setProcessor, "set");
 	public ProcessorDescriptor Set(Action<SetProcessorDescriptor> configure) => Set(configure, "set");
 	public ProcessorDescriptor Set<TDocument>(Action<SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");

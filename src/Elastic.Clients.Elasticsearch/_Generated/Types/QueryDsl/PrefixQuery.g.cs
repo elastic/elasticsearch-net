@@ -42,12 +42,6 @@ internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -57,6 +51,12 @@ internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 				if (property == "case_insensitive")
 				{
 					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -87,12 +87,6 @@ internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -103,6 +97,12 @@ internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 			{
 				writer.WritePropertyName("case_insensitive");
 				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			if (value.Rewrite is not null)
@@ -178,18 +178,12 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
-
-	public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public PrefixQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -218,6 +212,12 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	public PrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Method used to rewrite the query.</para>
 	/// </summary>
@@ -243,12 +243,6 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -259,6 +253,12 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)
@@ -289,18 +289,12 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
-
-	public PrefixQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public PrefixQueryDescriptor Boost(float? boost)
 	{
@@ -335,6 +329,12 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		return Self;
 	}
 
+	public PrefixQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Method used to rewrite the query.</para>
 	/// </summary>
@@ -360,12 +360,6 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -376,6 +370,12 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RewriteValue is not null)

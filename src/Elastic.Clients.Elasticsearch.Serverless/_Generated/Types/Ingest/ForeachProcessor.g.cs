@@ -69,6 +69,11 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	{
 	}
 
+	private string? DescriptionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? IfValue { get; set; }
+	private bool? IgnoreFailureValue { get; set; }
+	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
 	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
@@ -76,12 +81,52 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor ProcessorValue { get; set; }
 	private ProcessorDescriptor<TDocument> ProcessorDescriptor { get; set; }
 	private Action<ProcessorDescriptor<TDocument>> ProcessorDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
 	private string? TagValue { get; set; }
+
+	public ForeachProcessorDescriptor<TDocument> Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ForeachProcessorDescriptor<TDocument> If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public ForeachProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	{
+		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
 
 	public ForeachProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -146,51 +191,6 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing array or object values.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing array or object values.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public ForeachProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public ForeachProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
-	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
-	}
-
 	public ForeachProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -200,6 +200,32 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -247,32 +273,6 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, ProcessorValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
@@ -291,6 +291,11 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	{
 	}
 
+	private string? DescriptionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? IfValue { get; set; }
+	private bool? IgnoreFailureValue { get; set; }
+	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
 	private ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
@@ -298,12 +303,61 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor ProcessorValue { get; set; }
 	private ProcessorDescriptor ProcessorDescriptor { get; set; }
 	private Action<ProcessorDescriptor> ProcessorDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
 	private string? TagValue { get; set; }
+
+	public ForeachProcessorDescriptor Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public ForeachProcessorDescriptor If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public ForeachProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	{
+		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
 
 	public ForeachProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -368,60 +422,6 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing array or object values.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing array or object values.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing array or object values.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public ForeachProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public ForeachProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If `true`, the processor silently exits without changing the document if the `field` is `null` or missing.</para>
-	/// </summary>
-	public ForeachProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
-	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
-	}
-
 	public ForeachProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -431,6 +431,32 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -476,32 +502,6 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("processor");
 			JsonSerializer.Serialize(writer, ProcessorValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(TagValue))

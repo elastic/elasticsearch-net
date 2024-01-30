@@ -52,11 +52,29 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
+	public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to aggregate.</para>
+	/// </summary>
+	public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
@@ -85,24 +103,6 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The field to aggregate.</para>
-	/// </summary>
-	public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to aggregate.</para>
-	/// </summary>
-	public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	public TestPopulationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -112,6 +112,8 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -128,8 +130,6 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
@@ -148,38 +148,11 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-	/// <summary>
-	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
-	/// </summary>
-	public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public TestPopulationDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TestPopulationDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The field to aggregate.</para>
@@ -208,6 +181,33 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A filter used to define a set of records to run unpaired t-test on.</para>
+	/// </summary>
+	public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public TestPopulationDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public TestPopulationDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
+
 	public TestPopulationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -217,6 +217,8 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -233,8 +235,6 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");

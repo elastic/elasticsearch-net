@@ -38,7 +38,8 @@ public sealed partial class RemoveAction
 	/// <summary>
 	/// <para>Aliases for the action.<br/>Index alias names support date math.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
+	[JsonInclude, JsonPropertyName("aliases")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexAlias))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? Aliases { get; set; }
 
 	/// <summary>

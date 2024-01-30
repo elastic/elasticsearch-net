@@ -89,19 +89,34 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+	private int? MaxChildrenValue { get; set; }
+	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 	private string TypeValue { get; set; }
+
+	public HasChildQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// </summary>
+	public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -127,6 +142,24 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
+	/// </summary>
+	public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren)
+	{
+		MaxChildrenValue = maxChildren;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
+	/// </summary>
+	public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren)
+	{
+		MinChildrenValue = minChildren;
 		return Self;
 	}
 
@@ -163,39 +196,6 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
-	/// </summary>
-	public HasChildQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
-	/// </summary>
-	public HasChildQueryDescriptor<TDocument> MaxChildren(int? maxChildren)
-	{
-		MaxChildrenValue = maxChildren;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
-	/// </summary>
-	public HasChildQueryDescriptor<TDocument> MinChildren(int? minChildren)
-	{
-		MinChildrenValue = minChildren;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
 	/// </summary>
@@ -217,6 +217,18 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -231,6 +243,18 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("inner_hits");
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
+		}
+
+		if (MaxChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("max_children");
+			writer.WriteNumberValue(MaxChildrenValue.Value);
+		}
+
+		if (MinChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("min_children");
+			writer.WriteNumberValue(MinChildrenValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -255,30 +279,6 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (MinChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("min_children");
-			writer.WriteNumberValue(MinChildrenValue.Value);
-		}
-
 		if (ScoreModeValue is not null)
 		{
 			writer.WritePropertyName("score_mode");
@@ -299,19 +299,34 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+	private int? MaxChildrenValue { get; set; }
+	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private int? MaxChildrenValue { get; set; }
-	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 	private string TypeValue { get; set; }
+
+	public HasChildQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
+	/// </summary>
+	public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -337,6 +352,24 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
+	/// </summary>
+	public HasChildQueryDescriptor MaxChildren(int? maxChildren)
+	{
+		MaxChildrenValue = maxChildren;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
+	/// </summary>
+	public HasChildQueryDescriptor MinChildren(int? minChildren)
+	{
+		MinChildrenValue = minChildren;
 		return Self;
 	}
 
@@ -373,39 +406,6 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `type` and not return any documents instead of an error.</para>
-	/// </summary>
-	public HasChildQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maximum number of child documents that match the query allowed for a returned parent document.<br/>If the parent document exceeds this limit, it is excluded from the search results.</para>
-	/// </summary>
-	public HasChildQueryDescriptor MaxChildren(int? maxChildren)
-	{
-		MaxChildrenValue = maxChildren;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum number of child documents that match the query required to match the query for a returned parent document.<br/>If the parent document does not meet this limit, it is excluded from the search results.</para>
-	/// </summary>
-	public HasChildQueryDescriptor MinChildren(int? minChildren)
-	{
-		MinChildrenValue = minChildren;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
 	/// </summary>
@@ -427,6 +427,18 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -441,6 +453,18 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		{
 			writer.WritePropertyName("inner_hits");
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
+		}
+
+		if (MaxChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("max_children");
+			writer.WriteNumberValue(MaxChildrenValue.Value);
+		}
+
+		if (MinChildrenValue.HasValue)
+		{
+			writer.WritePropertyName("min_children");
+			writer.WriteNumberValue(MinChildrenValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -463,30 +487,6 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (MaxChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("max_children");
-			writer.WriteNumberValue(MaxChildrenValue.Value);
-		}
-
-		if (MinChildrenValue.HasValue)
-		{
-			writer.WritePropertyName("min_children");
-			writer.WriteNumberValue(MinChildrenValue.Value);
 		}
 
 		if (ScoreModeValue is not null)

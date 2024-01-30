@@ -78,6 +78,18 @@ public sealed partial class DataStream
 	public string Name { get; init; }
 
 	/// <summary>
+	/// <para>Name of the lifecycle system that'll manage the next generation of the data stream.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("next_generation_managed_by")]
+	public string NextGenerationManagedBy { get; init; }
+
+	/// <summary>
+	/// <para>Indicates if ILM should take precedence over DSL in case both are configured to managed this data stream.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("prefer_ilm")]
+	public bool PreferIlm { get; init; }
+
+	/// <summary>
 	/// <para>If `true`, the data stream is created and managed by cross-cluster replication and the local cluster can not write into this data stream or change its mappings.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("replicated")]

@@ -60,11 +60,11 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
 	private SpanQueryDescriptor<TDocument> BigDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> BigDescriptorAction { get; set; }
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
 	private SpanQueryDescriptor<TDocument> LittleDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> LittleDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 
 	/// <summary>
 	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
@@ -90,6 +90,12 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 		BigValue = null;
 		BigDescriptor = null;
 		BigDescriptorAction = configure;
+		return Self;
+	}
+
+	public SpanWithinQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
 		return Self;
 	}
 
@@ -126,12 +132,6 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public SpanWithinQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -149,6 +149,12 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("big");
 			JsonSerializer.Serialize(writer, BigValue, options);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		if (LittleDescriptor is not null)
@@ -173,12 +179,6 @@ public sealed partial class SpanWithinQueryDescriptor<TDocument> : SerializableD
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -194,11 +194,11 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery BigValue { get; set; }
 	private SpanQueryDescriptor BigDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> BigDescriptorAction { get; set; }
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery LittleValue { get; set; }
 	private SpanQueryDescriptor LittleDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> LittleDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
 
 	/// <summary>
 	/// <para>Can be any span query.<br/>Matching spans from `little` that are enclosed within `big` are returned.</para>
@@ -224,6 +224,12 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 		BigValue = null;
 		BigDescriptor = null;
 		BigDescriptorAction = configure;
+		return Self;
+	}
+
+	public SpanWithinQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
 		return Self;
 	}
 
@@ -260,12 +266,6 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 		return Self;
 	}
 
-	public SpanWithinQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -283,6 +283,12 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 		{
 			writer.WritePropertyName("big");
 			JsonSerializer.Serialize(writer, BigValue, options);
+		}
+
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		if (LittleDescriptor is not null)
@@ -305,12 +311,6 @@ public sealed partial class SpanWithinQueryDescriptor : SerializableDescriptor<S
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		writer.WriteEndObject();

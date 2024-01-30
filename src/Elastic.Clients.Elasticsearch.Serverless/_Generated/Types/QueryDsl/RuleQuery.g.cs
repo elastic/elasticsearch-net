@@ -53,13 +53,25 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
 	private QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
+
+	public RuleQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public RuleQueryDescriptor<TDocument> MatchCriteria(object matchCriteria)
+	{
+		MatchCriteriaValue = matchCriteria;
+		return Self;
+	}
 
 	public RuleQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query organic)
 	{
@@ -91,18 +103,6 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public RuleQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	public RuleQueryDescriptor<TDocument> MatchCriteria(object matchCriteria)
-	{
-		MatchCriteriaValue = matchCriteria;
-		return Self;
-	}
-
 	public RuleQueryDescriptor<TDocument> RulesetId(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId)
 	{
 		RulesetIdValue = rulesetId;
@@ -112,6 +112,14 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("match_criteria");
+		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
 		if (OrganicDescriptor is not null)
 		{
 			writer.WritePropertyName("organic");
@@ -134,14 +142,6 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("match_criteria");
-		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
 		writer.WritePropertyName("ruleset_id");
 		JsonSerializer.Serialize(writer, RulesetIdValue, options);
 		writer.WriteEndObject();
@@ -156,13 +156,25 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
 	private QueryDescriptor OrganicDescriptor { get; set; }
 	private Action<QueryDescriptor> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
+
+	public RuleQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public RuleQueryDescriptor MatchCriteria(object matchCriteria)
+	{
+		MatchCriteriaValue = matchCriteria;
+		return Self;
+	}
 
 	public RuleQueryDescriptor Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query organic)
 	{
@@ -194,18 +206,6 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 		return Self;
 	}
 
-	public RuleQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	public RuleQueryDescriptor MatchCriteria(object matchCriteria)
-	{
-		MatchCriteriaValue = matchCriteria;
-		return Self;
-	}
-
 	public RuleQueryDescriptor RulesetId(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId)
 	{
 		RulesetIdValue = rulesetId;
@@ -215,6 +215,14 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("match_criteria");
+		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
 		if (OrganicDescriptor is not null)
 		{
 			writer.WritePropertyName("organic");
@@ -237,14 +245,6 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("match_criteria");
-		JsonSerializer.Serialize(writer, MatchCriteriaValue, options);
 		writer.WritePropertyName("ruleset_id");
 		JsonSerializer.Serialize(writer, RulesetIdValue, options);
 		writer.WriteEndObject();

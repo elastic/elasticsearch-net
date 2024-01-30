@@ -57,12 +57,27 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private int EndValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery MatchValue { get; set; }
 	private SpanQueryDescriptor<TDocument> MatchDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private int EndValue { get; set; }
+
+	public SpanFirstQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// </summary>
+	public SpanFirstQueryDescriptor<TDocument> End(int end)
+	{
+		EndValue = end;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Can be any other span type query.</para>
@@ -97,24 +112,17 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public SpanFirstQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Controls the maximum end position permitted in a match.</para>
-	/// </summary>
-	public SpanFirstQueryDescriptor<TDocument> End(int end)
-	{
-		EndValue = end;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("end");
+		writer.WriteNumberValue(EndValue);
 		if (MatchDescriptor is not null)
 		{
 			writer.WritePropertyName("match");
@@ -137,14 +145,6 @@ public sealed partial class SpanFirstQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("end");
-		writer.WriteNumberValue(EndValue);
 		writer.WriteEndObject();
 	}
 }
@@ -157,12 +157,27 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private int EndValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery MatchValue { get; set; }
 	private SpanQueryDescriptor MatchDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private int EndValue { get; set; }
+
+	public SpanFirstQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Controls the maximum end position permitted in a match.</para>
+	/// </summary>
+	public SpanFirstQueryDescriptor End(int end)
+	{
+		EndValue = end;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Can be any other span type query.</para>
@@ -197,24 +212,17 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 		return Self;
 	}
 
-	public SpanFirstQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Controls the maximum end position permitted in a match.</para>
-	/// </summary>
-	public SpanFirstQueryDescriptor End(int end)
-	{
-		EndValue = end;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("end");
+		writer.WriteNumberValue(EndValue);
 		if (MatchDescriptor is not null)
 		{
 			writer.WritePropertyName("match");
@@ -237,14 +245,6 @@ public sealed partial class SpanFirstQueryDescriptor : SerializableDescriptor<Sp
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("end");
-		writer.WriteNumberValue(EndValue);
 		writer.WriteEndObject();
 	}
 }

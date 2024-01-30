@@ -42,12 +42,6 @@ internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -57,6 +51,12 @@ internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 				if (property == "case_insensitive")
 				{
 					variant.CaseInsensitive = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -81,12 +81,6 @@ internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -97,6 +91,12 @@ internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 			{
 				writer.WritePropertyName("case_insensitive");
 				writer.WriteBooleanValue(value.CaseInsensitive.Value);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			writer.WritePropertyName("value");
@@ -161,17 +161,11 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
-
-	public TermQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -200,6 +194,12 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	public TermQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Term you wish to find in the provided field.</para>
 	/// </summary>
@@ -216,12 +216,6 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -232,6 +226,12 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WritePropertyName("value");
@@ -256,17 +256,11 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private bool? CaseInsensitiveValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue ValueValue { get; set; }
-
-	public TermQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermQueryDescriptor Boost(float? boost)
 	{
@@ -301,6 +295,12 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		return Self;
 	}
 
+	public TermQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Term you wish to find in the provided field.</para>
 	/// </summary>
@@ -317,12 +317,6 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -333,6 +327,12 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 		{
 			writer.WritePropertyName("case_insensitive");
 			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WritePropertyName("value");

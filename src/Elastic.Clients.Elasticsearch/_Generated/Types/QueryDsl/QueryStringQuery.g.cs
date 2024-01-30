@@ -193,10 +193,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private bool? AllowLeadingWildcardValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
 	private string? AnalyzerValue { get; set; }
+	private bool? AnalyzeWildcardValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? DefaultFieldValue { get; set; }
@@ -214,18 +213,13 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private double? PhraseSlopValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? QuoteAnalyzerValue { get; set; }
 	private string? QuoteFieldSuffixValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
-
-	public QueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
@@ -237,20 +231,20 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
-	/// </summary>
-	public QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
-	{
-		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Analyzer used to convert text in the query string into tokens.</para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// </summary>
+	public QueryStringQueryDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true)
+	{
+		AnalyzeWildcardValue = analyzeWildcard;
 		return Self;
 	}
 
@@ -410,6 +404,12 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public QueryStringQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
 	/// </summary>
@@ -467,28 +467,22 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (AllowLeadingWildcardValue.HasValue)
 		{
 			writer.WritePropertyName("allow_leading_wildcard");
 			writer.WriteBooleanValue(AllowLeadingWildcardValue.Value);
 		}
 
-		if (AnalyzeWildcardValue.HasValue)
-		{
-			writer.WritePropertyName("analyze_wildcard");
-			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
 			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (AnalyzeWildcardValue.HasValue)
+		{
+			writer.WritePropertyName("analyze_wildcard");
+			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
 		}
 
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -589,6 +583,12 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (!string.IsNullOrEmpty(QuoteAnalyzerValue))
 		{
 			writer.WritePropertyName("quote_analyzer");
@@ -637,10 +637,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private bool? AllowLeadingWildcardValue { get; set; }
-	private bool? AnalyzeWildcardValue { get; set; }
 	private string? AnalyzerValue { get; set; }
+	private bool? AnalyzeWildcardValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? DefaultFieldValue { get; set; }
@@ -658,18 +657,13 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private double? PhraseSlopValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private string? QuoteAnalyzerValue { get; set; }
 	private string? QuoteFieldSuffixValue { get; set; }
 	private string? RewriteValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? TypeValue { get; set; }
-
-	public QueryStringQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
@@ -681,20 +675,20 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
-	/// </summary>
-	public QueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
-	{
-		AnalyzeWildcardValue = analyzeWildcard;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Analyzer used to convert text in the query string into tokens.</para>
 	/// </summary>
 	public QueryStringQueryDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// </summary>
+	public QueryStringQueryDescriptor AnalyzeWildcard(bool? analyzeWildcard = true)
+	{
+		AnalyzeWildcardValue = analyzeWildcard;
 		return Self;
 	}
 
@@ -863,6 +857,12 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public QueryStringQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
 	/// </summary>
@@ -920,28 +920,22 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (AllowLeadingWildcardValue.HasValue)
 		{
 			writer.WritePropertyName("allow_leading_wildcard");
 			writer.WriteBooleanValue(AllowLeadingWildcardValue.Value);
 		}
 
-		if (AnalyzeWildcardValue.HasValue)
-		{
-			writer.WritePropertyName("analyze_wildcard");
-			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
 			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (AnalyzeWildcardValue.HasValue)
+		{
+			writer.WritePropertyName("analyze_wildcard");
+			writer.WriteBooleanValue(AnalyzeWildcardValue.Value);
 		}
 
 		if (AutoGenerateSynonymsPhraseQueryValue.HasValue)
@@ -1042,6 +1036,12 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (!string.IsNullOrEmpty(QuoteAnalyzerValue))
 		{
 			writer.WritePropertyName("quote_analyzer");

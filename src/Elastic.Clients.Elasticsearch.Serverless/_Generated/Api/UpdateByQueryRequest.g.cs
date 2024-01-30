@@ -358,6 +358,12 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
+	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("conflicts")]
+	public Elastic.Clients.Elasticsearch.Serverless.Conflicts? Conflicts { get; set; }
+
+	/// <summary>
 	/// <para>The maximum number of documents to update.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_docs")]
@@ -380,12 +386,6 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 	/// </summary>
 	[JsonInclude, JsonPropertyName("slice")]
 	public Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? Slice { get; set; }
-
-	/// <summary>
-	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("conflicts")]
-	public Elastic.Clients.Elasticsearch.Serverless.Conflicts? Conflicts { get; set; }
 }
 
 /// <summary>
@@ -412,8 +412,8 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	internal override string OperationName => "update_by_query";
 
 	public UpdateByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public UpdateByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public UpdateByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public UpdateByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
 	public UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -446,15 +446,33 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
+	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+
+	/// <summary>
+	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
+	{
+		ConflictsValue = conflicts;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum number of documents to update.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to update using the Query DSL.</para>
@@ -480,6 +498,15 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The script to run to update the document source or metadata when updating.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -510,36 +537,21 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
-	{
-		ConflictsValue = conflicts;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum number of documents to update.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
-	{
-		MaxDocsValue = maxDocs;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The script to run to update the document source or metadata when updating.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
-	{
-		ScriptValue = script;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ConflictsValue is not null)
+		{
+			writer.WritePropertyName("conflicts");
+			JsonSerializer.Serialize(writer, ConflictsValue, options);
+		}
+
+		if (MaxDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -556,6 +568,12 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		if (SliceDescriptor is not null)
 		{
 			writer.WritePropertyName("slice");
@@ -570,24 +588,6 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
-
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
-
-		if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -618,8 +618,8 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	internal override string OperationName => "update_by_query";
 
 	public UpdateByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public UpdateByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public UpdateByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public UpdateByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public UpdateByQueryRequestDescriptor Df(string? df) => Qs("df", df);
 	public UpdateByQueryRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
@@ -652,15 +652,33 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
+	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+
+	/// <summary>
+	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
+	{
+		ConflictsValue = conflicts;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum number of documents to update.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to update using the Query DSL.</para>
@@ -686,6 +704,15 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		QueryValue = null;
 		QueryDescriptor = null;
 		QueryDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The script to run to update the document source or metadata when updating.</para>
+	/// </summary>
+	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -716,36 +743,21 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Serverless.Conflicts? conflicts)
-	{
-		ConflictsValue = conflicts;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum number of documents to update.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor MaxDocs(long? maxDocs)
-	{
-		MaxDocsValue = maxDocs;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The script to run to update the document source or metadata when updating.</para>
-	/// </summary>
-	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
-	{
-		ScriptValue = script;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ConflictsValue is not null)
+		{
+			writer.WritePropertyName("conflicts");
+			JsonSerializer.Serialize(writer, ConflictsValue, options);
+		}
+
+		if (MaxDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -762,6 +774,12 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		if (SliceDescriptor is not null)
 		{
 			writer.WritePropertyName("slice");
@@ -776,24 +794,6 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
-
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
-
-		if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		writer.WriteEndObject();

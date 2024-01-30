@@ -117,15 +117,15 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-	private DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
-	private Action<DirectGeneratorDescriptor<TDocument>> DirectGeneratorDescriptorAction { get; set; }
-	private Action<DirectGeneratorDescriptor<TDocument>>[] DirectGeneratorDescriptorActions { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
 	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
 	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
 	private double? ConfidenceValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
+	private DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
+	private Action<DirectGeneratorDescriptor<TDocument>> DirectGeneratorDescriptorAction { get; set; }
+	private Action<DirectGeneratorDescriptor<TDocument>>[] DirectGeneratorDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? ForceUnigramsValue { get; set; }
 	private int? GramSizeValue { get; set; }
@@ -142,45 +142,6 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 	private string? TextValue { get; set; }
 	private int? TokenLimitValue { get; set; }
-
-	/// <summary>
-	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
-	/// </summary>
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
-	{
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorValue = directGenerator;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(DirectGeneratorDescriptor<TDocument> descriptor)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorDescriptor = descriptor;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(Action<DirectGeneratorDescriptor<TDocument>> configure)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorDescriptorAction = configure;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Action<DirectGeneratorDescriptor<TDocument>>[] configure)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = configure;
-		return Self;
-	}
 
 	public PhraseSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
@@ -221,6 +182,45 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	public PhraseSuggesterDescriptor<TDocument> Confidence(double? confidence)
 	{
 		ConfidenceValue = confidence;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
+	/// </summary>
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
+	{
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorValue = directGenerator;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(DirectGeneratorDescriptor<TDocument> descriptor)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorDescriptor = descriptor;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(Action<DirectGeneratorDescriptor<TDocument>> configure)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorDescriptorAction = configure;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Action<DirectGeneratorDescriptor<TDocument>>[] configure)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = configure;
 		return Self;
 	}
 
@@ -365,6 +365,34 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (CollateDescriptor is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, CollateDescriptor, options);
+		}
+		else if (CollateDescriptorAction is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
+		}
+		else if (CollateValue is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, CollateValue, options);
+		}
+
+		if (ConfidenceValue.HasValue)
+		{
+			writer.WritePropertyName("confidence");
+			writer.WriteNumberValue(ConfidenceValue.Value);
+		}
+
 		if (DirectGeneratorDescriptor is not null)
 		{
 			writer.WritePropertyName("direct_generator");
@@ -394,34 +422,6 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("direct_generator");
 			JsonSerializer.Serialize(writer, DirectGeneratorValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (CollateDescriptor is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, CollateDescriptor, options);
-		}
-		else if (CollateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
-		}
-		else if (CollateValue is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, CollateValue, options);
-		}
-
-		if (ConfidenceValue.HasValue)
-		{
-			writer.WritePropertyName("confidence");
-			writer.WriteNumberValue(ConfidenceValue.Value);
 		}
 
 		writer.WritePropertyName("field");
@@ -524,15 +524,15 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-	private DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
-	private Action<DirectGeneratorDescriptor> DirectGeneratorDescriptorAction { get; set; }
-	private Action<DirectGeneratorDescriptor>[] DirectGeneratorDescriptorActions { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
 	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
 	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
 	private double? ConfidenceValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
+	private DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
+	private Action<DirectGeneratorDescriptor> DirectGeneratorDescriptorAction { get; set; }
+	private Action<DirectGeneratorDescriptor>[] DirectGeneratorDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? ForceUnigramsValue { get; set; }
 	private int? GramSizeValue { get; set; }
@@ -549,45 +549,6 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 	private string? TextValue { get; set; }
 	private int? TokenLimitValue { get; set; }
-
-	/// <summary>
-	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
-	/// </summary>
-	public PhraseSuggesterDescriptor DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
-	{
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorValue = directGenerator;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor DirectGenerator(DirectGeneratorDescriptor descriptor)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorDescriptor = descriptor;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor DirectGenerator(Action<DirectGeneratorDescriptor> configure)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorActions = null;
-		DirectGeneratorDescriptorAction = configure;
-		return Self;
-	}
-
-	public PhraseSuggesterDescriptor DirectGenerator(params Action<DirectGeneratorDescriptor>[] configure)
-	{
-		DirectGeneratorValue = null;
-		DirectGeneratorDescriptor = null;
-		DirectGeneratorDescriptorAction = null;
-		DirectGeneratorDescriptorActions = configure;
-		return Self;
-	}
 
 	public PhraseSuggesterDescriptor Analyzer(string? analyzer)
 	{
@@ -628,6 +589,45 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	public PhraseSuggesterDescriptor Confidence(double? confidence)
 	{
 		ConfidenceValue = confidence;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A list of candidate generators that produce a list of possible terms per term in the given text.</para>
+	/// </summary>
+	public PhraseSuggesterDescriptor DirectGenerator(ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Search.DirectGenerator>? directGenerator)
+	{
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorValue = directGenerator;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor DirectGenerator(DirectGeneratorDescriptor descriptor)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorDescriptor = descriptor;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor DirectGenerator(Action<DirectGeneratorDescriptor> configure)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorActions = null;
+		DirectGeneratorDescriptorAction = configure;
+		return Self;
+	}
+
+	public PhraseSuggesterDescriptor DirectGenerator(params Action<DirectGeneratorDescriptor>[] configure)
+	{
+		DirectGeneratorValue = null;
+		DirectGeneratorDescriptor = null;
+		DirectGeneratorDescriptorAction = null;
+		DirectGeneratorDescriptorActions = configure;
 		return Self;
 	}
 
@@ -778,6 +778,34 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(AnalyzerValue))
+		{
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(AnalyzerValue);
+		}
+
+		if (CollateDescriptor is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, CollateDescriptor, options);
+		}
+		else if (CollateDescriptorAction is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
+		}
+		else if (CollateValue is not null)
+		{
+			writer.WritePropertyName("collate");
+			JsonSerializer.Serialize(writer, CollateValue, options);
+		}
+
+		if (ConfidenceValue.HasValue)
+		{
+			writer.WritePropertyName("confidence");
+			writer.WriteNumberValue(ConfidenceValue.Value);
+		}
+
 		if (DirectGeneratorDescriptor is not null)
 		{
 			writer.WritePropertyName("direct_generator");
@@ -807,34 +835,6 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		{
 			writer.WritePropertyName("direct_generator");
 			JsonSerializer.Serialize(writer, DirectGeneratorValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (CollateDescriptor is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, CollateDescriptor, options);
-		}
-		else if (CollateDescriptorAction is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
-		}
-		else if (CollateValue is not null)
-		{
-			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, CollateValue, options);
-		}
-
-		if (ConfidenceValue.HasValue)
-		{
-			writer.WritePropertyName("confidence");
-			writer.WriteNumberValue(ConfidenceValue.Value);
 		}
 
 		writer.WritePropertyName("field");

@@ -53,15 +53,9 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-
-	public ExistsQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public ExistsQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -87,15 +81,15 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	public ExistsQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -104,6 +98,12 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -116,15 +116,9 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-
-	public ExistsQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public ExistsQueryDescriptor Boost(float? boost)
 	{
@@ -159,15 +153,15 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 		return Self;
 	}
 
+	public ExistsQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -176,6 +170,12 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 	}
 }

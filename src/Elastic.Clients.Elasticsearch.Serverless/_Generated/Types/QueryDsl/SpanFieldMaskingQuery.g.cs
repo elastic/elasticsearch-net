@@ -49,12 +49,30 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery QueryValue { get; set; }
 	private SpanQueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<SpanQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+
+	public SpanFieldMaskingQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public SpanFieldMaskingQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public SpanFieldMaskingQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
 	public SpanFieldMaskingQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery query)
 	{
@@ -86,27 +104,17 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -129,14 +137,6 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		writer.WriteEndObject();
 	}
 }
@@ -149,12 +149,36 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery QueryValue { get; set; }
 	private SpanQueryDescriptor QueryDescriptor { get; set; }
 	private Action<SpanQueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+
+	public SpanFieldMaskingQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	public SpanFieldMaskingQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public SpanFieldMaskingQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public SpanFieldMaskingQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
 	public SpanFieldMaskingQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery query)
 	{
@@ -186,33 +210,17 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -235,14 +243,6 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		writer.WriteEndObject();
 	}
 }

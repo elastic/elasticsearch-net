@@ -77,17 +77,32 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+	private string ParentTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string ParentTypeValue { get; set; }
 	private bool? ScoreValue { get; set; }
+
+	public HasParentQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
+	/// </summary>
+	public HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -113,6 +128,15 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Name of the parent relationship mapped for the `join` field.</para>
+	/// </summary>
+	public HasParentQueryDescriptor<TDocument> ParentType(string parentType)
+	{
+		ParentTypeValue = parentType;
 		return Self;
 	}
 
@@ -149,30 +173,6 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HasParentQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
-	/// </summary>
-	public HasParentQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Name of the parent relationship mapped for the `join` field.</para>
-	/// </summary>
-	public HasParentQueryDescriptor<TDocument> ParentType(string parentType)
-	{
-		ParentTypeValue = parentType;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Indicates whether the relevance score of a matching parent document is aggregated into its child documents.</para>
 	/// </summary>
@@ -185,6 +185,18 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -201,6 +213,8 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
 		}
 
+		writer.WritePropertyName("parent_type");
+		JsonSerializer.Serialize(writer, ParentTypeValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -223,20 +237,6 @@ public sealed partial class HasParentQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		writer.WritePropertyName("parent_type");
-		JsonSerializer.Serialize(writer, ParentTypeValue, options);
 		if (ScoreValue.HasValue)
 		{
 			writer.WritePropertyName("score");
@@ -255,17 +255,32 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+	private string ParentTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private string ParentTypeValue { get; set; }
 	private bool? ScoreValue { get; set; }
+
+	public HasParentQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
+	/// </summary>
+	public HasParentQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -291,6 +306,15 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Name of the parent relationship mapped for the `join` field.</para>
+	/// </summary>
+	public HasParentQueryDescriptor ParentType(string parentType)
+	{
+		ParentTypeValue = parentType;
 		return Self;
 	}
 
@@ -327,30 +351,6 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 		return Self;
 	}
 
-	public HasParentQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped `parent_type` and not return any documents instead of an error.<br/>You can use this parameter to query multiple indices that may not contain the `parent_type`.</para>
-	/// </summary>
-	public HasParentQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Name of the parent relationship mapped for the `join` field.</para>
-	/// </summary>
-	public HasParentQueryDescriptor ParentType(string parentType)
-	{
-		ParentTypeValue = parentType;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Indicates whether the relevance score of a matching parent document is aggregated into its child documents.</para>
 	/// </summary>
@@ -363,6 +363,18 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -379,6 +391,8 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
 		}
 
+		writer.WritePropertyName("parent_type");
+		JsonSerializer.Serialize(writer, ParentTypeValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -401,20 +415,6 @@ public sealed partial class HasParentQueryDescriptor : SerializableDescriptor<Ha
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		writer.WritePropertyName("parent_type");
-		JsonSerializer.Serialize(writer, ParentTypeValue, options);
 		if (ScoreValue.HasValue)
 		{
 			writer.WritePropertyName("score");
