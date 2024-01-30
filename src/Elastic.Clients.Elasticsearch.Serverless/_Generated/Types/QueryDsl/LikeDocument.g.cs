@@ -66,14 +66,29 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private object? DocValue { get; set; }
 	private Fields? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id? IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>? PerFieldAnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
+
+	/// <summary>
+	/// <para>A document not present in the index.</para>
+	/// </summary>
+	public LikeDocumentDescriptor<TDocument> Doc(object? doc)
+	{
+		DocValue = doc;
+		return Self;
+	}
+
+	public LikeDocumentDescriptor<TDocument> Fields(Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>ID of a document.</para>
@@ -90,21 +105,6 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	public LikeDocumentDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A document not present in the index.</para>
-	/// </summary>
-	public LikeDocumentDescriptor<TDocument> Doc(object? doc)
-	{
-		DocValue = doc;
-		return Self;
-	}
-
-	public LikeDocumentDescriptor<TDocument> Fields(Fields? fields)
-	{
-		FieldsValue = fields;
 		return Self;
 	}
 
@@ -135,18 +135,6 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
@@ -157,6 +145,18 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 		{
 			writer.WritePropertyName("fields");
 			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+		}
+
+		if (IndexValue is not null)
+		{
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (PerFieldAnalyzerValue is not null)
@@ -195,14 +195,29 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private object? DocValue { get; set; }
 	private Fields? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Id? IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>? PerFieldAnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
+
+	/// <summary>
+	/// <para>A document not present in the index.</para>
+	/// </summary>
+	public LikeDocumentDescriptor Doc(object? doc)
+	{
+		DocValue = doc;
+		return Self;
+	}
+
+	public LikeDocumentDescriptor Fields(Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>ID of a document.</para>
@@ -219,21 +234,6 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	public LikeDocumentDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.IndexName? index)
 	{
 		IndexValue = index;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A document not present in the index.</para>
-	/// </summary>
-	public LikeDocumentDescriptor Doc(object? doc)
-	{
-		DocValue = doc;
-		return Self;
-	}
-
-	public LikeDocumentDescriptor Fields(Fields? fields)
-	{
-		FieldsValue = fields;
 		return Self;
 	}
 
@@ -264,18 +264,6 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IdValue is not null)
-		{
-			writer.WritePropertyName("_id");
-			JsonSerializer.Serialize(writer, IdValue, options);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("_index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
@@ -286,6 +274,18 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 		{
 			writer.WritePropertyName("fields");
 			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+		}
+
+		if (IndexValue is not null)
+		{
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
 		}
 
 		if (PerFieldAnalyzerValue is not null)

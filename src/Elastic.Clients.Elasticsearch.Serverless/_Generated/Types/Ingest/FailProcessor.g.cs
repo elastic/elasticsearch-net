@@ -57,15 +57,42 @@ public sealed partial class FailProcessorDescriptor<TDocument> : SerializableDes
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private string MessageValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
+
+	public FailProcessorDescriptor<TDocument> Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	public FailProcessorDescriptor<TDocument> If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public FailProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
+	/// </summary>
+	public FailProcessorDescriptor<TDocument> Message(string message)
+	{
+		MessageValue = message;
+		return Self;
+	}
 
 	public FailProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -103,33 +130,6 @@ public sealed partial class FailProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FailProcessorDescriptor<TDocument> Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	public FailProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public FailProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
-	/// </summary>
-	public FailProcessorDescriptor<TDocument> Message(string message)
-	{
-		MessageValue = message;
-		return Self;
-	}
-
 	public FailProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -139,6 +139,26 @@ public sealed partial class FailProcessorDescriptor<TDocument> : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		writer.WritePropertyName("message");
+		writer.WriteStringValue(MessageValue);
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -170,26 +190,6 @@ public sealed partial class FailProcessorDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		writer.WritePropertyName("message");
-		writer.WriteStringValue(MessageValue);
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");
@@ -208,15 +208,42 @@ public sealed partial class FailProcessorDescriptor : SerializableDescriptor<Fai
 	{
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? DescriptionValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private string MessageValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
+	private ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
+
+	public FailProcessorDescriptor Description(string? description)
+	{
+		DescriptionValue = description;
+		return Self;
+	}
+
+	public FailProcessorDescriptor If(string? ifValue)
+	{
+		IfValue = ifValue;
+		return Self;
+	}
+
+	public FailProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	{
+		IgnoreFailureValue = ignoreFailure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
+	/// </summary>
+	public FailProcessorDescriptor Message(string message)
+	{
+		MessageValue = message;
+		return Self;
+	}
 
 	public FailProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
@@ -254,33 +281,6 @@ public sealed partial class FailProcessorDescriptor : SerializableDescriptor<Fai
 		return Self;
 	}
 
-	public FailProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
-	}
-
-	public FailProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
-	public FailProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The error message thrown by the processor.<br/>Supports template snippets.</para>
-	/// </summary>
-	public FailProcessorDescriptor Message(string message)
-	{
-		MessageValue = message;
-		return Self;
-	}
-
 	public FailProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -290,6 +290,26 @@ public sealed partial class FailProcessorDescriptor : SerializableDescriptor<Fai
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(DescriptionValue))
+		{
+			writer.WritePropertyName("description");
+			writer.WriteStringValue(DescriptionValue);
+		}
+
+		if (!string.IsNullOrEmpty(IfValue))
+		{
+			writer.WritePropertyName("if");
+			writer.WriteStringValue(IfValue);
+		}
+
+		if (IgnoreFailureValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_failure");
+			writer.WriteBooleanValue(IgnoreFailureValue.Value);
+		}
+
+		writer.WritePropertyName("message");
+		writer.WriteStringValue(MessageValue);
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -321,26 +341,6 @@ public sealed partial class FailProcessorDescriptor : SerializableDescriptor<Fai
 			JsonSerializer.Serialize(writer, OnFailureValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		writer.WritePropertyName("message");
-		writer.WriteStringValue(MessageValue);
 		if (!string.IsNullOrEmpty(TagValue))
 		{
 			writer.WritePropertyName("tag");

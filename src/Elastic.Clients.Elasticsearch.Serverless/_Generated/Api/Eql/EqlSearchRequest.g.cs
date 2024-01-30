@@ -67,12 +67,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-	/// <summary>
-	/// <para>EQL query you wish to run.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
 	[JsonInclude, JsonPropertyName("case_sensitive")]
 	public bool? CaseSensitive { get; set; }
 
@@ -81,6 +75,46 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// </summary>
 	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryField { get; set; }
+
+	/// <summary>
+	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fetch_size")]
+	public int? FetchSize { get; set; }
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat))]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
+
+	/// <summary>
+	/// <para>Query, written in Query DSL, used to filter the events on which the EQL query runs.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("filter")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query))]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filter { get; set; }
+	[JsonInclude, JsonPropertyName("keep_alive")]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get; set; }
+	[JsonInclude, JsonPropertyName("keep_on_completion")]
+	public bool? KeepOnCompletion { get; set; }
+
+	/// <summary>
+	/// <para>EQL query you wish to run.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("query")]
+	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("result_position")]
+	public Elastic.Clients.Elasticsearch.Serverless.Eql.ResultPosition? ResultPosition { get; set; }
+	[JsonInclude, JsonPropertyName("runtime_mappings")]
+	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+
+	/// <summary>
+	/// <para>For basic queries, the maximum number of matching events to return. Defaults to 10</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
+	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
@@ -93,40 +127,8 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TimestampField { get; set; }
-
-	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_size")]
-	public int? FetchSize { get; set; }
-
-	/// <summary>
-	/// <para>Query, written in Query DSL, used to filter the events on which the EQL query runs.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("keep_alive")]
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAlive { get; set; }
-	[JsonInclude, JsonPropertyName("keep_on_completion")]
-	public bool? KeepOnCompletion { get; set; }
 	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeout { get; set; }
-
-	/// <summary>
-	/// <para>For basic queries, the maximum number of matching events to return. Defaults to 10</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
-	public int? Size { get; set; }
-
-	/// <summary>
-	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("fields"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat))]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("result_position")]
-	public Elastic.Clients.Elasticsearch.Serverless.Eql.ResultPosition? ResultPosition { get; set; }
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
 /// <summary>
@@ -162,6 +164,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	private bool? CaseSensitiveValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
+	private int? FetchSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
@@ -170,9 +175,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private bool? CaseSensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
-	private int? FetchSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
 	private string QueryValue { get; set; }
@@ -182,6 +184,39 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? caseSensitive = true)
+	{
+		CaseSensitiveValue = caseSensitive;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> EventCategoryField<TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> FetchSize(int? fetchSize)
+	{
+		FetchSizeValue = fetchSize;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
@@ -258,39 +293,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	public EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? caseSensitive = true)
-	{
-		CaseSensitiveValue = caseSensitive;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> EventCategoryField<TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> FetchSize(int? fetchSize)
-	{
-		FetchSizeValue = fetchSize;
 		return Self;
 	}
 
@@ -381,6 +383,24 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (CaseSensitiveValue.HasValue)
+		{
+			writer.WritePropertyName("case_sensitive");
+			writer.WriteBooleanValue(CaseSensitiveValue.Value);
+		}
+
+		if (EventCategoryFieldValue is not null)
+		{
+			writer.WritePropertyName("event_category_field");
+			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
+		}
+
+		if (FetchSizeValue.HasValue)
+		{
+			writer.WritePropertyName("fetch_size");
+			writer.WriteNumberValue(FetchSizeValue.Value);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -437,24 +457,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (CaseSensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_sensitive");
-			writer.WriteBooleanValue(CaseSensitiveValue.Value);
-		}
-
-		if (EventCategoryFieldValue is not null)
-		{
-			writer.WritePropertyName("event_category_field");
-			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
-		}
-
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
 		}
 
 		if (KeepAliveValue is not null)
@@ -544,6 +546,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
+	private bool? CaseSensitiveValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
+	private int? FetchSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
@@ -552,9 +557,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private bool? CaseSensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field? EventCategoryFieldValue { get; set; }
-	private int? FetchSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
 	private string QueryValue { get; set; }
@@ -564,6 +566,48 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TimestampFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
+
+	public EqlSearchRequestDescriptor CaseSensitive(bool? caseSensitive = true)
+	{
+		CaseSensitiveValue = caseSensitive;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor EventCategoryField<TDocument, TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor EventCategoryField<TDocument>(Expression<Func<TDocument, object>> eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Maximum number of events to search at a time for sequence queries.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor FetchSize(int? fetchSize)
+	{
+		FetchSizeValue = fetchSize;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.</para>
@@ -640,48 +684,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	public EqlSearchRequestDescriptor CaseSensitive(bool? caseSensitive = true)
-	{
-		CaseSensitiveValue = caseSensitive;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Serverless.Field? eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField<TDocument, TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Field containing the event classification, such as process, file, or network.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField<TDocument>(Expression<Func<TDocument, object>> eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Maximum number of events to search at a time for sequence queries.</para>
-	/// </summary>
-	public EqlSearchRequestDescriptor FetchSize(int? fetchSize)
-	{
-		FetchSizeValue = fetchSize;
 		return Self;
 	}
 
@@ -790,6 +792,24 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (CaseSensitiveValue.HasValue)
+		{
+			writer.WritePropertyName("case_sensitive");
+			writer.WriteBooleanValue(CaseSensitiveValue.Value);
+		}
+
+		if (EventCategoryFieldValue is not null)
+		{
+			writer.WritePropertyName("event_category_field");
+			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
+		}
+
+		if (FetchSizeValue.HasValue)
+		{
+			writer.WritePropertyName("fetch_size");
+			writer.WriteNumberValue(FetchSizeValue.Value);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -846,24 +866,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (CaseSensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_sensitive");
-			writer.WriteBooleanValue(CaseSensitiveValue.Value);
-		}
-
-		if (EventCategoryFieldValue is not null)
-		{
-			writer.WritePropertyName("event_category_field");
-			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
-		}
-
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
 		}
 
 		if (KeepAliveValue is not null)

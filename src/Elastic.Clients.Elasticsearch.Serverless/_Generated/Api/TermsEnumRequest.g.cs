@@ -51,10 +51,24 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	internal override string OperationName => "terms_enum";
 
 	/// <summary>
+	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("case_insensitive")]
+	public bool? CaseInsensitive { get; set; }
+
+	/// <summary>
 	/// <para>The string to match at the start of indexed terms. If not provided, all terms in the field are considered.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("index_filter")]
+	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? IndexFilter { get; set; }
+	[JsonInclude, JsonPropertyName("search_after")]
+	public string? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>How many matching terms to return.</para>
@@ -63,30 +77,16 @@ public sealed partial class TermsEnumRequest : PlainRequest<TermsEnumRequestPara
 	public int? Size { get; set; }
 
 	/// <summary>
-	/// <para>The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("timeout")]
-	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get; set; }
-
-	/// <summary>
-	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("case_insensitive")]
-	public bool? CaseInsensitive { get; set; }
-
-	/// <summary>
-	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("index_filter")]
-	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? IndexFilter { get; set; }
-
-	/// <summary>
 	/// <para>The string after which terms in the index should be returned. Allows for a form of pagination if the last result from one request is passed as the search_after parameter for a subsequent request.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("string")]
 	public string? String { get; set; }
-	[JsonInclude, JsonPropertyName("search_after")]
-	public string? SearchAfter { get; set; }
+
+	/// <summary>
+	/// <para>The maximum length of time to spend collecting results. Defaults to "1s" (one second). If the timeout is exceeded the complete flag set to false in the response and the results may be partial or empty.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("timeout")]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get; set; }
 }
 
 /// <summary>
@@ -122,42 +122,15 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	private bool? CaseInsensitiveValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? IndexFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> IndexFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> IndexFilterDescriptorAction { get; set; }
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? SearchAfterValue { get; set; }
 	private int? SizeValue { get; set; }
 	private string? StringValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? TimeoutValue { get; set; }
-
-	/// <summary>
-	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
-	/// </summary>
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
-	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
-	}
-
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
@@ -183,6 +156,33 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	public TermsEnumRequestDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
+	{
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterValue = indexFilter;
+		return Self;
+	}
+
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public TermsEnumRequestDescriptor<TDocument> IndexFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = configure;
 		return Self;
 	}
 
@@ -222,6 +222,14 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (CaseInsensitiveValue.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (IndexFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("index_filter");
@@ -238,14 +246,6 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 			JsonSerializer.Serialize(writer, IndexFilterValue, options);
 		}
 
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(SearchAfterValue))
 		{
 			writer.WritePropertyName("search_after");
@@ -303,42 +303,15 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 		return Self;
 	}
 
+	private bool? CaseInsensitiveValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? IndexFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor IndexFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> IndexFilterDescriptorAction { get; set; }
-	private bool? CaseInsensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? SearchAfterValue { get; set; }
 	private int? SizeValue { get; set; }
 	private string? StringValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? TimeoutValue { get; set; }
-
-	/// <summary>
-	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
-	/// </summary>
-	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
-	{
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterValue = indexFilter;
-		return Self;
-	}
-
-	public TermsEnumRequestDescriptor IndexFilter(QueryDsl.QueryDescriptor descriptor)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptorAction = null;
-		IndexFilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TermsEnumRequestDescriptor IndexFilter(Action<QueryDsl.QueryDescriptor> configure)
-	{
-		IndexFilterValue = null;
-		IndexFilterDescriptor = null;
-		IndexFilterDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>When true the provided search string is matched against index terms without case sensitivity.</para>
@@ -373,6 +346,33 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	public TermsEnumRequestDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Allows to filter an index shard if the provided query rewrites to match_none.</para>
+	/// </summary>
+	public TermsEnumRequestDescriptor IndexFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? indexFilter)
+	{
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterValue = indexFilter;
+		return Self;
+	}
+
+	public TermsEnumRequestDescriptor IndexFilter(QueryDsl.QueryDescriptor descriptor)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptorAction = null;
+		IndexFilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public TermsEnumRequestDescriptor IndexFilter(Action<QueryDsl.QueryDescriptor> configure)
+	{
+		IndexFilterValue = null;
+		IndexFilterDescriptor = null;
+		IndexFilterDescriptorAction = configure;
 		return Self;
 	}
 
@@ -412,6 +412,14 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (CaseInsensitiveValue.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (IndexFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("index_filter");
@@ -428,14 +436,6 @@ public sealed partial class TermsEnumRequestDescriptor : RequestDescriptor<Terms
 			JsonSerializer.Serialize(writer, IndexFilterValue, options);
 		}
 
-		if (CaseInsensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_insensitive");
-			writer.WriteBooleanValue(CaseInsensitiveValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (!string.IsNullOrEmpty(SearchAfterValue))
 		{
 			writer.WritePropertyName("search_after");

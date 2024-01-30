@@ -50,13 +50,40 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
 	private IntervalsDescriptor<TDocument> IntervalsDescriptor { get; set; }
 	private Action<IntervalsDescriptor<TDocument>> IntervalsDescriptorAction { get; set; }
 	private Action<IntervalsDescriptor<TDocument>>[] IntervalsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Rule used to filter returned intervals.</para>
+	/// </summary>
+	public IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsAnyOfDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAnyOfDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>An array of rules to match.</para>
@@ -97,36 +124,25 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
-	/// </summary>
-	public IntervalsAnyOfDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Filter(IntervalsFilterDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor<TDocument> Filter(Action<IntervalsFilterDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
 		if (IntervalsDescriptor is not null)
 		{
 			writer.WritePropertyName("intervals");
@@ -158,22 +174,6 @@ public sealed partial class IntervalsAnyOfDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, IntervalsValue, options);
 		}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -186,13 +186,40 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
+	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
+	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> IntervalsValue { get; set; }
 	private IntervalsDescriptor IntervalsDescriptor { get; set; }
 	private Action<IntervalsDescriptor> IntervalsDescriptorAction { get; set; }
 	private Action<IntervalsDescriptor>[] IntervalsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? FilterValue { get; set; }
-	private IntervalsFilterDescriptor FilterDescriptor { get; set; }
-	private Action<IntervalsFilterDescriptor> FilterDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Rule used to filter returned intervals.</para>
+	/// </summary>
+	public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
+	{
+		FilterDescriptor = null;
+		FilterDescriptorAction = null;
+		FilterValue = filter;
+		return Self;
+	}
+
+	public IntervalsAnyOfDescriptor Filter(IntervalsFilterDescriptor descriptor)
+	{
+		FilterValue = null;
+		FilterDescriptorAction = null;
+		FilterDescriptor = descriptor;
+		return Self;
+	}
+
+	public IntervalsAnyOfDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
+	{
+		FilterValue = null;
+		FilterDescriptor = null;
+		FilterDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>An array of rules to match.</para>
@@ -233,36 +260,25 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Rule used to filter returned intervals.</para>
-	/// </summary>
-	public IntervalsAnyOfDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? filter)
-	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor Filter(IntervalsFilterDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public IntervalsAnyOfDescriptor Filter(Action<IntervalsFilterDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (FilterDescriptor is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterDescriptor, options);
+		}
+		else if (FilterDescriptorAction is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
+		}
+		else if (FilterValue is not null)
+		{
+			writer.WritePropertyName("filter");
+			JsonSerializer.Serialize(writer, FilterValue, options);
+		}
+
 		if (IntervalsDescriptor is not null)
 		{
 			writer.WritePropertyName("intervals");
@@ -292,22 +308,6 @@ public sealed partial class IntervalsAnyOfDescriptor : SerializableDescriptor<In
 		{
 			writer.WritePropertyName("intervals");
 			JsonSerializer.Serialize(writer, IntervalsValue, options);
-		}
-
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new IntervalsFilterDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
 		writer.WriteEndObject();

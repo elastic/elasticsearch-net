@@ -199,16 +199,31 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 	{
 	}
 
+	private bool? IncludeSortValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GeoLinePoint PointValue { get; set; }
 	private GeoLinePointDescriptor<TDocument> PointDescriptor { get; set; }
 	private Action<GeoLinePointDescriptor<TDocument>> PointDescriptorAction { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GeoLineSort SortValue { get; set; }
 	private GeoLineSortDescriptor<TDocument> SortDescriptor { get; set; }
 	private Action<GeoLineSortDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private bool? IncludeSortValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? SortOrderValue { get; set; }
+
+	/// <summary>
+	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
+	/// </summary>
+	public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true)
+	{
+		IncludeSortValue = includeSort;
+		return Self;
+	}
+
+	public GeoLineAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The name of the geo_point field.</para>
@@ -234,6 +249,15 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		PointValue = null;
 		PointDescriptor = null;
 		PointDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
+	/// </summary>
+	public GeoLineAggregationDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -265,30 +289,6 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 	}
 
 	/// <summary>
-	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
-	/// </summary>
-	public GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? includeSort = true)
-	{
-		IncludeSortValue = includeSort;
-		return Self;
-	}
-
-	public GeoLineAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
-	/// </summary>
-	public GeoLineAggregationDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>The order in which the line is sorted (ascending or descending).</para>
 	/// </summary>
 	public GeoLineAggregationDescriptor<TDocument> SortOrder(Elastic.Clients.Elasticsearch.Serverless.SortOrder? sortOrder)
@@ -302,6 +302,12 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		writer.WriteStartObject();
 		writer.WritePropertyName("geo_line");
 		writer.WriteStartObject();
+		if (IncludeSortValue.HasValue)
+		{
+			writer.WritePropertyName("include_sort");
+			writer.WriteBooleanValue(IncludeSortValue.Value);
+		}
+
 		if (PointDescriptor is not null)
 		{
 			writer.WritePropertyName("point");
@@ -318,6 +324,12 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, PointValue, options);
 		}
 
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -332,18 +344,6 @@ public sealed partial class GeoLineAggregationDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("sort");
 			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
-		if (IncludeSortValue.HasValue)
-		{
-			writer.WritePropertyName("include_sort");
-			writer.WriteBooleanValue(IncludeSortValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SortOrderValue is not null)
@@ -371,16 +371,31 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 	{
 	}
 
+	private bool? IncludeSortValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GeoLinePoint PointValue { get; set; }
 	private GeoLinePointDescriptor PointDescriptor { get; set; }
 	private Action<GeoLinePointDescriptor> PointDescriptorAction { get; set; }
+	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GeoLineSort SortValue { get; set; }
 	private GeoLineSortDescriptor SortDescriptor { get; set; }
 	private Action<GeoLineSortDescriptor> SortDescriptorAction { get; set; }
-	private bool? IncludeSortValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? SortOrderValue { get; set; }
+
+	/// <summary>
+	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
+	/// </summary>
+	public GeoLineAggregationDescriptor IncludeSort(bool? includeSort = true)
+	{
+		IncludeSortValue = includeSort;
+		return Self;
+	}
+
+	public GeoLineAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The name of the geo_point field.</para>
@@ -406,6 +421,15 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		PointValue = null;
 		PointDescriptor = null;
 		PointDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
+	/// </summary>
+	public GeoLineAggregationDescriptor Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -437,30 +461,6 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 	}
 
 	/// <summary>
-	/// <para>When `true`, returns an additional array of the sort values in the feature properties.</para>
-	/// </summary>
-	public GeoLineAggregationDescriptor IncludeSort(bool? includeSort = true)
-	{
-		IncludeSortValue = includeSort;
-		return Self;
-	}
-
-	public GeoLineAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum length of the line represented in the aggregation.<br/>Valid sizes are between 1 and 10000.</para>
-	/// </summary>
-	public GeoLineAggregationDescriptor Size(int? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>The order in which the line is sorted (ascending or descending).</para>
 	/// </summary>
 	public GeoLineAggregationDescriptor SortOrder(Elastic.Clients.Elasticsearch.Serverless.SortOrder? sortOrder)
@@ -474,6 +474,12 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		writer.WriteStartObject();
 		writer.WritePropertyName("geo_line");
 		writer.WriteStartObject();
+		if (IncludeSortValue.HasValue)
+		{
+			writer.WritePropertyName("include_sort");
+			writer.WriteBooleanValue(IncludeSortValue.Value);
+		}
+
 		if (PointDescriptor is not null)
 		{
 			writer.WritePropertyName("point");
@@ -490,6 +496,12 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, PointValue, options);
 		}
 
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -504,18 +516,6 @@ public sealed partial class GeoLineAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("sort");
 			JsonSerializer.Serialize(writer, SortValue, options);
-		}
-
-		if (IncludeSortValue.HasValue)
-		{
-			writer.WritePropertyName("include_sort");
-			writer.WriteBooleanValue(IncludeSortValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SortOrderValue is not null)

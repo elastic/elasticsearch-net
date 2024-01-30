@@ -39,12 +39,6 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_source")
-				{
-					variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "aggregations" || property == "aggs")
 				{
 					variant.Aggregations = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary?>(ref reader, options);
@@ -177,6 +171,12 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 					continue;
 				}
 
+				if (property == "_source")
+				{
+					variant.Source = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "stats")
 				{
 					variant.Stats = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
@@ -233,12 +233,6 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 	public override void Write(Utf8JsonWriter writer, MultisearchBody value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Source is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, value.Source, options);
-		}
-
 		if (value.Aggregations is not null)
 		{
 			writer.WritePropertyName("aggregations");
@@ -369,6 +363,12 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 		{
 			writer.WritePropertyName("sort");
 			JsonSerializer.Serialize(writer, value.Sort, options);
+		}
+
+		if (value.Source is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, value.Source, options);
 		}
 
 		if (value.Stats is not null)
@@ -564,20 +564,29 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
+	private bool? ExplainValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
+	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
 	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>? KnnValue { get; set; }
 	private KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
 	private Action<KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
 	private Action<KnnQueryDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
+	private double? MinScoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
+	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
+	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
@@ -585,25 +594,16 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 	private Action<Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
 	private Action<Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private int? FromValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? SuggestValue { get; set; }
@@ -703,6 +703,24 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
 	/// </summary>
 	public MultisearchBodyDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
@@ -741,6 +759,15 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -762,6 +789,15 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
+	{
+		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
@@ -804,6 +840,42 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
+	{
+		PitDescriptor = null;
+		PitDescriptorAction = null;
+		PitValue = pit;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	{
+		PitValue = null;
+		PitDescriptorAction = null;
+		PitDescriptor = descriptor;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	{
+		PitValue = null;
+		PitDescriptor = null;
+		PitDescriptorAction = configure;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
@@ -825,6 +897,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor<TDocument> Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -891,6 +969,48 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
+	{
+		SearchAfterValue = searchAfter;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -933,126 +1053,6 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	public MultisearchBodyDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
-	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
-	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
-	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
-	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor<TDocument> Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor<TDocument> SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -1209,6 +1209,18 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (ExtValue is not null)
+		{
+			writer.WritePropertyName("ext");
+			JsonSerializer.Serialize(writer, ExtValue, options);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -1240,6 +1252,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -1254,6 +1272,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndicesBoostValue is not null)
+		{
+			writer.WritePropertyName("indices_boost");
+			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
 		}
 
 		if (KnnDescriptor is not null)
@@ -1285,6 +1309,28 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>(KnnValue, writer, options);
 		}
 
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
+		if (PitDescriptor is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitDescriptor, options);
+		}
+		else if (PitDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+		}
+		else if (PitValue is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitValue, options);
+		}
+
 		if (PostFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("post_filter");
@@ -1299,6 +1345,12 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("post_filter");
 			JsonSerializer.Serialize(writer, PostFilterValue, options);
+		}
+
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -1346,6 +1398,36 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>(RescoreValue, writer, options);
 		}
 
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SearchAfterValue is not null)
+		{
+			writer.WritePropertyName("search_after");
+			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -1379,88 +1461,6 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StatsValue is not null)
@@ -1543,20 +1543,29 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
+	private bool? ExplainValue { get; set; }
+	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
 	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
+	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
 	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>? KnnValue { get; set; }
 	private KnnQueryDescriptor KnnDescriptor { get; set; }
 	private Action<KnnQueryDescriptor> KnnDescriptorAction { get; set; }
 	private Action<KnnQueryDescriptor>[] KnnDescriptorActions { get; set; }
+	private double? MinScoreValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
+	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? PostFilterValue { get; set; }
 	private QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
+	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
@@ -1564,25 +1573,16 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 	private Action<Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
 	private Action<Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
-	private bool? ExplainValue { get; set; }
-	private IDictionary<string, object>? ExtValue { get; set; }
-	private int? FromValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? IndicesBoostValue { get; set; }
-	private double? MinScoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
-	private bool? ProfileValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? SearchAfterValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Suggester? SuggestValue { get; set; }
@@ -1682,6 +1682,24 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	}
 
 	/// <summary>
+	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
 	/// </summary>
 	public MultisearchBodyDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldAndFormat>? fields)
@@ -1720,6 +1738,15 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -1741,6 +1768,15 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Boosts the _score of documents from specified indices.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
+	{
+		IndicesBoostValue = indicesBoost;
 		return Self;
 	}
 
@@ -1783,6 +1819,42 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor MinScore(double? minScore)
+	{
+		MinScoreValue = minScore;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
+	{
+		PitDescriptor = null;
+		PitDescriptorAction = null;
+		PitValue = pit;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	{
+		PitValue = null;
+		PitDescriptorAction = null;
+		PitDescriptor = descriptor;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	{
+		PitValue = null;
+		PitDescriptor = null;
+		PitDescriptorAction = configure;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor PostFilter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? postFilter)
 	{
 		PostFilterDescriptor = null;
@@ -1804,6 +1876,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
 		PostFilterDescriptorAction = configure;
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -1870,6 +1948,48 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	{
+		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public MultisearchBodyDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
+	{
+		SearchAfterValue = searchAfter;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
+	/// </summary>
+	public MultisearchBodyDescriptor Size(int? size)
+	{
+		SizeValue = size;
+		return Self;
+	}
+
 	public MultisearchBodyDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? sort)
 	{
 		SortDescriptor = null;
@@ -1912,126 +2032,6 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	public MultisearchBodyDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns detailed information about score computation as part of a hit.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Configuration of search extensions defined by Elasticsearch plugins.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor Ext(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		ExtValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Starting document offset. By default, you cannot page through more than 10,000<br/>hits using the from and size parameters. To page through more hits, use the<br/>search_after parameter.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boosts the _score of documents from specified indices.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, double>>? indicesBoost)
-	{
-		IndicesBoostValue = indicesBoost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor MinScore(double? minScore)
-	{
-		MinScoreValue = minScore;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Limits the search to a point in time (PIT). If you provide a PIT, you<br/>cannot specify an <index> in the request path.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor Pit(Elastic.Clients.Elasticsearch.Serverless.Core.Search.PointInTimeReference? pit)
-	{
-		PitDescriptor = null;
-		PitDescriptorAction = null;
-		PitValue = pit;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
-	{
-		PitValue = null;
-		PitDescriptorAction = null;
-		PitDescriptor = descriptor;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
-	{
-		PitValue = null;
-		PitDescriptor = null;
-		PitDescriptorAction = configure;
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor Profile(bool? profile = true)
-	{
-		ProfileValue = profile;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
-	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Retrieve a script evaluation (based on different fields) for each hit.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public MultisearchBodyDescriptor SearchAfter(ICollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? searchAfter)
-	{
-		SearchAfterValue = searchAfter;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>If true, returns sequence number and primary term of the last modification<br/>of each hit. See Optimistic concurrency control.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The number of hits to return. By default, you cannot page through more<br/>than 10,000 hits using the from and size parameters. To page through more<br/>hits, use the search_after parameter.</para>
-	/// </summary>
-	public MultisearchBodyDescriptor Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -2188,6 +2188,18 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (ExtValue is not null)
+		{
+			writer.WritePropertyName("ext");
+			JsonSerializer.Serialize(writer, ExtValue, options);
+		}
+
 		if (FieldsDescriptor is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -2219,6 +2231,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -2233,6 +2251,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IndicesBoostValue is not null)
+		{
+			writer.WritePropertyName("indices_boost");
+			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
 		}
 
 		if (KnnDescriptor is not null)
@@ -2264,6 +2288,28 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery>(KnnValue, writer, options);
 		}
 
+		if (MinScoreValue.HasValue)
+		{
+			writer.WritePropertyName("min_score");
+			writer.WriteNumberValue(MinScoreValue.Value);
+		}
+
+		if (PitDescriptor is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitDescriptor, options);
+		}
+		else if (PitDescriptorAction is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+		}
+		else if (PitValue is not null)
+		{
+			writer.WritePropertyName("pit");
+			JsonSerializer.Serialize(writer, PitValue, options);
+		}
+
 		if (PostFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("post_filter");
@@ -2278,6 +2324,12 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		{
 			writer.WritePropertyName("post_filter");
 			JsonSerializer.Serialize(writer, PostFilterValue, options);
+		}
+
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
 		if (QueryDescriptor is not null)
@@ -2325,6 +2377,36 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Rescore>(RescoreValue, writer, options);
 		}
 
+		if (RuntimeMappingsValue is not null)
+		{
+			writer.WritePropertyName("runtime_mappings");
+			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SearchAfterValue is not null)
+		{
+			writer.WritePropertyName("search_after");
+			JsonSerializer.Serialize(writer, SearchAfterValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
+		}
+
 		if (SortDescriptor is not null)
 		{
 			writer.WritePropertyName("sort");
@@ -2358,88 +2440,6 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (ExtValue is not null)
-		{
-			writer.WritePropertyName("ext");
-			JsonSerializer.Serialize(writer, ExtValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IndicesBoostValue is not null)
-		{
-			writer.WritePropertyName("indices_boost");
-			JsonSerializer.Serialize(writer, IndicesBoostValue, options);
-		}
-
-		if (MinScoreValue.HasValue)
-		{
-			writer.WritePropertyName("min_score");
-			writer.WriteNumberValue(MinScoreValue.Value);
-		}
-
-		if (PitDescriptor is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitDescriptor, options);
-		}
-		else if (PitDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
-		}
-		else if (PitValue is not null)
-		{
-			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, PitValue, options);
-		}
-
-		if (ProfileValue.HasValue)
-		{
-			writer.WritePropertyName("profile");
-			writer.WriteBooleanValue(ProfileValue.Value);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SearchAfterValue is not null)
-		{
-			writer.WritePropertyName("search_after");
-			JsonSerializer.Serialize(writer, SearchAfterValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StatsValue is not null)

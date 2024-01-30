@@ -42,12 +42,6 @@ internal sealed partial class MatchBoolPrefixQueryConverter : JsonConverter<Matc
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "analyzer")
 				{
 					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -107,6 +101,12 @@ internal sealed partial class MatchBoolPrefixQueryConverter : JsonConverter<Matc
 					variant.Query = JsonSerializer.Deserialize<string>(ref reader, options);
 					continue;
 				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 			}
 		}
 
@@ -123,12 +123,6 @@ internal sealed partial class MatchBoolPrefixQueryConverter : JsonConverter<Matc
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (!string.IsNullOrEmpty(value.Analyzer))
 			{
 				writer.WritePropertyName("analyzer");
@@ -185,6 +179,12 @@ internal sealed partial class MatchBoolPrefixQueryConverter : JsonConverter<Matc
 
 			writer.WritePropertyName("query");
 			writer.WriteStringValue(value.Query);
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
 			writer.WriteEndObject();
 			writer.WriteEndObject();
 			return;
@@ -280,7 +280,6 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
@@ -292,12 +291,7 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
-
-	public MatchBoolPrefixQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -398,6 +392,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	public MatchBoolPrefixQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -405,12 +405,6 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -467,6 +461,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor<TDocument> : Serializ
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -487,7 +487,6 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
@@ -499,12 +498,7 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
-
-	public MatchBoolPrefixQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -611,6 +605,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	public MatchBoolPrefixQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -618,12 +618,6 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -680,6 +674,12 @@ public sealed partial class MatchBoolPrefixQueryDescriptor : SerializableDescrip
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

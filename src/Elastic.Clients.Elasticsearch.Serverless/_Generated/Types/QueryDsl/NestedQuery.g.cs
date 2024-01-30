@@ -77,17 +77,32 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
+
+	public NestedQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
+	/// </summary>
+	public NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -113,6 +128,24 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Path to the nested object you wish to search.</para>
+	/// </summary>
+	public NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Path to the nested object you wish to search.</para>
+	/// </summary>
+	public NestedQueryDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
 		return Self;
 	}
 
@@ -149,39 +182,6 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public NestedQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
-	/// </summary>
-	public NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
-	/// </summary>
-	public NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
-	/// </summary>
-	public NestedQueryDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>How scores for matching child objects affect the root parent document’s relevance score.</para>
 	/// </summary>
@@ -194,6 +194,18 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -210,6 +222,8 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
 		}
 
+		writer.WritePropertyName("path");
+		JsonSerializer.Serialize(writer, PathValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -232,20 +246,6 @@ public sealed partial class NestedQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
 		if (ScoreModeValue is not null)
 		{
 			writer.WritePropertyName("score_mode");
@@ -264,17 +264,32 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
 	private QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private bool? IgnoreUnmappedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field PathValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
+
+	public NestedQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
+	/// </summary>
+	public NestedQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>If defined, each search hit will contain inner hits.</para>
@@ -300,6 +315,33 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
 		InnerHitsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Path to the nested object you wish to search.</para>
+	/// </summary>
+	public NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Path to the nested object you wish to search.</para>
+	/// </summary>
+	public NestedQueryDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Path to the nested object you wish to search.</para>
+	/// </summary>
+	public NestedQueryDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
 		return Self;
 	}
 
@@ -336,48 +378,6 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 		return Self;
 	}
 
-	public NestedQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Indicates whether to ignore an unmapped path and not return any documents instead of an error.</para>
-	/// </summary>
-	public NestedQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
-	/// </summary>
-	public NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Serverless.Field path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
-	/// </summary>
-	public NestedQueryDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Path to the nested object you wish to search.</para>
-	/// </summary>
-	public NestedQueryDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
-	{
-		PathValue = path;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>How scores for matching child objects affect the root parent document’s relevance score.</para>
 	/// </summary>
@@ -390,6 +390,18 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
 		if (InnerHitsDescriptor is not null)
 		{
 			writer.WritePropertyName("inner_hits");
@@ -406,6 +418,8 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 			JsonSerializer.Serialize(writer, InnerHitsValue, options);
 		}
 
+		writer.WritePropertyName("path");
+		JsonSerializer.Serialize(writer, PathValue, options);
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -428,20 +442,6 @@ public sealed partial class NestedQueryDescriptor : SerializableDescriptor<Neste
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		writer.WritePropertyName("path");
-		JsonSerializer.Serialize(writer, PathValue, options);
 		if (ScoreModeValue is not null)
 		{
 			writer.WritePropertyName("score_mode");

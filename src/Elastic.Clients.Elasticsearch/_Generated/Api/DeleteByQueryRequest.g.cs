@@ -87,6 +87,11 @@ public sealed class DeleteByQueryRequestParameters : RequestParameters
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>If `true`, Elasticsearch refreshes all shards involved in the delete by query after the request completes.</para>
 	/// </summary>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
@@ -105,11 +110,6 @@ public sealed class DeleteByQueryRequestParameters : RequestParameters
 	/// <para>Custom value used to route operations to a specific shard.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
 	/// <para>Period to retain the search context for scrolling.</para>
@@ -256,6 +256,12 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
 	/// <summary>
+	/// <para>Query in the Lucene query string syntax.</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
+
+	/// <summary>
 	/// <para>If `true`, Elasticsearch refreshes all shards involved in the delete by query after the request completes.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -278,12 +284,6 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	/// <summary>
-	/// <para>Query in the Lucene query string syntax.</para>
-	/// </summary>
-	[JsonIgnore]
-	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
 	/// <summary>
 	/// <para>Period to retain the search context for scrolling.</para>
@@ -400,8 +400,8 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	internal override string OperationName => "delete_by_query";
 
 	public DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor<TDocument> Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
 	public DeleteByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public DeleteByQueryRequestDescriptor<TDocument> Df(string? df) => Qs("df", df);
@@ -410,7 +410,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	public DeleteByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public DeleteByQueryRequestDescriptor<TDocument> Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public DeleteByQueryRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
-	public DeleteByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? q) => Qs("q", q);
+	public DeleteByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public DeleteByQueryRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public DeleteByQueryRequestDescriptor<TDocument> RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -434,13 +434,22 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
+	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of documents to delete.</para>
+	/// </summary>
+	public DeleteByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to delete using the Query DSL.</para>
@@ -496,18 +505,15 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The maximum number of documents to delete.</para>
-	/// </summary>
-	public DeleteByQueryRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
-	{
-		MaxDocsValue = maxDocs;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (MaxDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -540,12 +546,6 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 			JsonSerializer.Serialize(writer, SliceValue, options);
 		}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -574,8 +574,8 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	internal override string OperationName => "delete_by_query";
 
 	public DeleteByQueryRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor Analyzer(string? analyzer) => Qs("analyzer", analyzer);
+	public DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? analyzeWildcard = true) => Qs("analyze_wildcard", analyzeWildcard);
 	public DeleteByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts) => Qs("conflicts", conflicts);
 	public DeleteByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? defaultOperator) => Qs("default_operator", defaultOperator);
 	public DeleteByQueryRequestDescriptor Df(string? df) => Qs("df", df);
@@ -584,7 +584,7 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 	public DeleteByQueryRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public DeleteByQueryRequestDescriptor Lenient(bool? lenient = true) => Qs("lenient", lenient);
 	public DeleteByQueryRequestDescriptor Preference(string? preference) => Qs("preference", preference);
-	public DeleteByQueryRequestDescriptor QueryLuceneSyntax(string? q) => Qs("q", q);
+	public DeleteByQueryRequestDescriptor QueryLuceneSyntax(string? queryLuceneSyntax) => Qs("q", queryLuceneSyntax);
 	public DeleteByQueryRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public DeleteByQueryRequestDescriptor RequestCache(bool? requestCache = true) => Qs("request_cache", requestCache);
 	public DeleteByQueryRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
@@ -608,13 +608,22 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		return Self;
 	}
 
+	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
 	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of documents to delete.</para>
+	/// </summary>
+	public DeleteByQueryRequestDescriptor MaxDocs(long? maxDocs)
+	{
+		MaxDocsValue = maxDocs;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Specifies the documents to delete using the Query DSL.</para>
@@ -670,18 +679,15 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The maximum number of documents to delete.</para>
-	/// </summary>
-	public DeleteByQueryRequestDescriptor MaxDocs(long? maxDocs)
-	{
-		MaxDocsValue = maxDocs;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (MaxDocsValue.HasValue)
+		{
+			writer.WritePropertyName("max_docs");
+			writer.WriteNumberValue(MaxDocsValue.Value);
+		}
+
 		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
@@ -712,12 +718,6 @@ public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<D
 		{
 			writer.WritePropertyName("slice");
 			JsonSerializer.Serialize(writer, SliceValue, options);
-		}
-
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
 		}
 
 		writer.WriteEndObject();
