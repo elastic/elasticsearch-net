@@ -69,7 +69,8 @@ public sealed partial class InnerHits
 	/// <summary>
 	/// <para>How the inner hits should be sorted per `inner_hits`.<br/>By default, inner hits are sorted by score.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
+	[JsonInclude, JsonPropertyName("sort")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? Sort { get; set; }
 	[JsonInclude, JsonPropertyName("stored_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredField { get; set; }
@@ -94,22 +95,22 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
-	private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-	private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private bool? ExplainValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
 	private int? FromValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
+	private HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
+	private Action<HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name? NameValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
 	private bool? VersionValue { get; set; }
@@ -174,6 +175,27 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	public InnerHitsDescriptor<TDocument> Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	public InnerHitsDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Inner hit starting document offset.</para>
+	/// </summary>
+	public InnerHitsDescriptor<TDocument> From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public InnerHitsDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -195,6 +217,42 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public InnerHitsDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
+	/// </summary>
+	public InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
+	public InnerHitsDescriptor<TDocument> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public InnerHitsDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum number of hits to return per `inner_hits`.</para>
+	/// </summary>
+	public InnerHitsDescriptor<TDocument> Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -240,63 +298,6 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 	public InnerHitsDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	public InnerHitsDescriptor<TDocument> Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	public InnerHitsDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
-	{
-		FieldsValue = fields;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Inner hit starting document offset.</para>
-	/// </summary>
-	public InnerHitsDescriptor<TDocument> From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	public InnerHitsDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
-	/// </summary>
-	public InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
-	public InnerHitsDescriptor<TDocument> ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public InnerHitsDescriptor<TDocument> SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum number of hits to return per `inner_hits`.</para>
-	/// </summary>
-	public InnerHitsDescriptor<TDocument> Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -368,6 +369,24 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -382,6 +401,36 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (NameValue is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SortDescriptor is not null)
@@ -417,54 +466,6 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StoredFieldValue is not null)
@@ -504,22 +505,22 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
 	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
-	private HighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private bool? ExplainValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
 	private int? FromValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
+	private HighlightDescriptor HighlightDescriptor { get; set; }
+	private Action<HighlightDescriptor> HighlightDescriptorAction { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name? NameValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
+	private SortOptionsDescriptor SortDescriptor { get; set; }
+	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
+	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
 	private bool? VersionValue { get; set; }
@@ -584,6 +585,27 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		return Self;
 	}
 
+	public InnerHitsDescriptor Explain(bool? explain = true)
+	{
+		ExplainValue = explain;
+		return Self;
+	}
+
+	public InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Inner hit starting document offset.</para>
+	/// </summary>
+	public InnerHitsDescriptor From(int? from)
+	{
+		FromValue = from;
+		return Self;
+	}
+
 	public InnerHitsDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? highlight)
 	{
 		HighlightDescriptor = null;
@@ -605,6 +627,42 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		HighlightValue = null;
 		HighlightDescriptor = null;
 		HighlightDescriptorAction = configure;
+		return Self;
+	}
+
+	public InnerHitsDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
+	/// </summary>
+	public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
+	public InnerHitsDescriptor ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	{
+		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		return Self;
+	}
+
+	public InnerHitsDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
+	{
+		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The maximum number of hits to return per `inner_hits`.</para>
+	/// </summary>
+	public InnerHitsDescriptor Size(int? size)
+	{
+		SizeValue = size;
 		return Self;
 	}
 
@@ -650,63 +708,6 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 	public InnerHitsDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? source)
 	{
 		SourceValue = source;
-		return Self;
-	}
-
-	public InnerHitsDescriptor Explain(bool? explain = true)
-	{
-		ExplainValue = explain;
-		return Self;
-	}
-
-	public InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
-	{
-		FieldsValue = fields;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Inner hit starting document offset.</para>
-	/// </summary>
-	public InnerHitsDescriptor From(int? from)
-	{
-		FromValue = from;
-		return Self;
-	}
-
-	public InnerHitsDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name for the particular inner hit definition in the response.<br/>Useful when a search request contains multiple inner hits.</para>
-	/// </summary>
-	public InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
-	public InnerHitsDescriptor ScriptFields(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
-	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
-		return Self;
-	}
-
-	public InnerHitsDescriptor SeqNoPrimaryTerm(bool? seqNoPrimaryTerm = true)
-	{
-		SeqNoPrimaryTermValue = seqNoPrimaryTerm;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The maximum number of hits to return per `inner_hits`.</para>
-	/// </summary>
-	public InnerHitsDescriptor Size(int? size)
-	{
-		SizeValue = size;
 		return Self;
 	}
 
@@ -778,6 +779,24 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
 		}
 
+		if (ExplainValue.HasValue)
+		{
+			writer.WritePropertyName("explain");
+			writer.WriteBooleanValue(ExplainValue.Value);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FromValue.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(FromValue.Value);
+		}
+
 		if (HighlightDescriptor is not null)
 		{
 			writer.WritePropertyName("highlight");
@@ -792,6 +811,36 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		{
 			writer.WritePropertyName("highlight");
 			JsonSerializer.Serialize(writer, HighlightValue, options);
+		}
+
+		if (IgnoreUnmappedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unmapped");
+			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
+		}
+
+		if (NameValue is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+		}
+
+		if (ScriptFieldsValue is not null)
+		{
+			writer.WritePropertyName("script_fields");
+			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
+		}
+
+		if (SeqNoPrimaryTermValue.HasValue)
+		{
+			writer.WritePropertyName("seq_no_primary_term");
+			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
+		}
+
+		if (SizeValue.HasValue)
+		{
+			writer.WritePropertyName("size");
+			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (SortDescriptor is not null)
@@ -827,54 +876,6 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		if (ExplainValue.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(ExplainValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (FromValue.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(FromValue.Value);
-		}
-
-		if (IgnoreUnmappedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unmapped");
-			writer.WriteBooleanValue(IgnoreUnmappedValue.Value);
-		}
-
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
-
-		if (ScriptFieldsValue is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, ScriptFieldsValue, options);
-		}
-
-		if (SeqNoPrimaryTermValue.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(SeqNoPrimaryTermValue.Value);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
 		}
 
 		if (StoredFieldValue is not null)

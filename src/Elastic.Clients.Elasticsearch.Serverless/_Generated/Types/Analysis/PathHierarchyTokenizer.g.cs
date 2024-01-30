@@ -31,17 +31,17 @@ public sealed partial class PathHierarchyTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
 	[JsonConverter(typeof(StringifiedIntegerConverter))]
-	public int BufferSize { get; set; }
+	public int? BufferSize { get; set; }
 	[JsonInclude, JsonPropertyName("delimiter")]
-	public string Delimiter { get; set; }
+	public string? Delimiter { get; set; }
 	[JsonInclude, JsonPropertyName("replacement")]
-	public string Replacement { get; set; }
+	public string? Replacement { get; set; }
 	[JsonInclude, JsonPropertyName("reverse")]
 	[JsonConverter(typeof(StringifiedBoolConverter))]
-	public bool Reverse { get; set; }
+	public bool? Reverse { get; set; }
 	[JsonInclude, JsonPropertyName("skip")]
 	[JsonConverter(typeof(StringifiedIntegerConverter))]
-	public int Skip { get; set; }
+	public int? Skip { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "path_hierarchy";
@@ -58,38 +58,38 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	{
 	}
 
-	private int BufferSizeValue { get; set; }
-	private string DelimiterValue { get; set; }
-	private string ReplacementValue { get; set; }
-	private bool ReverseValue { get; set; }
-	private int SkipValue { get; set; }
+	private int? BufferSizeValue { get; set; }
+	private string? DelimiterValue { get; set; }
+	private string? ReplacementValue { get; set; }
+	private bool? ReverseValue { get; set; }
+	private int? SkipValue { get; set; }
 	private string? VersionValue { get; set; }
 
-	public PathHierarchyTokenizerDescriptor BufferSize(int bufferSize)
+	public PathHierarchyTokenizerDescriptor BufferSize(int? bufferSize)
 	{
 		BufferSizeValue = bufferSize;
 		return Self;
 	}
 
-	public PathHierarchyTokenizerDescriptor Delimiter(string delimiter)
+	public PathHierarchyTokenizerDescriptor Delimiter(string? delimiter)
 	{
 		DelimiterValue = delimiter;
 		return Self;
 	}
 
-	public PathHierarchyTokenizerDescriptor Replacement(string replacement)
+	public PathHierarchyTokenizerDescriptor Replacement(string? replacement)
 	{
 		ReplacementValue = replacement;
 		return Self;
 	}
 
-	public PathHierarchyTokenizerDescriptor Reverse(bool reverse = true)
+	public PathHierarchyTokenizerDescriptor Reverse(bool? reverse = true)
 	{
 		ReverseValue = reverse;
 		return Self;
 	}
 
-	public PathHierarchyTokenizerDescriptor Skip(int skip)
+	public PathHierarchyTokenizerDescriptor Skip(int? skip)
 	{
 		SkipValue = skip;
 		return Self;
@@ -104,16 +104,36 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("buffer_size");
-		JsonSerializer.Serialize(writer, BufferSizeValue, options);
-		writer.WritePropertyName("delimiter");
-		writer.WriteStringValue(DelimiterValue);
-		writer.WritePropertyName("replacement");
-		writer.WriteStringValue(ReplacementValue);
-		writer.WritePropertyName("reverse");
-		JsonSerializer.Serialize(writer, ReverseValue, options);
-		writer.WritePropertyName("skip");
-		JsonSerializer.Serialize(writer, SkipValue, options);
+		if (BufferSizeValue is not null)
+		{
+			writer.WritePropertyName("buffer_size");
+			JsonSerializer.Serialize(writer, BufferSizeValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(DelimiterValue))
+		{
+			writer.WritePropertyName("delimiter");
+			writer.WriteStringValue(DelimiterValue);
+		}
+
+		if (!string.IsNullOrEmpty(ReplacementValue))
+		{
+			writer.WritePropertyName("replacement");
+			writer.WriteStringValue(ReplacementValue);
+		}
+
+		if (ReverseValue is not null)
+		{
+			writer.WritePropertyName("reverse");
+			JsonSerializer.Serialize(writer, ReverseValue, options);
+		}
+
+		if (SkipValue is not null)
+		{
+			writer.WritePropertyName("skip");
+			JsonSerializer.Serialize(writer, SkipValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("path_hierarchy");
 		if (VersionValue is not null)

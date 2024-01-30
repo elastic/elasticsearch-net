@@ -87,19 +87,19 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
 	private string? BoundaryScannerLocaleValue { get; set; }
 	private bool? ForceSourceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private int? FragmentOffsetValue { get; set; }
 	private int? FragmentSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private bool? HighlightFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
+	private QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
+	private Action<QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? MatchedFieldsValue { get; set; }
 	private int? MaxAnalyzedOffsetValue { get; set; }
 	private int? MaxFragmentLengthValue { get; set; }
@@ -113,30 +113,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	private bool? RequireFieldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterType? TypeValue { get; set; }
-
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
-	{
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryValue = highlightQuery;
-		return Self;
-	}
-
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = configure;
-		return Self;
-	}
 
 	public HighlightFieldDescriptor<TDocument> Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? analyzer)
 	{
@@ -174,6 +150,12 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
+	{
+		FragmenterValue = fragmenter;
+		return Self;
+	}
+
 	public HighlightFieldDescriptor<TDocument> FragmentOffset(int? fragmentOffset)
 	{
 		FragmentOffsetValue = fragmentOffset;
@@ -186,15 +168,33 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
-	{
-		FragmenterValue = fragmenter;
-		return Self;
-	}
-
 	public HighlightFieldDescriptor<TDocument> HighlightFilter(bool? highlightFilter = true)
 	{
 		HighlightFilterValue = highlightFilter;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
+	{
+		HighlightQueryDescriptor = null;
+		HighlightQueryDescriptorAction = null;
+		HighlightQueryValue = highlightQuery;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		HighlightQueryValue = null;
+		HighlightQueryDescriptorAction = null;
+		HighlightQueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		HighlightQueryValue = null;
+		HighlightQueryDescriptor = null;
+		HighlightQueryDescriptorAction = configure;
 		return Self;
 	}
 
@@ -279,22 +279,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (HighlightQueryDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
-		}
-		else if (HighlightQueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
-		}
-		else if (HighlightQueryValue is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
-		}
-
 		if (AnalyzerValue is not null)
 		{
 			writer.WritePropertyName("analyzer");
@@ -331,6 +315,12 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 			writer.WriteBooleanValue(ForceSourceValue.Value);
 		}
 
+		if (FragmenterValue is not null)
+		{
+			writer.WritePropertyName("fragmenter");
+			JsonSerializer.Serialize(writer, FragmenterValue, options);
+		}
+
 		if (FragmentOffsetValue.HasValue)
 		{
 			writer.WritePropertyName("fragment_offset");
@@ -343,16 +333,26 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 			writer.WriteNumberValue(FragmentSizeValue.Value);
 		}
 
-		if (FragmenterValue is not null)
-		{
-			writer.WritePropertyName("fragmenter");
-			JsonSerializer.Serialize(writer, FragmenterValue, options);
-		}
-
 		if (HighlightFilterValue.HasValue)
 		{
 			writer.WritePropertyName("highlight_filter");
 			writer.WriteBooleanValue(HighlightFilterValue.Value);
+		}
+
+		if (HighlightQueryDescriptor is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
+		}
+		else if (HighlightQueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
+		}
+		else if (HighlightQueryValue is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
 		}
 
 		if (MatchedFieldsValue is not null)
@@ -445,19 +445,19 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
 	private string? BoundaryScannerLocaleValue { get; set; }
 	private bool? ForceSourceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private int? FragmentOffsetValue { get; set; }
 	private int? FragmentSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private bool? HighlightFilterValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
+	private QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
+	private Action<QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? MatchedFieldsValue { get; set; }
 	private int? MaxAnalyzedOffsetValue { get; set; }
 	private int? MaxFragmentLengthValue { get; set; }
@@ -471,30 +471,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	private bool? RequireFieldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterType? TypeValue { get; set; }
-
-	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
-	{
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryValue = highlightQuery;
-		return Self;
-	}
-
-	public HighlightFieldDescriptor HighlightQuery(QueryDsl.QueryDescriptor descriptor)
-	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptorAction = null;
-		HighlightQueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public HighlightFieldDescriptor HighlightQuery(Action<QueryDsl.QueryDescriptor> configure)
-	{
-		HighlightQueryValue = null;
-		HighlightQueryDescriptor = null;
-		HighlightQueryDescriptorAction = configure;
-		return Self;
-	}
 
 	public HighlightFieldDescriptor Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? analyzer)
 	{
@@ -532,6 +508,12 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	public HighlightFieldDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
+	{
+		FragmenterValue = fragmenter;
+		return Self;
+	}
+
 	public HighlightFieldDescriptor FragmentOffset(int? fragmentOffset)
 	{
 		FragmentOffsetValue = fragmentOffset;
@@ -544,15 +526,33 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
-	{
-		FragmenterValue = fragmenter;
-		return Self;
-	}
-
 	public HighlightFieldDescriptor HighlightFilter(bool? highlightFilter = true)
 	{
 		HighlightFilterValue = highlightFilter;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
+	{
+		HighlightQueryDescriptor = null;
+		HighlightQueryDescriptorAction = null;
+		HighlightQueryValue = highlightQuery;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor HighlightQuery(QueryDsl.QueryDescriptor descriptor)
+	{
+		HighlightQueryValue = null;
+		HighlightQueryDescriptorAction = null;
+		HighlightQueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public HighlightFieldDescriptor HighlightQuery(Action<QueryDsl.QueryDescriptor> configure)
+	{
+		HighlightQueryValue = null;
+		HighlightQueryDescriptor = null;
+		HighlightQueryDescriptorAction = configure;
 		return Self;
 	}
 
@@ -637,22 +637,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (HighlightQueryDescriptor is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
-		}
-		else if (HighlightQueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
-		}
-		else if (HighlightQueryValue is not null)
-		{
-			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
-		}
-
 		if (AnalyzerValue is not null)
 		{
 			writer.WritePropertyName("analyzer");
@@ -689,6 +673,12 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 			writer.WriteBooleanValue(ForceSourceValue.Value);
 		}
 
+		if (FragmenterValue is not null)
+		{
+			writer.WritePropertyName("fragmenter");
+			JsonSerializer.Serialize(writer, FragmenterValue, options);
+		}
+
 		if (FragmentOffsetValue.HasValue)
 		{
 			writer.WritePropertyName("fragment_offset");
@@ -701,16 +691,26 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 			writer.WriteNumberValue(FragmentSizeValue.Value);
 		}
 
-		if (FragmenterValue is not null)
-		{
-			writer.WritePropertyName("fragmenter");
-			JsonSerializer.Serialize(writer, FragmenterValue, options);
-		}
-
 		if (HighlightFilterValue.HasValue)
 		{
 			writer.WritePropertyName("highlight_filter");
 			writer.WriteBooleanValue(HighlightFilterValue.Value);
+		}
+
+		if (HighlightQueryDescriptor is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, HighlightQueryDescriptor, options);
+		}
+		else if (HighlightQueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
+		}
+		else if (HighlightQueryValue is not null)
+		{
+			writer.WritePropertyName("highlight_query");
+			JsonSerializer.Serialize(writer, HighlightQueryValue, options);
 		}
 
 		if (MatchedFieldsValue is not null)

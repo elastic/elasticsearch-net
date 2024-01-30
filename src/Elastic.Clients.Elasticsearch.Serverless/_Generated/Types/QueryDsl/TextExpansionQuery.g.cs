@@ -42,12 +42,6 @@ internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextEx
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -63,6 +57,12 @@ internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextEx
 				if (property == "model_text")
 				{
 					variant.ModelText = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 			}
@@ -81,12 +81,6 @@ internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextEx
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -97,6 +91,12 @@ internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextEx
 			writer.WriteStringValue(value.ModelId);
 			writer.WritePropertyName("model_text");
 			writer.WriteStringValue(value.ModelText);
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
 			writer.WriteEndObject();
 			writer.WriteEndObject();
 			return;
@@ -157,17 +157,11 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string ModelIdValue { get; set; }
 	private string ModelTextValue { get; set; }
-
-	public TextExpansionQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public TextExpansionQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -205,6 +199,12 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	public TextExpansionQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -212,12 +212,6 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -228,6 +222,12 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 		writer.WriteStringValue(ModelIdValue);
 		writer.WritePropertyName("model_text");
 		writer.WriteStringValue(ModelTextValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -248,17 +248,11 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string ModelIdValue { get; set; }
 	private string ModelTextValue { get; set; }
-
-	public TextExpansionQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public TextExpansionQueryDescriptor Boost(float? boost)
 	{
@@ -302,6 +296,12 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	public TextExpansionQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		if (FieldValue is null)
@@ -309,12 +309,6 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -325,6 +319,12 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 		writer.WriteStringValue(ModelIdValue);
 		writer.WritePropertyName("model_text");
 		writer.WriteStringValue(ModelTextValue);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

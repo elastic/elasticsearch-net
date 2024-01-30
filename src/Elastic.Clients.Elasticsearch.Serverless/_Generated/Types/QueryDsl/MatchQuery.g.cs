@@ -42,12 +42,6 @@ internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "analyzer")
 				{
 					variant.Analyzer = JsonSerializer.Deserialize<string?>(ref reader, options);
@@ -120,6 +114,12 @@ internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 					continue;
 				}
 
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "zero_terms_query")
 				{
 					variant.ZeroTermsQuery = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery?>(ref reader, options);
@@ -141,12 +141,6 @@ internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (!string.IsNullOrEmpty(value.Analyzer))
 			{
 				writer.WritePropertyName("analyzer");
@@ -215,6 +209,12 @@ internal sealed partial class MatchQueryConverter : JsonConverter<MatchQuery>
 
 			writer.WritePropertyName("query");
 			JsonSerializer.Serialize(writer, value.Query, options);
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
+			}
+
 			if (value.ZeroTermsQuery is not null)
 			{
 				writer.WritePropertyName("zero_terms_query");
@@ -331,7 +331,6 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
@@ -345,13 +344,8 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MatchQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -470,6 +464,12 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	public MatchQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
 	/// </summary>
@@ -486,12 +486,6 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -560,6 +554,12 @@ public sealed partial class MatchQueryDescriptor<TDocument> : SerializableDescri
 
 		writer.WritePropertyName("query");
 		JsonSerializer.Serialize(writer, QueryValue, options);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ZeroTermsQueryValue is not null)
 		{
 			writer.WritePropertyName("zero_terms_query");
@@ -586,7 +586,6 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
@@ -600,13 +599,8 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? OperatorValue { get; set; }
 	private int? PrefixLengthValue { get; set; }
 	private string QueryValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQueryValue { get; set; }
-
-	public MatchQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
@@ -731,6 +725,12 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 		return Self;
 	}
 
+	public MatchQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
 	/// </summary>
@@ -747,12 +747,6 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -821,6 +815,12 @@ public sealed partial class MatchQueryDescriptor : SerializableDescriptor<MatchQ
 
 		writer.WritePropertyName("query");
 		JsonSerializer.Serialize(writer, QueryValue, options);
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ZeroTermsQueryValue is not null)
 		{
 			writer.WritePropertyName("zero_terms_query");

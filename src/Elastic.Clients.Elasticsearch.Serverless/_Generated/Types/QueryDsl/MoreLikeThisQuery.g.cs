@@ -67,7 +67,8 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	/// <summary>
 	/// <para>Specifies free form text and/or a single or multiple documents for which you want to find similar documents.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("like"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
+	[JsonInclude, JsonPropertyName("like")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> Like { get; set; }
 
 	/// <summary>
@@ -130,7 +131,8 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	/// <summary>
 	/// <para>Used in combination with `like` to exclude documents that match a set of terms.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("unlike"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
+	[JsonInclude, JsonPropertyName("unlike")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like>? Unlike { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
@@ -150,7 +152,6 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
@@ -162,21 +163,16 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private int? MaxQueryTermsValue { get; set; }
 	private int? MaxWordLengthValue { get; set; }
 	private int? MinDocFreqValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private int? MinTermFreqValue { get; set; }
 	private int? MinWordLengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>? PerFieldAnalyzerValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private ICollection<string>? StopWordsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like>? UnlikeValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
-
-	public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
@@ -275,6 +271,15 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
+	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// </summary>
+	public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? minTermFreq)
@@ -293,20 +298,17 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	}
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
-	/// </summary>
-	public MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
-	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Overrides the default analyzer.</para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>> selector)
 	{
 		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>());
+		return Self;
+	}
+
+	public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -349,12 +351,6 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -417,6 +413,12 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 			writer.WriteNumberValue(MinDocFreqValue.Value);
 		}
 
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+		}
+
 		if (MinTermFreqValue.HasValue)
 		{
 			writer.WritePropertyName("min_term_freq");
@@ -429,16 +431,16 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 			writer.WriteNumberValue(MinWordLengthValue.Value);
 		}
 
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
 		if (PerFieldAnalyzerValue is not null)
 		{
 			writer.WritePropertyName("per_field_analyzer");
 			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RoutingValue is not null)
@@ -483,7 +485,6 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	{
 	}
 
-	private string? QueryNameValue { get; set; }
 	private string? AnalyzerValue { get; set; }
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
@@ -495,21 +496,16 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private int? MaxQueryTermsValue { get; set; }
 	private int? MaxWordLengthValue { get; set; }
 	private int? MinDocFreqValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private int? MinTermFreqValue { get; set; }
 	private int? MinWordLengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>? PerFieldAnalyzerValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
 	private ICollection<string>? StopWordsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like>? UnlikeValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionTypeValue { get; set; }
-
-	public MoreLikeThisQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
@@ -608,6 +604,15 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
+	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// </summary>
+	public MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor MinTermFreq(int? minTermFreq)
@@ -626,20 +631,17 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	}
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
-	/// </summary>
-	public MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? minimumShouldMatch)
-	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Overrides the default analyzer.</para>
 	/// </summary>
 	public MoreLikeThisQueryDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>> selector)
 	{
 		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, string>());
+		return Self;
+	}
+
+	public MoreLikeThisQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -682,12 +684,6 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (!string.IsNullOrEmpty(AnalyzerValue))
 		{
 			writer.WritePropertyName("analyzer");
@@ -750,6 +746,12 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 			writer.WriteNumberValue(MinDocFreqValue.Value);
 		}
 
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
+		}
+
 		if (MinTermFreqValue.HasValue)
 		{
 			writer.WritePropertyName("min_term_freq");
@@ -762,16 +764,16 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 			writer.WriteNumberValue(MinWordLengthValue.Value);
 		}
 
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
 		if (PerFieldAnalyzerValue is not null)
 		{
 			writer.WritePropertyName("per_field_analyzer");
 			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (RoutingValue is not null)

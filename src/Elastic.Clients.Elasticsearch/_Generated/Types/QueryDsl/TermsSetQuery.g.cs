@@ -42,12 +42,6 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
 				var property = reader.GetString();
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
 				if (property == "boost")
 				{
 					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -63,6 +57,12 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 				if (property == "minimum_should_match_script")
 				{
 					variant.MinimumShouldMatchScript = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_name")
+				{
+					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
 					continue;
 				}
 
@@ -87,12 +87,6 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 			writer.WriteStartObject();
 			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
 			if (value.Boost.HasValue)
 			{
 				writer.WritePropertyName("boost");
@@ -109,6 +103,12 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 			{
 				writer.WritePropertyName("minimum_should_match_script");
 				JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
+			}
+
+			if (!string.IsNullOrEmpty(value.QueryName))
+			{
+				writer.WritePropertyName("_name");
+				writer.WriteStringValue(value.QueryName);
 			}
 
 			writer.WritePropertyName("terms");
@@ -178,18 +178,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
-
-	public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermsSetQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -236,6 +230,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public TermsSetQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Array of terms you wish to find in the provided field.</para>
 	/// </summary>
@@ -252,12 +252,6 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -274,6 +268,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("minimum_should_match_script");
 			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WritePropertyName("terms");
@@ -298,18 +298,12 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		FieldValue = field;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScriptValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
-
-	public TermsSetQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
 
 	public TermsSetQueryDescriptor Boost(float? boost)
 	{
@@ -371,6 +365,12 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		return Self;
 	}
 
+	public TermsSetQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Array of terms you wish to find in the provided field.</para>
 	/// </summary>
@@ -387,12 +387,6 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
@@ -409,6 +403,12 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 		{
 			writer.WritePropertyName("minimum_should_match_script");
 			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		writer.WritePropertyName("terms");

@@ -37,7 +37,8 @@ public sealed partial class BoolQuery : SearchQuery
 	/// <summary>
 	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
+	[JsonInclude, JsonPropertyName("filter")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -49,19 +50,22 @@ public sealed partial class BoolQuery : SearchQuery
 	/// <summary>
 	/// <para>The clause (query) must appear in matching documents and will contribute to the score.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
+	[JsonInclude, JsonPropertyName("must")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
 
 	/// <summary>
 	/// <para>The clause (query) must not appear in the matching documents.<br/>Because scoring is ignored, a score of `0` is returned for all documents.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("must_not"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
+	[JsonInclude, JsonPropertyName("must_not")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
 
 	/// <summary>
 	/// <para>The clause (query) should appear in the matching document.</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("should"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
+	[JsonInclude, JsonPropertyName("should")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 
 	public static implicit operator Query(BoolQuery boolQuery) => QueryDsl.Query.Bool(boolQuery);
@@ -77,10 +81,12 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
 	private QueryDescriptor<TDocument> MustDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> MustDescriptorAction { get; set; }
@@ -89,13 +95,17 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 	private QueryDescriptor<TDocument> MustNotDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> MustNotDescriptorAction { get; set; }
 	private Action<QueryDescriptor<TDocument>>[] MustNotDescriptorActions { get; set; }
+	private string? QueryNameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
 	private QueryDescriptor<TDocument> ShouldDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> ShouldDescriptorAction { get; set; }
 	private Action<QueryDescriptor<TDocument>>[] ShouldDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+	public BoolQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
@@ -133,6 +143,15 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
+	/// </summary>
+	public BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
@@ -214,6 +233,12 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
+	public BoolQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The clause (query) should appear in the matching document.</para>
 	/// </summary>
@@ -253,30 +278,15 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public BoolQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public BoolQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
-	/// </summary>
-	public BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
-	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -304,6 +314,12 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+		}
+
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 		}
 
 		if (MustDescriptor is not null)
@@ -364,6 +380,12 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustNotValue, writer, options);
 		}
 
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ShouldDescriptor is not null)
 		{
 			writer.WritePropertyName("should");
@@ -393,24 +415,6 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ShouldValue, writer, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -423,10 +427,12 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 	private QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<QueryDescriptor>[] FilterDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustValue { get; set; }
 	private QueryDescriptor MustDescriptor { get; set; }
 	private Action<QueryDescriptor> MustDescriptorAction { get; set; }
@@ -435,13 +441,17 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 	private QueryDescriptor MustNotDescriptor { get; set; }
 	private Action<QueryDescriptor> MustNotDescriptorAction { get; set; }
 	private Action<QueryDescriptor>[] MustNotDescriptorActions { get; set; }
+	private string? QueryNameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? ShouldValue { get; set; }
 	private QueryDescriptor ShouldDescriptor { get; set; }
 	private Action<QueryDescriptor> ShouldDescriptorAction { get; set; }
 	private Action<QueryDescriptor>[] ShouldDescriptorActions { get; set; }
-	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
+
+	public BoolQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The clause (query) must appear in matching documents.<br/>However, unlike `must`, the score of the query will be ignored.</para>
@@ -479,6 +489,15 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
+	/// </summary>
+	public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
+	{
+		MinimumShouldMatchValue = minimumShouldMatch;
 		return Self;
 	}
 
@@ -560,6 +579,12 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
+	public BoolQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The clause (query) should appear in the matching document.</para>
 	/// </summary>
@@ -599,30 +624,15 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		return Self;
 	}
 
-	public BoolQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public BoolQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Specifies the number or percentage of `should` clauses returned documents must match.</para>
-	/// </summary>
-	public BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? minimumShouldMatch)
-	{
-		MinimumShouldMatchValue = minimumShouldMatch;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -650,6 +660,12 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("filter");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
+		}
+
+		if (MinimumShouldMatchValue is not null)
+		{
+			writer.WritePropertyName("minimum_should_match");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 		}
 
 		if (MustDescriptor is not null)
@@ -710,6 +726,12 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(MustNotValue, writer, options);
 		}
 
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
+		}
+
 		if (ShouldDescriptor is not null)
 		{
 			writer.WritePropertyName("should");
@@ -737,24 +759,6 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		{
 			writer.WritePropertyName("should");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ShouldValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (MinimumShouldMatchValue is not null)
-		{
-			writer.WritePropertyName("minimum_should_match");
-			JsonSerializer.Serialize(writer, MinimumShouldMatchValue, options);
 		}
 
 		writer.WriteEndObject();

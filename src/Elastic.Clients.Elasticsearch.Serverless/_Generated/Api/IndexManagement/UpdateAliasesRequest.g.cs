@@ -97,9 +97,9 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	public UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? ActionsValue { get; set; }
-	private ActionDescriptor ActionsDescriptor { get; set; }
-	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
-	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
+	private ActionDescriptor<TDocument> ActionsDescriptor { get; set; }
+	private Action<ActionDescriptor<TDocument>> ActionsDescriptorAction { get; set; }
+	private Action<ActionDescriptor<TDocument>>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Actions to perform.</para>
@@ -113,7 +113,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(ActionDescriptor descriptor)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(ActionDescriptor<TDocument> descriptor)
 	{
 		ActionsValue = null;
 		ActionsDescriptorAction = null;
@@ -122,7 +122,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(Action<ActionDescriptor> configure)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(Action<ActionDescriptor<TDocument>> configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -131,7 +131,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(params Action<ActionDescriptor>[] configure)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(params Action<ActionDescriptor<TDocument>>[] configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -154,7 +154,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		{
 			writer.WritePropertyName("actions");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ActionDescriptor(ActionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new ActionDescriptor<TDocument>(ActionsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ActionsDescriptorActions is not null)
@@ -163,7 +163,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 			writer.WriteStartArray();
 			foreach (var action in ActionsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ActionDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new ActionDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();

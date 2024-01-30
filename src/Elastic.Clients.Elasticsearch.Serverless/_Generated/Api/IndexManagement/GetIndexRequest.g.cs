@@ -42,6 +42,11 @@ public sealed class GetIndexRequestParameters : RequestParameters
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
+	/// <para>Return only information on specified index features</para>
+	/// </summary>
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
+
+	/// <summary>
 	/// <para>If true, returns settings in flat format.</para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
@@ -65,11 +70,6 @@ public sealed class GetIndexRequestParameters : RequestParameters
 	/// <para>Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>Return only information on specified index features</para>
-	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 }
 
 /// <summary>
@@ -102,6 +102,12 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
+	/// <para>Return only information on specified index features</para>
+	/// </summary>
+	[JsonIgnore]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
+
+	/// <summary>
 	/// <para>If true, returns settings in flat format.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -130,12 +136,6 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>Return only information on specified index features</para>
-	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>? Features { get => Q<ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Feature>?>("features"); set => Q("features", value); }
 }
 
 /// <summary>

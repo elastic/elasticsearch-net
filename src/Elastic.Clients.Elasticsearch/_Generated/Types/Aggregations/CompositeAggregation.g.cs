@@ -187,13 +187,22 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	{
 	}
 
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+
+	/// <summary>
+	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// </summary>
+	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
+	{
+		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
+		return Self;
+	}
 
 	public CompositeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
@@ -216,15 +225,6 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
 		AggregationsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
-	/// </summary>
-	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
-	{
-		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
 		return Self;
 	}
 
@@ -310,13 +310,22 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	{
 	}
 
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? AfterValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
+
+	/// <summary>
+	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
+	/// </summary>
+	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
+	{
+		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
+		return Self;
+	}
 
 	public CompositeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
 	{
@@ -339,15 +348,6 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 		AggregationsValue = null;
 		AggregationsDescriptor = null;
 		AggregationsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>When paginating, use the `after_key` value returned in the previous response to retrieve the next page.</para>
-	/// </summary>
-	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>> selector)
-	{
-		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>());
 		return Self;
 	}
 

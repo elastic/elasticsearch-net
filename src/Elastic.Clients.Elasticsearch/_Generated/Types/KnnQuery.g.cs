@@ -44,7 +44,8 @@ public sealed partial class KnnQuery
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter"), SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
+	[JsonInclude, JsonPropertyName("filter")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
 	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
 	/// <summary>
@@ -86,12 +87,12 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private long kValue { get; set; }
 	private long NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
@@ -99,6 +100,33 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
 	private float? SimilarityValue { get; set; }
+
+	/// <summary>
+	/// <para>Boost value to apply to kNN scores</para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -136,33 +164,6 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boost value to apply to kNN scores</para>
-	/// </summary>
-	public KnnQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the vector field to search against</para>
-	/// </summary>
-	public KnnQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the vector field to search against</para>
-	/// </summary>
-	public KnnQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
 		return Self;
 	}
 
@@ -232,6 +233,14 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -261,14 +270,6 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		writer.WritePropertyName("k");
 		writer.WriteNumberValue(kValue);
 		writer.WritePropertyName("num_candidates");
@@ -313,12 +314,12 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	{
 	}
 
+	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
 	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private long kValue { get; set; }
 	private long NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
@@ -326,6 +327,42 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
 	private float? SimilarityValue { get; set; }
+
+	/// <summary>
+	/// <para>Boost value to apply to kNN scores</para>
+	/// </summary>
+	public KnnQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
+	public KnnQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
+	public KnnQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the vector field to search against</para>
+	/// </summary>
+	public KnnQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Filters for the kNN search query</para>
@@ -363,42 +400,6 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		FilterDescriptor = null;
 		FilterDescriptorAction = null;
 		FilterDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Boost value to apply to kNN scores</para>
-	/// </summary>
-	public KnnQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the vector field to search against</para>
-	/// </summary>
-	public KnnQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the vector field to search against</para>
-	/// </summary>
-	public KnnQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the vector field to search against</para>
-	/// </summary>
-	public KnnQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
 		return Self;
 	}
 
@@ -468,6 +469,14 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		writer.WritePropertyName("field");
+		JsonSerializer.Serialize(writer, FieldValue, options);
 		if (FilterDescriptor is not null)
 		{
 			writer.WritePropertyName("filter");
@@ -497,14 +506,6 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
 		writer.WritePropertyName("k");
 		writer.WriteNumberValue(kValue);
 		writer.WritePropertyName("num_candidates");

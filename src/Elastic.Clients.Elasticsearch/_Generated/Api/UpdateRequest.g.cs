@@ -67,16 +67,6 @@ public sealed class UpdateRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-	/// <summary>
 	/// <para>Specify the source fields you want to exclude.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
@@ -85,6 +75,16 @@ public sealed class UpdateRequestParameters : RequestParameters
 	/// <para>Specify the source fields you want to retrieve.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
@@ -147,18 +147,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
 	/// <summary>
-	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-
-	/// <summary>
 	/// <para>Specify the source fields you want to exclude.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -169,6 +157,18 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
+
+	/// <summary>
+	/// <para>Period to wait for dynamic mapping updates and active shards.<br/>This guarantees Elasticsearch waits for at least the timeout before failing.<br/>The actual wait time could be longer, particularly when multiple waits occur.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>The number of shard copies that must be active before proceeding with the operations.<br/>Set to 'all' or any positive integer up to the total number of shards in the index<br/>(number_of_replicas+1). Defaults to 1 meaning the primary shard.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
 	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
@@ -258,8 +258,6 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	internal override string OperationName => "update";
 
-	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Lang(string? lang) => Qs("lang", lang);
@@ -267,6 +265,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> RetryOnConflict(int? retryOnConflict) => Qs("retry_on_conflict", retryOnConflict);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 
@@ -282,22 +282,13 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 	private bool? DetectNoopValue { get; set; }
 	private TPartialDocument? DocValue { get; set; }
 	private bool? DocAsUpsertValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private bool? ScriptedUpsertValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 	private TDocument? UpsertValue { get; set; }
-
-	/// <summary>
-	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
-	/// </summary>
-	public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
-	{
-		SourceValue = source;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Set to false to disable setting 'result' in the response<br/>to 'noop' if no change to the document occurred.</para>
@@ -345,6 +336,15 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	}
 
 	/// <summary>
+	/// <para>Set to false to disable source retrieval. You can also specify a comma-separated<br/>list of the fields you want to retrieve.</para>
+	/// </summary>
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	{
+		SourceValue = source;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Upsert(TDocument? upsert)
@@ -356,12 +356,6 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (SourceValue is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
 		if (DetectNoopValue.HasValue)
 		{
 			writer.WritePropertyName("detect_noop");
@@ -390,6 +384,12 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		{
 			writer.WritePropertyName("scripted_upsert");
 			writer.WriteBooleanValue(ScriptedUpsertValue.Value);
+		}
+
+		if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
 		if (UpsertValue is not null)

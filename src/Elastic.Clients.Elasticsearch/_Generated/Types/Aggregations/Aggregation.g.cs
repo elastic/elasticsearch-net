@@ -147,11 +147,6 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>("geo_distance", ref reader, options);
 		}
 
-		if (propertyName == "geo_line")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>("geo_line", ref reader, options);
-		}
-
 		if (propertyName == "geohash_grid")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation?>("geohash_grid", ref reader, options);
@@ -160,6 +155,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 		if (propertyName == "geohex_grid")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation?>("geohex_grid", ref reader, options);
+		}
+
+		if (propertyName == "geo_line")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>("geo_line", ref reader, options);
 		}
 
 		if (propertyName == "geotile_grid")
@@ -302,11 +302,6 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>("sum", ref reader, options);
 		}
 
-		if (propertyName == "t_test")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
-		}
-
 		if (propertyName == "terms")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>("terms", ref reader, options);
@@ -320,6 +315,11 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 		if (propertyName == "top_metrics")
 		{
 			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>("top_metrics", ref reader, options);
+		}
+
+		if (propertyName == "t_test")
+		{
+			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
 		}
 
 		if (propertyName == "value_count")

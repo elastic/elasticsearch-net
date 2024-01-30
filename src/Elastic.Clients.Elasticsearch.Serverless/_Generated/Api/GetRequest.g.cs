@@ -203,13 +203,13 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 
 	internal override string OperationName => "get";
 
-	public GetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public GetRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public GetRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public GetRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public GetRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public GetRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 	public GetRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
 	public GetRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.Serverless.VersionType? versionType) => Qs("version_type", versionType);
@@ -254,13 +254,13 @@ public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestD
 
 	internal override string OperationName => "get";
 
-	public GetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
-	public GetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
-	public GetRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public GetRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
 	public GetRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing) => Qs("routing", routing);
+	public GetRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfigParam? source) => Qs("_source", source);
+	public GetRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceExcludes) => Qs("_source_excludes", sourceExcludes);
+	public GetRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Serverless.Fields? sourceIncludes) => Qs("_source_includes", sourceIncludes);
 	public GetRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Serverless.Fields? storedFields) => Qs("stored_fields", storedFields);
 	public GetRequestDescriptor Version(long? version) => Qs("version", version);
 	public GetRequestDescriptor VersionType(Elastic.Clients.Elasticsearch.Serverless.VersionType? versionType) => Qs("version_type", versionType);

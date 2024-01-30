@@ -138,13 +138,22 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
+	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
 	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
 	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+
+	/// <summary>
+	/// <para>Aliases for the index.</para>
+	/// </summary>
+	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
@@ -200,18 +209,15 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Aliases for the index.</para>
-	/// </summary>
-	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
-	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
 		if (MappingsDescriptor is not null)
 		{
 			writer.WritePropertyName("mappings");
@@ -242,12 +248,6 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		{
 			writer.WritePropertyName("settings");
 			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -287,13 +287,22 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
+	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
 	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
 	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
 	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
 	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+
+	/// <summary>
+	/// <para>Aliases for the index.</para>
+	/// </summary>
+	public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Mapping for fields in the index. If specified, this mapping can include:<br/>- Field names<br/>- Field data types<br/>- Mapping parameters</para>
@@ -349,18 +358,15 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Aliases for the index.</para>
-	/// </summary>
-	public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
-	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
 		if (MappingsDescriptor is not null)
 		{
 			writer.WritePropertyName("mappings");
@@ -391,12 +397,6 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		{
 			writer.WritePropertyName("settings");
 			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
 		}
 
 		writer.WriteEndObject();

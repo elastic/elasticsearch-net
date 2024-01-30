@@ -51,11 +51,17 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
 	private QueryDescriptor<TDocument> MatchDescriptor { get; set; }
 	private Action<QueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Should be a multi term query (one of `wildcard`, `fuzzy`, `prefix`, `range`, or `regexp` query).</para>
@@ -90,15 +96,15 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (MatchDescriptor is not null)
 		{
 			writer.WritePropertyName("match");
@@ -121,12 +127,6 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -139,11 +139,17 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 	{
 	}
 
+	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
 	private QueryDescriptor MatchDescriptor { get; set; }
 	private Action<QueryDescriptor> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private float? BoostValue { get; set; }
+
+	public SpanMultiTermQueryDescriptor Boost(float? boost)
+	{
+		BoostValue = boost;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>Should be a multi term query (one of `wildcard`, `fuzzy`, `prefix`, `range`, or `regexp` query).</para>
@@ -178,15 +184,15 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor Boost(float? boost)
-	{
-		BoostValue = boost;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (BoostValue.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(BoostValue.Value);
+		}
+
 		if (MatchDescriptor is not null)
 		{
 			writer.WritePropertyName("match");
@@ -207,12 +213,6 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("_name");
 			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
 		}
 
 		writer.WriteEndObject();

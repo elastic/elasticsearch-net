@@ -261,15 +261,9 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-
-	public IntervalsQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public IntervalsQueryDescriptor<TDocument> Boost(float? boost)
 	{
@@ -286,6 +280,12 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	public IntervalsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -307,16 +307,16 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (!string.IsNullOrEmpty(ContainedVariantName))
@@ -376,15 +376,9 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 		return Self;
 	}
 
-	private string? QueryNameValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-
-	public IntervalsQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
+	private string? QueryNameValue { get; set; }
 
 	public IntervalsQueryDescriptor Boost(float? boost)
 	{
@@ -407,6 +401,12 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	public IntervalsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
 		return Self;
 	}
 
@@ -434,16 +434,16 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 		writer.WriteStartObject();
 		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
 		if (BoostValue.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(BoostValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(QueryNameValue))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(QueryNameValue);
 		}
 
 		if (!string.IsNullOrEmpty(ContainedVariantName))
