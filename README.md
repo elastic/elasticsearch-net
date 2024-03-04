@@ -17,10 +17,20 @@ The .NET client for Elasticsearch provides strongly typed requests and responses
 
 ## Compatibility
 
-Language clients are forward compatible; meaning that clients support
-communicating with greater or equal minor versions of Elasticsearch.
-Elasticsearch language clients are only backwards compatible with default
-distributions and without guarantees made.
+Language clients are forward compatible; meaning that the clients support
+communicating with greater or equal minor versions of Elasticsearch without
+breaking. It does not mean that the clients automatically support new features
+of newer Elasticsearch versions; it is only possible after a release of a new
+client version. For example, a 8.12 client version won't automatically support
+the new features of the 8.13 version of Elasticsearch, the 8.13 client version
+is required for that. Elasticsearch language clients are only backwards
+compatible with default distributions and without guarantees made.
+
+| Elasticsearch Version | Elasticsearch-NET Branch  | Supported |
+| --------------------- | ------------------------- | --------- |
+| main                  | main                      |           |
+| 8.x                   | 8.x                       | 8.x       |
+| 7.x                   | 7.x                       | 7.17      |
 
 ## Installation
 
