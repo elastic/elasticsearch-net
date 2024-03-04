@@ -71,7 +71,7 @@ language clients are only backwards compatible with default distributions and
 without guarantees made.
 
 |===
-| Elasticsearch Version | Elasticsearch-NET Branch   | Supported
+| Elasticsearch Version | Elasticsearch-NET Branch  | Supported
 
 | main                  | main                      | 
 | 8.x                   | 8.x                       | 8.x
