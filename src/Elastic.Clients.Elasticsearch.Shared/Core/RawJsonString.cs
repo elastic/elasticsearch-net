@@ -13,6 +13,7 @@ namespace Elastic.Clients.Elasticsearch;
 #endif
 
 #if NET6_0_OR_GREATER
+[JsonConverter(typeof(RawJsonConverter))]
 public struct RawJsonString
 {
 public RawJsonString(string rawJson) => Json = rawJson;
