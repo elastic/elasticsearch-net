@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net6.0": {
+    "net8.0": {
       "Bullseye": {
         "type": "Direct",
         "requested": "[3.3.0, )",

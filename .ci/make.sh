@@ -42,7 +42,7 @@ OUTPUT_DIR="$repo/${output_folder}"
 REPO_BINDING="${OUTPUT_DIR}:/sln/${output_folder}"
 mkdir -p "$OUTPUT_DIR"
 
-DOTNET_VERSION=${DOTNET_VERSION-6.0.403}
+DOTNET_VERSION=${DOTNET_VERSION-8.0.100}
 
 echo -e "\033[34;1mINFO:\033[0m PRODUCT ${product}\033[0m"
 echo -e "\033[34;1mINFO:\033[0m VERSION ${STACK_VERSION}\033[0m"
@@ -121,7 +121,8 @@ echo -e "\033[34;1mINFO: building $product container\033[0m"
 
 docker build --file .ci/DockerFile --tag ${product} \
   --build-arg USER_ID="$(id -u)" \
-  --build-arg GROUP_ID="$(id -g)" .
+  --build-arg GROUP_ID="$(id -g)" \
+  --build-arg DOTNET_VERSION="$DOTNET_VERSION" .
 
 # ------------------------------------------------------- #
 # Run the Container
