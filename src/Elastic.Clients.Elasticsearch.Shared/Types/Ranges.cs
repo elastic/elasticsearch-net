@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless;
@@ -13,90 +13,90 @@ namespace Elastic.Clients.Elasticsearch;
 
 public class DateRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public DateTimeOffset? GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public DateTimeOffset? GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public DateTimeOffset? LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public DateTimeOffset? LessThanOrEqualTo { get; set; }
 }
 
 public class DoubleRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public double? GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public double? GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public double? LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public double? LessThanOrEqualTo { get; set; }
 }
 
 public class FloatRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public float? GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public float? GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public float? LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public float? LessThanOrEqualTo { get; set; }
 }
 
 public class IntegerRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public int? GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public int? GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public int? LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public int? LessThanOrEqualTo { get; set; }
 }
 
 public class LongRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public long? GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public long? GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public long? LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public long? LessThanOrEqualTo { get; set; }
 }
 
 public class IpAddressRange
 {
-	[DataMember(Name = "gt")]
+	[JsonPropertyName("gt")]
 	public string GreaterThan { get; set; }
 
-	[DataMember(Name = "gte")]
+	[JsonPropertyName("gte")]
 	public string GreaterThanOrEqualTo { get; set; }
 
-	[DataMember(Name = "lt")]
+	[JsonPropertyName("lt")]
 	public string LessThan { get; set; }
 
-	[DataMember(Name = "lte")]
+	[JsonPropertyName("lte")]
 	public string LessThanOrEqualTo { get; set; }
 }
