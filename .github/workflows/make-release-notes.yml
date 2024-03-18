@@ -49,9 +49,9 @@ jobs:
         with:
           ref: "${{ matrix.branch }}"
           
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.403'
+          dotnet-version: '8.0.100'
       - name: Install dotnet-script
         run: dotnet tool install release-notes --tool-path dotnet-tool
 

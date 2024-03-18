@@ -1,5 +1,7 @@
-ARG DOTNET_VERSION=6.0.403
+ARG DOTNET_VERSION=8.0.100
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
+
+ENV NUGET_SCRATCH="/tmp/NuGetScratch"
 
 ARG USER_ID
 ARG GROUP_ID
@@ -42,6 +44,7 @@ RUN chown -R $GROUP_ID:$USER_ID /tmp/NuGetScratch
 COPY . .
 
 # making sure enough git info is available inside the container
+RUN git config --global --add safe.directory '*'
 RUN git rev-parse HEAD .
 
 # USER user
