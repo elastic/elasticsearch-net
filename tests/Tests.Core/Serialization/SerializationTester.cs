@@ -189,7 +189,7 @@ namespace Tests.Core.Serialization
 			{
 				string s => s,
 				byte[] b => Encoding.UTF8.GetString(b),
-				_ => Serializer.SerializeToString(@object)
+				_ => Serializer.SerializeToString(@object, SerializationFormatting.None)
 			};
 
 		private T Deserialize<T>(string json)
