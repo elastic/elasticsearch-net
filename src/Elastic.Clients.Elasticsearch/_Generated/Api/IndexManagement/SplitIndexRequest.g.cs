@@ -106,10 +106,6 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal SplitIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -182,10 +178,6 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	internal SplitIndexRequestDescriptor(Action<SplitIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public SplitIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
-	{
-	}
-
-	internal SplitIndexRequestDescriptor()
 	{
 	}
 

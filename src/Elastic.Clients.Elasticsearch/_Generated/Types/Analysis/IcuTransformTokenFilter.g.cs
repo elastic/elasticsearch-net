@@ -84,10 +84,10 @@ public sealed partial class IcuTransformTokenFilterDescriptor : SerializableDesc
 		writer.WriteStringValue(IdValue);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("icu_transform");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

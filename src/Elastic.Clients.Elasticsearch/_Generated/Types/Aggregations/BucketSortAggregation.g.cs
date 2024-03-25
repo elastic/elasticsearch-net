@@ -27,161 +27,38 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class BucketSortAggregationConverter : JsonConverter<BucketSortAggregation>
+public sealed partial class BucketSortAggregation
 {
-	public override BucketSortAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "bucket_sort")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new BucketSortAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("from"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.From = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("gap_policy"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.GapPolicy = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Size = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("sort"))
-				{
-					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortOptions>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Sort = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, BucketSortAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("bucket_sort");
-		writer.WriteStartObject();
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.GapPolicy is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, value.GapPolicy, options);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(value.Sort, writer, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(BucketSortAggregationConverter))]
-public sealed partial class BucketSortAggregation : SearchAggregation
-{
-	public BucketSortAggregation(string name) => Name = name;
-
-	internal BucketSortAggregation()
-	{
-	}
-
 	/// <summary>
 	/// <para>Buckets in positions prior to `from` will be truncated.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
 	/// <para>The policy to apply when gaps are found in the data.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>The list of fields to sort on.</para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	[JsonInclude, JsonPropertyName("sort")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortCombinations))]
+	public ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(BucketSortAggregation bucketSortAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketSort(bucketSortAggregation);
 }
 
 public sealed partial class BucketSortAggregationDescriptor<TDocument> : SerializableDescriptor<BucketSortAggregationDescriptor<TDocument>>
@@ -195,11 +72,9 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 	/// <summary>
 	/// <para>Buckets in positions prior to `from` will be truncated.</para>
@@ -225,6 +100,12 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	public BucketSortAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
 	/// </summary>
@@ -237,46 +118,14 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 	/// <summary>
 	/// <para>The list of fields to sort on.</para>
 	/// </summary>
-	public BucketSortAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public BucketSortAggregationDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
 		SortValue = sort;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("bucket_sort");
 		writer.WriteStartObject();
 		if (FromValue.HasValue)
 		{
@@ -290,46 +139,28 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (SizeValue.HasValue)
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
 		}
 
-		if (SortDescriptor is not null)
+		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 		}
 
 		writer.WriteEndObject();
@@ -347,11 +178,9 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 
 	/// <summary>
 	/// <para>Buckets in positions prior to `from` will be truncated.</para>
@@ -377,6 +206,12 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
+	public BucketSortAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The number of buckets to return.<br/>Defaults to all buckets of the parent aggregation.</para>
 	/// </summary>
@@ -389,46 +224,14 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 	/// <summary>
 	/// <para>The list of fields to sort on.</para>
 	/// </summary>
-	public BucketSortAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public BucketSortAggregationDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
 		SortValue = sort;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor Sort(SortOptionsDescriptor descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor Sort(Action<SortOptionsDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public BucketSortAggregationDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("bucket_sort");
 		writer.WriteStartObject();
 		if (FromValue.HasValue)
 		{
@@ -442,46 +245,28 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (SizeValue.HasValue)
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
 		}
 
-		if (SortDescriptor is not null)
+		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 		}
 
 		writer.WriteEndObject();

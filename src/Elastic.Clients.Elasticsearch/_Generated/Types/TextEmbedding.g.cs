@@ -34,7 +34,7 @@ public sealed partial class TextEmbedding
 	[JsonInclude, JsonPropertyName("model_text")]
 	public string ModelText { get; set; }
 
-	public static implicit operator QueryVectorBuilder(TextEmbedding textEmbedding) => QueryVectorBuilder.TextEmbedding(textEmbedding);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryVectorBuilder(TextEmbedding textEmbedding) => Elastic.Clients.Elasticsearch.QueryVectorBuilder.TextEmbedding(textEmbedding);
 }
 
 public sealed partial class TextEmbeddingDescriptor : SerializableDescriptor<TextEmbeddingDescriptor>

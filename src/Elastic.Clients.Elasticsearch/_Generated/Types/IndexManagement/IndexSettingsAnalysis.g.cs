@@ -33,10 +33,10 @@ public sealed partial class IndexSettingsAnalysis
 	public Elastic.Clients.Elasticsearch.Analysis.Analyzers? Analyzers { get; set; }
 	[JsonInclude, JsonPropertyName("char_filter")]
 	public Elastic.Clients.Elasticsearch.Analysis.CharFilters? CharFilters { get; set; }
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
 	[JsonInclude, JsonPropertyName("normalizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Normalizers? Normalizers { get; set; }
+	[JsonInclude, JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFilters? TokenFilters { get; set; }
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public Elastic.Clients.Elasticsearch.Analysis.Tokenizers? Tokenizers { get; set; }
 }
@@ -61,15 +61,15 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Analyzers(Analysis.AnalyzersDescriptor descriptor)
+	public IndexSettingsAnalysisDescriptor Analyzers(Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor descriptor)
 	{
 		AnalyzersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Analyzers(Action<Analysis.AnalyzersDescriptor> configure)
+	public IndexSettingsAnalysisDescriptor Analyzers(Action<Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor> configure)
 	{
-		var descriptor = new Analysis.AnalyzersDescriptor();
+		var descriptor = new Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor();
 		configure?.Invoke(descriptor);
 		AnalyzersValue = descriptor.PromisedValue;
 		return Self;
@@ -81,15 +81,15 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor CharFilters(Analysis.CharFiltersDescriptor descriptor)
+	public IndexSettingsAnalysisDescriptor CharFilters(Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor descriptor)
 	{
 		CharFiltersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor CharFilters(Action<Analysis.CharFiltersDescriptor> configure)
+	public IndexSettingsAnalysisDescriptor CharFilters(Action<Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor> configure)
 	{
-		var descriptor = new Analysis.CharFiltersDescriptor();
+		var descriptor = new Elastic.Clients.Elasticsearch.Analysis.CharFiltersDescriptor();
 		configure?.Invoke(descriptor);
 		CharFiltersValue = descriptor.PromisedValue;
 		return Self;
@@ -101,15 +101,15 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Normalizers(Analysis.NormalizersDescriptor descriptor)
+	public IndexSettingsAnalysisDescriptor Normalizers(Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor descriptor)
 	{
 		NormalizersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Normalizers(Action<Analysis.NormalizersDescriptor> configure)
+	public IndexSettingsAnalysisDescriptor Normalizers(Action<Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor> configure)
 	{
-		var descriptor = new Analysis.NormalizersDescriptor();
+		var descriptor = new Elastic.Clients.Elasticsearch.Analysis.NormalizersDescriptor();
 		configure?.Invoke(descriptor);
 		NormalizersValue = descriptor.PromisedValue;
 		return Self;
@@ -121,15 +121,15 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor TokenFilters(Analysis.TokenFiltersDescriptor descriptor)
+	public IndexSettingsAnalysisDescriptor TokenFilters(Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor descriptor)
 	{
 		TokenFiltersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor TokenFilters(Action<Analysis.TokenFiltersDescriptor> configure)
+	public IndexSettingsAnalysisDescriptor TokenFilters(Action<Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor> configure)
 	{
-		var descriptor = new Analysis.TokenFiltersDescriptor();
+		var descriptor = new Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor();
 		configure?.Invoke(descriptor);
 		TokenFiltersValue = descriptor.PromisedValue;
 		return Self;
@@ -141,15 +141,15 @@ public sealed partial class IndexSettingsAnalysisDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Tokenizers(Analysis.TokenizersDescriptor descriptor)
+	public IndexSettingsAnalysisDescriptor Tokenizers(Elastic.Clients.Elasticsearch.Analysis.TokenizersDescriptor descriptor)
 	{
 		TokenizersValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IndexSettingsAnalysisDescriptor Tokenizers(Action<Analysis.TokenizersDescriptor> configure)
+	public IndexSettingsAnalysisDescriptor Tokenizers(Action<Elastic.Clients.Elasticsearch.Analysis.TokenizersDescriptor> configure)
 	{
-		var descriptor = new Analysis.TokenizersDescriptor();
+		var descriptor = new Elastic.Clients.Elasticsearch.Analysis.TokenizersDescriptor();
 		configure?.Invoke(descriptor);
 		TokenizersValue = descriptor.PromisedValue;
 		return Self;

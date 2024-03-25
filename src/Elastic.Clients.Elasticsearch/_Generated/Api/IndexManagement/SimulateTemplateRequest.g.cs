@@ -64,7 +64,7 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.simulate_template";
 
@@ -85,14 +85,20 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? Template { get; set; }
 }
 
 /// <summary>
 /// <para>Returns the index configuration that would be applied by a particular index template.</para>
 /// </summary>
-public sealed partial class SimulateTemplateRequestDescriptor : RequestDescriptor<SimulateTemplateRequestDescriptor, SimulateTemplateRequestParameters>
+public sealed partial class SimulateTemplateRequestDescriptor<TDocument> : RequestDescriptor<SimulateTemplateRequestDescriptor<TDocument>, SimulateTemplateRequestParameters>
 {
-	internal SimulateTemplateRequestDescriptor(Action<SimulateTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	internal SimulateTemplateRequestDescriptor(Action<SimulateTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	{
+	}
 
 	public SimulateTemplateRequestDescriptor()
 	{
@@ -102,7 +108,73 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
+
+	internal override string OperationName => "indices.simulate_template";
+
+	public SimulateTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
+	public SimulateTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
+	public SimulateTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
+	public SimulateTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
+	{
+		RouteValues.Optional("name", name);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? TemplateValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
+
+	public SimulateTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? template)
+	{
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = null;
+		TemplateValue = template;
+		return Self;
+	}
+
+	public SimulateTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> descriptor)
+	{
+		TemplateValue = null;
+		TemplateDescriptorAction = null;
+		TemplateDescriptor = descriptor;
+		return Self;
+	}
+
+	public SimulateTemplateRequestDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> configure)
+	{
+		TemplateValue = null;
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+	}
+}
+
+/// <summary>
+/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+/// </summary>
+public sealed partial class SimulateTemplateRequestDescriptor : RequestDescriptor<SimulateTemplateRequestDescriptor, SimulateTemplateRequestParameters>
+{
+	internal SimulateTemplateRequestDescriptor(Action<SimulateTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
+	public SimulateTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	{
+	}
+
+	public SimulateTemplateRequestDescriptor()
+	{
+	}
+
+	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateTemplate;
+
+	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.simulate_template";
 
@@ -113,6 +185,34 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 	public SimulateTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		RouteValues.Optional("name", name);
+		return Self;
+	}
+
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? TemplateValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> TemplateDescriptorAction { get; set; }
+
+	public SimulateTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? template)
+	{
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = null;
+		TemplateValue = template;
+		return Self;
+	}
+
+	public SimulateTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor descriptor)
+	{
+		TemplateValue = null;
+		TemplateDescriptorAction = null;
+		TemplateDescriptor = descriptor;
+		return Self;
+	}
+
+	public SimulateTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> configure)
+	{
+		TemplateValue = null;
+		TemplateDescriptor = null;
+		TemplateDescriptorAction = configure;
 		return Self;
 	}
 

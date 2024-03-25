@@ -151,11 +151,11 @@ public sealed partial class RemoteSourceDescriptor : SerializableDescriptor<Remo
 		}
 
 		writer.WritePropertyName("host");
-		JsonSerializer.Serialize(writer, HostValue, options);
-		if (PasswordValue is not null)
+		writer.WriteStringValue(HostValue);
+		if (!string.IsNullOrEmpty(PasswordValue))
 		{
 			writer.WritePropertyName("password");
-			JsonSerializer.Serialize(writer, PasswordValue, options);
+			writer.WriteStringValue(PasswordValue);
 		}
 
 		if (SocketTimeoutValue is not null)

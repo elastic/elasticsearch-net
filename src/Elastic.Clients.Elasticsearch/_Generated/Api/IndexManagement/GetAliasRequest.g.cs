@@ -113,15 +113,11 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public GetAliasRequestDescriptor()
-	{
-	}
-
 	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
 	{
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	public GetAliasRequestDescriptor()
 	{
 	}
 
@@ -138,15 +134,15 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	public GetAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 
-	public GetAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
-	{
-		RouteValues.Optional("name", name);
-		return Self;
-	}
-
 	public GetAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public GetAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		RouteValues.Optional("name", name);
 		return Self;
 	}
 
@@ -162,15 +158,11 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 {
 	internal GetAliasRequestDescriptor(Action<GetAliasRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetAliasRequestDescriptor()
-	{
-	}
-
 	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
 	{
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	public GetAliasRequestDescriptor()
 	{
 	}
 
@@ -187,15 +179,15 @@ public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAli
 	public GetAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public GetAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
 
-	public GetAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
-	{
-		RouteValues.Optional("name", name);
-		return Self;
-	}
-
 	public GetAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public GetAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		RouteValues.Optional("name", name);
 		return Self;
 	}
 

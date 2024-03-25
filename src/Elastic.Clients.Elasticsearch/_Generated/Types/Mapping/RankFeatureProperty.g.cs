@@ -35,6 +35,10 @@ public sealed partial class RankFeatureProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("positive_score_impact")]
@@ -73,15 +77,15 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -93,6 +97,9 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public RankFeaturePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -111,15 +118,15 @@ public sealed partial class RankFeaturePropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -207,15 +214,15 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -227,6 +234,9 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public RankFeaturePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -245,15 +255,15 @@ public sealed partial class RankFeaturePropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

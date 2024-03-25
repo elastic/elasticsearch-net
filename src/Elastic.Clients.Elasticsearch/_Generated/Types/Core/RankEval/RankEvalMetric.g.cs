@@ -50,20 +50,20 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? DcgValue { get; set; }
-	private RankEvalMetricDiscountedCumulativeGainDescriptor DcgDescriptor { get; set; }
-	private Action<RankEvalMetricDiscountedCumulativeGainDescriptor> DcgDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor DcgDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor> DcgDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank? ExpectedReciprocalRankValue { get; set; }
-	private RankEvalMetricExpectedReciprocalRankDescriptor ExpectedReciprocalRankDescriptor { get; set; }
-	private Action<RankEvalMetricExpectedReciprocalRankDescriptor> ExpectedReciprocalRankDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor ExpectedReciprocalRankDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> ExpectedReciprocalRankDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank? MeanReciprocalRankValue { get; set; }
-	private RankEvalMetricMeanReciprocalRankDescriptor MeanReciprocalRankDescriptor { get; set; }
-	private Action<RankEvalMetricMeanReciprocalRankDescriptor> MeanReciprocalRankDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor MeanReciprocalRankDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor> MeanReciprocalRankDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision? PrecisionValue { get; set; }
-	private RankEvalMetricPrecisionDescriptor PrecisionDescriptor { get; set; }
-	private Action<RankEvalMetricPrecisionDescriptor> PrecisionDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor PrecisionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor> PrecisionDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall? RecallValue { get; set; }
-	private RankEvalMetricRecallDescriptor RecallDescriptor { get; set; }
-	private Action<RankEvalMetricRecallDescriptor> RecallDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor RecallDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor> RecallDescriptorAction { get; set; }
 
 	public RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain? dcg)
 	{
@@ -73,7 +73,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Dcg(RankEvalMetricDiscountedCumulativeGainDescriptor descriptor)
+	public RankEvalMetricDescriptor Dcg(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor descriptor)
 	{
 		DcgValue = null;
 		DcgDescriptorAction = null;
@@ -81,7 +81,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Dcg(Action<RankEvalMetricDiscountedCumulativeGainDescriptor> configure)
+	public RankEvalMetricDescriptor Dcg(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor> configure)
 	{
 		DcgValue = null;
 		DcgDescriptor = null;
@@ -97,7 +97,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor ExpectedReciprocalRank(RankEvalMetricExpectedReciprocalRankDescriptor descriptor)
+	public RankEvalMetricDescriptor ExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor descriptor)
 	{
 		ExpectedReciprocalRankValue = null;
 		ExpectedReciprocalRankDescriptorAction = null;
@@ -105,7 +105,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor ExpectedReciprocalRank(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure)
+	public RankEvalMetricDescriptor ExpectedReciprocalRank(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> configure)
 	{
 		ExpectedReciprocalRankValue = null;
 		ExpectedReciprocalRankDescriptor = null;
@@ -121,7 +121,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor MeanReciprocalRank(RankEvalMetricMeanReciprocalRankDescriptor descriptor)
+	public RankEvalMetricDescriptor MeanReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor descriptor)
 	{
 		MeanReciprocalRankValue = null;
 		MeanReciprocalRankDescriptorAction = null;
@@ -129,7 +129,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor MeanReciprocalRank(Action<RankEvalMetricMeanReciprocalRankDescriptor> configure)
+	public RankEvalMetricDescriptor MeanReciprocalRank(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor> configure)
 	{
 		MeanReciprocalRankValue = null;
 		MeanReciprocalRankDescriptor = null;
@@ -145,7 +145,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Precision(RankEvalMetricPrecisionDescriptor descriptor)
+	public RankEvalMetricDescriptor Precision(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor descriptor)
 	{
 		PrecisionValue = null;
 		PrecisionDescriptorAction = null;
@@ -153,7 +153,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Precision(Action<RankEvalMetricPrecisionDescriptor> configure)
+	public RankEvalMetricDescriptor Precision(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor> configure)
 	{
 		PrecisionValue = null;
 		PrecisionDescriptor = null;
@@ -169,7 +169,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Recall(RankEvalMetricRecallDescriptor descriptor)
+	public RankEvalMetricDescriptor Recall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor descriptor)
 	{
 		RecallValue = null;
 		RecallDescriptorAction = null;
@@ -177,7 +177,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		return Self;
 	}
 
-	public RankEvalMetricDescriptor Recall(Action<RankEvalMetricRecallDescriptor> configure)
+	public RankEvalMetricDescriptor Recall(Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor> configure)
 	{
 		RecallValue = null;
 		RecallDescriptor = null;
@@ -196,7 +196,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		else if (DcgDescriptorAction is not null)
 		{
 			writer.WritePropertyName("dcg");
-			JsonSerializer.Serialize(writer, new RankEvalMetricDiscountedCumulativeGainDescriptor(DcgDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(DcgDescriptorAction), options);
 		}
 		else if (DcgValue is not null)
 		{
@@ -212,7 +212,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		else if (ExpectedReciprocalRankDescriptorAction is not null)
 		{
 			writer.WritePropertyName("expected_reciprocal_rank");
-			JsonSerializer.Serialize(writer, new RankEvalMetricExpectedReciprocalRankDescriptor(ExpectedReciprocalRankDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(ExpectedReciprocalRankDescriptorAction), options);
 		}
 		else if (ExpectedReciprocalRankValue is not null)
 		{
@@ -228,7 +228,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		else if (MeanReciprocalRankDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mean_reciprocal_rank");
-			JsonSerializer.Serialize(writer, new RankEvalMetricMeanReciprocalRankDescriptor(MeanReciprocalRankDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankDescriptor(MeanReciprocalRankDescriptorAction), options);
 		}
 		else if (MeanReciprocalRankValue is not null)
 		{
@@ -244,7 +244,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		else if (PrecisionDescriptorAction is not null)
 		{
 			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, new RankEvalMetricPrecisionDescriptor(PrecisionDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor(PrecisionDescriptorAction), options);
 		}
 		else if (PrecisionValue is not null)
 		{
@@ -260,7 +260,7 @@ public sealed partial class RankEvalMetricDescriptor : SerializableDescriptor<Ra
 		else if (RecallDescriptorAction is not null)
 		{
 			writer.WritePropertyName("recall");
-			JsonSerializer.Serialize(writer, new RankEvalMetricRecallDescriptor(RecallDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(RecallDescriptorAction), options);
 		}
 		else if (RecallValue is not null)
 		{

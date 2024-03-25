@@ -31,12 +31,22 @@ public sealed partial class Hit<TDocument>
 {
 	[JsonInclude, JsonPropertyName("_explanation")]
 	public Elastic.Clients.Elasticsearch.Core.Explain.Explanation? Explanation { get; init; }
+	[JsonInclude, JsonPropertyName("fields")]
+	public IReadOnlyDictionary<string, object>? Fields { get; init; }
+	[JsonInclude, JsonPropertyName("highlight")]
+	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
+	[JsonInclude, JsonPropertyName("ignored_field_values")]
+	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
+	[JsonInclude, JsonPropertyName("inner_hits")]
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
+	[JsonInclude, JsonPropertyName("matched_queries")]
+	public IReadOnlyCollection<string>? MatchedQueries { get; init; }
 	[JsonInclude, JsonPropertyName("_nested")]
 	public Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity? Nested { get; init; }
 	[JsonInclude, JsonPropertyName("_node")]
@@ -51,21 +61,10 @@ public sealed partial class Hit<TDocument>
 	public long? SeqNo { get; init; }
 	[JsonInclude, JsonPropertyName("_shard")]
 	public string? Shard { get; init; }
+	[JsonInclude, JsonPropertyName("sort")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TDocument? Source { get; init; }
 	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
-	public IReadOnlyDictionary<string, object>? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("highlight")]
-	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
-	[JsonInclude, JsonPropertyName("ignored_field_values")]
-	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? IgnoredFieldValues { get; init; }
-	[JsonInclude, JsonPropertyName("inner_hits")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; init; }
-	[JsonInclude, JsonPropertyName("matched_queries")]
-	public IReadOnlyCollection<string>? MatchedQueries { get; init; }
-	[JsonInclude, JsonPropertyName("sort")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 }

@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityDfr
+public sealed partial class SettingsSimilarityDfr : ISettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("after_effect")]
 	public Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
@@ -40,7 +40,7 @@ public sealed partial class SettingsSimilarityDfr
 	public string Type => "DFR";
 }
 
-public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptor<SettingsSimilarityDfrDescriptor>
+public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescriptor<SettingsSimilarityDfrDescriptor>, IBuildableDescriptor<SettingsSimilarityDfr>
 {
 	internal SettingsSimilarityDfrDescriptor(Action<SettingsSimilarityDfrDescriptor> configure) => configure.Invoke(this);
 
@@ -83,4 +83,11 @@ public sealed partial class SettingsSimilarityDfrDescriptor : SerializableDescri
 		writer.WriteStringValue("DFR");
 		writer.WriteEndObject();
 	}
+
+	SettingsSimilarityDfr IBuildableDescriptor<SettingsSimilarityDfr>.Build() => new()
+	{
+		AfterEffect = AfterEffectValue,
+		BasicModel = BasicModelValue,
+		Normalization = NormalizationValue
+	};
 }

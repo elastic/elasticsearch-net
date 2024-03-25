@@ -72,10 +72,6 @@ public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<E
 	{
 	}
 
-	internal ExecutePolicyRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichExecutePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

@@ -23,7 +23,7 @@ public partial class SubmitAsyncSearchRequest
 
 public sealed partial class SubmitAsyncSearchRequestDescriptor
 {
-	public SubmitAsyncSearchRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll()) : Query(q => q.MatchAll(selector));
+	public SubmitAsyncSearchRequestDescriptor MatchAll(Action<MatchAllQueryDescriptor>? selector = null) => selector is null ? Query(q => q.MatchAll(new MatchAllQuery())) : Query(q => q.MatchAll(selector));
 
 	internal override void BeforeRequest() => TypedKeys(true);
 }

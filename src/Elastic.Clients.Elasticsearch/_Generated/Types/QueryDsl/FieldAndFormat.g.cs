@@ -72,15 +72,6 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
-	/// </summary>
-	public FieldAndFormatDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Format in which the values are returned.</para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Format(string? format)
@@ -135,24 +126,6 @@ public sealed partial class FieldAndFormatDescriptor : SerializableDescriptor<Fi
 	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
 	/// </summary>
 	public FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
-	/// </summary>
-	public FieldAndFormatDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
-	/// </summary>
-	public FieldAndFormatDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

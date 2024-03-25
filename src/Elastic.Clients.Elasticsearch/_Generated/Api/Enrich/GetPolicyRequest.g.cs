@@ -62,6 +62,10 @@ public sealed partial class GetPolicyRequestDescriptor : RequestDescriptor<GetPo
 {
 	internal GetPolicyRequestDescriptor(Action<GetPolicyRequestDescriptor> configure) => configure.Invoke(this);
 
+	public GetPolicyRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+	{
+	}
+
 	public GetPolicyRequestDescriptor()
 	{
 	}

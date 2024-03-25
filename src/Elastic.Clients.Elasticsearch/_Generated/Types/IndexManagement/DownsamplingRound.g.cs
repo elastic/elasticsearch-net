@@ -52,8 +52,8 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 
 	private Elastic.Clients.Elasticsearch.Duration AfterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig ConfigValue { get; set; }
-	private DownsampleConfigDescriptor ConfigDescriptor { get; set; }
-	private Action<DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor ConfigDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The duration since rollover when this downsampling round should execute</para>
@@ -75,7 +75,7 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public DownsamplingRoundDescriptor Config(DownsampleConfigDescriptor descriptor)
+	public DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor)
 	{
 		ConfigValue = null;
 		ConfigDescriptorAction = null;
@@ -83,7 +83,7 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public DownsamplingRoundDescriptor Config(Action<DownsampleConfigDescriptor> configure)
+	public DownsamplingRoundDescriptor Config(Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> configure)
 	{
 		ConfigValue = null;
 		ConfigDescriptor = null;
@@ -104,7 +104,7 @@ public sealed partial class DownsamplingRoundDescriptor : SerializableDescriptor
 		else if (ConfigDescriptorAction is not null)
 		{
 			writer.WritePropertyName("config");
-			JsonSerializer.Serialize(writer, new DownsampleConfigDescriptor(ConfigDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor(ConfigDescriptorAction), options);
 		}
 		else
 		{

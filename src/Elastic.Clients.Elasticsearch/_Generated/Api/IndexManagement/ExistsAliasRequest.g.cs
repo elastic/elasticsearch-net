@@ -105,15 +105,11 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 {
 	internal ExistsAliasRequestDescriptor(Action<ExistsAliasRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
-	{
-	}
-
 	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
 	{
 	}
 
-	internal ExistsAliasRequestDescriptor()
+	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
 
@@ -130,15 +126,15 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	public ExistsAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 
-	public ExistsAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names name)
-	{
-		RouteValues.Required("name", name);
-		return Self;
-	}
-
 	public ExistsAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public ExistsAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names name)
+	{
+		RouteValues.Required("name", name);
 		return Self;
 	}
 
@@ -154,15 +150,11 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 {
 	internal ExistsAliasRequestDescriptor(Action<ExistsAliasRequestDescriptor> configure) => configure.Invoke(this);
 
-	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
-	{
-	}
-
 	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Optional("index", indices).Required("name", name))
 	{
 	}
 
-	internal ExistsAliasRequestDescriptor()
+	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
 
@@ -179,15 +171,15 @@ public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<Exi
 	public ExistsAliasRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public ExistsAliasRequestDescriptor Local(bool? local = true) => Qs("local", local);
 
-	public ExistsAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
-	{
-		RouteValues.Required("name", name);
-		return Self;
-	}
-
 	public ExistsAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public ExistsAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	{
+		RouteValues.Required("name", name);
 		return Self;
 	}
 

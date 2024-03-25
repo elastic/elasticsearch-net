@@ -83,10 +83,6 @@ public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal DeleteAliasRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -123,10 +119,6 @@ public sealed partial class DeleteAliasRequestDescriptor : RequestDescriptor<Del
 	internal DeleteAliasRequestDescriptor(Action<DeleteAliasRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("index", indices).Required("name", name))
-	{
-	}
-
-	internal DeleteAliasRequestDescriptor()
 	{
 	}
 

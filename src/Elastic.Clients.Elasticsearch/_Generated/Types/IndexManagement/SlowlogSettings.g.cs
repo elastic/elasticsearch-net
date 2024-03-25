@@ -51,8 +51,8 @@ public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<S
 	private bool? ReformatValue { get; set; }
 	private int? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds? ThresholdValue { get; set; }
-	private SlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
-	private Action<SlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor ThresholdDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor> ThresholdDescriptorAction { get; set; }
 
 	public SlowlogSettingsDescriptor Level(string? level)
 	{
@@ -80,7 +80,7 @@ public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<S
 		return Self;
 	}
 
-	public SlowlogSettingsDescriptor Threshold(SlowlogTresholdsDescriptor descriptor)
+	public SlowlogSettingsDescriptor Threshold(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor descriptor)
 	{
 		ThresholdValue = null;
 		ThresholdDescriptorAction = null;
@@ -88,7 +88,7 @@ public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<S
 		return Self;
 	}
 
-	public SlowlogSettingsDescriptor Threshold(Action<SlowlogTresholdsDescriptor> configure)
+	public SlowlogSettingsDescriptor Threshold(Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor> configure)
 	{
 		ThresholdValue = null;
 		ThresholdDescriptor = null;
@@ -125,7 +125,7 @@ public sealed partial class SlowlogSettingsDescriptor : SerializableDescriptor<S
 		else if (ThresholdDescriptorAction is not null)
 		{
 			writer.WritePropertyName("threshold");
-			JsonSerializer.Serialize(writer, new SlowlogTresholdsDescriptor(ThresholdDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdsDescriptor(ThresholdDescriptorAction), options);
 		}
 		else if (ThresholdValue is not null)
 		{

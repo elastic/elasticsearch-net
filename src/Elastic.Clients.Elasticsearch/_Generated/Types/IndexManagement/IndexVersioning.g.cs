@@ -61,10 +61,10 @@ public sealed partial class IndexVersioningDescriptor : SerializableDescriptor<I
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (CreatedValue is not null)
+		if (!string.IsNullOrEmpty(CreatedValue))
 		{
 			writer.WritePropertyName("created");
-			JsonSerializer.Serialize(writer, CreatedValue, options);
+			writer.WriteStringValue(CreatedValue);
 		}
 
 		if (!string.IsNullOrEmpty(CreatedStringValue))

@@ -62,10 +62,6 @@ public sealed partial class AsyncSearchStatusRequestDescriptor<TDocument> : Requ
 	{
 	}
 
-	internal AsyncSearchStatusRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.AsyncSearchStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -93,10 +89,6 @@ public sealed partial class AsyncSearchStatusRequestDescriptor : RequestDescript
 	internal AsyncSearchStatusRequestDescriptor(Action<AsyncSearchStatusRequestDescriptor> configure) => configure.Invoke(this);
 
 	public AsyncSearchStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal AsyncSearchStatusRequestDescriptor()
 	{
 	}
 

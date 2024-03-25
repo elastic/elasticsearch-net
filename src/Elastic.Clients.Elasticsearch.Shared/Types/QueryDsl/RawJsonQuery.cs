@@ -15,7 +15,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 /// <summary>
 /// Allows a query represented as a string of JSON to be defined. This can be useful when support for a built-in query is not yet available.
 /// </summary>
-public sealed class RawJsonQuery : SearchQuery
+[JsonConverter(typeof(RawJsonQueryConverter))]
+public sealed class RawJsonQuery
 {
 	public RawJsonQuery(string rawQuery) => Raw = rawQuery;
 
@@ -23,8 +24,6 @@ public sealed class RawJsonQuery : SearchQuery
 	/// The raw JSON representing the query to be executed.
 	/// </summary>
 	public string Raw { get; }
-
-	internal override void InternalWrapInContainer(Query container) => new Query("raw_json", this);
 
 	public static implicit operator Query(RawJsonQuery rawJsonQuery) => Query.RawJson(rawJsonQuery);
 }

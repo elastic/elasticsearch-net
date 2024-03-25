@@ -94,6 +94,10 @@ public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<Get
 {
 	internal GetTemplateRequestDescriptor(Action<GetTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
+	public GetTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
+	{
+	}
+
 	public GetTemplateRequestDescriptor()
 	{
 	}

@@ -160,6 +160,10 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 {
 	internal BulkRequestDescriptor(Action<BulkRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
+
 	public BulkRequestDescriptor()
 	{
 	}
@@ -190,6 +194,8 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
 	}
 }
 
@@ -199,6 +205,10 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkRequestDescriptor, BulkRequestParameters>
 {
 	internal BulkRequestDescriptor(Action<BulkRequestDescriptor> configure) => configure.Invoke(this);
+
+	public BulkRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
 
 	public BulkRequestDescriptor()
 	{
@@ -230,5 +240,7 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
 	}
 }

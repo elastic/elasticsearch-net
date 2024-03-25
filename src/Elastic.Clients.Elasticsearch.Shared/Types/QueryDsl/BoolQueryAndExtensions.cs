@@ -176,13 +176,13 @@ internal static class BoolQueryAndExtensions
 		CreateMustContainer(new List<Query> { left, right });
 
 	private static Query CreateMustContainer(List<Query> mustClauses) =>
-		new(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
+		Query.Bool(new BoolQuery() { Must = mustClauses.ToListOrNullIfEmpty() });
 
 	private static Query CreateMustContainer(
 		List<Query> mustClauses,
 		List<Query> mustNotClauses,
 		List<Query> filters
-		) => new(new BoolQuery
+		) => Query.Bool(new BoolQuery
 		{
 			Must = mustClauses.ToListOrNullIfEmpty(),
 			MustNot = mustNotClauses.ToListOrNullIfEmpty(),

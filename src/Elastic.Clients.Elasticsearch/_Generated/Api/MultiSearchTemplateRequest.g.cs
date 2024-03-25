@@ -72,7 +72,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -109,7 +109,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public List<Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
+	public List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
@@ -137,15 +137,19 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 /// <summary>
 /// <para>Runs multiple templated searches with a single request.</para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public MultiSearchTemplateRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -169,33 +173,11 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	{
 	}
 
-	List<Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
+	List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
 
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public MultiSearchTemplateRequestDescriptor<TDocument> AddSearchTemplates(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
-
-	public MultiSearchTemplateRequestDescriptor<TDocument> Add(Core.MSearchTemplate.SearchTemplateRequestItem item)
-	{
-		_items.Add(item);
+		_items.Add(searchTemplates);
 		return this;
 	}
 }
@@ -203,15 +185,19 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 /// <summary>
 /// <para>Runs multiple templated searches with a single request.</para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
+	public MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public MultiSearchTemplateRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearchTemplate;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearchTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -235,33 +221,11 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 	{
 	}
 
-	List<Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
+	List<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
 
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public MultiSearchTemplateRequestDescriptor AddSearchTemplates(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
-
-	public MultiSearchTemplateRequestDescriptor Add(Core.MSearchTemplate.SearchTemplateRequestItem item)
-	{
-		_items.Add(item);
+		_items.Add(searchTemplates);
 		return this;
 	}
 }

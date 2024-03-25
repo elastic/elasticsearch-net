@@ -55,15 +55,6 @@ public sealed partial class GeoLinePointDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the geo_point field.</para>
-	/// </summary>
-	public GeoLinePointDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -87,24 +78,6 @@ public sealed partial class GeoLinePointDescriptor : SerializableDescriptor<GeoL
 	/// <para>The name of the geo_point field.</para>
 	/// </summary>
 	public GeoLinePointDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the geo_point field.</para>
-	/// </summary>
-	public GeoLinePointDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the geo_point field.</para>
-	/// </summary>
-	public GeoLinePointDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

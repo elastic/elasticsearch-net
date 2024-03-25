@@ -82,12 +82,12 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 				}
 
 				additionalProperties ??= new Dictionary<string, object>();
-				var value = JsonSerializer.Deserialize<object>(ref reader, options);
-				additionalProperties.Add(property, value);
+				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
+				additionalProperties.Add(property, additionalValue);
 			}
 		}
 
-		return new ErrorCause { CausedBy = causedBy, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type, Metadata = additionalProperties };
+		return new ErrorCause { CausedBy = causedBy, Metadata = additionalProperties, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type };
 	}
 
 	public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
@@ -96,13 +96,17 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 	}
 }
 
-[JsonConverter(typeof(ErrorCauseConverter))]
 /// <summary>
 /// <para>Cause and details about a request failure. This class defines the properties common to all error types.<br/>Additional details are also provided, that depend on the error type.</para>
 /// </summary>
+[JsonConverter(typeof(ErrorCauseConverter))]
 public sealed partial class ErrorCause
 {
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
+
+	/// <summary>
+	/// <para>Additional details about the error</para>
+	/// </summary>
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
 
 	/// <summary>

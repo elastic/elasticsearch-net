@@ -34,6 +34,10 @@ public sealed partial class GeoIpProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("database_file")]
 	public string? DatabaseFile { get; set; }
+
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -48,8 +52,16 @@ public sealed partial class GeoIpProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("first_only")]
 	public bool? FirstOnly { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -58,6 +70,10 @@ public sealed partial class GeoIpProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
@@ -66,6 +82,10 @@ public sealed partial class GeoIpProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("properties")]
 	public ICollection<string>? Properties { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -75,7 +95,7 @@ public sealed partial class GeoIpProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(GeoIpProcessor geoIpProcessor) => Ingest.Processor.Geoip(geoIpProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(GeoIpProcessor geoIpProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Geoip(geoIpProcessor);
 }
 
 public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDescriptor<GeoIpProcessorDescriptor<TDocument>>
@@ -94,9 +114,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
@@ -110,6 +130,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -126,15 +149,6 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> FirstOnly(bool? firstOnly = true)
@@ -143,12 +157,18 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public GeoIpProcessorDescriptor<TDocument> If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -164,6 +184,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -173,7 +196,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public GeoIpProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -182,7 +205,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public GeoIpProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -191,7 +214,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public GeoIpProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -209,6 +232,9 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -219,15 +245,6 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
 	/// </summary>
 	public GeoIpProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -285,7 +302,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -294,7 +311,7 @@ public sealed partial class GeoIpProcessorDescriptor<TDocument> : SerializableDe
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -343,9 +360,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
@@ -359,6 +376,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -375,24 +395,6 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	}
 
 	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to get the ip address from for the geographical lookup.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>If `true`, only the first found geoip data will be returned, even if the field contains an array.</para>
 	/// </summary>
 	public GeoIpProcessorDescriptor FirstOnly(bool? firstOnly = true)
@@ -401,12 +403,18 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public GeoIpProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -422,6 +430,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -431,7 +442,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public GeoIpProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -440,7 +451,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public GeoIpProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -449,7 +460,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
-	public GeoIpProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public GeoIpProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -467,6 +478,9 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public GeoIpProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -477,24 +491,6 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
 	/// </summary>
 	public GeoIpProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that will hold the geographical information looked up from the MaxMind database.</para>
-	/// </summary>
-	public GeoIpProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -552,7 +548,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -561,7 +557,7 @@ public sealed partial class GeoIpProcessorDescriptor : SerializableDescriptor<Ge
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

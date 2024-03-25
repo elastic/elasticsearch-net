@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class SpanMultiTermQuery : SearchQuery
+public sealed partial class SpanMultiTermQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -39,8 +40,11 @@ public sealed partial class SpanMultiTermQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("match")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_multi", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanMultiTermQuery spanMultiTermQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanMulti(spanMultiTermQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanMultiTermQuery spanMultiTermQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanMulti(spanMultiTermQuery);
 }
 
 public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : SerializableDescriptor<SpanMultiTermQueryDescriptor<TDocument>>
@@ -53,10 +57,13 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
-	private QueryDescriptor<TDocument> MatchDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> MatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanMultiTermQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -74,7 +81,7 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> Match(QueryDescriptor<TDocument> descriptor)
+	public SpanMultiTermQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		MatchValue = null;
 		MatchDescriptorAction = null;
@@ -82,7 +89,7 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor<TDocument> Match(Action<QueryDescriptor<TDocument>> configure)
+	public SpanMultiTermQueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		MatchValue = null;
 		MatchDescriptor = null;
@@ -113,7 +120,7 @@ public sealed partial class SpanMultiTermQueryDescriptor<TDocument> : Serializab
 		else if (MatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(MatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(MatchDescriptorAction), options);
 		}
 		else
 		{
@@ -141,10 +148,13 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query MatchValue { get; set; }
-	private QueryDescriptor MatchDescriptor { get; set; }
-	private Action<QueryDescriptor> MatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor MatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> MatchDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanMultiTermQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -162,7 +172,7 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor Match(QueryDescriptor descriptor)
+	public SpanMultiTermQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		MatchValue = null;
 		MatchDescriptorAction = null;
@@ -170,7 +180,7 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public SpanMultiTermQueryDescriptor Match(Action<QueryDescriptor> configure)
+	public SpanMultiTermQueryDescriptor Match(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		MatchValue = null;
 		MatchDescriptor = null;
@@ -201,7 +211,7 @@ public sealed partial class SpanMultiTermQueryDescriptor : SerializableDescripto
 		else if (MatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(MatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(MatchDescriptorAction), options);
 		}
 		else
 		{

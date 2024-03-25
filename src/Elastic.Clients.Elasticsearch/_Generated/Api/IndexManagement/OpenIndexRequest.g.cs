@@ -127,10 +127,6 @@ public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal OpenIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -165,10 +161,6 @@ public sealed partial class OpenIndexRequestDescriptor : RequestDescriptor<OpenI
 	internal OpenIndexRequestDescriptor(Action<OpenIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public OpenIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal OpenIndexRequestDescriptor()
 	{
 	}
 

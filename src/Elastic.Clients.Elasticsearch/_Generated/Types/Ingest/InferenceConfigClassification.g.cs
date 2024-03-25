@@ -59,7 +59,7 @@ public sealed partial class InferenceConfigClassification
 	[JsonInclude, JsonPropertyName("top_classes_results_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesResultsField { get; set; }
 
-	public static implicit operator InferenceConfig(InferenceConfigClassification inferenceConfigClassification) => Ingest.InferenceConfig.Classification(inferenceConfigClassification);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfig(InferenceConfigClassification inferenceConfigClassification) => Elastic.Clients.Elasticsearch.Ingest.InferenceConfig.Classification(inferenceConfigClassification);
 }
 
 public sealed partial class InferenceConfigClassificationDescriptor<TDocument> : SerializableDescriptor<InferenceConfigClassificationDescriptor<TDocument>>
@@ -113,27 +113,9 @@ public sealed partial class InferenceConfigClassificationDescriptor<TDocument> :
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
-	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Specifies the field to which the top classes are written.</para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
-	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor<TDocument> TopClassesResultsField<TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
 		return Self;
@@ -227,45 +209,9 @@ public sealed partial class InferenceConfigClassificationDescriptor : Serializab
 	}
 
 	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor ResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> resultsField)
-	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor ResultsField<TDocument>(Expression<Func<TDocument, object>> resultsField)
-	{
-		ResultsFieldValue = resultsField;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>Specifies the field to which the top classes are written.</para>
 	/// </summary>
 	public InferenceConfigClassificationDescriptor TopClassesResultsField(Elastic.Clients.Elasticsearch.Field? topClassesResultsField)
-	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesResultsField)
-	{
-		TopClassesResultsFieldValue = topClassesResultsField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Specifies the field to which the top classes are written.</para>
-	/// </summary>
-	public InferenceConfigClassificationDescriptor TopClassesResultsField<TDocument>(Expression<Func<TDocument, object>> topClassesResultsField)
 	{
 		TopClassesResultsFieldValue = topClassesResultsField;
 		return Self;

@@ -42,8 +42,8 @@ public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescri
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? SchedulerValue { get; set; }
-	private MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
-	private Action<MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor SchedulerDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor> SchedulerDescriptorAction { get; set; }
 
 	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? scheduler)
 	{
@@ -53,7 +53,7 @@ public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescri
 		return Self;
 	}
 
-	public MergeDescriptor Scheduler(MergeSchedulerDescriptor descriptor)
+	public MergeDescriptor Scheduler(Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor descriptor)
 	{
 		SchedulerValue = null;
 		SchedulerDescriptorAction = null;
@@ -61,7 +61,7 @@ public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescri
 		return Self;
 	}
 
-	public MergeDescriptor Scheduler(Action<MergeSchedulerDescriptor> configure)
+	public MergeDescriptor Scheduler(Action<Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor> configure)
 	{
 		SchedulerValue = null;
 		SchedulerDescriptor = null;
@@ -80,7 +80,7 @@ public sealed partial class MergeDescriptor : SerializableDescriptor<MergeDescri
 		else if (SchedulerDescriptorAction is not null)
 		{
 			writer.WritePropertyName("scheduler");
-			JsonSerializer.Serialize(writer, new MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MergeSchedulerDescriptor(SchedulerDescriptorAction), options);
 		}
 		else if (SchedulerValue is not null)
 		{

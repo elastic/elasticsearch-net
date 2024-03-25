@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -46,6 +47,18 @@ public sealed partial class QueryVectorBuilder
 	internal string VariantName { get; }
 
 	public static QueryVectorBuilder TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => new QueryVectorBuilder("text_embedding", textEmbedding);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class QueryVectorBuilderConverter : JsonConverter<QueryVectorBuilder>
@@ -57,28 +70,41 @@ internal sealed partial class QueryVectorBuilderConverter : JsonConverter<QueryV
 			throw new JsonException("Expected start token.");
 		}
 
-		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
 
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "text_embedding")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextEmbedding?>(ref reader, options);
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
 			reader.Read();
-			return new QueryVectorBuilder(propertyName, variant);
+			if (propertyName == "text_embedding")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.TextEmbedding?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'QueryVectorBuilder' from the response.");
 		}
 
-		throw new JsonException();
+		reader.Read();
+		var result = new QueryVectorBuilder(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, QueryVectorBuilder value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -124,27 +150,25 @@ public sealed partial class QueryVectorBuilderDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
-	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(Action<TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
+	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
+	public QueryVectorBuilderDescriptor<TDocument> TextEmbedding(Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -180,27 +204,25 @@ public sealed partial class QueryVectorBuilderDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public QueryVectorBuilderDescriptor TextEmbedding(TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
-	public QueryVectorBuilderDescriptor TextEmbedding(Action<TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
+	public QueryVectorBuilderDescriptor TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbedding textEmbedding) => Set(textEmbedding, "text_embedding");
+	public QueryVectorBuilderDescriptor TextEmbedding(Action<Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor> configure) => Set(configure, "text_embedding");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

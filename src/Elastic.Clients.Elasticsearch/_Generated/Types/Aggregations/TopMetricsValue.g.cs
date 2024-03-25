@@ -55,15 +55,6 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>A field to return as a metric.</para>
-	/// </summary>
-	public TopMetricsValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -87,24 +78,6 @@ public sealed partial class TopMetricsValueDescriptor : SerializableDescriptor<T
 	/// <para>A field to return as a metric.</para>
 	/// </summary>
 	public TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A field to return as a metric.</para>
-	/// </summary>
-	public TopMetricsValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>A field to return as a metric.</para>
-	/// </summary>
-	public TopMetricsValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

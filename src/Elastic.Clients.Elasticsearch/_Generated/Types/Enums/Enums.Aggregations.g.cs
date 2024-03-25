@@ -17,14 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Core;
+using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
@@ -82,7 +82,8 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 				return CalendarInterval.Day;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CalendarInterval value, JsonSerializerOptions options)
@@ -168,7 +169,8 @@ internal sealed class CardinalityExecutionModeConverter : JsonConverter<Cardinal
 				return CardinalityExecutionMode.Direct;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CardinalityExecutionMode value, JsonSerializerOptions options)
@@ -231,7 +233,8 @@ internal sealed class GapPolicyConverter : JsonConverter<GapPolicy>
 				return GapPolicy.InsertZeros;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GapPolicy value, JsonSerializerOptions options)
@@ -291,7 +294,8 @@ internal sealed class MinimumIntervalConverter : JsonConverter<MinimumInterval>
 				return MinimumInterval.Day;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, MinimumInterval value, JsonSerializerOptions options)
@@ -348,7 +352,8 @@ internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 				return MissingOrder.Default;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, MissingOrder value, JsonSerializerOptions options)
@@ -363,6 +368,94 @@ internal sealed class MissingOrderConverter : JsonConverter<MissingOrder>
 				return;
 			case MissingOrder.Default:
 				writer.WriteStringValue("default");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(NormalizeMethodConverter))]
+public enum NormalizeMethod
+{
+	/// <summary>
+	/// <para>This method normalizes such that each value represents how far it is from the mean relative to the standard deviation.</para>
+	/// </summary>
+	[EnumMember(Value = "z-score")]
+	ZScore,
+	/// <summary>
+	/// <para>This method normalizes such that each value is exponentiated and relative to the sum of the exponents of the original values.</para>
+	/// </summary>
+	[EnumMember(Value = "softmax")]
+	Softmax,
+	/// <summary>
+	/// <para>This method rescales the data such that the minimum number is 0, and the maximum number is 100, with the rest normalized linearly in-between.</para>
+	/// </summary>
+	[EnumMember(Value = "rescale_0_100")]
+	Rescale0100,
+	/// <summary>
+	/// <para>This method rescales the data such that the minimum number is 0, and the maximum number is 1, with the rest normalized linearly in-between.</para>
+	/// </summary>
+	[EnumMember(Value = "rescale_0_1")]
+	Rescale01,
+	/// <summary>
+	/// <para>This method normalizes each value so that it represents a percentage of the total sum it attributes to.</para>
+	/// </summary>
+	[EnumMember(Value = "percent_of_sum")]
+	PercentOfSum,
+	/// <summary>
+	/// <para>This method normalizes such that each value is normalized by how much it differs from the average.</para>
+	/// </summary>
+	[EnumMember(Value = "mean")]
+	Mean
+}
+
+internal sealed class NormalizeMethodConverter : JsonConverter<NormalizeMethod>
+{
+	public override NormalizeMethod Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "z-score":
+				return NormalizeMethod.ZScore;
+			case "softmax":
+				return NormalizeMethod.Softmax;
+			case "rescale_0_100":
+				return NormalizeMethod.Rescale0100;
+			case "rescale_0_1":
+				return NormalizeMethod.Rescale01;
+			case "percent_of_sum":
+				return NormalizeMethod.PercentOfSum;
+			case "mean":
+				return NormalizeMethod.Mean;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, NormalizeMethod value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case NormalizeMethod.ZScore:
+				writer.WriteStringValue("z-score");
+				return;
+			case NormalizeMethod.Softmax:
+				writer.WriteStringValue("softmax");
+				return;
+			case NormalizeMethod.Rescale0100:
+				writer.WriteStringValue("rescale_0_100");
+				return;
+			case NormalizeMethod.Rescale01:
+				writer.WriteStringValue("rescale_0_1");
+				return;
+			case NormalizeMethod.PercentOfSum:
+				writer.WriteStringValue("percent_of_sum");
+				return;
+			case NormalizeMethod.Mean:
+				writer.WriteStringValue("mean");
 				return;
 		}
 
@@ -398,7 +491,8 @@ internal sealed class RateModeConverter : JsonConverter<RateMode>
 				return RateMode.Sum;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, RateMode value, JsonSerializerOptions options)
@@ -452,7 +546,8 @@ internal sealed class SamplerAggregationExecutionHintConverter : JsonConverter<S
 				return SamplerAggregationExecutionHint.BytesHash;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SamplerAggregationExecutionHint value, JsonSerializerOptions options)
@@ -502,7 +597,8 @@ internal sealed class TermsAggregationCollectModeConverter : JsonConverter<Terms
 				return TermsAggregationCollectMode.BreadthFirst;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsAggregationCollectMode value, JsonSerializerOptions options)
@@ -551,7 +647,8 @@ internal sealed class TermsAggregationExecutionHintConverter : JsonConverter<Ter
 				return TermsAggregationExecutionHint.GlobalOrdinals;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsAggregationExecutionHint value, JsonSerializerOptions options)
@@ -611,7 +708,8 @@ internal sealed class TTestTypeConverter : JsonConverter<TTestType>
 				return TTestType.Heteroscedastic;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TTestType value, JsonSerializerOptions options)
@@ -687,7 +785,8 @@ internal sealed class ValueTypeConverter : JsonConverter<ValueType>
 				return ValueType.Boolean;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ValueType value, JsonSerializerOptions options)

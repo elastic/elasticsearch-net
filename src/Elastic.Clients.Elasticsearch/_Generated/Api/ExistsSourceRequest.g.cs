@@ -160,30 +160,6 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	public ExistsSourceRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-	{
-	}
-
-	public ExistsSourceRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public ExistsSourceRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-	{
-	}
-
-	public ExistsSourceRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public ExistsSourceRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal ExistsSourceRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExistsSource;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -227,10 +203,6 @@ public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<Ex
 	internal ExistsSourceRequestDescriptor(Action<ExistsSourceRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ExistsSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	internal ExistsSourceRequestDescriptor()
 	{
 	}
 

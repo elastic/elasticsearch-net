@@ -30,22 +30,22 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public partial class Properties : IsADictionary<PropertyName, IProperty>
+public partial class Properties : IsADictionary<Elastic.Clients.Elasticsearch.PropertyName, IProperty>
 {
 	public Properties()
 	{
 	}
 
-	public Properties(IDictionary<PropertyName, IProperty> container) : base(container)
+	public Properties(IDictionary<Elastic.Clients.Elasticsearch.PropertyName, IProperty> container) : base(container)
 	{
 	}
 
-	public void Add(PropertyName propertyName, IProperty property) => BackingDictionary.Add(Sanitize(propertyName), property);
-	public bool TryGetProperty(PropertyName propertyName, [NotNullWhen(returnValue: true)] out IProperty property) => BackingDictionary.TryGetValue(Sanitize(propertyName), out property);
+	public void Add(Elastic.Clients.Elasticsearch.PropertyName name, IProperty property) => BackingDictionary.Add(Sanitize(name), property);
+	public bool TryGetProperty(Elastic.Clients.Elasticsearch.PropertyName name, [NotNullWhen(returnValue: true)] out IProperty property) => BackingDictionary.TryGetValue(Sanitize(name), out property);
 
-	public bool TryGetProperty<T>(PropertyName propertyName, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
+	public bool TryGetProperty<T>(Elastic.Clients.Elasticsearch.PropertyName name, [NotNullWhen(returnValue: true)] out T? property) where T : class, IProperty
 	{
-		if (BackingDictionary.TryGetValue(Sanitize(propertyName), out var matchedValue) && matchedValue is T finalValue)
+		if (BackingDictionary.TryGetValue(Sanitize(name), out var matchedValue) && matchedValue is T finalValue)
 		{
 			property = finalValue;
 			return true;
@@ -56,7 +56,7 @@ public partial class Properties : IsADictionary<PropertyName, IProperty>
 	}
 }
 
-public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, PropertyName, IProperty>
+public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescriptor<PropertiesDescriptor<TDocument>, Properties, Elastic.Clients.Elasticsearch.PropertyName, IProperty>
 {
 	public PropertiesDescriptor() : base(new Properties())
 	{
@@ -66,241 +66,241 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	{
 	}
 
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(PropertyName propertyName) => AssignVariant<AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(PropertyName propertyName, Action<AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(PropertyName propertyName, AggregateMetricDoubleProperty aggregateMetricDoubleProperty) => AssignVariant(propertyName, aggregateMetricDoubleProperty);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName) => AssignVariant<AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName, Action<AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Binary(PropertyName propertyName) => AssignVariant<BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Binary(PropertyName propertyName, Action<BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Binary(PropertyName propertyName, BinaryProperty binaryProperty) => AssignVariant(propertyName, binaryProperty);
-	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName) => AssignVariant<BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName, Action<BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName) => AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Boolean(PropertyName propertyName, BooleanProperty booleanProperty) => AssignVariant(propertyName, booleanProperty);
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName) => AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName, Action<BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ByteNumber(PropertyName propertyName) => AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ByteNumber(PropertyName propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ByteNumber(PropertyName propertyName, ByteNumberProperty byteNumberProperty) => AssignVariant(propertyName, byteNumberProperty);
-	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName, Action<ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Completion(PropertyName propertyName) => AssignVariant<CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Completion(PropertyName propertyName, Action<CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Completion(PropertyName propertyName, CompletionProperty completionProperty) => AssignVariant(propertyName, completionProperty);
-	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName) => AssignVariant<CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName, Action<CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(PropertyName propertyName) => AssignVariant<ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(PropertyName propertyName, Action<ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(PropertyName propertyName, ConstantKeywordProperty constantKeywordProperty) => AssignVariant(propertyName, constantKeywordProperty);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName, Action<ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateNanos(PropertyName propertyName) => AssignVariant<DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateNanos(PropertyName propertyName, Action<DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateNanos(PropertyName propertyName, DateNanosProperty dateNanosProperty) => AssignVariant(propertyName, dateNanosProperty);
-	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName, Action<DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Date(PropertyName propertyName) => AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Date(PropertyName propertyName, Action<DatePropertyDescriptor<TDocument>> configure) => AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Date(PropertyName propertyName, DateProperty dateProperty) => AssignVariant(propertyName, dateProperty);
-	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName, Action<DatePropertyDescriptor<TDocument>> configure) => AssignVariant<DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateRange(PropertyName propertyName) => AssignVariant<DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateRange(PropertyName propertyName, Action<DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DateRange(PropertyName propertyName, DateRangeProperty dateRangeProperty) => AssignVariant(propertyName, dateRangeProperty);
-	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName, Action<DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DenseVector(PropertyName propertyName) => AssignVariant<DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DenseVector(PropertyName propertyName, Action<DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DenseVector(PropertyName propertyName, DenseVectorProperty denseVectorProperty) => AssignVariant(propertyName, denseVectorProperty);
-	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName, Action<DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleNumber(PropertyName propertyName) => AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleNumber(PropertyName propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleNumber(PropertyName propertyName, DoubleNumberProperty doubleNumberProperty) => AssignVariant(propertyName, doubleNumberProperty);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName, Action<DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleRange(PropertyName propertyName) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleRange(PropertyName propertyName, Action<DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> DoubleRange(PropertyName propertyName, DoubleRangeProperty doubleRangeProperty) => AssignVariant(propertyName, doubleRangeProperty);
-	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName, Action<DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName, Action<DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Dynamic(PropertyName propertyName, DynamicProperty dynamicProperty) => AssignVariant(propertyName, dynamicProperty);
-	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName, Action<DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName, Action<FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FieldAlias(PropertyName propertyName, FieldAliasProperty fieldAliasProperty) => AssignVariant(propertyName, fieldAliasProperty);
-	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName, Action<FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Flattened(PropertyName propertyName) => AssignVariant<FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Flattened(PropertyName propertyName, Action<FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Flattened(PropertyName propertyName, FlattenedProperty flattenedProperty) => AssignVariant(propertyName, flattenedProperty);
-	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName) => AssignVariant<FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName, Action<FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatNumber(PropertyName propertyName) => AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatNumber(PropertyName propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatNumber(PropertyName propertyName, FloatNumberProperty floatNumberProperty) => AssignVariant(propertyName, floatNumberProperty);
-	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName, Action<FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatRange(PropertyName propertyName) => AssignVariant<FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatRange(PropertyName propertyName, Action<FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> FloatRange(PropertyName propertyName, FloatRangeProperty floatRangeProperty) => AssignVariant(propertyName, floatRangeProperty);
-	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName, Action<FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoPoint(PropertyName propertyName) => AssignVariant<GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoPoint(PropertyName propertyName, Action<GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoPoint(PropertyName propertyName, GeoPointProperty geoPointProperty) => AssignVariant(propertyName, geoPointProperty);
-	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName) => AssignVariant<GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName, Action<GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoShape(PropertyName propertyName) => AssignVariant<GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoShape(PropertyName propertyName, Action<GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> GeoShape(PropertyName propertyName, GeoShapeProperty geoShapeProperty) => AssignVariant(propertyName, geoShapeProperty);
-	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName, Action<GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(PropertyName propertyName) => AssignVariant<HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(PropertyName propertyName, Action<HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(PropertyName propertyName, HalfFloatNumberProperty halfFloatNumberProperty) => AssignVariant(propertyName, halfFloatNumberProperty);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Histogram(PropertyName propertyName) => AssignVariant<HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Histogram(PropertyName propertyName, Action<HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Histogram(PropertyName propertyName, HistogramProperty histogramProperty) => AssignVariant(propertyName, histogramProperty);
-	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName) => AssignVariant<HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName, Action<HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerNumber(PropertyName propertyName) => AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerNumber(PropertyName propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerNumber(PropertyName propertyName, IntegerNumberProperty integerNumberProperty) => AssignVariant(propertyName, integerNumberProperty);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName, Action<IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerRange(PropertyName propertyName) => AssignVariant<IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerRange(PropertyName propertyName, Action<IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IntegerRange(PropertyName propertyName, IntegerRangeProperty integerRangeProperty) => AssignVariant(propertyName, integerRangeProperty);
-	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName, Action<IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Ip(PropertyName propertyName) => AssignVariant<IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Ip(PropertyName propertyName, Action<IpPropertyDescriptor<TDocument>> configure) => AssignVariant<IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Ip(PropertyName propertyName, IpProperty ipProperty) => AssignVariant(propertyName, ipProperty);
-	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName) => AssignVariant<IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName, Action<IpPropertyDescriptor<TDocument>> configure) => AssignVariant<IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IpRange(PropertyName propertyName) => AssignVariant<IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IpRange(PropertyName propertyName, Action<IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> IpRange(PropertyName propertyName, IpRangeProperty ipRangeProperty) => AssignVariant(propertyName, ipRangeProperty);
-	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName, Action<IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Join(PropertyName propertyName) => AssignVariant<JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Join(PropertyName propertyName, Action<JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Join(PropertyName propertyName, JoinProperty joinProperty) => AssignVariant(propertyName, joinProperty);
-	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName) => AssignVariant<JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName, Action<JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Keyword(PropertyName propertyName) => AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Keyword(PropertyName propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Keyword(PropertyName propertyName, KeywordProperty keywordProperty) => AssignVariant(propertyName, keywordProperty);
-	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName, Action<KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongNumber(PropertyName propertyName) => AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongNumber(PropertyName propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongNumber(PropertyName propertyName, LongNumberProperty longNumberProperty) => AssignVariant(propertyName, longNumberProperty);
-	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName, Action<LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongRange(PropertyName propertyName) => AssignVariant<LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongRange(PropertyName propertyName, Action<LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> LongRange(PropertyName propertyName, LongRangeProperty longRangeProperty) => AssignVariant(propertyName, longRangeProperty);
-	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName, Action<LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(PropertyName propertyName) => AssignVariant<MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(PropertyName propertyName, Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(PropertyName propertyName, MatchOnlyTextProperty matchOnlyTextProperty) => AssignVariant(propertyName, matchOnlyTextProperty);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName, Action<MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(PropertyName propertyName) => AssignVariant<Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(PropertyName propertyName, Action<Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(PropertyName propertyName, Murmur3HashProperty murmur3HashProperty) => AssignVariant(propertyName, murmur3HashProperty);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName, Action<Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Nested(PropertyName propertyName) => AssignVariant<NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Nested(PropertyName propertyName, Action<NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Nested(PropertyName propertyName, NestedProperty nestedProperty) => AssignVariant(propertyName, nestedProperty);
-	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName) => AssignVariant<NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName, Action<NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Object(PropertyName propertyName) => AssignVariant<ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Object(PropertyName propertyName, Action<ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Object(PropertyName propertyName, ObjectProperty objectProperty) => AssignVariant(propertyName, objectProperty);
-	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName, Action<ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Percolator(PropertyName propertyName) => AssignVariant<PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Percolator(PropertyName propertyName, Action<PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Percolator(PropertyName propertyName, PercolatorProperty percolatorProperty) => AssignVariant(propertyName, percolatorProperty);
-	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName) => AssignVariant<PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName, Action<PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Point(PropertyName propertyName) => AssignVariant<PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Point(PropertyName propertyName, Action<PointPropertyDescriptor<TDocument>> configure) => AssignVariant<PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Point(PropertyName propertyName, PointProperty pointProperty) => AssignVariant(propertyName, pointProperty);
-	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName) => AssignVariant<PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName, Action<PointPropertyDescriptor<TDocument>> configure) => AssignVariant<PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeature(PropertyName propertyName) => AssignVariant<RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeature(PropertyName propertyName, Action<RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeature(PropertyName propertyName, RankFeatureProperty rankFeatureProperty) => AssignVariant(propertyName, rankFeatureProperty);
-	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName) => AssignVariant<RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName, Action<RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeatures(PropertyName propertyName) => AssignVariant<RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeatures(PropertyName propertyName, Action<RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> RankFeatures(PropertyName propertyName, RankFeaturesProperty rankFeaturesProperty) => AssignVariant(propertyName, rankFeaturesProperty);
-	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName) => AssignVariant<RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName, Action<RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(PropertyName propertyName) => AssignVariant<ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(PropertyName propertyName, Action<ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(PropertyName propertyName, ScaledFloatNumberProperty scaledFloatNumberProperty) => AssignVariant(propertyName, scaledFloatNumberProperty);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(PropertyName propertyName) => AssignVariant<SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(PropertyName propertyName, Action<SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(PropertyName propertyName, SearchAsYouTypeProperty searchAsYouTypeProperty) => AssignVariant(propertyName, searchAsYouTypeProperty);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName) => AssignVariant<SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName, Action<SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Shape(PropertyName propertyName) => AssignVariant<ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Shape(PropertyName propertyName, Action<ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Shape(PropertyName propertyName, ShapeProperty shapeProperty) => AssignVariant(propertyName, shapeProperty);
-	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName, Action<ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ShortNumber(PropertyName propertyName) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ShortNumber(PropertyName propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> ShortNumber(PropertyName propertyName, ShortNumberProperty shortNumberProperty) => AssignVariant(propertyName, shortNumberProperty);
-	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName, Action<ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName, Action<SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> SparseVector(PropertyName propertyName, SparseVectorProperty sparseVectorProperty) => AssignVariant(propertyName, sparseVectorProperty);
-	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName, Action<SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName, Action<TextPropertyDescriptor<TDocument>> configure) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Text(PropertyName propertyName, TextProperty textProperty) => AssignVariant(propertyName, textProperty);
-	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName, Action<TextPropertyDescriptor<TDocument>> configure) => AssignVariant<TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> TokenCount(PropertyName propertyName) => AssignVariant<TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> TokenCount(PropertyName propertyName, Action<TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> TokenCount(PropertyName propertyName, TokenCountProperty tokenCountProperty) => AssignVariant(propertyName, tokenCountProperty);
-	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName) => AssignVariant<TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName, Action<TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(PropertyName propertyName) => AssignVariant<UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(PropertyName propertyName, Action<UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(PropertyName propertyName, UnsignedLongNumberProperty unsignedLongNumberProperty) => AssignVariant(propertyName, unsignedLongNumberProperty);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName, Action<UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Version(PropertyName propertyName) => AssignVariant<VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Version(PropertyName propertyName, Action<VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Version(PropertyName propertyName, VersionProperty versionProperty) => AssignVariant(propertyName, versionProperty);
-	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName) => AssignVariant<VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName, Action<VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Wildcard(PropertyName propertyName) => AssignVariant<WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Wildcard(PropertyName propertyName, Action<WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
-	public PropertiesDescriptor<TDocument> Wildcard(PropertyName propertyName, WildcardProperty wildcardProperty) => AssignVariant(propertyName, wildcardProperty);
-	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName) => AssignVariant<WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
-	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName, Action<WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Elastic.Clients.Elasticsearch.PropertyName propertyName, AggregateMetricDoubleProperty aggregateMetricDoubleProperty) => AssignVariant(propertyName, aggregateMetricDoubleProperty);
+	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> AggregateMetricDouble(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument>, AggregateMetricDoubleProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Binary(Elastic.Clients.Elasticsearch.PropertyName propertyName, BinaryProperty binaryProperty) => AssignVariant(propertyName, binaryProperty);
+	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Binary(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BinaryPropertyDescriptor<TDocument>, BinaryProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Boolean(Elastic.Clients.Elasticsearch.PropertyName propertyName, BooleanProperty booleanProperty) => AssignVariant(propertyName, booleanProperty);
+	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Boolean(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.BooleanPropertyDescriptor<TDocument>, BooleanProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ByteNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ByteNumberProperty byteNumberProperty) => AssignVariant(propertyName, byteNumberProperty);
+	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ByteNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ByteNumberPropertyDescriptor<TDocument>, ByteNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.PropertyName propertyName, CompletionProperty completionProperty) => AssignVariant(propertyName, completionProperty);
+	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Completion(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CompletionPropertyDescriptor<TDocument>, CompletionProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, ConstantKeywordProperty constantKeywordProperty) => AssignVariant(propertyName, constantKeywordProperty);
+	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateNanosProperty dateNanosProperty) => AssignVariant(propertyName, dateNanosProperty);
+	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DateNanos(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateProperty dateProperty) => AssignVariant(propertyName, dateProperty);
+	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Date(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument>, DateProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateRangeProperty dateRangeProperty) => AssignVariant(propertyName, dateRangeProperty);
+	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DateRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateRangePropertyDescriptor<TDocument>, DateRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DenseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, DenseVectorProperty denseVectorProperty) => AssignVariant(propertyName, denseVectorProperty);
+	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DenseVector(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DenseVectorPropertyDescriptor<TDocument>, DenseVectorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DoubleNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, DoubleNumberProperty doubleNumberProperty) => AssignVariant(propertyName, doubleNumberProperty);
+	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DoubleNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberPropertyDescriptor<TDocument>, DoubleNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> DoubleRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, DoubleRangeProperty doubleRangeProperty) => AssignVariant(propertyName, doubleRangeProperty);
+	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> DoubleRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>, DoubleRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.PropertyName propertyName, DynamicProperty dynamicProperty) => AssignVariant(propertyName, dynamicProperty);
+	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Dynamic(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>, DynamicProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FieldAlias(Elastic.Clients.Elasticsearch.PropertyName propertyName, FieldAliasProperty fieldAliasProperty) => AssignVariant(propertyName, fieldAliasProperty);
+	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FieldAlias(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FieldAliasPropertyDescriptor<TDocument>, FieldAliasProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName propertyName, FlattenedProperty flattenedProperty) => AssignVariant(propertyName, flattenedProperty);
+	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Flattened(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument>, FlattenedProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, FloatNumberProperty floatNumberProperty) => AssignVariant(propertyName, floatNumberProperty);
+	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatNumberPropertyDescriptor<TDocument>, FloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> FloatRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, FloatRangeProperty floatRangeProperty) => AssignVariant(propertyName, floatRangeProperty);
+	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> FloatRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.FloatRangePropertyDescriptor<TDocument>, FloatRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> GeoPoint(Elastic.Clients.Elasticsearch.PropertyName propertyName, GeoPointProperty geoPointProperty) => AssignVariant(propertyName, geoPointProperty);
+	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> GeoPoint(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument>, GeoPointProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.PropertyName propertyName, GeoShapeProperty geoShapeProperty) => AssignVariant(propertyName, geoShapeProperty);
+	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> GeoShape(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument>, GeoShapeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> HalfFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, HalfFloatNumberProperty halfFloatNumberProperty) => AssignVariant(propertyName, halfFloatNumberProperty);
+	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> HalfFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberPropertyDescriptor<TDocument>, HalfFloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.PropertyName propertyName, HistogramProperty histogramProperty) => AssignVariant(propertyName, histogramProperty);
+	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, IntegerNumberProperty integerNumberProperty) => AssignVariant(propertyName, integerNumberProperty);
+	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IntegerNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IntegerRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, IntegerRangeProperty integerRangeProperty) => AssignVariant(propertyName, integerRangeProperty);
+	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IntegerRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IntegerRangePropertyDescriptor<TDocument>, IntegerRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Ip(Elastic.Clients.Elasticsearch.PropertyName propertyName, IpProperty ipProperty) => AssignVariant(propertyName, ipProperty);
+	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Ip(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpPropertyDescriptor<TDocument>, IpProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, IpRangeProperty ipRangeProperty) => AssignVariant(propertyName, ipRangeProperty);
+	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IpRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.IpRangePropertyDescriptor<TDocument>, IpRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.PropertyName propertyName, JoinProperty joinProperty) => AssignVariant(propertyName, joinProperty);
+	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Join(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.JoinPropertyDescriptor<TDocument>, JoinProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Keyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, KeywordProperty keywordProperty) => AssignVariant(propertyName, keywordProperty);
+	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Keyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument>, KeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> LongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, LongNumberProperty longNumberProperty) => AssignVariant(propertyName, longNumberProperty);
+	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> LongNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongNumberPropertyDescriptor<TDocument>, LongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> LongRange(Elastic.Clients.Elasticsearch.PropertyName propertyName, LongRangeProperty longRangeProperty) => AssignVariant(propertyName, longRangeProperty);
+	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> LongRange(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.LongRangePropertyDescriptor<TDocument>, LongRangeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> MatchOnlyText(Elastic.Clients.Elasticsearch.PropertyName propertyName, MatchOnlyTextProperty matchOnlyTextProperty) => AssignVariant(propertyName, matchOnlyTextProperty);
+	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> MatchOnlyText(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextPropertyDescriptor<TDocument>, MatchOnlyTextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Murmur3Hash(Elastic.Clients.Elasticsearch.PropertyName propertyName, Murmur3HashProperty murmur3HashProperty) => AssignVariant(propertyName, murmur3HashProperty);
+	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Murmur3Hash(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashPropertyDescriptor<TDocument>, Murmur3HashProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.PropertyName propertyName, NestedProperty nestedProperty) => AssignVariant(propertyName, nestedProperty);
+	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Nested(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.NestedPropertyDescriptor<TDocument>, NestedProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName, ObjectProperty objectProperty) => AssignVariant(propertyName, objectProperty);
+	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, PercolatorProperty percolatorProperty) => AssignVariant(propertyName, percolatorProperty);
+	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Percolator(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.PropertyName propertyName, PointProperty pointProperty) => AssignVariant(propertyName, pointProperty);
+	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Point(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PointPropertyDescriptor<TDocument>, PointProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.PropertyName propertyName, RankFeatureProperty rankFeatureProperty) => AssignVariant(propertyName, rankFeatureProperty);
+	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> RankFeature(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturePropertyDescriptor<TDocument>, RankFeatureProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> RankFeatures(Elastic.Clients.Elasticsearch.PropertyName propertyName, RankFeaturesProperty rankFeaturesProperty) => AssignVariant(propertyName, rankFeaturesProperty);
+	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> RankFeatures(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>, RankFeaturesProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ScaledFloatNumberProperty scaledFloatNumberProperty) => AssignVariant(propertyName, scaledFloatNumberProperty);
+	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ScaledFloatNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberPropertyDescriptor<TDocument>, ScaledFloatNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName, SearchAsYouTypeProperty searchAsYouTypeProperty) => AssignVariant(propertyName, searchAsYouTypeProperty);
+	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, ShapeProperty shapeProperty) => AssignVariant(propertyName, shapeProperty);
+	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Shape(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> ShortNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, ShortNumberProperty shortNumberProperty) => AssignVariant(propertyName, shortNumberProperty);
+	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> ShortNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShortNumberPropertyDescriptor<TDocument>, ShortNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.PropertyName propertyName, SparseVectorProperty sparseVectorProperty) => AssignVariant(propertyName, sparseVectorProperty);
+	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SparseVector(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument>, SparseVectorProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Text(Elastic.Clients.Elasticsearch.PropertyName propertyName, TextProperty textProperty) => AssignVariant(propertyName, textProperty);
+	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Text(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TextPropertyDescriptor<TDocument>, TextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> TokenCount(Elastic.Clients.Elasticsearch.PropertyName propertyName, TokenCountProperty tokenCountProperty) => AssignVariant(propertyName, tokenCountProperty);
+	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> TokenCount(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.TokenCountPropertyDescriptor<TDocument>, TokenCountProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Elastic.Clients.Elasticsearch.PropertyName propertyName, UnsignedLongNumberProperty unsignedLongNumberProperty) => AssignVariant(propertyName, unsignedLongNumberProperty);
+	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> UnsignedLongNumber(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberPropertyDescriptor<TDocument>, UnsignedLongNumberProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.PropertyName propertyName, VersionProperty versionProperty) => AssignVariant(propertyName, versionProperty);
+	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Version(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.VersionPropertyDescriptor<TDocument>, VersionProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.PropertyName propertyName, WildcardProperty wildcardProperty) => AssignVariant(propertyName, wildcardProperty);
+	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> Wildcard(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.WildcardPropertyDescriptor<TDocument>, WildcardProperty>(propertyName, configure);
 }
 
 internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProperty>
@@ -317,105 +317,102 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 
 		switch (type)
 		{
-			case "long_range":
-				return JsonSerializer.Deserialize<LongRangeProperty>(ref reader, options);
-			case "ip_range":
-				return JsonSerializer.Deserialize<IpRangeProperty>(ref reader, options);
-			case "integer_range":
-				return JsonSerializer.Deserialize<IntegerRangeProperty>(ref reader, options);
-			case "float_range":
-				return JsonSerializer.Deserialize<FloatRangeProperty>(ref reader, options);
-			case "double_range":
-				return JsonSerializer.Deserialize<DoubleRangeProperty>(ref reader, options);
-			case "date_range":
-				return JsonSerializer.Deserialize<DateRangeProperty>(ref reader, options);
-			case "unsigned_long":
-				return JsonSerializer.Deserialize<UnsignedLongNumberProperty>(ref reader, options);
-			case "short":
-				return JsonSerializer.Deserialize<ShortNumberProperty>(ref reader, options);
-			case "scaled_float":
-				return JsonSerializer.Deserialize<ScaledFloatNumberProperty>(ref reader, options);
-			case "long":
-				return JsonSerializer.Deserialize<LongNumberProperty>(ref reader, options);
-			case "integer":
-				return JsonSerializer.Deserialize<IntegerNumberProperty>(ref reader, options);
-			case "half_float":
-				return JsonSerializer.Deserialize<HalfFloatNumberProperty>(ref reader, options);
-			case "float":
-				return JsonSerializer.Deserialize<FloatNumberProperty>(ref reader, options);
-			case "double":
-				return JsonSerializer.Deserialize<DoubleNumberProperty>(ref reader, options);
-			case "byte":
-				return JsonSerializer.Deserialize<ByteNumberProperty>(ref reader, options);
-			case "shape":
-				return JsonSerializer.Deserialize<ShapeProperty>(ref reader, options);
-			case "point":
-				return JsonSerializer.Deserialize<PointProperty>(ref reader, options);
-			case "geo_shape":
-				return JsonSerializer.Deserialize<GeoShapeProperty>(ref reader, options);
-			case "geo_point":
-				return JsonSerializer.Deserialize<GeoPointProperty>(ref reader, options);
-			case "token_count":
-				return JsonSerializer.Deserialize<TokenCountProperty>(ref reader, options);
-			case "murmur3":
-				return JsonSerializer.Deserialize<Murmur3HashProperty>(ref reader, options);
-			case "ip":
-				return JsonSerializer.Deserialize<IpProperty>(ref reader, options);
-			case "histogram":
-				return JsonSerializer.Deserialize<HistogramProperty>(ref reader, options);
-			case "alias":
-				return JsonSerializer.Deserialize<FieldAliasProperty>(ref reader, options);
-			case "constant_keyword":
-				return JsonSerializer.Deserialize<ConstantKeywordProperty>(ref reader, options);
-			case "completion":
-				return JsonSerializer.Deserialize<CompletionProperty>(ref reader, options);
-			case "object":
-				return JsonSerializer.Deserialize<ObjectProperty>(ref reader, options);
-			case "nested":
-				return JsonSerializer.Deserialize<NestedProperty>(ref reader, options);
-			case "flattened":
-				return JsonSerializer.Deserialize<FlattenedProperty>(ref reader, options);
-			case "sparse_vector":
-				return JsonSerializer.Deserialize<SparseVectorProperty>(ref reader, options);
-			case "dense_vector":
-				return JsonSerializer.Deserialize<DenseVectorProperty>(ref reader, options);
 			case "aggregate_metric_double":
-				return JsonSerializer.Deserialize<AggregateMetricDoubleProperty>(ref reader, options);
-			case "date":
-				return JsonSerializer.Deserialize<DateProperty>(ref reader, options);
-			case "date_nanos":
-				return JsonSerializer.Deserialize<DateNanosProperty>(ref reader, options);
-			case "wildcard":
-				return JsonSerializer.Deserialize<WildcardProperty>(ref reader, options);
-			case "version":
-				return JsonSerializer.Deserialize<VersionProperty>(ref reader, options);
-			case "text":
-				return JsonSerializer.Deserialize<TextProperty>(ref reader, options);
-			case "search_as_you_type":
-				return JsonSerializer.Deserialize<SearchAsYouTypeProperty>(ref reader, options);
-			case "rank_features":
-				return JsonSerializer.Deserialize<RankFeaturesProperty>(ref reader, options);
-			case "rank_feature":
-				return JsonSerializer.Deserialize<RankFeatureProperty>(ref reader, options);
-			case "percolator":
-				return JsonSerializer.Deserialize<PercolatorProperty>(ref reader, options);
-			case "match_only_text":
-				return JsonSerializer.Deserialize<MatchOnlyTextProperty>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<KeywordProperty>(ref reader, options);
-			case "join":
-				return JsonSerializer.Deserialize<JoinProperty>(ref reader, options);
-			case "{dynamic_property}":
-				return JsonSerializer.Deserialize<DynamicProperty>(ref reader, options);
-			case "boolean":
-				return JsonSerializer.Deserialize<BooleanProperty>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty>(ref reader, options);
 			case "binary":
-				return JsonSerializer.Deserialize<BinaryProperty>(ref reader, options);
-			case null:
-				return JsonSerializer.Deserialize<ObjectProperty>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BinaryProperty>(ref reader, options);
+			case "boolean":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.BooleanProperty>(ref reader, options);
+			case "byte":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty>(ref reader, options);
+			case "completion":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(ref reader, options);
+			case "constant_keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(ref reader, options);
+			case "date_nanos":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(ref reader, options);
+			case "date":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateProperty>(ref reader, options);
+			case "date_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty>(ref reader, options);
+			case "dense_vector":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(ref reader, options);
+			case "double":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(ref reader, options);
+			case "double_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(ref reader, options);
+			case "{dynamic_property}":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(ref reader, options);
+			case "alias":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(ref reader, options);
+			case "flattened":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(ref reader, options);
+			case "float":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(ref reader, options);
+			case "float_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(ref reader, options);
+			case "geo_point":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty>(ref reader, options);
+			case "geo_shape":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty>(ref reader, options);
+			case "half_float":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty>(ref reader, options);
+			case "histogram":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.HistogramProperty>(ref reader, options);
+			case "integer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty>(ref reader, options);
+			case "integer_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty>(ref reader, options);
+			case "ip":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpProperty>(ref reader, options);
+			case "ip_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty>(ref reader, options);
+			case "join":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.JoinProperty>(ref reader, options);
+			case "keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.KeywordProperty>(ref reader, options);
+			case "long":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty>(ref reader, options);
+			case "long_range":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty>(ref reader, options);
+			case "match_only_text":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty>(ref reader, options);
+			case "murmur3":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty>(ref reader, options);
+			case "nested":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(ref reader, options);
+			case "object":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
+			case "percolator":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(ref reader, options);
+			case "point":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(ref reader, options);
+			case "rank_feature":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(ref reader, options);
+			case "rank_features":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(ref reader, options);
+			case "scaled_float":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(ref reader, options);
+			case "search_as_you_type":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(ref reader, options);
+			case "shape":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(ref reader, options);
+			case "short":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty>(ref reader, options);
+			case "sparse_vector":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty>(ref reader, options);
+			case "text":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TextProperty>(ref reader, options);
+			case "token_count":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty>(ref reader, options);
+			case "unsigned_long":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty>(ref reader, options);
+			case "version":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.VersionProperty>(ref reader, options);
+			case "wildcard":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.WildcardProperty>(ref reader, options);
 			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IProperty));
-				return null;
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
 		}
 	}
 
@@ -429,146 +426,146 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 
 		switch (value.Type)
 		{
-			case "long_range":
-				JsonSerializer.Serialize(writer, value, typeof(LongRangeProperty), options);
-				return;
-			case "ip_range":
-				JsonSerializer.Serialize(writer, value, typeof(IpRangeProperty), options);
-				return;
-			case "integer_range":
-				JsonSerializer.Serialize(writer, value, typeof(IntegerRangeProperty), options);
-				return;
-			case "float_range":
-				JsonSerializer.Serialize(writer, value, typeof(FloatRangeProperty), options);
-				return;
-			case "double_range":
-				JsonSerializer.Serialize(writer, value, typeof(DoubleRangeProperty), options);
-				return;
-			case "date_range":
-				JsonSerializer.Serialize(writer, value, typeof(DateRangeProperty), options);
-				return;
-			case "unsigned_long":
-				JsonSerializer.Serialize(writer, value, typeof(UnsignedLongNumberProperty), options);
-				return;
-			case "short":
-				JsonSerializer.Serialize(writer, value, typeof(ShortNumberProperty), options);
-				return;
-			case "scaled_float":
-				JsonSerializer.Serialize(writer, value, typeof(ScaledFloatNumberProperty), options);
-				return;
-			case "long":
-				JsonSerializer.Serialize(writer, value, typeof(LongNumberProperty), options);
-				return;
-			case "integer":
-				JsonSerializer.Serialize(writer, value, typeof(IntegerNumberProperty), options);
-				return;
-			case "half_float":
-				JsonSerializer.Serialize(writer, value, typeof(HalfFloatNumberProperty), options);
-				return;
-			case "float":
-				JsonSerializer.Serialize(writer, value, typeof(FloatNumberProperty), options);
-				return;
-			case "double":
-				JsonSerializer.Serialize(writer, value, typeof(DoubleNumberProperty), options);
-				return;
-			case "byte":
-				JsonSerializer.Serialize(writer, value, typeof(ByteNumberProperty), options);
-				return;
-			case "shape":
-				JsonSerializer.Serialize(writer, value, typeof(ShapeProperty), options);
-				return;
-			case "point":
-				JsonSerializer.Serialize(writer, value, typeof(PointProperty), options);
-				return;
-			case "geo_shape":
-				JsonSerializer.Serialize(writer, value, typeof(GeoShapeProperty), options);
-				return;
-			case "geo_point":
-				JsonSerializer.Serialize(writer, value, typeof(GeoPointProperty), options);
-				return;
-			case "token_count":
-				JsonSerializer.Serialize(writer, value, typeof(TokenCountProperty), options);
-				return;
-			case "murmur3":
-				JsonSerializer.Serialize(writer, value, typeof(Murmur3HashProperty), options);
-				return;
-			case "ip":
-				JsonSerializer.Serialize(writer, value, typeof(IpProperty), options);
-				return;
-			case "histogram":
-				JsonSerializer.Serialize(writer, value, typeof(HistogramProperty), options);
-				return;
-			case "alias":
-				JsonSerializer.Serialize(writer, value, typeof(FieldAliasProperty), options);
-				return;
-			case "constant_keyword":
-				JsonSerializer.Serialize(writer, value, typeof(ConstantKeywordProperty), options);
-				return;
-			case "completion":
-				JsonSerializer.Serialize(writer, value, typeof(CompletionProperty), options);
-				return;
-			case "object":
-				JsonSerializer.Serialize(writer, value, typeof(ObjectProperty), options);
-				return;
-			case "nested":
-				JsonSerializer.Serialize(writer, value, typeof(NestedProperty), options);
-				return;
-			case "flattened":
-				JsonSerializer.Serialize(writer, value, typeof(FlattenedProperty), options);
-				return;
-			case "sparse_vector":
-				JsonSerializer.Serialize(writer, value, typeof(SparseVectorProperty), options);
-				return;
-			case "dense_vector":
-				JsonSerializer.Serialize(writer, value, typeof(DenseVectorProperty), options);
-				return;
 			case "aggregate_metric_double":
-				JsonSerializer.Serialize(writer, value, typeof(AggregateMetricDoubleProperty), options);
-				return;
-			case "date":
-				JsonSerializer.Serialize(writer, value, typeof(DateProperty), options);
-				return;
-			case "date_nanos":
-				JsonSerializer.Serialize(writer, value, typeof(DateNanosProperty), options);
-				return;
-			case "wildcard":
-				JsonSerializer.Serialize(writer, value, typeof(WildcardProperty), options);
-				return;
-			case "version":
-				JsonSerializer.Serialize(writer, value, typeof(VersionProperty), options);
-				return;
-			case "text":
-				JsonSerializer.Serialize(writer, value, typeof(TextProperty), options);
-				return;
-			case "search_as_you_type":
-				JsonSerializer.Serialize(writer, value, typeof(SearchAsYouTypeProperty), options);
-				return;
-			case "rank_features":
-				JsonSerializer.Serialize(writer, value, typeof(RankFeaturesProperty), options);
-				return;
-			case "rank_feature":
-				JsonSerializer.Serialize(writer, value, typeof(RankFeatureProperty), options);
-				return;
-			case "percolator":
-				JsonSerializer.Serialize(writer, value, typeof(PercolatorProperty), options);
-				return;
-			case "match_only_text":
-				JsonSerializer.Serialize(writer, value, typeof(MatchOnlyTextProperty), options);
-				return;
-			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(KeywordProperty), options);
-				return;
-			case "join":
-				JsonSerializer.Serialize(writer, value, typeof(JoinProperty), options);
-				return;
-			case "{dynamic_property}":
-				JsonSerializer.Serialize(writer, value, typeof(DynamicProperty), options);
-				return;
-			case "boolean":
-				JsonSerializer.Serialize(writer, value, typeof(BooleanProperty), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoubleProperty), options);
 				return;
 			case "binary":
-				JsonSerializer.Serialize(writer, value, typeof(BinaryProperty), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BinaryProperty), options);
+				return;
+			case "boolean":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.BooleanProperty), options);
+				return;
+			case "byte":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ByteNumberProperty), options);
+				return;
+			case "completion":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.CompletionProperty), options);
+				return;
+			case "constant_keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty), options);
+				return;
+			case "date_nanos":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty), options);
+				return;
+			case "date":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateProperty), options);
+				return;
+			case "date_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateRangeProperty), options);
+				return;
+			case "dense_vector":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty), options);
+				return;
+			case "double":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty), options);
+				return;
+			case "double_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty), options);
+				return;
+			case "{dynamic_property}":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty), options);
+				return;
+			case "alias":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty), options);
+				return;
+			case "flattened":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty), options);
+				return;
+			case "float":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty), options);
+				return;
+			case "float_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty), options);
+				return;
+			case "geo_point":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty), options);
+				return;
+			case "geo_shape":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty), options);
+				return;
+			case "half_float":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HalfFloatNumberProperty), options);
+				return;
+			case "histogram":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.HistogramProperty), options);
+				return;
+			case "integer":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerNumberProperty), options);
+				return;
+			case "integer_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IntegerRangeProperty), options);
+				return;
+			case "ip":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpProperty), options);
+				return;
+			case "ip_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.IpRangeProperty), options);
+				return;
+			case "join":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.JoinProperty), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.KeywordProperty), options);
+				return;
+			case "long":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongNumberProperty), options);
+				return;
+			case "long_range":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.LongRangeProperty), options);
+				return;
+			case "match_only_text":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.MatchOnlyTextProperty), options);
+				return;
+			case "murmur3":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.Murmur3HashProperty), options);
+				return;
+			case "nested":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.NestedProperty), options);
+				return;
+			case "object":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ObjectProperty), options);
+				return;
+			case "percolator":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty), options);
+				return;
+			case "point":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PointProperty), options);
+				return;
+			case "rank_feature":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty), options);
+				return;
+			case "rank_features":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty), options);
+				return;
+			case "scaled_float":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty), options);
+				return;
+			case "search_as_you_type":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty), options);
+				return;
+			case "shape":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShapeProperty), options);
+				return;
+			case "short":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShortNumberProperty), options);
+				return;
+			case "sparse_vector":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SparseVectorProperty), options);
+				return;
+			case "text":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TextProperty), options);
+				return;
+			case "token_count":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.TokenCountProperty), options);
+				return;
+			case "unsigned_long":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.UnsignedLongNumberProperty), options);
+				return;
+			case "version":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.VersionProperty), options);
+				return;
+			case "wildcard":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.WildcardProperty), options);
 				return;
 			default:
 				var type = value.GetType();
@@ -581,5 +578,5 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 [JsonConverter(typeof(PropertyInterfaceConverter))]
 public partial interface IProperty
 {
-	public string Type { get; }
+	public string? Type { get; }
 }

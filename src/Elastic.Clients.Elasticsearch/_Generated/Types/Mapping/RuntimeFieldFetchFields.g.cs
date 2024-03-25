@@ -52,12 +52,6 @@ public sealed partial class RuntimeFieldFetchFieldsDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	public RuntimeFieldFetchFieldsDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	public RuntimeFieldFetchFieldsDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -91,18 +85,6 @@ public sealed partial class RuntimeFieldFetchFieldsDescriptor : SerializableDesc
 	private string? FormatValue { get; set; }
 
 	public RuntimeFieldFetchFieldsDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public RuntimeFieldFetchFieldsDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public RuntimeFieldFetchFieldsDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

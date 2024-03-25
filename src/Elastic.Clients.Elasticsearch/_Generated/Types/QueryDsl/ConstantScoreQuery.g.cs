@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class ConstantScoreQuery : SearchQuery
+public sealed partial class ConstantScoreQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -39,10 +40,10 @@ public sealed partial class ConstantScoreQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	public static implicit operator Query(ConstantScoreQuery constantScoreQuery) => QueryDsl.Query.ConstantScore(constantScoreQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("constant_score", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ConstantScoreQuery constantScoreQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.ConstantScore(constantScoreQuery);
 }
 
 public sealed partial class ConstantScoreQueryDescriptor<TDocument> : SerializableDescriptor<ConstantScoreQueryDescriptor<TDocument>>
@@ -55,10 +56,13 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
-	private QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ConstantScoreQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -76,7 +80,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor<TDocument> Filter(QueryDescriptor<TDocument> descriptor)
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -84,7 +88,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor<TDocument> Filter(Action<QueryDescriptor<TDocument>> configure)
+	public ConstantScoreQueryDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -115,7 +119,7 @@ public sealed partial class ConstantScoreQueryDescriptor<TDocument> : Serializab
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else
 		{
@@ -143,10 +147,13 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query FilterValue { get; set; }
-	private QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ConstantScoreQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -164,7 +171,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor Filter(QueryDescriptor descriptor)
+	public ConstantScoreQueryDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -172,7 +179,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ConstantScoreQueryDescriptor Filter(Action<QueryDescriptor> configure)
+	public ConstantScoreQueryDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -203,7 +210,7 @@ public sealed partial class ConstantScoreQueryDescriptor : SerializableDescripto
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else
 		{

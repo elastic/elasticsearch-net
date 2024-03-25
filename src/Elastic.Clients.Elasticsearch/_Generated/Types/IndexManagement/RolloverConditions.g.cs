@@ -184,10 +184,10 @@ public sealed partial class RolloverConditionsDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, MaxAgeValue, options);
 		}
 
-		if (MaxAgeMillisValue is not null)
+		if (MaxAgeMillisValue.HasValue)
 		{
 			writer.WritePropertyName("max_age_millis");
-			JsonSerializer.Serialize(writer, MaxAgeMillisValue, options);
+			writer.WriteNumberValue(MaxAgeMillisValue.Value);
 		}
 
 		if (MaxDocsValue.HasValue)

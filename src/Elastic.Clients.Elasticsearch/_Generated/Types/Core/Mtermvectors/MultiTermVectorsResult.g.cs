@@ -29,19 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 
 public sealed partial class MultiTermVectorsResult
 {
-	[JsonInclude, JsonPropertyName("_id")]
-	public string Id { get; init; }
-	[JsonInclude, JsonPropertyName("_index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("_version")]
-	public long? Version { get; init; }
 	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
 	[JsonInclude, JsonPropertyName("found")]
 	public bool? Found { get; init; }
+	[JsonInclude, JsonPropertyName("_id")]
+	public string Id { get; init; }
+	[JsonInclude, JsonPropertyName("_index")]
+	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("term_vectors")]
 	[ReadOnlyFieldDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>? TermVectors { get; init; }
 	[JsonInclude, JsonPropertyName("took")]
 	public long? Took { get; init; }
+	[JsonInclude, JsonPropertyName("_version")]
+	public long? Version { get; init; }
 }

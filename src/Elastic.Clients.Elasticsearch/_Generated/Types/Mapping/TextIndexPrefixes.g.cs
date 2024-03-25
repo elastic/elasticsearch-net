@@ -35,7 +35,7 @@ public sealed partial class TextIndexPrefixes
 	public int MinChars { get; set; }
 }
 
-public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptor<TextIndexPrefixesDescriptor>, IBuildableDescriptor<TextIndexPrefixes>
+public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptor<TextIndexPrefixesDescriptor>
 {
 	internal TextIndexPrefixesDescriptor(Action<TextIndexPrefixesDescriptor> configure) => configure.Invoke(this);
 
@@ -67,10 +67,4 @@ public sealed partial class TextIndexPrefixesDescriptor : SerializableDescriptor
 		writer.WriteNumberValue(MinCharsValue);
 		writer.WriteEndObject();
 	}
-
-	TextIndexPrefixes IBuildableDescriptor<TextIndexPrefixes>.Build() => new()
-	{
-		MaxChars = MaxCharsValue,
-		MinChars = MinCharsValue
-	};
 }

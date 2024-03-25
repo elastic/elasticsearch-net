@@ -55,12 +55,6 @@ public sealed partial class SlicedScrollDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public SlicedScrollDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	public SlicedScrollDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
 	{
 		IdValue = id;
@@ -103,18 +97,6 @@ public sealed partial class SlicedScrollDescriptor : SerializableDescriptor<Slic
 	private int MaxValue { get; set; }
 
 	public SlicedScrollDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SlicedScrollDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SlicedScrollDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

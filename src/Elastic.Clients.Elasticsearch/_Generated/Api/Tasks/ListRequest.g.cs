@@ -73,7 +73,6 @@ public sealed partial class ListRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
 /// </summary>
 public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
@@ -136,7 +135,6 @@ public sealed partial class ListRequest : PlainRequest<ListRequestParameters>
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>The task management API returns information about tasks currently executing on one or more nodes in the cluster.</para>
 /// </summary>
 public sealed partial class ListRequestDescriptor : RequestDescriptor<ListRequestDescriptor, ListRequestParameters>

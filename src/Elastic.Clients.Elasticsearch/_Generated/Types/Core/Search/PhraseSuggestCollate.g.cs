@@ -59,8 +59,8 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private bool? PruneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery QueryValue { get; set; }
-	private PhraseSuggestCollateQueryDescriptor QueryDescriptor { get; set; }
-	private Action<PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Parameters to use if the query is templated.</para>
@@ -91,7 +91,7 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public PhraseSuggestCollateDescriptor Query(PhraseSuggestCollateQueryDescriptor descriptor)
+	public PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -99,7 +99,7 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public PhraseSuggestCollateDescriptor Query(Action<PhraseSuggestCollateQueryDescriptor> configure)
+	public PhraseSuggestCollateDescriptor Query(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -130,7 +130,7 @@ public sealed partial class PhraseSuggestCollateDescriptor : SerializableDescrip
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new PhraseSuggestCollateQueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

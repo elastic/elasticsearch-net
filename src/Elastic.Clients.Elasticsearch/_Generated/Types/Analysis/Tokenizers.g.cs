@@ -66,47 +66,47 @@ public sealed partial class TokenizersDescriptor : IsADictionaryDescriptor<Token
 	{
 	}
 
-	public TokenizersDescriptor CharGroup(string tokenizerName) => AssignVariant<CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor CharGroup(string tokenizerName, Action<CharGroupTokenizerDescriptor> configure) => AssignVariant<CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor CharGroup(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor CharGroup(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerDescriptor, CharGroupTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor CharGroup(string tokenizerName, CharGroupTokenizer charGroupTokenizer) => AssignVariant(tokenizerName, charGroupTokenizer);
-	public TokenizersDescriptor EdgeNGram(string tokenizerName) => AssignVariant<EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor EdgeNGram(string tokenizerName, Action<EdgeNGramTokenizerDescriptor> configure) => AssignVariant<EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor EdgeNGram(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor EdgeNGram(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor, EdgeNGramTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor EdgeNGram(string tokenizerName, EdgeNGramTokenizer edgeNGramTokenizer) => AssignVariant(tokenizerName, edgeNGramTokenizer);
-	public TokenizersDescriptor Icu(string tokenizerName) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Icu(string tokenizerName, Action<IcuTokenizerDescriptor> configure) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Icu(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor, IcuTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Icu(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor, IcuTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Icu(string tokenizerName, IcuTokenizer icuTokenizer) => AssignVariant(tokenizerName, icuTokenizer);
-	public TokenizersDescriptor Keyword(string tokenizerName) => AssignVariant<KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Keyword(string tokenizerName, Action<KeywordTokenizerDescriptor> configure) => AssignVariant<KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Keyword(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Keyword(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizerDescriptor, KeywordTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Keyword(string tokenizerName, KeywordTokenizer keywordTokenizer) => AssignVariant(tokenizerName, keywordTokenizer);
-	public TokenizersDescriptor Kuromoji(string tokenizerName) => AssignVariant<KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Kuromoji(string tokenizerName, Action<KuromojiTokenizerDescriptor> configure) => AssignVariant<KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Kuromoji(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Kuromoji(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizerDescriptor, KuromojiTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Kuromoji(string tokenizerName, KuromojiTokenizer kuromojiTokenizer) => AssignVariant(tokenizerName, kuromojiTokenizer);
-	public TokenizersDescriptor Letter(string tokenizerName) => AssignVariant<LetterTokenizerDescriptor, LetterTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Letter(string tokenizerName, Action<LetterTokenizerDescriptor> configure) => AssignVariant<LetterTokenizerDescriptor, LetterTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Letter(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor, LetterTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Letter(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizerDescriptor, LetterTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Letter(string tokenizerName, LetterTokenizer letterTokenizer) => AssignVariant(tokenizerName, letterTokenizer);
-	public TokenizersDescriptor Lowercase(string tokenizerName) => AssignVariant<LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Lowercase(string tokenizerName, Action<LowercaseTokenizerDescriptor> configure) => AssignVariant<LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Lowercase(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Lowercase(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizerDescriptor, LowercaseTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Lowercase(string tokenizerName, LowercaseTokenizer lowercaseTokenizer) => AssignVariant(tokenizerName, lowercaseTokenizer);
-	public TokenizersDescriptor NGram(string tokenizerName) => AssignVariant<NGramTokenizerDescriptor, NGramTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor NGram(string tokenizerName, Action<NGramTokenizerDescriptor> configure) => AssignVariant<NGramTokenizerDescriptor, NGramTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor NGram(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor, NGramTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor NGram(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizerDescriptor, NGramTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor NGram(string tokenizerName, NGramTokenizer nGramTokenizer) => AssignVariant(tokenizerName, nGramTokenizer);
-	public TokenizersDescriptor Nori(string tokenizerName) => AssignVariant<NoriTokenizerDescriptor, NoriTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Nori(string tokenizerName, Action<NoriTokenizerDescriptor> configure) => AssignVariant<NoriTokenizerDescriptor, NoriTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Nori(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor, NoriTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Nori(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizerDescriptor, NoriTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Nori(string tokenizerName, NoriTokenizer noriTokenizer) => AssignVariant(tokenizerName, noriTokenizer);
-	public TokenizersDescriptor PathHierarchy(string tokenizerName) => AssignVariant<PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor PathHierarchy(string tokenizerName, Action<PathHierarchyTokenizerDescriptor> configure) => AssignVariant<PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor PathHierarchy(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor PathHierarchy(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizerDescriptor, PathHierarchyTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor PathHierarchy(string tokenizerName, PathHierarchyTokenizer pathHierarchyTokenizer) => AssignVariant(tokenizerName, pathHierarchyTokenizer);
-	public TokenizersDescriptor Pattern(string tokenizerName) => AssignVariant<PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Pattern(string tokenizerName, Action<PatternTokenizerDescriptor> configure) => AssignVariant<PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Pattern(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Pattern(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizerDescriptor, PatternTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Pattern(string tokenizerName, PatternTokenizer patternTokenizer) => AssignVariant(tokenizerName, patternTokenizer);
-	public TokenizersDescriptor Standard(string tokenizerName) => AssignVariant<StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Standard(string tokenizerName, Action<StandardTokenizerDescriptor> configure) => AssignVariant<StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Standard(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Standard(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizerDescriptor, StandardTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Standard(string tokenizerName, StandardTokenizer standardTokenizer) => AssignVariant(tokenizerName, standardTokenizer);
-	public TokenizersDescriptor UaxEmailUrl(string tokenizerName) => AssignVariant<UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor UaxEmailUrl(string tokenizerName, Action<UaxEmailUrlTokenizerDescriptor> configure) => AssignVariant<UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor UaxEmailUrl(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor UaxEmailUrl(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizerDescriptor, UaxEmailUrlTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor UaxEmailUrl(string tokenizerName, UaxEmailUrlTokenizer uaxEmailUrlTokenizer) => AssignVariant(tokenizerName, uaxEmailUrlTokenizer);
-	public TokenizersDescriptor Whitespace(string tokenizerName) => AssignVariant<WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerName, null);
-	public TokenizersDescriptor Whitespace(string tokenizerName, Action<WhitespaceTokenizerDescriptor> configure) => AssignVariant<WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerName, configure);
+	public TokenizersDescriptor Whitespace(string tokenizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerName, null);
+	public TokenizersDescriptor Whitespace(string tokenizerName, Action<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizerDescriptor, WhitespaceTokenizer>(tokenizerName, configure);
 	public TokenizersDescriptor Whitespace(string tokenizerName, WhitespaceTokenizer whitespaceTokenizer) => AssignVariant(tokenizerName, whitespaceTokenizer);
 }
 
@@ -124,34 +124,34 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 
 		switch (type)
 		{
-			case "icu_tokenizer":
-				return JsonSerializer.Deserialize<IcuTokenizer>(ref reader, options);
-			case "pattern":
-				return JsonSerializer.Deserialize<PatternTokenizer>(ref reader, options);
-			case "kuromoji_tokenizer":
-				return JsonSerializer.Deserialize<KuromojiTokenizer>(ref reader, options);
-			case "whitespace":
-				return JsonSerializer.Deserialize<WhitespaceTokenizer>(ref reader, options);
-			case "uax_url_email":
-				return JsonSerializer.Deserialize<UaxEmailUrlTokenizer>(ref reader, options);
-			case "standard":
-				return JsonSerializer.Deserialize<StandardTokenizer>(ref reader, options);
-			case "path_hierarchy":
-				return JsonSerializer.Deserialize<PathHierarchyTokenizer>(ref reader, options);
-			case "nori_tokenizer":
-				return JsonSerializer.Deserialize<NoriTokenizer>(ref reader, options);
-			case "ngram":
-				return JsonSerializer.Deserialize<NGramTokenizer>(ref reader, options);
-			case "lowercase":
-				return JsonSerializer.Deserialize<LowercaseTokenizer>(ref reader, options);
-			case "letter":
-				return JsonSerializer.Deserialize<LetterTokenizer>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<KeywordTokenizer>(ref reader, options);
-			case "edge_ngram":
-				return JsonSerializer.Deserialize<EdgeNGramTokenizer>(ref reader, options);
 			case "char_group":
-				return JsonSerializer.Deserialize<CharGroupTokenizer>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>(ref reader, options);
+			case "edge_ngram":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer>(ref reader, options);
+			case "icu_tokenizer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>(ref reader, options);
+			case "keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer>(ref reader, options);
+			case "kuromoji_tokenizer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>(ref reader, options);
+			case "letter":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer>(ref reader, options);
+			case "lowercase":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer>(ref reader, options);
+			case "ngram":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>(ref reader, options);
+			case "nori_tokenizer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>(ref reader, options);
+			case "path_hierarchy":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>(ref reader, options);
+			case "pattern":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer>(ref reader, options);
+			case "standard":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer>(ref reader, options);
+			case "uax_url_email":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer>(ref reader, options);
+			case "whitespace":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer>(ref reader, options);
 			default:
 				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ITokenizer));
 				return null;
@@ -168,47 +168,47 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 
 		switch (value.Type)
 		{
-			case "icu_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(IcuTokenizer), options);
-				return;
-			case "pattern":
-				JsonSerializer.Serialize(writer, value, typeof(PatternTokenizer), options);
-				return;
-			case "kuromoji_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(KuromojiTokenizer), options);
-				return;
-			case "whitespace":
-				JsonSerializer.Serialize(writer, value, typeof(WhitespaceTokenizer), options);
-				return;
-			case "uax_url_email":
-				JsonSerializer.Serialize(writer, value, typeof(UaxEmailUrlTokenizer), options);
-				return;
-			case "standard":
-				JsonSerializer.Serialize(writer, value, typeof(StandardTokenizer), options);
-				return;
-			case "path_hierarchy":
-				JsonSerializer.Serialize(writer, value, typeof(PathHierarchyTokenizer), options);
-				return;
-			case "nori_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(NoriTokenizer), options);
-				return;
-			case "ngram":
-				JsonSerializer.Serialize(writer, value, typeof(NGramTokenizer), options);
-				return;
-			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(LowercaseTokenizer), options);
-				return;
-			case "letter":
-				JsonSerializer.Serialize(writer, value, typeof(LetterTokenizer), options);
-				return;
-			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(KeywordTokenizer), options);
+			case "char_group":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer), options);
 				return;
 			case "edge_ngram":
-				JsonSerializer.Serialize(writer, value, typeof(EdgeNGramTokenizer), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizer), options);
 				return;
-			case "char_group":
-				JsonSerializer.Serialize(writer, value, typeof(CharGroupTokenizer), options);
+			case "icu_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer), options);
+				return;
+			case "kuromoji_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer), options);
+				return;
+			case "letter":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LetterTokenizer), options);
+				return;
+			case "lowercase":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenizer), options);
+				return;
+			case "ngram":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer), options);
+				return;
+			case "nori_tokenizer":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer), options);
+				return;
+			case "path_hierarchy":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer), options);
+				return;
+			case "pattern":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternTokenizer), options);
+				return;
+			case "standard":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer), options);
+				return;
+			case "uax_url_email":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer), options);
+				return;
+			case "whitespace":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.WhitespaceTokenizer), options);
 				return;
 			default:
 				var type = value.GetType();
@@ -221,5 +221,5 @@ internal sealed partial class TokenizerInterfaceConverter : JsonConverter<IToken
 [JsonConverter(typeof(TokenizerInterfaceConverter))]
 public partial interface ITokenizer
 {
-	public string Type { get; }
+	public string? Type { get; }
 }

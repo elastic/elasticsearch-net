@@ -53,7 +53,6 @@ public sealed partial class CancelRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Cancels a task, if it can be cancelled through an API.</para>
 /// </summary>
 public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters>
@@ -62,7 +61,7 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 	{
 	}
 
-	public CancelRequest(Elastic.Clients.Elasticsearch.TaskId? task_id) : base(r => r.Optional("task_id", task_id))
+	public CancelRequest(Elastic.Clients.Elasticsearch.TaskId? taskId) : base(r => r.Optional("task_id", taskId))
 	{
 	}
 
@@ -100,12 +99,15 @@ public sealed partial class CancelRequest : PlainRequest<CancelRequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Cancels a task, if it can be cancelled through an API.</para>
 /// </summary>
 public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRequestDescriptor, CancelRequestParameters>
 {
 	internal CancelRequestDescriptor(Action<CancelRequestDescriptor> configure) => configure.Invoke(this);
+
+	public CancelRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId? taskId) : base(r => r.Optional("task_id", taskId))
+	{
+	}
 
 	public CancelRequestDescriptor()
 	{
@@ -124,9 +126,9 @@ public sealed partial class CancelRequestDescriptor : RequestDescriptor<CancelRe
 	public CancelRequestDescriptor ParentTaskId(string? parentTaskId) => Qs("parent_task_id", parentTaskId);
 	public CancelRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 
-	public CancelRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId? task_id)
+	public CancelRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId? taskId)
 	{
-		RouteValues.Optional("task_id", task_id);
+		RouteValues.Optional("task_id", taskId);
 		return Self;
 	}
 

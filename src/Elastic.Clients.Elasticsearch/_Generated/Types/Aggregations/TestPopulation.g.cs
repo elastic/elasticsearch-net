@@ -54,23 +54,14 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	/// <summary>
 	/// <para>The field to aggregate.</para>
 	/// </summary>
 	public TestPopulationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to aggregate.</para>
-	/// </summary>
-	public TestPopulationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -87,7 +78,7 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public TestPopulationDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public TestPopulationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -95,7 +86,7 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public TestPopulationDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public TestPopulationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -122,7 +113,7 @@ public sealed partial class TestPopulationDescriptor<TDocument> : SerializableDe
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -150,32 +141,14 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 
 	/// <summary>
 	/// <para>The field to aggregate.</para>
 	/// </summary>
 	public TestPopulationDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to aggregate.</para>
-	/// </summary>
-	public TestPopulationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to aggregate.</para>
-	/// </summary>
-	public TestPopulationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -192,7 +165,7 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
-	public TestPopulationDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public TestPopulationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -200,7 +173,7 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 		return Self;
 	}
 
-	public TestPopulationDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public TestPopulationDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -227,7 +200,7 @@ public sealed partial class TestPopulationDescriptor : SerializableDescriptor<Te
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

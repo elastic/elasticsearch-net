@@ -36,7 +36,7 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -115,10 +115,10 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("pattern");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -55,15 +55,6 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
-	/// </summary>
-	public GeoLineSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -87,24 +78,6 @@ public sealed partial class GeoLineSortDescriptor : SerializableDescriptor<GeoLi
 	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
 	/// </summary>
 	public GeoLineSortDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
-	/// </summary>
-	public GeoLineSortDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
-	/// </summary>
-	public GeoLineSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

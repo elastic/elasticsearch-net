@@ -45,6 +45,10 @@ public sealed partial class SearchAsYouTypeProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 	[JsonInclude, JsonPropertyName("max_shingle_size")]
 	public int? MaxShingleSize { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("norms")]
@@ -115,15 +119,15 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public SearchAsYouTypePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public SearchAsYouTypePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -153,6 +157,9 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public SearchAsYouTypePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -171,15 +178,15 @@ public sealed partial class SearchAsYouTypePropertyDescriptor<TDocument> : Seria
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public SearchAsYouTypePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public SearchAsYouTypePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -389,15 +396,15 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public SearchAsYouTypePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public SearchAsYouTypePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -427,6 +434,9 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public SearchAsYouTypePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -445,15 +455,15 @@ public sealed partial class SearchAsYouTypePropertyDescriptor : SerializableDesc
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public SearchAsYouTypePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public SearchAsYouTypePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public SearchAsYouTypePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

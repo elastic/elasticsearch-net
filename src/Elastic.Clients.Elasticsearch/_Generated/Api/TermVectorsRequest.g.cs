@@ -108,9 +108,6 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	internal override string OperationName => "termvectors";
 
-	[JsonIgnore]
-	public TDocument Document { get; set; }
-
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
 	/// </summary>
@@ -203,24 +200,11 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 {
 	internal TermVectorsRequestDescriptor(Action<TermVectorsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
-	{
-	}
-
-	public TermVectorsRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
-	public TermVectorsRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
-	public TermVectorsRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
-	public TermVectorsRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
-
-	public TermVectorsRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 	{
 	}
 
 	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
-	{
-	}
-
-	internal TermVectorsRequestDescriptor()
 	{
 	}
 
@@ -258,10 +242,9 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 
 	private TDocument? DocValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
-	private Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
-	private Action<Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
-	private TDocument DocumentValue { get; set; }
 
 	/// <summary>
 	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
@@ -283,7 +266,7 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public TermVectorsRequestDescriptor<TDocument> Filter(Core.TermVectors.FilterDescriptor descriptor)
+	public TermVectorsRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -291,7 +274,7 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public TermVectorsRequestDescriptor<TDocument> Filter(Action<Core.TermVectors.FilterDescriptor> configure)
+	public TermVectorsRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -325,7 +308,7 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

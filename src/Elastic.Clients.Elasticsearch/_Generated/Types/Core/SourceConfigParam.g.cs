@@ -30,13 +30,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <summary>
+/// <para>Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.<br/>Used as a query parameter along with the `_source_includes` and `_source_excludes` parameters.</para>
+/// </summary>
 public sealed partial class SourceConfigParam : Union<bool, Elastic.Clients.Elasticsearch.Fields>
 {
-	public SourceConfigParam(bool fetch) : base(fetch)
+	public SourceConfigParam(bool Fetch) : base(Fetch)
 	{
 	}
 
-	public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields fields) : base(fields)
+	public SourceConfigParam(Elastic.Clients.Elasticsearch.Fields Fields) : base(Fields)
 	{
 	}
 }

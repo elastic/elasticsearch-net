@@ -47,7 +47,7 @@ public sealed partial class RemoveIndexAction
 	[JsonInclude, JsonPropertyName("must_exist")]
 	public bool? MustExist { get; set; }
 
-	public static implicit operator Action(RemoveIndexAction removeIndexAction) => IndexManagement.Action.RemoveIndex(removeIndexAction);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction(RemoveIndexAction removeIndexAction) => Elastic.Clients.Elasticsearch.IndexManagement.IndexUpdateAliasesAction.RemoveIndex(removeIndexAction);
 }
 
 public sealed partial class RemoveIndexActionDescriptor : SerializableDescriptor<RemoveIndexActionDescriptor>

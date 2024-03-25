@@ -89,15 +89,11 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 {
 	internal PutScriptRequestDescriptor(Action<PutScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
 	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
 	{
 	}
 
-	internal PutScriptRequestDescriptor()
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
@@ -112,21 +108,21 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 	public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
-	public PutScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
 	public PutScriptRequestDescriptor<TDocument> Context(Elastic.Clients.Elasticsearch.Name? context)
 	{
 		RouteValues.Optional("context", context);
 		return Self;
 	}
 
+	public PutScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
 	private Elastic.Clients.Elasticsearch.StoredScript ScriptValue { get; set; }
-	private StoredScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.StoredScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Contains the script or search template, its parameters, and its language.</para>
@@ -139,7 +135,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutScriptRequestDescriptor<TDocument> Script(StoredScriptDescriptor descriptor)
+	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.StoredScriptDescriptor descriptor)
 	{
 		ScriptValue = null;
 		ScriptDescriptorAction = null;
@@ -147,7 +143,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutScriptRequestDescriptor<TDocument> Script(Action<StoredScriptDescriptor> configure)
+	public PutScriptRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> configure)
 	{
 		ScriptValue = null;
 		ScriptDescriptor = null;
@@ -166,7 +162,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 		else if (ScriptDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new StoredScriptDescriptor(ScriptDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.StoredScriptDescriptor(ScriptDescriptorAction), options);
 		}
 		else
 		{
@@ -185,15 +181,11 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 {
 	internal PutScriptRequestDescriptor(Action<PutScriptRequestDescriptor> configure) => configure.Invoke(this);
 
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
 	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
 	{
 	}
 
-	internal PutScriptRequestDescriptor()
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
@@ -208,21 +200,21 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 	public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
-	public PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
 	public PutScriptRequestDescriptor Context(Elastic.Clients.Elasticsearch.Name? context)
 	{
 		RouteValues.Optional("context", context);
 		return Self;
 	}
 
+	public PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		RouteValues.Required("id", id);
+		return Self;
+	}
+
 	private Elastic.Clients.Elasticsearch.StoredScript ScriptValue { get; set; }
-	private StoredScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.StoredScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Contains the script or search template, its parameters, and its language.</para>
@@ -235,7 +227,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 		return Self;
 	}
 
-	public PutScriptRequestDescriptor Script(StoredScriptDescriptor descriptor)
+	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScriptDescriptor descriptor)
 	{
 		ScriptValue = null;
 		ScriptDescriptorAction = null;
@@ -243,7 +235,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 		return Self;
 	}
 
-	public PutScriptRequestDescriptor Script(Action<StoredScriptDescriptor> configure)
+	public PutScriptRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> configure)
 	{
 		ScriptValue = null;
 		ScriptDescriptor = null;
@@ -262,7 +254,7 @@ public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutSc
 		else if (ScriptDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new StoredScriptDescriptor(ScriptDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.StoredScriptDescriptor(ScriptDescriptorAction), options);
 		}
 		else
 		{

@@ -66,15 +66,6 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
-	/// </summary>
-	public WeightedAverageValueDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
 	/// <para>A value or weight to use if the field is missing.</para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)
@@ -130,24 +121,6 @@ public sealed partial class WeightedAverageValueDescriptor : SerializableDescrip
 	/// <para>The field from which to extract the values or weights.</para>
 	/// </summary>
 	public WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
-	/// </summary>
-	public WeightedAverageValueDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field from which to extract the values or weights.</para>
-	/// </summary>
-	public WeightedAverageValueDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

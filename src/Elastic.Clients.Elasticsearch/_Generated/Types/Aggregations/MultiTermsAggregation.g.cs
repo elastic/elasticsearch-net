@@ -27,264 +27,62 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class MultiTermsAggregationConverter : JsonConverter<MultiTermsAggregation>
+public sealed partial class MultiTermsAggregation
 {
-	public override MultiTermsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "multi_terms")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new MultiTermsAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("collect_mode"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.CollectMode = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<long?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("order"))
-				{
-					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Order = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("shard_min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<long?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShardMinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("shard_size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShardSize = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("show_term_doc_count_error"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShowTermDocCountError = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Size = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("terms"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>>(ref reader, options);
-					agg.Terms = value;
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, MultiTermsAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("multi_terms");
-		writer.WriteStartObject();
-		if (value.CollectMode is not null)
-		{
-			writer.WritePropertyName("collect_mode");
-			JsonSerializer.Serialize(writer, value.CollectMode, options);
-		}
-
-		if (value.MinDocCount.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(value.MinDocCount.Value);
-		}
-
-		if (value.Order is not null)
-		{
-			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
-		}
-
-		if (value.ShardMinDocCount.HasValue)
-		{
-			writer.WritePropertyName("shard_min_doc_count");
-			writer.WriteNumberValue(value.ShardMinDocCount.Value);
-		}
-
-		if (value.ShardSize.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(value.ShardSize.Value);
-		}
-
-		if (value.ShowTermDocCountError.HasValue)
-		{
-			writer.WritePropertyName("show_term_doc_count_error");
-			writer.WriteBooleanValue(value.ShowTermDocCountError.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		writer.WritePropertyName("terms");
-		JsonSerializer.Serialize(writer, value.Terms, options);
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(MultiTermsAggregationConverter))]
-public sealed partial class MultiTermsAggregation : SearchAggregation
-{
-	public MultiTermsAggregation(string name) => Name = name;
-
-	internal MultiTermsAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>Specifies the strategy for data collection.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
-	override public string? Name { get; internal set; }
-	[JsonConverter(typeof(AggregateOrderConverter))]
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	[JsonInclude, JsonPropertyName("order")]
+	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
+	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket on each shard for it to be returned.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
 	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
 	/// <para>Calculates the doc count error on per term basis.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
 	/// <para>The number of term buckets should be returned out of the overall terms list.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>The field from which to generate sets of terms.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("terms")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(MultiTermsAggregation multiTermsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.MultiTerms(multiTermsAggregation);
 }
 
 public sealed partial class MultiTermsAggregationDescriptor<TDocument> : SerializableDescriptor<MultiTermsAggregationDescriptor<TDocument>>
@@ -295,45 +93,19 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private string? NameValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
-	private MultiTermLookupDescriptor<TDocument> TermsDescriptor { get; set; }
-	private Action<MultiTermLookupDescriptor<TDocument>> TermsDescriptorAction { get; set; }
-	private Action<MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
-
-	public MultiTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> TermsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>> TermsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>>[] TermsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the strategy for data collection.</para>
@@ -359,10 +131,16 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
+	public MultiTermsAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public MultiTermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -416,7 +194,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Terms(MultiTermLookupDescriptor<TDocument> descriptor)
+	public MultiTermsAggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument> descriptor)
 	{
 		TermsValue = null;
 		TermsDescriptorAction = null;
@@ -425,7 +203,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Terms(Action<MultiTermLookupDescriptor<TDocument>> configure)
+	public MultiTermsAggregationDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>> configure)
 	{
 		TermsValue = null;
 		TermsDescriptor = null;
@@ -434,7 +212,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Terms(params Action<MultiTermLookupDescriptor<TDocument>>[] configure)
+	public MultiTermsAggregationDescriptor<TDocument> Terms(params Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>>[] configure)
 	{
 		TermsValue = null;
 		TermsDescriptor = null;
@@ -446,12 +224,16 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("multi_terms");
-		writer.WriteStartObject();
 		if (CollectModeValue is not null)
 		{
 			writer.WritePropertyName("collect_mode");
 			JsonSerializer.Serialize(writer, CollectModeValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -460,10 +242,16 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ShardMinDocCountValue.HasValue)
@@ -501,7 +289,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		{
 			writer.WritePropertyName("terms");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(TermsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>(TermsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (TermsDescriptorActions is not null)
@@ -510,7 +298,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 			writer.WriteStartArray();
 			foreach (var action in TermsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -519,29 +307,6 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		{
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -556,45 +321,19 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private string? NameValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> TermsValue { get; set; }
-	private MultiTermLookupDescriptor TermsDescriptor { get; set; }
-	private Action<MultiTermLookupDescriptor> TermsDescriptorAction { get; set; }
-	private Action<MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
-
-	public MultiTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
+	private Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor TermsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor> TermsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor>[] TermsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the strategy for data collection.</para>
@@ -620,10 +359,16 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
+	public MultiTermsAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public MultiTermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -677,7 +422,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Terms(MultiTermLookupDescriptor descriptor)
+	public MultiTermsAggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor descriptor)
 	{
 		TermsValue = null;
 		TermsDescriptorAction = null;
@@ -686,7 +431,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Terms(Action<MultiTermLookupDescriptor> configure)
+	public MultiTermsAggregationDescriptor Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor> configure)
 	{
 		TermsValue = null;
 		TermsDescriptor = null;
@@ -695,7 +440,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Terms(params Action<MultiTermLookupDescriptor>[] configure)
+	public MultiTermsAggregationDescriptor Terms(params Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor>[] configure)
 	{
 		TermsValue = null;
 		TermsDescriptor = null;
@@ -707,12 +452,16 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("multi_terms");
-		writer.WriteStartObject();
 		if (CollectModeValue is not null)
 		{
 			writer.WritePropertyName("collect_mode");
 			JsonSerializer.Serialize(writer, CollectModeValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -721,10 +470,16 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ShardMinDocCountValue.HasValue)
@@ -762,7 +517,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		{
 			writer.WritePropertyName("terms");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(TermsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor(TermsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (TermsDescriptorActions is not null)
@@ -771,7 +526,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 			writer.WriteStartArray();
 			foreach (var action in TermsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new MultiTermLookupDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -780,29 +535,6 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		{
 			writer.WritePropertyName("terms");
 			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

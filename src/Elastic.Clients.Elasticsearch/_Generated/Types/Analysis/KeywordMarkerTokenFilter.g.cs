@@ -118,10 +118,10 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("keyword_marker");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

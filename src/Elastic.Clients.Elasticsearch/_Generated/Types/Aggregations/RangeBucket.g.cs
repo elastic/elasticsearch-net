@@ -27,99 +27,95 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[JsonConverter(typeof(RangeBucketConverter))]
-public sealed partial class RangeBucket : AggregateDictionary
+internal sealed partial class RangeBucketConverter : JsonConverter<RangeBucket>
 {
-	public RangeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("from")]
-	public double? From { get; init; }
-	[JsonInclude, JsonPropertyName("from_as_string")]
-	public string? FromAsString { get; init; }
-
-	/// <summary>
-	/// <para>The bucket key. Present if the aggregation is _not_ keyed</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("key")]
-	public string? Key { get; init; }
-	[JsonInclude, JsonPropertyName("to")]
-	public double? To { get; init; }
-	[JsonInclude, JsonPropertyName("to_as_string")]
-	public string? ToAsString { get; init; }
-}
-
-internal sealed class RangeBucketConverter : JsonConverter<RangeBucket>
-{
-	public override RangeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override RangeBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		double? from = default;
 		string? fromAsString = default;
 		string? key = default;
 		double? to = default;
 		string? toAsString = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("from", StringComparison.Ordinal))
-			{
-				from = JsonSerializer.Deserialize<double?>(ref reader, options);
-				continue;
-			}
+				if (property == "from")
+				{
+					from = JsonSerializer.Deserialize<double?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("from_as_string", StringComparison.Ordinal))
-			{
-				fromAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "from_as_string")
+				{
+					fromAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key", StringComparison.Ordinal))
-			{
-				key = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "key")
+				{
+					key = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("to", StringComparison.Ordinal))
-			{
-				to = JsonSerializer.Deserialize<double?>(ref reader, options);
-				continue;
-			}
+				if (property == "to")
+				{
+					to = JsonSerializer.Deserialize<double?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("to_as_string", StringComparison.Ordinal))
-			{
-				toAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "to_as_string")
+				{
+					toAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new RangeBucket(subAggs) { DocCount = docCount, From = from, FromAsString = fromAsString, Key = key, To = to, ToAsString = toAsString };
+		return new RangeBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, From = from, FromAsString = fromAsString, Key = key, To = to, ToAsString = toAsString };
 	}
 
-	public override void Write(Utf8JsonWriter writer, RangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, RangeBucket value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'RangeBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(RangeBucketConverter))]
+public sealed partial class RangeBucket
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public double? From { get; init; }
+	public string? FromAsString { get; init; }
+
+	/// <summary>
+	/// <para>The bucket key. Present if the aggregation is _not_ keyed</para>
+	/// </summary>
+	public string? Key { get; init; }
+	public double? To { get; init; }
+	public string? ToAsString { get; init; }
 }

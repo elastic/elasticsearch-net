@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class ParentIdQuery : SearchQuery
+public sealed partial class ParentIdQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -45,6 +46,8 @@ public sealed partial class ParentIdQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unmapped")]
 	public bool? IgnoreUnmapped { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Name of the child relationship mapped for the `join` field.</para>
@@ -52,9 +55,7 @@ public sealed partial class ParentIdQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; set; }
 
-	public static implicit operator Query(ParentIdQuery parentIdQuery) => QueryDsl.Query.ParentId(parentIdQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("parent_id", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ParentIdQuery parentIdQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.ParentId(parentIdQuery);
 }
 
 public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<ParentIdQueryDescriptor>
@@ -71,6 +72,9 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 	private string? QueryNameValue { get; set; }
 	private string? TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ParentIdQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -137,10 +141,10 @@ public sealed partial class ParentIdQueryDescriptor : SerializableDescriptor<Par
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (TypeValue is not null)
+		if (!string.IsNullOrEmpty(TypeValue))
 		{
 			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
+			writer.WriteStringValue(TypeValue);
 		}
 
 		writer.WriteEndObject();

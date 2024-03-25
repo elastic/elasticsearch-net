@@ -34,6 +34,10 @@ public sealed partial class SetProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_from")]
 	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
+
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -42,6 +46,10 @@ public sealed partial class SetProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
 
@@ -50,6 +58,10 @@ public sealed partial class SetProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_empty_value")]
 	public bool? IgnoreEmptyValue { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -58,6 +70,10 @@ public sealed partial class SetProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("media_type")]
 	public string? MediaType { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
@@ -66,6 +82,10 @@ public sealed partial class SetProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("override")]
 	public bool? Override { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -75,7 +95,7 @@ public sealed partial class SetProcessor
 	[JsonInclude, JsonPropertyName("value")]
 	public object? Value { get; set; }
 
-	public static implicit operator Processor(SetProcessor setProcessor) => Ingest.Processor.Set(setProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(SetProcessor setProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Set(setProcessor);
 }
 
 public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDescriptor<SetProcessorDescriptor<TDocument>>
@@ -94,9 +114,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	private bool? IgnoreFailureValue { get; set; }
 	private string? MediaTypeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private bool? OverrideValue { get; set; }
 	private string? TagValue { get; set; }
 	private object? ValueValue { get; set; }
@@ -111,14 +131,8 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
 	/// </summary>
-	public SetProcessorDescriptor<TDocument> CopyFrom<TValue>(Expression<Func<TDocument, TValue>> copyFrom)
-	{
-		CopyFromValue = copyFrom;
-		return Self;
-	}
-
 	public SetProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -135,17 +149,11 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>Conditionally execute the processor.</para>
 	/// </summary>
-	public SetProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public SetProcessorDescriptor<TDocument> If(string? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SetProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
@@ -158,6 +166,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -173,6 +184,9 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -182,7 +196,7 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public SetProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public SetProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -191,7 +205,7 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public SetProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public SetProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -200,7 +214,7 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public SetProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public SetProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -212,12 +226,15 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 	/// <summary>
 	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
 	/// </summary>
-	public SetProcessorDescriptor<TDocument> Override(bool? overrideValue = true)
+	public SetProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
-		OverrideValue = overrideValue;
+		OverrideValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public SetProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -285,7 +302,7 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -294,7 +311,7 @@ public sealed partial class SetProcessorDescriptor<TDocument> : SerializableDesc
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -343,9 +360,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	private bool? IgnoreFailureValue { get; set; }
 	private string? MediaTypeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private bool? OverrideValue { get; set; }
 	private string? TagValue { get; set; }
 	private object? ValueValue { get; set; }
@@ -360,23 +377,8 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
 	/// </summary>
-	public SetProcessorDescriptor CopyFrom<TDocument, TValue>(Expression<Func<TDocument, TValue>> copyFrom)
-	{
-		CopyFromValue = copyFrom;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The origin field which will be copied to `field`, cannot set `value` simultaneously.<br/>Supported data types are `boolean`, `number`, `array`, `object`, `string`, `date`, etc.</para>
-	/// </summary>
-	public SetProcessorDescriptor CopyFrom<TDocument>(Expression<Func<TDocument, object>> copyFrom)
-	{
-		CopyFromValue = copyFrom;
-		return Self;
-	}
-
 	public SetProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -393,26 +395,11 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	}
 
 	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
+	/// <para>Conditionally execute the processor.</para>
 	/// </summary>
-	public SetProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public SetProcessorDescriptor If(string? value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field to insert, upsert, or update.<br/>Supports template snippets.</para>
-	/// </summary>
-	public SetProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SetProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
@@ -425,6 +412,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public SetProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -440,6 +430,9 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public SetProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -449,7 +442,7 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
-	public SetProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public SetProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -458,7 +451,7 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
-	public SetProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public SetProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -467,7 +460,7 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		return Self;
 	}
 
-	public SetProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public SetProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -479,12 +472,15 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 	/// <summary>
 	/// <para>If `true` processor will update fields with pre-existing non-null-valued field.<br/>When set to `false`, such fields will not be touched.</para>
 	/// </summary>
-	public SetProcessorDescriptor Override(bool? overrideValue = true)
+	public SetProcessorDescriptor Override(bool? value = true)
 	{
-		OverrideValue = overrideValue;
+		OverrideValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public SetProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -552,7 +548,7 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -561,7 +557,7 @@ public sealed partial class SetProcessorDescriptor : SerializableDescriptor<SetP
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

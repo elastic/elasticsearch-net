@@ -116,15 +116,11 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 {
 	internal GetFieldMappingRequestDescriptor(Action<GetFieldMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
-	{
-	}
-
 	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
 	{
 	}
 
-	internal GetFieldMappingRequestDescriptor()
+	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 	{
 	}
 
@@ -166,15 +162,11 @@ public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor
 {
 	internal GetFieldMappingRequestDescriptor(Action<GetFieldMappingRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
-	{
-	}
-
 	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Optional("index", indices).Required("fields", fields))
 	{
 	}
 
-	internal GetFieldMappingRequestDescriptor()
+	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
 	{
 	}
 

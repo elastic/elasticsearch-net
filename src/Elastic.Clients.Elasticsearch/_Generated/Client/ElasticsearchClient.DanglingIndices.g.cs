@@ -18,6 +18,7 @@
 #nullable restore
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.
+	/// <para>Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.</para>
 	/// </summary>
 	protected DanglingIndicesNamespacedClient() : base()
 	{

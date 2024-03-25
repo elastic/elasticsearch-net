@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -28,7 +29,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 [JsonConverter(typeof(PinnedQueryConverter))]
-public sealed partial class PinnedQuery : SearchQuery
+public sealed partial class PinnedQuery
 {
 	internal PinnedQuery(string variantName, object variant)
 	{
@@ -45,11 +46,12 @@ public sealed partial class PinnedQuery : SearchQuery
 	internal object Variant { get; }
 	internal string VariantName { get; }
 
-	public static PinnedQuery Docs(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> variant) => new PinnedQuery("docs", variant);
-	public static PinnedQuery Ids(ICollection<Elastic.Clients.Elasticsearch.Id> variant) => new PinnedQuery("ids", variant);
+	public static PinnedQuery Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => new PinnedQuery("docs", pinnedDoc);
+	public static PinnedQuery Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => new PinnedQuery("ids", id);
 
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -58,10 +60,20 @@ public sealed partial class PinnedQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("organic")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	public static implicit operator Query(PinnedQuery pinnedQuery) => QueryDsl.Query.Pinned(pinnedQuery);
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
 
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("pinned", this);
+		return false;
+	}
 }
 
 internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
@@ -75,9 +87,9 @@ internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
 
 		object? variantValue = default;
 		string? variantNameValue = default;
-		string? nameValue = default;
 		float? boostValue = default;
 		Elastic.Clients.Elasticsearch.QueryDsl.Query organicValue = default;
+		string? queryNameValue = default;
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
 			if (reader.TokenType != JsonTokenType.PropertyName)
@@ -92,12 +104,6 @@ internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
 
 			var propertyName = reader.GetString();
 			reader.Read();
-			if (propertyName == "_name")
-			{
-				nameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
-
 			if (propertyName == "boost")
 			{
 				boostValue = JsonSerializer.Deserialize<float?>(ref reader, options);
@@ -107,6 +113,12 @@ internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
 			if (propertyName == "organic")
 			{
 				organicValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "_name")
+			{
+				queryNameValue = JsonSerializer.Deserialize<string?>(ref reader, options);
 				continue;
 			}
 
@@ -129,39 +141,43 @@ internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
 
 		reader.Read();
 		var result = new PinnedQuery(variantNameValue, variantValue);
-		result.QueryName = nameValue;
 		result.Boost = boostValue;
 		result.Organic = organicValue;
+		result.QueryName = queryNameValue;
 		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PinnedQuery value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
 		if (value.Boost.HasValue)
 		{
 			writer.WritePropertyName("boost");
 			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		writer.WritePropertyName("organic");
-		JsonSerializer.Serialize(writer, value.Organic, options);
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.Organic is not null)
+		{
+			writer.WritePropertyName("organic");
+			JsonSerializer.Serialize(writer, value.Organic, options);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
 				case "docs":
-					JsonSerializer.Serialize<ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (ICollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
+					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc>)value.Variant, options);
 					break;
 				case "ids":
-					JsonSerializer.Serialize<ICollection<Elastic.Clients.Elasticsearch.Id>>(writer, (ICollection<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
+					JsonSerializer.Serialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>>(writer, (IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id>)value.Variant, options);
 					break;
 			}
 		}
@@ -203,10 +219,11 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query OrganicValue { get; set; }
-	private QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PinnedQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -218,25 +235,7 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 	/// </summary>
 	public PinnedQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
 	{
-		OrganicDescriptor = null;
-		OrganicDescriptorAction = null;
 		OrganicValue = organic;
-		return Self;
-	}
-
-	public PinnedQueryDescriptor<TDocument> Organic(QueryDescriptor<TDocument> descriptor)
-	{
-		OrganicValue = null;
-		OrganicDescriptorAction = null;
-		OrganicDescriptor = descriptor;
-		return Self;
-	}
-
-	public PinnedQueryDescriptor<TDocument> Organic(Action<QueryDescriptor<TDocument>> configure)
-	{
-		OrganicValue = null;
-		OrganicDescriptor = null;
-		OrganicDescriptorAction = configure;
 		return Self;
 	}
 
@@ -245,6 +244,10 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 		QueryNameValue = queryName;
 		return Self;
 	}
+
+	public PinnedQueryDescriptor<TDocument> Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => Set(pinnedDoc, "docs");
+	public PinnedQueryDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor> configure) => Set(configure, "docs");
+	public PinnedQueryDescriptor<TDocument> Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => Set(id, "ids");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -255,17 +258,7 @@ public sealed partial class PinnedQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (OrganicDescriptor is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, OrganicDescriptor, options);
-		}
-		else if (OrganicDescriptorAction is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(OrganicDescriptorAction), options);
-		}
-		else
+		if (OrganicValue is not null)
 		{
 			writer.WritePropertyName("organic");
 			JsonSerializer.Serialize(writer, OrganicValue, options);
@@ -327,10 +320,11 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query OrganicValue { get; set; }
-	private QueryDescriptor OrganicDescriptor { get; set; }
-	private Action<QueryDescriptor> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PinnedQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -342,25 +336,7 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 	/// </summary>
 	public PinnedQueryDescriptor Organic(Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
 	{
-		OrganicDescriptor = null;
-		OrganicDescriptorAction = null;
 		OrganicValue = organic;
-		return Self;
-	}
-
-	public PinnedQueryDescriptor Organic(QueryDescriptor descriptor)
-	{
-		OrganicValue = null;
-		OrganicDescriptorAction = null;
-		OrganicDescriptor = descriptor;
-		return Self;
-	}
-
-	public PinnedQueryDescriptor Organic(Action<QueryDescriptor> configure)
-	{
-		OrganicValue = null;
-		OrganicDescriptor = null;
-		OrganicDescriptorAction = configure;
 		return Self;
 	}
 
@@ -369,6 +345,10 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 		QueryNameValue = queryName;
 		return Self;
 	}
+
+	public PinnedQueryDescriptor Docs(IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc> pinnedDoc) => Set(pinnedDoc, "docs");
+	public PinnedQueryDescriptor Docs(Action<Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor> configure) => Set(configure, "docs");
+	public PinnedQueryDescriptor Ids(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Id> id) => Set(id, "ids");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -379,17 +359,7 @@ public sealed partial class PinnedQueryDescriptor : SerializableDescriptor<Pinne
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (OrganicDescriptor is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, OrganicDescriptor, options);
-		}
-		else if (OrganicDescriptorAction is not null)
-		{
-			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(OrganicDescriptorAction), options);
-		}
-		else
+		if (OrganicValue is not null)
 		{
 			writer.WritePropertyName("organic");
 			JsonSerializer.Serialize(writer, OrganicValue, options);

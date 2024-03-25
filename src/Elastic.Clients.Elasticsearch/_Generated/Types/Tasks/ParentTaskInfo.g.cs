@@ -53,6 +53,10 @@ public sealed partial class ParentTaskInfo
 	public long RunningTimeInNanos { get; init; }
 	[JsonInclude, JsonPropertyName("start_time_in_millis")]
 	public long StartTimeInMillis { get; init; }
+
+	/// <summary>
+	/// <para>Task status information can vary wildly from task to task.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public object? Status { get; init; }
 	[JsonInclude, JsonPropertyName("type")]

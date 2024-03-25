@@ -151,10 +151,10 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("dictionary_decompounder");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		if (WordListValue is not null)

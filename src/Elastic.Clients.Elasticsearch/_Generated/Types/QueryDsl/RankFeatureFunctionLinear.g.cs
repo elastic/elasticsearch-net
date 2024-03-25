@@ -41,5 +41,7 @@ public sealed partial class RankFeatureFunctionLinearDescriptor : SerializableDe
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
 	}
 }

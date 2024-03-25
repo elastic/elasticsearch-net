@@ -39,7 +39,8 @@ public sealed partial class FieldCapability
 	/// <para>The list of indices where this field has the same type family, or null if all indices have the same type family for the field.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.Indices? Indices { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string>? Indices { get; init; }
 
 	/// <summary>
 	/// <para>Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.</para>
@@ -57,25 +58,27 @@ public sealed partial class FieldCapability
 	/// <para>The list of indices where this field is present if these indices<br/>don’t have the same `time_series_metric` value for this field.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("metric_conflicts_indices")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? MetricConflictsIndices { get; init; }
+	public IReadOnlyCollection<string>? MetricConflictsIndices { get; init; }
 
 	/// <summary>
 	/// <para>The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_aggregatable_indices")]
-	public Elastic.Clients.Elasticsearch.Indices? NonAggregatableIndices { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string>? NonAggregatableIndices { get; init; }
 
 	/// <summary>
 	/// <para>If this list is present in response then some indices have the<br/>field marked as a dimension and other indices, the ones in this list, do not.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_dimension_indices")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexName>? NonDimensionIndices { get; init; }
+	public IReadOnlyCollection<string>? NonDimensionIndices { get; init; }
 
 	/// <summary>
 	/// <para>The list of indices where this field is not searchable, or null if all indices have the same definition for the field.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("non_searchable_indices")]
-	public Elastic.Clients.Elasticsearch.Indices? NonSearchableIndices { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string>? NonSearchableIndices { get; init; }
 
 	/// <summary>
 	/// <para>Whether this field is indexed for search on all indices.</para>

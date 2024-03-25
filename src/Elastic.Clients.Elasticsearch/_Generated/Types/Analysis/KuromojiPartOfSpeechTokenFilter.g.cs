@@ -69,10 +69,10 @@ public sealed partial class KuromojiPartOfSpeechTokenFilterDescriptor : Serializ
 		JsonSerializer.Serialize(writer, StoptagsValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("kuromoji_part_of_speech");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

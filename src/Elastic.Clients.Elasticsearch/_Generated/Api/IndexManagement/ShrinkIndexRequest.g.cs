@@ -106,10 +106,6 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal ShrinkIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -182,10 +178,6 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 	internal ShrinkIndexRequestDescriptor(Action<ShrinkIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
-	{
-	}
-
-	internal ShrinkIndexRequestDescriptor()
 	{
 	}
 

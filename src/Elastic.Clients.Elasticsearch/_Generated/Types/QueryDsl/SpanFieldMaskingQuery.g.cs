@@ -27,18 +27,22 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class SpanFieldMaskingQuery : SearchQuery
+public sealed partial class SpanFieldMaskingQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("field_masking_span", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.FieldMaskingSpan(spanFieldMaskingQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.FieldMaskingSpan(spanFieldMaskingQuery);
 }
 
 public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : SerializableDescriptor<SpanFieldMaskingQueryDescriptor<TDocument>>
@@ -52,10 +56,13 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; set; }
-	private SpanQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<SpanQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanFieldMaskingQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -63,12 +70,6 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 	}
 
 	public SpanFieldMaskingQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -82,7 +83,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor<TDocument> Query(SpanQueryDescriptor<TDocument> descriptor)
+	public SpanFieldMaskingQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -90,7 +91,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<SpanQueryDescriptor<TDocument>> configure)
+	public SpanFieldMaskingQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -123,7 +124,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : Seriali
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -152,10 +153,13 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery QueryValue { get; set; }
-	private SpanQueryDescriptor QueryDescriptor { get; set; }
-	private Action<SpanQueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanFieldMaskingQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -163,18 +167,6 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 	}
 
 	public SpanFieldMaskingQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SpanFieldMaskingQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -188,7 +180,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor Query(SpanQueryDescriptor descriptor)
+	public SpanFieldMaskingQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -196,7 +188,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public SpanFieldMaskingQueryDescriptor Query(Action<SpanQueryDescriptor> configure)
+	public SpanFieldMaskingQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -229,7 +221,7 @@ public sealed partial class SpanFieldMaskingQueryDescriptor : SerializableDescri
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new SpanQueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

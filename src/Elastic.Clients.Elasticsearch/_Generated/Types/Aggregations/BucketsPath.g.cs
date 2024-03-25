@@ -115,9 +115,8 @@ internal sealed class BucketsPathConverter : MultiItemUnionConverter<BucketsPath
 {
 	public BucketsPathConverter()
 	{
-		_arrayType = typeof(string[]);
-		_types = new Dictionary<BucketsPath.Kind, Type> { { BucketsPath.Kind.Single, typeof(string) }, { BucketsPath.Kind.Array, typeof(string[]) }, { BucketsPath.Kind.Dictionary, typeof(Dictionary<string, string>) } };
+		_types = new Dictionary<BucketsPath.Kind, Type> { { BucketsPath.Kind.Single, typeof(string) }, { BucketsPath.Kind.Array, typeof(IReadOnlyCollection<string>) }, { BucketsPath.Kind.Dictionary, typeof(IReadOnlyDictionary<string, string>) } };
 		_factories = new Dictionary<Type, Func<object, BucketsPath>> { { typeof(string), o => BucketsPath.Single((string)o) }, { typeof(string[]), o => BucketsPath.Array((string[])o) }, { typeof(Dictionary<string, string>), o => BucketsPath.Dictionary((Dictionary<string, string>)o) } };
-		_uniquePropertyToType = new Dictionary<string, Type> { };
+		_uniquePropertyToType = new Dictionary<string, Type> { { "", typeof(string) }, { "", typeof(IReadOnlyCollection<string>) }, { "", typeof(IReadOnlyDictionary<string, string>) } };
 	}
 }

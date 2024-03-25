@@ -55,6 +55,10 @@ public sealed partial class TextProperty : IProperty
 	public bool? IndexPhrases { get; set; }
 	[JsonInclude, JsonPropertyName("index_prefixes")]
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("norms")]
@@ -93,16 +97,16 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 	private bool? EagerGlobalOrdinalsValue { get; set; }
 	private bool? FielddataValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilterValue { get; set; }
-	private IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
-	private Action<IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
 	private bool? IndexPhrasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NormsValue { get; set; }
 	private int? PositionIncrementGapValue { get; set; }
@@ -157,7 +161,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> FielddataFrequencyFilter(IndexManagement.FielddataFrequencyFilterDescriptor descriptor)
+	public TextPropertyDescriptor<TDocument> FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor descriptor)
 	{
 		FielddataFrequencyFilterValue = null;
 		FielddataFrequencyFilterDescriptorAction = null;
@@ -165,7 +169,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> FielddataFrequencyFilter(Action<IndexManagement.FielddataFrequencyFilterDescriptor> configure)
+	public TextPropertyDescriptor<TDocument> FielddataFrequencyFilter(Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> configure)
 	{
 		FielddataFrequencyFilterValue = null;
 		FielddataFrequencyFilterDescriptor = null;
@@ -179,15 +183,15 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public TextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public TextPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -225,7 +229,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> IndexPrefixes(TextIndexPrefixesDescriptor descriptor)
+	public TextPropertyDescriptor<TDocument> IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor)
 	{
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptorAction = null;
@@ -233,7 +237,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> IndexPrefixes(Action<TextIndexPrefixesDescriptor> configure)
+	public TextPropertyDescriptor<TDocument> IndexPrefixes(Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> configure)
 	{
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptor = null;
@@ -241,6 +245,9 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public TextPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -265,15 +272,15 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public TextPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TextPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public TextPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -356,7 +363,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		else if (FielddataFrequencyFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata_frequency_filter");
-			JsonSerializer.Serialize(writer, new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction), options);
 		}
 		else if (FielddataFrequencyFilterValue is not null)
 		{
@@ -402,7 +409,7 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 		else if (IndexPrefixesDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
 		}
 		else if (IndexPrefixesValue is not null)
 		{
@@ -476,15 +483,15 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 			return FielddataFrequencyFilterValue;
 		}
 
-		if (FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
+		if ((object)FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataFrequencyFilterDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}
@@ -500,15 +507,15 @@ public sealed partial class TextPropertyDescriptor<TDocument> : SerializableDesc
 			return IndexPrefixesValue;
 		}
 
-		if (IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
+		if ((object)IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (IndexPrefixesDescriptorAction is not null)
 		{
-			var descriptor = new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}
@@ -559,16 +566,16 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 	private bool? EagerGlobalOrdinalsValue { get; set; }
 	private bool? FielddataValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter? FielddataFrequencyFilterValue { get; set; }
-	private IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
-	private Action<IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor FielddataFrequencyFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> FielddataFrequencyFilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
 	private bool? IndexPhrasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-	private TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-	private Action<TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NormsValue { get; set; }
 	private int? PositionIncrementGapValue { get; set; }
@@ -623,7 +630,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor FielddataFrequencyFilter(IndexManagement.FielddataFrequencyFilterDescriptor descriptor)
+	public TextPropertyDescriptor FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor descriptor)
 	{
 		FielddataFrequencyFilterValue = null;
 		FielddataFrequencyFilterDescriptorAction = null;
@@ -631,7 +638,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor FielddataFrequencyFilter(Action<IndexManagement.FielddataFrequencyFilterDescriptor> configure)
+	public TextPropertyDescriptor FielddataFrequencyFilter(Action<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor> configure)
 	{
 		FielddataFrequencyFilterValue = null;
 		FielddataFrequencyFilterDescriptor = null;
@@ -645,15 +652,15 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public TextPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TextPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public TextPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -691,7 +698,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor IndexPrefixes(TextIndexPrefixesDescriptor descriptor)
+	public TextPropertyDescriptor IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor)
 	{
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptorAction = null;
@@ -699,7 +706,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor IndexPrefixes(Action<TextIndexPrefixesDescriptor> configure)
+	public TextPropertyDescriptor IndexPrefixes(Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> configure)
 	{
 		IndexPrefixesValue = null;
 		IndexPrefixesDescriptor = null;
@@ -707,6 +714,9 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public TextPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -731,15 +741,15 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		return Self;
 	}
 
-	public TextPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public TextPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TextPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public TextPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -822,7 +832,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		else if (FielddataFrequencyFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata_frequency_filter");
-			JsonSerializer.Serialize(writer, new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction), options);
 		}
 		else if (FielddataFrequencyFilterValue is not null)
 		{
@@ -868,7 +878,7 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 		else if (IndexPrefixesDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
 		}
 		else if (IndexPrefixesValue is not null)
 		{
@@ -942,15 +952,15 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 			return FielddataFrequencyFilterValue;
 		}
 
-		if (FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
+		if ((object)FielddataFrequencyFilterDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataFrequencyFilterDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterDescriptor(FielddataFrequencyFilterDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}
@@ -966,15 +976,15 @@ public sealed partial class TextPropertyDescriptor : SerializableDescriptor<Text
 			return IndexPrefixesValue;
 		}
 
-		if (IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
+		if ((object)IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (IndexPrefixesDescriptorAction is not null)
 		{
-			var descriptor = new TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}

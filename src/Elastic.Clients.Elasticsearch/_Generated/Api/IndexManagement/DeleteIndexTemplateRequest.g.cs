@@ -83,10 +83,6 @@ public sealed partial class DeleteIndexTemplateRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal DeleteIndexTemplateRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

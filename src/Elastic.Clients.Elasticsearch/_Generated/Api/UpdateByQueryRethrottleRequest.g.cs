@@ -42,7 +42,7 @@ public sealed partial class UpdateByQueryRethrottleRequestParameters : RequestPa
 /// </summary>
 public sealed partial class UpdateByQueryRethrottleRequest : PlainRequest<UpdateByQueryRethrottleRequestParameters>
 {
-	public UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
+	public UpdateByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -68,11 +68,7 @@ public sealed partial class UpdateByQueryRethrottleRequestDescriptor : RequestDe
 {
 	internal UpdateByQueryRethrottleRequestDescriptor(Action<UpdateByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
 
-	public UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
-	{
-	}
-
-	internal UpdateByQueryRethrottleRequestDescriptor()
+	public UpdateByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -86,9 +82,9 @@ public sealed partial class UpdateByQueryRethrottleRequestDescriptor : RequestDe
 
 	public UpdateByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 
-	public UpdateByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id task_id)
+	public UpdateByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id taskId)
 	{
-		RouteValues.Required("task_id", task_id);
+		RouteValues.Required("task_id", taskId);
 		return Self;
 	}
 

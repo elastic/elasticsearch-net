@@ -33,7 +33,6 @@ public sealed partial class IndexSettingsLifecycle
 	/// <para>Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.<br/>You can explicitly set it to skip rollover.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexing_complete")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? IndexingComplete { get; set; }
 
 	/// <summary>
@@ -77,8 +76,8 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	private bool? ParseOriginationDateValue { get; set; }
 	private string? RolloverAliasValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep? StepValue { get; set; }
-	private IndexSettingsLifecycleStepDescriptor StepDescriptor { get; set; }
-	private Action<IndexSettingsLifecycleStepDescriptor> StepDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor StepDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor> StepDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Indicates whether or not the index has been rolled over. Automatically set to true when ILM completes the rollover action.<br/>You can explicitly set it to skip rollover.</para>
@@ -133,7 +132,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public IndexSettingsLifecycleDescriptor Step(IndexSettingsLifecycleStepDescriptor descriptor)
+	public IndexSettingsLifecycleDescriptor Step(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor descriptor)
 	{
 		StepValue = null;
 		StepDescriptorAction = null;
@@ -141,7 +140,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public IndexSettingsLifecycleDescriptor Step(Action<IndexSettingsLifecycleStepDescriptor> configure)
+	public IndexSettingsLifecycleDescriptor Step(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor> configure)
 	{
 		StepValue = null;
 		StepDescriptor = null;
@@ -152,10 +151,10 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (IndexingCompleteValue is not null)
+		if (IndexingCompleteValue.HasValue)
 		{
 			writer.WritePropertyName("indexing_complete");
-			JsonSerializer.Serialize(writer, IndexingCompleteValue, options);
+			writer.WriteBooleanValue(IndexingCompleteValue.Value);
 		}
 
 		writer.WritePropertyName("name");
@@ -186,7 +185,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 		else if (StepDescriptorAction is not null)
 		{
 			writer.WritePropertyName("step");
-			JsonSerializer.Serialize(writer, new IndexSettingsLifecycleStepDescriptor(StepDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStepDescriptor(StepDescriptorAction), options);
 		}
 		else if (StepValue is not null)
 		{

@@ -69,10 +69,10 @@ public sealed partial class IcuNormalizationTokenFilterDescriptor : Serializable
 		JsonSerializer.Serialize(writer, NameValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("icu_normalizer");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

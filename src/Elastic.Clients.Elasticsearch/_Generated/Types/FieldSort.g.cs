@@ -32,7 +32,7 @@ public sealed partial class FieldSort
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 	[JsonInclude, JsonPropertyName("missing")]
-	public FieldValue? Missing { get; set; }
+	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	[JsonInclude, JsonPropertyName("nested")]
@@ -54,11 +54,11 @@ public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescrip
 	}
 
 	private string? FormatValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
@@ -69,7 +69,7 @@ public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public FieldSortDescriptor<TDocument> Missing(FieldValue? missing)
+	public FieldSortDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -89,7 +89,7 @@ public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public FieldSortDescriptor<TDocument> Nested(NestedSortValueDescriptor<TDocument> descriptor)
+	public FieldSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -97,7 +97,7 @@ public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public FieldSortDescriptor<TDocument> Nested(Action<NestedSortValueDescriptor<TDocument>> configure)
+	public FieldSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -152,7 +152,7 @@ public sealed partial class FieldSortDescriptor<TDocument> : SerializableDescrip
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{
@@ -191,11 +191,11 @@ public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSo
 	}
 
 	private string? FormatValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldSortNumericType? NumericTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedTypeValue { get; set; }
@@ -206,7 +206,7 @@ public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSo
 		return Self;
 	}
 
-	public FieldSortDescriptor Missing(FieldValue? missing)
+	public FieldSortDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -226,7 +226,7 @@ public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSo
 		return Self;
 	}
 
-	public FieldSortDescriptor Nested(NestedSortValueDescriptor descriptor)
+	public FieldSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -234,7 +234,7 @@ public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSo
 		return Self;
 	}
 
-	public FieldSortDescriptor Nested(Action<NestedSortValueDescriptor> configure)
+	public FieldSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -289,7 +289,7 @@ public sealed partial class FieldSortDescriptor : SerializableDescriptor<FieldSo
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{

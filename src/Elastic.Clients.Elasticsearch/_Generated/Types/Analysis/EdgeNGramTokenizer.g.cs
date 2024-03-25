@@ -106,10 +106,10 @@ public sealed partial class EdgeNGramTokenizerDescriptor : SerializableDescripto
 		JsonSerializer.Serialize(writer, TokenCharsValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("edge_ngram");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

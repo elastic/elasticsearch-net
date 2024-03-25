@@ -42,7 +42,7 @@ public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestPa
 /// </summary>
 public sealed partial class DeleteByQueryRethrottleRequest : PlainRequest<DeleteByQueryRethrottleRequestParameters>
 {
-	public DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.TaskId task_id) : base(r => r.Required("task_id", task_id))
+	public DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.TaskId taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -68,11 +68,7 @@ public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDe
 {
 	internal DeleteByQueryRethrottleRequestDescriptor(Action<DeleteByQueryRethrottleRequestDescriptor> configure) => configure.Invoke(this);
 
-	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId task_id) : base(r => r.Required("task_id", task_id))
-	{
-	}
-
-	internal DeleteByQueryRethrottleRequestDescriptor()
+	public DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.TaskId taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -86,9 +82,9 @@ public sealed partial class DeleteByQueryRethrottleRequestDescriptor : RequestDe
 
 	public DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 
-	public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId task_id)
+	public DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId taskId)
 	{
-		RouteValues.Required("task_id", task_id);
+		RouteValues.Required("task_id", taskId);
 		return Self;
 	}
 

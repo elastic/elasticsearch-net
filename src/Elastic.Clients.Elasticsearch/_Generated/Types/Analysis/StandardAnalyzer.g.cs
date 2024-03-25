@@ -32,7 +32,7 @@ public sealed partial class StandardAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]

@@ -36,7 +36,7 @@ public sealed partial class FingerprintAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
@@ -122,10 +122,10 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("fingerprint");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

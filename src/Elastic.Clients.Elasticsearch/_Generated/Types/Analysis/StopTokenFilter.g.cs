@@ -34,7 +34,7 @@ public sealed partial class StopTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("remove_trailing")]
 	public bool? RemoveTrailing { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
@@ -119,10 +119,10 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("stop");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

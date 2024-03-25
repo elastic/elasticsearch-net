@@ -68,10 +68,10 @@ public sealed partial class KuromojiReadingFormTokenFilterDescriptor : Serializa
 		writer.WriteStringValue("kuromoji_readingform");
 		writer.WritePropertyName("use_romaji");
 		writer.WriteBooleanValue(UseRomajiValue);
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

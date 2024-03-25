@@ -68,10 +68,10 @@ public sealed partial class IcuFoldingTokenFilterDescriptor : SerializableDescri
 		writer.WriteStringValue("icu_folding");
 		writer.WritePropertyName("unicode_set_filter");
 		writer.WriteStringValue(UnicodeSetFilterValue);
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

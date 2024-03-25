@@ -46,6 +46,10 @@ public sealed partial class JsonProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_duplicate_keys")]
 	public bool? AllowDuplicateKeys { get; set; }
+
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -54,12 +58,28 @@ public sealed partial class JsonProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -69,7 +89,7 @@ public sealed partial class JsonProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(JsonProcessor jsonProcessor) => Ingest.Processor.Json(jsonProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(JsonProcessor jsonProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Json(jsonProcessor);
 }
 
 public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDescriptor<JsonProcessorDescriptor<TDocument>>
@@ -88,9 +108,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
@@ -121,6 +141,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -137,26 +160,26 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>Conditionally execute the processor.</para>
 	/// </summary>
-	public JsonProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public JsonProcessorDescriptor<TDocument> If(string? value)
 	{
-		FieldValue = field;
+		IfValue = value;
 		return Self;
 	}
 
-	public JsonProcessorDescriptor<TDocument> If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public JsonProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public JsonProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -166,7 +189,7 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public JsonProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public JsonProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -175,7 +198,7 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public JsonProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public JsonProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -184,7 +207,7 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public JsonProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public JsonProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -193,6 +216,9 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public JsonProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -203,15 +229,6 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
 	/// </summary>
 	public JsonProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
-	/// </summary>
-	public JsonProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -269,7 +286,7 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -278,7 +295,7 @@ public sealed partial class JsonProcessorDescriptor<TDocument> : SerializableDes
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -321,9 +338,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
@@ -354,6 +371,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public JsonProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -370,35 +390,26 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>Conditionally execute the processor.</para>
 	/// </summary>
-	public JsonProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public JsonProcessorDescriptor If(string? value)
 	{
-		FieldValue = field;
+		IfValue = value;
 		return Self;
 	}
 
 	/// <summary>
-	/// <para>The field to be parsed.</para>
+	/// <para>Ignore failures for the processor.</para>
 	/// </summary>
-	public JsonProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public JsonProcessorDescriptor If(string? ifValue)
-	{
-		IfValue = ifValue;
-		return Self;
-	}
-
 	public JsonProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public JsonProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -408,7 +419,7 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		return Self;
 	}
 
-	public JsonProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public JsonProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -417,7 +428,7 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		return Self;
 	}
 
-	public JsonProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public JsonProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -426,7 +437,7 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		return Self;
 	}
 
-	public JsonProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public JsonProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -435,6 +446,9 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public JsonProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -445,24 +459,6 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
 	/// </summary>
 	public JsonProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
-	/// </summary>
-	public JsonProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The field that the converted structured object will be written into.<br/>Any existing content in this field will be overwritten.</para>
-	/// </summary>
-	public JsonProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -520,7 +516,7 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -529,7 +525,7 @@ public sealed partial class JsonProcessorDescriptor : SerializableDescriptor<Jso
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

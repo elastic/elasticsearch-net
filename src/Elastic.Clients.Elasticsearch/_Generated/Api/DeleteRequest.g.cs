@@ -149,30 +149,6 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	public DeleteRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-	{
-	}
-
-	public DeleteRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public DeleteRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-	{
-	}
-
-	public DeleteRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public DeleteRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal DeleteRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -215,10 +191,6 @@ public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRe
 	internal DeleteRequestDescriptor(Action<DeleteRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	internal DeleteRequestDescriptor()
 	{
 	}
 

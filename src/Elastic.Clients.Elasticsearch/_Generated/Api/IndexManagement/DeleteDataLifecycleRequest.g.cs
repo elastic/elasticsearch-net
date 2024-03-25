@@ -94,10 +94,6 @@ public sealed partial class DeleteDataLifecycleRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal DeleteDataLifecycleRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

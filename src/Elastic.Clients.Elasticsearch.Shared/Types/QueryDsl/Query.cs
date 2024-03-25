@@ -13,27 +13,6 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public partial class Query
 {
-	internal Query(SearchQuery query)
-	{
-		if (query is null)
-			return;
-
-		query.WrapInContainer(this);
-	}
-
-	public bool TryGet<T>([NotNullWhen(true)]out T? query)
-	{
-		query = default;
-
-		if (Variant is T variant)
-		{
-			query = variant;
-			return true;
-		}
-
-		return false;
-	}
-
 	internal bool HoldsOnlyShouldMusts { get; set; }
 
 	public static bool operator false(Query _) => false;
@@ -78,9 +57,9 @@ public partial class Query
 
 	public static Query operator !(Query queryContainer) => queryContainer is null
 			? null
-			: new Query(new BoolQuery { MustNot = new[] { queryContainer } });
+			: Query.Bool(new BoolQuery { MustNot = new[] { queryContainer } });
 
 	public static Query operator +(Query queryContainer) => queryContainer is null
 		? null
-		: new Query(new BoolQuery { Filter = new[] { queryContainer } });
+		: Query.Bool(new BoolQuery { Filter = new[] { queryContainer } });
 }

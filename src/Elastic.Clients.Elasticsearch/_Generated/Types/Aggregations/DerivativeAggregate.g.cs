@@ -35,6 +35,10 @@ public sealed partial class DerivativeAggregate : IAggregate
 	public double? NormalizedValue { get; init; }
 	[JsonInclude, JsonPropertyName("normalized_value_as_string")]
 	public string? NormalizedValueAsString { get; init; }
+
+	/// <summary>
+	/// <para>The metric value. A missing value generally means that there was no data to aggregate,<br/>unless specified otherwise.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }
 	[JsonInclude, JsonPropertyName("value_as_string")]

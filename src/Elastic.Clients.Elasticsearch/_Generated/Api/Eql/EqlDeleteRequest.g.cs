@@ -62,10 +62,6 @@ public sealed partial class EqlDeleteRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal EqlDeleteRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -93,10 +89,6 @@ public sealed partial class EqlDeleteRequestDescriptor : RequestDescriptor<EqlDe
 	internal EqlDeleteRequestDescriptor(Action<EqlDeleteRequestDescriptor> configure) => configure.Invoke(this);
 
 	public EqlDeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal EqlDeleteRequestDescriptor()
 	{
 	}
 

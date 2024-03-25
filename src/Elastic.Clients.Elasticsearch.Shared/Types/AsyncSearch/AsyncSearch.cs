@@ -30,5 +30,5 @@ public partial class AsyncSearch<TDocument>
 	/// The total number of hits returned for this search.
 	/// </summary>
 	[JsonIgnore]
-	public long Total => HitsMetadata?.Total?.Value ?? -1;
+	public long Total => HitsMetadata?.Total?.Item2 ?? HitsMetadata?.Total?.Item1.Value ?? -1;
 }

@@ -41,7 +41,7 @@ public sealed partial class RrfRank
 	[JsonInclude, JsonPropertyName("window_size")]
 	public long? WindowSize { get; set; }
 
-	public static implicit operator Rank(RrfRank rrfRank) => Rank.Rrf(rrfRank);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rank(RrfRank rrfRank) => Elastic.Clients.Elasticsearch.Rank.Rrf(rrfRank);
 }
 
 public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDescriptor>

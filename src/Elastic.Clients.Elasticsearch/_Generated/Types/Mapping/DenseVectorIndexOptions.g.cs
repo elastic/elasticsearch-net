@@ -37,7 +37,7 @@ public sealed partial class DenseVectorIndexOptions
 	public string Type { get; set; }
 }
 
-public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptor<DenseVectorIndexOptionsDescriptor>, IBuildableDescriptor<DenseVectorIndexOptions>
+public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDescriptor<DenseVectorIndexOptionsDescriptor>
 {
 	internal DenseVectorIndexOptionsDescriptor(Action<DenseVectorIndexOptionsDescriptor> configure) => configure.Invoke(this);
 
@@ -78,11 +78,4 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 		writer.WriteStringValue(TypeValue);
 		writer.WriteEndObject();
 	}
-
-	DenseVectorIndexOptions IBuildableDescriptor<DenseVectorIndexOptions>.Build() => new()
-	{
-		EfConstruction = EfConstructionValue,
-		m = mValue,
-		Type = TypeValue
-	};
 }

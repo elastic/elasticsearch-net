@@ -62,10 +62,6 @@ public sealed partial class DeleteAsyncRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal DeleteAsyncRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlDeleteAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -93,10 +89,6 @@ public sealed partial class DeleteAsyncRequestDescriptor : RequestDescriptor<Del
 	internal DeleteAsyncRequestDescriptor(Action<DeleteAsyncRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeleteAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal DeleteAsyncRequestDescriptor()
 	{
 	}
 

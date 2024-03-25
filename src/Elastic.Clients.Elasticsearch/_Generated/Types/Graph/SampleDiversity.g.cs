@@ -52,12 +52,6 @@ public sealed partial class SampleDiversityDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public SampleDiversityDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	public SampleDiversityDescriptor<TDocument> MaxDocsPerValue(int maxDocsPerValue)
 	{
 		MaxDocsPerValueValue = maxDocsPerValue;
@@ -87,18 +81,6 @@ public sealed partial class SampleDiversityDescriptor : SerializableDescriptor<S
 	private int MaxDocsPerValueValue { get; set; }
 
 	public SampleDiversityDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SampleDiversityDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public SampleDiversityDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

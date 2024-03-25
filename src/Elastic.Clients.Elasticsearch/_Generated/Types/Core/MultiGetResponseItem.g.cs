@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
 public sealed partial class MultiGetResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
 {
-	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> result) : base(result)
+	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> Result) : base(Result)
 	{
 	}
 
-	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError failure) : base(failure)
+	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError Failure) : base(Failure)
 	{
 	}
 }

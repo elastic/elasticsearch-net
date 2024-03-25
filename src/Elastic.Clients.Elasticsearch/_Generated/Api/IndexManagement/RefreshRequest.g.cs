@@ -94,6 +94,10 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 {
 	internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public RefreshRequestDescriptor()
 	{
 	}
@@ -127,6 +131,10 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 public sealed partial class RefreshRequestDescriptor : RequestDescriptor<RefreshRequestDescriptor, RefreshRequestParameters>
 {
 	internal RefreshRequestDescriptor(Action<RefreshRequestDescriptor> configure) => configure.Invoke(this);
+
+	public RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public RefreshRequestDescriptor()
 	{

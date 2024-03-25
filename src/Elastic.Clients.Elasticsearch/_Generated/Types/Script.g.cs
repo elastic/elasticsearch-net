@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class Script : Union<Elastic.Clients.Elasticsearch.InlineScript, Elastic.Clients.Elasticsearch.StoredScriptId>
 {
-	public Script(Elastic.Clients.Elasticsearch.InlineScript inline) : base(inline)
+	public Script(Elastic.Clients.Elasticsearch.InlineScript Inline) : base(Inline)
 	{
 	}
 
-	public Script(Elastic.Clients.Elasticsearch.StoredScriptId stored) : base(stored)
+	public Script(Elastic.Clients.Elasticsearch.StoredScriptId Stored) : base(Stored)
 	{
 	}
 }

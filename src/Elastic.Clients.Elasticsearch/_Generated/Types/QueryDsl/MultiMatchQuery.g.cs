@@ -27,11 +27,8 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class MultiMatchQuery : SearchQuery
+public sealed partial class MultiMatchQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
-
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
 	/// </summary>
@@ -43,6 +40,10 @@ public sealed partial class MultiMatchQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -105,6 +106,8 @@ public sealed partial class MultiMatchQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
@@ -130,9 +133,7 @@ public sealed partial class MultiMatchQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-	public static implicit operator Query(MultiMatchQuery multiMatchQuery) => QueryDsl.Query.MultiMatch(multiMatchQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("multi_match", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MultiMatchQuery multiMatchQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.MultiMatch(multiMatchQuery);
 }
 
 public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableDescriptor<MultiMatchQueryDescriptor<TDocument>>
@@ -180,6 +181,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MultiMatchQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -252,9 +256,9 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 	/// <summary>
 	/// <para>Boolean logic used to interpret text in the query value.</para>
 	/// </summary>
-	public MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+	public MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
-		OperatorValue = op;
+		OperatorValue = value;
 		return Self;
 	}
 
@@ -351,10 +355,10 @@ public sealed partial class MultiMatchQueryDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, FuzzinessValue, options);
 		}
 
-		if (FuzzyRewriteValue is not null)
+		if (!string.IsNullOrEmpty(FuzzyRewriteValue))
 		{
 			writer.WritePropertyName("fuzzy_rewrite");
-			JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			writer.WriteStringValue(FuzzyRewriteValue);
 		}
 
 		if (FuzzyTranspositionsValue.HasValue)
@@ -474,6 +478,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MultiMatchQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -546,9 +553,9 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 	/// <summary>
 	/// <para>Boolean logic used to interpret text in the query value.</para>
 	/// </summary>
-	public MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? op)
+	public MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
-		OperatorValue = op;
+		OperatorValue = value;
 		return Self;
 	}
 
@@ -645,10 +652,10 @@ public sealed partial class MultiMatchQueryDescriptor : SerializableDescriptor<M
 			JsonSerializer.Serialize(writer, FuzzinessValue, options);
 		}
 
-		if (FuzzyRewriteValue is not null)
+		if (!string.IsNullOrEmpty(FuzzyRewriteValue))
 		{
 			writer.WritePropertyName("fuzzy_rewrite");
-			JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			writer.WriteStringValue(FuzzyRewriteValue);
 		}
 
 		if (FuzzyTranspositionsValue.HasValue)

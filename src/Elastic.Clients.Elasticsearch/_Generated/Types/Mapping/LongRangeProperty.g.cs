@@ -45,6 +45,10 @@ public sealed partial class LongRangeProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
@@ -115,15 +119,15 @@ public sealed partial class LongRangePropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public LongRangePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public LongRangePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -141,6 +145,9 @@ public sealed partial class LongRangePropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public LongRangePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -153,15 +160,15 @@ public sealed partial class LongRangePropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public LongRangePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public LongRangePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -333,15 +340,15 @@ public sealed partial class LongRangePropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public LongRangePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public LongRangePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -359,6 +366,9 @@ public sealed partial class LongRangePropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public LongRangePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -371,15 +381,15 @@ public sealed partial class LongRangePropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public LongRangePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public LongRangePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public LongRangePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

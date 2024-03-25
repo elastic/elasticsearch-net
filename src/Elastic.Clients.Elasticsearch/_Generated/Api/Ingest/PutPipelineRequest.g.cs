@@ -124,10 +124,6 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal PutPipelineRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestPutPipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -149,13 +145,13 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 	private string? DescriptionValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-	private ProcessorDescriptor<TDocument> ProcessorsDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> ProcessorsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> ProcessorsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] ProcessorsDescriptorActions { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -188,7 +184,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public PutPipelineRequestDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -197,7 +193,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public PutPipelineRequestDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -206,7 +202,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public PutPipelineRequestDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -227,7 +223,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> Processors(ProcessorDescriptor<TDocument> descriptor)
+	public PutPipelineRequestDescriptor<TDocument> Processors(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptorAction = null;
@@ -236,7 +232,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> Processors(Action<ProcessorDescriptor<TDocument>> configure)
+	public PutPipelineRequestDescriptor<TDocument> Processors(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptor = null;
@@ -245,7 +241,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor<TDocument> Processors(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public PutPipelineRequestDescriptor<TDocument> Processors(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptor = null;
@@ -289,7 +285,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -298,7 +294,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -320,7 +316,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 		{
 			writer.WritePropertyName("processors");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(ProcessorsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(ProcessorsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ProcessorsDescriptorActions is not null)
@@ -329,7 +325,7 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 			writer.WriteStartArray();
 			foreach (var action in ProcessorsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -340,10 +336,10 @@ public sealed partial class PutPipelineRequestDescriptor<TDocument> : RequestDes
 			JsonSerializer.Serialize(writer, ProcessorsValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();
@@ -358,10 +354,6 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	internal PutPipelineRequestDescriptor(Action<PutPipelineRequestDescriptor> configure) => configure.Invoke(this);
 
 	public PutPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal PutPipelineRequestDescriptor()
 	{
 	}
 
@@ -386,13 +378,13 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 	private string? DescriptionValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? ProcessorsValue { get; set; }
-	private ProcessorDescriptor ProcessorsDescriptor { get; set; }
-	private Action<ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor ProcessorsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> ProcessorsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] ProcessorsDescriptorActions { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -425,7 +417,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public PutPipelineRequestDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -434,7 +426,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public PutPipelineRequestDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -443,7 +435,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public PutPipelineRequestDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -464,7 +456,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor Processors(ProcessorDescriptor descriptor)
+	public PutPipelineRequestDescriptor Processors(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptorAction = null;
@@ -473,7 +465,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor Processors(Action<ProcessorDescriptor> configure)
+	public PutPipelineRequestDescriptor Processors(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptor = null;
@@ -482,7 +474,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		return Self;
 	}
 
-	public PutPipelineRequestDescriptor Processors(params Action<ProcessorDescriptor>[] configure)
+	public PutPipelineRequestDescriptor Processors(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		ProcessorsValue = null;
 		ProcessorsDescriptor = null;
@@ -526,7 +518,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -535,7 +527,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -557,7 +549,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 		{
 			writer.WritePropertyName("processors");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(ProcessorsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(ProcessorsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ProcessorsDescriptorActions is not null)
@@ -566,7 +558,7 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 			writer.WriteStartArray();
 			foreach (var action in ProcessorsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -577,10 +569,10 @@ public sealed partial class PutPipelineRequestDescriptor : RequestDescriptor<Put
 			JsonSerializer.Serialize(writer, ProcessorsValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();

@@ -36,5 +36,6 @@ public sealed partial class DanglingIndex
 	[JsonInclude, JsonPropertyName("index_uuid")]
 	public string IndexUuid { get; init; }
 	[JsonInclude, JsonPropertyName("node_ids")]
-	public Elastic.Clients.Elasticsearch.Ids NodeIds { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string> NodeIds { get; init; }
 }

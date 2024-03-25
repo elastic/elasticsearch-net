@@ -191,7 +191,7 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 				var property = reader.GetString();
 				if (property == "aggregations" || property == "aggs")
 				{
-					variant.Aggregations = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary?>(ref reader, options);
+					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
 					continue;
 				}
 
@@ -329,7 +329,7 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
+					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortCombinations>?>(ref reader, options);
 					continue;
 				}
 
@@ -597,11 +597,11 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 	}
 }
 
-[JsonConverter(typeof(SearchRequestConverter))]
 /// <summary>
 /// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
 /// </summary>
-public partial class SearchRequest : PlainRequest<SearchRequestParameters>
+[JsonConverter(typeof(SearchRequestConverter))]
+public sealed partial class SearchRequest : PlainRequest<SearchRequestParameters>
 {
 	public SearchRequest()
 	{
@@ -797,7 +797,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <para>Defines the aggregations that are run as part of the search request.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>Collapses search results the values of the specified field.</para>
@@ -937,8 +937,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortCombinations))]
+	public ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>Indicates which source fields are returned for matching documents.<br/>These fields are returned in the hits._source property of the search response.</para>
@@ -998,25 +998,15 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 /// <summary>
 /// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
 /// </summary>
-public partial class SearchRequest<TInferDocument> : SearchRequest
-{
-	public SearchRequest() : base(typeof(TInferDocument))
-	{
-	}
-}
-
-/// <summary>
-/// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
-/// </summary>
 public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescriptor<SearchRequestDescriptor<TDocument>, SearchRequestParameters>
 {
 	internal SearchRequestDescriptor(Action<SearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public SearchRequestDescriptor() : this(typeof(TDocument))
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	public SearchRequestDescriptor(Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	public SearchRequestDescriptor()
 	{
 	}
 
@@ -1064,67 +1054,62 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? AggregationsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-	private Action<Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
 	private bool? ExplainValue { get; set; }
 	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? KnnValue { get; set; }
-	private KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
-	private Action<KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
-	private Action<KnnQueryDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> PostFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> PostFilterDescriptorAction { get; set; }
 	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Rank? RankValue { get; set; }
-	private RankDescriptor RankDescriptor { get; set; }
-	private Action<RankDescriptor> RankDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.RankDescriptor RankDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RankDescriptor> RankDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-	private Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
-	private Action<Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
-	private Action<Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-	private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
-	private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> SuggestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>> SuggestDescriptorAction { get; set; }
 	private long? TerminateAfterValue { get; set; }
 	private string? TimeoutValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
@@ -1134,27 +1119,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	/// <summary>
 	/// <para>Defines the aggregations that are run as part of the search request.</para>
 	/// </summary>
-	public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+	public SearchRequestDescriptor<TDocument> Aggregations(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>> selector)
 	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
+		AggregationsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>());
 		return Self;
 	}
 
@@ -1169,7 +1136,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Collapse(Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
 	{
 		CollapseValue = null;
 		CollapseDescriptorAction = null;
@@ -1177,7 +1144,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Collapse(Action<Core.Search.FieldCollapseDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> configure)
 	{
 		CollapseValue = null;
 		CollapseDescriptor = null;
@@ -1197,7 +1164,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> DocvalueFields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -1206,7 +1173,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptor = null;
@@ -1215,7 +1182,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	public SearchRequestDescriptor<TDocument> DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptor = null;
@@ -1254,7 +1221,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Fields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = null;
 		FieldsDescriptorAction = null;
@@ -1263,7 +1230,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Fields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -1272,7 +1239,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Fields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	public SearchRequestDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -1301,7 +1268,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Highlight(Core.Search.HighlightDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -1309,7 +1276,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Highlight(Action<Core.Search.HighlightDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -1338,7 +1305,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Knn(KnnQueryDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> descriptor)
 	{
 		KnnValue = null;
 		KnnDescriptorAction = null;
@@ -1347,7 +1314,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Knn(Action<KnnQueryDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -1356,7 +1323,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Knn(params Action<KnnQueryDescriptor<TDocument>>[] configure)
+	public SearchRequestDescriptor<TDocument> Knn(params Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>>[] configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -1385,7 +1352,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	public SearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor descriptor)
 	{
 		PitValue = null;
 		PitDescriptorAction = null;
@@ -1393,7 +1360,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	public SearchRequestDescriptor<TDocument> Pit(Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> configure)
 	{
 		PitValue = null;
 		PitDescriptor = null;
@@ -1412,7 +1379,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> PostFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptorAction = null;
@@ -1420,7 +1387,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> PostFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> PostFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
@@ -1448,7 +1415,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -1456,7 +1423,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -1475,7 +1442,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rank(RankDescriptor descriptor)
+	public SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.RankDescriptor descriptor)
 	{
 		RankValue = null;
 		RankDescriptorAction = null;
@@ -1483,7 +1450,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rank(Action<RankDescriptor> configure)
+	public SearchRequestDescriptor<TDocument> Rank(Action<Elastic.Clients.Elasticsearch.RankDescriptor> configure)
 	{
 		RankValue = null;
 		RankDescriptor = null;
@@ -1503,7 +1470,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rescore(Core.Search.RescoreDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> descriptor)
 	{
 		RescoreValue = null;
 		RescoreDescriptorAction = null;
@@ -1512,7 +1479,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rescore(Action<Core.Search.RescoreDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Rescore(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> configure)
 	{
 		RescoreValue = null;
 		RescoreDescriptor = null;
@@ -1521,7 +1488,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Rescore(params Action<Core.Search.RescoreDescriptor<TDocument>>[] configure)
+	public SearchRequestDescriptor<TDocument> Rescore(params Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] configure)
 	{
 		RescoreValue = null;
 		RescoreDescriptor = null;
@@ -1586,7 +1553,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Slice(SlicedScrollDescriptor<TDocument> descriptor)
+	public SearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> descriptor)
 	{
 		SliceValue = null;
 		SliceDescriptorAction = null;
@@ -1594,7 +1561,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
+	public SearchRequestDescriptor<TDocument> Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> configure)
 	{
 		SliceValue = null;
 		SliceDescriptor = null;
@@ -1605,39 +1572,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	/// <summary>
 	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
 	/// </summary>
-	public SearchRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public SearchRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
 		SortValue = sort;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SearchRequestDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -1679,7 +1616,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Suggest(Core.Search.SuggesterDescriptor descriptor)
+	public SearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument> descriptor)
 	{
 		SuggestValue = null;
 		SuggestDescriptorAction = null;
@@ -1687,7 +1624,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		return Self;
 	}
 
-	public SearchRequestDescriptor<TDocument> Suggest(Action<Core.Search.SuggesterDescriptor> configure)
+	public SearchRequestDescriptor<TDocument> Suggest(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>> configure)
 	{
 		SuggestValue = null;
 		SuggestDescriptor = null;
@@ -1743,17 +1680,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
+		if (AggregationsValue is not null)
 		{
 			writer.WritePropertyName("aggregations");
 			JsonSerializer.Serialize(writer, AggregationsValue, options);
@@ -1767,7 +1694,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (CollapseDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
 		}
 		else if (CollapseValue is not null)
 		{
@@ -1786,7 +1713,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		{
 			writer.WritePropertyName("docvalue_fields");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocvalueFieldsDescriptorActions is not null)
@@ -1795,7 +1722,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			writer.WriteStartArray();
 			foreach (var action in DocvalueFieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -1829,7 +1756,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		{
 			writer.WritePropertyName("fields");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorActions is not null)
@@ -1838,7 +1765,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -1863,7 +1790,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -1885,7 +1812,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (KnnDescriptorAction is not null)
 		{
 			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new KnnQueryDescriptor<TDocument>(KnnDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>(KnnDescriptorAction), options);
 		}
 		else if (KnnDescriptorActions is not null)
 		{
@@ -1894,7 +1821,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new KnnQueryDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>(action), options);
 			}
 
 			if (KnnDescriptorActions.Length > 1)
@@ -1920,7 +1847,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (PitDescriptorAction is not null)
 		{
 			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
 		}
 		else if (PitValue is not null)
 		{
@@ -1936,7 +1863,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (PostFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(PostFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(PostFilterDescriptorAction), options);
 		}
 		else if (PostFilterValue is not null)
 		{
@@ -1958,7 +1885,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -1974,7 +1901,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (RankDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, new RankDescriptor(RankDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RankDescriptor(RankDescriptorAction), options);
 		}
 		else if (RankValue is not null)
 		{
@@ -1990,7 +1917,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (RescoreDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(RescoreDescriptorAction), options);
 		}
 		else if (RescoreDescriptorActions is not null)
 		{
@@ -1999,7 +1926,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>(action), options);
 			}
 
 			if (RescoreDescriptorActions.Length > 1)
@@ -2049,7 +1976,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (SliceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
 		}
 		else if (SliceValue is not null)
 		{
@@ -2057,33 +1984,10 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			JsonSerializer.Serialize(writer, SliceValue, options);
 		}
 
-		if (SortDescriptor is not null)
+		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 		}
 
 		if (SourceValue is not null)
@@ -2112,7 +2016,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		else if (SuggestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, new Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>(SuggestDescriptorAction), options);
 		}
 		else if (SuggestValue is not null)
 		{
@@ -2161,7 +2065,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 {
 	internal SearchRequestDescriptor(Action<SearchRequestDescriptor> configure) => configure.Invoke(this);
 
-	public SearchRequestDescriptor(Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	public SearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
@@ -2213,67 +2117,62 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? AggregationsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
-	private Action<Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
 	private bool? ExplainValue { get; set; }
 	private IDictionary<string, object>? ExtValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
-	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? KnnValue { get; set; }
-	private KnnQueryDescriptor KnnDescriptor { get; set; }
-	private Action<KnnQueryDescriptor> KnnDescriptorAction { get; set; }
-	private Action<KnnQueryDescriptor>[] KnnDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.KnnQueryDescriptor KnnDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor> KnnDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor>[] KnnDescriptorActions { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
-	private Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
-	private Action<Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> PitDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilterValue { get; set; }
-	private QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor PostFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> PostFilterDescriptorAction { get; set; }
 	private bool? ProfileValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Rank? RankValue { get; set; }
-	private RankDescriptor RankDescriptor { get; set; }
-	private Action<RankDescriptor> RankDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.RankDescriptor RankDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RankDescriptor> RankDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? RescoreValue { get; set; }
-	private Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
-	private Action<Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
-	private Action<Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
-	private SlicedScrollDescriptor SliceDescriptor { get; set; }
-	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor SliceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? SortValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
 	private ICollection<string>? StatsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Suggester? SuggestValue { get; set; }
-	private Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
-	private Action<Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor SuggestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor> SuggestDescriptorAction { get; set; }
 	private long? TerminateAfterValue { get; set; }
 	private string? TimeoutValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
@@ -2283,27 +2182,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	/// <summary>
 	/// <para>Defines the aggregations that are run as part of the search request.</para>
 	/// </summary>
-	public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
+	public SearchRequestDescriptor Aggregations(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>> selector)
 	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
+		AggregationsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>());
 		return Self;
 	}
 
@@ -2318,7 +2199,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Collapse(Core.Search.FieldCollapseDescriptor descriptor)
+	public SearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor descriptor)
 	{
 		CollapseValue = null;
 		CollapseDescriptorAction = null;
@@ -2326,7 +2207,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Collapse(Action<Core.Search.FieldCollapseDescriptor> configure)
+	public SearchRequestDescriptor Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> configure)
 	{
 		CollapseValue = null;
 		CollapseDescriptor = null;
@@ -2346,7 +2227,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor DocvalueFields(QueryDsl.FieldAndFormatDescriptor descriptor)
+	public SearchRequestDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptorAction = null;
@@ -2355,7 +2236,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor DocvalueFields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+	public SearchRequestDescriptor DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptor = null;
@@ -2364,7 +2245,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor DocvalueFields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+	public SearchRequestDescriptor DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
 	{
 		DocvalueFieldsValue = null;
 		DocvalueFieldsDescriptor = null;
@@ -2403,7 +2284,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Fields(QueryDsl.FieldAndFormatDescriptor descriptor)
+	public SearchRequestDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
 	{
 		FieldsValue = null;
 		FieldsDescriptorAction = null;
@@ -2412,7 +2293,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Fields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+	public SearchRequestDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -2421,7 +2302,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Fields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+	public SearchRequestDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -2450,7 +2331,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Highlight(Core.Search.HighlightDescriptor descriptor)
+	public SearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -2458,7 +2339,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Highlight(Action<Core.Search.HighlightDescriptor> configure)
+	public SearchRequestDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -2487,7 +2368,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Knn(KnnQueryDescriptor descriptor)
+	public SearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnQueryDescriptor descriptor)
 	{
 		KnnValue = null;
 		KnnDescriptorAction = null;
@@ -2496,7 +2377,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Knn(Action<KnnQueryDescriptor> configure)
+	public SearchRequestDescriptor Knn(Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor> configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -2505,7 +2386,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Knn(params Action<KnnQueryDescriptor>[] configure)
+	public SearchRequestDescriptor Knn(params Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor>[] configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -2534,7 +2415,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Pit(Core.Search.PointInTimeReferenceDescriptor descriptor)
+	public SearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor descriptor)
 	{
 		PitValue = null;
 		PitDescriptorAction = null;
@@ -2542,7 +2423,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Pit(Action<Core.Search.PointInTimeReferenceDescriptor> configure)
+	public SearchRequestDescriptor Pit(Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> configure)
 	{
 		PitValue = null;
 		PitDescriptor = null;
@@ -2561,7 +2442,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor PostFilter(QueryDsl.QueryDescriptor descriptor)
+	public SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptorAction = null;
@@ -2569,7 +2450,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor PostFilter(Action<QueryDsl.QueryDescriptor> configure)
+	public SearchRequestDescriptor PostFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		PostFilterValue = null;
 		PostFilterDescriptor = null;
@@ -2597,7 +2478,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -2605,7 +2486,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public SearchRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -2624,7 +2505,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rank(RankDescriptor descriptor)
+	public SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.RankDescriptor descriptor)
 	{
 		RankValue = null;
 		RankDescriptorAction = null;
@@ -2632,7 +2513,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rank(Action<RankDescriptor> configure)
+	public SearchRequestDescriptor Rank(Action<Elastic.Clients.Elasticsearch.RankDescriptor> configure)
 	{
 		RankValue = null;
 		RankDescriptor = null;
@@ -2652,7 +2533,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rescore(Core.Search.RescoreDescriptor descriptor)
+	public SearchRequestDescriptor Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor descriptor)
 	{
 		RescoreValue = null;
 		RescoreDescriptorAction = null;
@@ -2661,7 +2542,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rescore(Action<Core.Search.RescoreDescriptor> configure)
+	public SearchRequestDescriptor Rescore(Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> configure)
 	{
 		RescoreValue = null;
 		RescoreDescriptor = null;
@@ -2670,7 +2551,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Rescore(params Action<Core.Search.RescoreDescriptor>[] configure)
+	public SearchRequestDescriptor Rescore(params Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] configure)
 	{
 		RescoreValue = null;
 		RescoreDescriptor = null;
@@ -2735,7 +2616,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Slice(SlicedScrollDescriptor descriptor)
+	public SearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScrollDescriptor descriptor)
 	{
 		SliceValue = null;
 		SliceDescriptorAction = null;
@@ -2743,7 +2624,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
+	public SearchRequestDescriptor Slice(Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> configure)
 	{
 		SliceValue = null;
 		SliceDescriptor = null;
@@ -2754,39 +2635,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	/// <summary>
 	/// <para>A comma-separated list of <field>:<direction> pairs.</para>
 	/// </summary>
-	public SearchRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public SearchRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortCombinations>? sort)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
 		SortValue = sort;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Sort(SortOptionsDescriptor descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Sort(Action<SortOptionsDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SearchRequestDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
 		return Self;
 	}
 
@@ -2828,7 +2679,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Suggest(Core.Search.SuggesterDescriptor descriptor)
+	public SearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor descriptor)
 	{
 		SuggestValue = null;
 		SuggestDescriptorAction = null;
@@ -2836,7 +2687,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		return Self;
 	}
 
-	public SearchRequestDescriptor Suggest(Action<Core.Search.SuggesterDescriptor> configure)
+	public SearchRequestDescriptor Suggest(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor> configure)
 	{
 		SuggestValue = null;
 		SuggestDescriptor = null;
@@ -2892,17 +2743,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
+		if (AggregationsValue is not null)
 		{
 			writer.WritePropertyName("aggregations");
 			JsonSerializer.Serialize(writer, AggregationsValue, options);
@@ -2916,7 +2757,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (CollapseDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
 		}
 		else if (CollapseValue is not null)
 		{
@@ -2935,7 +2776,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		{
 			writer.WritePropertyName("docvalue_fields");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocvalueFieldsDescriptorActions is not null)
@@ -2944,7 +2785,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 			writer.WriteStartArray();
 			foreach (var action in DocvalueFieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -2978,7 +2819,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		{
 			writer.WritePropertyName("fields");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FieldsDescriptorActions is not null)
@@ -2987,7 +2828,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 			writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -3012,7 +2853,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -3034,7 +2875,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (KnnDescriptorAction is not null)
 		{
 			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new KnnQueryDescriptor(KnnDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor(KnnDescriptorAction), options);
 		}
 		else if (KnnDescriptorActions is not null)
 		{
@@ -3043,7 +2884,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new KnnQueryDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor(action), options);
 			}
 
 			if (KnnDescriptorActions.Length > 1)
@@ -3069,7 +2910,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (PitDescriptorAction is not null)
 		{
 			writer.WritePropertyName("pit");
-			JsonSerializer.Serialize(writer, new Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor(PitDescriptorAction), options);
 		}
 		else if (PitValue is not null)
 		{
@@ -3085,7 +2926,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (PostFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("post_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(PostFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(PostFilterDescriptorAction), options);
 		}
 		else if (PostFilterValue is not null)
 		{
@@ -3107,7 +2948,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -3123,7 +2964,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (RankDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rank");
-			JsonSerializer.Serialize(writer, new RankDescriptor(RankDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RankDescriptor(RankDescriptorAction), options);
 		}
 		else if (RankValue is not null)
 		{
@@ -3139,7 +2980,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (RescoreDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore");
-			JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(RescoreDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(RescoreDescriptorAction), options);
 		}
 		else if (RescoreDescriptorActions is not null)
 		{
@@ -3148,7 +2989,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.Search.RescoreDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor(action), options);
 			}
 
 			if (RescoreDescriptorActions.Length > 1)
@@ -3198,7 +3039,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (SliceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new SlicedScrollDescriptor(SliceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SlicedScrollDescriptor(SliceDescriptorAction), options);
 		}
 		else if (SliceValue is not null)
 		{
@@ -3206,33 +3047,10 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 			JsonSerializer.Serialize(writer, SliceValue, options);
 		}
 
-		if (SortDescriptor is not null)
+		if (SortValue is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length > 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortCombinations>(SortValue, writer, options);
 		}
 
 		if (SourceValue is not null)
@@ -3261,7 +3079,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		else if (SuggestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("suggest");
-			JsonSerializer.Serialize(writer, new Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor(SuggestDescriptorAction), options);
 		}
 		else if (SuggestValue is not null)
 		{
