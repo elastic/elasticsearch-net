@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class ExplainRequestParameters : RequestParameters
+public sealed partial class ExplainRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Analyzer to use for the query string.<br/>This parameter can only be used when the `q` query string parameter is specified.</para>

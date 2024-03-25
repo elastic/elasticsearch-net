@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class RolloverRequestParameters : RequestParameters
+public sealed partial class RolloverRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover.</para>

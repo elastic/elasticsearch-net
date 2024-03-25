@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 
-public sealed class GetClusterSettingsRequestParameters : RequestParameters
+public sealed partial class GetClusterSettingsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>

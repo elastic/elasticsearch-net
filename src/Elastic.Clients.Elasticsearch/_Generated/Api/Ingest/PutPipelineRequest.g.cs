@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed class PutPipelineRequestParameters : RequestParameters
+public sealed partial class PutPipelineRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Required version for optimistic concurrency control for pipeline updates</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class GetDataLifecycleRequestParameters : RequestParameters
+public sealed partial class GetDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `open`, `closed`, `hidden`, `none`.</para>
