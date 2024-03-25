@@ -46,7 +46,7 @@ public class BulkSourceDeserialize
 
 		var pool = new SingleNodePool(new Uri("http://localhost:9200"));
 
-		var connection = new InMemoryTransportClient(Encoding.UTF8.GetBytes(json));
+		var connection = new InMemoryRequestInvoker(Encoding.UTF8.GetBytes(json));
 		var settings = new ElasticsearchClientSettings(pool, connection);
 		var client = new ElasticsearchClient(settings);
 
