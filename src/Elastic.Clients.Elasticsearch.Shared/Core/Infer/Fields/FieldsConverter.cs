@@ -22,8 +22,7 @@ internal sealed class FieldsConverter : JsonConverter<Fields>
 			Fields fields = reader.GetString();
 			return fields;
 		}
-
-		if (reader.TokenType == JsonTokenType.StartArray)
+		else if (reader.TokenType == JsonTokenType.StartArray)
 		{
 			var fields = new List<Field>();
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
@@ -43,19 +42,6 @@ internal sealed class FieldsConverter : JsonConverter<Fields>
 		if (value is null)
 		{
 			writer.WriteNullValue();
-			return;
-		}
-
-		if (value.ListOfFields.Count == 0)
-		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-			return;
-		}
-
-		if (value.ListOfFields.Count == 1)
-		{
-			JsonSerializer.Serialize(writer, value.ListOfFields[0], options);
 			return;
 		}
 
