@@ -56,7 +56,7 @@ namespace Tests.Core.Client
 
 			var headers = new Dictionary<string, IEnumerable<string>> { { "x-elastic-product", new[] { "Elasticsearch" } } };
 
-			var connection = new InMemoryTransportClient(responseBytes, statusCode, exception, contentType, headers);
+			var connection = new InMemoryRequestInvoker(responseBytes, statusCode, exception, contentType, headers);
 			var nodePool = new SingleNodePool(new Uri("http://localhost:9200"));
 			var defaultSettings = new ElasticsearchClientSettings(nodePool, connection)
 				.DefaultIndex("default-index");

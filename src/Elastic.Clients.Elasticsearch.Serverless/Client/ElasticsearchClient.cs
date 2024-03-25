@@ -25,7 +25,7 @@ public partial class ElasticsearchClient
 	// This should be updated if any of the code uses semantic conventions defined in newer schema versions.
 	private const string OpenTelemetrySchemaVersion = "https://opentelemetry.io/schemas/1.21.0";
 
-	private readonly HttpTransport<IElasticsearchClientSettings> _transport;
+	private readonly ITransport<IElasticsearchClientSettings> _transport;
 	internal static ConditionalWeakTable<JsonSerializerOptions, IElasticsearchClientSettings> SettingsTable { get; } = new();
 
 	/// <summary>
@@ -59,28 +59,28 @@ public partial class ElasticsearchClient
 	/// </summary>
 	/// <param name="elasticsearchClientSettings">The <see cref="IElasticsearchClientSettings"/> used to configure the client.</param>
 	public ElasticsearchClient(IElasticsearchClientSettings elasticsearchClientSettings)
-		: this(new DefaultHttpTransport<IElasticsearchClientSettings>(elasticsearchClientSettings))
+		: this(new DistributedTransport<IElasticsearchClientSettings>(elasticsearchClientSettings))
 	{
 	}
 
-	internal ElasticsearchClient(HttpTransport<IElasticsearchClientSettings> transport)
+	internal ElasticsearchClient(ITransport<IElasticsearchClientSettings> transport)
 	{
 		transport.ThrowIfNull(nameof(transport));
-		transport.Settings.ThrowIfNull(nameof(transport.Settings));
-		transport.Settings.RequestResponseSerializer.ThrowIfNull(
-			nameof(transport.Settings.RequestResponseSerializer));
-		transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
+		transport.Configuration.ThrowIfNull(nameof(transport.Configuration));
+		transport.Configuration.RequestResponseSerializer.ThrowIfNull(
+			nameof(transport.Configuration.RequestResponseSerializer));
+		transport.Configuration.Inferrer.ThrowIfNull(nameof(transport.Configuration.Inferrer));
 
 		_transport = transport;
 
 		SetupNamespaces();
 	}
 
-	public IElasticsearchClientSettings ElasticsearchClientSettings => _transport.Settings;
-	public Inferrer Infer => _transport.Settings.Inferrer;
-	public Serializer RequestResponseSerializer => _transport.Settings.RequestResponseSerializer;
-	public Serializer SourceSerializer => _transport.Settings.SourceSerializer;
-	public HttpTransport Transport => _transport;
+	public IElasticsearchClientSettings ElasticsearchClientSettings => _transport.Configuration;
+	public Inferrer Infer => _transport.Configuration.Inferrer;
+	public Serializer RequestResponseSerializer => _transport.Configuration.RequestResponseSerializer;
+	public Serializer SourceSerializer => _transport.Configuration.SourceSerializer;
+	public ITransport<IElasticsearchClientSettings> Transport => _transport;
 
 	private ProductCheckStatus _productCheckStatus;
 
