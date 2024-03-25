@@ -18,7 +18,7 @@ public class BulkResponseParstingTests : DocumentationTestBase
 	{
 		var client = TestClient.DefaultInMemoryClient;
 		var count = 100000;
-		var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count));
+		var bytes = client.RequestResponseSerializer.SerializeToBytes(ReturnBulkResponse(count), SerializationFormatting.None);
 		var x = Deserialize(bytes, client);
 		x.Items.Should().HaveCount(count).And.NotContain(i => i == null);
 	}
@@ -29,32 +29,33 @@ public class BulkResponseParstingTests : DocumentationTestBase
 		return client.RequestResponseSerializer.Deserialize<BulkResponse>(ms);
 	}
 
-	private static object BulkItemResponse() => new
+	private static object BulkItemResponse()
 	{
-		index = new
+		return new
 		{
-			_index = "nest-52cfd7aa",
-			_type = "project",
-			_id = "Kuhn LLC",
-			_version = 1,
-			_shards = new
+			index = new
 			{
-				total = 2,
-				successful = 1,
-				failed = 0
-			},
-			created = true,
-			status = 201
-		}
-	};
+				_index = "nest-52cfd7aa",
+				_type = "project",
+				_id = "Kuhn LLC",
+				_version = 1,
+				_shards = new { total = 2, successful = 1, failed = 0 },
+				created = true,
+				status = 201
+			}
+		};
+	}
 
 
-	private static object ReturnBulkResponse(int numberOfItems) => new
+	private static object ReturnBulkResponse(int numberOfItems)
 	{
-		took = 276,
-		errors = false,
-		items = Enumerable.Range(0, numberOfItems)
-			.Select(i => BulkItemResponse())
-			.ToArray()
-	};
+		return new
+		{
+			took = 276,
+			errors = false,
+			items = Enumerable.Range(0, numberOfItems)
+				.Select(i => BulkItemResponse())
+				.ToArray()
+		};
+	}
 }

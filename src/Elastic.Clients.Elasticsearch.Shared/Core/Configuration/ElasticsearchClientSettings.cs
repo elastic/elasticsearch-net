@@ -67,28 +67,28 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	public ElasticsearchClientSettings(NodePool nodePool, SourceSerializerFactory sourceSerializer)
 		: this(nodePool, null, sourceSerializer) { }
 
-	public ElasticsearchClientSettings(NodePool nodePool, TransportClient connection) : this(nodePool, connection, null) { }
+	public ElasticsearchClientSettings(NodePool nodePool, IRequestInvoker requestInvoker) : this(nodePool, requestInvoker, null) { }
 
-	public ElasticsearchClientSettings(NodePool nodePool, TransportClient connection, SourceSerializerFactory sourceSerializer) : this(
+	public ElasticsearchClientSettings(NodePool nodePool, IRequestInvoker requestInvoker, SourceSerializerFactory sourceSerializer) : this(
 		nodePool,
-		connection, sourceSerializer, null)
+		requestInvoker, sourceSerializer, null)
 	{
 	}
 
 	/// <summary>
 	/// Instantiate connection settings using a <see cref="SingleNodePool" /> using the provided
-	/// <see cref="InMemoryTransportClient" /> that never uses any IO.
+	/// <see cref="InMemoryRequestInvoker" /> that never uses any IO.
 	/// </summary>
-	public ElasticsearchClientSettings(InMemoryTransportClient inMemoryTransportClient)
+	public ElasticsearchClientSettings(InMemoryRequestInvoker inMemoryTransportClient)
 		: this(new SingleNodePool(new Uri("http://localhost:9200")), inMemoryTransportClient)
 	{
 	}
 
 	public ElasticsearchClientSettings(
 		NodePool nodePool,
-		TransportClient connection,
+		IRequestInvoker requestInvoker,
 		SourceSerializerFactory sourceSerializer,
-		IPropertyMappingProvider propertyMappingProvider) : base(nodePool, connection, sourceSerializer, propertyMappingProvider)
+		IPropertyMappingProvider propertyMappingProvider) : base(nodePool, requestInvoker, sourceSerializer, propertyMappingProvider)
 	{
 	}
 }
@@ -121,10 +121,10 @@ public abstract class
 
 	protected ElasticsearchClientSettingsBase(
 		NodePool nodePool,
-		TransportClient connection,
+		IRequestInvoker requestInvoker,
 		ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
 		IPropertyMappingProvider propertyMappingProvider)
-		: base(nodePool, connection, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
+		: base(nodePool, requestInvoker, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 	{
 		var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
 		var sourceSerializer = new DefaultSourceSerializer(this);
@@ -348,8 +348,8 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 
 	public ConnectionConfiguration(NodePool nodePool) : this(nodePool, null, null) { }
 
-	public ConnectionConfiguration(NodePool nodePool, TransportClient connection) : this(nodePool,
-		connection, null)
+	public ConnectionConfiguration(NodePool nodePool, IRequestInvoker requestInvoker) : this(nodePool,
+		requestInvoker, null)
 	{
 	}
 
@@ -358,9 +358,9 @@ public class ConnectionConfiguration : ConnectionConfigurationBase<ConnectionCon
 	{
 	}
 
-	public ConnectionConfiguration(NodePool nodePool, TransportClient connection,
+	public ConnectionConfiguration(NodePool nodePool, IRequestInvoker requestInvoker,
 		Serializer serializer)
-		: base(nodePool, connection, serializer)
+		: base(nodePool, requestInvoker, serializer)
 	{
 	}
 }
@@ -376,10 +376,10 @@ public abstract class
 {
 	private bool _includeServerStackTraceOnError;
 
-	protected ConnectionConfigurationBase(NodePool nodePool, TransportClient connection,
+	protected ConnectionConfigurationBase(NodePool nodePool, IRequestInvoker requestInvoker,
 		Serializer? serializer,
 		ProductRegistration registration = null)
-		: base(nodePool, connection, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
+		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient))) =>
 			UserAgent(ConnectionConfiguration.DefaultUserAgent);
 
 	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
