@@ -61,6 +61,8 @@ public sealed partial class TypeMapping
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+	[JsonInclude, JsonPropertyName("subobjects")]
+	public bool? Subobjects { get; set; }
 }
 
 public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescriptor<TypeMappingDescriptor<TDocument>>
@@ -101,6 +103,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
 	private SourceFieldDescriptor SourceDescriptor { get; set; }
 	private Action<SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+	private bool? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
 	{
@@ -338,6 +341,12 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	public TypeMappingDescriptor<TDocument> Subobjects(bool? subobjects = true)
+	{
+		SubobjectsValue = subobjects;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -507,6 +516,12 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
+		if (SubobjectsValue.HasValue)
+		{
+			writer.WritePropertyName("subobjects");
+			writer.WriteBooleanValue(SubobjectsValue.Value);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -549,6 +564,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
 	private SourceFieldDescriptor SourceDescriptor { get; set; }
 	private Action<SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+	private bool? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
 	{
@@ -786,6 +802,12 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
+	public TypeMappingDescriptor Subobjects(bool? subobjects = true)
+	{
+		SubobjectsValue = subobjects;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -953,6 +975,12 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		{
 			writer.WritePropertyName("_source");
 			JsonSerializer.Serialize(writer, SourceValue, options);
+		}
+
+		if (SubobjectsValue.HasValue)
+		{
+			writer.WritePropertyName("subobjects");
+			writer.WriteBooleanValue(SubobjectsValue.Value);
 		}
 
 		writer.WriteEndObject();

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public sealed class GetTasksRequestParameters : RequestParameters
+public sealed partial class GetTasksRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public sealed class AsyncSearchStatusRequestParameters : RequestParameters
+public sealed partial class AsyncSearchStatusRequestParameters : RequestParameters
 {
 }
 

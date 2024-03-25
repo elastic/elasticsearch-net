@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 
-public sealed class SubmitAsyncSearchRequestParameters : RequestParameters
+public sealed partial class SubmitAsyncSearchRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>

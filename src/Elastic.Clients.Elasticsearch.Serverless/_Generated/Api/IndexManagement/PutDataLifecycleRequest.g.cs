@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed class PutDataLifecycleRequestParameters : RequestParameters
+public sealed partial class PutDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match.<br/>Supports comma-separated values, such as `open,hidden`.<br/>Valid values are: `all`, `hidden`, `open`, `closed`, `none`.</para>

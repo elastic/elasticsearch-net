@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class MultiSearchRequestParameters : RequestParameters
+public sealed partial class MultiSearchRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.</para>
