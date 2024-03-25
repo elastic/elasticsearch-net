@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
-public sealed class ProcessorGrokRequestParameters : RequestParameters
+public sealed partial class ProcessorGrokRequestParameters : RequestParameters
 {
 }
 

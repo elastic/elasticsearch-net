@@ -67,6 +67,7 @@ public sealed partial class Query
 	public static Query HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
 	public static Query Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new Query("ids", idsQuery);
 	public static Query Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery intervalsQuery) => new Query("intervals", intervalsQuery);
+	public static Query Knn(Elastic.Clients.Elasticsearch.KnnQuery knnQuery) => new Query("knn", knnQuery);
 	public static Query Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery matchQuery) => new Query("match", matchQuery);
 	public static Query MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery matchAllQuery) => new Query("match_all", matchAllQuery);
 	public static Query MatchBoolPrefix(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery matchBoolPrefixQuery) => new Query("match_bool_prefix", matchBoolPrefixQuery);
@@ -230,6 +231,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 		if (propertyName == "intervals")
 		{
 			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery?>(ref reader, options);
+			reader.Read();
+			return new Query(propertyName, variant);
+		}
+
+		if (propertyName == "knn")
+		{
+			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.KnnQuery?>(ref reader, options);
 			reader.Read();
 			return new Query(propertyName, variant);
 		}
@@ -551,6 +559,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "intervals":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)value.Variant, options);
 					break;
+				case "knn":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.KnnQuery>(writer, (Elastic.Clients.Elasticsearch.KnnQuery)value.Variant, options);
+					break;
 				case "match":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)value.Variant, options);
 					break;
@@ -729,6 +740,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
 	public QueryDescriptor<TDocument> Intervals(IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
 	public QueryDescriptor<TDocument> Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
+	public QueryDescriptor<TDocument> Knn(KnnQuery knnQuery) => Set(knnQuery, "knn");
+	public QueryDescriptor<TDocument> Knn(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 	public QueryDescriptor<TDocument> Match(MatchQuery matchQuery) => Set(matchQuery, "match");
 	public QueryDescriptor<TDocument> Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
 	public QueryDescriptor<TDocument> MatchAll(MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
@@ -907,6 +920,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Intervals(IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
 	public QueryDescriptor Intervals(Action<IntervalsQueryDescriptor> configure) => Set(configure, "intervals");
 	public QueryDescriptor Intervals<TDocument>(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
+	public QueryDescriptor Knn(KnnQuery knnQuery) => Set(knnQuery, "knn");
+	public QueryDescriptor Knn(Action<KnnQueryDescriptor> configure) => Set(configure, "knn");
+	public QueryDescriptor Knn<TDocument>(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
 	public QueryDescriptor Match(MatchQuery matchQuery) => Set(matchQuery, "match");
 	public QueryDescriptor Match(Action<MatchQueryDescriptor> configure) => Set(configure, "match");
 	public QueryDescriptor Match<TDocument>(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");

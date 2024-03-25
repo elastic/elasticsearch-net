@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class MultiGetRequestParameters : RequestParameters
+public sealed partial class MultiGetRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>

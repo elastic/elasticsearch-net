@@ -105,9 +105,6 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName, Action<IcuNormalizationTokenFilterDescriptor> configure) => AssignVariant<IcuNormalizationTokenFilterDescriptor, IcuNormalizationTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor IcuNormalization(string tokenFilterName, IcuNormalizationTokenFilter icuNormalizationTokenFilter) => AssignVariant(tokenFilterName, icuNormalizationTokenFilter);
-	public TokenFiltersDescriptor IcuTokenizer(string tokenFilterName) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterName, null);
-	public TokenFiltersDescriptor IcuTokenizer(string tokenFilterName, Action<IcuTokenizerDescriptor> configure) => AssignVariant<IcuTokenizerDescriptor, IcuTokenizer>(tokenFilterName, configure);
-	public TokenFiltersDescriptor IcuTokenizer(string tokenFilterName, IcuTokenizer icuTokenizer) => AssignVariant(tokenFilterName, icuTokenizer);
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, Action<IcuTransformTokenFilterDescriptor> configure) => AssignVariant<IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, IcuTransformTokenFilter icuTransformTokenFilter) => AssignVariant(tokenFilterName, icuTransformTokenFilter);
@@ -238,8 +235,6 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<IcuFoldingTokenFilter>(ref reader, options);
 			case "icu_collation":
 				return JsonSerializer.Deserialize<IcuCollationTokenFilter>(ref reader, options);
-			case "icu_tokenizer":
-				return JsonSerializer.Deserialize<IcuTokenizer>(ref reader, options);
 			case "kuromoji_part_of_speech":
 				return JsonSerializer.Deserialize<KuromojiPartOfSpeechTokenFilter>(ref reader, options);
 			case "kuromoji_readingform":
@@ -355,9 +350,6 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return;
 			case "icu_collation":
 				JsonSerializer.Serialize(writer, value, typeof(IcuCollationTokenFilter), options);
-				return;
-			case "icu_tokenizer":
-				JsonSerializer.Serialize(writer, value, typeof(IcuTokenizer), options);
 				return;
 			case "kuromoji_part_of_speech":
 				JsonSerializer.Serialize(writer, value, typeof(KuromojiPartOfSpeechTokenFilter), options);

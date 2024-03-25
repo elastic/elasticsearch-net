@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class ForcemergeRequestParameters : RequestParameters
+public sealed partial class ForcemergeRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</para>

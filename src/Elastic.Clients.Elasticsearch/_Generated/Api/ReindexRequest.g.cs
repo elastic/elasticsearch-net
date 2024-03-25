@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class ReindexRequestParameters : RequestParameters
+public sealed partial class ReindexRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, the request refreshes affected shards to make this operation visible to search.</para>
