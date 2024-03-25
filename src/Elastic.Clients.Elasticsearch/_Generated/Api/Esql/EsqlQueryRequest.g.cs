@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-public sealed class EsqlQueryRequestParameters : RequestParameters
+public sealed partial class EsqlQueryRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>The character to use between values within a CSV row. Only valid for the CSV format.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class GetRequestParameters : RequestParameters
+public sealed partial class GetRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>

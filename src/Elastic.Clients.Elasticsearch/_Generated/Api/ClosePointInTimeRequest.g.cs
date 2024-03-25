@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class ClosePointInTimeRequestParameters : RequestParameters
+public sealed partial class ClosePointInTimeRequestParameters : RequestParameters
 {
 }
 

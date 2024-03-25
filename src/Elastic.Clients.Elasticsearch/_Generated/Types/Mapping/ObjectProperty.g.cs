@@ -47,6 +47,8 @@ public sealed partial class ObjectProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+	[JsonInclude, JsonPropertyName("subobjects")]
+	public bool? Subobjects { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "object";
@@ -69,6 +71,7 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private bool? SubobjectsValue { get; set; }
 
 	public ObjectPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -152,6 +155,12 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	public ObjectPropertyDescriptor<TDocument> Subobjects(bool? subobjects = true)
+	{
+		SubobjectsValue = subobjects;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -209,6 +218,12 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SubobjectsValue.HasValue)
+		{
+			writer.WritePropertyName("subobjects");
+			writer.WriteBooleanValue(SubobjectsValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("object");
 		writer.WriteEndObject();
@@ -224,7 +239,8 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 		Meta = MetaValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue
+		Store = StoreValue,
+		Subobjects = SubobjectsValue
 	};
 }
 
@@ -245,6 +261,7 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
+	private bool? SubobjectsValue { get; set; }
 
 	public ObjectPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
 	{
@@ -328,6 +345,12 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 		return Self;
 	}
 
+	public ObjectPropertyDescriptor Subobjects(bool? subobjects = true)
+	{
+		SubobjectsValue = subobjects;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -385,6 +408,12 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
+		if (SubobjectsValue.HasValue)
+		{
+			writer.WritePropertyName("subobjects");
+			writer.WriteBooleanValue(SubobjectsValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("object");
 		writer.WriteEndObject();
@@ -400,6 +429,7 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 		Meta = MetaValue,
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue
+		Store = StoreValue,
+		Subobjects = SubobjectsValue
 	};
 }

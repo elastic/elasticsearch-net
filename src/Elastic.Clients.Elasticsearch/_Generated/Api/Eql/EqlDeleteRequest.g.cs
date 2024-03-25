@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public sealed class EqlDeleteRequestParameters : RequestParameters
+public sealed partial class EqlDeleteRequestParameters : RequestParameters
 {
 }
 

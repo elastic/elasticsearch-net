@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class CloneIndexRequestParameters : RequestParameters
+public sealed partial class CloneIndexRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Period to wait for a connection to the master node.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed class GeoIpStatsRequestParameters : RequestParameters
+public sealed partial class GeoIpStatsRequestParameters : RequestParameters
 {
 }
 

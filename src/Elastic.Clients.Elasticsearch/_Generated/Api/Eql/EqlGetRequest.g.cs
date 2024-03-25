@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public sealed class EqlGetRequestParameters : RequestParameters
+public sealed partial class EqlGetRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Period for which the search and its results are stored on the cluster.<br/>Defaults to the keep_alive value set by the search’s EQL search API request.</para>

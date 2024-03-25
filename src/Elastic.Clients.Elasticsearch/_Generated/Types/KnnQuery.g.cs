@@ -24,10 +24,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class KnnQuery
+public sealed partial class KnnQuery : SearchQuery
 {
 	/// <summary>
 	/// <para>Boost value to apply to kNN scores</para>
@@ -77,6 +78,10 @@ public sealed partial class KnnQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("similarity")]
 	public float? Similarity { get; set; }
+
+	public static implicit operator Query(KnnQuery knnQuery) => QueryDsl.Query.Knn(knnQuery);
+
+	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("knn", this);
 }
 
 public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescriptor<KnnQueryDescriptor<TDocument>>

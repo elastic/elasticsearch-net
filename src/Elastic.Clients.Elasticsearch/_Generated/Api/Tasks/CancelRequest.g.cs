@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public sealed class CancelRequestParameters : RequestParameters
+public sealed partial class CancelRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expression of actions used to limit the request.</para>

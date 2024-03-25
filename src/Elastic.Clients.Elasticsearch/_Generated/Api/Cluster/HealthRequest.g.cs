@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed class HealthRequestParameters : RequestParameters
+public sealed partial class HealthRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Whether to expand wildcard expression to concrete indices that are open, closed or both.</para>
