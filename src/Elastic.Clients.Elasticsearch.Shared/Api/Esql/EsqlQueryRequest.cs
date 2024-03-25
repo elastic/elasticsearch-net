@@ -1,3 +1,7 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -54,7 +58,7 @@ internal sealed class EsqlResponseBuilder : CustomResponseBuilder
 	}
 }
 
-public sealed partial class EsqlQueryRequestParameters : RequestParameters
+public sealed partial class EsqlQueryRequestParameters
 {
 	private static readonly EsqlResponseBuilder ResponseBuilder = new();
 
