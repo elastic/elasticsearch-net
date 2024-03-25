@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed class DeleteDataLifecycleRequestParameters : RequestParameters
+public sealed partial class DeleteDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Whether wildcard expressions should get expanded to open or closed indices (default: open)</para>

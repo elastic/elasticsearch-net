@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class ClearScrollRequestParameters : RequestParameters
+public sealed partial class ClearScrollRequestParameters : RequestParameters
 {
 }
 

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 
-public sealed class ExecutePolicyRequestParameters : RequestParameters
+public sealed partial class ExecutePolicyRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, the request blocks other enrich policy execution requests until complete.</para>

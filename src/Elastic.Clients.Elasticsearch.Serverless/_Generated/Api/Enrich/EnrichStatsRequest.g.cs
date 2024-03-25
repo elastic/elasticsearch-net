@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 
-public sealed class EnrichStatsRequestParameters : RequestParameters
+public sealed partial class EnrichStatsRequestParameters : RequestParameters
 {
 }
 

@@ -2,6 +2,8 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+#if ELASTICSEARCH_STACK
+
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -64,3 +66,5 @@ public sealed partial class EsqlQueryRequestParameters
 
 	public EsqlQueryRequestParameters() => CustomResponseBuilder = ResponseBuilder;
 }
+
+#endif
