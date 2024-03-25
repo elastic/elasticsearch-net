@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class PutIndexTemplateRequestParameters : RequestParameters
+public sealed partial class PutIndexTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, this request cannot replace or update existing index templates.</para>

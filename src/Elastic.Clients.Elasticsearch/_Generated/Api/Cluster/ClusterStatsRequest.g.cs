@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed class ClusterStatsRequestParameters : RequestParameters
+public sealed partial class ClusterStatsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>

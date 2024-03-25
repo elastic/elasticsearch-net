@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class UpdateRequestParameters : RequestParameters
+public sealed partial class UpdateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Only perform the operation if the document has this primary term.</para>

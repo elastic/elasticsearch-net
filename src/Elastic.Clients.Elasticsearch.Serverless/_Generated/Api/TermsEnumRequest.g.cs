@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class TermsEnumRequestParameters : RequestParameters
+public sealed partial class TermsEnumRequestParameters : RequestParameters
 {
 }
 

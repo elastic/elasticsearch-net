@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed class AllocationExplainRequestParameters : RequestParameters
+public sealed partial class AllocationExplainRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If true, returns information about disk usage and shard sizes.</para>

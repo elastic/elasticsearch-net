@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class MultiTermVectorsRequestParameters : RequestParameters
+public sealed partial class MultiTermVectorsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>

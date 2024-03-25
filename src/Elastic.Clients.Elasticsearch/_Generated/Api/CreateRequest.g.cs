@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class CreateRequestParameters : RequestParameters
+public sealed partial class CreateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>

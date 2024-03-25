@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed class ExplainDataLifecycleRequestParameters : RequestParameters
+public sealed partial class ExplainDataLifecycleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>indicates if the API should return the default values the system uses for the index's lifecycle</para>

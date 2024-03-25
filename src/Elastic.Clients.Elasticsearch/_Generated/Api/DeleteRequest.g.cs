@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class DeleteRequestParameters : RequestParameters
+public sealed partial class DeleteRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Only perform the operation if the document has this primary term.</para>

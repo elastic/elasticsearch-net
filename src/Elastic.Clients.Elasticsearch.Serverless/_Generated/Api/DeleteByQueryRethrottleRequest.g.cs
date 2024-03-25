@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
-public sealed class DeleteByQueryRethrottleRequestParameters : RequestParameters
+public sealed partial class DeleteByQueryRethrottleRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>The throttle for this request in sub-requests per second.</para>

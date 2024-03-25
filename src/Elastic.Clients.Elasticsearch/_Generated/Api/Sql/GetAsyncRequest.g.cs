@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed class GetAsyncRequestParameters : RequestParameters
+public sealed partial class GetAsyncRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Separator for CSV results. The API only supports this parameter for CSV responses.</para>

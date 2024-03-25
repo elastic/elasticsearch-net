@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class MultiSearchTemplateRequestParameters : RequestParameters
+public sealed partial class MultiSearchTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, network round-trips are minimized for cross-cluster search requests.</para>

@@ -129,9 +129,9 @@ public sealed partial class RerouteProcessorDescriptor<TDocument> : Serializable
 	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <namespace> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
 	/// <para>default {{data_stream.namespace}}</para>
 	/// </summary>
-	public RerouteProcessorDescriptor<TDocument> Namespace(ICollection<string>? @namespace)
+	public RerouteProcessorDescriptor<TDocument> Namespace(ICollection<string>? value)
 	{
-		NamespaceValue = @namespace;
+		NamespaceValue = value;
 		return Self;
 	}
 
@@ -320,9 +320,9 @@ public sealed partial class RerouteProcessorDescriptor : SerializableDescriptor<
 	/// <para>Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).<br/>When resolving field references, the processor replaces invalid characters with _. Uses the <namespace> part<br/>of the index name as a fallback if all field references resolve to a null, missing, or non-string value.</para>
 	/// <para>default {{data_stream.namespace}}</para>
 	/// </summary>
-	public RerouteProcessorDescriptor Namespace(ICollection<string>? @namespace)
+	public RerouteProcessorDescriptor Namespace(ICollection<string>? value)
 	{
-		NamespaceValue = @namespace;
+		NamespaceValue = value;
 		return Self;
 	}
 
