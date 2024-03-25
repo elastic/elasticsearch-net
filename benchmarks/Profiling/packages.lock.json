@@ -31,8 +31,12 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.17",
-        "contentHash": "T8QGwTt3E+5b3YCkctyp+aUzJRZKiKZbbngCvell9tqhqfN4Po+Fbsw2ilX5Qm0JFnoIUzpIFJyTK6mCVf4rkg=="
+        "resolved": "0.4.18",
+        "contentHash": "Q9nGgYxB0r1jTkUf8zWbFKLk5JHliZhVU6vukdMLHLH/1EBKQvHzPahkrnV8KsvGOPFFqFAVOhQvaxpjXuS3TA==",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "8.0.0",
+          "System.Text.Json": "8.0.0"
+        }
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
@@ -85,10 +89,40 @@
           "Microsoft.SourceLink.Common": "1.1.1"
         }
       },
+      "System.Diagnostics.DiagnosticSource": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "c9xLpVz6PL9lp/djOWtk5KPDZq3cSYpmXoJQY524EOtuFl5z9ZtsotpsyrDW40U1DRnQSYvcPKEUV0X//u6gkQ==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg=="
+      },
+      "System.Text.Encodings.Web": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        }
+      },
+      "System.Text.Json": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "OdrZO2WjkiEG6ajEFRABTRCi/wuXQPxeV6g8xvUJqdxMvvuCCEk86zPla8UiIQJz3durtUEbNyY/3lIhS0yZvQ==",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Text.Encodings.Web": "8.0.0"
+        }
+      },
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.17, )"
+          "Elastic.Transport": "[0.4.18, )"
         }
       }
     }

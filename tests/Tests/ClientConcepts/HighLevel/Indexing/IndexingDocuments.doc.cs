@@ -18,7 +18,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 	public class Indexing : DocumentationTestBase
 	{
 		private readonly ElasticsearchClient _client = new(new ElasticsearchClientSettings(
-			new SingleNodePool(new Uri("http://localhost:9200")), new InMemoryTransportClient()));
+			new SingleNodePool(new Uri("http://localhost:9200")), new InMemoryRequestInvoker()));
 
 		/// hide
 		public class Person
@@ -180,7 +180,7 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		* Multiple documents can be indexed using the `BulkAll` method and `Wait()` extension method.
 		*
 		* This helper exposes functionality to automatically retry / backoff in the event of an indexing failure,
-	    * and to control the number of documents indexed in a single HTTP request. In the example below each request will contain 1000 documents,
+		* and to control the number of documents indexed in a single HTTP request. In the example below each request will contain 1000 documents,
 		* chunked from the original input. In the event of a large number of documents this could result in many HTTP requests, each containing
 		* 1000 documents (the last request may contain less, depending on the total number).
 		*
@@ -241,8 +241,8 @@ namespace Tests.ClientConcepts.HighLevel.Indexing
 		//* * `BufferToBulk` to customize individual operations within the bulk request before it is dispatched to the server
 		//* * `RetryDocumentPredicate` to decide if a document that failed to be indexed should be retried
 		//* * `DroppedDocumentCallback` to  determine what to do in the event a document is not indexed, even after retrying
- 		//	*
- 		//	* The following example demonstrates some of these methods, in addition to using a `BulkAllObserver` to subscribe to
+		//	*
+		//	* The following example demonstrates some of these methods, in addition to using a `BulkAllObserver` to subscribe to
 		//* the bulk indexing process and take some action on each successful bulk response, when an error occurs, and when
 		//* the process has finished.
 		//*
