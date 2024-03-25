@@ -1,7 +1,7 @@
-{
+﻿{
   params: {
     person: {
-      json: { "forename": "raw_json" }
+      forename: raw_json
     }
   },
   source: source
