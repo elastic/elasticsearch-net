@@ -1,0 +1,130 @@
+name: 'CD'
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        description: 'The release flavor (either ''stack'' or ''serverless'')'
+        type: 'string'
+        required: true
+      solution:
+        description: 'The filename of the .NET solution file'
+        type: 'string'
+        required: true
+      release_tag:
+        description: 'The release tag (release version)'
+        type: 'string'
+        required: true
+      release_body:
+        description: 'The release body (release notes)'
+        type: 'string'
+        required: true
+    secrets:
+      NUGET_API_KEY:
+        required: true
+
+concurrency:
+  group: 'release-${{ inputs.flavor }}'
+  cancel-in-progress: false
+
+env:
+  # Configuration
+  BUILD_CONFIG: 'Release'
+  GLOBAL_JSON_FILE: 'global.json'
+  LOCKFILE_PATTERN: '**/packages.lock.json'
+  PACKAGE_PATH: 'nupkg'
+  # .NET SDK related environment variables
+  DOTNET_NOLOGO: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: 0
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Parse Version'
+        id: 'version'
+        uses: 'zyactions/semver@v1'
+        with:
+          version: ${{ inputs.release_tag }}
+          prefixes: 'serverless-'
+
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: '.NET Setup'
+        uses: 'actions/setup-dotnet@v4'
+        with:
+          global-json-file: '${{ github.workspace }}/${{ env.GLOBAL_JSON_FILE }}'
+
+      - name: '.NET Cache Packages'
+        uses: 'actions/cache@v4'
+        with:
+          path: '~/.nuget/packages'
+          key: '${{ runner.os }}-nuget-${{ inputs.flavor }}-${{ hashFiles(env.LOCKFILE_PATTERN) }}'
+          restore-keys: '${{ runner.os }}-nuget-${{ inputs.flavor }}-'
+
+      - name: '.NET Restore'
+        run: >-
+          dotnet restore "${{ github.workspace }}/${{ inputs.solution }}"
+
+      - name: '.NET Pack'
+        env:
+          # The complete semver version string
+          CURRENT_VERSION: ${{ steps.version.outputs.version }}
+          # Assembly version is sticky to MAJOR.0.0.0 to avoid binding redirects because we strong name our assemblies
+          CURRENT_ASSEMBLY_VERSION: '${{ steps.version.outputs.major }}.0.0.0'
+          # File version reflects actual version number without prelease and build since these are not allowed in its struct
+          CURRENT_ASSEMBLY_FILE_VERSION: '${{ steps.version.outputs.major }}.${{ steps.version.outputs.minor }}.${{ steps.version.outputs.patch }}'
+        run: >-
+          dotnet pack
+          "${{ github.workspace }}/${{ inputs.solution }}"
+          --no-restore
+          --configuration "${{ env.BUILD_CONFIG }}"
+          -p:ContinuousIntegrationBuild=true
+          -p:CurrentVersion=${{ env.CURRENT_VERSION }}
+          -p:CurrentAssemblyVersion=${{ env.CURRENT_ASSEMBLY_VERSION }}
+          -p:CurrentAssemblyFileVersion=${{ env.CURRENT_ASSEMBLY_FILE_VERSION }}
+          -o "${{ github.workspace }}/${{ env.PACKAGE_PATH }}"
+
+      - name: 'Upload Artifacts'
+        uses: 'actions/upload-artifact@v4'
+        with:
+          name: 'packages'
+          path: '${{ github.workspace }}/${{ env.PACKAGE_PATH }}'
+          if-no-files-found: 'error'
+          retention-days: 1
+
+  publish:
+    name: Publish to ${{ matrix.feed.name }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        feed:
+          - { name: 'NuGet' , source: 'https://api.nuget.org/v3/index.json'                                   , key: 'NUGET_API_KEY' }
+          # - { name: 'GitHub', source: 'https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json', key: 'GITHUB_TOKEN'  }
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - name: '.NET Setup'
+        uses: 'actions/setup-dotnet@v4'
+        with:
+          global-json-file: '${{ github.workspace }}/${{ env.GLOBAL_JSON_FILE }}'
+
+      - name: 'Download Artifacts'
+        uses: actions/download-artifact@v4
+        with:
+          name: 'packages'
+          path: '${{ github.workspace }}/${{ env.PACKAGE_PATH }}'
+
+      - name: '.NET NuGet Push'
+        run: >-
+          dotnet nuget push ${{ format('{0}/{1}/*.nupkg', github.workspace, env.PACKAGE_PATH) }}
+          --source ${{ matrix.feed.source }}
+          --api-key ${{ secrets[matrix.feed.key] }}
+          --skip-duplicate
