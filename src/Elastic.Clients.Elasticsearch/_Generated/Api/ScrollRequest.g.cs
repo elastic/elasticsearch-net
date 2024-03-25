@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class ScrollRequestParameters : RequestParameters
+public sealed partial class ScrollRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.</para>

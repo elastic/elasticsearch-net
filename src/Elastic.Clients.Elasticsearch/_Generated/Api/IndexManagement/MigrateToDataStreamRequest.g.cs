@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class MigrateToDataStreamRequestParameters : RequestParameters
+public sealed partial class MigrateToDataStreamRequestParameters : RequestParameters
 {
 }
 

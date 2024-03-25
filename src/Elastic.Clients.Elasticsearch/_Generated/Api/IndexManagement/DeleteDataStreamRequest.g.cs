@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class DeleteDataStreamRequestParameters : RequestParameters
+public sealed partial class DeleteDataStreamRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Type of data stream that wildcard patterns can match. Supports comma-separated values,such as `open,hidden`.</para>

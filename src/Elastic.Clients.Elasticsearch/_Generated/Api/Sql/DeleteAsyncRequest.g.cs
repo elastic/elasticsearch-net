@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed class DeleteAsyncRequestParameters : RequestParameters
+public sealed partial class DeleteAsyncRequestParameters : RequestParameters
 {
 }
 

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed class SimulateTemplateRequestParameters : RequestParameters
+public sealed partial class SimulateTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed class PendingTasksRequestParameters : RequestParameters
+public sealed partial class PendingTasksRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, the request retrieves information from the local node only.<br/>If `false`, information is retrieved from the master node.</para>

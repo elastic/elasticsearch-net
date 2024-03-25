@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class GetScriptLanguagesRequestParameters : RequestParameters
+public sealed partial class GetScriptLanguagesRequestParameters : RequestParameters
 {
 }
 

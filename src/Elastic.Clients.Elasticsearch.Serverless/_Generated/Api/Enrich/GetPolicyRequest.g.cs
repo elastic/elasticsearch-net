@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 
-public sealed class GetPolicyRequestParameters : RequestParameters
+public sealed partial class GetPolicyRequestParameters : RequestParameters
 {
 }
 

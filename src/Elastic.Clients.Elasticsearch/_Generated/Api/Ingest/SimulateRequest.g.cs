@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed class SimulateRequestParameters : RequestParameters
+public sealed partial class SimulateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, the response includes output data for each processor in the executed pipeline.</para>
