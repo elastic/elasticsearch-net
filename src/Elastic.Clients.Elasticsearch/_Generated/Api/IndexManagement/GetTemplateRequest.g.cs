@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class GetTemplateRequestParameters : RequestParameters
+public sealed partial class GetTemplateRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>If `true`, returns settings in flat format.</para>

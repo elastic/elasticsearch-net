@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed class GetScriptRequestParameters : RequestParameters
+public sealed partial class GetScriptRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Specify timeout for connection to master</para>

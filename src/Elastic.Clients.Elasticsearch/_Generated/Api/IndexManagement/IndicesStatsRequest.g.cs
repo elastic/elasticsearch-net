@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed class IndicesStatsRequestParameters : RequestParameters
+public sealed partial class IndicesStatsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
-public sealed class ExploreRequestParameters : RequestParameters
+public sealed partial class ExploreRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Custom value used to route operations to a specific shard.</para>

@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
-public sealed class GetAsyncSearchRequestParameters : RequestParameters
+public sealed partial class GetAsyncSearchRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>Specifies how long the async search should be available in the cluster.<br/>When not specified, the `keep_alive` set with the corresponding submit async request will be used.<br/>Otherwise, it is possible to override the value and extend the validity of the request.<br/>When this period expires, the search, if still running, is cancelled.<br/>If the search is completed, its saved results are deleted.</para>

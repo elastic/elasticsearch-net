@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
-public sealed class ListDanglingIndicesRequestParameters : RequestParameters
+public sealed partial class ListDanglingIndicesRequestParameters : RequestParameters
 {
 }
 

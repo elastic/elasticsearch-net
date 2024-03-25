@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-public sealed class DeletePolicyRequestParameters : RequestParameters
+public sealed partial class DeletePolicyRequestParameters : RequestParameters
 {
 }
 
