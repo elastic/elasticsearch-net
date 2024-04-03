@@ -601,7 +601,7 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 /// <para>Returns search hits that match the query defined in the request.<br/>You can provide search queries using the `q` query string parameter or the request body.<br/>If both are specified, only the query parameter is used.</para>
 /// </summary>
 [JsonConverter(typeof(SearchRequestConverter))]
-public sealed partial class SearchRequest : PlainRequest<SearchRequestParameters>
+public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 {
 	public SearchRequest()
 	{

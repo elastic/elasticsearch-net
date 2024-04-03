@@ -37,6 +37,17 @@ public partial class SearchRequest
 	}
 }
 
+public partial class SearchRequest<TInferDocument> : SearchRequest
+{
+	public SearchRequest(Indices? indices) : base(indices)
+	{
+	}
+
+	public SearchRequest() : base(typeof(TInferDocument))
+	{
+	}
+}
+
 public sealed partial class SearchRequestDescriptor<TDocument>
 {
 	public SearchRequestDescriptor<TDocument> Index(Indices indices)
