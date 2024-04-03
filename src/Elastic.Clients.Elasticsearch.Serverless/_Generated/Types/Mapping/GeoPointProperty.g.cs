@@ -43,12 +43,22 @@ public sealed partial class GeoPointProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
+	[JsonInclude, JsonPropertyName("index")]
+	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
 	public Elastic.Clients.Elasticsearch.Serverless.GeoLocation? NullValue { get; set; }
+	[JsonInclude, JsonPropertyName("on_script_error")]
+	public Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
@@ -73,9 +83,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IgnoreZValueValue { get; set; }
+	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.GeoLocation? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -103,15 +116,15 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public GeoPointPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public GeoPointPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -135,6 +148,15 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor<TDocument> Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public GeoPointPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -147,23 +169,35 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public GeoPointPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public GeoPointPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public GeoPointPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -224,6 +258,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -236,10 +276,22 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, NullValueValue, options);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(SimilarityValue))
@@ -268,9 +320,12 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
+		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = ScriptValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
@@ -291,9 +346,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IgnoreZValueValue { get; set; }
+	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.GeoLocation? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -321,15 +379,15 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public GeoPointPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public GeoPointPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -353,6 +411,15 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor Index(bool? index = true)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public GeoPointPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -365,23 +432,35 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public GeoPointPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public GeoPointPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public GeoPointPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public GeoPointPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public GeoPointPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -442,6 +521,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -454,10 +539,22 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, NullValueValue, options);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(SimilarityValue))
@@ -486,9 +583,12 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
+		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = ScriptValue,
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};

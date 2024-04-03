@@ -17,14 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 
@@ -58,7 +58,8 @@ internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPha
 				return EnrichPolicyPhase.Complete;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, EnrichPolicyPhase value, JsonSerializerOptions options)
@@ -109,7 +110,8 @@ internal sealed class PolicyTypeConverter : JsonConverter<PolicyType>
 				return PolicyType.GeoMatch;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PolicyType value, JsonSerializerOptions options)

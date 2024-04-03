@@ -35,7 +35,7 @@ public sealed partial class ScriptScoreFunction
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script Script { get; set; }
 
-	public static implicit operator FunctionScore(ScriptScoreFunction scriptScoreFunction) => QueryDsl.FunctionScore.ScriptScore(scriptScoreFunction);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore(ScriptScoreFunction scriptScoreFunction) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore.ScriptScore(scriptScoreFunction);
 }
 
 public sealed partial class ScriptScoreFunctionDescriptor : SerializableDescriptor<ScriptScoreFunctionDescriptor>

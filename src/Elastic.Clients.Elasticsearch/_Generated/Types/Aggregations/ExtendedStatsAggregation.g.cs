@@ -27,170 +27,31 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class ExtendedStatsAggregationConverter : JsonConverter<ExtendedStatsAggregation>
+public sealed partial class ExtendedStatsAggregation
 {
-	public override ExtendedStatsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "extended_stats")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new ExtendedStatsAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("sigma"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Sigma = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ExtendedStatsAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("extended_stats");
-		writer.WriteStartObject();
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		if (value.Sigma.HasValue)
-		{
-			writer.WritePropertyName("sigma");
-			writer.WriteNumberValue(value.Sigma.Value);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(ExtendedStatsAggregationConverter))]
-public sealed partial class ExtendedStatsAggregation : SearchAggregation
-{
-	public ExtendedStatsAggregation(string name, Field field) : this(name) => Field = field;
-	public ExtendedStatsAggregation(string name) => Name = name;
-
-	internal ExtendedStatsAggregation()
-	{
-	}
-
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	public IDictionary<string, object>? Meta { get; set; }
-	public FieldValue? Missing { get; set; }
-	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
 	/// <para>The number of standard deviations above/below the mean to display.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("sigma")]
 	public double? Sigma { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(ExtendedStatsAggregation extendedStatsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ExtendedStats(extendedStatsAggregation);
 }
 
 public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : SerializableDescriptor<ExtendedStatsAggregationDescriptor<TDocument>>
@@ -203,18 +64,32 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private double? SigmaValue { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	public ExtendedStatsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -226,13 +101,10 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
-	public ExtendedStatsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ExtendedStatsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public ExtendedStatsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -256,8 +128,6 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("extended_stats");
-		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -289,13 +159,6 @@ public sealed partial class ExtendedStatsAggregationDescriptor<TDocument> : Seri
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -309,23 +172,31 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private double? SigmaValue { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ExtendedStatsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -338,13 +209,10 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
-	public ExtendedStatsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ExtendedStatsAggregationDescriptor Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public ExtendedStatsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -368,8 +236,6 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("extended_stats");
-		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -398,13 +264,6 @@ public sealed partial class ExtendedStatsAggregationDescriptor : SerializableDes
 		{
 			writer.WritePropertyName("sigma");
 			writer.WriteNumberValue(SigmaValue.Value);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();

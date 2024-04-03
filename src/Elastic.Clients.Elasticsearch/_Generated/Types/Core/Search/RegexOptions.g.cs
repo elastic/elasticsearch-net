@@ -33,7 +33,7 @@ public sealed partial class RegexOptions
 	/// <para>Optional operators for the regular expression.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flags")]
-	public Union<int?, string?>? Flags { get; set; }
+	public object? Flags { get; set; }
 
 	/// <summary>
 	/// <para>Maximum number of automaton states required for the query.</para>
@@ -50,13 +50,13 @@ public sealed partial class RegexOptionsDescriptor : SerializableDescriptor<Rege
 	{
 	}
 
-	private Union<int?, string?>? FlagsValue { get; set; }
+	private object? FlagsValue { get; set; }
 	private int? MaxDeterminizedStatesValue { get; set; }
 
 	/// <summary>
 	/// <para>Optional operators for the regular expression.</para>
 	/// </summary>
-	public RegexOptionsDescriptor Flags(Union<int?, string?>? flags)
+	public RegexOptionsDescriptor Flags(object? flags)
 	{
 		FlagsValue = flags;
 		return Self;

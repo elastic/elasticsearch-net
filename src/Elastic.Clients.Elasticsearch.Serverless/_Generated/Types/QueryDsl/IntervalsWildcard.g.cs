@@ -46,6 +46,9 @@ public sealed partial class IntervalsWildcard
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? UseField { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Intervals(IntervalsWildcard intervalsWildcard) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Intervals.Wildcard(intervalsWildcard);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery(IntervalsWildcard intervalsWildcard) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery.Wildcard(intervalsWildcard);
 }
 
 public sealed partial class IntervalsWildcardDescriptor<TDocument> : SerializableDescriptor<IntervalsWildcardDescriptor<TDocument>>
@@ -91,6 +94,15 @@ public sealed partial class IntervalsWildcardDescriptor<TDocument> : Serializabl
 	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
 	/// </summary>
 	public IntervalsWildcardDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `pattern` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
+	public IntervalsWildcardDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
 	{
 		UseFieldValue = useField;
 		return Self;

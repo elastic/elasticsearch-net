@@ -27,12 +27,15 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class ScriptQuery : SearchQuery
+public sealed partial class ScriptQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Contains a script to run as a query.<br/>This script must return a boolean value, `true` or `false`.</para>
@@ -40,9 +43,7 @@ public sealed partial class ScriptQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script Script { get; set; }
 
-	public static implicit operator Query(ScriptQuery scriptQuery) => QueryDsl.Query.Script(scriptQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("script", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(ScriptQuery scriptQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Script(scriptQuery);
 }
 
 public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<ScriptQueryDescriptor>
@@ -57,6 +58,9 @@ public sealed partial class ScriptQueryDescriptor : SerializableDescriptor<Scrip
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ScriptQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

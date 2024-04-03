@@ -17,14 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Eql;
 
@@ -56,7 +56,8 @@ internal sealed class ResultPositionConverter : JsonConverter<ResultPosition>
 				return ResultPosition.Head;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ResultPosition value, JsonSerializerOptions options)

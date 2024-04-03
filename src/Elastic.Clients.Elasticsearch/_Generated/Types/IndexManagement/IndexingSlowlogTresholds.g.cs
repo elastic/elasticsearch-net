@@ -45,8 +45,8 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? IndexValue { get; set; }
-	private SlowlogTresholdLevelsDescriptor IndexDescriptor { get; set; }
-	private Action<SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor IndexDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor> IndexDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.json`.<br/>Log and the thresholds are configured in the same way as the search slowlog.</para>
@@ -59,7 +59,7 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 		return Self;
 	}
 
-	public IndexingSlowlogTresholdsDescriptor Index(SlowlogTresholdLevelsDescriptor descriptor)
+	public IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor descriptor)
 	{
 		IndexValue = null;
 		IndexDescriptorAction = null;
@@ -67,7 +67,7 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 		return Self;
 	}
 
-	public IndexingSlowlogTresholdsDescriptor Index(Action<SlowlogTresholdLevelsDescriptor> configure)
+	public IndexingSlowlogTresholdsDescriptor Index(Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor> configure)
 	{
 		IndexValue = null;
 		IndexDescriptor = null;
@@ -86,7 +86,7 @@ public sealed partial class IndexingSlowlogTresholdsDescriptor : SerializableDes
 		else if (IndexDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, new SlowlogTresholdLevelsDescriptor(IndexDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor(IndexDescriptorAction), options);
 		}
 		else if (IndexValue is not null)
 		{

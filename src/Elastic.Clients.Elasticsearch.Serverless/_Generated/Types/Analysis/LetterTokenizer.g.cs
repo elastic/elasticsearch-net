@@ -57,10 +57,10 @@ public sealed partial class LetterTokenizerDescriptor : SerializableDescriptor<L
 		writer.WriteStartObject();
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("letter");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -64,6 +64,15 @@ public sealed partial class TopMetricsValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A field to return as a metric.</para>
+	/// </summary>
+	public TopMetricsValueDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();

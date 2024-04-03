@@ -88,74 +88,74 @@ internal sealed partial class MatchPhraseQueryConverter : JsonConverter<MatchPhr
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize MatchPhraseQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(value.Analyzer))
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (!string.IsNullOrEmpty(value.Analyzer))
-			{
-				writer.WritePropertyName("analyzer");
-				writer.WriteStringValue(value.Analyzer);
-			}
-
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(value.Query);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Slop.HasValue)
-			{
-				writer.WritePropertyName("slop");
-				writer.WriteNumberValue(value.Slop.Value);
-			}
-
-			if (value.ZeroTermsQuery is not null)
-			{
-				writer.WritePropertyName("zero_terms_query");
-				JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("analyzer");
+			writer.WriteStringValue(value.Analyzer);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.Boost.HasValue)
+		{
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
+		}
+
+		writer.WritePropertyName("query");
+		writer.WriteStringValue(value.Query);
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (value.Slop.HasValue)
+		{
+			writer.WritePropertyName("slop");
+			writer.WriteNumberValue(value.Slop.Value);
+		}
+
+		if (value.ZeroTermsQuery is not null)
+		{
+			writer.WritePropertyName("zero_terms_query");
+			JsonSerializer.Serialize(writer, value.ZeroTermsQuery, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(MatchPhraseQueryConverter))]
-public sealed partial class MatchPhraseQuery : SearchQuery
+public sealed partial class MatchPhraseQuery
 {
-	public MatchPhraseQuery(Field field)
+	public MatchPhraseQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
-
 	/// <summary>
 	/// <para>Analyzer used to convert the text in the query value into tokens.</para>
 	/// </summary>
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Query terms that are analyzed and turned into a phrase query.</para>
 	/// </summary>
 	public string Query { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Maximum number of positions allowed between matching tokens.</para>
@@ -166,33 +166,16 @@ public sealed partial class MatchPhraseQuery : SearchQuery
 	/// <para>Indicates whether no documents are returned if the `analyzer` removes all tokens, such as when using a `stop` filter.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
-	public static implicit operator Query(MatchPhraseQuery matchPhraseQuery) => QueryDsl.Query.MatchPhrase(matchPhraseQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("match_phrase", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(MatchPhraseQuery matchPhraseQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.MatchPhrase(matchPhraseQuery);
 }
 
 public sealed partial class MatchPhraseQueryDescriptor<TDocument> : SerializableDescriptor<MatchPhraseQueryDescriptor<TDocument>>
 {
 	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal MatchPhraseQueryDescriptor() : base()
+	public MatchPhraseQueryDescriptor() : base()
 	{
-	}
-
-	public MatchPhraseQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public MatchPhraseQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private string? AnalyzerValue { get; set; }
@@ -212,6 +195,9 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -225,6 +211,12 @@ public sealed partial class MatchPhraseQueryDescriptor<TDocument> : Serializable
 	}
 
 	public MatchPhraseQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public MatchPhraseQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -311,15 +303,8 @@ public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<
 {
 	internal MatchPhraseQueryDescriptor(Action<MatchPhraseQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal MatchPhraseQueryDescriptor() : base()
+	public MatchPhraseQueryDescriptor() : base()
 	{
-	}
-
-	public MatchPhraseQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private string? AnalyzerValue { get; set; }
@@ -339,6 +324,9 @@ public sealed partial class MatchPhraseQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MatchPhraseQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

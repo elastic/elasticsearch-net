@@ -27,440 +27,95 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class TermsAggregationConverter : JsonConverter<TermsAggregation>
+public sealed partial class TermsAggregation
 {
-	public override TermsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "terms")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new TermsAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("collect_mode"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.CollectMode = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("exclude"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Exclude = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("execution_hint"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ExecutionHint = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("include"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Include = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing_bucket"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MissingBucket = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing_order"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MissingOrder = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("order"))
-				{
-					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Order = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("shard_size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShardSize = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("show_term_doc_count_error"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShowTermDocCountError = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Size = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("value_type"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ValueType = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TermsAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("terms");
-		writer.WriteStartObject();
-		if (value.CollectMode is not null)
-		{
-			writer.WritePropertyName("collect_mode");
-			JsonSerializer.Serialize(writer, value.CollectMode, options);
-		}
-
-		if (value.Exclude is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, value.Exclude, options);
-		}
-
-		if (value.ExecutionHint is not null)
-		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, value.ExecutionHint, options);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Include is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, value.Include, options);
-		}
-
-		if (value.MinDocCount.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(value.MinDocCount.Value);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.MissingBucket.HasValue)
-		{
-			writer.WritePropertyName("missing_bucket");
-			writer.WriteBooleanValue(value.MissingBucket.Value);
-		}
-
-		if (value.MissingOrder is not null)
-		{
-			writer.WritePropertyName("missing_order");
-			JsonSerializer.Serialize(writer, value.MissingOrder, options);
-		}
-
-		if (value.Order is not null)
-		{
-			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		if (value.ShardSize.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(value.ShardSize.Value);
-		}
-
-		if (value.ShowTermDocCountError.HasValue)
-		{
-			writer.WritePropertyName("show_term_doc_count_error");
-			writer.WriteBooleanValue(value.ShowTermDocCountError.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.ValueType))
-		{
-			writer.WritePropertyName("value_type");
-			writer.WriteStringValue(value.ValueType);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(TermsAggregationConverter))]
-public sealed partial class TermsAggregation : SearchAggregation
-{
-	public TermsAggregation(string name) => Name = name;
-
-	internal TermsAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
 	/// <summary>
 	/// <para>Values to exclude.<br/>Accepts regular expressions and partitions.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
 	/// <para>Determines whether the aggregation will use field values directly or global ordinals.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
 	/// <para>The field from which to return terms.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
 	/// <para>Values to include.<br/>Accepts regular expressions and partitions.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
-	public FieldValue? Missing { get; set; }
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
+	[JsonInclude, JsonPropertyName("missing_bucket")]
 	public bool? MissingBucket { get; set; }
+	[JsonInclude, JsonPropertyName("missing_order")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
-	override public string? Name { get; internal set; }
-	[JsonConverter(typeof(AggregateOrderConverter))]
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	[JsonInclude, JsonPropertyName("order")]
+	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
+	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
 	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
 	/// <para>Set to `true` to return the `doc_count_error_upper_bound`, which is an upper bound to the error on the `doc_count` returned by each shard.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("show_term_doc_count_error")]
 	public bool? ShowTermDocCountError { get; set; }
 
 	/// <summary>
 	/// <para>The number of buckets returned out of the overall terms list.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>Coerced unmapped fields into the specified type.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("value_type")]
 	public string? ValueType { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Terms(termsAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(TermsAggregation termsAggregation) => Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy.Terms(termsAggregation);
 }
 
 public sealed partial class TermsAggregationDescriptor<TDocument> : SerializableDescriptor<TermsAggregationDescriptor<TDocument>>
@@ -471,9 +126,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
@@ -482,39 +134,16 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private bool? MissingBucketValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private string? NameValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
 	private string? ValueTypeValue { get; set; }
-
-	public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
@@ -561,6 +190,15 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field from which to return terms.</para>
+	/// </summary>
+	public TermsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public TermsAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
@@ -594,7 +232,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
-	public TermsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	public TermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -612,10 +250,16 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public TermsAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public TermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public TermsAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -666,8 +310,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("terms");
-		writer.WriteStartObject();
 		if (CollectModeValue is not null)
 		{
 			writer.WritePropertyName("collect_mode");
@@ -704,6 +346,12 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -728,10 +376,16 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, MissingOrderValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)
@@ -765,29 +419,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -799,9 +430,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
@@ -810,39 +438,16 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private bool? MissingBucketValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private string? NameValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
 	private string? ValueTypeValue { get; set; }
-
-	public TermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Determines how child aggregations should be calculated: breadth-first or depth-first.</para>
@@ -931,7 +536,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
-	public TermsAggregationDescriptor Missing(FieldValue? missing)
+	public TermsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -949,10 +554,16 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public TermsAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public TermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public TermsAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -1003,8 +614,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("terms");
-		writer.WriteStartObject();
 		if (CollectModeValue is not null)
 		{
 			writer.WritePropertyName("collect_mode");
@@ -1041,6 +650,12 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -1065,10 +680,16 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, MissingOrderValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)
@@ -1099,29 +720,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("value_type");
 			writer.WriteStringValue(ValueTypeValue);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

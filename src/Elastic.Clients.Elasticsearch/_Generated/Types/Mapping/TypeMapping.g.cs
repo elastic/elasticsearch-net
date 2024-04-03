@@ -29,20 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public sealed partial class TypeMapping
 {
-	[JsonInclude, JsonPropertyName("_data_stream_timestamp")]
-	public Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestamp { get; set; }
-	[JsonInclude, JsonPropertyName("_field_names")]
-	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("_routing")]
-	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
-	[JsonInclude, JsonPropertyName("_size")]
-	public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
-	[JsonInclude, JsonPropertyName("_source")]
-	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 	[JsonInclude, JsonPropertyName("all_field")]
 	public Elastic.Clients.Elasticsearch.Mapping.AllField? AllField { get; set; }
+	[JsonInclude, JsonPropertyName("_data_stream_timestamp")]
+	public Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestamp { get; set; }
 	[JsonInclude, JsonPropertyName("date_detection")]
 	public bool? DateDetection { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic")]
@@ -53,14 +43,24 @@ public sealed partial class TypeMapping
 	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
+	[JsonInclude, JsonPropertyName("_field_names")]
+	public Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNames { get; set; }
 	[JsonInclude, JsonPropertyName("index_field")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexField { get; set; }
+	[JsonInclude, JsonPropertyName("_meta")]
+	public IDictionary<string, object>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("numeric_detection")]
 	public bool? NumericDetection { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("_routing")]
+	public Elastic.Clients.Elasticsearch.Mapping.RoutingField? Routing { get; set; }
 	[JsonInclude, JsonPropertyName("runtime")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? Runtime { get; set; }
+	[JsonInclude, JsonPropertyName("_size")]
+	public Elastic.Clients.Elasticsearch.Mapping.SizeField? Size { get; set; }
+	[JsonInclude, JsonPropertyName("_source")]
+	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 	[JsonInclude, JsonPropertyName("subobjects")]
 	public bool? Subobjects { get; set; }
 }
@@ -74,35 +74,35 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.AllField? AllFieldValue { get; set; }
-	private AllFieldDescriptor AllFieldDescriptor { get; set; }
-	private Action<AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor AllFieldDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestampValue { get; set; }
-	private DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
-	private Action<DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexFieldValue { get; set; }
-	private IndexFieldDescriptor IndexFieldDescriptor { get; set; }
-	private Action<IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor IndexFieldDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private bool? NumericDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-	private RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SizeField? SizeValue { get; set; }
-	private SizeFieldDescriptor SizeDescriptor { get; set; }
-	private Action<SizeFieldDescriptor> SizeDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor SizeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> SizeDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-	private SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 	private bool? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
@@ -113,7 +113,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> AllField(AllFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor descriptor)
 	{
 		AllFieldValue = null;
 		AllFieldDescriptorAction = null;
@@ -121,7 +121,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> AllField(Action<AllFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> AllField(Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> configure)
 	{
 		AllFieldValue = null;
 		AllFieldDescriptor = null;
@@ -137,7 +137,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(DataStreamTimestampDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor descriptor)
 	{
 		DataStreamTimestampValue = null;
 		DataStreamTimestampDescriptorAction = null;
@@ -145,7 +145,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Action<DataStreamTimestampDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> DataStreamTimestamp(Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> configure)
 	{
 		DataStreamTimestampValue = null;
 		DataStreamTimestampDescriptor = null;
@@ -191,7 +191,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> FieldNames(FieldNamesFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
 	{
 		FieldNamesValue = null;
 		FieldNamesDescriptorAction = null;
@@ -199,7 +199,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> FieldNames(Action<FieldNamesFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
 	{
 		FieldNamesValue = null;
 		FieldNamesDescriptor = null;
@@ -215,7 +215,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> IndexField(IndexFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor descriptor)
 	{
 		IndexFieldValue = null;
 		IndexFieldDescriptorAction = null;
@@ -223,7 +223,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> IndexField(Action<IndexFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> IndexField(Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> configure)
 	{
 		IndexFieldValue = null;
 		IndexFieldDescriptor = null;
@@ -249,15 +249,15 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public TypeMappingDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public TypeMappingDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -271,7 +271,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Routing(RoutingFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
 	{
 		RoutingValue = null;
 		RoutingDescriptorAction = null;
@@ -279,7 +279,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Routing(Action<RoutingFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
 	{
 		RoutingValue = null;
 		RoutingDescriptor = null;
@@ -287,9 +287,9 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Runtime(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	public TypeMappingDescriptor<TDocument> Runtime(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
-		RuntimeValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		RuntimeValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -301,7 +301,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Size(SizeFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor descriptor)
 	{
 		SizeValue = null;
 		SizeDescriptorAction = null;
@@ -309,7 +309,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Size(Action<SizeFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> Size(Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> configure)
 	{
 		SizeValue = null;
 		SizeDescriptor = null;
@@ -325,7 +325,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Source(SourceFieldDescriptor descriptor)
+	public TypeMappingDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
 	{
 		SourceValue = null;
 		SourceDescriptorAction = null;
@@ -333,7 +333,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Source(Action<SourceFieldDescriptor> configure)
+	public TypeMappingDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
 	{
 		SourceValue = null;
 		SourceDescriptor = null;
@@ -358,7 +358,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (AllFieldDescriptorAction is not null)
 		{
 			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, new AllFieldDescriptor(AllFieldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor(AllFieldDescriptorAction), options);
 		}
 		else if (AllFieldValue is not null)
 		{
@@ -374,7 +374,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (DataStreamTimestampDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, new DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
 		}
 		else if (DataStreamTimestampValue is not null)
 		{
@@ -420,7 +420,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (FieldNamesDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
 		}
 		else if (FieldNamesValue is not null)
 		{
@@ -436,7 +436,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (IndexFieldDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, new IndexFieldDescriptor(IndexFieldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor(IndexFieldDescriptorAction), options);
 		}
 		else if (IndexFieldValue is not null)
 		{
@@ -470,7 +470,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (RoutingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new RoutingFieldDescriptor(RoutingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
 		}
 		else if (RoutingValue is not null)
 		{
@@ -492,7 +492,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (SizeDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, new SizeFieldDescriptor(SizeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor(SizeDescriptorAction), options);
 		}
 		else if (SizeValue is not null)
 		{
@@ -508,7 +508,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		else if (SourceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new SourceFieldDescriptor(SourceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
 		}
 		else if (SourceValue is not null)
 		{
@@ -535,35 +535,35 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 	}
 
 	private Elastic.Clients.Elasticsearch.Mapping.AllField? AllFieldValue { get; set; }
-	private AllFieldDescriptor AllFieldDescriptor { get; set; }
-	private Action<AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor AllFieldDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> AllFieldDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp? DataStreamTimestampValue { get; set; }
-	private DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
-	private Action<DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor DataStreamTimestampDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> DataStreamTimestampDescriptorAction { get; set; }
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
-	private FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
-	private Action<FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.IndexField? IndexFieldValue { get; set; }
-	private IndexFieldDescriptor IndexFieldDescriptor { get; set; }
-	private Action<IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor IndexFieldDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> IndexFieldDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private bool? NumericDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.RoutingField? RoutingValue { get; set; }
-	private RoutingFieldDescriptor RoutingDescriptor { get; set; }
-	private Action<RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor RoutingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> RoutingDescriptorAction { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SizeField? SizeValue { get; set; }
-	private SizeFieldDescriptor SizeDescriptor { get; set; }
-	private Action<SizeFieldDescriptor> SizeDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor SizeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> SizeDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
-	private SourceFieldDescriptor SourceDescriptor { get; set; }
-	private Action<SourceFieldDescriptor> SourceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
 	private bool? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
@@ -574,7 +574,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor AllField(AllFieldDescriptor descriptor)
+	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor descriptor)
 	{
 		AllFieldValue = null;
 		AllFieldDescriptorAction = null;
@@ -582,7 +582,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor AllField(Action<AllFieldDescriptor> configure)
+	public TypeMappingDescriptor AllField(Action<Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor> configure)
 	{
 		AllFieldValue = null;
 		AllFieldDescriptor = null;
@@ -598,7 +598,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DataStreamTimestamp(DataStreamTimestampDescriptor descriptor)
+	public TypeMappingDescriptor DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor descriptor)
 	{
 		DataStreamTimestampValue = null;
 		DataStreamTimestampDescriptorAction = null;
@@ -606,7 +606,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DataStreamTimestamp(Action<DataStreamTimestampDescriptor> configure)
+	public TypeMappingDescriptor DataStreamTimestamp(Action<Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor> configure)
 	{
 		DataStreamTimestampValue = null;
 		DataStreamTimestampDescriptor = null;
@@ -652,7 +652,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor FieldNames(FieldNamesFieldDescriptor descriptor)
+	public TypeMappingDescriptor FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor descriptor)
 	{
 		FieldNamesValue = null;
 		FieldNamesDescriptorAction = null;
@@ -660,7 +660,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor FieldNames(Action<FieldNamesFieldDescriptor> configure)
+	public TypeMappingDescriptor FieldNames(Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> configure)
 	{
 		FieldNamesValue = null;
 		FieldNamesDescriptor = null;
@@ -676,7 +676,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor IndexField(IndexFieldDescriptor descriptor)
+	public TypeMappingDescriptor IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor descriptor)
 	{
 		IndexFieldValue = null;
 		IndexFieldDescriptorAction = null;
@@ -684,7 +684,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor IndexField(Action<IndexFieldDescriptor> configure)
+	public TypeMappingDescriptor IndexField(Action<Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor> configure)
 	{
 		IndexFieldValue = null;
 		IndexFieldDescriptor = null;
@@ -710,15 +710,15 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public TypeMappingDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public TypeMappingDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public TypeMappingDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -732,7 +732,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Routing(RoutingFieldDescriptor descriptor)
+	public TypeMappingDescriptor Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor descriptor)
 	{
 		RoutingValue = null;
 		RoutingDescriptorAction = null;
@@ -740,7 +740,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Routing(Action<RoutingFieldDescriptor> configure)
+	public TypeMappingDescriptor Routing(Action<Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor> configure)
 	{
 		RoutingValue = null;
 		RoutingDescriptor = null;
@@ -748,9 +748,9 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Runtime(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	public TypeMappingDescriptor Runtime(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{
-		RuntimeValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		RuntimeValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
 		return Self;
 	}
 
@@ -762,7 +762,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Size(SizeFieldDescriptor descriptor)
+	public TypeMappingDescriptor Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor descriptor)
 	{
 		SizeValue = null;
 		SizeDescriptorAction = null;
@@ -770,7 +770,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Size(Action<SizeFieldDescriptor> configure)
+	public TypeMappingDescriptor Size(Action<Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor> configure)
 	{
 		SizeValue = null;
 		SizeDescriptor = null;
@@ -786,7 +786,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Source(SourceFieldDescriptor descriptor)
+	public TypeMappingDescriptor Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor descriptor)
 	{
 		SourceValue = null;
 		SourceDescriptorAction = null;
@@ -794,7 +794,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Source(Action<SourceFieldDescriptor> configure)
+	public TypeMappingDescriptor Source(Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> configure)
 	{
 		SourceValue = null;
 		SourceDescriptor = null;
@@ -819,7 +819,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (AllFieldDescriptorAction is not null)
 		{
 			writer.WritePropertyName("all_field");
-			JsonSerializer.Serialize(writer, new AllFieldDescriptor(AllFieldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor(AllFieldDescriptorAction), options);
 		}
 		else if (AllFieldValue is not null)
 		{
@@ -835,7 +835,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (DataStreamTimestampDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_data_stream_timestamp");
-			JsonSerializer.Serialize(writer, new DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor(DataStreamTimestampDescriptorAction), options);
 		}
 		else if (DataStreamTimestampValue is not null)
 		{
@@ -881,7 +881,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (FieldNamesDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_field_names");
-			JsonSerializer.Serialize(writer, new FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor(FieldNamesDescriptorAction), options);
 		}
 		else if (FieldNamesValue is not null)
 		{
@@ -897,7 +897,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (IndexFieldDescriptorAction is not null)
 		{
 			writer.WritePropertyName("index_field");
-			JsonSerializer.Serialize(writer, new IndexFieldDescriptor(IndexFieldDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor(IndexFieldDescriptorAction), options);
 		}
 		else if (IndexFieldValue is not null)
 		{
@@ -931,7 +931,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (RoutingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_routing");
-			JsonSerializer.Serialize(writer, new RoutingFieldDescriptor(RoutingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor(RoutingDescriptorAction), options);
 		}
 		else if (RoutingValue is not null)
 		{
@@ -953,7 +953,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (SizeDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_size");
-			JsonSerializer.Serialize(writer, new SizeFieldDescriptor(SizeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor(SizeDescriptorAction), options);
 		}
 		else if (SizeValue is not null)
 		{
@@ -969,7 +969,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		else if (SourceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, new SourceFieldDescriptor(SourceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor(SourceDescriptorAction), options);
 		}
 		else if (SourceValue is not null)
 		{

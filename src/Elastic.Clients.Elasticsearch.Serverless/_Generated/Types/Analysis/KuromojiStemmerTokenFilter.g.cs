@@ -69,10 +69,10 @@ public sealed partial class KuromojiStemmerTokenFilterDescriptor : SerializableD
 		writer.WriteNumberValue(MinimumLengthValue);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("kuromoji_stemmer");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

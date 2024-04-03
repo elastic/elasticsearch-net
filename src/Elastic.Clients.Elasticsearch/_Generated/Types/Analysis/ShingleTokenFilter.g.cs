@@ -32,9 +32,9 @@ public sealed partial class ShingleTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("filler_token")]
 	public string? FillerToken { get; set; }
 	[JsonInclude, JsonPropertyName("max_shingle_size")]
-	public Union<int?, string?>? MaxShingleSize { get; set; }
+	public object? MaxShingleSize { get; set; }
 	[JsonInclude, JsonPropertyName("min_shingle_size")]
-	public Union<int?, string?>? MinShingleSize { get; set; }
+	public object? MinShingleSize { get; set; }
 	[JsonInclude, JsonPropertyName("output_unigrams")]
 	public bool? OutputUnigrams { get; set; }
 	[JsonInclude, JsonPropertyName("output_unigrams_if_no_shingles")]
@@ -58,8 +58,8 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 	}
 
 	private string? FillerTokenValue { get; set; }
-	private Union<int?, string?>? MaxShingleSizeValue { get; set; }
-	private Union<int?, string?>? MinShingleSizeValue { get; set; }
+	private object? MaxShingleSizeValue { get; set; }
+	private object? MinShingleSizeValue { get; set; }
 	private bool? OutputUnigramsValue { get; set; }
 	private bool? OutputUnigramsIfNoShinglesValue { get; set; }
 	private string? TokenSeparatorValue { get; set; }
@@ -71,13 +71,13 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ShingleTokenFilterDescriptor MaxShingleSize(Union<int?, string?>? maxShingleSize)
+	public ShingleTokenFilterDescriptor MaxShingleSize(object? maxShingleSize)
 	{
 		MaxShingleSizeValue = maxShingleSize;
 		return Self;
 	}
 
-	public ShingleTokenFilterDescriptor MinShingleSize(Union<int?, string?>? minShingleSize)
+	public ShingleTokenFilterDescriptor MinShingleSize(object? minShingleSize)
 	{
 		MinShingleSizeValue = minShingleSize;
 		return Self;
@@ -148,10 +148,10 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("shingle");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

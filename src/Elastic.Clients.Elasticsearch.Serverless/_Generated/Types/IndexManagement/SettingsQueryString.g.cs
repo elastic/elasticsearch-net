@@ -30,7 +30,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class SettingsQueryString
 {
 	[JsonInclude, JsonPropertyName("lenient")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool Lenient { get; set; }
 }
 
@@ -54,7 +53,7 @@ public sealed partial class SettingsQueryStringDescriptor : SerializableDescript
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("lenient");
-		JsonSerializer.Serialize(writer, LenientValue, options);
+		writer.WriteBooleanValue(LenientValue);
 		writer.WriteEndObject();
 	}
 }

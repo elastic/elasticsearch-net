@@ -44,11 +44,11 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? IdleValue { get; set; }
-	private SearchIdleDescriptor IdleDescriptor { get; set; }
-	private Action<SearchIdleDescriptor> IdleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor IdleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor> IdleDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? SlowlogValue { get; set; }
-	private SlowlogSettingsDescriptor SlowlogDescriptor { get; set; }
-	private Action<SlowlogSettingsDescriptor> SlowlogDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor SlowlogDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor> SlowlogDescriptorAction { get; set; }
 
 	public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle? idle)
 	{
@@ -58,7 +58,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		return Self;
 	}
 
-	public SettingsSearchDescriptor Idle(SearchIdleDescriptor descriptor)
+	public SettingsSearchDescriptor Idle(Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor descriptor)
 	{
 		IdleValue = null;
 		IdleDescriptorAction = null;
@@ -66,7 +66,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		return Self;
 	}
 
-	public SettingsSearchDescriptor Idle(Action<SearchIdleDescriptor> configure)
+	public SettingsSearchDescriptor Idle(Action<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor> configure)
 	{
 		IdleValue = null;
 		IdleDescriptor = null;
@@ -82,7 +82,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		return Self;
 	}
 
-	public SettingsSearchDescriptor Slowlog(SlowlogSettingsDescriptor descriptor)
+	public SettingsSearchDescriptor Slowlog(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor descriptor)
 	{
 		SlowlogValue = null;
 		SlowlogDescriptorAction = null;
@@ -90,7 +90,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		return Self;
 	}
 
-	public SettingsSearchDescriptor Slowlog(Action<SlowlogSettingsDescriptor> configure)
+	public SettingsSearchDescriptor Slowlog(Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor> configure)
 	{
 		SlowlogValue = null;
 		SlowlogDescriptor = null;
@@ -109,7 +109,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		else if (IdleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("idle");
-			JsonSerializer.Serialize(writer, new SearchIdleDescriptor(IdleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SearchIdleDescriptor(IdleDescriptorAction), options);
 		}
 		else if (IdleValue is not null)
 		{
@@ -125,7 +125,7 @@ public sealed partial class SettingsSearchDescriptor : SerializableDescriptor<Se
 		else if (SlowlogDescriptorAction is not null)
 		{
 			writer.WritePropertyName("slowlog");
-			JsonSerializer.Serialize(writer, new SlowlogSettingsDescriptor(SlowlogDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettingsDescriptor(SlowlogDescriptorAction), options);
 		}
 		else if (SlowlogValue is not null)
 		{

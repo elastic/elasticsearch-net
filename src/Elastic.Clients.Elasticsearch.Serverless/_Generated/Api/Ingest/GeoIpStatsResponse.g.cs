@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ public sealed partial class GeoIpStatsResponse : ElasticsearchResponse
 	/// <para>Downloaded GeoIP2 databases for each node.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Id, Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpNodeDatabases> Nodes { get; init; }
 
 	/// <summary>
 	/// <para>Download statistics for all GeoIP2 databases.</para>

@@ -116,18 +116,19 @@ internal sealed partial class GeoPolygonQueryConverter : JsonConverter<GeoPolygo
 }
 
 [JsonConverter(typeof(GeoPolygonQueryConverter))]
-public sealed partial class GeoPolygonQuery : SearchQuery
+public sealed partial class GeoPolygonQuery
 {
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints Polygon { get; set; }
+	public string? QueryName { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
-	public static implicit operator Query(GeoPolygonQuery geoPolygonQuery) => QueryDsl.Query.GeoPolygon(geoPolygonQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("geo_polygon", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(GeoPolygonQuery geoPolygonQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.GeoPolygon(geoPolygonQuery);
 }
 
 public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableDescriptor<GeoPolygonQueryDescriptor<TDocument>>
@@ -139,23 +140,68 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoPolygonQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
 		return Self;
 	}
 
+	public GeoPolygonQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public GeoPolygonQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints polygon)
+	{
+		PolygonDescriptor = null;
+		PolygonDescriptorAction = null;
+		PolygonValue = polygon;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor descriptor)
+	{
+		PolygonValue = null;
+		PolygonDescriptorAction = null;
+		PolygonDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor<TDocument> Polygon(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor> configure)
+	{
+		PolygonValue = null;
+		PolygonDescriptor = null;
+		PolygonDescriptorAction = configure;
 		return Self;
 	}
 
@@ -171,60 +217,14 @@ public sealed partial class GeoPolygonQueryDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public GeoPolygonQueryDescriptor<TDocument> Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints polygon)
-	{
-		PolygonValue = polygon;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor<TDocument> Polygon(GeoPolygonPointsDescriptor descriptor)
-	{
-		PolygonValue = null;
-		PolygonDescriptorAction = null;
-		PolygonDescriptor = descriptor;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor<TDocument> Polygon(Action<GeoPolygonPointsDescriptor> configure)
-	{
-		PolygonValue = null;
-		PolygonDescriptor = null;
-		PolygonDescriptorAction = configure;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && (PolygonValue is not null || PolygonDescriptor is not null || PolygonDescriptorAction is not null))
+		if (FieldValue is not null && PolygonValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			if (PolygonValue is not null)
-			{
-				JsonSerializer.Serialize(writer, PolygonValue, options);
-			}
-			else if (PolygonDescriptor is not null)
-			{
-				JsonSerializer.Serialize(writer, PolygonDescriptor, options);
-			}
-			else if (PolygonDescriptorAction is not null)
-			{
-				var descriptor = new GeoPolygonPointsDescriptor(PolygonDescriptorAction);
-				JsonSerializer.Serialize(writer, descriptor, options);
-			}
+			JsonSerializer.Serialize(writer, PolygonValue, options);
 		}
 
 		if (BoostValue.HasValue)
@@ -264,63 +264,26 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints PolygonValue { get; set; }
-	private GeoPolygonPointsDescriptor PolygonDescriptor { get; set; }
-	private Action<GeoPolygonPointsDescriptor> PolygonDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoPolygonQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
 		return Self;
 	}
 
-	public GeoPolygonQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
-	{
-		ValidationMethodValue = validationMethod;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints polygon)
-	{
-		PolygonValue = polygon;
-		return Self;
-	}
-
 	public GeoPolygonQueryDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor Polygon(GeoPolygonPointsDescriptor descriptor)
-	{
-		PolygonValue = null;
-		PolygonDescriptorAction = null;
-		PolygonDescriptor = descriptor;
-		return Self;
-	}
-
-	public GeoPolygonQueryDescriptor Polygon(Action<GeoPolygonPointsDescriptor> configure)
-	{
-		PolygonValue = null;
-		PolygonDescriptor = null;
-		PolygonDescriptorAction = configure;
 		return Self;
 	}
 
@@ -336,26 +299,56 @@ public sealed partial class GeoPolygonQueryDescriptor : SerializableDescriptor<G
 		return Self;
 	}
 
+	public GeoPolygonQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPoints polygon)
+	{
+		PolygonDescriptor = null;
+		PolygonDescriptorAction = null;
+		PolygonValue = polygon;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor Polygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor descriptor)
+	{
+		PolygonValue = null;
+		PolygonDescriptorAction = null;
+		PolygonDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor Polygon(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonPointsDescriptor> configure)
+	{
+		PolygonValue = null;
+		PolygonDescriptor = null;
+		PolygonDescriptorAction = configure;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public GeoPolygonQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
+	{
+		ValidationMethodValue = validationMethod;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && (PolygonValue is not null || PolygonDescriptor is not null || PolygonDescriptorAction is not null))
+		if (FieldValue is not null && PolygonValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			if (PolygonValue is not null)
-			{
-				JsonSerializer.Serialize(writer, PolygonValue, options);
-			}
-			else if (PolygonDescriptor is not null)
-			{
-				JsonSerializer.Serialize(writer, PolygonDescriptor, options);
-			}
-			else if (PolygonDescriptorAction is not null)
-			{
-				var descriptor = new GeoPolygonPointsDescriptor(PolygonDescriptorAction);
-				JsonSerializer.Serialize(writer, descriptor, options);
-			}
+			JsonSerializer.Serialize(writer, PolygonValue, options);
 		}
 
 		if (BoostValue.HasValue)

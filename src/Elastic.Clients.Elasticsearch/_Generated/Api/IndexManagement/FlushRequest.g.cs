@@ -116,6 +116,10 @@ public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescripto
 {
 	internal FlushRequestDescriptor(Action<FlushRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public FlushRequestDescriptor()
 	{
 	}
@@ -151,6 +155,10 @@ public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescripto
 public sealed partial class FlushRequestDescriptor : RequestDescriptor<FlushRequestDescriptor, FlushRequestParameters>
 {
 	internal FlushRequestDescriptor(Action<FlushRequestDescriptor> configure) => configure.Invoke(this);
+
+	public FlushRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public FlushRequestDescriptor()
 	{

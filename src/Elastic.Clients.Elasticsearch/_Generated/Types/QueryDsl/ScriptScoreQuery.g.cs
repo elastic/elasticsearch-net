@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class ScriptScoreQuery : SearchQuery
+public sealed partial class ScriptScoreQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -45,6 +46,8 @@ public sealed partial class ScriptScoreQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Script used to compute the score of documents returned by the query.<br/>Important: final relevance scores from the `script_score` query cannot be negative.</para>
@@ -52,9 +55,7 @@ public sealed partial class ScriptScoreQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
-	public static implicit operator Query(ScriptScoreQuery scriptScoreQuery) => QueryDsl.Query.ScriptScore(scriptScoreQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("script_score", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ScriptScoreQuery scriptScoreQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.ScriptScore(scriptScoreQuery);
 }
 
 public sealed partial class ScriptScoreQueryDescriptor<TDocument> : SerializableDescriptor<ScriptScoreQueryDescriptor<TDocument>>
@@ -68,11 +69,14 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 	private float? BoostValue { get; set; }
 	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -99,7 +103,7 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor<TDocument> Query(QueryDescriptor<TDocument> descriptor)
+	public ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -107,7 +111,7 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor<TDocument> Query(Action<QueryDescriptor<TDocument>> configure)
+	public ScriptScoreQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -153,7 +157,7 @@ public sealed partial class ScriptScoreQueryDescriptor<TDocument> : Serializable
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -184,11 +188,14 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 	private float? BoostValue { get; set; }
 	private float? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ScriptScoreQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -215,7 +222,7 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor Query(QueryDescriptor descriptor)
+	public ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -223,7 +230,7 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ScriptScoreQueryDescriptor Query(Action<QueryDescriptor> configure)
+	public ScriptScoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -269,7 +276,7 @@ public sealed partial class ScriptScoreQueryDescriptor : SerializableDescriptor<
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

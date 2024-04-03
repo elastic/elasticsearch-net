@@ -32,7 +32,6 @@ public sealed partial class LimitTokenCountTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("consume_all_tokens")]
 	public bool? ConsumeAllTokens { get; set; }
 	[JsonInclude, JsonPropertyName("max_token_count")]
-	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? MaxTokenCount { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -81,18 +80,18 @@ public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableD
 			writer.WriteBooleanValue(ConsumeAllTokensValue.Value);
 		}
 
-		if (MaxTokenCountValue is not null)
+		if (MaxTokenCountValue.HasValue)
 		{
 			writer.WritePropertyName("max_token_count");
-			JsonSerializer.Serialize(writer, MaxTokenCountValue, options);
+			writer.WriteNumberValue(MaxTokenCountValue.Value);
 		}
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("limit");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

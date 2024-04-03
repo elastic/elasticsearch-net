@@ -35,7 +35,7 @@ public sealed partial class StupidBackoffSmoothingModel
 	[JsonInclude, JsonPropertyName("discount")]
 	public double Discount { get; set; }
 
-	public static implicit operator SmoothingModel(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Core.Search.SmoothingModel.StupidBackoff(stupidBackoffSmoothingModel);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel.StupidBackoff(stupidBackoffSmoothingModel);
 }
 
 public sealed partial class StupidBackoffSmoothingModelDescriptor : SerializableDescriptor<StupidBackoffSmoothingModelDescriptor>

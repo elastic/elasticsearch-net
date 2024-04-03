@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class ForeachProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -37,8 +40,16 @@ public sealed partial class ForeachProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -47,6 +58,10 @@ public sealed partial class ForeachProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
@@ -55,10 +70,14 @@ public sealed partial class ForeachProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("processor")]
 	public Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
-	public static implicit operator Processor(ForeachProcessor foreachProcessor) => Ingest.Processor.Foreach(foreachProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(ForeachProcessor foreachProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Foreach(foreachProcessor);
 }
 
 public sealed partial class ForeachProcessorDescriptor<TDocument> : SerializableDescriptor<ForeachProcessorDescriptor<TDocument>>
@@ -75,14 +94,17 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.Processor ProcessorValue { get; set; }
-	private ProcessorDescriptor<TDocument> ProcessorDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> ProcessorDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> ProcessorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> ProcessorDescriptorAction { get; set; }
 	private string? TagValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -107,12 +129,27 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>Field containing array or object values.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -128,6 +165,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -137,7 +177,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public ForeachProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -146,7 +186,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public ForeachProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -155,7 +195,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public ForeachProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -175,7 +215,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> Processor(ProcessorDescriptor<TDocument> descriptor)
+	public ForeachProcessorDescriptor<TDocument> Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		ProcessorValue = null;
 		ProcessorDescriptorAction = null;
@@ -183,7 +223,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor<TDocument> Processor(Action<ProcessorDescriptor<TDocument>> configure)
+	public ForeachProcessorDescriptor<TDocument> Processor(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		ProcessorValue = null;
 		ProcessorDescriptor = null;
@@ -191,6 +231,9 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -237,7 +280,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -246,7 +289,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -265,7 +308,7 @@ public sealed partial class ForeachProcessorDescriptor<TDocument> : Serializable
 		else if (ProcessorDescriptorAction is not null)
 		{
 			writer.WritePropertyName("processor");
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(ProcessorDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(ProcessorDescriptorAction), options);
 		}
 		else
 		{
@@ -297,14 +340,17 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.Processor ProcessorValue { get; set; }
-	private ProcessorDescriptor ProcessorDescriptor { get; set; }
-	private Action<ProcessorDescriptor> ProcessorDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor ProcessorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> ProcessorDescriptorAction { get; set; }
 	private string? TagValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -338,12 +384,18 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public ForeachProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -359,6 +411,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -368,7 +423,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public ForeachProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -377,7 +432,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public ForeachProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -386,7 +441,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public ForeachProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -406,7 +461,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor Processor(ProcessorDescriptor descriptor)
+	public ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		ProcessorValue = null;
 		ProcessorDescriptorAction = null;
@@ -414,7 +469,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public ForeachProcessorDescriptor Processor(Action<ProcessorDescriptor> configure)
+	public ForeachProcessorDescriptor Processor(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		ProcessorValue = null;
 		ProcessorDescriptor = null;
@@ -422,6 +477,9 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public ForeachProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -468,7 +526,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -477,7 +535,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -496,7 +554,7 @@ public sealed partial class ForeachProcessorDescriptor : SerializableDescriptor<
 		else if (ProcessorDescriptorAction is not null)
 		{
 			writer.WritePropertyName("processor");
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(ProcessorDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(ProcessorDescriptorAction), options);
 		}
 		else
 		{

@@ -27,242 +27,53 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class ScriptedMetricAggregationConverter : JsonConverter<ScriptedMetricAggregation>
+public sealed partial class ScriptedMetricAggregation
 {
-	public override ScriptedMetricAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "scripted_metric")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new ScriptedMetricAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("combine_script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.CombineScript = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("init_script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.InitScript = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("map_script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MapScript = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("params"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Params = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("reduce_script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ReduceScript = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ScriptedMetricAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("scripted_metric");
-		writer.WriteStartObject();
-		if (value.CombineScript is not null)
-		{
-			writer.WritePropertyName("combine_script");
-			JsonSerializer.Serialize(writer, value.CombineScript, options);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.InitScript is not null)
-		{
-			writer.WritePropertyName("init_script");
-			JsonSerializer.Serialize(writer, value.InitScript, options);
-		}
-
-		if (value.MapScript is not null)
-		{
-			writer.WritePropertyName("map_script");
-			JsonSerializer.Serialize(writer, value.MapScript, options);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.Params is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, value.Params, options);
-		}
-
-		if (value.ReduceScript is not null)
-		{
-			writer.WritePropertyName("reduce_script");
-			JsonSerializer.Serialize(writer, value.ReduceScript, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(ScriptedMetricAggregationConverter))]
-public sealed partial class ScriptedMetricAggregation : SearchAggregation
-{
-	public ScriptedMetricAggregation(string name, Field field) : this(name) => Field = field;
-	public ScriptedMetricAggregation(string name) => Name = name;
-
-	internal ScriptedMetricAggregation()
-	{
-	}
-
 	/// <summary>
 	/// <para>Runs once on each shard after document collection is complete.<br/>Allows the aggregation to consolidate the state returned from each shard.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("combine_script")]
 	public Elastic.Clients.Elasticsearch.Script? CombineScript { get; set; }
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
 	/// <para>Runs prior to any collection of documents.<br/>Allows the aggregation to set up any initial state.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("init_script")]
 	public Elastic.Clients.Elasticsearch.Script? InitScript { get; set; }
 
 	/// <summary>
 	/// <para>Run once per document collected.<br/>If no `combine_script` is specified, the resulting state needs to be stored in the `state` object.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("map_script")]
 	public Elastic.Clients.Elasticsearch.Script? MapScript { get; set; }
-	public IDictionary<string, object>? Meta { get; set; }
-	public FieldValue? Missing { get; set; }
-	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	/// <summary>
 	/// <para>A global object with script parameters for `init`, `map` and `combine` scripts.<br/>It is shared between the scripts.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>Runs once on the coordinating node after all shards have returned their results.<br/>The script is provided with access to a variable `states`, which is an array of the result of the `combine_script` on each shard.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("reduce_script")]
 	public Elastic.Clients.Elasticsearch.Script? ReduceScript { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(ScriptedMetricAggregation scriptedMetricAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.ScriptedMetric(scriptedMetricAggregation);
 }
 
 public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : SerializableDescriptor<ScriptedMetricAggregationDescriptor<TDocument>>
@@ -277,8 +88,7 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -292,13 +102,28 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	public ScriptedMetricAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -322,13 +147,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public ScriptedMetricAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public ScriptedMetricAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -361,8 +183,6 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("scripted_metric");
-		writer.WriteStartObject();
 		if (CombineScriptValue is not null)
 		{
 			writer.WritePropertyName("combine_script");
@@ -412,13 +232,6 @@ public sealed partial class ScriptedMetricAggregationDescriptor<TDocument> : Ser
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -434,8 +247,7 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? InitScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? MapScriptValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ReduceScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -449,18 +261,27 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public ScriptedMetricAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -485,13 +306,10 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 		return Self;
 	}
 
-	public ScriptedMetricAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ScriptedMetricAggregationDescriptor Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public ScriptedMetricAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -524,8 +342,6 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("scripted_metric");
-		writer.WriteStartObject();
 		if (CombineScriptValue is not null)
 		{
 			writer.WritePropertyName("combine_script");
@@ -572,13 +388,6 @@ public sealed partial class ScriptedMetricAggregationDescriptor : SerializableDe
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();

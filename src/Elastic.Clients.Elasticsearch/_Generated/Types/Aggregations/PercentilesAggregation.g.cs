@@ -27,216 +27,43 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class PercentilesAggregationConverter : JsonConverter<PercentilesAggregation>
+public sealed partial class PercentilesAggregation
 {
-	public override PercentilesAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "percentiles")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new PercentilesAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("hdr"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Hdr = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("percents"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<ICollection<double>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Percents = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("tdigest"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TDigest?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.TDigest = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, PercentilesAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("percentiles");
-		writer.WriteStartObject();
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Hdr is not null)
-		{
-			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, value.Hdr, options);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.Percents is not null)
-		{
-			writer.WritePropertyName("percents");
-			JsonSerializer.Serialize(writer, value.Percents, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		if (value.TDigest is not null)
-		{
-			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, value.TDigest, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(PercentilesAggregationConverter))]
-public sealed partial class PercentilesAggregation : SearchAggregation
-{
-	public PercentilesAggregation(string name, Field field) : this(name) => Field = field;
-	public PercentilesAggregation(string name) => Name = name;
-
-	internal PercentilesAggregation()
-	{
-	}
-
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
 	/// <para>Uses the alternative High Dynamic Range Histogram algorithm to calculate percentiles.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("hdr")]
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
-	public IDictionary<string, object>? Meta { get; set; }
-	public FieldValue? Missing { get; set; }
-	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
 
 	/// <summary>
 	/// <para>The percentiles to calculate.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("percents")]
 	public ICollection<double>? Percents { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
 	/// <summary>
 	/// <para>Sets parameters for the default TDigest algorithm used to calculate percentiles.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("tdigest")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigest { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(PercentilesAggregation percentilesAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Percentiles(percentilesAggregation);
 }
 
 public sealed partial class PercentilesAggregationDescriptor<TDocument> : SerializableDescriptor<PercentilesAggregationDescriptor<TDocument>>
@@ -250,23 +77,37 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; set; }
-	private HdrMethodDescriptor HdrDescriptor { get; set; }
-	private Action<HdrMethodDescriptor> HdrDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor HdrDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> HdrDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private ICollection<double>? PercentsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; set; }
-	private TDigestDescriptor TDigestDescriptor { get; set; }
-	private Action<TDigestDescriptor> TDigestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor TDigestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public PercentilesAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	public PercentilesAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -289,7 +130,7 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor<TDocument> Hdr(HdrMethodDescriptor descriptor)
+	public PercentilesAggregationDescriptor<TDocument> Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor)
 	{
 		HdrValue = null;
 		HdrDescriptorAction = null;
@@ -297,7 +138,7 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor<TDocument> Hdr(Action<HdrMethodDescriptor> configure)
+	public PercentilesAggregationDescriptor<TDocument> Hdr(Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> configure)
 	{
 		HdrValue = null;
 		HdrDescriptor = null;
@@ -305,13 +146,10 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public PercentilesAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public PercentilesAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -343,7 +181,7 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor<TDocument> TDigest(TDigestDescriptor descriptor)
+	public PercentilesAggregationDescriptor<TDocument> TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
 	{
 		TDigestValue = null;
 		TDigestDescriptorAction = null;
@@ -351,7 +189,7 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor<TDocument> TDigest(Action<TDigestDescriptor> configure)
+	public PercentilesAggregationDescriptor<TDocument> TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
 	{
 		TDigestValue = null;
 		TDigestDescriptor = null;
@@ -361,8 +199,6 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("percentiles");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -384,7 +220,7 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		else if (HdrDescriptorAction is not null)
 		{
 			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, new HdrMethodDescriptor(HdrDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(HdrDescriptorAction), options);
 		}
 		else if (HdrValue is not null)
 		{
@@ -418,19 +254,12 @@ public sealed partial class PercentilesAggregationDescriptor<TDocument> : Serial
 		else if (TDigestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, new TDigestDescriptor(TDigestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(TDigestDescriptorAction), options);
 		}
 		else if (TDigestValue is not null)
 		{
 			writer.WritePropertyName("tdigest");
 			JsonSerializer.Serialize(writer, TDigestValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -448,28 +277,36 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? HdrValue { get; set; }
-	private HdrMethodDescriptor HdrDescriptor { get; set; }
-	private Action<HdrMethodDescriptor> HdrDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor HdrDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> HdrDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private ICollection<double>? PercentsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TDigest? TDigestValue { get; set; }
-	private TDigestDescriptor TDigestDescriptor { get; set; }
-	private Action<TDigestDescriptor> TDigestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor TDigestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> TDigestDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public PercentilesAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public PercentilesAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public PercentilesAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -493,7 +330,7 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor Hdr(HdrMethodDescriptor descriptor)
+	public PercentilesAggregationDescriptor Hdr(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor)
 	{
 		HdrValue = null;
 		HdrDescriptorAction = null;
@@ -501,7 +338,7 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor Hdr(Action<HdrMethodDescriptor> configure)
+	public PercentilesAggregationDescriptor Hdr(Action<Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor> configure)
 	{
 		HdrValue = null;
 		HdrDescriptor = null;
@@ -509,13 +346,10 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public PercentilesAggregationDescriptor Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public PercentilesAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -547,7 +381,7 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor TDigest(TDigestDescriptor descriptor)
+	public PercentilesAggregationDescriptor TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor)
 	{
 		TDigestValue = null;
 		TDigestDescriptorAction = null;
@@ -555,7 +389,7 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public PercentilesAggregationDescriptor TDigest(Action<TDigestDescriptor> configure)
+	public PercentilesAggregationDescriptor TDigest(Action<Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor> configure)
 	{
 		TDigestValue = null;
 		TDigestDescriptor = null;
@@ -565,8 +399,6 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("percentiles");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -588,7 +420,7 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		else if (HdrDescriptorAction is not null)
 		{
 			writer.WritePropertyName("hdr");
-			JsonSerializer.Serialize(writer, new HdrMethodDescriptor(HdrDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(HdrDescriptorAction), options);
 		}
 		else if (HdrValue is not null)
 		{
@@ -622,19 +454,12 @@ public sealed partial class PercentilesAggregationDescriptor : SerializableDescr
 		else if (TDigestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("tdigest");
-			JsonSerializer.Serialize(writer, new TDigestDescriptor(TDigestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(TDigestDescriptorAction), options);
 		}
 		else if (TDigestValue is not null)
 		{
 			writer.WritePropertyName("tdigest");
 			JsonSerializer.Serialize(writer, TDigestValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();

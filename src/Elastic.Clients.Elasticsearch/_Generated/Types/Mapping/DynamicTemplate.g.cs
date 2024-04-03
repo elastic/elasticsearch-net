@@ -45,6 +45,113 @@ public sealed partial class DynamicTemplate
 	public string? Unmatch { get; set; }
 }
 
+public sealed partial class DynamicTemplateDescriptor<TDocument> : SerializableDescriptor<DynamicTemplateDescriptor<TDocument>>
+{
+	internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public DynamicTemplateDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Mapping.IProperty? MappingValue { get; set; }
+	private string? MatchValue { get; set; }
+	private string? MatchMappingTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.MatchType? MatchPatternValue { get; set; }
+	private string? PathMatchValue { get; set; }
+	private string? PathUnmatchValue { get; set; }
+	private string? UnmatchValue { get; set; }
+
+	public DynamicTemplateDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty? mapping)
+	{
+		MappingValue = mapping;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> Match(string? match)
+	{
+		MatchValue = match;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> MatchMappingType(string? matchMappingType)
+	{
+		MatchMappingTypeValue = matchMappingType;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> MatchPattern(Elastic.Clients.Elasticsearch.Mapping.MatchType? matchPattern)
+	{
+		MatchPatternValue = matchPattern;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> PathMatch(string? pathMatch)
+	{
+		PathMatchValue = pathMatch;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> PathUnmatch(string? pathUnmatch)
+	{
+		PathUnmatchValue = pathUnmatch;
+		return Self;
+	}
+
+	public DynamicTemplateDescriptor<TDocument> Unmatch(string? unmatch)
+	{
+		UnmatchValue = unmatch;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (MappingValue is not null)
+		{
+			writer.WritePropertyName("mapping");
+			JsonSerializer.Serialize(writer, MappingValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(MatchValue))
+		{
+			writer.WritePropertyName("match");
+			writer.WriteStringValue(MatchValue);
+		}
+
+		if (!string.IsNullOrEmpty(MatchMappingTypeValue))
+		{
+			writer.WritePropertyName("match_mapping_type");
+			writer.WriteStringValue(MatchMappingTypeValue);
+		}
+
+		if (MatchPatternValue is not null)
+		{
+			writer.WritePropertyName("match_pattern");
+			JsonSerializer.Serialize(writer, MatchPatternValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(PathMatchValue))
+		{
+			writer.WritePropertyName("path_match");
+			writer.WriteStringValue(PathMatchValue);
+		}
+
+		if (!string.IsNullOrEmpty(PathUnmatchValue))
+		{
+			writer.WritePropertyName("path_unmatch");
+			writer.WriteStringValue(PathUnmatchValue);
+		}
+
+		if (!string.IsNullOrEmpty(UnmatchValue))
+		{
+			writer.WritePropertyName("unmatch");
+			writer.WriteStringValue(UnmatchValue);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
 public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<DynamicTemplateDescriptor>
 {
 	internal DynamicTemplateDescriptor(Action<DynamicTemplateDescriptor> configure) => configure.Invoke(this);

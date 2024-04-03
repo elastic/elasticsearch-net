@@ -47,6 +47,10 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -63,8 +67,16 @@ public sealed partial class ScaledFloatNumberProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -136,15 +148,15 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -168,6 +180,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -192,15 +207,15 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -230,12 +245,18 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;
@@ -452,15 +473,15 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ScaledFloatNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -484,6 +505,9 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -508,15 +532,15 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ScaledFloatNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -546,12 +570,18 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ScaledFloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;

@@ -61,6 +61,12 @@ public sealed partial class SlicedScrollDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	public SlicedScrollDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public SlicedScrollDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Serverless.Id id)
 	{
 		IdValue = id;

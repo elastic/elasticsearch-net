@@ -106,10 +106,6 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal PutDataLifecycleRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -130,8 +126,8 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 
 	private Elastic.Clients.Elasticsearch.Duration? DataRetentionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
-	private DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
-	private Action<DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>If defined, every document added to this data stream will be stored at least for this time frame.<br/>Any time after this duration the document could be deleted.<br/>When empty, every document in this data stream will be stored indefinitely.</para>
@@ -153,7 +149,7 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutDataLifecycleRequestDescriptor Downsampling(DataStreamLifecycleDownsamplingDescriptor descriptor)
+	public PutDataLifecycleRequestDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor descriptor)
 	{
 		DownsamplingValue = null;
 		DownsamplingDescriptorAction = null;
@@ -161,7 +157,7 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutDataLifecycleRequestDescriptor Downsampling(Action<DataStreamLifecycleDownsamplingDescriptor> configure)
+	public PutDataLifecycleRequestDescriptor Downsampling(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> configure)
 	{
 		DownsamplingValue = null;
 		DownsamplingDescriptor = null;
@@ -186,7 +182,7 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 		else if (DownsamplingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
 		}
 		else if (DownsamplingValue is not null)
 		{

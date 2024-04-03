@@ -238,10 +238,10 @@ public sealed partial class IcuCollationTokenFilterDescriptor : SerializableDesc
 			writer.WriteStringValue(VariantValue);
 		}
 
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

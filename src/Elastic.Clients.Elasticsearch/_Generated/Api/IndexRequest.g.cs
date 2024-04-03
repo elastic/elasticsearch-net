@@ -108,9 +108,6 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 
 	internal override string OperationName => "index";
 
-	[JsonIgnore]
-	public TDocument Document { get; set; }
-
 	/// <summary>
 	/// <para>Only perform the operation if the document has this primary term.</para>
 	/// </summary>
@@ -176,6 +173,8 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	[JsonIgnore]
+	public TDocument Document { get; set; }
 }
 
 /// <summary>
@@ -184,25 +183,17 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptor<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 {
 	internal IndexRequestDescriptor(Action<IndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id)) => DocumentValue = document;
 
-	internal IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
+	public IndexRequestDescriptor(TDocument document) : this(document, typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document))
 	{
 	}
 
-	public IndexRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document)) => DocumentValue = document;
-	public IndexRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
-	public IndexRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document)) => DocumentValue = document;
-	public IndexRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
-
-	public IndexRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index) : this(document, index, Elastic.Clients.Elasticsearch.Id.From(document))
 	{
 	}
 
-	public IndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
-	{
-	}
-
-	internal IndexRequestDescriptor()
+	public IndexRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id? id) : this(document, typeof(TDocument), id)
 	{
 	}
 
@@ -239,6 +230,12 @@ public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	private TDocument DocumentValue { get; set; }
+
+	public IndexRequestDescriptor<TDocument> Document(TDocument document)
+	{
+		DocumentValue = document;
+		return Self;
+	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

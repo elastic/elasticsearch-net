@@ -81,6 +81,15 @@ public sealed partial class FieldAndFormatDescriptor<TDocument> : SerializableDe
 	}
 
 	/// <summary>
+	/// <para>Wildcard pattern. The request returns values for field names matching this pattern.</para>
+	/// </summary>
+	public FieldAndFormatDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Format in which the values are returned.</para>
 	/// </summary>
 	public FieldAndFormatDescriptor<TDocument> Format(string? format)

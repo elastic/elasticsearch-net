@@ -92,16 +92,17 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 }
 
 [JsonConverter(typeof(TermsQueryConverter))]
-public sealed partial class TermsQuery : SearchQuery
+public sealed partial class TermsQuery
 {
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+	public string? QueryName { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField Terms { get; set; }
 
-	public static implicit operator Query(TermsQuery termsQuery) => QueryDsl.Query.Terms(termsQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("terms", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Terms(termsQuery);
 }
 
 public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescriptor<TermsQueryDescriptor<TDocument>>
@@ -113,25 +114,16 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	private float? BoostValue { get; set; }
-	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermsQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
-		return Self;
-	}
-
-	public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public TermsQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
-	{
-		TermsValue = terms;
 		return Self;
 	}
 
@@ -144,6 +136,24 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 	public TermsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public TermsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TermsQueryDescriptor<TDocument> QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public TermsQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
+	{
+		TermsValue = terms;
 		return Self;
 	}
 
@@ -182,25 +192,16 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 	}
 
 	private float? BoostValue { get; set; }
-	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
+	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
-		return Self;
-	}
-
-	public TermsQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	public TermsQueryDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
-	{
-		TermsValue = terms;
 		return Self;
 	}
 
@@ -219,6 +220,18 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 	public TermsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public TermsQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	public TermsQueryDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
+	{
+		TermsValue = terms;
 		return Self;
 	}
 

@@ -77,6 +77,10 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 {
 	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	{
+	}
+
 	public RenderSearchTemplateRequestDescriptor()
 	{
 	}
@@ -154,6 +158,10 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescriptor<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateRequestParameters>
 {
 	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
+	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	{
+	}
 
 	public RenderSearchTemplateRequestDescriptor()
 	{

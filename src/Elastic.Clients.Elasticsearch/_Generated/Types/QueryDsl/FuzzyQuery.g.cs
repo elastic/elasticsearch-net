@@ -100,76 +100,75 @@ internal sealed partial class FuzzyQueryConverter : JsonConverter<FuzzyQuery>
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize FuzzyQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.Fuzziness is not null)
-			{
-				writer.WritePropertyName("fuzziness");
-				JsonSerializer.Serialize(writer, value.Fuzziness, options);
-			}
-
-			if (value.MaxExpansions.HasValue)
-			{
-				writer.WritePropertyName("max_expansions");
-				writer.WriteNumberValue(value.MaxExpansions.Value);
-			}
-
-			if (value.PrefixLength.HasValue)
-			{
-				writer.WritePropertyName("prefix_length");
-				writer.WriteNumberValue(value.PrefixLength.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			if (value.Transpositions.HasValue)
-			{
-				writer.WritePropertyName("transpositions");
-				writer.WriteBooleanValue(value.Transpositions.Value);
-			}
-
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.Fuzziness is not null)
+		{
+			writer.WritePropertyName("fuzziness");
+			JsonSerializer.Serialize(writer, value.Fuzziness, options);
+		}
+
+		if (value.MaxExpansions.HasValue)
+		{
+			writer.WritePropertyName("max_expansions");
+			writer.WriteNumberValue(value.MaxExpansions.Value);
+		}
+
+		if (value.PrefixLength.HasValue)
+		{
+			writer.WritePropertyName("prefix_length");
+			writer.WriteNumberValue(value.PrefixLength.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (!string.IsNullOrEmpty(value.Rewrite))
+		{
+			writer.WritePropertyName("rewrite");
+			writer.WriteStringValue(value.Rewrite);
+		}
+
+		if (value.Transpositions.HasValue)
+		{
+			writer.WritePropertyName("transpositions");
+			writer.WriteBooleanValue(value.Transpositions.Value);
+		}
+
+		writer.WritePropertyName("value");
+		JsonSerializer.Serialize(writer, value.Value, options);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(FuzzyQueryConverter))]
-public sealed partial class FuzzyQuery : SearchQuery
+public sealed partial class FuzzyQuery
 {
-	public FuzzyQuery(Field field)
+	public FuzzyQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Maximum edit distance allowed for matching.</para>
@@ -185,6 +184,7 @@ public sealed partial class FuzzyQuery : SearchQuery
 	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
 	/// </summary>
 	public int? PrefixLength { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Number of beginning characters left unchanged when creating expansions.</para>
@@ -200,33 +200,16 @@ public sealed partial class FuzzyQuery : SearchQuery
 	/// <para>Term you wish to find in the provided field.</para>
 	/// </summary>
 	public object Value { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator Query(FuzzyQuery fuzzyQuery) => QueryDsl.Query.Fuzzy(fuzzyQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("fuzzy", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(FuzzyQuery fuzzyQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Fuzzy(fuzzyQuery);
 }
 
 public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescriptor<FuzzyQueryDescriptor<TDocument>>
 {
 	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal FuzzyQueryDescriptor() : base()
+	public FuzzyQueryDescriptor() : base()
 	{
-	}
-
-	public FuzzyQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public FuzzyQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -239,6 +222,9 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	private bool? TranspositionsValue { get; set; }
 	private object ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -252,6 +238,12 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 	}
 
 	public FuzzyQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public FuzzyQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -354,10 +346,10 @@ public sealed partial class FuzzyQueryDescriptor<TDocument> : SerializableDescri
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (TranspositionsValue.HasValue)
@@ -377,15 +369,8 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 {
 	internal FuzzyQueryDescriptor(Action<FuzzyQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal FuzzyQueryDescriptor() : base()
+	public FuzzyQueryDescriptor() : base()
 	{
-	}
-
-	public FuzzyQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -398,6 +383,9 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 	private bool? TranspositionsValue { get; set; }
 	private object ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public FuzzyQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -519,10 +507,10 @@ public sealed partial class FuzzyQueryDescriptor : SerializableDescriptor<FuzzyQ
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (TranspositionsValue.HasValue)

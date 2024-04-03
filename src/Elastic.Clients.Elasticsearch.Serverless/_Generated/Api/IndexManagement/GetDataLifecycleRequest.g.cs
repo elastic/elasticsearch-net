@@ -83,10 +83,6 @@ public sealed partial class GetDataLifecycleRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal GetDataLifecycleRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

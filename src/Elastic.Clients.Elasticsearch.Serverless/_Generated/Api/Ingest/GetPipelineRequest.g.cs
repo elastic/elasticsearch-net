@@ -83,6 +83,10 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public GetPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id? id) : base(r => r.Optional("id", id))
+	{
+	}
+
 	public GetPipelineRequestDescriptor()
 	{
 	}
@@ -115,6 +119,10 @@ public sealed partial class GetPipelineRequestDescriptor<TDocument> : RequestDes
 public sealed partial class GetPipelineRequestDescriptor : RequestDescriptor<GetPipelineRequestDescriptor, GetPipelineRequestParameters>
 {
 	internal GetPipelineRequestDescriptor(Action<GetPipelineRequestDescriptor> configure) => configure.Invoke(this);
+
+	public GetPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id? id) : base(r => r.Optional("id", id))
+	{
+	}
 
 	public GetPipelineRequestDescriptor()
 	{

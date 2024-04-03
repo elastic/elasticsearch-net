@@ -127,10 +127,6 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal ExistsRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -165,10 +161,6 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal ExistsRequestDescriptor()
 	{
 	}
 

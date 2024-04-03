@@ -30,17 +30,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class PathHierarchyTokenizer : ITokenizer
 {
 	[JsonInclude, JsonPropertyName("buffer_size")]
-	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? BufferSize { get; set; }
 	[JsonInclude, JsonPropertyName("delimiter")]
 	public string? Delimiter { get; set; }
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 	[JsonInclude, JsonPropertyName("reverse")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Reverse { get; set; }
 	[JsonInclude, JsonPropertyName("skip")]
-	[JsonConverter(typeof(StringifiedIntegerConverter))]
 	public int? Skip { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -104,10 +101,10 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (BufferSizeValue is not null)
+		if (BufferSizeValue.HasValue)
 		{
 			writer.WritePropertyName("buffer_size");
-			JsonSerializer.Serialize(writer, BufferSizeValue, options);
+			writer.WriteNumberValue(BufferSizeValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(DelimiterValue))
@@ -122,24 +119,24 @@ public sealed partial class PathHierarchyTokenizerDescriptor : SerializableDescr
 			writer.WriteStringValue(ReplacementValue);
 		}
 
-		if (ReverseValue is not null)
+		if (ReverseValue.HasValue)
 		{
 			writer.WritePropertyName("reverse");
-			JsonSerializer.Serialize(writer, ReverseValue, options);
+			writer.WriteBooleanValue(ReverseValue.Value);
 		}
 
-		if (SkipValue is not null)
+		if (SkipValue.HasValue)
 		{
 			writer.WritePropertyName("skip");
-			JsonSerializer.Serialize(writer, SkipValue, options);
+			writer.WriteNumberValue(SkipValue.Value);
 		}
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("path_hierarchy");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

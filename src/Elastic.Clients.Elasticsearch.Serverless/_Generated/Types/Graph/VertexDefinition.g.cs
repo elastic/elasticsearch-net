@@ -77,9 +77,9 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	private ICollection<string>? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexInclude>? IncludeValue { get; set; }
-	private VertexIncludeDescriptor IncludeDescriptor { get; set; }
-	private Action<VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
-	private Action<VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor IncludeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -112,6 +112,15 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
+	/// <para>Identifies a field in the documents of interest.</para>
+	/// </summary>
+	public VertexDefinitionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Identifies the terms of interest that form the starting points from which you want to spider out.</para>
 	/// </summary>
 	public VertexDefinitionDescriptor<TDocument> Include(ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexInclude>? include)
@@ -123,7 +132,7 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor<TDocument> Include(VertexIncludeDescriptor descriptor)
+	public VertexDefinitionDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor descriptor)
 	{
 		IncludeValue = null;
 		IncludeDescriptorAction = null;
@@ -132,7 +141,7 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor<TDocument> Include(Action<VertexIncludeDescriptor> configure)
+	public VertexDefinitionDescriptor<TDocument> Include(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor> configure)
 	{
 		IncludeValue = null;
 		IncludeDescriptor = null;
@@ -141,7 +150,7 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor<TDocument> Include(params Action<VertexIncludeDescriptor>[] configure)
+	public VertexDefinitionDescriptor<TDocument> Include(params Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor>[] configure)
 	{
 		IncludeValue = null;
 		IncludeDescriptor = null;
@@ -199,7 +208,7 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("include");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor(IncludeDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (IncludeDescriptorActions is not null)
@@ -208,7 +217,7 @@ public sealed partial class VertexDefinitionDescriptor<TDocument> : Serializable
 			writer.WriteStartArray();
 			foreach (var action in IncludeDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -252,9 +261,9 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 	private ICollection<string>? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexInclude>? IncludeValue { get; set; }
-	private VertexIncludeDescriptor IncludeDescriptor { get; set; }
-	private Action<VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
-	private Action<VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor IncludeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor> IncludeDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor>[] IncludeDescriptorActions { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -307,7 +316,7 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor Include(VertexIncludeDescriptor descriptor)
+	public VertexDefinitionDescriptor Include(Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor descriptor)
 	{
 		IncludeValue = null;
 		IncludeDescriptorAction = null;
@@ -316,7 +325,7 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor Include(Action<VertexIncludeDescriptor> configure)
+	public VertexDefinitionDescriptor Include(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor> configure)
 	{
 		IncludeValue = null;
 		IncludeDescriptor = null;
@@ -325,7 +334,7 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public VertexDefinitionDescriptor Include(params Action<VertexIncludeDescriptor>[] configure)
+	public VertexDefinitionDescriptor Include(params Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor>[] configure)
 	{
 		IncludeValue = null;
 		IncludeDescriptor = null;
@@ -383,7 +392,7 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("include");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(IncludeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor(IncludeDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (IncludeDescriptorActions is not null)
@@ -392,7 +401,7 @@ public sealed partial class VertexDefinitionDescriptor : SerializableDescriptor<
 			writer.WriteStartArray();
 			foreach (var action in IncludeDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new VertexIncludeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexIncludeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

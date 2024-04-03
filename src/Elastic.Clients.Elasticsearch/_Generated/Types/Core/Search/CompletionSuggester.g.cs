@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class CompletionSuggester
 {
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
@@ -36,7 +39,11 @@ public sealed partial class CompletionSuggester
 	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("contexts")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? Contexts { get; set; }
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
@@ -51,6 +58,10 @@ public sealed partial class CompletionSuggester
 	/// </summary>
 	[JsonInclude, JsonPropertyName("regex")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
+
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
@@ -60,7 +71,7 @@ public sealed partial class CompletionSuggester
 	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
 
-	public static implicit operator FieldSuggester(CompletionSuggester completionSuggester) => Core.Search.FieldSuggester.Completion(completionSuggester);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(CompletionSuggester completionSuggester) => Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester.Completion(completionSuggester);
 }
 
 public sealed partial class CompletionSuggesterDescriptor<TDocument> : SerializableDescriptor<CompletionSuggesterDescriptor<TDocument>>
@@ -72,17 +83,20 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	}
 
 	private string? AnalyzerValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? ContextsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
-	private RegexOptionsDescriptor RegexDescriptor { get; set; }
-	private Action<RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor RegexDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 	private bool? SkipDuplicatesValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -92,19 +106,34 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// <summary>
 	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>> selector)
+	public CompletionSuggesterDescriptor<TDocument> Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
 	{
-		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>());
+		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
+	public CompletionSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -121,7 +150,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Fuzzy(SuggestFuzzinessDescriptor descriptor)
+	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor)
 	{
 		FuzzyValue = null;
 		FuzzyDescriptorAction = null;
@@ -129,7 +158,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Action<SuggestFuzzinessDescriptor> configure)
+	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> configure)
 	{
 		FuzzyValue = null;
 		FuzzyDescriptor = null;
@@ -148,7 +177,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Regex(RegexOptionsDescriptor descriptor)
+	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor)
 	{
 		RegexValue = null;
 		RegexDescriptorAction = null;
@@ -156,7 +185,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Regex(Action<RegexOptionsDescriptor> configure)
+	public CompletionSuggesterDescriptor<TDocument> Regex(Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> configure)
 	{
 		RegexValue = null;
 		RegexDescriptor = null;
@@ -164,6 +193,9 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -204,7 +236,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		else if (FuzzyDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, new SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
 		}
 		else if (FuzzyValue is not null)
 		{
@@ -220,7 +252,7 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 		else if (RegexDescriptorAction is not null)
 		{
 			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, new RegexOptionsDescriptor(RegexDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(RegexDescriptorAction), options);
 		}
 		else if (RegexValue is not null)
 		{
@@ -253,17 +285,20 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	}
 
 	private string? AnalyzerValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? ContextsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? ContextsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-	private SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-	private Action<SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
-	private RegexOptionsDescriptor RegexDescriptor { get; set; }
-	private Action<RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor RegexDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 	private bool? SkipDuplicatesValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -273,24 +308,33 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// <summary>
 	/// <para>A value, geo point object, or a geo hash string to filter or boost the suggestion on.</para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>> selector)
+	public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
 	{
-		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>());
+		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>());
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -308,7 +352,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Fuzzy(SuggestFuzzinessDescriptor descriptor)
+	public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor)
 	{
 		FuzzyValue = null;
 		FuzzyDescriptorAction = null;
@@ -316,7 +360,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Fuzzy(Action<SuggestFuzzinessDescriptor> configure)
+	public CompletionSuggesterDescriptor Fuzzy(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> configure)
 	{
 		FuzzyValue = null;
 		FuzzyDescriptor = null;
@@ -335,7 +379,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Regex(RegexOptionsDescriptor descriptor)
+	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor)
 	{
 		RegexValue = null;
 		RegexDescriptorAction = null;
@@ -343,7 +387,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public CompletionSuggesterDescriptor Regex(Action<RegexOptionsDescriptor> configure)
+	public CompletionSuggesterDescriptor Regex(Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> configure)
 	{
 		RegexValue = null;
 		RegexDescriptor = null;
@@ -351,6 +395,9 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public CompletionSuggesterDescriptor Size(int? size)
 	{
 		SizeValue = size;
@@ -391,7 +438,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		else if (FuzzyDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, new SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
 		}
 		else if (FuzzyValue is not null)
 		{
@@ -407,7 +454,7 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 		else if (RegexDescriptorAction is not null)
 		{
 			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, new RegexOptionsDescriptor(RegexDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(RegexDescriptorAction), options);
 		}
 		else if (RegexValue is not null)
 		{

@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -28,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 public sealed partial class ExecutePolicyResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus Status { get; init; }
+	public Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus? Status { get; init; }
 	[JsonInclude, JsonPropertyName("task_id")]
 	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get; init; }
 }

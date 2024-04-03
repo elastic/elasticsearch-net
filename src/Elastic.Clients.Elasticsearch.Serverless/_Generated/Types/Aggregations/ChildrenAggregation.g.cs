@@ -27,202 +27,20 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class ChildrenAggregationConverter : JsonConverter<ChildrenAggregation>
+public sealed partial class ChildrenAggregation
 {
-	public override ChildrenAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "children")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new ChildrenAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("type"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Type = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ChildrenAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("children");
-		writer.WriteStartObject();
-		if (value.Type is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, value.Type, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(ChildrenAggregationConverter))]
-public sealed partial class ChildrenAggregation : SearchAggregation
-{
-	public ChildrenAggregation(string name) => Name = name;
-
-	internal ChildrenAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? Aggregations { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The child type that should be selected.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("type")]
 	public string? Type { get; set; }
-}
 
-public sealed partial class ChildrenAggregationDescriptor<TDocument> : SerializableDescriptor<ChildrenAggregationDescriptor<TDocument>>
-{
-	internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public ChildrenAggregationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? TypeValue { get; set; }
-
-	public ChildrenAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>The child type that should be selected.</para>
-	/// </summary>
-	public ChildrenAggregationDescriptor<TDocument> Type(string? type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("children");
-		writer.WriteStartObject();
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(ChildrenAggregation childrenAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Children(childrenAggregation);
 }
 
 public sealed partial class ChildrenAggregationDescriptor : SerializableDescriptor<ChildrenAggregationDescriptor>
@@ -233,39 +51,19 @@ public sealed partial class ChildrenAggregationDescriptor : SerializableDescript
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private string? TypeValue { get; set; }
-
-	public ChildrenAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	public ChildrenAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ChildrenAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -281,35 +79,22 @@ public sealed partial class ChildrenAggregationDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("children");
-		writer.WriteStartObject();
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (AggregationsDescriptor is not null)
+		if (!string.IsNullOrEmpty(NameValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
-		else if (AggregationsDescriptorAction is not null)
+
+		if (!string.IsNullOrEmpty(TypeValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			writer.WritePropertyName("type");
+			writer.WriteStringValue(TypeValue);
 		}
 
 		writer.WriteEndObject();

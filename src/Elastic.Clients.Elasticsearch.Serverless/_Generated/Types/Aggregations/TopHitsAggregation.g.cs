@@ -27,403 +27,96 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class TopHitsAggregationConverter : JsonConverter<TopHitsAggregation>
+public sealed partial class TopHitsAggregation
 {
-	public override TopHitsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "top_hits")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new TopHitsAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("_source"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Source = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("docvalue_fields"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Fields?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.DocvalueFields = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("explain"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Explain = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("from"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.From = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("highlight"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Highlight = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script_fields"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ScriptFields = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("seq_no_primary_term"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.SeqNoPrimaryTerm = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Size = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("sort"))
-				{
-					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Sort = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("stored_fields"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Fields?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.StoredFields = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("track_scores"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.TrackScores = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("version"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Version = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TopHitsAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("top_hits");
-		writer.WriteStartObject();
-		if (value.Source is not null)
-		{
-			writer.WritePropertyName("_source");
-			JsonSerializer.Serialize(writer, value.Source, options);
-		}
-
-		if (value.DocvalueFields is not null)
-		{
-			writer.WritePropertyName("docvalue_fields");
-			JsonSerializer.Serialize(writer, value.DocvalueFields, options);
-		}
-
-		if (value.Explain.HasValue)
-		{
-			writer.WritePropertyName("explain");
-			writer.WriteBooleanValue(value.Explain.Value);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.From.HasValue)
-		{
-			writer.WritePropertyName("from");
-			writer.WriteNumberValue(value.From.Value);
-		}
-
-		if (value.Highlight is not null)
-		{
-			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, value.Highlight, options);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		if (value.ScriptFields is not null)
-		{
-			writer.WritePropertyName("script_fields");
-			JsonSerializer.Serialize(writer, value.ScriptFields, options);
-		}
-
-		if (value.SeqNoPrimaryTerm.HasValue)
-		{
-			writer.WritePropertyName("seq_no_primary_term");
-			writer.WriteBooleanValue(value.SeqNoPrimaryTerm.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		if (value.Sort is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.SortOptions>(value.Sort, writer, options);
-		}
-
-		if (value.StoredFields is not null)
-		{
-			writer.WritePropertyName("stored_fields");
-			JsonSerializer.Serialize(writer, value.StoredFields, options);
-		}
-
-		if (value.TrackScores.HasValue)
-		{
-			writer.WritePropertyName("track_scores");
-			writer.WriteBooleanValue(value.TrackScores.Value);
-		}
-
-		if (value.Version.HasValue)
-		{
-			writer.WritePropertyName("version");
-			writer.WriteBooleanValue(value.Version.Value);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(TopHitsAggregationConverter))]
-public sealed partial class TopHitsAggregation : SearchAggregation
-{
-	public TopHitsAggregation(string name, Field field) : this(name) => Field = field;
-	public TopHitsAggregation(string name) => Name = name;
-
-	internal TopHitsAggregation()
-	{
-	}
-
-	/// <summary>
-	/// <para>Selects the fields of the source that are returned.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
-
 	/// <summary>
 	/// <para>Fields for which to return doc values.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("docvalue_fields")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, returns detailed information about score computation as part of a hit.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 
 	/// <summary>
 	/// <para>Starting document offset.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("from")]
 	public int? From { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("highlight")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? Highlight { get; set; }
-	public IDictionary<string, object>? Meta { get; set; }
-	public FieldValue? Missing { get; set; }
-	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
 	/// <para>Returns the result of one or more script evaluations for each hit.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("script_fields")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFields { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, returns sequence number and primary term of the last modification of each hit.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("seq_no_primary_term")]
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
 	/// <para>The maximum number of top matching hits to return per bucket.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>Sort order of the top matching hits.<br/>By default, the hits are sorted by the score of the main query.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("sort")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.SortOptions))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? Sort { get; set; }
+
+	/// <summary>
+	/// <para>Selects the fields of the source that are returned.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_source")]
+	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
 	/// <para>Returns values for the specified stored fields (fields that use the `store` mapping option).</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("stored_fields")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, calculates and returns document scores, even if the scores are not used for sorting.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, returns document version as part of a hit.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("version")]
 	public bool? Version { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(TopHitsAggregation topHitsAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.TopHits(topHitsAggregation);
 }
 
 public sealed partial class TopHitsAggregationDescriptor<TDocument> : SerializableDescriptor<TopHitsAggregationDescriptor<TDocument>>
@@ -439,18 +132,17 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
-	private Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
-	private Action<Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
@@ -474,13 +166,28 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	public TopHitsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -506,7 +213,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Highlight(Core.Search.HighlightDescriptor<TDocument> descriptor)
+	public TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor<TDocument> descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -514,7 +221,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Highlight(Action<Core.Search.HighlightDescriptor<TDocument>> configure)
+	public TopHitsAggregationDescriptor<TDocument> Highlight(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor<TDocument>> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -522,13 +229,10 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public TopHitsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -543,9 +247,9 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// <summary>
 	/// <para>Returns the result of one or more script evaluations for each hit.</para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	public TopHitsAggregationDescriptor<TDocument> ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>());
 		return Self;
 	}
 
@@ -579,7 +283,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(SortOptionsDescriptor<TDocument> descriptor)
+	public TopHitsAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument> descriptor)
 	{
 		SortValue = null;
 		SortDescriptorAction = null;
@@ -588,7 +292,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(Action<SortOptionsDescriptor<TDocument>> configure)
+	public TopHitsAggregationDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>> configure)
 	{
 		SortValue = null;
 		SortDescriptor = null;
@@ -597,7 +301,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor<TDocument> Sort(params Action<SortOptionsDescriptor<TDocument>>[] configure)
+	public TopHitsAggregationDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>>[] configure)
 	{
 		SortValue = null;
 		SortDescriptor = null;
@@ -645,8 +349,6 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("top_hits");
-		writer.WriteStartObject();
 		if (DocvalueFieldsValue is not null)
 		{
 			writer.WritePropertyName("docvalue_fields");
@@ -679,7 +381,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor<TDocument>(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -725,7 +427,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		else if (SortDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
 		}
 		else if (SortDescriptorActions is not null)
 		{
@@ -734,7 +436,7 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>(action), options);
 			}
 
 			if (SortDescriptorActions.Length > 1)
@@ -771,13 +473,6 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -794,18 +489,17 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.Highlight? HighlightValue { get; set; }
-	private Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>? ScriptFieldsValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
 	private bool? SeqNoPrimaryTermValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.SortOptions>? SortValue { get; set; }
-	private SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor SortDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor> SortDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFieldsValue { get; set; }
 	private bool? TrackScoresValue { get; set; }
@@ -829,18 +523,27 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public TopHitsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -867,7 +570,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Highlight(Core.Search.HighlightDescriptor descriptor)
+	public TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -875,7 +578,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Highlight(Action<Core.Search.HighlightDescriptor> configure)
+	public TopHitsAggregationDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -883,13 +586,10 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TopHitsAggregationDescriptor Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public TopHitsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -904,9 +604,9 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// <summary>
 	/// <para>Returns the result of one or more script evaluations for each hit.</para>
 	/// </summary>
-	public TopHitsAggregationDescriptor ScriptFields(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>> selector)
+	public TopHitsAggregationDescriptor ScriptFields(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>> selector)
 	{
-		ScriptFieldsValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptField>());
+		ScriptFieldsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.ScriptFieldDescriptor>());
 		return Self;
 	}
 
@@ -940,7 +640,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(SortOptionsDescriptor descriptor)
+	public TopHitsAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor descriptor)
 	{
 		SortValue = null;
 		SortDescriptorAction = null;
@@ -949,7 +649,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(Action<SortOptionsDescriptor> configure)
+	public TopHitsAggregationDescriptor Sort(Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor> configure)
 	{
 		SortValue = null;
 		SortDescriptor = null;
@@ -958,7 +658,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public TopHitsAggregationDescriptor Sort(params Action<SortOptionsDescriptor>[] configure)
+	public TopHitsAggregationDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor>[] configure)
 	{
 		SortValue = null;
 		SortDescriptor = null;
@@ -1006,8 +706,6 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("top_hits");
-		writer.WriteStartObject();
 		if (DocvalueFieldsValue is not null)
 		{
 			writer.WritePropertyName("docvalue_fields");
@@ -1040,7 +738,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlightDescriptor(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -1086,7 +784,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		else if (SortDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new SortOptionsDescriptor(SortDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor(SortDescriptorAction), options);
 		}
 		else if (SortDescriptorActions is not null)
 		{
@@ -1095,7 +793,7 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SortOptionsDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor(action), options);
 			}
 
 			if (SortDescriptorActions.Length > 1)
@@ -1129,13 +827,6 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("version");
 			writer.WriteBooleanValue(VersionValue.Value);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();

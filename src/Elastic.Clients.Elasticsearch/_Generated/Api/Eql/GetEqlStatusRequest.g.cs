@@ -62,10 +62,6 @@ public sealed partial class GetEqlStatusRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal GetEqlStatusRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGetStatus;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -93,10 +89,6 @@ public sealed partial class GetEqlStatusRequestDescriptor : RequestDescriptor<Ge
 	internal GetEqlStatusRequestDescriptor(Action<GetEqlStatusRequestDescriptor> configure) => configure.Invoke(this);
 
 	public GetEqlStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal GetEqlStatusRequestDescriptor()
 	{
 	}
 

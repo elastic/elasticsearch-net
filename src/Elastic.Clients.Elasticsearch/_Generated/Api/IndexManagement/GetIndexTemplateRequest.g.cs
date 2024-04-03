@@ -105,6 +105,10 @@ public sealed partial class GetIndexTemplateRequestDescriptor : RequestDescripto
 {
 	internal GetIndexTemplateRequestDescriptor(Action<GetIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
+	public GetIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	{
+	}
+
 	public GetIndexTemplateRequestDescriptor()
 	{
 	}

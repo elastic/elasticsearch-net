@@ -27,16 +27,17 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class MoreLikeThisQuery : SearchQuery
+public sealed partial class MoreLikeThisQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
-
 	/// <summary>
 	/// <para>The analyzer that is used to analyze the free form text.<br/>Defaults to the analyzer associated with the first field in fields.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -56,7 +57,7 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public Fields? Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>Specifies whether the input documents should also be included in the search results returned.</para>
@@ -96,6 +97,12 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	public int? MinDocFreq { get; set; }
 
 	/// <summary>
+	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("minimum_should_match")]
+	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
+
+	/// <summary>
 	/// <para>The minimum term frequency below which the terms are ignored from the input document.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_term_freq")]
@@ -108,16 +115,12 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	public int? MinWordLength { get; set; }
 
 	/// <summary>
-	/// <para>After the disjunctive query has been formed, this parameter controls the number of terms that must match.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("minimum_should_match")]
-	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-
-	/// <summary>
 	/// <para>Overrides the default analyzer.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
@@ -125,7 +128,7 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	/// <para>An array of stop words.<br/>Any word in this set is ignored.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stop_words")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? StopWords { get; set; }
 
 	/// <summary>
@@ -139,9 +142,7 @@ public sealed partial class MoreLikeThisQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 
-	public static implicit operator Query(MoreLikeThisQuery moreLikeThisQuery) => QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("more_like_this", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(MoreLikeThisQuery moreLikeThisQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.MoreLikeThis(moreLikeThisQuery);
 }
 
 public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : SerializableDescriptor<MoreLikeThisQueryDescriptor<TDocument>>
@@ -156,7 +157,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-	private Fields? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 	private bool? IncludeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 	private int? MaxDocFreqValue { get; set; }
@@ -183,6 +184,9 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MoreLikeThisQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -210,7 +214,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	/// <summary>
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor<TDocument> Fields(Fields? fields)
+	public MoreLikeThisQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -461,10 +465,10 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(UnlikeValue, writer, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		if (VersionTypeValue is not null)
@@ -489,7 +493,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-	private Fields? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
 	private bool? IncludeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> LikeValue { get; set; }
 	private int? MaxDocFreqValue { get; set; }
@@ -516,6 +520,9 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public MoreLikeThisQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -543,7 +550,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	/// <summary>
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor Fields(Fields? fields)
+	public MoreLikeThisQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -794,10 +801,10 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Like>(UnlikeValue, writer, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		if (VersionTypeValue is not null)

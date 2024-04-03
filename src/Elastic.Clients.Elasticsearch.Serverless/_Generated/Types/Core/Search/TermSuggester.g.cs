@@ -29,8 +29,15 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
 public sealed partial class TermSuggester
 {
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("lowercase_terms")]
@@ -77,6 +84,10 @@ public sealed partial class TermSuggester
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
+
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
@@ -104,7 +115,7 @@ public sealed partial class TermSuggester
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
 
-	public static implicit operator FieldSuggester(TermSuggester termSuggester) => Core.Search.FieldSuggester.Term(termSuggester);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggester(TermSuggester termSuggester) => Elastic.Clients.Elasticsearch.Serverless.Core.Search.FieldSuggester.Term(termSuggester);
 }
 
 public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDescriptor<TermSuggesterDescriptor<TDocument>>
@@ -131,19 +142,37 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.SuggestMode? SuggestModeValue { get; set; }
 	private string? TextValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
+	public TermSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -218,6 +247,9 @@ public sealed partial class TermSuggesterDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public TermSuggesterDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -377,24 +409,36 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 	private Elastic.Clients.Elasticsearch.Serverless.SuggestMode? SuggestModeValue { get; set; }
 	private string? TextValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public TermSuggesterDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public TermSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public TermSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public TermSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -470,6 +514,9 @@ public sealed partial class TermSuggesterDescriptor : SerializableDescriptor<Ter
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public TermSuggesterDescriptor Size(int? size)
 	{
 		SizeValue = size;

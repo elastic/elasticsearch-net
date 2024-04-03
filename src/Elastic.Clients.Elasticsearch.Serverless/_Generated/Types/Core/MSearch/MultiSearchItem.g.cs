@@ -29,14 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
 
 public sealed partial class MultiSearchItem<TDocument>
 {
-	[JsonInclude, JsonPropertyName("_clusters")]
-	public Elastic.Clients.Elasticsearch.Serverless.ClusterStatistics? Clusters { get; init; }
-	[JsonInclude, JsonPropertyName("_scroll_id")]
-	public Elastic.Clients.Elasticsearch.Serverless.ScrollId? ScrollId { get; init; }
-	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary? Aggregations { get; init; }
+	[JsonInclude, JsonPropertyName("_clusters")]
+	public Elastic.Clients.Elasticsearch.Serverless.ClusterStatistics? Clusters { get; init; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 	[JsonInclude, JsonPropertyName("hits")]
@@ -49,6 +45,10 @@ public sealed partial class MultiSearchItem<TDocument>
 	public string? PitId { get; init; }
 	[JsonInclude, JsonPropertyName("profile")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Profile? Profile { get; init; }
+	[JsonInclude, JsonPropertyName("_scroll_id")]
+	public Elastic.Clients.Elasticsearch.Serverless.ScrollId? ScrollId { get; init; }
+	[JsonInclude, JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public int? Status { get; init; }
 	[JsonInclude, JsonPropertyName("suggest")]

@@ -35,6 +35,10 @@ public sealed partial class FieldAliasProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("path")]
@@ -73,15 +77,15 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public FieldAliasPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public FieldAliasPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -93,6 +97,9 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public FieldAliasPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -111,21 +118,27 @@ public sealed partial class FieldAliasPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	public FieldAliasPropertyDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
 	public FieldAliasPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public FieldAliasPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public FieldAliasPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -213,15 +226,15 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public FieldAliasPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public FieldAliasPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -233,6 +246,9 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public FieldAliasPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -263,15 +279,15 @@ public sealed partial class FieldAliasPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public FieldAliasPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FieldAliasPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public FieldAliasPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

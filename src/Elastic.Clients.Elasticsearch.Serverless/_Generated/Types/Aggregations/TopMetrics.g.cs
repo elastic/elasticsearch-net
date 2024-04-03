@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class TopMetrics
 {
 	[JsonInclude, JsonPropertyName("metrics")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? Metrics { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.FieldValue?> Metrics { get; init; }
 	[JsonInclude, JsonPropertyName("sort")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue>? Sort { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.FieldValue?> Sort { get; init; }
 }

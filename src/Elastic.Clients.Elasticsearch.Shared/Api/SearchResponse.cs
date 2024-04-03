@@ -21,5 +21,5 @@ public partial class SearchResponse<TDocument>
 	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
 	[JsonIgnore]
-	public long Total => HitsMetadata?.Total?.Value ?? -1;
+	public long Total => HitsMetadata?.Total?.Item2 ?? HitsMetadata?.Total?.Item1.Value ?? -1;
 }

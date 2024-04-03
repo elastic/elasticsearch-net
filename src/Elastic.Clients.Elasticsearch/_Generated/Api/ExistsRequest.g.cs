@@ -171,30 +171,6 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	public ExistsRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-	{
-	}
-
-	public ExistsRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public ExistsRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-	{
-	}
-
-	public ExistsRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public ExistsRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal ExistsRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;
@@ -239,10 +215,6 @@ public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRe
 	internal ExistsRequestDescriptor(Action<ExistsRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	internal ExistsRequestDescriptor()
 	{
 	}
 

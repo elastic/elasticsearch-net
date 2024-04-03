@@ -34,7 +34,6 @@ public sealed partial class EdgeNGramTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 	[JsonInclude, JsonPropertyName("side")]
 	public Elastic.Clients.Elasticsearch.Serverless.Analysis.EdgeNGramSide? Side { get; set; }
@@ -105,10 +104,10 @@ public sealed partial class EdgeNGramTokenFilterDescriptor : SerializableDescrip
 			writer.WriteNumberValue(MinGramValue.Value);
 		}
 
-		if (PreserveOriginalValue is not null)
+		if (PreserveOriginalValue.HasValue)
 		{
 			writer.WritePropertyName("preserve_original");
-			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
+			writer.WriteBooleanValue(PreserveOriginalValue.Value);
 		}
 
 		if (SideValue is not null)
@@ -119,10 +118,10 @@ public sealed partial class EdgeNGramTokenFilterDescriptor : SerializableDescrip
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("edge_ngram");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -36,7 +36,7 @@ public sealed partial class LinearInterpolationSmoothingModel
 	[JsonInclude, JsonPropertyName("unigram_lambda")]
 	public double UnigramLambda { get; set; }
 
-	public static implicit operator SmoothingModel(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Core.Search.SmoothingModel.LinearInterpolation(linearInterpolationSmoothingModel);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel.LinearInterpolation(linearInterpolationSmoothingModel);
 }
 
 public sealed partial class LinearInterpolationSmoothingModelDescriptor : SerializableDescriptor<LinearInterpolationSmoothingModelDescriptor>
