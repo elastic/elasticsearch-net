@@ -27,68 +27,67 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-[JsonConverter(typeof(HistogramBucketConverter))]
-public sealed partial class HistogramBucket : AggregateDictionary
+internal sealed partial class HistogramBucketConverter : JsonConverter<HistogramBucket>
 {
-	public HistogramBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("key")]
-	public double Key { get; init; }
-	[JsonInclude, JsonPropertyName("key_as_string")]
-	public string? KeyAsString { get; init; }
-}
-
-internal sealed class HistogramBucketConverter : JsonConverter<HistogramBucket>
-{
-	public override HistogramBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override HistogramBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		double key = default;
 		string? keyAsString = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key", StringComparison.Ordinal))
-			{
-				key = JsonSerializer.Deserialize<double>(ref reader, options);
-				continue;
-			}
+				if (property == "key")
+				{
+					key = JsonSerializer.Deserialize<double>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key_as_string", StringComparison.Ordinal))
-			{
-				keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "key_as_string")
+				{
+					keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new HistogramBucket(subAggs) { DocCount = docCount, Key = key, KeyAsString = keyAsString };
+		return new HistogramBucket { Aggregations = new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, Key = key, KeyAsString = keyAsString };
 	}
 
-	public override void Write(Utf8JsonWriter writer, HistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, HistogramBucket value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'HistogramBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(HistogramBucketConverter))]
+public sealed partial class HistogramBucket
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public double Key { get; init; }
+	public string? KeyAsString { get; init; }
 }

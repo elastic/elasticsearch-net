@@ -163,10 +163,10 @@ public sealed partial class SynonymTokenFilterDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(UpdateableValue.Value);
 		}
 
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -27,22 +27,13 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class QueryStringQuery : SearchQuery
+public sealed partial class QueryStringQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
-
 	/// <summary>
 	/// <para>If `true`, the wildcard characters `*` and `?` are allowed as the first character of the query string.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_leading_wildcard")]
 	public bool? AllowLeadingWildcard { get; set; }
-
-	/// <summary>
-	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("analyze_wildcard")]
-	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
 	/// <para>Analyzer used to convert text in the query string into tokens.</para>
@@ -51,10 +42,20 @@ public sealed partial class QueryStringQuery : SearchQuery
 	public string? Analyzer { get; set; }
 
 	/// <summary>
+	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("analyze_wildcard")]
+	public bool? AnalyzeWildcard { get; set; }
+
+	/// <summary>
 	/// <para>If `true`, match phrase queries are automatically created for multi-term synonyms.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -82,7 +83,7 @@ public sealed partial class QueryStringQuery : SearchQuery
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public Fields? Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>Maximum edit distance allowed for fuzzy matching.</para>
@@ -143,6 +144,8 @@ public sealed partial class QueryStringQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Analyzer used to convert quoted text in the query string into tokens.<br/>For quoted text, this parameter overrides the analyzer specified in the `analyzer` parameter.</para>
@@ -180,9 +183,7 @@ public sealed partial class QueryStringQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextQueryType? Type { get; set; }
 
-	public static implicit operator Query(QueryStringQuery queryStringQuery) => QueryDsl.Query.QueryString(queryStringQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("query_string", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(QueryStringQuery queryStringQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.QueryString(queryStringQuery);
 }
 
 public sealed partial class QueryStringQueryDescriptor<TDocument> : SerializableDescriptor<QueryStringQueryDescriptor<TDocument>>
@@ -202,7 +203,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private bool? EnablePositionIncrementsValue { get; set; }
 	private bool? EscapeValue { get; set; }
-	private Fields? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fuzziness? FuzzinessValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
@@ -257,6 +258,9 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -276,6 +280,15 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
 	public QueryStringQueryDescriptor<TDocument> DefaultField<TValue>(Expression<Func<TDocument, TValue>> defaultField)
+	{
+		DefaultFieldValue = defaultField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Default field to search if no field is provided in the query string.<br/>Supports wildcards (`*`).<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
+	/// </summary>
+	public QueryStringQueryDescriptor<TDocument> DefaultField(Expression<Func<TDocument, object>> defaultField)
 	{
 		DefaultFieldValue = defaultField;
 		return Self;
@@ -308,7 +321,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	/// <summary>
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
-	public QueryStringQueryDescriptor<TDocument> Fields(Fields? fields)
+	public QueryStringQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -545,10 +558,10 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 			writer.WriteNumberValue(FuzzyPrefixLengthValue.Value);
 		}
 
-		if (FuzzyRewriteValue is not null)
+		if (!string.IsNullOrEmpty(FuzzyRewriteValue))
 		{
 			writer.WritePropertyName("fuzzy_rewrite");
-			JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			writer.WriteStringValue(FuzzyRewriteValue);
 		}
 
 		if (FuzzyTranspositionsValue.HasValue)
@@ -601,10 +614,10 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 			writer.WriteStringValue(QuoteFieldSuffixValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (TieBreakerValue.HasValue)
@@ -613,10 +626,10 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 			writer.WriteNumberValue(TieBreakerValue.Value);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (TypeValue is not null)
@@ -646,7 +659,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private bool? EnablePositionIncrementsValue { get; set; }
 	private bool? EscapeValue { get; set; }
-	private Fields? FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fuzziness? FuzzinessValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
@@ -701,6 +714,9 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public QueryStringQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -761,7 +777,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	/// <summary>
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
-	public QueryStringQueryDescriptor Fields(Fields? fields)
+	public QueryStringQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -998,10 +1014,10 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 			writer.WriteNumberValue(FuzzyPrefixLengthValue.Value);
 		}
 
-		if (FuzzyRewriteValue is not null)
+		if (!string.IsNullOrEmpty(FuzzyRewriteValue))
 		{
 			writer.WritePropertyName("fuzzy_rewrite");
-			JsonSerializer.Serialize(writer, FuzzyRewriteValue, options);
+			writer.WriteStringValue(FuzzyRewriteValue);
 		}
 
 		if (FuzzyTranspositionsValue.HasValue)
@@ -1054,10 +1070,10 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 			writer.WriteStringValue(QuoteFieldSuffixValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (TieBreakerValue.HasValue)
@@ -1066,10 +1082,10 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 			writer.WriteNumberValue(TieBreakerValue.Value);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (TypeValue is not null)

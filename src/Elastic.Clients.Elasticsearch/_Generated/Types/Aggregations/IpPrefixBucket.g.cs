@@ -27,86 +27,83 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[JsonConverter(typeof(IpPrefixBucketConverter))]
-public sealed partial class IpPrefixBucket : AggregateDictionary
+internal sealed partial class IpPrefixBucketConverter : JsonConverter<IpPrefixBucket>
 {
-	public IpPrefixBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("is_ipv6")]
-	public bool IsIpv6 { get; init; }
-	[JsonInclude, JsonPropertyName("key")]
-	public string Key { get; init; }
-	[JsonInclude, JsonPropertyName("netmask")]
-	public string? Netmask { get; init; }
-	[JsonInclude, JsonPropertyName("prefix_length")]
-	public int PrefixLength { get; init; }
-}
-
-internal sealed class IpPrefixBucketConverter : JsonConverter<IpPrefixBucket>
-{
-	public override IpPrefixBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override IpPrefixBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		bool isIpv6 = default;
 		string key = default;
 		string? netmask = default;
 		int prefixLength = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("is_ipv6", StringComparison.Ordinal))
-			{
-				isIpv6 = JsonSerializer.Deserialize<bool>(ref reader, options);
-				continue;
-			}
+				if (property == "is_ipv6")
+				{
+					isIpv6 = JsonSerializer.Deserialize<bool>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key", StringComparison.Ordinal))
-			{
-				key = JsonSerializer.Deserialize<string>(ref reader, options);
-				continue;
-			}
+				if (property == "key")
+				{
+					key = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("netmask", StringComparison.Ordinal))
-			{
-				netmask = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "netmask")
+				{
+					netmask = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("prefix_length", StringComparison.Ordinal))
-			{
-				prefixLength = JsonSerializer.Deserialize<int>(ref reader, options);
-				continue;
-			}
+				if (property == "prefix_length")
+				{
+					prefixLength = JsonSerializer.Deserialize<int>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new IpPrefixBucket(subAggs) { DocCount = docCount, IsIpv6 = isIpv6, Key = key, Netmask = netmask, PrefixLength = prefixLength };
+		return new IpPrefixBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, IsIpv6 = isIpv6, Key = key, Netmask = netmask, PrefixLength = prefixLength };
 	}
 
-	public override void Write(Utf8JsonWriter writer, IpPrefixBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, IpPrefixBucket value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'IpPrefixBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(IpPrefixBucketConverter))]
+public sealed partial class IpPrefixBucket
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public bool IsIpv6 { get; init; }
+	public string Key { get; init; }
+	public string? Netmask { get; init; }
+	public int PrefixLength { get; init; }
 }

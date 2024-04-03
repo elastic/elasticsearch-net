@@ -27,111 +27,20 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class NestedAggregationConverter : JsonConverter<NestedAggregation>
+public sealed partial class NestedAggregation
 {
-	public override NestedAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "nested")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new NestedAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("path"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Path = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, NestedAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("nested");
-		writer.WriteStartObject();
-		if (value.Path is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, value.Path, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(NestedAggregationConverter))]
-public sealed partial class NestedAggregation : SearchAggregation
-{
-	public NestedAggregation(string name) => Name = name;
-
-	internal NestedAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The path to the field of type `nested`.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(NestedAggregation nestedAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Nested(nestedAggregation);
 }
 
 public sealed partial class NestedAggregationDescriptor<TDocument> : SerializableDescriptor<NestedAggregationDescriptor<TDocument>>
@@ -142,39 +51,19 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public NestedAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public NestedAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public NestedAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	public NestedAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public NestedAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -196,38 +85,34 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The path to the field of type `nested`.</para>
+	/// </summary>
+	public NestedAggregationDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("nested");
-		writer.WriteStartObject();
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (AggregationsDescriptor is not null)
+		if (!string.IsNullOrEmpty(NameValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
-		else if (AggregationsDescriptorAction is not null)
+
+		if (PathValue is not null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			writer.WritePropertyName("path");
+			JsonSerializer.Serialize(writer, PathValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -242,39 +127,19 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public NestedAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public NestedAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public NestedAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	public NestedAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public NestedAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -308,35 +173,22 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("nested");
-		writer.WriteStartObject();
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (AggregationsDescriptor is not null)
+		if (!string.IsNullOrEmpty(NameValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
-		else if (AggregationsDescriptorAction is not null)
+
+		if (PathValue is not null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			writer.WritePropertyName("path");
+			JsonSerializer.Serialize(writer, PathValue, options);
 		}
 
 		writer.WriteEndObject();

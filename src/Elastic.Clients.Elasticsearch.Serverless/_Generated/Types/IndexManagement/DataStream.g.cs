@@ -30,12 +30,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 public sealed partial class DataStream
 {
 	/// <summary>
-	/// <para>Custom metadata for the stream, copied from the `_meta` object of the stream’s matching index template.<br/>If empty, the response omits this property.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-
-	/// <summary>
 	/// <para>If `true`, the data stream allows custom routing on write request.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("allow_custom_routing")]
@@ -72,6 +66,12 @@ public sealed partial class DataStream
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
 
 	/// <summary>
+	/// <para>Custom metadata for the stream, copied from the `_meta` object of the stream’s matching index template.<br/>If empty, the response omits this property.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_meta")]
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	/// <summary>
 	/// <para>Name of the data stream.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
@@ -81,7 +81,7 @@ public sealed partial class DataStream
 	/// <para>Name of the lifecycle system that'll manage the next generation of the data stream.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("next_generation_managed_by")]
-	public string NextGenerationManagedBy { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.ManagedBy NextGenerationManagedBy { get; init; }
 
 	/// <summary>
 	/// <para>Indicates if ILM should take precedence over DSL in case both are configured to managed this data stream.</para>

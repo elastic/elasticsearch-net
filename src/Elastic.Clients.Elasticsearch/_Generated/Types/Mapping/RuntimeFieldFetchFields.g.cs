@@ -58,6 +58,12 @@ public sealed partial class RuntimeFieldFetchFieldsDescriptor<TDocument> : Seria
 		return Self;
 	}
 
+	public RuntimeFieldFetchFieldsDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public RuntimeFieldFetchFieldsDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;

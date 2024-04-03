@@ -18,6 +18,7 @@
 #nullable restore
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Graph;
 public partial class GraphNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="GraphNamespacedClient"/> class for mocking.
+	/// <para>Initializes a new instance of the <see cref="GraphNamespacedClient"/> class for mocking.</para>
 	/// </summary>
 	protected GraphNamespacedClient() : base()
 	{
@@ -38,7 +39,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual ExploreResponse Explore(ExploreRequest request)
 	{
@@ -48,7 +49,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequest request, CancellationToken cancellationToken = default)
 	{
@@ -58,8 +59,9 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new ExploreRequestDescriptor(indices);
@@ -69,8 +71,9 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(ExploreRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -79,8 +82,9 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ExploreRequestDescriptor(indices);
@@ -91,8 +95,9 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(ExploreRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -101,8 +106,9 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new ExploreRequestDescriptor<TDocument>(indices);
@@ -113,7 +119,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -124,7 +130,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -134,7 +140,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -146,7 +152,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(ExploreRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -156,7 +162,7 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{

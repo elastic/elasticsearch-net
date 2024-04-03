@@ -33,7 +33,7 @@ public sealed partial class TemplateMapping
 	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Alias))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; init; }
 	[JsonInclude, JsonPropertyName("index_patterns")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name> IndexPatterns { get; init; }
+	public IReadOnlyCollection<string> IndexPatterns { get; init; }
 	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; init; }
 	[JsonInclude, JsonPropertyName("order")]

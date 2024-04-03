@@ -27,210 +27,43 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class IpPrefixAggregationConverter : JsonConverter<IpPrefixAggregation>
+public sealed partial class IpPrefixAggregation
 {
-	public override IpPrefixAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "ip_prefix")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new IpPrefixAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("append_prefix_length"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.AppendPrefixLength = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Field>(ref reader, options);
-					agg.Field = value;
-					continue;
-				}
-
-				if (reader.ValueTextEquals("is_ipv6"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.IsIpv6 = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("keyed"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<bool?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Keyed = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<long?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("prefix_length"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int>(ref reader, options);
-					agg.PrefixLength = value;
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IpPrefixAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("ip_prefix");
-		writer.WriteStartObject();
-		if (value.AppendPrefixLength.HasValue)
-		{
-			writer.WritePropertyName("append_prefix_length");
-			writer.WriteBooleanValue(value.AppendPrefixLength.Value);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, value.Field, options);
-		if (value.IsIpv6.HasValue)
-		{
-			writer.WritePropertyName("is_ipv6");
-			writer.WriteBooleanValue(value.IsIpv6.Value);
-		}
-
-		if (value.Keyed.HasValue)
-		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(value.Keyed.Value);
-		}
-
-		if (value.MinDocCount.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(value.MinDocCount.Value);
-		}
-
-		writer.WritePropertyName("prefix_length");
-		writer.WriteNumberValue(value.PrefixLength);
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(IpPrefixAggregationConverter))]
-public sealed partial class IpPrefixAggregation : SearchAggregation
-{
-	public IpPrefixAggregation(string name) => Name = name;
-
-	internal IpPrefixAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("append_prefix_length")]
 	public bool? AppendPrefixLength { get; set; }
 
 	/// <summary>
 	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Defines whether the prefix applies to IPv6 addresses.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("is_ipv6")]
 	public bool? IsIpv6 { get; set; }
-
-	/// <summary>
-	/// <para>Defines whether buckets are returned as a hash rather than an array in the response.</para>
-	/// </summary>
-	public bool? Keyed { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("prefix_length")]
 	public int PrefixLength { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(IpPrefixAggregation ipPrefixAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.IpPrefix(ipPrefixAggregation);
 }
 
 public sealed partial class IpPrefixAggregationDescriptor<TDocument> : SerializableDescriptor<IpPrefixAggregationDescriptor<TDocument>>
@@ -241,40 +74,13 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private bool? AppendPrefixLengthValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IsIpv6Value { get; set; }
-	private bool? KeyedValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
+	private string? NameValue { get; set; }
 	private int PrefixLengthValue { get; set; }
-
-	public IpPrefixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
@@ -304,20 +110,20 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
+	/// <para>The IP address field to aggregation on. The field mapping type must be `ip`.</para>
+	/// </summary>
+	public IpPrefixAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Defines whether the prefix applies to IPv6 addresses.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> IsIpv6(bool? isIpv6 = true)
 	{
 		IsIpv6Value = isIpv6;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Defines whether buckets are returned as a hash rather than an array in the response.</para>
-	/// </summary>
-	public IpPrefixAggregationDescriptor<TDocument> Keyed(bool? keyed = true)
-	{
-		KeyedValue = keyed;
 		return Self;
 	}
 
@@ -336,6 +142,12 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	public IpPrefixAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
 	/// </summary>
@@ -347,8 +159,6 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("ip_prefix");
 		writer.WriteStartObject();
 		if (AppendPrefixLengthValue.HasValue)
 		{
@@ -364,10 +174,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 			writer.WriteBooleanValue(IsIpv6Value.Value);
 		}
 
-		if (KeyedValue.HasValue)
+		if (MetaValue is not null)
 		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(KeyedValue.Value);
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -376,31 +186,14 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		writer.WritePropertyName("prefix_length");
 		writer.WriteNumberValue(PrefixLengthValue);
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -413,40 +206,13 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private bool? AppendPrefixLengthValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IsIpv6Value { get; set; }
-	private bool? KeyedValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
+	private string? NameValue { get; set; }
 	private int PrefixLengthValue { get; set; }
-
-	public IpPrefixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Defines whether the prefix length is appended to IP address keys in the response.</para>
@@ -493,15 +259,6 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Defines whether buckets are returned as a hash rather than an array in the response.</para>
-	/// </summary>
-	public IpPrefixAggregationDescriptor Keyed(bool? keyed = true)
-	{
-		KeyedValue = keyed;
-		return Self;
-	}
-
 	public IpPrefixAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
@@ -517,6 +274,12 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 		return Self;
 	}
 
+	public IpPrefixAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
 	/// </summary>
@@ -528,8 +291,6 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("ip_prefix");
 		writer.WriteStartObject();
 		if (AppendPrefixLengthValue.HasValue)
 		{
@@ -545,10 +306,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 			writer.WriteBooleanValue(IsIpv6Value.Value);
 		}
 
-		if (KeyedValue.HasValue)
+		if (MetaValue is not null)
 		{
-			writer.WritePropertyName("keyed");
-			writer.WriteBooleanValue(KeyedValue.Value);
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -557,31 +318,14 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 			writer.WriteNumberValue(MinDocCountValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		writer.WritePropertyName("prefix_length");
 		writer.WriteNumberValue(PrefixLengthValue);
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
 		writer.WriteEndObject();
 	}
 }

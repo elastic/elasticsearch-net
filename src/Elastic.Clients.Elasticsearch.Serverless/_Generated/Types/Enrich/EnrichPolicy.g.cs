@@ -40,7 +40,7 @@ public sealed partial class EnrichPolicy
 	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Serverless.Name? Name { get; set; }
 	[JsonInclude, JsonPropertyName("query")]
-	public string? Query { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? Query { get; set; }
 }
 
 public sealed partial class EnrichPolicyDescriptor<TDocument> : SerializableDescriptor<EnrichPolicyDescriptor<TDocument>>
@@ -56,7 +56,9 @@ public sealed partial class EnrichPolicyDescriptor<TDocument> : SerializableDesc
 	private Elastic.Clients.Elasticsearch.Serverless.Indices IndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field MatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name? NameValue { get; set; }
-	private string? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	public EnrichPolicyDescriptor<TDocument> ElasticsearchVersion(string? elasticsearchVersion)
 	{
@@ -88,15 +90,39 @@ public sealed partial class EnrichPolicyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	public EnrichPolicyDescriptor<TDocument> MatchField(Expression<Func<TDocument, object>> matchField)
+	{
+		MatchFieldValue = matchField;
+		return Self;
+	}
+
 	public EnrichPolicyDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Serverless.Name? name)
 	{
 		NameValue = name;
 		return Self;
 	}
 
-	public EnrichPolicyDescriptor<TDocument> Query(string? query)
+	public EnrichPolicyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
+		QueryDescriptor = null;
+		QueryDescriptorAction = null;
 		QueryValue = query;
+		return Self;
+	}
+
+	public EnrichPolicyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	{
+		QueryValue = null;
+		QueryDescriptorAction = null;
+		QueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public EnrichPolicyDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
+	{
+		QueryValue = null;
+		QueryDescriptor = null;
+		QueryDescriptorAction = configure;
 		return Self;
 	}
 
@@ -121,10 +147,20 @@ public sealed partial class EnrichPolicyDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, NameValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryValue))
+		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
+			JsonSerializer.Serialize(writer, QueryDescriptor, options);
+		}
+		else if (QueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+		}
+		else if (QueryValue is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -144,7 +180,9 @@ public sealed partial class EnrichPolicyDescriptor : SerializableDescriptor<Enri
 	private Elastic.Clients.Elasticsearch.Serverless.Indices IndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field MatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Name? NameValue { get; set; }
-	private string? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	public EnrichPolicyDescriptor ElasticsearchVersion(string? elasticsearchVersion)
 	{
@@ -188,9 +226,27 @@ public sealed partial class EnrichPolicyDescriptor : SerializableDescriptor<Enri
 		return Self;
 	}
 
-	public EnrichPolicyDescriptor Query(string? query)
+	public EnrichPolicyDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? query)
 	{
+		QueryDescriptor = null;
+		QueryDescriptorAction = null;
 		QueryValue = query;
+		return Self;
+	}
+
+	public EnrichPolicyDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
+	{
+		QueryValue = null;
+		QueryDescriptorAction = null;
+		QueryDescriptor = descriptor;
+		return Self;
+	}
+
+	public EnrichPolicyDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
+	{
+		QueryValue = null;
+		QueryDescriptor = null;
+		QueryDescriptorAction = configure;
 		return Self;
 	}
 
@@ -215,10 +271,20 @@ public sealed partial class EnrichPolicyDescriptor : SerializableDescriptor<Enri
 			JsonSerializer.Serialize(writer, NameValue, options);
 		}
 
-		if (!string.IsNullOrEmpty(QueryValue))
+		if (QueryDescriptor is not null)
 		{
 			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
+			JsonSerializer.Serialize(writer, QueryDescriptor, options);
+		}
+		else if (QueryDescriptorAction is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+		}
+		else if (QueryValue is not null)
+		{
+			writer.WritePropertyName("query");
+			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
 		writer.WriteEndObject();

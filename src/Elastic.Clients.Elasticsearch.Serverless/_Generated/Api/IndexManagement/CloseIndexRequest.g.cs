@@ -127,10 +127,6 @@ public sealed partial class CloseIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal CloseIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -165,10 +161,6 @@ public sealed partial class CloseIndexRequestDescriptor : RequestDescriptor<Clos
 	internal CloseIndexRequestDescriptor(Action<CloseIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public CloseIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal CloseIndexRequestDescriptor()
 	{
 	}
 

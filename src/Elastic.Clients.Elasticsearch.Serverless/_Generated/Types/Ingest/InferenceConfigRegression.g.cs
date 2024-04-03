@@ -41,7 +41,7 @@ public sealed partial class InferenceConfigRegression
 	[JsonInclude, JsonPropertyName("results_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? ResultsField { get; set; }
 
-	public static implicit operator InferenceConfig(InferenceConfigRegression inferenceConfigRegression) => Ingest.InferenceConfig.Regression(inferenceConfigRegression);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig(InferenceConfigRegression inferenceConfigRegression) => Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig.Regression(inferenceConfigRegression);
 }
 
 public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : SerializableDescriptor<InferenceConfigRegressionDescriptor<TDocument>>
@@ -77,6 +77,15 @@ public sealed partial class InferenceConfigRegressionDescriptor<TDocument> : Ser
 	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
 	/// </summary>
 	public InferenceConfigRegressionDescriptor<TDocument> ResultsField<TValue>(Expression<Func<TDocument, TValue>> resultsField)
+	{
+		ResultsFieldValue = resultsField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field that is added to incoming documents to contain the inference prediction.</para>
+	/// </summary>
+	public InferenceConfigRegressionDescriptor<TDocument> ResultsField(Expression<Func<TDocument, object>> resultsField)
 	{
 		ResultsFieldValue = resultsField;
 		return Self;

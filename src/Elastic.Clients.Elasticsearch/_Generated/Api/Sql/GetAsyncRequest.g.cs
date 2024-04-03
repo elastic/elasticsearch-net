@@ -105,10 +105,6 @@ public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal GetAsyncRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -141,10 +137,6 @@ public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsy
 	internal GetAsyncRequestDescriptor(Action<GetAsyncRequestDescriptor> configure) => configure.Invoke(this);
 
 	public GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal GetAsyncRequestDescriptor()
 	{
 	}
 

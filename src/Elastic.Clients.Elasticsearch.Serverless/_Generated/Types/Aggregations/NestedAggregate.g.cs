@@ -27,59 +27,59 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-[JsonConverter(typeof(NestedAggregateConverter))]
-public sealed partial class NestedAggregate : AggregateDictionary, IAggregate
+internal sealed partial class NestedAggregateConverter : JsonConverter<NestedAggregate>
 {
-	public NestedAggregate(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-}
-
-internal sealed class NestedAggregateConverter : JsonConverter<NestedAggregate>
-{
-	public override NestedAggregate? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override NestedAggregate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		IReadOnlyDictionary<string, object>? meta = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("meta", StringComparison.Ordinal))
-			{
-				meta = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
-				continue;
-			}
+				if (property == "meta")
+				{
+					meta = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new NestedAggregate(subAggs) { DocCount = docCount, Meta = meta };
+		return new NestedAggregate { Aggregations = new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, Meta = meta };
 	}
 
-	public override void Write(Utf8JsonWriter writer, NestedAggregate value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, NestedAggregate value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'NestedAggregate' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(NestedAggregateConverter))]
+public sealed partial class NestedAggregate : IAggregate
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public IReadOnlyDictionary<string, object>? Meta { get; init; }
 }

@@ -44,11 +44,11 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevels? FetchValue { get; set; }
-	private SlowlogTresholdLevelsDescriptor FetchDescriptor { get; set; }
-	private Action<SlowlogTresholdLevelsDescriptor> FetchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor FetchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor> FetchDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevels? QueryValue { get; set; }
-	private SlowlogTresholdLevelsDescriptor QueryDescriptor { get; set; }
-	private Action<SlowlogTresholdLevelsDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor> QueryDescriptorAction { get; set; }
 
 	public SlowlogTresholdsDescriptor Fetch(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevels? fetch)
 	{
@@ -58,7 +58,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SlowlogTresholdsDescriptor Fetch(SlowlogTresholdLevelsDescriptor descriptor)
+	public SlowlogTresholdsDescriptor Fetch(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor descriptor)
 	{
 		FetchValue = null;
 		FetchDescriptorAction = null;
@@ -66,7 +66,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SlowlogTresholdsDescriptor Fetch(Action<SlowlogTresholdLevelsDescriptor> configure)
+	public SlowlogTresholdsDescriptor Fetch(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor> configure)
 	{
 		FetchValue = null;
 		FetchDescriptor = null;
@@ -82,7 +82,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SlowlogTresholdsDescriptor Query(SlowlogTresholdLevelsDescriptor descriptor)
+	public SlowlogTresholdsDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -90,7 +90,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SlowlogTresholdsDescriptor Query(Action<SlowlogTresholdLevelsDescriptor> configure)
+	public SlowlogTresholdsDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -109,7 +109,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		else if (FetchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fetch");
-			JsonSerializer.Serialize(writer, new SlowlogTresholdLevelsDescriptor(FetchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor(FetchDescriptorAction), options);
 		}
 		else if (FetchValue is not null)
 		{
@@ -125,7 +125,7 @@ public sealed partial class SlowlogTresholdsDescriptor : SerializableDescriptor<
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new SlowlogTresholdLevelsDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.SlowlogTresholdLevelsDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

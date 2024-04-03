@@ -63,8 +63,8 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversityValue { get; set; }
-	private SampleDiversityDescriptor<TDocument> SampleDiversityDescriptor { get; set; }
-	private Action<SampleDiversityDescriptor<TDocument>> SampleDiversityDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> SampleDiversityDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> SampleDiversityDescriptorAction { get; set; }
 	private int? SampleSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 	private bool UseSignificanceValue { get; set; }
@@ -80,7 +80,7 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public ExploreControlsDescriptor<TDocument> SampleDiversity(SampleDiversityDescriptor<TDocument> descriptor)
+	public ExploreControlsDescriptor<TDocument> SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument> descriptor)
 	{
 		SampleDiversityValue = null;
 		SampleDiversityDescriptorAction = null;
@@ -88,7 +88,7 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<SampleDiversityDescriptor<TDocument>> configure)
+	public ExploreControlsDescriptor<TDocument> SampleDiversity(Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>> configure)
 	{
 		SampleDiversityValue = null;
 		SampleDiversityDescriptor = null;
@@ -134,7 +134,7 @@ public sealed partial class ExploreControlsDescriptor<TDocument> : SerializableD
 		else if (SampleDiversityDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, new SampleDiversityDescriptor<TDocument>(SampleDiversityDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor<TDocument>(SampleDiversityDescriptorAction), options);
 		}
 		else if (SampleDiversityValue is not null)
 		{
@@ -169,8 +169,8 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 	}
 
 	private Elastic.Clients.Elasticsearch.Graph.SampleDiversity? SampleDiversityValue { get; set; }
-	private SampleDiversityDescriptor SampleDiversityDescriptor { get; set; }
-	private Action<SampleDiversityDescriptor> SampleDiversityDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor SampleDiversityDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> SampleDiversityDescriptorAction { get; set; }
 	private int? SampleSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? TimeoutValue { get; set; }
 	private bool UseSignificanceValue { get; set; }
@@ -186,7 +186,7 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 		return Self;
 	}
 
-	public ExploreControlsDescriptor SampleDiversity(SampleDiversityDescriptor descriptor)
+	public ExploreControlsDescriptor SampleDiversity(Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor descriptor)
 	{
 		SampleDiversityValue = null;
 		SampleDiversityDescriptorAction = null;
@@ -194,7 +194,7 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 		return Self;
 	}
 
-	public ExploreControlsDescriptor SampleDiversity(Action<SampleDiversityDescriptor> configure)
+	public ExploreControlsDescriptor SampleDiversity(Action<Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor> configure)
 	{
 		SampleDiversityValue = null;
 		SampleDiversityDescriptor = null;
@@ -240,7 +240,7 @@ public sealed partial class ExploreControlsDescriptor : SerializableDescriptor<E
 		else if (SampleDiversityDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sample_diversity");
-			JsonSerializer.Serialize(writer, new SampleDiversityDescriptor(SampleDiversityDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Graph.SampleDiversityDescriptor(SampleDiversityDescriptorAction), options);
 		}
 		else if (SampleDiversityValue is not null)
 		{

@@ -32,9 +32,9 @@ public sealed partial class RandomScoreFunction
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	[JsonInclude, JsonPropertyName("seed")]
-	public Union<long?, string?>? Seed { get; set; }
+	public object? Seed { get; set; }
 
-	public static implicit operator FunctionScore(RandomScoreFunction randomScoreFunction) => QueryDsl.FunctionScore.RandomScore(randomScoreFunction);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(RandomScoreFunction randomScoreFunction) => Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.RandomScore(randomScoreFunction);
 }
 
 public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptor<RandomScoreFunctionDescriptor<TDocument>>
@@ -46,7 +46,7 @@ public sealed partial class RandomScoreFunctionDescriptor<TDocument> : Serializa
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Union<long?, string?>? SeedValue { get; set; }
+	private object? SeedValue { get; set; }
 
 	public RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -60,7 +60,13 @@ public sealed partial class RandomScoreFunctionDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public RandomScoreFunctionDescriptor<TDocument> Seed(Union<long?, string?>? seed)
+	public RandomScoreFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RandomScoreFunctionDescriptor<TDocument> Seed(object? seed)
 	{
 		SeedValue = seed;
 		return Self;
@@ -94,7 +100,7 @@ public sealed partial class RandomScoreFunctionDescriptor : SerializableDescript
 	}
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private Union<long?, string?>? SeedValue { get; set; }
+	private object? SeedValue { get; set; }
 
 	public RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
 	{
@@ -114,7 +120,7 @@ public sealed partial class RandomScoreFunctionDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public RandomScoreFunctionDescriptor Seed(Union<long?, string?>? seed)
+	public RandomScoreFunctionDescriptor Seed(object? seed)
 	{
 		SeedValue = seed;
 		return Self;

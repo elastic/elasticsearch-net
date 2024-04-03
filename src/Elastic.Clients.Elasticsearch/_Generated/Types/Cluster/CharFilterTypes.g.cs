@@ -60,6 +60,12 @@ public sealed partial class CharFilterTypes
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; init; }
 
 	/// <summary>
+	/// <para>Contains statistics about character filter types used in selected nodes.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("char_filter_types")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; init; }
+
+	/// <summary>
 	/// <para>Contains statistics about token filter types used in selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filter_types")]

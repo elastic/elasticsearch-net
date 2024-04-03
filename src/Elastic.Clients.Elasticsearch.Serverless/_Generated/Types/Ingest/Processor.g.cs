@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -71,6 +72,7 @@ public sealed partial class Processor
 	public static Processor Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => new Processor("remove", removeProcessor);
 	public static Processor Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => new Processor("rename", renameProcessor);
 	public static Processor Reroute(Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor rerouteProcessor) => new Processor("reroute", rerouteProcessor);
+	public static Processor Script(Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor scriptProcessor) => new Processor("script", scriptProcessor);
 	public static Processor Set(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor setProcessor) => new Processor("set", setProcessor);
 	public static Processor SetSecurityUser(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => new Processor("set_security_user", setSecurityUserProcessor);
 	public static Processor Sort(Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor sortProcessor) => new Processor("sort", sortProcessor);
@@ -79,6 +81,18 @@ public sealed partial class Processor
 	public static Processor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => new Processor("uppercase", uppercaseProcessor);
 	public static Processor UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => new Processor("urldecode", urlDecodeProcessor);
 	public static Processor UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => new Processor("user_agent", userAgentProcessor);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class ProcessorConverter : JsonConverter<Processor>
@@ -90,259 +104,279 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			throw new JsonException("Expected start token.");
 		}
 
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "append")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "attachment")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bytes")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "circle")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "convert")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "csv")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "date")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "date_index_name")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "dissect")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "dot_expander")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "drop")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "enrich")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "fail")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "foreach")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geoip")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "grok")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "gsub")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "inference")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "join")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "json")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "kv")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "lowercase")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "pipeline")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "remove")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "rename")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "reroute")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "script")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "set")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "set_security_user")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "sort")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "split")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "trim")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "uppercase")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "urldecode")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "user_agent")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Processor' from the response.");
+		}
+
 		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
-		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
-
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "append")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "attachment")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "bytes")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "circle")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "convert")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "csv")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "date")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "date_index_name")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "dissect")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "dot_expander")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "drop")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "enrich")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "fail")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "foreach")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "geoip")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "grok")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "gsub")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "inference")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "join")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "json")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "kv")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "lowercase")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "pipeline")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "remove")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "rename")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "reroute")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "set")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "set_security_user")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "sort")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "split")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "trim")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "uppercase")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "urldecode")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		if (propertyName == "user_agent")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor?>(ref reader, options);
-			reader.Read();
-			return new Processor(propertyName, variant);
-		}
-
-		throw new JsonException();
+		var result = new Processor(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Processor value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -425,6 +459,9 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 				case "reroute":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor)value.Variant, options);
 					break;
+				case "script":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor)value.Variant, options);
+					break;
 				case "set":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor>(writer, (Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor)value.Variant, options);
 					break;
@@ -487,93 +524,93 @@ public sealed partial class ProcessorDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public ProcessorDescriptor<TDocument> Append(AppendProcessor appendProcessor) => Set(appendProcessor, "append");
-	public ProcessorDescriptor<TDocument> Append(Action<AppendProcessorDescriptor<TDocument>> configure) => Set(configure, "append");
-	public ProcessorDescriptor<TDocument> Attachment(AttachmentProcessor attachmentProcessor) => Set(attachmentProcessor, "attachment");
-	public ProcessorDescriptor<TDocument> Attachment(Action<AttachmentProcessorDescriptor<TDocument>> configure) => Set(configure, "attachment");
-	public ProcessorDescriptor<TDocument> Bytes(BytesProcessor bytesProcessor) => Set(bytesProcessor, "bytes");
-	public ProcessorDescriptor<TDocument> Bytes(Action<BytesProcessorDescriptor<TDocument>> configure) => Set(configure, "bytes");
-	public ProcessorDescriptor<TDocument> Circle(CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
-	public ProcessorDescriptor<TDocument> Circle(Action<CircleProcessorDescriptor<TDocument>> configure) => Set(configure, "circle");
-	public ProcessorDescriptor<TDocument> Convert(ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
-	public ProcessorDescriptor<TDocument> Convert(Action<ConvertProcessorDescriptor<TDocument>> configure) => Set(configure, "convert");
-	public ProcessorDescriptor<TDocument> Csv(CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
-	public ProcessorDescriptor<TDocument> Csv(Action<CsvProcessorDescriptor<TDocument>> configure) => Set(configure, "csv");
-	public ProcessorDescriptor<TDocument> Date(DateProcessor dateProcessor) => Set(dateProcessor, "date");
-	public ProcessorDescriptor<TDocument> Date(Action<DateProcessorDescriptor<TDocument>> configure) => Set(configure, "date");
-	public ProcessorDescriptor<TDocument> DateIndexName(DateIndexNameProcessor dateIndexNameProcessor) => Set(dateIndexNameProcessor, "date_index_name");
-	public ProcessorDescriptor<TDocument> DateIndexName(Action<DateIndexNameProcessorDescriptor<TDocument>> configure) => Set(configure, "date_index_name");
-	public ProcessorDescriptor<TDocument> Dissect(DissectProcessor dissectProcessor) => Set(dissectProcessor, "dissect");
-	public ProcessorDescriptor<TDocument> Dissect(Action<DissectProcessorDescriptor<TDocument>> configure) => Set(configure, "dissect");
-	public ProcessorDescriptor<TDocument> DotExpander(DotExpanderProcessor dotExpanderProcessor) => Set(dotExpanderProcessor, "dot_expander");
-	public ProcessorDescriptor<TDocument> DotExpander(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
-	public ProcessorDescriptor<TDocument> Drop(DropProcessor dropProcessor) => Set(dropProcessor, "drop");
-	public ProcessorDescriptor<TDocument> Drop(Action<DropProcessorDescriptor<TDocument>> configure) => Set(configure, "drop");
-	public ProcessorDescriptor<TDocument> Enrich(EnrichProcessor enrichProcessor) => Set(enrichProcessor, "enrich");
-	public ProcessorDescriptor<TDocument> Enrich(Action<EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
-	public ProcessorDescriptor<TDocument> Fail(FailProcessor failProcessor) => Set(failProcessor, "fail");
-	public ProcessorDescriptor<TDocument> Fail(Action<FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
-	public ProcessorDescriptor<TDocument> Foreach(ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
-	public ProcessorDescriptor<TDocument> Foreach(Action<ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
-	public ProcessorDescriptor<TDocument> Geoip(GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
-	public ProcessorDescriptor<TDocument> Geoip(Action<GeoIpProcessorDescriptor<TDocument>> configure) => Set(configure, "geoip");
-	public ProcessorDescriptor<TDocument> Grok(GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
-	public ProcessorDescriptor<TDocument> Grok(Action<GrokProcessorDescriptor<TDocument>> configure) => Set(configure, "grok");
-	public ProcessorDescriptor<TDocument> Gsub(GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
-	public ProcessorDescriptor<TDocument> Gsub(Action<GsubProcessorDescriptor<TDocument>> configure) => Set(configure, "gsub");
-	public ProcessorDescriptor<TDocument> Inference(InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
-	public ProcessorDescriptor<TDocument> Inference(Action<InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
-	public ProcessorDescriptor<TDocument> Join(JoinProcessor joinProcessor) => Set(joinProcessor, "join");
-	public ProcessorDescriptor<TDocument> Join(Action<JoinProcessorDescriptor<TDocument>> configure) => Set(configure, "join");
-	public ProcessorDescriptor<TDocument> Json(JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");
-	public ProcessorDescriptor<TDocument> Json(Action<JsonProcessorDescriptor<TDocument>> configure) => Set(configure, "json");
-	public ProcessorDescriptor<TDocument> Kv(KeyValueProcessor keyValueProcessor) => Set(keyValueProcessor, "kv");
-	public ProcessorDescriptor<TDocument> Kv(Action<KeyValueProcessorDescriptor<TDocument>> configure) => Set(configure, "kv");
-	public ProcessorDescriptor<TDocument> Lowercase(LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
-	public ProcessorDescriptor<TDocument> Lowercase(Action<LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
-	public ProcessorDescriptor<TDocument> Pipeline(PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
-	public ProcessorDescriptor<TDocument> Pipeline(Action<PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
-	public ProcessorDescriptor<TDocument> Remove(RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
-	public ProcessorDescriptor<TDocument> Remove(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
-	public ProcessorDescriptor<TDocument> Rename(RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
-	public ProcessorDescriptor<TDocument> Rename(Action<RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
-	public ProcessorDescriptor<TDocument> Reroute(RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
-	public ProcessorDescriptor<TDocument> Reroute(Action<RerouteProcessorDescriptor<TDocument>> configure) => Set(configure, "reroute");
-	public ProcessorDescriptor<TDocument> Set(SetProcessor setProcessor) => Set(setProcessor, "set");
-	public ProcessorDescriptor<TDocument> Set(Action<SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");
-	public ProcessorDescriptor<TDocument> SetSecurityUser(SetSecurityUserProcessor setSecurityUserProcessor) => Set(setSecurityUserProcessor, "set_security_user");
-	public ProcessorDescriptor<TDocument> SetSecurityUser(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => Set(configure, "set_security_user");
-	public ProcessorDescriptor<TDocument> Sort(SortProcessor sortProcessor) => Set(sortProcessor, "sort");
-	public ProcessorDescriptor<TDocument> Sort(Action<SortProcessorDescriptor<TDocument>> configure) => Set(configure, "sort");
-	public ProcessorDescriptor<TDocument> Split(SplitProcessor splitProcessor) => Set(splitProcessor, "split");
-	public ProcessorDescriptor<TDocument> Split(Action<SplitProcessorDescriptor<TDocument>> configure) => Set(configure, "split");
-	public ProcessorDescriptor<TDocument> Trim(TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
-	public ProcessorDescriptor<TDocument> Trim(Action<TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
-	public ProcessorDescriptor<TDocument> Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
-	public ProcessorDescriptor<TDocument> Uppercase(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor<TDocument> UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor<TDocument> UrlDecode(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
-	public ProcessorDescriptor<TDocument> UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
-	public ProcessorDescriptor<TDocument> UserAgent(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+	public ProcessorDescriptor<TDocument> Append(Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessor appendProcessor) => Set(appendProcessor, "append");
+	public ProcessorDescriptor<TDocument> Append(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessorDescriptor<TDocument>> configure) => Set(configure, "append");
+	public ProcessorDescriptor<TDocument> Attachment(Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessor attachmentProcessor) => Set(attachmentProcessor, "attachment");
+	public ProcessorDescriptor<TDocument> Attachment(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessorDescriptor<TDocument>> configure) => Set(configure, "attachment");
+	public ProcessorDescriptor<TDocument> Bytes(Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessor bytesProcessor) => Set(bytesProcessor, "bytes");
+	public ProcessorDescriptor<TDocument> Bytes(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessorDescriptor<TDocument>> configure) => Set(configure, "bytes");
+	public ProcessorDescriptor<TDocument> Circle(Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
+	public ProcessorDescriptor<TDocument> Circle(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessorDescriptor<TDocument>> configure) => Set(configure, "circle");
+	public ProcessorDescriptor<TDocument> Convert(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
+	public ProcessorDescriptor<TDocument> Convert(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessorDescriptor<TDocument>> configure) => Set(configure, "convert");
+	public ProcessorDescriptor<TDocument> Csv(Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
+	public ProcessorDescriptor<TDocument> Csv(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessorDescriptor<TDocument>> configure) => Set(configure, "csv");
+	public ProcessorDescriptor<TDocument> Date(Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessor dateProcessor) => Set(dateProcessor, "date");
+	public ProcessorDescriptor<TDocument> Date(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessorDescriptor<TDocument>> configure) => Set(configure, "date");
+	public ProcessorDescriptor<TDocument> DateIndexName(Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessor dateIndexNameProcessor) => Set(dateIndexNameProcessor, "date_index_name");
+	public ProcessorDescriptor<TDocument> DateIndexName(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessorDescriptor<TDocument>> configure) => Set(configure, "date_index_name");
+	public ProcessorDescriptor<TDocument> Dissect(Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessor dissectProcessor) => Set(dissectProcessor, "dissect");
+	public ProcessorDescriptor<TDocument> Dissect(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessorDescriptor<TDocument>> configure) => Set(configure, "dissect");
+	public ProcessorDescriptor<TDocument> DotExpander(Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessor dotExpanderProcessor) => Set(dotExpanderProcessor, "dot_expander");
+	public ProcessorDescriptor<TDocument> DotExpander(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
+	public ProcessorDescriptor<TDocument> Drop(Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessor dropProcessor) => Set(dropProcessor, "drop");
+	public ProcessorDescriptor<TDocument> Drop(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessorDescriptor<TDocument>> configure) => Set(configure, "drop");
+	public ProcessorDescriptor<TDocument> Enrich(Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessor enrichProcessor) => Set(enrichProcessor, "enrich");
+	public ProcessorDescriptor<TDocument> Enrich(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
+	public ProcessorDescriptor<TDocument> Fail(Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor failProcessor) => Set(failProcessor, "fail");
+	public ProcessorDescriptor<TDocument> Fail(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
+	public ProcessorDescriptor<TDocument> Foreach(Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
+	public ProcessorDescriptor<TDocument> Foreach(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
+	public ProcessorDescriptor<TDocument> Geoip(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
+	public ProcessorDescriptor<TDocument> Geoip(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessorDescriptor<TDocument>> configure) => Set(configure, "geoip");
+	public ProcessorDescriptor<TDocument> Grok(Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
+	public ProcessorDescriptor<TDocument> Grok(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessorDescriptor<TDocument>> configure) => Set(configure, "grok");
+	public ProcessorDescriptor<TDocument> Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
+	public ProcessorDescriptor<TDocument> Gsub(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessorDescriptor<TDocument>> configure) => Set(configure, "gsub");
+	public ProcessorDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
+	public ProcessorDescriptor<TDocument> Inference(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
+	public ProcessorDescriptor<TDocument> Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
+	public ProcessorDescriptor<TDocument> Join(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessorDescriptor<TDocument>> configure) => Set(configure, "join");
+	public ProcessorDescriptor<TDocument> Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");
+	public ProcessorDescriptor<TDocument> Json(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessorDescriptor<TDocument>> configure) => Set(configure, "json");
+	public ProcessorDescriptor<TDocument> Kv(Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor keyValueProcessor) => Set(keyValueProcessor, "kv");
+	public ProcessorDescriptor<TDocument> Kv(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessorDescriptor<TDocument>> configure) => Set(configure, "kv");
+	public ProcessorDescriptor<TDocument> Lowercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
+	public ProcessorDescriptor<TDocument> Lowercase(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
+	public ProcessorDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
+	public ProcessorDescriptor<TDocument> Pipeline(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
+	public ProcessorDescriptor<TDocument> Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
+	public ProcessorDescriptor<TDocument> Remove(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
+	public ProcessorDescriptor<TDocument> Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
+	public ProcessorDescriptor<TDocument> Rename(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
+	public ProcessorDescriptor<TDocument> Reroute(Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
+	public ProcessorDescriptor<TDocument> Reroute(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessorDescriptor<TDocument>> configure) => Set(configure, "reroute");
+	public ProcessorDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor scriptProcessor) => Set(scriptProcessor, "script");
+	public ProcessorDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessorDescriptor<TDocument>> configure) => Set(configure, "script");
+	public ProcessorDescriptor<TDocument> Set(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor setProcessor) => Set(setProcessor, "set");
+	public ProcessorDescriptor<TDocument> Set(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");
+	public ProcessorDescriptor<TDocument> SetSecurityUser(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => Set(setSecurityUserProcessor, "set_security_user");
+	public ProcessorDescriptor<TDocument> SetSecurityUser(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessorDescriptor<TDocument>> configure) => Set(configure, "set_security_user");
+	public ProcessorDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor sortProcessor) => Set(sortProcessor, "sort");
+	public ProcessorDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessorDescriptor<TDocument>> configure) => Set(configure, "sort");
+	public ProcessorDescriptor<TDocument> Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => Set(splitProcessor, "split");
+	public ProcessorDescriptor<TDocument> Split(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessorDescriptor<TDocument>> configure) => Set(configure, "split");
+	public ProcessorDescriptor<TDocument> Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
+	public ProcessorDescriptor<TDocument> Trim(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
+	public ProcessorDescriptor<TDocument> Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
+	public ProcessorDescriptor<TDocument> Uppercase(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
+	public ProcessorDescriptor<TDocument> UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor<TDocument> UrlDecode(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor<TDocument> UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
+	public ProcessorDescriptor<TDocument> UserAgent(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -609,127 +646,93 @@ public sealed partial class ProcessorDescriptor : SerializableDescriptor<Process
 		return Self;
 	}
 
-	public ProcessorDescriptor Append(AppendProcessor appendProcessor) => Set(appendProcessor, "append");
-	public ProcessorDescriptor Append(Action<AppendProcessorDescriptor> configure) => Set(configure, "append");
-	public ProcessorDescriptor Append<TDocument>(Action<AppendProcessorDescriptor<TDocument>> configure) => Set(configure, "append");
-	public ProcessorDescriptor Attachment(AttachmentProcessor attachmentProcessor) => Set(attachmentProcessor, "attachment");
-	public ProcessorDescriptor Attachment(Action<AttachmentProcessorDescriptor> configure) => Set(configure, "attachment");
-	public ProcessorDescriptor Attachment<TDocument>(Action<AttachmentProcessorDescriptor<TDocument>> configure) => Set(configure, "attachment");
-	public ProcessorDescriptor Bytes(BytesProcessor bytesProcessor) => Set(bytesProcessor, "bytes");
-	public ProcessorDescriptor Bytes(Action<BytesProcessorDescriptor> configure) => Set(configure, "bytes");
-	public ProcessorDescriptor Bytes<TDocument>(Action<BytesProcessorDescriptor<TDocument>> configure) => Set(configure, "bytes");
-	public ProcessorDescriptor Circle(CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
-	public ProcessorDescriptor Circle(Action<CircleProcessorDescriptor> configure) => Set(configure, "circle");
-	public ProcessorDescriptor Circle<TDocument>(Action<CircleProcessorDescriptor<TDocument>> configure) => Set(configure, "circle");
-	public ProcessorDescriptor Convert(ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
-	public ProcessorDescriptor Convert(Action<ConvertProcessorDescriptor> configure) => Set(configure, "convert");
-	public ProcessorDescriptor Convert<TDocument>(Action<ConvertProcessorDescriptor<TDocument>> configure) => Set(configure, "convert");
-	public ProcessorDescriptor Csv(CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
-	public ProcessorDescriptor Csv(Action<CsvProcessorDescriptor> configure) => Set(configure, "csv");
-	public ProcessorDescriptor Csv<TDocument>(Action<CsvProcessorDescriptor<TDocument>> configure) => Set(configure, "csv");
-	public ProcessorDescriptor Date(DateProcessor dateProcessor) => Set(dateProcessor, "date");
-	public ProcessorDescriptor Date(Action<DateProcessorDescriptor> configure) => Set(configure, "date");
-	public ProcessorDescriptor Date<TDocument>(Action<DateProcessorDescriptor<TDocument>> configure) => Set(configure, "date");
-	public ProcessorDescriptor DateIndexName(DateIndexNameProcessor dateIndexNameProcessor) => Set(dateIndexNameProcessor, "date_index_name");
-	public ProcessorDescriptor DateIndexName(Action<DateIndexNameProcessorDescriptor> configure) => Set(configure, "date_index_name");
-	public ProcessorDescriptor DateIndexName<TDocument>(Action<DateIndexNameProcessorDescriptor<TDocument>> configure) => Set(configure, "date_index_name");
-	public ProcessorDescriptor Dissect(DissectProcessor dissectProcessor) => Set(dissectProcessor, "dissect");
-	public ProcessorDescriptor Dissect(Action<DissectProcessorDescriptor> configure) => Set(configure, "dissect");
-	public ProcessorDescriptor Dissect<TDocument>(Action<DissectProcessorDescriptor<TDocument>> configure) => Set(configure, "dissect");
-	public ProcessorDescriptor DotExpander(DotExpanderProcessor dotExpanderProcessor) => Set(dotExpanderProcessor, "dot_expander");
-	public ProcessorDescriptor DotExpander(Action<DotExpanderProcessorDescriptor> configure) => Set(configure, "dot_expander");
-	public ProcessorDescriptor DotExpander<TDocument>(Action<DotExpanderProcessorDescriptor<TDocument>> configure) => Set(configure, "dot_expander");
-	public ProcessorDescriptor Drop(DropProcessor dropProcessor) => Set(dropProcessor, "drop");
-	public ProcessorDescriptor Drop(Action<DropProcessorDescriptor> configure) => Set(configure, "drop");
-	public ProcessorDescriptor Drop<TDocument>(Action<DropProcessorDescriptor<TDocument>> configure) => Set(configure, "drop");
-	public ProcessorDescriptor Enrich(EnrichProcessor enrichProcessor) => Set(enrichProcessor, "enrich");
-	public ProcessorDescriptor Enrich(Action<EnrichProcessorDescriptor> configure) => Set(configure, "enrich");
-	public ProcessorDescriptor Enrich<TDocument>(Action<EnrichProcessorDescriptor<TDocument>> configure) => Set(configure, "enrich");
-	public ProcessorDescriptor Fail(FailProcessor failProcessor) => Set(failProcessor, "fail");
-	public ProcessorDescriptor Fail(Action<FailProcessorDescriptor> configure) => Set(configure, "fail");
-	public ProcessorDescriptor Fail<TDocument>(Action<FailProcessorDescriptor<TDocument>> configure) => Set(configure, "fail");
-	public ProcessorDescriptor Foreach(ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
-	public ProcessorDescriptor Foreach(Action<ForeachProcessorDescriptor> configure) => Set(configure, "foreach");
-	public ProcessorDescriptor Foreach<TDocument>(Action<ForeachProcessorDescriptor<TDocument>> configure) => Set(configure, "foreach");
-	public ProcessorDescriptor Geoip(GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
-	public ProcessorDescriptor Geoip(Action<GeoIpProcessorDescriptor> configure) => Set(configure, "geoip");
-	public ProcessorDescriptor Geoip<TDocument>(Action<GeoIpProcessorDescriptor<TDocument>> configure) => Set(configure, "geoip");
-	public ProcessorDescriptor Grok(GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
-	public ProcessorDescriptor Grok(Action<GrokProcessorDescriptor> configure) => Set(configure, "grok");
-	public ProcessorDescriptor Grok<TDocument>(Action<GrokProcessorDescriptor<TDocument>> configure) => Set(configure, "grok");
-	public ProcessorDescriptor Gsub(GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
-	public ProcessorDescriptor Gsub(Action<GsubProcessorDescriptor> configure) => Set(configure, "gsub");
-	public ProcessorDescriptor Gsub<TDocument>(Action<GsubProcessorDescriptor<TDocument>> configure) => Set(configure, "gsub");
-	public ProcessorDescriptor Inference(InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
-	public ProcessorDescriptor Inference(Action<InferenceProcessorDescriptor> configure) => Set(configure, "inference");
-	public ProcessorDescriptor Inference<TDocument>(Action<InferenceProcessorDescriptor<TDocument>> configure) => Set(configure, "inference");
-	public ProcessorDescriptor Join(JoinProcessor joinProcessor) => Set(joinProcessor, "join");
-	public ProcessorDescriptor Join(Action<JoinProcessorDescriptor> configure) => Set(configure, "join");
-	public ProcessorDescriptor Join<TDocument>(Action<JoinProcessorDescriptor<TDocument>> configure) => Set(configure, "join");
-	public ProcessorDescriptor Json(JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");
-	public ProcessorDescriptor Json(Action<JsonProcessorDescriptor> configure) => Set(configure, "json");
-	public ProcessorDescriptor Json<TDocument>(Action<JsonProcessorDescriptor<TDocument>> configure) => Set(configure, "json");
-	public ProcessorDescriptor Kv(KeyValueProcessor keyValueProcessor) => Set(keyValueProcessor, "kv");
-	public ProcessorDescriptor Kv(Action<KeyValueProcessorDescriptor> configure) => Set(configure, "kv");
-	public ProcessorDescriptor Kv<TDocument>(Action<KeyValueProcessorDescriptor<TDocument>> configure) => Set(configure, "kv");
-	public ProcessorDescriptor Lowercase(LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
-	public ProcessorDescriptor Lowercase(Action<LowercaseProcessorDescriptor> configure) => Set(configure, "lowercase");
-	public ProcessorDescriptor Lowercase<TDocument>(Action<LowercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "lowercase");
-	public ProcessorDescriptor Pipeline(PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
-	public ProcessorDescriptor Pipeline(Action<PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
-	public ProcessorDescriptor Pipeline<TDocument>(Action<PipelineProcessorDescriptor<TDocument>> configure) => Set(configure, "pipeline");
-	public ProcessorDescriptor Remove(RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
-	public ProcessorDescriptor Remove(Action<RemoveProcessorDescriptor> configure) => Set(configure, "remove");
-	public ProcessorDescriptor Remove<TDocument>(Action<RemoveProcessorDescriptor<TDocument>> configure) => Set(configure, "remove");
-	public ProcessorDescriptor Rename(RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
-	public ProcessorDescriptor Rename(Action<RenameProcessorDescriptor> configure) => Set(configure, "rename");
-	public ProcessorDescriptor Rename<TDocument>(Action<RenameProcessorDescriptor<TDocument>> configure) => Set(configure, "rename");
-	public ProcessorDescriptor Reroute(RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
-	public ProcessorDescriptor Reroute(Action<RerouteProcessorDescriptor> configure) => Set(configure, "reroute");
-	public ProcessorDescriptor Reroute<TDocument>(Action<RerouteProcessorDescriptor<TDocument>> configure) => Set(configure, "reroute");
-	public ProcessorDescriptor Set(SetProcessor setProcessor) => Set(setProcessor, "set");
-	public ProcessorDescriptor Set(Action<SetProcessorDescriptor> configure) => Set(configure, "set");
-	public ProcessorDescriptor Set<TDocument>(Action<SetProcessorDescriptor<TDocument>> configure) => Set(configure, "set");
-	public ProcessorDescriptor SetSecurityUser(SetSecurityUserProcessor setSecurityUserProcessor) => Set(setSecurityUserProcessor, "set_security_user");
-	public ProcessorDescriptor SetSecurityUser(Action<SetSecurityUserProcessorDescriptor> configure) => Set(configure, "set_security_user");
-	public ProcessorDescriptor SetSecurityUser<TDocument>(Action<SetSecurityUserProcessorDescriptor<TDocument>> configure) => Set(configure, "set_security_user");
-	public ProcessorDescriptor Sort(SortProcessor sortProcessor) => Set(sortProcessor, "sort");
-	public ProcessorDescriptor Sort(Action<SortProcessorDescriptor> configure) => Set(configure, "sort");
-	public ProcessorDescriptor Sort<TDocument>(Action<SortProcessorDescriptor<TDocument>> configure) => Set(configure, "sort");
-	public ProcessorDescriptor Split(SplitProcessor splitProcessor) => Set(splitProcessor, "split");
-	public ProcessorDescriptor Split(Action<SplitProcessorDescriptor> configure) => Set(configure, "split");
-	public ProcessorDescriptor Split<TDocument>(Action<SplitProcessorDescriptor<TDocument>> configure) => Set(configure, "split");
-	public ProcessorDescriptor Trim(TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
-	public ProcessorDescriptor Trim(Action<TrimProcessorDescriptor> configure) => Set(configure, "trim");
-	public ProcessorDescriptor Trim<TDocument>(Action<TrimProcessorDescriptor<TDocument>> configure) => Set(configure, "trim");
-	public ProcessorDescriptor Uppercase(UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
-	public ProcessorDescriptor Uppercase(Action<UppercaseProcessorDescriptor> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor Uppercase<TDocument>(Action<UppercaseProcessorDescriptor<TDocument>> configure) => Set(configure, "uppercase");
-	public ProcessorDescriptor UrlDecode(UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
-	public ProcessorDescriptor UrlDecode(Action<UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
-	public ProcessorDescriptor UrlDecode<TDocument>(Action<UrlDecodeProcessorDescriptor<TDocument>> configure) => Set(configure, "urldecode");
-	public ProcessorDescriptor UserAgent(UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
-	public ProcessorDescriptor UserAgent(Action<UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
-	public ProcessorDescriptor UserAgent<TDocument>(Action<UserAgentProcessorDescriptor<TDocument>> configure) => Set(configure, "user_agent");
+	public ProcessorDescriptor Append(Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessor appendProcessor) => Set(appendProcessor, "append");
+	public ProcessorDescriptor Append<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.AppendProcessorDescriptor> configure) => Set(configure, "append");
+	public ProcessorDescriptor Attachment(Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessor attachmentProcessor) => Set(attachmentProcessor, "attachment");
+	public ProcessorDescriptor Attachment<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.AttachmentProcessorDescriptor> configure) => Set(configure, "attachment");
+	public ProcessorDescriptor Bytes(Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessor bytesProcessor) => Set(bytesProcessor, "bytes");
+	public ProcessorDescriptor Bytes<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.BytesProcessorDescriptor> configure) => Set(configure, "bytes");
+	public ProcessorDescriptor Circle(Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessor circleProcessor) => Set(circleProcessor, "circle");
+	public ProcessorDescriptor Circle<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CircleProcessorDescriptor> configure) => Set(configure, "circle");
+	public ProcessorDescriptor Convert(Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessor convertProcessor) => Set(convertProcessor, "convert");
+	public ProcessorDescriptor Convert<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ConvertProcessorDescriptor> configure) => Set(configure, "convert");
+	public ProcessorDescriptor Csv(Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessor csvProcessor) => Set(csvProcessor, "csv");
+	public ProcessorDescriptor Csv<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.CsvProcessorDescriptor> configure) => Set(configure, "csv");
+	public ProcessorDescriptor Date(Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessor dateProcessor) => Set(dateProcessor, "date");
+	public ProcessorDescriptor Date<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateProcessorDescriptor> configure) => Set(configure, "date");
+	public ProcessorDescriptor DateIndexName(Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessor dateIndexNameProcessor) => Set(dateIndexNameProcessor, "date_index_name");
+	public ProcessorDescriptor DateIndexName<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DateIndexNameProcessorDescriptor> configure) => Set(configure, "date_index_name");
+	public ProcessorDescriptor Dissect(Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessor dissectProcessor) => Set(dissectProcessor, "dissect");
+	public ProcessorDescriptor Dissect<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DissectProcessorDescriptor> configure) => Set(configure, "dissect");
+	public ProcessorDescriptor DotExpander(Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessor dotExpanderProcessor) => Set(dotExpanderProcessor, "dot_expander");
+	public ProcessorDescriptor DotExpander<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DotExpanderProcessorDescriptor> configure) => Set(configure, "dot_expander");
+	public ProcessorDescriptor Drop(Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessor dropProcessor) => Set(dropProcessor, "drop");
+	public ProcessorDescriptor Drop<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.DropProcessorDescriptor> configure) => Set(configure, "drop");
+	public ProcessorDescriptor Enrich(Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessor enrichProcessor) => Set(enrichProcessor, "enrich");
+	public ProcessorDescriptor Enrich<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.EnrichProcessorDescriptor> configure) => Set(configure, "enrich");
+	public ProcessorDescriptor Fail(Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessor failProcessor) => Set(failProcessor, "fail");
+	public ProcessorDescriptor Fail<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.FailProcessorDescriptor> configure) => Set(configure, "fail");
+	public ProcessorDescriptor Foreach(Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessor foreachProcessor) => Set(foreachProcessor, "foreach");
+	public ProcessorDescriptor Foreach<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ForeachProcessorDescriptor> configure) => Set(configure, "foreach");
+	public ProcessorDescriptor Geoip(Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessor geoIpProcessor) => Set(geoIpProcessor, "geoip");
+	public ProcessorDescriptor Geoip<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GeoIpProcessorDescriptor> configure) => Set(configure, "geoip");
+	public ProcessorDescriptor Grok(Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessor grokProcessor) => Set(grokProcessor, "grok");
+	public ProcessorDescriptor Grok<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GrokProcessorDescriptor> configure) => Set(configure, "grok");
+	public ProcessorDescriptor Gsub(Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessor gsubProcessor) => Set(gsubProcessor, "gsub");
+	public ProcessorDescriptor Gsub<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.GsubProcessorDescriptor> configure) => Set(configure, "gsub");
+	public ProcessorDescriptor Inference(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessor inferenceProcessor) => Set(inferenceProcessor, "inference");
+	public ProcessorDescriptor Inference<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceProcessorDescriptor> configure) => Set(configure, "inference");
+	public ProcessorDescriptor Join(Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessor joinProcessor) => Set(joinProcessor, "join");
+	public ProcessorDescriptor Join<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JoinProcessorDescriptor> configure) => Set(configure, "join");
+	public ProcessorDescriptor Json(Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessor jsonProcessor) => Set(jsonProcessor, "json");
+	public ProcessorDescriptor Json<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.JsonProcessorDescriptor> configure) => Set(configure, "json");
+	public ProcessorDescriptor Kv(Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessor keyValueProcessor) => Set(keyValueProcessor, "kv");
+	public ProcessorDescriptor Kv<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.KeyValueProcessorDescriptor> configure) => Set(configure, "kv");
+	public ProcessorDescriptor Lowercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessor lowercaseProcessor) => Set(lowercaseProcessor, "lowercase");
+	public ProcessorDescriptor Lowercase<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.LowercaseProcessorDescriptor> configure) => Set(configure, "lowercase");
+	public ProcessorDescriptor Pipeline(Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessor pipelineProcessor) => Set(pipelineProcessor, "pipeline");
+	public ProcessorDescriptor Pipeline<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.PipelineProcessorDescriptor> configure) => Set(configure, "pipeline");
+	public ProcessorDescriptor Remove(Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessor removeProcessor) => Set(removeProcessor, "remove");
+	public ProcessorDescriptor Remove<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RemoveProcessorDescriptor> configure) => Set(configure, "remove");
+	public ProcessorDescriptor Rename(Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessor renameProcessor) => Set(renameProcessor, "rename");
+	public ProcessorDescriptor Rename<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RenameProcessorDescriptor> configure) => Set(configure, "rename");
+	public ProcessorDescriptor Reroute(Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessor rerouteProcessor) => Set(rerouteProcessor, "reroute");
+	public ProcessorDescriptor Reroute<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.RerouteProcessorDescriptor> configure) => Set(configure, "reroute");
+	public ProcessorDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessor scriptProcessor) => Set(scriptProcessor, "script");
+	public ProcessorDescriptor Script<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ScriptProcessorDescriptor> configure) => Set(configure, "script");
+	public ProcessorDescriptor Set(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessor setProcessor) => Set(setProcessor, "set");
+	public ProcessorDescriptor Set<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetProcessorDescriptor> configure) => Set(configure, "set");
+	public ProcessorDescriptor SetSecurityUser(Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessor setSecurityUserProcessor) => Set(setSecurityUserProcessor, "set_security_user");
+	public ProcessorDescriptor SetSecurityUser<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SetSecurityUserProcessorDescriptor> configure) => Set(configure, "set_security_user");
+	public ProcessorDescriptor Sort(Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessor sortProcessor) => Set(sortProcessor, "sort");
+	public ProcessorDescriptor Sort<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SortProcessorDescriptor> configure) => Set(configure, "sort");
+	public ProcessorDescriptor Split(Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessor splitProcessor) => Set(splitProcessor, "split");
+	public ProcessorDescriptor Split<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.SplitProcessorDescriptor> configure) => Set(configure, "split");
+	public ProcessorDescriptor Trim(Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessor trimProcessor) => Set(trimProcessor, "trim");
+	public ProcessorDescriptor Trim<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.TrimProcessorDescriptor> configure) => Set(configure, "trim");
+	public ProcessorDescriptor Uppercase(Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessor uppercaseProcessor) => Set(uppercaseProcessor, "uppercase");
+	public ProcessorDescriptor Uppercase<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UppercaseProcessorDescriptor> configure) => Set(configure, "uppercase");
+	public ProcessorDescriptor UrlDecode(Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessor urlDecodeProcessor) => Set(urlDecodeProcessor, "urldecode");
+	public ProcessorDescriptor UrlDecode<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UrlDecodeProcessorDescriptor> configure) => Set(configure, "urldecode");
+	public ProcessorDescriptor UserAgent(Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessor userAgentProcessor) => Set(userAgentProcessor, "user_agent");
+	public ProcessorDescriptor UserAgent<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.UserAgentProcessorDescriptor> configure) => Set(configure, "user_agent");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

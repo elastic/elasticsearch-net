@@ -116,10 +116,6 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	{
 	}
 
-	internal OpenPointInTimeRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -153,10 +149,6 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	internal OpenPointInTimeRequestDescriptor(Action<OpenPointInTimeRequestDescriptor> configure) => configure.Invoke(this);
 
 	public OpenPointInTimeRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal OpenPointInTimeRequestDescriptor()
 	{
 	}
 

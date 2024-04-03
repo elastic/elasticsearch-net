@@ -27,77 +27,75 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-[JsonConverter(typeof(IpRangeBucketConverter))]
-public sealed partial class IpRangeBucket : AggregateDictionary
+internal sealed partial class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
 {
-	public IpRangeBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("from")]
-	public string? From { get; init; }
-	[JsonInclude, JsonPropertyName("key")]
-	public string? Key { get; init; }
-	[JsonInclude, JsonPropertyName("to")]
-	public string? To { get; init; }
-}
-
-internal sealed class IpRangeBucketConverter : JsonConverter<IpRangeBucket>
-{
-	public override IpRangeBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override IpRangeBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		string? from = default;
 		string? key = default;
 		string? to = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("from", StringComparison.Ordinal))
-			{
-				from = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "from")
+				{
+					from = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key", StringComparison.Ordinal))
-			{
-				key = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "key")
+				{
+					key = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("to", StringComparison.Ordinal))
-			{
-				to = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "to")
+				{
+					to = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new IpRangeBucket(subAggs) { DocCount = docCount, From = from, Key = key, To = to };
+		return new IpRangeBucket { Aggregations = new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, From = from, Key = key, To = to };
 	}
 
-	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, IpRangeBucket value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'IpRangeBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(IpRangeBucketConverter))]
+public sealed partial class IpRangeBucket
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public string? From { get; init; }
+	public string? Key { get; init; }
+	public string? To { get; init; }
 }

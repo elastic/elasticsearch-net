@@ -27,16 +27,17 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class CombinedFieldsQuery : SearchQuery
+public sealed partial class CombinedFieldsQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
-
 	/// <summary>
 	/// <para>If true, match phrase queries are automatically created for multi-term synonyms.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -44,7 +45,7 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public Fields Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> Fields { get; set; }
 
 	/// <summary>
 	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
@@ -63,6 +64,8 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Indicates whether no documents are returned if the analyzer removes all tokens, such as when using a `stop` filter.</para>
@@ -70,9 +73,7 @@ public sealed partial class CombinedFieldsQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("zero_terms_query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsZeroTerms? ZeroTermsQuery { get; set; }
 
-	public static implicit operator Query(CombinedFieldsQuery combinedFieldsQuery) => QueryDsl.Query.CombinedFields(combinedFieldsQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("combined_fields", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(CombinedFieldsQuery combinedFieldsQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.CombinedFields(combinedFieldsQuery);
 }
 
 public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : SerializableDescriptor<CombinedFieldsQueryDescriptor<TDocument>>
@@ -85,7 +86,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
-	private Fields FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
@@ -101,6 +102,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -110,7 +114,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// <summary>
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Fields(Fields fields)
+	public CombinedFieldsQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -128,9 +132,9 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// <summary>
 	/// <para>Boolean logic used to interpret text in the query value.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? op)
+	public CombinedFieldsQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? value)
 	{
-		OperatorValue = op;
+		OperatorValue = value;
 		return Self;
 	}
 
@@ -215,7 +219,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
-	private Fields FieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
@@ -231,6 +235,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public CombinedFieldsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -240,7 +247,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// <summary>
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Fields(Fields fields)
+	public CombinedFieldsQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -258,9 +265,9 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// <summary>
 	/// <para>Boolean logic used to interpret text in the query value.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? op)
+	public CombinedFieldsQueryDescriptor Operator(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? value)
 	{
-		OperatorValue = op;
+		OperatorValue = value;
 		return Self;
 	}
 

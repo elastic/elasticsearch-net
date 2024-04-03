@@ -51,7 +51,7 @@ public sealed partial class DataStreamIndex
 	/// <para>Name of the lifecycle system that's currently managing this backing index.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("managed_by")]
-	public string ManagedBy { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.ManagedBy ManagedBy { get; init; }
 
 	/// <summary>
 	/// <para>Indicates if ILM should take precedence over DSL in case both are configured to manage this index.</para>

@@ -34,6 +34,10 @@ public sealed partial class DissectProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("append_separator")]
 	public string? AppendSeparator { get; set; }
+
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -42,8 +46,16 @@ public sealed partial class DissectProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -52,6 +64,10 @@ public sealed partial class DissectProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
@@ -60,10 +76,14 @@ public sealed partial class DissectProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
-	public static implicit operator Processor(DissectProcessor dissectProcessor) => Ingest.Processor.Dissect(dissectProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor(DissectProcessor dissectProcessor) => Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor.Dissect(dissectProcessor);
 }
 
 public sealed partial class DissectProcessorDescriptor<TDocument> : SerializableDescriptor<DissectProcessorDescriptor<TDocument>>
@@ -81,9 +101,9 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string PatternValue { get; set; }
 	private string? TagValue { get; set; }
 
@@ -96,6 +116,9 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -120,12 +143,27 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public DissectProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>The field to dissect.</para>
+	/// </summary>
+	public DissectProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public DissectProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -141,6 +179,9 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -150,7 +191,7 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public DissectProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public DissectProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -159,7 +200,7 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public DissectProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public DissectProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -168,7 +209,7 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public DissectProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public DissectProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -186,6 +227,9 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public DissectProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -238,7 +282,7 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -247,7 +291,7 @@ public sealed partial class DissectProcessorDescriptor<TDocument> : Serializable
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -285,9 +329,9 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string PatternValue { get; set; }
 	private string? TagValue { get; set; }
 
@@ -300,6 +344,9 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -333,12 +380,18 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public DissectProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public DissectProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public DissectProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -354,6 +407,9 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public DissectProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -363,7 +419,7 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public DissectProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public DissectProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -372,7 +428,7 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public DissectProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public DissectProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -381,7 +437,7 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public DissectProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public DissectProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -399,6 +455,9 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public DissectProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -451,7 +510,7 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -460,7 +519,7 @@ public sealed partial class DissectProcessorDescriptor : SerializableDescriptor<
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

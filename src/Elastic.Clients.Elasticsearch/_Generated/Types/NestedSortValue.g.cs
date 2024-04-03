@@ -48,12 +48,12 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -64,7 +64,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public NestedSortValueDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -72,7 +72,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public NestedSortValueDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -94,7 +94,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Nested(NestedSortValueDescriptor<TDocument> descriptor)
+	public NestedSortValueDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -102,7 +102,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public NestedSortValueDescriptor<TDocument> Nested(Action<NestedSortValueDescriptor<TDocument>> configure)
+	public NestedSortValueDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -122,6 +122,12 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public NestedSortValueDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -133,7 +139,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -155,7 +161,7 @@ public sealed partial class NestedSortValueDescriptor<TDocument> : SerializableD
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{
@@ -178,12 +184,12 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 	}
 
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private int? MaxChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field PathValue { get; set; }
 
 	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
@@ -194,7 +200,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		return Self;
 	}
 
-	public NestedSortValueDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public NestedSortValueDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -202,7 +208,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		return Self;
 	}
 
-	public NestedSortValueDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public NestedSortValueDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -224,7 +230,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		return Self;
 	}
 
-	public NestedSortValueDescriptor Nested(NestedSortValueDescriptor descriptor)
+	public NestedSortValueDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -232,7 +238,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		return Self;
 	}
 
-	public NestedSortValueDescriptor Nested(Action<NestedSortValueDescriptor> configure)
+	public NestedSortValueDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -269,7 +275,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -291,7 +297,7 @@ public sealed partial class NestedSortValueDescriptor : SerializableDescriptor<N
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{

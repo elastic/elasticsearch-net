@@ -44,8 +44,8 @@ public sealed partial class RescoreDescriptor<TDocument> : SerializableDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQuery QueryValue { get; set; }
-	private RescoreQueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<RescoreQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private int? WindowSizeValue { get; set; }
 
 	public RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQuery query)
@@ -56,7 +56,7 @@ public sealed partial class RescoreDescriptor<TDocument> : SerializableDescripto
 		return Self;
 	}
 
-	public RescoreDescriptor<TDocument> Query(RescoreQueryDescriptor<TDocument> descriptor)
+	public RescoreDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -64,7 +64,7 @@ public sealed partial class RescoreDescriptor<TDocument> : SerializableDescripto
 		return Self;
 	}
 
-	public RescoreDescriptor<TDocument> Query(Action<RescoreQueryDescriptor<TDocument>> configure)
+	public RescoreDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -89,7 +89,7 @@ public sealed partial class RescoreDescriptor<TDocument> : SerializableDescripto
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new RescoreQueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -116,8 +116,8 @@ public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDe
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQuery QueryValue { get; set; }
-	private RescoreQueryDescriptor QueryDescriptor { get; set; }
-	private Action<RescoreQueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor> QueryDescriptorAction { get; set; }
 	private int? WindowSizeValue { get; set; }
 
 	public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQuery query)
@@ -128,7 +128,7 @@ public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDe
 		return Self;
 	}
 
-	public RescoreDescriptor Query(RescoreQueryDescriptor descriptor)
+	public RescoreDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -136,7 +136,7 @@ public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDe
 		return Self;
 	}
 
-	public RescoreDescriptor Query(Action<RescoreQueryDescriptor> configure)
+	public RescoreDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -161,7 +161,7 @@ public sealed partial class RescoreDescriptor : SerializableDescriptor<RescoreDe
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new RescoreQueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreQueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

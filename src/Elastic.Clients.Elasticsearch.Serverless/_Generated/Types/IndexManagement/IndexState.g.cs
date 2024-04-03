@@ -59,24 +59,24 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 	{
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DataStreamName? DataStreamValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? DefaultsValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> DefaultsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> DefaultsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> DefaultsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> DefaultsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
-	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
-	public IndexStateDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>> selector)
+	public IndexStateDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -97,7 +97,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Defaults(IndexSettingsDescriptor<TDocument> descriptor)
+	public IndexStateDescriptor<TDocument> Defaults(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 	{
 		DefaultsValue = null;
 		DefaultsDescriptorAction = null;
@@ -105,7 +105,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Defaults(Action<IndexSettingsDescriptor<TDocument>> configure)
+	public IndexStateDescriptor<TDocument> Defaults(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 	{
 		DefaultsValue = null;
 		DefaultsDescriptor = null;
@@ -124,7 +124,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Lifecycle(DataStreamLifecycleDescriptor descriptor)
+	public IndexStateDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -132,7 +132,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
+	public IndexStateDescriptor<TDocument> Lifecycle(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -148,7 +148,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	public IndexStateDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -156,7 +156,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor<TDocument>> configure)
+	public IndexStateDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -172,7 +172,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Settings(IndexSettingsDescriptor<TDocument> descriptor)
+	public IndexStateDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -180,7 +180,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IndexStateDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
+	public IndexStateDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -211,7 +211,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		else if (DefaultsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("defaults");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(DefaultsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>(DefaultsDescriptorAction), options);
 		}
 		else if (DefaultsValue is not null)
 		{
@@ -227,7 +227,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{
@@ -243,7 +243,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -259,7 +259,7 @@ public sealed partial class IndexStateDescriptor<TDocument> : SerializableDescri
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{
@@ -279,24 +279,24 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 	{
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DataStreamName? DataStreamValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? DefaultsValue { get; set; }
-	private IndexSettingsDescriptor DefaultsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> DefaultsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor DefaultsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> DefaultsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
-	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
-	public IndexStateDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>> selector)
+	public IndexStateDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>());
 		return Self;
 	}
 
@@ -317,7 +317,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Defaults(IndexSettingsDescriptor descriptor)
+	public IndexStateDescriptor Defaults(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor descriptor)
 	{
 		DefaultsValue = null;
 		DefaultsDescriptorAction = null;
@@ -325,7 +325,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Defaults(Action<IndexSettingsDescriptor> configure)
+	public IndexStateDescriptor Defaults(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> configure)
 	{
 		DefaultsValue = null;
 		DefaultsDescriptor = null;
@@ -344,7 +344,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Lifecycle(DataStreamLifecycleDescriptor descriptor)
+	public IndexStateDescriptor Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -352,7 +352,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
+	public IndexStateDescriptor Lifecycle(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -368,7 +368,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+	public IndexStateDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -376,7 +376,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+	public IndexStateDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -392,7 +392,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Settings(IndexSettingsDescriptor descriptor)
+	public IndexStateDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -400,7 +400,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		return Self;
 	}
 
-	public IndexStateDescriptor Settings(Action<IndexSettingsDescriptor> configure)
+	public IndexStateDescriptor Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -431,7 +431,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		else if (DefaultsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("defaults");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(DefaultsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor(DefaultsDescriptorAction), options);
 		}
 		else if (DefaultsValue is not null)
 		{
@@ -447,7 +447,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{
@@ -463,7 +463,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -479,7 +479,7 @@ public sealed partial class IndexStateDescriptor : SerializableDescriptor<IndexS
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{

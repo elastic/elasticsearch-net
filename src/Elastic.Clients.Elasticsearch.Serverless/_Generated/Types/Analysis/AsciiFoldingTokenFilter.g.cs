@@ -30,7 +30,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Analysis;
 public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("preserve_original")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -66,18 +65,18 @@ public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDesc
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (PreserveOriginalValue is not null)
+		if (PreserveOriginalValue.HasValue)
 		{
 			writer.WritePropertyName("preserve_original");
-			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
+			writer.WriteBooleanValue(PreserveOriginalValue.Value);
 		}
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("asciifolding");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

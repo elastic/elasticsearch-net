@@ -88,73 +88,73 @@ internal sealed partial class WildcardQueryConverter : JsonConverter<WildcardQue
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize WildcardQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.Value))
-			{
-				writer.WritePropertyName("value");
-				writer.WriteStringValue(value.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.Wildcard))
-			{
-				writer.WritePropertyName("wildcard");
-				writer.WriteStringValue(value.Wildcard);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.CaseInsensitive.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(value.CaseInsensitive.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (!string.IsNullOrEmpty(value.Rewrite))
+		{
+			writer.WritePropertyName("rewrite");
+			writer.WriteStringValue(value.Rewrite);
+		}
+
+		if (!string.IsNullOrEmpty(value.Value))
+		{
+			writer.WritePropertyName("value");
+			writer.WriteStringValue(value.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.Wildcard))
+		{
+			writer.WritePropertyName("wildcard");
+			writer.WriteStringValue(value.Wildcard);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(WildcardQueryConverter))]
-public sealed partial class WildcardQuery : SearchQuery
+public sealed partial class WildcardQuery
 {
-	public WildcardQuery(Field field)
+	public WildcardQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
 	/// <para>Allows case insensitive matching of the pattern with the indexed field values when set to true. Default is false which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Method used to rewrite the query.</para>
@@ -170,33 +170,16 @@ public sealed partial class WildcardQuery : SearchQuery
 	/// <para>Wildcard pattern for terms you wish to find in the provided field. Required, when value is not set.</para>
 	/// </summary>
 	public string? Wildcard { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
-	public static implicit operator Query(WildcardQuery wildcardQuery) => QueryDsl.Query.Wildcard(wildcardQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("wildcard", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(WildcardQuery wildcardQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Wildcard(wildcardQuery);
 }
 
 public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDescriptor<WildcardQueryDescriptor<TDocument>>
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal WildcardQueryDescriptor() : base()
+	public WildcardQueryDescriptor() : base()
 	{
-	}
-
-	public WildcardQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public WildcardQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -207,6 +190,9 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	private string? ValueValue { get; set; }
 	private string? WildcardValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public WildcardQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -229,6 +215,12 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	public WildcardQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public WildcardQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -292,10 +284,10 @@ public sealed partial class WildcardQueryDescriptor<TDocument> : SerializableDes
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (!string.IsNullOrEmpty(ValueValue))
@@ -319,15 +311,8 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 {
 	internal WildcardQueryDescriptor(Action<WildcardQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal WildcardQueryDescriptor() : base()
+	public WildcardQueryDescriptor() : base()
 	{
-	}
-
-	public WildcardQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -338,6 +323,9 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 	private string? ValueValue { get; set; }
 	private string? WildcardValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public WildcardQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -429,10 +417,10 @@ public sealed partial class WildcardQueryDescriptor : SerializableDescriptor<Wil
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		if (!string.IsNullOrEmpty(ValueValue))

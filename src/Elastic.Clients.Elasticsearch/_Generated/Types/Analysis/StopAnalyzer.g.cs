@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class StopAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
@@ -89,10 +89,10 @@ public sealed partial class StopAnalyzerDescriptor : SerializableDescriptor<Stop
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("stop");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

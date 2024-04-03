@@ -39,7 +39,7 @@ public sealed partial class MultiTermLookup
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
-	public FieldValue? Missing { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
 }
 
 public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableDescriptor<MultiTermLookupDescriptor<TDocument>>
@@ -51,7 +51,7 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 
 	/// <summary>
 	/// <para>A fields from which to retrieve terms.</para>
@@ -72,9 +72,18 @@ public sealed partial class MultiTermLookupDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
+	/// <para>A fields from which to retrieve terms.</para>
+	/// </summary>
+	public MultiTermLookupDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
-	public MultiTermLookupDescriptor<TDocument> Missing(FieldValue? missing)
+	public MultiTermLookupDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -104,7 +113,7 @@ public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<M
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 
 	/// <summary>
 	/// <para>A fields from which to retrieve terms.</para>
@@ -136,7 +145,7 @@ public sealed partial class MultiTermLookupDescriptor : SerializableDescriptor<M
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
-	public MultiTermLookupDescriptor Missing(FieldValue? missing)
+	public MultiTermLookupDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;

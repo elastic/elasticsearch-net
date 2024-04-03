@@ -53,7 +53,7 @@ public sealed partial class GeoHashLocationDescriptor : SerializableDescriptor<G
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("geohash");
-		JsonSerializer.Serialize(writer, GeohashValue, options);
+		writer.WriteStringValue(GeohashValue);
 		writer.WriteEndObject();
 	}
 }

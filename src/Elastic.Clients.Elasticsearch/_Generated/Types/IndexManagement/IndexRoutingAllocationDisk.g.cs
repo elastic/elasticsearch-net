@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexRoutingAllocationDisk
 {
 	[JsonInclude, JsonPropertyName("threshold_enabled")]
-	public Union<bool?, string?>? ThresholdEnabled { get; set; }
+	public object? ThresholdEnabled { get; set; }
 }
 
 public sealed partial class IndexRoutingAllocationDiskDescriptor : SerializableDescriptor<IndexRoutingAllocationDiskDescriptor>
@@ -41,9 +41,9 @@ public sealed partial class IndexRoutingAllocationDiskDescriptor : SerializableD
 	{
 	}
 
-	private Union<bool?, string?>? ThresholdEnabledValue { get; set; }
+	private object? ThresholdEnabledValue { get; set; }
 
-	public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(Union<bool?, string?>? thresholdEnabled)
+	public IndexRoutingAllocationDiskDescriptor ThresholdEnabled(object? thresholdEnabled)
 	{
 		ThresholdEnabledValue = thresholdEnabled;
 		return Self;

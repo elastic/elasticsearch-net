@@ -27,22 +27,23 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class RuleQuery : SearchQuery
+public sealed partial class RuleQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("match_criteria")]
 	public object MatchCriteria { get; set; }
 	[JsonInclude, JsonPropertyName("organic")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Organic { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("ruleset_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id RulesetId { get; set; }
 
-	public static implicit operator Query(RuleQuery ruleQuery) => QueryDsl.Query.RuleQuery(ruleQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("rule_query", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(RuleQuery ruleQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.RuleQuery(ruleQuery);
 }
 
 public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescriptor<RuleQueryDescriptor<TDocument>>
@@ -56,11 +57,14 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 	private float? BoostValue { get; set; }
 	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
-	private QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RuleQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -81,7 +85,7 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public RuleQueryDescriptor<TDocument> Organic(QueryDescriptor<TDocument> descriptor)
+	public RuleQueryDescriptor<TDocument> Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		OrganicValue = null;
 		OrganicDescriptorAction = null;
@@ -89,7 +93,7 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public RuleQueryDescriptor<TDocument> Organic(Action<QueryDescriptor<TDocument>> configure)
+	public RuleQueryDescriptor<TDocument> Organic(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		OrganicValue = null;
 		OrganicDescriptor = null;
@@ -128,7 +132,7 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 		else if (OrganicDescriptorAction is not null)
 		{
 			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(OrganicDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(OrganicDescriptorAction), options);
 		}
 		else
 		{
@@ -159,11 +163,14 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 	private float? BoostValue { get; set; }
 	private object MatchCriteriaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query OrganicValue { get; set; }
-	private QueryDescriptor OrganicDescriptor { get; set; }
-	private Action<QueryDescriptor> OrganicDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor OrganicDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RuleQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -184,7 +191,7 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 		return Self;
 	}
 
-	public RuleQueryDescriptor Organic(QueryDescriptor descriptor)
+	public RuleQueryDescriptor Organic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		OrganicValue = null;
 		OrganicDescriptorAction = null;
@@ -192,7 +199,7 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 		return Self;
 	}
 
-	public RuleQueryDescriptor Organic(Action<QueryDescriptor> configure)
+	public RuleQueryDescriptor Organic(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		OrganicValue = null;
 		OrganicDescriptor = null;
@@ -231,7 +238,7 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 		else if (OrganicDescriptorAction is not null)
 		{
 			writer.WritePropertyName("organic");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(OrganicDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(OrganicDescriptorAction), options);
 		}
 		else
 		{

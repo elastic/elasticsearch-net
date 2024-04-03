@@ -18,6 +18,7 @@
 #nullable restore
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="AsyncSearchNamespacedClient"/> class for mocking.
+	/// <para>Initializes a new instance of the <see cref="AsyncSearchNamespacedClient"/> class for mocking.</para>
 	/// </summary>
 	protected AsyncSearchNamespacedClient() : base()
 	{
@@ -37,138 +38,8 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual AsyncSearchStatusResponse Status<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(AsyncSearchStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AsyncSearchStatusResponse> StatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AsyncSearchStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AsyncSearchStatusRequestDescriptor<TDocument>, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequest request)
 	{
@@ -178,7 +49,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -188,8 +59,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
@@ -199,8 +71,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncSearchResponse Delete(DeleteAsyncSearchRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -209,8 +82,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncSearchResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest)
 	{
 		var descriptor = new DeleteAsyncSearchRequestDescriptor(id);
@@ -221,29 +95,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteAsyncSearchResponse Delete<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteAsyncSearchResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -254,7 +106,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(DeleteAsyncSearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -264,7 +116,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -275,30 +127,8 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(DeleteAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes an async search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteAsyncSearchResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteAsyncSearchRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAsyncSearchRequestDescriptor<TDocument>, DeleteAsyncSearchResponse, DeleteAsyncSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(GetAsyncSearchRequest request)
 	{
@@ -308,7 +138,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -318,8 +148,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
@@ -329,8 +160,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(GetAsyncSearchRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -339,8 +171,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncSearchResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncSearchRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new GetAsyncSearchRequestDescriptor<TDocument>(id);
@@ -351,7 +184,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -362,7 +195,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(GetAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -372,7 +205,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Retrieves the results of a previously submitted async search request given its ID.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncSearchResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -383,8 +216,97 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<AsyncSearchStatusRequest, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncSearchStatusResponse Status(AsyncSearchStatusRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncSearchStatusResponse Status(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest)
+	{
+		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncSearchStatusResponse> StatusAsync(AsyncSearchStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the status of a previously submitted async search request given its ID.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncSearchStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncSearchStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncSearchStatusRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncSearchStatusRequestDescriptor, AsyncSearchStatusResponse, AsyncSearchStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(SubmitAsyncSearchRequest request)
 	{
@@ -394,7 +316,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -404,8 +326,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>()
 	{
 		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
@@ -415,8 +338,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(SubmitAsyncSearchRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -425,8 +349,9 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SubmitAsyncSearchResponse<TDocument> Submit<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest)
 	{
 		var descriptor = new SubmitAsyncSearchRequestDescriptor<TDocument>();
@@ -437,7 +362,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -448,7 +373,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(SubmitAsyncSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -458,7 +383,7 @@ public partial class AsyncSearchNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Executes a search request asynchronously.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/async-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SubmitAsyncSearchResponse<TDocument>> SubmitAsync<TDocument>(Action<SubmitAsyncSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{

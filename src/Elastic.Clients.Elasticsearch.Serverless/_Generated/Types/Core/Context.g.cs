@@ -30,13 +30,17 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
+/// <summary>
+/// <para>Text or location that we want similar documents for or a lookup to a document's field for the text.</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
 public sealed partial class Context : Union<string, Elastic.Clients.Elasticsearch.Serverless.GeoLocation>
 {
-	public Context(string category) : base(category)
+	public Context(string Category) : base(Category)
 	{
 	}
 
-	public Context(Elastic.Clients.Elasticsearch.Serverless.GeoLocation location) : base(location)
+	public Context(Elastic.Clients.Elasticsearch.Serverless.GeoLocation Location) : base(Location)
 	{
 	}
 }

@@ -20,18 +20,18 @@
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-/// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
-/// </summary>
 public sealed partial class GetTasksResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("completed")]
 	public bool Completed { get; init; }
+	[JsonInclude, JsonPropertyName("error")]
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
 	[JsonInclude, JsonPropertyName("response")]
 	public object? Response { get; init; }
 	[JsonInclude, JsonPropertyName("task")]

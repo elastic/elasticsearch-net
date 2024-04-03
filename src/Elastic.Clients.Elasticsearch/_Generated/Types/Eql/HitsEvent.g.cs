@@ -29,6 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 
 public sealed partial class HitsEvent<TEvent>
 {
+	[JsonInclude, JsonPropertyName("fields")]
+	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<object>))]
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
+
 	/// <summary>
 	/// <para>Unique identifier for the event. This ID is only unique within the index.</para>
 	/// </summary>
@@ -46,7 +50,4 @@ public sealed partial class HitsEvent<TEvent>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
 	public TEvent Source { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
-	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyCollection<object>))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, IReadOnlyCollection<object>>? Fields { get; init; }
 }

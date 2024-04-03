@@ -130,18 +130,6 @@ public sealed partial class SegmentsStats
 	public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; init; }
 
 	/// <summary>
-	/// <para>Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("term_vectors_memory_in_bytes")]
-	public long TermVectorsMemoryInBytes { get; init; }
-
-	/// <summary>
-	/// <para>Total amount of memory used for term vectors across all shards assigned to selected nodes.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("term_vectory_memory")]
-	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; init; }
-
-	/// <summary>
 	/// <para>Total amount of memory used for terms across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms_memory")]
@@ -152,6 +140,18 @@ public sealed partial class SegmentsStats
 	/// </summary>
 	[JsonInclude, JsonPropertyName("terms_memory_in_bytes")]
 	public long TermsMemoryInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("term_vectors_memory_in_bytes")]
+	public long TermVectorsMemoryInBytes { get; init; }
+
+	/// <summary>
+	/// <para>Total amount of memory used for term vectors across all shards assigned to selected nodes.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("term_vectory_memory")]
+	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; init; }
 
 	/// <summary>
 	/// <para>Total amount of memory used by all version maps across all shards assigned to selected nodes.</para>

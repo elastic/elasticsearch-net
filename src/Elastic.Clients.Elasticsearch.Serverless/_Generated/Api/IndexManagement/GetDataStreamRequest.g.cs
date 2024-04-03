@@ -83,6 +83,10 @@ public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<G
 {
 	internal GetDataStreamRequestDescriptor(Action<GetDataStreamRequestDescriptor> configure) => configure.Invoke(this);
 
+	public GetDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.DataStreamNames? name) : base(r => r.Optional("name", name))
+	{
+	}
+
 	public GetDataStreamRequestDescriptor()
 	{
 	}

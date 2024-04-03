@@ -27,150 +27,37 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class ExtendedStatsBucketAggregationConverter : JsonConverter<ExtendedStatsBucketAggregation>
+public sealed partial class ExtendedStatsBucketAggregation
 {
-	public override ExtendedStatsBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "extended_stats_bucket")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new ExtendedStatsBucketAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("buckets_path"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.BucketsPath = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("gap_policy"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.GapPolicy = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("sigma"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Sigma = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ExtendedStatsBucketAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("extended_stats_bucket");
-		writer.WriteStartObject();
-		if (value.BucketsPath is not null)
-		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, value.BucketsPath, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.GapPolicy is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, value.GapPolicy, options);
-		}
-
-		if (value.Sigma.HasValue)
-		{
-			writer.WritePropertyName("sigma");
-			writer.WriteNumberValue(value.Sigma.Value);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(ExtendedStatsBucketAggregationConverter))]
-public sealed partial class ExtendedStatsBucketAggregation : SearchAggregation
-{
-	public ExtendedStatsBucketAggregation(string name) => Name = name;
-
-	internal ExtendedStatsBucketAggregation()
-	{
-	}
-
+	/// <summary>
+	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+	/// <summary>
+	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
+
+	/// <summary>
+	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The number of standard deviations above/below the mean to display.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("sigma")]
 	public double? Sigma { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(ExtendedStatsBucketAggregation extendedStatsBucketAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.ExtendedStatsBucket(extendedStatsBucketAggregation);
 }
 
 public sealed partial class ExtendedStatsBucketAggregationDescriptor : SerializableDescriptor<ExtendedStatsBucketAggregationDescriptor>
@@ -185,20 +72,30 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private double? SigmaValue { get; set; }
 
+	/// <summary>
+	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
 		BucketsPathValue = bucketsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// </summary>
 	public ExtendedStatsBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
 		GapPolicyValue = gapPolicy;
@@ -208,6 +105,12 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	public ExtendedStatsBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public ExtendedStatsBucketAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -222,8 +125,6 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("extended_stats_bucket");
 		writer.WriteStartObject();
 		if (BucketsPathValue is not null)
 		{
@@ -243,17 +144,22 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		if (SigmaValue.HasValue)
-		{
-			writer.WritePropertyName("sigma");
-			writer.WriteNumberValue(SigmaValue.Value);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
+		if (SigmaValue.HasValue)
+		{
+			writer.WritePropertyName("sigma");
+			writer.WriteNumberValue(SigmaValue.Value);
 		}
 
 		writer.WriteEndObject();

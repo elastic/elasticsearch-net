@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 
 #if ELASTICSEARCH_SERVERLESS
@@ -41,6 +42,45 @@ public class FluentDictionary<TKey, TValue> : Dictionary<TKey, TValue>
 
 	/// <inheritdoc cref="IDictionary{TKey, TValue}.Remove(TKey)" />
 	public new FluentDictionary<TKey, TValue> Remove(TKey key)
+	{
+		base.Remove(key);
+		return this;
+	}
+}
+
+public class FluentDescriptorDictionary<TKey, TDescriptor> : Dictionary<TKey, TDescriptor>
+	where TDescriptor : Descriptor<TDescriptor>, new()
+{
+	public FluentDescriptorDictionary() { }
+
+	public FluentDescriptorDictionary(IDictionary<TKey, TDescriptor> source)
+	{
+		if (source == null)
+			return;
+
+		foreach (var kv in source)
+			this[kv.Key] = kv.Value;
+	}
+
+	/// <inheritdoc cref="IDictionary{TKey, TValue}.Add(TKey, TValue)" />
+	public new FluentDescriptorDictionary<TKey, TDescriptor> Add(TKey key, TDescriptor value)
+	{
+		base.Add(key, value);
+		return this;
+	}
+
+	/// <inheritdoc cref="IDictionary{TKey, TValue}.Add(TKey, TValue)" />
+	public FluentDescriptorDictionary<TKey, TDescriptor> Add(TKey key, Action<TDescriptor> configure)
+	{
+		var descriptor = new TDescriptor();
+		configure?.Invoke(descriptor);
+
+		base.Add(key, descriptor);
+		return this;
+	}
+
+	/// <inheritdoc cref="IDictionary{TKey, TValue}.Remove(TKey)" />
+	public new FluentDescriptorDictionary<TKey, TDescriptor> Remove(TKey key)
 	{
 		base.Remove(key);
 		return this;

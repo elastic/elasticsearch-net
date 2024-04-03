@@ -163,30 +163,6 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	public GetSourceRequestDescriptor(TDocument document) : this(typeof(TDocument), Elasticsearch.Id.From(document))
-	{
-	}
-
-	public GetSourceRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public GetSourceRequestDescriptor(TDocument document, IndexName index) : this(index, Elasticsearch.Id.From(document))
-	{
-	}
-
-	public GetSourceRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public GetSourceRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal GetSourceRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetSource;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -231,10 +207,6 @@ public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSo
 	internal GetSourceRequestDescriptor(Action<GetSourceRequestDescriptor> configure) => configure.Invoke(this);
 
 	public GetSourceRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	internal GetSourceRequestDescriptor()
 	{
 	}
 

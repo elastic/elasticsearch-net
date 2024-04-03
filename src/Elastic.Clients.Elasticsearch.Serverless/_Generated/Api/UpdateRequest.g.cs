@@ -180,7 +180,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// <para>A partial update to an existing document.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
-	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
 
 	/// <summary>
@@ -211,7 +210,6 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("upsert")]
-	[SourceConverter]
 	public TDocument? Upsert { get; set; }
 }
 
@@ -223,30 +221,6 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	internal UpdateRequestDescriptor(Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configure) => configure.Invoke(this);
 
 	public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	public UpdateRequestDescriptor(TDocument document) : this(typeof(TDocument), Serverless.Id.From(document))
-	{
-	}
-
-	public UpdateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public UpdateRequestDescriptor(TDocument document, IndexName index) : this(index, Serverless.Id.From(document))
-	{
-	}
-
-	public UpdateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public UpdateRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal UpdateRequestDescriptor()
 	{
 	}
 
@@ -365,7 +339,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			SourceSerialization.Serialize(DocValue, writer, settings);
+			JsonSerializer.Serialize(writer, DocValue, options);
 		}
 
 		if (DocAsUpsertValue.HasValue)
@@ -395,7 +369,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (UpsertValue is not null)
 		{
 			writer.WritePropertyName("upsert");
-			SourceSerialization.Serialize(UpsertValue, writer, settings);
+			JsonSerializer.Serialize(writer, UpsertValue, options);
 		}
 
 		writer.WriteEndObject();

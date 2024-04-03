@@ -27,12 +27,15 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class IdsQuery : SearchQuery
+public sealed partial class IdsQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>An array of document IDs.</para>
@@ -40,9 +43,7 @@ public sealed partial class IdsQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("values")]
 	public Elastic.Clients.Elasticsearch.Ids? Values { get; set; }
 
-	public static implicit operator Query(IdsQuery idsQuery) => QueryDsl.Query.Ids(idsQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("ids", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(IdsQuery idsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Ids(idsQuery);
 }
 
 public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQueryDescriptor>
@@ -57,6 +58,9 @@ public sealed partial class IdsQueryDescriptor : SerializableDescriptor<IdsQuery
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ids? ValuesValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public IdsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

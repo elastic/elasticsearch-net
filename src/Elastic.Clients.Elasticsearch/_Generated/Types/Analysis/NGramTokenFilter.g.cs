@@ -34,7 +34,6 @@ public sealed partial class NGramTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -96,18 +95,18 @@ public sealed partial class NGramTokenFilterDescriptor : SerializableDescriptor<
 			writer.WriteNumberValue(MinGramValue.Value);
 		}
 
-		if (PreserveOriginalValue is not null)
+		if (PreserveOriginalValue.HasValue)
 		{
 			writer.WritePropertyName("preserve_original");
-			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
+			writer.WriteBooleanValue(PreserveOriginalValue.Value);
 		}
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("ngram");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

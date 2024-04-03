@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Sql;
 
 public sealed partial class QueryRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>Format for the response.</para>
+	/// </summary>
+	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 }
 
 /// <summary>
@@ -45,6 +49,12 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "sql.query";
+
+	/// <summary>
+	/// <para>Format for the response.</para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.</para>
@@ -162,14 +172,16 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 
 	internal override string OperationName => "sql.query";
 
+	public QueryRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
+
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private bool? FieldMultiValueLeniencyValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private bool? IndexUsingFrozenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
@@ -177,7 +189,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private string? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? RequestTimeoutValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
 
@@ -237,7 +249,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
-	public QueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -245,7 +257,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
-	public QueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public QueryRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -319,9 +331,9 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	/// <summary>
 	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	public QueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -384,7 +396,7 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -440,10 +452,10 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (WaitForCompletionTimeoutValue is not null)
@@ -475,14 +487,16 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 
 	internal override string OperationName => "sql.query";
 
+	public QueryRequestDescriptor Format(string? format) => Qs("format", format);
+
 	private string? CatalogValue { get; set; }
 	private bool? ColumnarValue { get; set; }
 	private string? CursorValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private bool? FieldMultiValueLeniencyValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private bool? IndexUsingFrozenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
@@ -490,7 +504,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private string? QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? RequestTimeoutValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? WaitForCompletionTimeoutValue { get; set; }
 
@@ -550,7 +564,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
-	public QueryRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -558,7 +572,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		return Self;
 	}
 
-	public QueryRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public QueryRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -632,9 +646,9 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	/// <summary>
 	/// <para>Defines one or more runtime fields in the search request. These fields take<br/>precedence over mapped fields with the same name.</para>
 	/// </summary>
-	public QueryRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>> selector)
+	public QueryRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>> selector)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeField>());
+		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldDescriptor>());
 		return Self;
 	}
 
@@ -697,7 +711,7 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -753,10 +767,10 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (WaitForCompletionTimeoutValue is not null)

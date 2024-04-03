@@ -19,7 +19,7 @@ internal sealed class ResolvedRouteValues : Dictionary<string, string>
 	public ResolvedRouteValues(int size) : base(size) { }
 }
 
-public sealed class RouteValues : Dictionary<string, IUrlParameter>
+public sealed class RouteValues : Dictionary<string, object>
 {
 	/// <summary>
 	/// Used specifically by index requests to determine whether to use PUT or POST.
@@ -34,7 +34,7 @@ public sealed class RouteValues : Dictionary<string, IUrlParameter>
 		var resolved = new ResolvedRouteValues(Count);
 		foreach (var kv in this)
 		{
-			var value = this[kv.Key].GetString(configuration);
+			var value = UrlFormatter.CreateString(this[kv.Key], configuration);
 			if (value.IsNullOrEmpty())
 				continue;
 			resolved[kv.Key] = value;
@@ -45,7 +45,7 @@ public sealed class RouteValues : Dictionary<string, IUrlParameter>
 		return resolved;
 	}
 
-	private RouteValues Route(string name, IUrlParameter? routeValue, bool required = true)
+	private RouteValues Route(string name, object? routeValue, bool required = true)
 	{
 		switch (routeValue)
 		{
@@ -72,9 +72,9 @@ public sealed class RouteValues : Dictionary<string, IUrlParameter>
 
 	private static bool IsId(string key) => key.Equals("id", StringComparison.OrdinalIgnoreCase);
 
-	internal RouteValues Required(string route, IUrlParameter? value) => Route(route, value);
+	internal RouteValues Required(string route, object? value) => Route(route, value);
 
-	internal RouteValues Optional(string route, IUrlParameter? value) => Route(route, value, false);
+	internal RouteValues Optional(string route, object? value) => Route(route, value, false);
 
 	internal TActual Get<TActual>(string route)
 	{

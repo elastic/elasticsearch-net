@@ -62,10 +62,6 @@ public sealed partial class MigrateToDataStreamRequestDescriptor : RequestDescri
 	{
 	}
 
-	internal MigrateToDataStreamRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementMigrateToDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

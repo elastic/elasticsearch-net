@@ -42,8 +42,8 @@ public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDe
 	}
 
 	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? CacheValue { get; set; }
-	private CacheQueriesDescriptor CacheDescriptor { get; set; }
-	private Action<CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor CacheDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> CacheDescriptorAction { get; set; }
 
 	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueries? cache)
 	{
@@ -53,7 +53,7 @@ public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDe
 		return Self;
 	}
 
-	public QueriesDescriptor Cache(CacheQueriesDescriptor descriptor)
+	public QueriesDescriptor Cache(Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor descriptor)
 	{
 		CacheValue = null;
 		CacheDescriptorAction = null;
@@ -61,7 +61,7 @@ public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDe
 		return Self;
 	}
 
-	public QueriesDescriptor Cache(Action<CacheQueriesDescriptor> configure)
+	public QueriesDescriptor Cache(Action<Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor> configure)
 	{
 		CacheValue = null;
 		CacheDescriptor = null;
@@ -80,7 +80,7 @@ public sealed partial class QueriesDescriptor : SerializableDescriptor<QueriesDe
 		else if (CacheDescriptorAction is not null)
 		{
 			writer.WritePropertyName("cache");
-			JsonSerializer.Serialize(writer, new CacheQueriesDescriptor(CacheDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.CacheQueriesDescriptor(CacheDescriptorAction), options);
 		}
 		else if (CacheValue is not null)
 		{

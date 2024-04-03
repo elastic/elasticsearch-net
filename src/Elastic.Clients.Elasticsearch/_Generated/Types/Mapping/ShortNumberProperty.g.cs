@@ -47,10 +47,14 @@ public sealed partial class ShortNumberProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
-	public double? NullValue { get; set; }
+	public short? NullValue { get; set; }
 	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
@@ -61,8 +65,16 @@ public sealed partial class ShortNumberProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_dimension")]
 	public bool? TimeSeriesDimension { get; set; }
+
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
@@ -88,7 +100,7 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
-	private double? NullValueValue { get; set; }
+	private short? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -133,15 +145,15 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public ShortNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShortNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -165,13 +177,16 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> NullValue(double? nullValue)
+	public ShortNumberPropertyDescriptor<TDocument> NullValue(short? nullValue)
 	{
 		NullValueValue = nullValue;
 		return Self;
@@ -189,15 +204,15 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public ShortNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShortNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -221,12 +236,18 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;
@@ -296,10 +317,10 @@ public sealed partial class ShortNumberPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (NullValueValue is not null)
+		if (NullValueValue.HasValue)
 		{
 			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
+			writer.WriteNumberValue(NullValueValue.Value);
 		}
 
 		if (OnScriptErrorValue is not null)
@@ -390,7 +411,7 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
-	private double? NullValueValue { get; set; }
+	private short? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -435,15 +456,15 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ShortNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShortNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -467,13 +488,16 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor NullValue(double? nullValue)
+	public ShortNumberPropertyDescriptor NullValue(short? nullValue)
 	{
 		NullValueValue = nullValue;
 		return Self;
@@ -491,15 +515,15 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ShortNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShortNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShortNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -523,12 +547,18 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
 	{
 		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
+	/// </summary>
 	public ShortNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
 	{
 		TimeSeriesMetricValue = timeSeriesMetric;
@@ -598,10 +628,10 @@ public sealed partial class ShortNumberPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (NullValueValue is not null)
+		if (NullValueValue.HasValue)
 		{
 			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
+			writer.WriteNumberValue(NullValueValue.Value);
 		}
 
 		if (OnScriptErrorValue is not null)

@@ -43,12 +43,11 @@ public sealed partial class GetTasksRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Returns information about a task.</para>
 /// </summary>
 public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParameters>
 {
-	public GetTasksRequest(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
+	public GetTasksRequest(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -74,18 +73,13 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Returns information about a task.</para>
 /// </summary>
 public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTasksRequestDescriptor, GetTasksRequestParameters>
 {
 	internal GetTasksRequestDescriptor(Action<GetTasksRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetTasksRequestDescriptor(Elastic.Clients.Elasticsearch.Id task_id) : base(r => r.Required("task_id", task_id))
-	{
-	}
-
-	internal GetTasksRequestDescriptor()
+	public GetTasksRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -100,9 +94,9 @@ public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTas
 	public GetTasksRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public GetTasksRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 
-	public GetTasksRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id task_id)
+	public GetTasksRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id taskId)
 	{
-		RouteValues.Required("task_id", task_id);
+		RouteValues.Required("task_id", taskId);
 		return Self;
 	}
 

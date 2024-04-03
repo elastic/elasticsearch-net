@@ -42,16 +42,16 @@ public sealed partial class MultiGetOperation
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
-	/// <para>If `false`, excludes all _source fields.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_source")]
-	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-
-	/// <summary>
 	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+
+	/// <summary>
+	/// <para>If `false`, excludes all _source fields.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_source")]
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
 	/// <para>The stored fields you want to retrieve.</para>
@@ -62,6 +62,124 @@ public sealed partial class MultiGetOperation
 	public long? Version { get; set; }
 	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
+}
+
+public sealed partial class MultiGetOperationDescriptor<TDocument> : SerializableDescriptor<MultiGetOperationDescriptor<TDocument>>
+{
+	internal MultiGetOperationDescriptor(Action<MultiGetOperationDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public MultiGetOperationDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? StoredFieldsValue { get; set; }
+	private long? VersionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+
+	/// <summary>
+	/// <para>The unique document ID.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	{
+		IdValue = id;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The index that contains the document.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? index)
+	{
+		IndexValue = index;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The key for the primary shard the document resides on. Required if routing is used during indexing.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If `false`, excludes all _source fields.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? source)
+	{
+		SourceValue = source;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The stored fields you want to retrieve.</para>
+	/// </summary>
+	public MultiGetOperationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? storedFields)
+	{
+		StoredFieldsValue = storedFields;
+		return Self;
+	}
+
+	public MultiGetOperationDescriptor<TDocument> Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	public MultiGetOperationDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	{
+		VersionTypeValue = versionType;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("_id");
+		JsonSerializer.Serialize(writer, IdValue, options);
+		if (IndexValue is not null)
+		{
+			writer.WritePropertyName("_index");
+			JsonSerializer.Serialize(writer, IndexValue, options);
+		}
+
+		if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
+		if (SourceValue is not null)
+		{
+			writer.WritePropertyName("_source");
+			JsonSerializer.Serialize(writer, SourceValue, options);
+		}
+
+		if (StoredFieldsValue is not null)
+		{
+			writer.WritePropertyName("stored_fields");
+			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		if (VersionTypeValue is not null)
+		{
+			writer.WritePropertyName("version_type");
+			JsonSerializer.Serialize(writer, VersionTypeValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }
 
 public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor<MultiGetOperationDescriptor>
@@ -166,10 +284,10 @@ public sealed partial class MultiGetOperationDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, StoredFieldsValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		if (VersionTypeValue is not null)

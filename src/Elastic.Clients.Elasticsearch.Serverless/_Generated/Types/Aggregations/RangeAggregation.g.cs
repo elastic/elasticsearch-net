@@ -27,195 +27,35 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class RangeAggregationConverter : JsonConverter<RangeAggregation>
+public sealed partial class RangeAggregation
 {
-	public override RangeAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "range")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new RangeAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("ranges"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Ranges = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, RangeAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("range");
-		writer.WriteStartObject();
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Missing.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(value.Missing.Value);
-		}
-
-		if (value.Ranges is not null)
-		{
-			writer.WritePropertyName("ranges");
-			JsonSerializer.Serialize(writer, value.Ranges, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(RangeAggregationConverter))]
-public sealed partial class RangeAggregation : SearchAggregation
-{
-	public RangeAggregation(string name) => Name = name;
-
-	internal RangeAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>The date field whose values are use to build ranges.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
 	public int? Missing { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>An array of ranges used to bucket documents.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("ranges")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? Ranges { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(RangeAggregation rangeAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Range(rangeAggregation);
 }
 
 public sealed partial class RangeAggregationDescriptor<TDocument> : SerializableDescriptor<RangeAggregationDescriptor<TDocument>>
@@ -226,42 +66,16 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MissingValue { get; set; }
+	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-
-	public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The date field whose values are use to build ranges.</para>
@@ -276,6 +90,15 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	/// <para>The date field whose values are use to build ranges.</para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The date field whose values are use to build ranges.</para>
+	/// </summary>
+	public RangeAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -302,6 +125,12 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public RangeAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>An array of ranges used to bucket documents.</para>
 	/// </summary>
@@ -314,7 +143,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RangeAggregationDescriptor<TDocument> Ranges(AggregationRangeDescriptor descriptor)
+	public RangeAggregationDescriptor<TDocument> Ranges(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor descriptor)
 	{
 		RangesValue = null;
 		RangesDescriptorAction = null;
@@ -323,7 +152,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RangeAggregationDescriptor<TDocument> Ranges(Action<AggregationRangeDescriptor> configure)
+	public RangeAggregationDescriptor<TDocument> Ranges(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -332,7 +161,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RangeAggregationDescriptor<TDocument> Ranges(params Action<AggregationRangeDescriptor>[] configure)
+	public RangeAggregationDescriptor<TDocument> Ranges(params Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor>[] configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -350,8 +179,6 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("range");
-		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -364,10 +191,22 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 			writer.WriteStringValue(FormatValue);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MissingValue.HasValue)
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)
@@ -381,7 +220,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("ranges");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (RangesDescriptorActions is not null)
@@ -390,7 +229,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 			writer.WriteStartArray();
 			foreach (var action in RangesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -408,29 +247,6 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -442,42 +258,16 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MissingValue { get; set; }
+	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
-
-	public RangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The date field whose values are use to build ranges.</para>
@@ -527,6 +317,12 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	public RangeAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>An array of ranges used to bucket documents.</para>
 	/// </summary>
@@ -539,7 +335,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RangeAggregationDescriptor Ranges(AggregationRangeDescriptor descriptor)
+	public RangeAggregationDescriptor Ranges(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor descriptor)
 	{
 		RangesValue = null;
 		RangesDescriptorAction = null;
@@ -548,7 +344,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RangeAggregationDescriptor Ranges(Action<AggregationRangeDescriptor> configure)
+	public RangeAggregationDescriptor Ranges(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -557,7 +353,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RangeAggregationDescriptor Ranges(params Action<AggregationRangeDescriptor>[] configure)
+	public RangeAggregationDescriptor Ranges(params Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor>[] configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -575,8 +371,6 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("range");
-		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -589,10 +383,22 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 			writer.WriteStringValue(FormatValue);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MissingValue.HasValue)
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)
@@ -606,7 +412,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("ranges");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (RangesDescriptorActions is not null)
@@ -615,7 +421,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 			writer.WriteStartArray();
 			foreach (var action in RangesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -630,29 +436,6 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

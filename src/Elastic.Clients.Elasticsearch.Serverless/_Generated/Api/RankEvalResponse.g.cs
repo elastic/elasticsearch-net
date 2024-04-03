@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -31,7 +32,7 @@ public sealed partial class RankEvalResponse : ElasticsearchResponse
 	/// <para>The details section contains one entry for every query in the original requests section, keyed by the search request id</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("details")]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Id, Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.RankEval.RankEvalMetricDetail> Details { get; init; }
 	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyDictionary<string, object> Failures { get; init; }
 
