@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class RankFeatureQuery : SearchQuery
+public sealed partial class RankFeatureQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -51,6 +52,8 @@ public sealed partial class RankFeatureQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("log")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Saturation function used to boost relevance scores based on the value of the rank feature `field`.</para>
@@ -64,9 +67,7 @@ public sealed partial class RankFeatureQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("sigmoid")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 
-	public static implicit operator Query(RankFeatureQuery rankFeatureQuery) => QueryDsl.Query.RankFeature(rankFeatureQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("rank_feature", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(RankFeatureQuery rankFeatureQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.RankFeature(rankFeatureQuery);
 }
 
 public sealed partial class RankFeatureQueryDescriptor<TDocument> : SerializableDescriptor<RankFeatureQueryDescriptor<TDocument>>
@@ -80,19 +81,22 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; set; }
-	private RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
-	private Action<RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? LogValue { get; set; }
-	private RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
-	private Action<RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; set; }
-	private RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
-	private Action<RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; set; }
-	private RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
-	private Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -118,6 +122,15 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
+	/// <para>`rank_feature` or `rank_features` field used to boost relevance scores.</para>
+	/// </summary>
+	public RankFeatureQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Linear function used to boost relevance scores based on the value of the rank feature `field`.</para>
 	/// </summary>
 	public RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? linear)
@@ -128,7 +141,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Linear(RankFeatureFunctionLinearDescriptor descriptor)
+	public RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
 	{
 		LinearValue = null;
 		LinearDescriptorAction = null;
@@ -136,7 +149,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Linear(Action<RankFeatureFunctionLinearDescriptor> configure)
+	public RankFeatureQueryDescriptor<TDocument> Linear(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
 	{
 		LinearValue = null;
 		LinearDescriptor = null;
@@ -155,7 +168,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Log(RankFeatureFunctionLogarithmDescriptor descriptor)
+	public RankFeatureQueryDescriptor<TDocument> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
 	{
 		LogValue = null;
 		LogDescriptorAction = null;
@@ -163,7 +176,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Log(Action<RankFeatureFunctionLogarithmDescriptor> configure)
+	public RankFeatureQueryDescriptor<TDocument> Log(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
 	{
 		LogValue = null;
 		LogDescriptor = null;
@@ -188,7 +201,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Saturation(RankFeatureFunctionSaturationDescriptor descriptor)
+	public RankFeatureQueryDescriptor<TDocument> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
 	{
 		SaturationValue = null;
 		SaturationDescriptorAction = null;
@@ -196,7 +209,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Saturation(Action<RankFeatureFunctionSaturationDescriptor> configure)
+	public RankFeatureQueryDescriptor<TDocument> Saturation(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
 	{
 		SaturationValue = null;
 		SaturationDescriptor = null;
@@ -215,7 +228,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Sigmoid(RankFeatureFunctionSigmoidDescriptor descriptor)
+	public RankFeatureQueryDescriptor<TDocument> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
 	{
 		SigmoidValue = null;
 		SigmoidDescriptorAction = null;
@@ -223,7 +236,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor<TDocument> Sigmoid(Action<RankFeatureFunctionSigmoidDescriptor> configure)
+	public RankFeatureQueryDescriptor<TDocument> Sigmoid(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
 	{
 		SigmoidValue = null;
 		SigmoidDescriptor = null;
@@ -250,7 +263,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		else if (LinearDescriptorAction is not null)
 		{
 			writer.WritePropertyName("linear");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
 		}
 		else if (LinearValue is not null)
 		{
@@ -266,7 +279,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		else if (LogDescriptorAction is not null)
 		{
 			writer.WritePropertyName("log");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
 		}
 		else if (LogValue is not null)
 		{
@@ -288,7 +301,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		else if (SaturationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("saturation");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
 		}
 		else if (SaturationValue is not null)
 		{
@@ -304,7 +317,7 @@ public sealed partial class RankFeatureQueryDescriptor<TDocument> : Serializable
 		else if (SigmoidDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sigmoid");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
 		}
 		else if (SigmoidValue is not null)
 		{
@@ -327,19 +340,22 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? LinearValue { get; set; }
-	private RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
-	private Action<RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor LinearDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> LinearDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? LogValue { get; set; }
-	private RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
-	private Action<RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor LogDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> LogDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? SaturationValue { get; set; }
-	private RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
-	private Action<RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor SaturationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> SaturationDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? SigmoidValue { get; set; }
-	private RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
-	private Action<RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor SigmoidDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> SigmoidDescriptorAction { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RankFeatureQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -384,7 +400,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Linear(RankFeatureFunctionLinearDescriptor descriptor)
+	public RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor descriptor)
 	{
 		LinearValue = null;
 		LinearDescriptorAction = null;
@@ -392,7 +408,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Linear(Action<RankFeatureFunctionLinearDescriptor> configure)
+	public RankFeatureQueryDescriptor Linear(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor> configure)
 	{
 		LinearValue = null;
 		LinearDescriptor = null;
@@ -411,7 +427,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Log(RankFeatureFunctionLogarithmDescriptor descriptor)
+	public RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor)
 	{
 		LogValue = null;
 		LogDescriptorAction = null;
@@ -419,7 +435,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Log(Action<RankFeatureFunctionLogarithmDescriptor> configure)
+	public RankFeatureQueryDescriptor Log(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> configure)
 	{
 		LogValue = null;
 		LogDescriptor = null;
@@ -444,7 +460,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Saturation(RankFeatureFunctionSaturationDescriptor descriptor)
+	public RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor)
 	{
 		SaturationValue = null;
 		SaturationDescriptorAction = null;
@@ -452,7 +468,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Saturation(Action<RankFeatureFunctionSaturationDescriptor> configure)
+	public RankFeatureQueryDescriptor Saturation(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor> configure)
 	{
 		SaturationValue = null;
 		SaturationDescriptor = null;
@@ -471,7 +487,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Sigmoid(RankFeatureFunctionSigmoidDescriptor descriptor)
+	public RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor descriptor)
 	{
 		SigmoidValue = null;
 		SigmoidDescriptorAction = null;
@@ -479,7 +495,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RankFeatureQueryDescriptor Sigmoid(Action<RankFeatureFunctionSigmoidDescriptor> configure)
+	public RankFeatureQueryDescriptor Sigmoid(Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> configure)
 	{
 		SigmoidValue = null;
 		SigmoidDescriptor = null;
@@ -506,7 +522,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		else if (LinearDescriptorAction is not null)
 		{
 			writer.WritePropertyName("linear");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor(LinearDescriptorAction), options);
 		}
 		else if (LinearValue is not null)
 		{
@@ -522,7 +538,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		else if (LogDescriptorAction is not null)
 		{
 			writer.WritePropertyName("log");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(LogDescriptorAction), options);
 		}
 		else if (LogValue is not null)
 		{
@@ -544,7 +560,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		else if (SaturationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("saturation");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(SaturationDescriptorAction), options);
 		}
 		else if (SaturationValue is not null)
 		{
@@ -560,7 +576,7 @@ public sealed partial class RankFeatureQueryDescriptor : SerializableDescriptor<
 		else if (SigmoidDescriptorAction is not null)
 		{
 			writer.WritePropertyName("sigmoid");
-			JsonSerializer.Serialize(writer, new RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor(SigmoidDescriptorAction), options);
 		}
 		else if (SigmoidValue is not null)
 		{

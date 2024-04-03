@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 

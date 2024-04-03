@@ -82,58 +82,57 @@ internal sealed partial class TermsSetQueryConverter : JsonConverter<TermsSetQue
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize TermsSetQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.MinimumShouldMatchField is not null)
-			{
-				writer.WritePropertyName("minimum_should_match_field");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatchField, options);
-			}
-
-			if (value.MinimumShouldMatchScript is not null)
-			{
-				writer.WritePropertyName("minimum_should_match_script");
-				JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, value.Terms, options);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.MinimumShouldMatchField is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_field");
+			JsonSerializer.Serialize(writer, value.MinimumShouldMatchField, options);
+		}
+
+		if (value.MinimumShouldMatchScript is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_script");
+			JsonSerializer.Serialize(writer, value.MinimumShouldMatchScript, options);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		writer.WritePropertyName("terms");
+		JsonSerializer.Serialize(writer, value.Terms, options);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(TermsSetQueryConverter))]
-public sealed partial class TermsSetQuery : SearchQuery
+public sealed partial class TermsSetQuery
 {
-	public TermsSetQuery(Field field)
+	public TermsSetQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
@@ -144,38 +143,22 @@ public sealed partial class TermsSetQuery : SearchQuery
 	/// <para>Custom script containing the number of matching terms required to return a document.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScript { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Array of terms you wish to find in the provided field.</para>
 	/// </summary>
 	public ICollection<string> Terms { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator Query(TermsSetQuery termsSetQuery) => QueryDsl.Query.TermsSet(termsSetQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("terms_set", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(TermsSetQuery termsSetQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.TermsSet(termsSetQuery);
 }
 
 public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDescriptor<TermsSetQueryDescriptor<TDocument>>
 {
 	internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal TermsSetQueryDescriptor() : base()
+	public TermsSetQueryDescriptor() : base()
 	{
-	}
-
-	public TermsSetQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public TermsSetQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -185,6 +168,9 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -203,6 +189,12 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public TermsSetQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
 	/// </summary>
@@ -216,6 +208,15 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField<TValue>(Expression<Func<TDocument, TValue>> minimumShouldMatchField)
+	{
+		MinimumShouldMatchFieldValue = minimumShouldMatchField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Numeric field containing the number of matching terms required to return a document.</para>
+	/// </summary>
+	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Expression<Func<TDocument, object>> minimumShouldMatchField)
 	{
 		MinimumShouldMatchFieldValue = minimumShouldMatchField;
 		return Self;
@@ -287,15 +288,8 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 {
 	internal TermsSetQueryDescriptor(Action<TermsSetQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal TermsSetQueryDescriptor() : base()
+	public TermsSetQueryDescriptor() : base()
 	{
-	}
-
-	public TermsSetQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -305,6 +299,9 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermsSetQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

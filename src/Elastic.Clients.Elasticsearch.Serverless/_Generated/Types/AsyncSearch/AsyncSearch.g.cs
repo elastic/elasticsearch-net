@@ -29,22 +29,13 @@ namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 
 public sealed partial class AsyncSearch<TDocument>
 {
-	[JsonInclude, JsonPropertyName("_clusters")]
-	public Elastic.Clients.Elasticsearch.Serverless.ClusterStatistics? Clusters { get; init; }
-	[JsonInclude, JsonPropertyName("_scroll_id")]
-	public Elastic.Clients.Elasticsearch.Serverless.ScrollId? ScrollId { get; init; }
-
-	/// <summary>
-	/// <para>Indicates how many shards have run the query.<br/>Note that in order for shard results to be included in the search response, they need to be reduced first.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
-
 	/// <summary>
 	/// <para>Partial aggregations results, coming from the shards that have already completed the execution of the query.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary? Aggregations { get; init; }
+	[JsonInclude, JsonPropertyName("_clusters")]
+	public Elastic.Clients.Elasticsearch.Serverless.ClusterStatistics? Clusters { get; init; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
 	[JsonInclude, JsonPropertyName("hits")]
@@ -61,6 +52,14 @@ public sealed partial class AsyncSearch<TDocument>
 	public string? PitId { get; init; }
 	[JsonInclude, JsonPropertyName("profile")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.Profile? Profile { get; init; }
+	[JsonInclude, JsonPropertyName("_scroll_id")]
+	public Elastic.Clients.Elasticsearch.Serverless.ScrollId? ScrollId { get; init; }
+
+	/// <summary>
+	/// <para>Indicates how many shards have run the query.<br/>Note that in order for shard results to be included in the search response, they need to be reduced first.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.SuggestDictionary<TDocument>? Suggest { get; init; }
 	[JsonInclude, JsonPropertyName("terminated_early")]

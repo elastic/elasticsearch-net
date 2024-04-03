@@ -27,147 +27,25 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class MaxAggregationConverter : JsonConverter<MaxAggregation>
+public sealed partial class MaxAggregation
 {
-	public override MaxAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "max")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new MaxAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<FieldValue?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, MaxAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("max");
-		writer.WriteStartObject();
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Missing is not null)
-		{
-			writer.WritePropertyName("missing");
-			JsonSerializer.Serialize(writer, value.Missing, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(MaxAggregationConverter))]
-public sealed partial class MaxAggregation : SearchAggregation
-{
-	public MaxAggregation(string name, Field field) : this(name) => Field = field;
-	public MaxAggregation(string name) => Name = name;
-
-	internal MaxAggregation()
-	{
-	}
-
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	public IDictionary<string, object>? Meta { get; set; }
-	public FieldValue? Missing { get; set; }
-	override public string? Name { get; internal set; }
+
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(MaxAggregation maxAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Max(maxAggregation);
 }
 
 public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDescriptor<MaxAggregationDescriptor<TDocument>>
@@ -180,17 +58,31 @@ public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDe
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public MaxAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public MaxAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
+	public MaxAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -202,13 +94,10 @@ public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public MaxAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public MaxAggregationDescriptor<TDocument> Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public MaxAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -222,8 +111,6 @@ public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDe
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("max");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -247,13 +134,6 @@ public sealed partial class MaxAggregationDescriptor<TDocument> : SerializableDe
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -270,22 +150,30 @@ public sealed partial class MaxAggregationDescriptor : SerializableDescriptor<Ma
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private FieldValue? MissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public MaxAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field? field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public MaxAggregationDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field on which to run the aggregation.</para>
+	/// </summary>
 	public MaxAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -298,13 +186,10 @@ public sealed partial class MaxAggregationDescriptor : SerializableDescriptor<Ma
 		return Self;
 	}
 
-	public MaxAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public MaxAggregationDescriptor Missing(FieldValue? missing)
+	/// <summary>
+	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
+	/// </summary>
+	public MaxAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
 		return Self;
@@ -318,8 +203,6 @@ public sealed partial class MaxAggregationDescriptor : SerializableDescriptor<Ma
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("max");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -343,13 +226,6 @@ public sealed partial class MaxAggregationDescriptor : SerializableDescriptor<Ma
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		writer.WriteEndObject();

@@ -38,5 +38,5 @@ public sealed partial class HitsMetadata<T>
 	/// <para>Total hit count information, present only if `track_total_hits` wasn't `false` in the search request.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total")]
-	public Elastic.Clients.Elasticsearch.Core.Search.TotalHits? Total { get; init; }
+	public Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>? Total { get; init; }
 }

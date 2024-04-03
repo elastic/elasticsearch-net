@@ -106,10 +106,6 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	internal SplitIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -134,15 +130,15 @@ public sealed partial class SplitIndexRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
 	/// <para>Aliases for the resulting index.</para>
 	/// </summary>
-	public SplitIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	public SplitIndexRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -185,10 +181,6 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 	{
 	}
 
-	internal SplitIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSplit;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -213,15 +205,15 @@ public sealed partial class SplitIndexRequestDescriptor : RequestDescriptor<Spli
 		return Self;
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
 	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
 	/// <para>Aliases for the resulting index.</para>
 	/// </summary>
-	public SplitIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	public SplitIndexRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>());
 		return Self;
 	}
 

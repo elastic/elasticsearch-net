@@ -21,16 +21,20 @@ using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
+/// <summary>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
 {
-	internal Query(string variantName, SearchQuery variant)
+	internal Query(string variantName, object variant)
 	{
 		if (variantName is null)
 			throw new ArgumentNullException(nameof(variantName));
@@ -42,14 +46,8 @@ public sealed partial class Query
 		Variant = variant;
 	}
 
-	internal object Variant { get; private set; }
-	internal string VariantName { get; private set; }
-
-	internal void WrapVariant(string variantName, SearchQuery variant)
-	{
-		VariantName = variantName;
-		Variant = variant;
-	}
+	internal object Variant { get; }
+	internal string VariantName { get; }
 
 	public static Query Bool(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQuery boolQuery) => new Query("bool", boolQuery);
 	public static Query Boosting(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQuery boostingQuery) => new Query("boosting", boostingQuery);
@@ -102,8 +100,21 @@ public sealed partial class Query
 	public static Query Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => new Query("terms", termsQuery);
 	public static Query TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => new Query("terms_set", termsSetQuery);
 	public static Query TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => new Query("text_expansion", textExpansionQuery);
+	public static Query WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => new Query("weighted_tokens", weightedTokensQuery);
 	public static Query Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => new Query("wildcard", wildcardQuery);
 	public static Query Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => new Query("wrapper", wrapperQuery);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class QueryConverter : JsonConverter<Query>
@@ -115,398 +126,412 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			throw new JsonException("Expected start token.");
 		}
 
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "bool")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "boosting")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "combined_fields")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "constant_score")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "dis_max")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "exists")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "field_masking_span")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "function_score")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "fuzzy")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_bounding_box")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_distance")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_polygon")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "has_child")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "has_parent")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "ids")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "intervals")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "knn")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match_all")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match_bool_prefix")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match_none")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match_phrase")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "match_phrase_prefix")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "more_like_this")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "multi_match")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "nested")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "parent_id")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "percolate")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "pinned")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "prefix")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "query_string")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "range")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "rank_feature")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "raw_json")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "regexp")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "rule_query")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "script")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "script_score")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "simple_query_string")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_containing")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_first")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_multi")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_near")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_not")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_or")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_term")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "span_within")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "term")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "terms_set")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "text_expansion")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "weighted_tokens")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "wildcard")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "wrapper")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Query' from the response.");
+		}
+
 		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
-		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
-
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "bool")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "boosting")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "combined_fields")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "constant_score")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "dis_max")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "exists")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "field_masking_span")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "function_score")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "fuzzy")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "geo_bounding_box")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "geo_distance")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "geo_polygon")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "has_child")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "has_parent")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "ids")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "intervals")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "knn")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.KnnQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match_all")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match_bool_prefix")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match_none")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match_phrase")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "match_phrase_prefix")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "more_like_this")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "multi_match")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "nested")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "parent_id")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "percolate")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "pinned")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "prefix")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "query_string")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "range")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "rank_feature")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "raw_json")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "regexp")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "rule_query")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "script")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "script_score")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "simple_query_string")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_containing")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_first")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_multi")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_near")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_not")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_or")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_term")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "span_within")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "term")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "terms")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "terms_set")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "text_expansion")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "wildcard")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		if (propertyName == "wrapper")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery?>(ref reader, options);
-			reader.Read();
-			return new Query(propertyName, variant);
-		}
-
-		throw new JsonException();
+		var result = new Query(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Query value, JsonSerializerOptions options)
 	{
-		if (value.VariantName == "raw_json" && value.TryGet<RawJsonQuery>(out var rawJsonQuery))
-		{
-			writer.WriteRawValue(rawJsonQuery.Raw);
-			return;
-		}
-
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -664,6 +689,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "text_expansion":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery)value.Variant, options);
 					break;
+				case "weighted_tokens":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery)value.Variant, options);
+					break;
 				case "wildcard":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery)value.Variant, options);
 					break;
@@ -708,136 +736,129 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 		return Self;
 	}
 
-	public QueryDescriptor<TDocument> Bool(BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public QueryDescriptor<TDocument> Bool(Action<BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
-	public QueryDescriptor<TDocument> Boosting(BoostingQuery boostingQuery) => Set(boostingQuery, "boosting");
-	public QueryDescriptor<TDocument> Boosting(Action<BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
-	public QueryDescriptor<TDocument> CombinedFields(CombinedFieldsQuery combinedFieldsQuery) => Set(combinedFieldsQuery, "combined_fields");
-	public QueryDescriptor<TDocument> CombinedFields(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => Set(configure, "combined_fields");
-	public QueryDescriptor<TDocument> ConstantScore(ConstantScoreQuery constantScoreQuery) => Set(constantScoreQuery, "constant_score");
-	public QueryDescriptor<TDocument> ConstantScore(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
-	public QueryDescriptor<TDocument> DisMax(DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
-	public QueryDescriptor<TDocument> DisMax(Action<DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
-	public QueryDescriptor<TDocument> Exists(ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public QueryDescriptor<TDocument> Exists(Action<ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
-	public QueryDescriptor<TDocument> FieldMaskingSpan(SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public QueryDescriptor<TDocument> FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
-	public QueryDescriptor<TDocument> FunctionScore(FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
-	public QueryDescriptor<TDocument> FunctionScore(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
-	public QueryDescriptor<TDocument> Fuzzy(FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
-	public QueryDescriptor<TDocument> Fuzzy(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-	public QueryDescriptor<TDocument> GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
-	public QueryDescriptor<TDocument> GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
-	public QueryDescriptor<TDocument> GeoDistance(GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
-	public QueryDescriptor<TDocument> GeoDistance(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
-	public QueryDescriptor<TDocument> GeoPolygon(GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
-	public QueryDescriptor<TDocument> GeoPolygon(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
-	public QueryDescriptor<TDocument> HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
-	public QueryDescriptor<TDocument> HasChild(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
-	public QueryDescriptor<TDocument> HasParent(HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
-	public QueryDescriptor<TDocument> HasParent(Action<HasParentQueryDescriptor<TDocument>> configure) => Set(configure, "has_parent");
-	public QueryDescriptor<TDocument> Ids(IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public QueryDescriptor<TDocument> Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public QueryDescriptor<TDocument> Intervals(IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
-	public QueryDescriptor<TDocument> Intervals(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-	public QueryDescriptor<TDocument> Knn(KnnQuery knnQuery) => Set(knnQuery, "knn");
-	public QueryDescriptor<TDocument> Knn(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
-	public QueryDescriptor<TDocument> Match(MatchQuery matchQuery) => Set(matchQuery, "match");
-	public QueryDescriptor<TDocument> Match(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
-	public QueryDescriptor<TDocument> MatchAll(MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public QueryDescriptor<TDocument> MatchAll(Action<MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public QueryDescriptor<TDocument> MatchBoolPrefix(MatchBoolPrefixQuery matchBoolPrefixQuery) => Set(matchBoolPrefixQuery, "match_bool_prefix");
-	public QueryDescriptor<TDocument> MatchBoolPrefix(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_bool_prefix");
-	public QueryDescriptor<TDocument> MatchNone(MatchNoneQuery matchNoneQuery) => Set(matchNoneQuery, "match_none");
-	public QueryDescriptor<TDocument> MatchNone(Action<MatchNoneQueryDescriptor> configure) => Set(configure, "match_none");
-	public QueryDescriptor<TDocument> MatchPhrase(MatchPhraseQuery matchPhraseQuery) => Set(matchPhraseQuery, "match_phrase");
-	public QueryDescriptor<TDocument> MatchPhrase(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase");
-	public QueryDescriptor<TDocument> MatchPhrasePrefix(MatchPhrasePrefixQuery matchPhrasePrefixQuery) => Set(matchPhrasePrefixQuery, "match_phrase_prefix");
-	public QueryDescriptor<TDocument> MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase_prefix");
-	public QueryDescriptor<TDocument> MoreLikeThis(MoreLikeThisQuery moreLikeThisQuery) => Set(moreLikeThisQuery, "more_like_this");
-	public QueryDescriptor<TDocument> MoreLikeThis(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => Set(configure, "more_like_this");
-	public QueryDescriptor<TDocument> MultiMatch(MultiMatchQuery multiMatchQuery) => Set(multiMatchQuery, "multi_match");
-	public QueryDescriptor<TDocument> MultiMatch(Action<MultiMatchQueryDescriptor<TDocument>> configure) => Set(configure, "multi_match");
-	public QueryDescriptor<TDocument> Nested(NestedQuery nestedQuery) => Set(nestedQuery, "nested");
-	public QueryDescriptor<TDocument> Nested(Action<NestedQueryDescriptor<TDocument>> configure) => Set(configure, "nested");
-	public QueryDescriptor<TDocument> ParentId(ParentIdQuery parentIdQuery) => Set(parentIdQuery, "parent_id");
-	public QueryDescriptor<TDocument> ParentId(Action<ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
-	public QueryDescriptor<TDocument> Percolate(PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
-	public QueryDescriptor<TDocument> Percolate(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
-	public QueryDescriptor<TDocument> Pinned(PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
-	public QueryDescriptor<TDocument> Pinned(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
-	public QueryDescriptor<TDocument> Prefix(PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public QueryDescriptor<TDocument> Prefix(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public QueryDescriptor<TDocument> QueryString(QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
-	public QueryDescriptor<TDocument> QueryString(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
-	public QueryDescriptor<TDocument> Range(RangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public QueryDescriptor<TDocument> Range(Action<RangeQueryDescriptor<TDocument>> configure) => Set(configure, "range");
-	public QueryDescriptor<TDocument> RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
-	public QueryDescriptor<TDocument> RankFeature(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
+	public QueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
+	public QueryDescriptor<TDocument> Bool(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
+	public QueryDescriptor<TDocument> Boosting(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQuery boostingQuery) => Set(boostingQuery, "boosting");
+	public QueryDescriptor<TDocument> Boosting(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
+	public QueryDescriptor<TDocument> CombinedFields(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQuery combinedFieldsQuery) => Set(combinedFieldsQuery, "combined_fields");
+	public QueryDescriptor<TDocument> CombinedFields(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQueryDescriptor<TDocument>> configure) => Set(configure, "combined_fields");
+	public QueryDescriptor<TDocument> ConstantScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery constantScoreQuery) => Set(constantScoreQuery, "constant_score");
+	public QueryDescriptor<TDocument> ConstantScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
+	public QueryDescriptor<TDocument> DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
+	public QueryDescriptor<TDocument> DisMax(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
+	public QueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
+	public QueryDescriptor<TDocument> Exists(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
+	public QueryDescriptor<TDocument> FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
+	public QueryDescriptor<TDocument> FieldMaskingSpan(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
+	public QueryDescriptor<TDocument> FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
+	public QueryDescriptor<TDocument> FunctionScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
+	public QueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
+	public QueryDescriptor<TDocument> Fuzzy(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
+	public QueryDescriptor<TDocument> GeoBoundingBox(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
+	public QueryDescriptor<TDocument> GeoBoundingBox(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
+	public QueryDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
+	public QueryDescriptor<TDocument> GeoDistance(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor<TDocument> GeoPolygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
+	public QueryDescriptor<TDocument> GeoPolygon(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
+	public QueryDescriptor<TDocument> HasChild(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
+	public QueryDescriptor<TDocument> HasChild(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
+	public QueryDescriptor<TDocument> HasParent(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
+	public QueryDescriptor<TDocument> HasParent(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQueryDescriptor<TDocument>> configure) => Set(configure, "has_parent");
+	public QueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
+	public QueryDescriptor<TDocument> Ids(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
+	public QueryDescriptor<TDocument> Intervals(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
+	public QueryDescriptor<TDocument> Intervals(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
+	public QueryDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.Serverless.KnnQuery knnQuery) => Set(knnQuery, "knn");
+	public QueryDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.Serverless.KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
+	public QueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
+	public QueryDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
+	public QueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
+	public QueryDescriptor<TDocument> MatchAll(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
+	public QueryDescriptor<TDocument> MatchBoolPrefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQuery matchBoolPrefixQuery) => Set(matchBoolPrefixQuery, "match_bool_prefix");
+	public QueryDescriptor<TDocument> MatchBoolPrefix(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_bool_prefix");
+	public QueryDescriptor<TDocument> MatchNone(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQuery matchNoneQuery) => Set(matchNoneQuery, "match_none");
+	public QueryDescriptor<TDocument> MatchNone(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQueryDescriptor> configure) => Set(configure, "match_none");
+	public QueryDescriptor<TDocument> MatchPhrase(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQuery matchPhraseQuery) => Set(matchPhraseQuery, "match_phrase");
+	public QueryDescriptor<TDocument> MatchPhrase(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase");
+	public QueryDescriptor<TDocument> MatchPhrasePrefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQuery matchPhrasePrefixQuery) => Set(matchPhrasePrefixQuery, "match_phrase_prefix");
+	public QueryDescriptor<TDocument> MatchPhrasePrefix(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase_prefix");
+	public QueryDescriptor<TDocument> MoreLikeThis(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQuery moreLikeThisQuery) => Set(moreLikeThisQuery, "more_like_this");
+	public QueryDescriptor<TDocument> MoreLikeThis(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQueryDescriptor<TDocument>> configure) => Set(configure, "more_like_this");
+	public QueryDescriptor<TDocument> MultiMatch(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQuery multiMatchQuery) => Set(multiMatchQuery, "multi_match");
+	public QueryDescriptor<TDocument> MultiMatch(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQueryDescriptor<TDocument>> configure) => Set(configure, "multi_match");
+	public QueryDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQuery nestedQuery) => Set(nestedQuery, "nested");
+	public QueryDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQueryDescriptor<TDocument>> configure) => Set(configure, "nested");
+	public QueryDescriptor<TDocument> ParentId(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQuery parentIdQuery) => Set(parentIdQuery, "parent_id");
+	public QueryDescriptor<TDocument> ParentId(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
+	public QueryDescriptor<TDocument> Percolate(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
+	public QueryDescriptor<TDocument> Percolate(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
+	public QueryDescriptor<TDocument> Pinned(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
+	public QueryDescriptor<TDocument> Pinned(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
+	public QueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
+	public QueryDescriptor<TDocument> Prefix(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
+	public QueryDescriptor<TDocument> QueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
+	public QueryDescriptor<TDocument> QueryString(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
+	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
+	public QueryDescriptor<TDocument> RankFeature(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor<TDocument> RawJson(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
-	public QueryDescriptor<TDocument> Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
-	public QueryDescriptor<TDocument> Regexp(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
-	public QueryDescriptor<TDocument> RuleQuery(RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
-	public QueryDescriptor<TDocument> RuleQuery(Action<RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
-	public QueryDescriptor<TDocument> Script(ScriptQuery scriptQuery) => Set(scriptQuery, "script");
-	public QueryDescriptor<TDocument> Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
-	public QueryDescriptor<TDocument> ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
-	public QueryDescriptor<TDocument> ScriptScore(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
-	public QueryDescriptor<TDocument> SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public QueryDescriptor<TDocument> SimpleQueryString(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
-	public QueryDescriptor<TDocument> SpanContaining(SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
-	public QueryDescriptor<TDocument> SpanContaining(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
-	public QueryDescriptor<TDocument> SpanFirst(SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
-	public QueryDescriptor<TDocument> SpanFirst(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public QueryDescriptor<TDocument> SpanMulti(SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
-	public QueryDescriptor<TDocument> SpanMulti(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
-	public QueryDescriptor<TDocument> SpanNear(SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
-	public QueryDescriptor<TDocument> SpanNear(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
-	public QueryDescriptor<TDocument> SpanNot(SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
-	public QueryDescriptor<TDocument> SpanNot(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
-	public QueryDescriptor<TDocument> SpanOr(SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
-	public QueryDescriptor<TDocument> SpanOr(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
-	public QueryDescriptor<TDocument> SpanTerm(SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
-	public QueryDescriptor<TDocument> SpanTerm(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
-	public QueryDescriptor<TDocument> SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
-	public QueryDescriptor<TDocument> SpanWithin(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
-	public QueryDescriptor<TDocument> Term(TermQuery termQuery) => Set(termQuery, "term");
-	public QueryDescriptor<TDocument> Term(Action<TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
-	public QueryDescriptor<TDocument> Terms(TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public QueryDescriptor<TDocument> Terms(Action<TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
-	public QueryDescriptor<TDocument> TermsSet(TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
-	public QueryDescriptor<TDocument> TermsSet(Action<TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
-	public QueryDescriptor<TDocument> TextExpansion(TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
-	public QueryDescriptor<TDocument> TextExpansion(Action<TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
-	public QueryDescriptor<TDocument> Wildcard(WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public QueryDescriptor<TDocument> Wildcard(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-	public QueryDescriptor<TDocument> Wrapper(WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
-	public QueryDescriptor<TDocument> Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+	public QueryDescriptor<TDocument> Regexp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
+	public QueryDescriptor<TDocument> Regexp(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
+	public QueryDescriptor<TDocument> RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
+	public QueryDescriptor<TDocument> RuleQuery(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
+	public QueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => Set(scriptQuery, "script");
+	public QueryDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
+	public QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
+	public QueryDescriptor<TDocument> ScriptScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
+	public QueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
+	public QueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
+	public QueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
+	public QueryDescriptor<TDocument> SpanContaining(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
+	public QueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
+	public QueryDescriptor<TDocument> SpanFirst(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
+	public QueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
+	public QueryDescriptor<TDocument> SpanMulti(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
+	public QueryDescriptor<TDocument> SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
+	public QueryDescriptor<TDocument> SpanNear(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
+	public QueryDescriptor<TDocument> SpanNot(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
+	public QueryDescriptor<TDocument> SpanNot(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
+	public QueryDescriptor<TDocument> SpanOr(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
+	public QueryDescriptor<TDocument> SpanOr(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
+	public QueryDescriptor<TDocument> SpanTerm(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
+	public QueryDescriptor<TDocument> SpanTerm(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
+	public QueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
+	public QueryDescriptor<TDocument> SpanWithin(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+	public QueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
+	public QueryDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
+	public QueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
+	public QueryDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public QueryDescriptor<TDocument> TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
+	public QueryDescriptor<TDocument> TermsSet(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
+	public QueryDescriptor<TDocument> TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
+	public QueryDescriptor<TDocument> TextExpansion(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
+	public QueryDescriptor<TDocument> WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => Set(weightedTokensQuery, "weighted_tokens");
+	public QueryDescriptor<TDocument> WeightedTokens(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQueryDescriptor<TDocument>> configure) => Set(configure, "weighted_tokens");
+	public QueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
+	public QueryDescriptor<TDocument> Wildcard(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
+	public QueryDescriptor<TDocument> Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
+	public QueryDescriptor<TDocument> Wrapper(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		if (ContainedVariantName == "raw_json")
-		{
-			writer.WriteRawValue(((RawJsonQuery)Variant).Raw);
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -873,182 +894,129 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 		return Self;
 	}
 
-	public QueryDescriptor Bool(BoolQuery boolQuery) => Set(boolQuery, "bool");
-	public QueryDescriptor Bool(Action<BoolQueryDescriptor> configure) => Set(configure, "bool");
-	public QueryDescriptor Bool<TDocument>(Action<BoolQueryDescriptor<TDocument>> configure) => Set(configure, "bool");
-	public QueryDescriptor Boosting(BoostingQuery boostingQuery) => Set(boostingQuery, "boosting");
-	public QueryDescriptor Boosting(Action<BoostingQueryDescriptor> configure) => Set(configure, "boosting");
-	public QueryDescriptor Boosting<TDocument>(Action<BoostingQueryDescriptor<TDocument>> configure) => Set(configure, "boosting");
-	public QueryDescriptor CombinedFields(CombinedFieldsQuery combinedFieldsQuery) => Set(combinedFieldsQuery, "combined_fields");
-	public QueryDescriptor CombinedFields(Action<CombinedFieldsQueryDescriptor> configure) => Set(configure, "combined_fields");
-	public QueryDescriptor CombinedFields<TDocument>(Action<CombinedFieldsQueryDescriptor<TDocument>> configure) => Set(configure, "combined_fields");
-	public QueryDescriptor ConstantScore(ConstantScoreQuery constantScoreQuery) => Set(constantScoreQuery, "constant_score");
-	public QueryDescriptor ConstantScore(Action<ConstantScoreQueryDescriptor> configure) => Set(configure, "constant_score");
-	public QueryDescriptor ConstantScore<TDocument>(Action<ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
-	public QueryDescriptor DisMax(DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
-	public QueryDescriptor DisMax(Action<DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
-	public QueryDescriptor DisMax<TDocument>(Action<DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
-	public QueryDescriptor Exists(ExistsQuery existsQuery) => Set(existsQuery, "exists");
-	public QueryDescriptor Exists(Action<ExistsQueryDescriptor> configure) => Set(configure, "exists");
-	public QueryDescriptor Exists<TDocument>(Action<ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
-	public QueryDescriptor FieldMaskingSpan(SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public QueryDescriptor FieldMaskingSpan(Action<SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
-	public QueryDescriptor FieldMaskingSpan<TDocument>(Action<SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
-	public QueryDescriptor FunctionScore(FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
-	public QueryDescriptor FunctionScore(Action<FunctionScoreQueryDescriptor> configure) => Set(configure, "function_score");
-	public QueryDescriptor FunctionScore<TDocument>(Action<FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
-	public QueryDescriptor Fuzzy(FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
-	public QueryDescriptor Fuzzy(Action<FuzzyQueryDescriptor> configure) => Set(configure, "fuzzy");
-	public QueryDescriptor Fuzzy<TDocument>(Action<FuzzyQueryDescriptor<TDocument>> configure) => Set(configure, "fuzzy");
-	public QueryDescriptor GeoBoundingBox(GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
-	public QueryDescriptor GeoBoundingBox(Action<GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
-	public QueryDescriptor GeoBoundingBox<TDocument>(Action<GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
-	public QueryDescriptor GeoDistance(GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
-	public QueryDescriptor GeoDistance(Action<GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
-	public QueryDescriptor GeoDistance<TDocument>(Action<GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
-	public QueryDescriptor GeoPolygon(GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
-	public QueryDescriptor GeoPolygon(Action<GeoPolygonQueryDescriptor> configure) => Set(configure, "geo_polygon");
-	public QueryDescriptor GeoPolygon<TDocument>(Action<GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
-	public QueryDescriptor HasChild(HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
-	public QueryDescriptor HasChild(Action<HasChildQueryDescriptor> configure) => Set(configure, "has_child");
-	public QueryDescriptor HasChild<TDocument>(Action<HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
-	public QueryDescriptor HasParent(HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
-	public QueryDescriptor HasParent(Action<HasParentQueryDescriptor> configure) => Set(configure, "has_parent");
-	public QueryDescriptor HasParent<TDocument>(Action<HasParentQueryDescriptor<TDocument>> configure) => Set(configure, "has_parent");
-	public QueryDescriptor Ids(IdsQuery idsQuery) => Set(idsQuery, "ids");
-	public QueryDescriptor Ids(Action<IdsQueryDescriptor> configure) => Set(configure, "ids");
-	public QueryDescriptor Intervals(IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
-	public QueryDescriptor Intervals(Action<IntervalsQueryDescriptor> configure) => Set(configure, "intervals");
-	public QueryDescriptor Intervals<TDocument>(Action<IntervalsQueryDescriptor<TDocument>> configure) => Set(configure, "intervals");
-	public QueryDescriptor Knn(KnnQuery knnQuery) => Set(knnQuery, "knn");
-	public QueryDescriptor Knn(Action<KnnQueryDescriptor> configure) => Set(configure, "knn");
-	public QueryDescriptor Knn<TDocument>(Action<KnnQueryDescriptor<TDocument>> configure) => Set(configure, "knn");
-	public QueryDescriptor Match(MatchQuery matchQuery) => Set(matchQuery, "match");
-	public QueryDescriptor Match(Action<MatchQueryDescriptor> configure) => Set(configure, "match");
-	public QueryDescriptor Match<TDocument>(Action<MatchQueryDescriptor<TDocument>> configure) => Set(configure, "match");
-	public QueryDescriptor MatchAll(MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
-	public QueryDescriptor MatchAll(Action<MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
-	public QueryDescriptor MatchBoolPrefix(MatchBoolPrefixQuery matchBoolPrefixQuery) => Set(matchBoolPrefixQuery, "match_bool_prefix");
-	public QueryDescriptor MatchBoolPrefix(Action<MatchBoolPrefixQueryDescriptor> configure) => Set(configure, "match_bool_prefix");
-	public QueryDescriptor MatchBoolPrefix<TDocument>(Action<MatchBoolPrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_bool_prefix");
-	public QueryDescriptor MatchNone(MatchNoneQuery matchNoneQuery) => Set(matchNoneQuery, "match_none");
-	public QueryDescriptor MatchNone(Action<MatchNoneQueryDescriptor> configure) => Set(configure, "match_none");
-	public QueryDescriptor MatchPhrase(MatchPhraseQuery matchPhraseQuery) => Set(matchPhraseQuery, "match_phrase");
-	public QueryDescriptor MatchPhrase(Action<MatchPhraseQueryDescriptor> configure) => Set(configure, "match_phrase");
-	public QueryDescriptor MatchPhrase<TDocument>(Action<MatchPhraseQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase");
-	public QueryDescriptor MatchPhrasePrefix(MatchPhrasePrefixQuery matchPhrasePrefixQuery) => Set(matchPhrasePrefixQuery, "match_phrase_prefix");
-	public QueryDescriptor MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor> configure) => Set(configure, "match_phrase_prefix");
-	public QueryDescriptor MatchPhrasePrefix<TDocument>(Action<MatchPhrasePrefixQueryDescriptor<TDocument>> configure) => Set(configure, "match_phrase_prefix");
-	public QueryDescriptor MoreLikeThis(MoreLikeThisQuery moreLikeThisQuery) => Set(moreLikeThisQuery, "more_like_this");
-	public QueryDescriptor MoreLikeThis(Action<MoreLikeThisQueryDescriptor> configure) => Set(configure, "more_like_this");
-	public QueryDescriptor MoreLikeThis<TDocument>(Action<MoreLikeThisQueryDescriptor<TDocument>> configure) => Set(configure, "more_like_this");
-	public QueryDescriptor MultiMatch(MultiMatchQuery multiMatchQuery) => Set(multiMatchQuery, "multi_match");
-	public QueryDescriptor MultiMatch(Action<MultiMatchQueryDescriptor> configure) => Set(configure, "multi_match");
-	public QueryDescriptor MultiMatch<TDocument>(Action<MultiMatchQueryDescriptor<TDocument>> configure) => Set(configure, "multi_match");
-	public QueryDescriptor Nested(NestedQuery nestedQuery) => Set(nestedQuery, "nested");
-	public QueryDescriptor Nested(Action<NestedQueryDescriptor> configure) => Set(configure, "nested");
-	public QueryDescriptor Nested<TDocument>(Action<NestedQueryDescriptor<TDocument>> configure) => Set(configure, "nested");
-	public QueryDescriptor ParentId(ParentIdQuery parentIdQuery) => Set(parentIdQuery, "parent_id");
-	public QueryDescriptor ParentId(Action<ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
-	public QueryDescriptor Percolate(PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
-	public QueryDescriptor Percolate(Action<PercolateQueryDescriptor> configure) => Set(configure, "percolate");
-	public QueryDescriptor Percolate<TDocument>(Action<PercolateQueryDescriptor<TDocument>> configure) => Set(configure, "percolate");
-	public QueryDescriptor Pinned(PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
-	public QueryDescriptor Pinned(Action<PinnedQueryDescriptor> configure) => Set(configure, "pinned");
-	public QueryDescriptor Pinned<TDocument>(Action<PinnedQueryDescriptor<TDocument>> configure) => Set(configure, "pinned");
-	public QueryDescriptor Prefix(PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
-	public QueryDescriptor Prefix(Action<PrefixQueryDescriptor> configure) => Set(configure, "prefix");
-	public QueryDescriptor Prefix<TDocument>(Action<PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
-	public QueryDescriptor QueryString(QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
-	public QueryDescriptor QueryString(Action<QueryStringQueryDescriptor> configure) => Set(configure, "query_string");
-	public QueryDescriptor QueryString<TDocument>(Action<QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
-	public QueryDescriptor Range(RangeQuery rangeQuery) => Set(rangeQuery, "range");
-	public QueryDescriptor Range(Action<RangeQueryDescriptor> configure) => Set(configure, "range");
-	public QueryDescriptor Range<TDocument>(Action<RangeQueryDescriptor<TDocument>> configure) => Set(configure, "range");
-	public QueryDescriptor RankFeature(RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
-	public QueryDescriptor RankFeature(Action<RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
-	public QueryDescriptor RankFeature<TDocument>(Action<RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
+	public QueryDescriptor Bool(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQuery boolQuery) => Set(boolQuery, "bool");
+	public QueryDescriptor Bool<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoolQueryDescriptor> configure) => Set(configure, "bool");
+	public QueryDescriptor Boosting(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQuery boostingQuery) => Set(boostingQuery, "boosting");
+	public QueryDescriptor Boosting<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.BoostingQueryDescriptor> configure) => Set(configure, "boosting");
+	public QueryDescriptor CombinedFields(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQuery combinedFieldsQuery) => Set(combinedFieldsQuery, "combined_fields");
+	public QueryDescriptor CombinedFields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQueryDescriptor> configure) => Set(configure, "combined_fields");
+	public QueryDescriptor ConstantScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery constantScoreQuery) => Set(constantScoreQuery, "constant_score");
+	public QueryDescriptor ConstantScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQueryDescriptor> configure) => Set(configure, "constant_score");
+	public QueryDescriptor DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
+	public QueryDescriptor DisMax<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
+	public QueryDescriptor Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
+	public QueryDescriptor Exists<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor> configure) => Set(configure, "exists");
+	public QueryDescriptor FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
+	public QueryDescriptor FieldMaskingSpan<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
+	public QueryDescriptor FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
+	public QueryDescriptor FunctionScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQueryDescriptor> configure) => Set(configure, "function_score");
+	public QueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
+	public QueryDescriptor Fuzzy<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQueryDescriptor> configure) => Set(configure, "fuzzy");
+	public QueryDescriptor GeoBoundingBox(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => Set(geoBoundingBoxQuery, "geo_bounding_box");
+	public QueryDescriptor GeoBoundingBox<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
+	public QueryDescriptor GeoDistance(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
+	public QueryDescriptor GeoDistance<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor GeoPolygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
+	public QueryDescriptor GeoPolygon<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQueryDescriptor> configure) => Set(configure, "geo_polygon");
+	public QueryDescriptor HasChild(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
+	public QueryDescriptor HasChild<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQueryDescriptor> configure) => Set(configure, "has_child");
+	public QueryDescriptor HasParent(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
+	public QueryDescriptor HasParent<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQueryDescriptor> configure) => Set(configure, "has_parent");
+	public QueryDescriptor Ids(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQuery idsQuery) => Set(idsQuery, "ids");
+	public QueryDescriptor Ids(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQueryDescriptor> configure) => Set(configure, "ids");
+	public QueryDescriptor Intervals(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQuery intervalsQuery) => Set(intervalsQuery, "intervals");
+	public QueryDescriptor Intervals<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IntervalsQueryDescriptor> configure) => Set(configure, "intervals");
+	public QueryDescriptor Knn(Elastic.Clients.Elasticsearch.Serverless.KnnQuery knnQuery) => Set(knnQuery, "knn");
+	public QueryDescriptor Knn<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.KnnQueryDescriptor> configure) => Set(configure, "knn");
+	public QueryDescriptor Match(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQuery matchQuery) => Set(matchQuery, "match");
+	public QueryDescriptor Match<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchQueryDescriptor> configure) => Set(configure, "match");
+	public QueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQuery matchAllQuery) => Set(matchAllQuery, "match_all");
+	public QueryDescriptor MatchAll(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchAllQueryDescriptor> configure) => Set(configure, "match_all");
+	public QueryDescriptor MatchBoolPrefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQuery matchBoolPrefixQuery) => Set(matchBoolPrefixQuery, "match_bool_prefix");
+	public QueryDescriptor MatchBoolPrefix<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchBoolPrefixQueryDescriptor> configure) => Set(configure, "match_bool_prefix");
+	public QueryDescriptor MatchNone(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQuery matchNoneQuery) => Set(matchNoneQuery, "match_none");
+	public QueryDescriptor MatchNone(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchNoneQueryDescriptor> configure) => Set(configure, "match_none");
+	public QueryDescriptor MatchPhrase(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQuery matchPhraseQuery) => Set(matchPhraseQuery, "match_phrase");
+	public QueryDescriptor MatchPhrase<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhraseQueryDescriptor> configure) => Set(configure, "match_phrase");
+	public QueryDescriptor MatchPhrasePrefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQuery matchPhrasePrefixQuery) => Set(matchPhrasePrefixQuery, "match_phrase_prefix");
+	public QueryDescriptor MatchPhrasePrefix<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MatchPhrasePrefixQueryDescriptor> configure) => Set(configure, "match_phrase_prefix");
+	public QueryDescriptor MoreLikeThis(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQuery moreLikeThisQuery) => Set(moreLikeThisQuery, "more_like_this");
+	public QueryDescriptor MoreLikeThis<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MoreLikeThisQueryDescriptor> configure) => Set(configure, "more_like_this");
+	public QueryDescriptor MultiMatch(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQuery multiMatchQuery) => Set(multiMatchQuery, "multi_match");
+	public QueryDescriptor MultiMatch<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiMatchQueryDescriptor> configure) => Set(configure, "multi_match");
+	public QueryDescriptor Nested(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQuery nestedQuery) => Set(nestedQuery, "nested");
+	public QueryDescriptor Nested<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NestedQueryDescriptor> configure) => Set(configure, "nested");
+	public QueryDescriptor ParentId(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQuery parentIdQuery) => Set(parentIdQuery, "parent_id");
+	public QueryDescriptor ParentId(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ParentIdQueryDescriptor> configure) => Set(configure, "parent_id");
+	public QueryDescriptor Percolate(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQuery percolateQuery) => Set(percolateQuery, "percolate");
+	public QueryDescriptor Percolate<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PercolateQueryDescriptor> configure) => Set(configure, "percolate");
+	public QueryDescriptor Pinned(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQuery pinnedQuery) => Set(pinnedQuery, "pinned");
+	public QueryDescriptor Pinned<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQueryDescriptor> configure) => Set(configure, "pinned");
+	public QueryDescriptor Prefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQuery prefixQuery) => Set(prefixQuery, "prefix");
+	public QueryDescriptor Prefix<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQueryDescriptor> configure) => Set(configure, "prefix");
+	public QueryDescriptor QueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
+	public QueryDescriptor QueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQueryDescriptor> configure) => Set(configure, "query_string");
+	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor RankFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
+	public QueryDescriptor RankFeature<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor RawJson(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
-	public QueryDescriptor Regexp(RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
-	public QueryDescriptor Regexp(Action<RegexpQueryDescriptor> configure) => Set(configure, "regexp");
-	public QueryDescriptor Regexp<TDocument>(Action<RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
-	public QueryDescriptor RuleQuery(RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
-	public QueryDescriptor RuleQuery(Action<RuleQueryDescriptor> configure) => Set(configure, "rule_query");
-	public QueryDescriptor RuleQuery<TDocument>(Action<RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
-	public QueryDescriptor Script(ScriptQuery scriptQuery) => Set(scriptQuery, "script");
-	public QueryDescriptor Script(Action<ScriptQueryDescriptor> configure) => Set(configure, "script");
-	public QueryDescriptor ScriptScore(ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
-	public QueryDescriptor ScriptScore(Action<ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
-	public QueryDescriptor ScriptScore<TDocument>(Action<ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
-	public QueryDescriptor SimpleQueryString(SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
-	public QueryDescriptor SimpleQueryString(Action<SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
-	public QueryDescriptor SimpleQueryString<TDocument>(Action<SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
-	public QueryDescriptor SpanContaining(SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
-	public QueryDescriptor SpanContaining(Action<SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
-	public QueryDescriptor SpanContaining<TDocument>(Action<SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
-	public QueryDescriptor SpanFirst(SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
-	public QueryDescriptor SpanFirst(Action<SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
-	public QueryDescriptor SpanFirst<TDocument>(Action<SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public QueryDescriptor SpanMulti(SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
-	public QueryDescriptor SpanMulti(Action<SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
-	public QueryDescriptor SpanMulti<TDocument>(Action<SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
-	public QueryDescriptor SpanNear(SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
-	public QueryDescriptor SpanNear(Action<SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
-	public QueryDescriptor SpanNear<TDocument>(Action<SpanNearQueryDescriptor<TDocument>> configure) => Set(configure, "span_near");
-	public QueryDescriptor SpanNot(SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
-	public QueryDescriptor SpanNot(Action<SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
-	public QueryDescriptor SpanNot<TDocument>(Action<SpanNotQueryDescriptor<TDocument>> configure) => Set(configure, "span_not");
-	public QueryDescriptor SpanOr(SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
-	public QueryDescriptor SpanOr(Action<SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
-	public QueryDescriptor SpanOr<TDocument>(Action<SpanOrQueryDescriptor<TDocument>> configure) => Set(configure, "span_or");
-	public QueryDescriptor SpanTerm(SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
-	public QueryDescriptor SpanTerm(Action<SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
-	public QueryDescriptor SpanTerm<TDocument>(Action<SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
-	public QueryDescriptor SpanWithin(SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
-	public QueryDescriptor SpanWithin(Action<SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
-	public QueryDescriptor SpanWithin<TDocument>(Action<SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
-	public QueryDescriptor Term(TermQuery termQuery) => Set(termQuery, "term");
-	public QueryDescriptor Term(Action<TermQueryDescriptor> configure) => Set(configure, "term");
-	public QueryDescriptor Term<TDocument>(Action<TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
-	public QueryDescriptor Terms(TermsQuery termsQuery) => Set(termsQuery, "terms");
-	public QueryDescriptor Terms(Action<TermsQueryDescriptor> configure) => Set(configure, "terms");
-	public QueryDescriptor Terms<TDocument>(Action<TermsQueryDescriptor<TDocument>> configure) => Set(configure, "terms");
-	public QueryDescriptor TermsSet(TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
-	public QueryDescriptor TermsSet(Action<TermsSetQueryDescriptor> configure) => Set(configure, "terms_set");
-	public QueryDescriptor TermsSet<TDocument>(Action<TermsSetQueryDescriptor<TDocument>> configure) => Set(configure, "terms_set");
-	public QueryDescriptor TextExpansion(TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
-	public QueryDescriptor TextExpansion(Action<TextExpansionQueryDescriptor> configure) => Set(configure, "text_expansion");
-	public QueryDescriptor TextExpansion<TDocument>(Action<TextExpansionQueryDescriptor<TDocument>> configure) => Set(configure, "text_expansion");
-	public QueryDescriptor Wildcard(WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
-	public QueryDescriptor Wildcard(Action<WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
-	public QueryDescriptor Wildcard<TDocument>(Action<WildcardQueryDescriptor<TDocument>> configure) => Set(configure, "wildcard");
-	public QueryDescriptor Wrapper(WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
-	public QueryDescriptor Wrapper(Action<WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
+	public QueryDescriptor Regexp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
+	public QueryDescriptor Regexp<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQueryDescriptor> configure) => Set(configure, "regexp");
+	public QueryDescriptor RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
+	public QueryDescriptor RuleQuery<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor> configure) => Set(configure, "rule_query");
+	public QueryDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => Set(scriptQuery, "script");
+	public QueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
+	public QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
+	public QueryDescriptor ScriptScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
+	public QueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
+	public QueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
+	public QueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
+	public QueryDescriptor SpanContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
+	public QueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
+	public QueryDescriptor SpanFirst<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
+	public QueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
+	public QueryDescriptor SpanMulti<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
+	public QueryDescriptor SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
+	public QueryDescriptor SpanNear<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQueryDescriptor> configure) => Set(configure, "span_near");
+	public QueryDescriptor SpanNot(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQuery spanNotQuery) => Set(spanNotQuery, "span_not");
+	public QueryDescriptor SpanNot<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQueryDescriptor> configure) => Set(configure, "span_not");
+	public QueryDescriptor SpanOr(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQuery spanOrQuery) => Set(spanOrQuery, "span_or");
+	public QueryDescriptor SpanOr<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQueryDescriptor> configure) => Set(configure, "span_or");
+	public QueryDescriptor SpanTerm(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQuery spanTermQuery) => Set(spanTermQuery, "span_term");
+	public QueryDescriptor SpanTerm<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
+	public QueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
+	public QueryDescriptor SpanWithin<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
+	public QueryDescriptor Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
+	public QueryDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQueryDescriptor> configure) => Set(configure, "term");
+	public QueryDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
+	public QueryDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryDescriptor> configure) => Set(configure, "terms");
+	public QueryDescriptor TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => Set(termsSetQuery, "terms_set");
+	public QueryDescriptor TermsSet<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQueryDescriptor> configure) => Set(configure, "terms_set");
+	public QueryDescriptor TextExpansion(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQuery textExpansionQuery) => Set(textExpansionQuery, "text_expansion");
+	public QueryDescriptor TextExpansion<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TextExpansionQueryDescriptor> configure) => Set(configure, "text_expansion");
+	public QueryDescriptor WeightedTokens(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQuery weightedTokensQuery) => Set(weightedTokensQuery, "weighted_tokens");
+	public QueryDescriptor WeightedTokens<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WeightedTokensQueryDescriptor> configure) => Set(configure, "weighted_tokens");
+	public QueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQuery wildcardQuery) => Set(wildcardQuery, "wildcard");
+	public QueryDescriptor Wildcard<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WildcardQueryDescriptor> configure) => Set(configure, "wildcard");
+	public QueryDescriptor Wrapper(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQuery wrapperQuery) => Set(wrapperQuery, "wrapper");
+	public QueryDescriptor Wrapper(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.WrapperQueryDescriptor> configure) => Set(configure, "wrapper");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		if (ContainedVariantName == "raw_json")
-		{
-			writer.WriteRawValue(((RawJsonQuery)Variant).Raw);
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

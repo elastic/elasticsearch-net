@@ -113,10 +113,6 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal PutAliasRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -141,8 +137,8 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRoutingValue { get; set; }
 	private bool? IsWriteIndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
@@ -159,7 +155,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public PutAliasRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public PutAliasRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -167,7 +163,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public PutAliasRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public PutAliasRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -222,7 +218,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -269,10 +265,6 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	{
 	}
 
-	internal PutAliasRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -297,8 +289,8 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRoutingValue { get; set; }
 	private bool? IsWriteIndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
@@ -315,7 +307,7 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 		return Self;
 	}
 
-	public PutAliasRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public PutAliasRequestDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -323,7 +315,7 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 		return Self;
 	}
 
-	public PutAliasRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public PutAliasRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -378,7 +370,7 @@ public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAli
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

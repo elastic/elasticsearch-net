@@ -29,10 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.MGet;
 
 public sealed partial class MultiGetError
 {
+	[JsonInclude, JsonPropertyName("error")]
+	public Elastic.Clients.Elasticsearch.Serverless.ErrorCause Error { get; init; }
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("error")]
-	public Elastic.Clients.Elasticsearch.Serverless.ErrorCause Error { get; init; }
 }

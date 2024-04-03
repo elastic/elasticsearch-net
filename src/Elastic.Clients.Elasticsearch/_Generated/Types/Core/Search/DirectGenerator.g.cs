@@ -135,6 +135,15 @@ public sealed partial class DirectGeneratorDescriptor<TDocument> : SerializableD
 	}
 
 	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
+	public DirectGeneratorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.<br/>Can only be `1` or `2`.</para>
 	/// </summary>
 	public DirectGeneratorDescriptor<TDocument> MaxEdits(int? maxEdits)

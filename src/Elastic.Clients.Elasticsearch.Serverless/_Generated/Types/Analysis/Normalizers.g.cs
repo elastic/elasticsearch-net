@@ -66,11 +66,11 @@ public sealed partial class NormalizersDescriptor : IsADictionaryDescriptor<Norm
 	{
 	}
 
-	public NormalizersDescriptor Custom(string normalizerName) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, null);
-	public NormalizersDescriptor Custom(string normalizerName, Action<CustomNormalizerDescriptor> configure) => AssignVariant<CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, configure);
+	public NormalizersDescriptor Custom(string normalizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, null);
+	public NormalizersDescriptor Custom(string normalizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomNormalizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomNormalizerDescriptor, CustomNormalizer>(normalizerName, configure);
 	public NormalizersDescriptor Custom(string normalizerName, CustomNormalizer customNormalizer) => AssignVariant(normalizerName, customNormalizer);
-	public NormalizersDescriptor Lowercase(string normalizerName) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, null);
-	public NormalizersDescriptor Lowercase(string normalizerName, Action<LowercaseNormalizerDescriptor> configure) => AssignVariant<LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, configure);
+	public NormalizersDescriptor Lowercase(string normalizerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, null);
+	public NormalizersDescriptor Lowercase(string normalizerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.LowercaseNormalizerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.LowercaseNormalizerDescriptor, LowercaseNormalizer>(normalizerName, configure);
 	public NormalizersDescriptor Lowercase(string normalizerName, LowercaseNormalizer lowercaseNormalizer) => AssignVariant(normalizerName, lowercaseNormalizer);
 }
 
@@ -89,9 +89,9 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 		switch (type)
 		{
 			case "custom":
-				return JsonSerializer.Deserialize<CustomNormalizer>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomNormalizer>(ref reader, options);
 			case "lowercase":
-				return JsonSerializer.Deserialize<LowercaseNormalizer>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.LowercaseNormalizer>(ref reader, options);
 			default:
 				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(INormalizer));
 				return null;
@@ -109,10 +109,10 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 		switch (value.Type)
 		{
 			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(CustomNormalizer), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomNormalizer), options);
 				return;
 			case "lowercase":
-				JsonSerializer.Serialize(writer, value, typeof(LowercaseNormalizer), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.LowercaseNormalizer), options);
 				return;
 			default:
 				var type = value.GetType();
@@ -122,8 +122,11 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 	}
 }
 
+/// <summary>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/analysis-normalizers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
 [JsonConverter(typeof(NormalizerInterfaceConverter))]
 public partial interface INormalizer
 {
-	public string Type { get; }
+	public string? Type { get; }
 }

@@ -72,10 +72,6 @@ public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal DeleteDataStreamRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

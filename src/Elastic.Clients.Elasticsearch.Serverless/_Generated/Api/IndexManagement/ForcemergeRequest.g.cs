@@ -138,6 +138,10 @@ public sealed partial class ForcemergeRequestDescriptor<TDocument> : RequestDesc
 {
 	internal ForcemergeRequestDescriptor(Action<ForcemergeRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public ForcemergeRequestDescriptor()
 	{
 	}
@@ -175,6 +179,10 @@ public sealed partial class ForcemergeRequestDescriptor<TDocument> : RequestDesc
 public sealed partial class ForcemergeRequestDescriptor : RequestDescriptor<ForcemergeRequestDescriptor, ForcemergeRequestParameters>
 {
 	internal ForcemergeRequestDescriptor(Action<ForcemergeRequestDescriptor> configure) => configure.Invoke(this);
+
+	public ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public ForcemergeRequestDescriptor()
 	{

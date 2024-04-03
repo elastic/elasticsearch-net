@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
 public sealed partial class GrokProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -37,8 +40,16 @@ public sealed partial class GrokProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -47,6 +58,10 @@ public sealed partial class GrokProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
 
@@ -61,6 +76,10 @@ public sealed partial class GrokProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -70,7 +89,7 @@ public sealed partial class GrokProcessor
 	[JsonInclude, JsonPropertyName("trace_match")]
 	public bool? TraceMatch { get; set; }
 
-	public static implicit operator Processor(GrokProcessor grokProcessor) => Ingest.Processor.Grok(grokProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor(GrokProcessor grokProcessor) => Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor.Grok(grokProcessor);
 }
 
 public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDescriptor<GrokProcessorDescriptor<TDocument>>
@@ -87,14 +106,17 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
 	private ICollection<string> PatternsValue { get; set; }
 	private string? TagValue { get; set; }
 	private bool? TraceMatchValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -119,12 +141,27 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public GrokProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>The field to use for grok expression parsing.</para>
+	/// </summary>
+	public GrokProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public GrokProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public GrokProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -140,6 +177,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public GrokProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -149,7 +189,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public GrokProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public GrokProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -158,7 +198,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public GrokProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public GrokProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -167,7 +207,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public GrokProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public GrokProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -194,6 +234,9 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public GrokProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -249,7 +292,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -258,7 +301,7 @@ public sealed partial class GrokProcessorDescriptor<TDocument> : SerializableDes
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -307,14 +350,17 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private IDictionary<string, string>? PatternDefinitionsValue { get; set; }
 	private ICollection<string> PatternsValue { get; set; }
 	private string? TagValue { get; set; }
 	private bool? TraceMatchValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public GrokProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -348,12 +394,18 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
-	public GrokProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public GrokProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public GrokProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -369,6 +421,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public GrokProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -378,7 +433,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
-	public GrokProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public GrokProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -387,7 +442,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
-	public GrokProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public GrokProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -396,7 +451,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
-	public GrokProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public GrokProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -423,6 +478,9 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public GrokProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -478,7 +536,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -487,7 +545,7 @@ public sealed partial class GrokProcessorDescriptor : SerializableDescriptor<Gro
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

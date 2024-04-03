@@ -37,9 +37,13 @@ public partial class SearchRequest
 	}
 }
 
-public partial class SearchRequest<TInferDocument>
+public partial class SearchRequest<TInferDocument> : SearchRequest
 {
 	public SearchRequest(Indices? indices) : base(indices)
+	{
+	}
+
+	public SearchRequest() : base(typeof(TInferDocument))
 	{
 	}
 }
@@ -63,7 +67,7 @@ public sealed partial class SearchRequestDescriptor<TDocument>
 
 	internal override void BeforeRequest()
 	{
-		if (AggregationsValue is not null || AggregationsDescriptor is not null || AggregationsDescriptorAction is not null ||
+		if (AggregationsValue is not null || /*AggregationsDescriptor is not null || AggregationsDescriptorAction is not null ||*/
 		    SuggestValue is not null || SuggestDescriptor is not null || SuggestDescriptorAction is not null)
 		{
 			TypedKeys(true);

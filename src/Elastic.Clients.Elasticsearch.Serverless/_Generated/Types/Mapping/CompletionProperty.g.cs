@@ -45,6 +45,10 @@ public sealed partial class CompletionProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 	[JsonInclude, JsonPropertyName("max_input_length")]
 	public int? MaxInputLength { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_position_increments")]
@@ -74,9 +78,9 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 
 	private string? AnalyzerValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? ContextsValue { get; set; }
-	private SuggestContextDescriptor<TDocument> ContextsDescriptor { get; set; }
-	private Action<SuggestContextDescriptor<TDocument>> ContextsDescriptorAction { get; set; }
-	private Action<SuggestContextDescriptor<TDocument>>[] ContextsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument> ContextsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>> ContextsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>>[] ContextsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? CopyToValue { get; set; }
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
@@ -106,7 +110,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Contexts(SuggestContextDescriptor<TDocument> descriptor)
+	public CompletionPropertyDescriptor<TDocument> Contexts(Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument> descriptor)
 	{
 		ContextsValue = null;
 		ContextsDescriptorAction = null;
@@ -115,7 +119,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Contexts(Action<SuggestContextDescriptor<TDocument>> configure)
+	public CompletionPropertyDescriptor<TDocument> Contexts(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>> configure)
 	{
 		ContextsValue = null;
 		ContextsDescriptor = null;
@@ -124,7 +128,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Contexts(params Action<SuggestContextDescriptor<TDocument>>[] configure)
+	public CompletionPropertyDescriptor<TDocument> Contexts(params Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>>[] configure)
 	{
 		ContextsValue = null;
 		ContextsDescriptor = null;
@@ -157,15 +161,15 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public CompletionPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public CompletionPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -183,6 +187,9 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public CompletionPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -207,15 +214,15 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public CompletionPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public CompletionPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -259,7 +266,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("contexts");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new SuggestContextDescriptor<TDocument>(ContextsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>(ContextsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ContextsDescriptorActions is not null)
@@ -268,7 +275,7 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 			writer.WriteStartArray();
 			foreach (var action in ContextsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SuggestContextDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -362,10 +369,34 @@ public sealed partial class CompletionPropertyDescriptor<TDocument> : Serializab
 		writer.WriteEndObject();
 	}
 
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? BuildContexts()
+	{
+		if (ContextsValue is not null)
+		{
+			return ContextsValue;
+		}
+
+		if ((object)ContextsDescriptor is IBuildableDescriptor<ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ContextsDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor<TDocument>(ContextsDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
 	{
-		Contexts = ContextsValue,
 		Analyzer = AnalyzerValue,
+		Contexts = BuildContexts(),
 		CopyTo = CopyToValue,
 		DocValues = DocValuesValue,
 		Dynamic = DynamicValue,
@@ -392,9 +423,9 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 
 	private string? AnalyzerValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? ContextsValue { get; set; }
-	private SuggestContextDescriptor ContextsDescriptor { get; set; }
-	private Action<SuggestContextDescriptor> ContextsDescriptorAction { get; set; }
-	private Action<SuggestContextDescriptor>[] ContextsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor ContextsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor> ContextsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor>[] ContextsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? CopyToValue { get; set; }
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
@@ -424,7 +455,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Contexts(SuggestContextDescriptor descriptor)
+	public CompletionPropertyDescriptor Contexts(Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor descriptor)
 	{
 		ContextsValue = null;
 		ContextsDescriptorAction = null;
@@ -433,7 +464,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Contexts(Action<SuggestContextDescriptor> configure)
+	public CompletionPropertyDescriptor Contexts(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor> configure)
 	{
 		ContextsValue = null;
 		ContextsDescriptor = null;
@@ -442,7 +473,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Contexts(params Action<SuggestContextDescriptor>[] configure)
+	public CompletionPropertyDescriptor Contexts(params Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor>[] configure)
 	{
 		ContextsValue = null;
 		ContextsDescriptor = null;
@@ -475,15 +506,15 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public CompletionPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public CompletionPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -501,6 +532,9 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public CompletionPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -525,15 +559,15 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public CompletionPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public CompletionPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public CompletionPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -577,7 +611,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("contexts");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new SuggestContextDescriptor(ContextsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor(ContextsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ContextsDescriptorActions is not null)
@@ -586,7 +620,7 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 			writer.WriteStartArray();
 			foreach (var action in ContextsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SuggestContextDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -680,10 +714,34 @@ public sealed partial class CompletionPropertyDescriptor : SerializableDescripto
 		writer.WriteEndObject();
 	}
 
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>? BuildContexts()
+	{
+		if (ContextsValue is not null)
+		{
+			return ContextsValue;
+		}
+
+		if ((object)ContextsDescriptor is IBuildableDescriptor<ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ContextsDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContextDescriptor(ContextsDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<ICollection<Elastic.Clients.Elasticsearch.Serverless.Mapping.SuggestContext>?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	CompletionProperty IBuildableDescriptor<CompletionProperty>.Build() => new()
 	{
-		Contexts = ContextsValue,
 		Analyzer = AnalyzerValue,
+		Contexts = BuildContexts(),
 		CopyTo = CopyToValue,
 		DocValues = DocValuesValue,
 		Dynamic = DynamicValue,

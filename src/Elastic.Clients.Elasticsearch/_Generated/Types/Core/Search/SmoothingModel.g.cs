@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -48,6 +49,18 @@ public sealed partial class SmoothingModel
 	public static SmoothingModel Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => new SmoothingModel("laplace", laplaceSmoothingModel);
 	public static SmoothingModel LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => new SmoothingModel("linear_interpolation", linearInterpolationSmoothingModel);
 	public static SmoothingModel StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => new SmoothingModel("stupid_backoff", stupidBackoffSmoothingModel);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingModel>
@@ -59,42 +72,55 @@ internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingM
 			throw new JsonException("Expected start token.");
 		}
 
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "laplace")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "linear_interpolation")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "stupid_backoff")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SmoothingModel' from the response.");
+		}
+
 		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
-		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
-
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "laplace")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel?>(ref reader, options);
-			reader.Read();
-			return new SmoothingModel(propertyName, variant);
-		}
-
-		if (propertyName == "linear_interpolation")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel?>(ref reader, options);
-			reader.Read();
-			return new SmoothingModel(propertyName, variant);
-		}
-
-		if (propertyName == "stupid_backoff")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel?>(ref reader, options);
-			reader.Read();
-			return new SmoothingModel(propertyName, variant);
-		}
-
-		throw new JsonException();
+		var result = new SmoothingModel(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SmoothingModel value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -146,31 +172,29 @@ public sealed partial class SmoothingModelDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public SmoothingModelDescriptor<TDocument> Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelDescriptor<TDocument> Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelDescriptor<TDocument> LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelDescriptor<TDocument> StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelDescriptor<TDocument> StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+	public SmoothingModelDescriptor<TDocument> Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
+	public SmoothingModelDescriptor<TDocument> Laplace(Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
+	public SmoothingModelDescriptor<TDocument> LinearInterpolation(Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+	public SmoothingModelDescriptor<TDocument> StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
+	public SmoothingModelDescriptor<TDocument> StupidBackoff(Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -206,31 +230,29 @@ public sealed partial class SmoothingModelDescriptor : SerializableDescriptor<Sm
 		return Self;
 	}
 
-	public SmoothingModelDescriptor Laplace(LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
-	public SmoothingModelDescriptor Laplace(Action<LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
-	public SmoothingModelDescriptor LinearInterpolation(LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
-	public SmoothingModelDescriptor LinearInterpolation(Action<LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
-	public SmoothingModelDescriptor StupidBackoff(StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
-	public SmoothingModelDescriptor StupidBackoff(Action<StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
+	public SmoothingModelDescriptor Laplace(Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel laplaceSmoothingModel) => Set(laplaceSmoothingModel, "laplace");
+	public SmoothingModelDescriptor Laplace(Action<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModelDescriptor> configure) => Set(configure, "laplace");
+	public SmoothingModelDescriptor LinearInterpolation(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel linearInterpolationSmoothingModel) => Set(linearInterpolationSmoothingModel, "linear_interpolation");
+	public SmoothingModelDescriptor LinearInterpolation(Action<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelDescriptor> configure) => Set(configure, "linear_interpolation");
+	public SmoothingModelDescriptor StupidBackoff(Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel stupidBackoffSmoothingModel) => Set(stupidBackoffSmoothingModel, "stupid_backoff");
+	public SmoothingModelDescriptor StupidBackoff(Action<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModelDescriptor> configure) => Set(configure, "stupid_backoff");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

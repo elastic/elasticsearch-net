@@ -127,6 +127,10 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 {
 	internal SearchShardsRequestDescriptor(Action<SearchShardsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public SearchShardsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public SearchShardsRequestDescriptor()
 	{
 	}
@@ -163,6 +167,10 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 public sealed partial class SearchShardsRequestDescriptor : RequestDescriptor<SearchShardsRequestDescriptor, SearchShardsRequestParameters>
 {
 	internal SearchShardsRequestDescriptor(Action<SearchShardsRequestDescriptor> configure) => configure.Invoke(this);
+
+	public SearchShardsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public SearchShardsRequestDescriptor()
 	{

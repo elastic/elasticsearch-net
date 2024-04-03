@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class TrimProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -37,8 +40,16 @@ public sealed partial class TrimProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -47,8 +58,16 @@ public sealed partial class TrimProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -58,7 +77,7 @@ public sealed partial class TrimProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(TrimProcessor trimProcessor) => Ingest.Processor.Trim(trimProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(TrimProcessor trimProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Trim(trimProcessor);
 }
 
 public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDescriptor<TrimProcessorDescriptor<TDocument>>
@@ -75,12 +94,15 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public TrimProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -105,12 +127,27 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public TrimProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>The string-valued field to trim whitespace from.</para>
+	/// </summary>
+	public TrimProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public TrimProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public TrimProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -126,6 +163,9 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public TrimProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -135,7 +175,7 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public TrimProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public TrimProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -144,7 +184,7 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public TrimProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public TrimProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -153,7 +193,7 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public TrimProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public TrimProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -162,6 +202,9 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public TrimProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -181,6 +224,15 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 	/// <para>The field to assign the trimmed value to.<br/>By default, the field is updated in-place.</para>
 	/// </summary>
 	public TrimProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to assign the trimmed value to.<br/>By default, the field is updated in-place.</para>
+	/// </summary>
+	public TrimProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -226,7 +278,7 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -235,7 +287,7 @@ public sealed partial class TrimProcessorDescriptor<TDocument> : SerializableDes
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -276,12 +328,15 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public TrimProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -315,12 +370,18 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
-	public TrimProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public TrimProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public TrimProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -336,6 +397,9 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public TrimProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -345,7 +409,7 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
-	public TrimProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public TrimProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -354,7 +418,7 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
-	public TrimProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public TrimProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -363,7 +427,7 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
-	public TrimProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public TrimProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -372,6 +436,9 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public TrimProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -445,7 +512,7 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -454,7 +521,7 @@ public sealed partial class TrimProcessorDescriptor : SerializableDescriptor<Tri
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

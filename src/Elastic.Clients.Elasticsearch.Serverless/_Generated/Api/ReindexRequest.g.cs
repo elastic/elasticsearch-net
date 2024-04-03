@@ -196,14 +196,14 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination DestValue { get; set; }
-	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
-	private Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
@@ -225,7 +225,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Dest(Core.Reindex.DestinationDescriptor descriptor)
+	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor descriptor)
 	{
 		DestValue = null;
 		DestDescriptorAction = null;
@@ -233,7 +233,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Dest(Action<Core.Reindex.DestinationDescriptor> configure)
+	public ReindexRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor> configure)
 	{
 		DestValue = null;
 		DestDescriptor = null;
@@ -276,7 +276,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Source(Core.Reindex.SourceDescriptor<TDocument> descriptor)
+	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument> descriptor)
 	{
 		SourceValue = null;
 		SourceDescriptorAction = null;
@@ -284,7 +284,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ReindexRequestDescriptor<TDocument> Source(Action<Core.Reindex.SourceDescriptor<TDocument>> configure)
+	public ReindexRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument>> configure)
 	{
 		SourceValue = null;
 		SourceDescriptor = null;
@@ -309,7 +309,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		else if (DestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
 		}
 		else
 		{
@@ -343,7 +343,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 		else if (SourceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
 		}
 		else
 		{
@@ -385,14 +385,14 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Destination DestValue { get; set; }
-	private Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private long? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.Source SourceValue { get; set; }
-	private Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-	private Action<Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Set to proceed to continue reindexing even if there are conflicts.</para>
@@ -414,7 +414,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
-	public ReindexRequestDescriptor Dest(Core.Reindex.DestinationDescriptor descriptor)
+	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor descriptor)
 	{
 		DestValue = null;
 		DestDescriptorAction = null;
@@ -422,7 +422,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
-	public ReindexRequestDescriptor Dest(Action<Core.Reindex.DestinationDescriptor> configure)
+	public ReindexRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor> configure)
 	{
 		DestValue = null;
 		DestDescriptor = null;
@@ -465,7 +465,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
-	public ReindexRequestDescriptor Source(Core.Reindex.SourceDescriptor descriptor)
+	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor descriptor)
 	{
 		SourceValue = null;
 		SourceDescriptorAction = null;
@@ -473,7 +473,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		return Self;
 	}
 
-	public ReindexRequestDescriptor Source(Action<Core.Reindex.SourceDescriptor> configure)
+	public ReindexRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor> configure)
 	{
 		SourceValue = null;
 		SourceDescriptor = null;
@@ -498,7 +498,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		else if (DestDescriptorAction is not null)
 		{
 			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
 		}
 		else
 		{
@@ -532,7 +532,7 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 		else if (SourceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
 		}
 		else
 		{

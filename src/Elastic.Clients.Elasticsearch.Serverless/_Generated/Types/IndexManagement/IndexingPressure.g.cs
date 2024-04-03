@@ -42,8 +42,8 @@ public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemory MemoryValue { get; set; }
-	private IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
-	private Action<IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemoryDescriptor MemoryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemoryDescriptor> MemoryDescriptorAction { get; set; }
 
 	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemory memory)
 	{
@@ -53,7 +53,7 @@ public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public IndexingPressureDescriptor Memory(IndexingPressureMemoryDescriptor descriptor)
+	public IndexingPressureDescriptor Memory(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemoryDescriptor descriptor)
 	{
 		MemoryValue = null;
 		MemoryDescriptorAction = null;
@@ -61,7 +61,7 @@ public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public IndexingPressureDescriptor Memory(Action<IndexingPressureMemoryDescriptor> configure)
+	public IndexingPressureDescriptor Memory(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemoryDescriptor> configure)
 	{
 		MemoryValue = null;
 		MemoryDescriptor = null;
@@ -80,7 +80,7 @@ public sealed partial class IndexingPressureDescriptor : SerializableDescriptor<
 		else if (MemoryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("memory");
-			JsonSerializer.Serialize(writer, new IndexingPressureMemoryDescriptor(MemoryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexingPressureMemoryDescriptor(MemoryDescriptorAction), options);
 		}
 		else
 		{

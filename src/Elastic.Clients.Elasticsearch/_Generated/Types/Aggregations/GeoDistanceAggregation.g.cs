@@ -27,203 +27,43 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class GeoDistanceAggregationConverter : JsonConverter<GeoDistanceAggregation>
+public sealed partial class GeoDistanceAggregation
 {
-	public override GeoDistanceAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "geo_distance")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new GeoDistanceAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("distance_type"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoDistanceType?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.DistanceType = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("origin"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.GeoLocation?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Origin = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("ranges"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Ranges = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("unit"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.DistanceUnit?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Unit = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, GeoDistanceAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("geo_distance");
-		writer.WriteStartObject();
-		if (value.DistanceType is not null)
-		{
-			writer.WritePropertyName("distance_type");
-			JsonSerializer.Serialize(writer, value.DistanceType, options);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.Origin is not null)
-		{
-			writer.WritePropertyName("origin");
-			JsonSerializer.Serialize(writer, value.Origin, options);
-		}
-
-		if (value.Ranges is not null)
-		{
-			writer.WritePropertyName("ranges");
-			JsonSerializer.Serialize(writer, value.Ranges, options);
-		}
-
-		if (value.Unit is not null)
-		{
-			writer.WritePropertyName("unit");
-			JsonSerializer.Serialize(writer, value.Unit, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(GeoDistanceAggregationConverter))]
-public sealed partial class GeoDistanceAggregation : SearchAggregation
-{
-	public GeoDistanceAggregation(string name) => Name = name;
-
-	internal GeoDistanceAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>The distance calculation type.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("distance_type")]
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
 
 	/// <summary>
 	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The origin  used to evaluate the distance.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("origin")]
 	public Elastic.Clients.Elasticsearch.GeoLocation? Origin { get; set; }
 
 	/// <summary>
 	/// <para>An array of ranges used to bucket documents.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("ranges")]
 	public ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 
 	/// <summary>
 	/// <para>The distance unit.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("unit")]
 	public Elastic.Clients.Elasticsearch.DistanceUnit? Unit { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(GeoDistanceAggregation geoDistanceAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.GeoDistance(geoDistanceAggregation);
 }
 
 public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : SerializableDescriptor<GeoDistanceAggregationDescriptor<TDocument>>
@@ -234,42 +74,16 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-	public GeoDistanceAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The distance calculation type.</para>
@@ -298,9 +112,24 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A field of type `geo_point` used to evaluate the distance.</para>
+	/// </summary>
+	public GeoDistanceAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public GeoDistanceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public GeoDistanceAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -325,7 +154,7 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(AggregationRangeDescriptor descriptor)
+	public GeoDistanceAggregationDescriptor<TDocument> Ranges(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor)
 	{
 		RangesValue = null;
 		RangesDescriptorAction = null;
@@ -334,7 +163,7 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(Action<AggregationRangeDescriptor> configure)
+	public GeoDistanceAggregationDescriptor<TDocument> Ranges(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -343,7 +172,7 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor<TDocument> Ranges(params Action<AggregationRangeDescriptor>[] configure)
+	public GeoDistanceAggregationDescriptor<TDocument> Ranges(params Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -364,8 +193,6 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("geo_distance");
-		writer.WriteStartObject();
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -376,6 +203,18 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (OriginValue is not null)
@@ -395,7 +234,7 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		{
 			writer.WritePropertyName("ranges");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (RangesDescriptorActions is not null)
@@ -404,7 +243,7 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 			writer.WriteStartArray();
 			foreach (var action in RangesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -422,29 +261,6 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -456,42 +272,16 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
-	private AggregationRangeDescriptor RangesDescriptor { get; set; }
-	private Action<AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
-	private Action<AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] RangesDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.DistanceUnit? UnitValue { get; set; }
-
-	public GeoDistanceAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The distance calculation type.</para>
@@ -535,6 +325,12 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	public GeoDistanceAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The origin  used to evaluate the distance.</para>
 	/// </summary>
@@ -556,7 +352,7 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor Ranges(AggregationRangeDescriptor descriptor)
+	public GeoDistanceAggregationDescriptor Ranges(Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor descriptor)
 	{
 		RangesValue = null;
 		RangesDescriptorAction = null;
@@ -565,7 +361,7 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor Ranges(Action<AggregationRangeDescriptor> configure)
+	public GeoDistanceAggregationDescriptor Ranges(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor> configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -574,7 +370,7 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
-	public GeoDistanceAggregationDescriptor Ranges(params Action<AggregationRangeDescriptor>[] configure)
+	public GeoDistanceAggregationDescriptor Ranges(params Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>[] configure)
 	{
 		RangesValue = null;
 		RangesDescriptor = null;
@@ -595,8 +391,6 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("geo_distance");
-		writer.WriteStartObject();
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -607,6 +401,18 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (OriginValue is not null)
@@ -626,7 +432,7 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("ranges");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(RangesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(RangesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (RangesDescriptorActions is not null)
@@ -635,7 +441,7 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 			writer.WriteStartArray();
 			foreach (var action in RangesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new AggregationRangeDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -650,29 +456,6 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("unit");
 			JsonSerializer.Serialize(writer, UnitValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

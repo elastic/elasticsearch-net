@@ -84,9 +84,6 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 
 	internal override string OperationName => "create";
 
-	[JsonIgnore]
-	public TDocument Document { get; set; }
-
 	/// <summary>
 	/// <para>ID of the pipeline to use to preprocess incoming documents.<br/>If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.<br/>If a final pipeline is configured it will always run, regardless of the value of this parameter.</para>
 	/// </summary>
@@ -128,6 +125,8 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
+	[JsonIgnore]
+	public TDocument Document { get; set; }
 }
 
 /// <summary>
@@ -136,21 +135,17 @@ public sealed partial class CreateRequest<TDocument> : PlainRequest<CreateReques
 public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescriptor<CreateRequestDescriptor<TDocument>, CreateRequestParameters>
 {
 	internal CreateRequestDescriptor(Action<CreateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("index", index).Required("id", id)) => DocumentValue = document;
 
-	internal CreateRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("index", index).Required("id", id))
+	public CreateRequestDescriptor(TDocument document) : this(document, typeof(TDocument), Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
 	{
 	}
 
-	public CreateRequestDescriptor(TDocument document) : this(typeof(TDocument), Serverless.Id.From(document)) => DocumentValue = document;
-	public CreateRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id) => DocumentValue = document;
-	public CreateRequestDescriptor(TDocument document, IndexName index) : this(index, Serverless.Id.From(document)) => DocumentValue = document;
-	public CreateRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id) => DocumentValue = document;
-
-	public CreateRequestDescriptor(Id id) : this(typeof(TDocument), id)
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index) : this(document, index, Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
 	{
 	}
 
-	internal CreateRequestDescriptor()
+	public CreateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id) : this(document, typeof(TDocument), id)
 	{
 	}
 
@@ -183,6 +178,12 @@ public sealed partial class CreateRequestDescriptor<TDocument> : RequestDescript
 	}
 
 	private TDocument DocumentValue { get; set; }
+
+	public CreateRequestDescriptor<TDocument> Document(TDocument document)
+	{
+		DocumentValue = document;
+		return Self;
+	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

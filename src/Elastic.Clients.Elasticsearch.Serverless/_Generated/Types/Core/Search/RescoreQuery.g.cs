@@ -30,16 +30,16 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class RescoreQuery
 {
 	/// <summary>
-	/// <para>Relative importance of the original query versus the rescore query.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("query_weight")]
-	public double? QueryWeight { get; set; }
-
-	/// <summary>
 	/// <para>The query to use for rescoring.<br/>This query is only run on the Top-K results returned by the `query` and `post_filter` phases.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rescore_query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Query { get; set; }
+
+	/// <summary>
+	/// <para>Relative importance of the original query versus the rescore query.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("query_weight")]
+	public double? QueryWeight { get; set; }
 
 	/// <summary>
 	/// <para>Relative importance of the rescore query versus the original query.</para>
@@ -63,8 +63,8 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private double? QueryWeightValue { get; set; }
 	private double? RescoreQueryWeightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.ScoreMode? ScoreModeValue { get; set; }
@@ -80,7 +80,7 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public RescoreQueryDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public RescoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -88,7 +88,7 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public RescoreQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public RescoreQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -134,7 +134,7 @@ public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDesc
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -173,8 +173,8 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private double? QueryWeightValue { get; set; }
 	private double? RescoreQueryWeightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.ScoreMode? ScoreModeValue { get; set; }
@@ -190,7 +190,7 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 		return Self;
 	}
 
-	public RescoreQueryDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public RescoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -198,7 +198,7 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 		return Self;
 	}
 
-	public RescoreQueryDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public RescoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -244,7 +244,7 @@ public sealed partial class RescoreQueryDescriptor : SerializableDescriptor<Resc
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rescore_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

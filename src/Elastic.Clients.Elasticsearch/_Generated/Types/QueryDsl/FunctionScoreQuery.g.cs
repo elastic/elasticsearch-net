@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class FunctionScoreQuery : SearchQuery
+public sealed partial class FunctionScoreQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -63,6 +64,8 @@ public sealed partial class FunctionScoreQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Specifies how the computed scores are combined</para>
@@ -70,9 +73,7 @@ public sealed partial class FunctionScoreQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreMode { get; set; }
 
-	public static implicit operator Query(FunctionScoreQuery functionScoreQuery) => QueryDsl.Query.FunctionScore(functionScoreQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("function_score", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(FunctionScoreQuery functionScoreQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.FunctionScore(functionScoreQuery);
 }
 
 public sealed partial class FunctionScoreQueryDescriptor<TDocument> : SerializableDescriptor<FunctionScoreQueryDescriptor<TDocument>>
@@ -86,17 +87,20 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
-	private FunctionScoreDescriptor<TDocument> FunctionsDescriptor { get; set; }
-	private Action<FunctionScoreDescriptor<TDocument>> FunctionsDescriptorAction { get; set; }
-	private Action<FunctionScoreDescriptor<TDocument>>[] FunctionsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> FunctionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>> FunctionsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>>[] FunctionsDescriptorActions { get; set; }
 	private double? MaxBoostValue { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -124,7 +128,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Functions(FunctionScoreDescriptor<TDocument> descriptor)
+	public FunctionScoreQueryDescriptor<TDocument> Functions(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> descriptor)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptorAction = null;
@@ -133,7 +137,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Functions(Action<FunctionScoreDescriptor<TDocument>> configure)
+	public FunctionScoreQueryDescriptor<TDocument> Functions(Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>> configure)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptor = null;
@@ -142,7 +146,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Functions(params Action<FunctionScoreDescriptor<TDocument>>[] configure)
+	public FunctionScoreQueryDescriptor<TDocument> Functions(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>>[] configure)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptor = null;
@@ -180,7 +184,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Query(QueryDescriptor<TDocument> descriptor)
+	public FunctionScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -188,7 +192,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor<TDocument> Query(Action<QueryDescriptor<TDocument>> configure)
+	public FunctionScoreQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -237,7 +241,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("functions");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new FunctionScoreDescriptor<TDocument>(FunctionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(FunctionsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FunctionsDescriptorActions is not null)
@@ -246,7 +250,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 			writer.WriteStartArray();
 			foreach (var action in FunctionsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new FunctionScoreDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -277,7 +281,7 @@ public sealed partial class FunctionScoreQueryDescriptor<TDocument> : Serializab
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -312,17 +316,20 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode? BoostModeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>? FunctionsValue { get; set; }
-	private FunctionScoreDescriptor FunctionsDescriptor { get; set; }
-	private Action<FunctionScoreDescriptor> FunctionsDescriptorAction { get; set; }
-	private Action<FunctionScoreDescriptor>[] FunctionsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor FunctionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor> FunctionsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor>[] FunctionsDescriptorActions { get; set; }
 	private double? MaxBoostValue { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode? ScoreModeValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public FunctionScoreQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -350,7 +357,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Functions(FunctionScoreDescriptor descriptor)
+	public FunctionScoreQueryDescriptor Functions(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor descriptor)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptorAction = null;
@@ -359,7 +366,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Functions(Action<FunctionScoreDescriptor> configure)
+	public FunctionScoreQueryDescriptor Functions(Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor> configure)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptor = null;
@@ -368,7 +375,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Functions(params Action<FunctionScoreDescriptor>[] configure)
+	public FunctionScoreQueryDescriptor Functions(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor>[] configure)
 	{
 		FunctionsValue = null;
 		FunctionsDescriptor = null;
@@ -406,7 +413,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Query(QueryDescriptor descriptor)
+	public FunctionScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -414,7 +421,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public FunctionScoreQueryDescriptor Query(Action<QueryDescriptor> configure)
+	public FunctionScoreQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -463,7 +470,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("functions");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new FunctionScoreDescriptor(FunctionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(FunctionsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (FunctionsDescriptorActions is not null)
@@ -472,7 +479,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 			writer.WriteStartArray();
 			foreach (var action in FunctionsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new FunctionScoreDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -503,7 +510,7 @@ public sealed partial class FunctionScoreQueryDescriptor : SerializableDescripto
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

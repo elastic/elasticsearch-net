@@ -76,6 +76,12 @@ public sealed partial class TermsLookupDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	public TermsLookupDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
 	public TermsLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
 	{
 		RoutingValue = routing;

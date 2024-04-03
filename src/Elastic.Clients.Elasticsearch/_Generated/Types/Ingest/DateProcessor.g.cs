@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class DateProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -43,8 +46,16 @@ public sealed partial class DateProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("formats")]
 	public ICollection<string> Formats { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -53,8 +64,16 @@ public sealed partial class DateProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -70,7 +89,7 @@ public sealed partial class DateProcessor
 	[JsonInclude, JsonPropertyName("timezone")]
 	public string? Timezone { get; set; }
 
-	public static implicit operator Processor(DateProcessor dateProcessor) => Ingest.Processor.Date(dateProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(DateProcessor dateProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Date(dateProcessor);
 }
 
 public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDescriptor<DateProcessorDescriptor<TDocument>>
@@ -88,13 +107,16 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	private bool? IgnoreFailureValue { get; set; }
 	private string? LocaleValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 	private string? TimezoneValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -120,6 +142,15 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
+	/// <para>The field to get the date from.</para>
+	/// </summary>
+	public DateProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>An array of the expected date formats.<br/>Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.</para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> Formats(ICollection<string> formats)
@@ -128,12 +159,18 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public DateProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public DateProcessorDescriptor<TDocument> If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -149,6 +186,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -158,7 +198,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public DateProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public DateProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -167,7 +207,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public DateProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public DateProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -176,7 +216,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public DateProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public DateProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -185,6 +225,9 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public DateProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -204,6 +247,15 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 	/// <para>The field that will hold the parsed date.</para>
 	/// </summary>
 	public DateProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field that will hold the parsed date.</para>
+	/// </summary>
+	public DateProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -260,7 +312,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -269,7 +321,7 @@ public sealed partial class DateProcessorDescriptor<TDocument> : SerializableDes
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -317,13 +369,16 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 	private bool? IgnoreFailureValue { get; set; }
 	private string? LocaleValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 	private string? TimezoneValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public DateProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -366,12 +421,18 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
-	public DateProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public DateProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public DateProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -387,6 +448,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public DateProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -396,7 +460,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
-	public DateProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public DateProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -405,7 +469,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
-	public DateProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public DateProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -414,7 +478,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
-	public DateProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public DateProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -423,6 +487,9 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public DateProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -507,7 +574,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -516,7 +583,7 @@ public sealed partial class DateProcessorDescriptor : SerializableDescriptor<Dat
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

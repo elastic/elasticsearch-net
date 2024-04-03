@@ -107,10 +107,6 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	internal ExploreRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.GraphExplore;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -129,18 +125,18 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Graph.Hop? ConnectionsValue { get; set; }
-	private HopDescriptor<TDocument> ConnectionsDescriptor { get; set; }
-	private Action<HopDescriptor<TDocument>> ConnectionsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor<TDocument> ConnectionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor<TDocument>> ConnectionsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControls? ControlsValue { get; set; }
-	private ExploreControlsDescriptor<TDocument> ControlsDescriptor { get; set; }
-	private Action<ExploreControlsDescriptor<TDocument>> ControlsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor<TDocument> ControlsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor<TDocument>> ControlsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinition>? VerticesValue { get; set; }
-	private VertexDefinitionDescriptor<TDocument> VerticesDescriptor { get; set; }
-	private Action<VertexDefinitionDescriptor<TDocument>> VerticesDescriptorAction { get; set; }
-	private Action<VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument> VerticesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>> VerticesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Specifies or more fields from which you want to extract terms that are associated with the specified vertices.</para>
@@ -153,7 +149,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Connections(HopDescriptor<TDocument> descriptor)
+	public ExploreRequestDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor<TDocument> descriptor)
 	{
 		ConnectionsValue = null;
 		ConnectionsDescriptorAction = null;
@@ -161,7 +157,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Connections(Action<HopDescriptor<TDocument>> configure)
+	public ExploreRequestDescriptor<TDocument> Connections(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor<TDocument>> configure)
 	{
 		ConnectionsValue = null;
 		ConnectionsDescriptor = null;
@@ -180,7 +176,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Controls(ExploreControlsDescriptor<TDocument> descriptor)
+	public ExploreRequestDescriptor<TDocument> Controls(Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor<TDocument> descriptor)
 	{
 		ControlsValue = null;
 		ControlsDescriptorAction = null;
@@ -188,7 +184,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Controls(Action<ExploreControlsDescriptor<TDocument>> configure)
+	public ExploreRequestDescriptor<TDocument> Controls(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor<TDocument>> configure)
 	{
 		ControlsValue = null;
 		ControlsDescriptor = null;
@@ -207,7 +203,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public ExploreRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -215,7 +211,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public ExploreRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -235,7 +231,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Vertices(VertexDefinitionDescriptor<TDocument> descriptor)
+	public ExploreRequestDescriptor<TDocument> Vertices(Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument> descriptor)
 	{
 		VerticesValue = null;
 		VerticesDescriptorAction = null;
@@ -244,7 +240,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Vertices(Action<VertexDefinitionDescriptor<TDocument>> configure)
+	public ExploreRequestDescriptor<TDocument> Vertices(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>> configure)
 	{
 		VerticesValue = null;
 		VerticesDescriptor = null;
@@ -253,7 +249,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExploreRequestDescriptor<TDocument> Vertices(params Action<VertexDefinitionDescriptor<TDocument>>[] configure)
+	public ExploreRequestDescriptor<TDocument> Vertices(params Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>>[] configure)
 	{
 		VerticesValue = null;
 		VerticesDescriptor = null;
@@ -273,7 +269,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		else if (ConnectionsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, new HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor<TDocument>(ConnectionsDescriptorAction), options);
 		}
 		else if (ConnectionsValue is not null)
 		{
@@ -289,7 +285,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		else if (ControlsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("controls");
-			JsonSerializer.Serialize(writer, new ExploreControlsDescriptor<TDocument>(ControlsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor<TDocument>(ControlsDescriptorAction), options);
 		}
 		else if (ControlsValue is not null)
 		{
@@ -305,7 +301,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -324,7 +320,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 		{
 			writer.WritePropertyName("vertices");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>(VerticesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (VerticesDescriptorActions is not null)
@@ -333,7 +329,7 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 			writer.WriteStartArray();
 			foreach (var action in VerticesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -359,10 +355,6 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	{
 	}
 
-	internal ExploreRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.GraphExplore;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -381,18 +373,18 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Graph.Hop? ConnectionsValue { get; set; }
-	private HopDescriptor ConnectionsDescriptor { get; set; }
-	private Action<HopDescriptor> ConnectionsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor ConnectionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor> ConnectionsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControls? ControlsValue { get; set; }
-	private ExploreControlsDescriptor ControlsDescriptor { get; set; }
-	private Action<ExploreControlsDescriptor> ControlsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor ControlsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor> ControlsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinition>? VerticesValue { get; set; }
-	private VertexDefinitionDescriptor VerticesDescriptor { get; set; }
-	private Action<VertexDefinitionDescriptor> VerticesDescriptorAction { get; set; }
-	private Action<VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor VerticesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor> VerticesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor>[] VerticesDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Specifies or more fields from which you want to extract terms that are associated with the specified vertices.</para>
@@ -405,7 +397,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Connections(HopDescriptor descriptor)
+	public ExploreRequestDescriptor Connections(Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor descriptor)
 	{
 		ConnectionsValue = null;
 		ConnectionsDescriptorAction = null;
@@ -413,7 +405,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Connections(Action<HopDescriptor> configure)
+	public ExploreRequestDescriptor Connections(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor> configure)
 	{
 		ConnectionsValue = null;
 		ConnectionsDescriptor = null;
@@ -432,7 +424,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Controls(ExploreControlsDescriptor descriptor)
+	public ExploreRequestDescriptor Controls(Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor descriptor)
 	{
 		ControlsValue = null;
 		ControlsDescriptorAction = null;
@@ -440,7 +432,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Controls(Action<ExploreControlsDescriptor> configure)
+	public ExploreRequestDescriptor Controls(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor> configure)
 	{
 		ControlsValue = null;
 		ControlsDescriptor = null;
@@ -459,7 +451,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public ExploreRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -467,7 +459,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public ExploreRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -487,7 +479,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Vertices(VertexDefinitionDescriptor descriptor)
+	public ExploreRequestDescriptor Vertices(Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor descriptor)
 	{
 		VerticesValue = null;
 		VerticesDescriptorAction = null;
@@ -496,7 +488,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Vertices(Action<VertexDefinitionDescriptor> configure)
+	public ExploreRequestDescriptor Vertices(Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor> configure)
 	{
 		VerticesValue = null;
 		VerticesDescriptor = null;
@@ -505,7 +497,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		return Self;
 	}
 
-	public ExploreRequestDescriptor Vertices(params Action<VertexDefinitionDescriptor>[] configure)
+	public ExploreRequestDescriptor Vertices(params Action<Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor>[] configure)
 	{
 		VerticesValue = null;
 		VerticesDescriptor = null;
@@ -525,7 +517,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		else if (ConnectionsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("connections");
-			JsonSerializer.Serialize(writer, new HopDescriptor(ConnectionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.HopDescriptor(ConnectionsDescriptorAction), options);
 		}
 		else if (ConnectionsValue is not null)
 		{
@@ -541,7 +533,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		else if (ControlsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("controls");
-			JsonSerializer.Serialize(writer, new ExploreControlsDescriptor(ControlsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.ExploreControlsDescriptor(ControlsDescriptorAction), options);
 		}
 		else if (ControlsValue is not null)
 		{
@@ -557,7 +549,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -576,7 +568,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 		{
 			writer.WritePropertyName("vertices");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(VerticesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor(VerticesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (VerticesDescriptorActions is not null)
@@ -585,7 +577,7 @@ public sealed partial class ExploreRequestDescriptor : RequestDescriptor<Explore
 			writer.WriteStartArray();
 			foreach (var action in VerticesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new VertexDefinitionDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Graph.VertexDefinitionDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

@@ -27,21 +27,87 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
+internal sealed partial class InlineGetConverter<TDocument> : JsonConverter<InlineGet<TDocument>>
+{
+	public override InlineGet<TDocument> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		IReadOnlyDictionary<string, object>? fields = default;
+		bool found = default;
+		long? primaryTerm = default;
+		string? routing = default;
+		long? seqNo = default;
+		TDocument? source = default;
+		Dictionary<string, object> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				var property = reader.GetString();
+				if (property == "fields")
+				{
+					fields = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "found")
+				{
+					found = JsonSerializer.Deserialize<bool>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_primary_term")
+				{
+					primaryTerm = JsonSerializer.Deserialize<long?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_routing")
+				{
+					routing = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_seq_no")
+				{
+					seqNo = JsonSerializer.Deserialize<long?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "_source")
+				{
+					source = JsonSerializer.Deserialize<TDocument?>(ref reader, options);
+					continue;
+				}
+
+				additionalProperties ??= new Dictionary<string, object>();
+				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
+				additionalProperties.Add(property, additionalValue);
+			}
+		}
+
+		return new InlineGet<TDocument> { Fields = fields, Found = found, Metadata = additionalProperties, PrimaryTerm = primaryTerm, Routing = routing, SeqNo = seqNo, Source = source };
+	}
+
+	public override void Write(Utf8JsonWriter writer, InlineGet<TDocument> value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'InlineGet' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[GenericConverter(typeof(InlineGetConverter<>), unwrap: true)]
 public sealed partial class InlineGet<TDocument>
 {
-	[JsonInclude, JsonPropertyName("_primary_term")]
-	public long? PrimaryTerm { get; init; }
-	[JsonInclude, JsonPropertyName("_routing")]
-	public string? Routing { get; init; }
-	[JsonInclude, JsonPropertyName("_seq_no")]
-	public long? SeqNo { get; init; }
-	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
-	public TDocument Source { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public IReadOnlyDictionary<string, object>? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
-	[JsonInclude, JsonPropertyName("metadata")]
+
+	/// <summary>
+	/// <para>Document metadata</para>
+	/// </summary>
 	public IReadOnlyDictionary<string, object> Metadata { get; init; }
+	public long? PrimaryTerm { get; init; }
+	public string? Routing { get; init; }
+	public long? SeqNo { get; init; }
+	public TDocument? Source { get; init; }
 }

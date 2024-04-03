@@ -106,7 +106,7 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 		}
 
 		writer.WritePropertyName("distance");
-		JsonSerializer.Serialize(writer, value.Distance, options);
+		writer.WriteStringValue(value.Distance);
 		if (value.DistanceType is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -136,9 +136,11 @@ internal sealed partial class GeoDistanceQueryConverter : JsonConverter<GeoDista
 }
 
 [JsonConverter(typeof(GeoDistanceQueryConverter))]
-public sealed partial class GeoDistanceQuery : SearchQuery
+public sealed partial class GeoDistanceQuery
 {
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
@@ -157,15 +159,14 @@ public sealed partial class GeoDistanceQuery : SearchQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
-	public static implicit operator Query(GeoDistanceQuery geoDistanceQuery) => QueryDsl.Query.GeoDistance(geoDistanceQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("geo_distance", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(GeoDistanceQuery geoDistanceQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.GeoDistance(geoDistanceQuery);
 }
 
 public sealed partial class GeoDistanceQueryDescriptor<TDocument> : SerializableDescriptor<GeoDistanceQueryDescriptor<TDocument>>
@@ -179,12 +180,15 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	private float? BoostValue { get; set; }
 	private string DistanceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -209,12 +213,36 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoDistanceQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
 	/// </summary>
 	public GeoDistanceQueryDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+	{
+		LocationValue = location;
 		return Self;
 	}
 
@@ -230,24 +258,6 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 	public GeoDistanceQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;
-		return Self;
-	}
-
-	public GeoDistanceQueryDescriptor<TDocument> Location(Elastic.Clients.Elasticsearch.GeoLocation location)
-	{
-		LocationValue = location;
-		return Self;
-	}
-
-	public GeoDistanceQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoDistanceQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
 		return Self;
 	}
 
@@ -268,7 +278,7 @@ public sealed partial class GeoDistanceQueryDescriptor<TDocument> : Serializable
 		}
 
 		writer.WritePropertyName("distance");
-		JsonSerializer.Serialize(writer, DistanceValue, options);
+		writer.WriteStringValue(DistanceValue);
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");
@@ -308,12 +318,15 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	private float? BoostValue { get; set; }
 	private string DistanceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeoLocation LocationValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoDistanceQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -338,36 +351,6 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
-	/// </summary>
-	public GeoDistanceQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	public GeoDistanceQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
-	/// </summary>
-	public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
-	{
-		ValidationMethodValue = validationMethod;
-		return Self;
-	}
-
-	public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
-	{
-		LocationValue = location;
-		return Self;
-	}
-
 	public GeoDistanceQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
@@ -383,6 +366,36 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 	public GeoDistanceQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// </summary>
+	public GeoDistanceQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceQueryDescriptor Location(Elastic.Clients.Elasticsearch.GeoLocation location)
+	{
+		LocationValue = location;
+		return Self;
+	}
+
+	public GeoDistanceQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
+	public GeoDistanceQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? validationMethod)
+	{
+		ValidationMethodValue = validationMethod;
 		return Self;
 	}
 
@@ -403,7 +416,7 @@ public sealed partial class GeoDistanceQueryDescriptor : SerializableDescriptor<
 		}
 
 		writer.WritePropertyName("distance");
-		JsonSerializer.Serialize(writer, DistanceValue, options);
+		writer.WriteStringValue(DistanceValue);
 		if (DistanceTypeValue is not null)
 		{
 			writer.WritePropertyName("distance_type");

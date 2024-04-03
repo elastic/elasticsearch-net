@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class SpanNearQuery : SearchQuery
+public sealed partial class SpanNearQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -45,6 +46,8 @@ public sealed partial class SpanNearQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("in_order")]
 	public bool? InOrder { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Controls the maximum number of intervening unmatched positions permitted.</para>
@@ -52,7 +55,8 @@ public sealed partial class SpanNearQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("slop")]
 	public int? Slop { get; set; }
 
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_near", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(SpanNearQuery spanNearQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.SpanNear(spanNearQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery(SpanNearQuery spanNearQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery.SpanNear(spanNearQuery);
 }
 
 public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDescriptor<SpanNearQueryDescriptor<TDocument>>
@@ -65,13 +69,16 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 
 	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
-	private Action<SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
-	private Action<SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument> ClausesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>> ClausesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>>[] ClausesDescriptorActions { get; set; }
 	private bool? InOrderValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -90,7 +97,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(SpanQueryDescriptor<TDocument> descriptor)
+	public SpanNearQueryDescriptor<TDocument> Clauses(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument> descriptor)
 	{
 		ClausesValue = null;
 		ClausesDescriptorAction = null;
@@ -99,7 +106,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(Action<SpanQueryDescriptor<TDocument>> configure)
+	public SpanNearQueryDescriptor<TDocument> Clauses(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>> configure)
 	{
 		ClausesValue = null;
 		ClausesDescriptor = null;
@@ -108,7 +115,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor<TDocument> Clauses(params Action<SpanQueryDescriptor<TDocument>>[] configure)
+	public SpanNearQueryDescriptor<TDocument> Clauses(params Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>>[] configure)
 	{
 		ClausesValue = null;
 		ClausesDescriptor = null;
@@ -161,7 +168,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 		{
 			writer.WritePropertyName("clauses");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(ClausesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>(ClausesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ClausesDescriptorActions is not null)
@@ -170,7 +177,7 @@ public sealed partial class SpanNearQueryDescriptor<TDocument> : SerializableDes
 			writer.WriteStartArray();
 			foreach (var action in ClausesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -213,13 +220,16 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 
 	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery> ClausesValue { get; set; }
-	private SpanQueryDescriptor ClausesDescriptor { get; set; }
-	private Action<SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
-	private Action<SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor ClausesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor> ClausesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor>[] ClausesDescriptorActions { get; set; }
 	private bool? InOrderValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private int? SlopValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanNearQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -238,7 +248,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor Clauses(SpanQueryDescriptor descriptor)
+	public SpanNearQueryDescriptor Clauses(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor descriptor)
 	{
 		ClausesValue = null;
 		ClausesDescriptorAction = null;
@@ -247,7 +257,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor Clauses(Action<SpanQueryDescriptor> configure)
+	public SpanNearQueryDescriptor Clauses(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor> configure)
 	{
 		ClausesValue = null;
 		ClausesDescriptor = null;
@@ -256,7 +266,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		return Self;
 	}
 
-	public SpanNearQueryDescriptor Clauses(params Action<SpanQueryDescriptor>[] configure)
+	public SpanNearQueryDescriptor Clauses(params Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor>[] configure)
 	{
 		ClausesValue = null;
 		ClausesDescriptor = null;
@@ -309,7 +319,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 		{
 			writer.WritePropertyName("clauses");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new SpanQueryDescriptor(ClausesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor(ClausesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ClausesDescriptorActions is not null)
@@ -318,7 +328,7 @@ public sealed partial class SpanNearQueryDescriptor : SerializableDescriptor<Spa
 			writer.WriteStartArray();
 			foreach (var action in ClausesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new SpanQueryDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed partial class SettingsSimilarityIb
+public sealed partial class SettingsSimilarityIb : ISettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("distribution")]
 	public Elastic.Clients.Elasticsearch.Serverless.IBDistribution Distribution { get; set; }
@@ -40,7 +40,7 @@ public sealed partial class SettingsSimilarityIb
 	public string Type => "IB";
 }
 
-public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescriptor<SettingsSimilarityIbDescriptor>
+public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescriptor<SettingsSimilarityIbDescriptor>, IBuildableDescriptor<SettingsSimilarityIb>
 {
 	internal SettingsSimilarityIbDescriptor(Action<SettingsSimilarityIbDescriptor> configure) => configure.Invoke(this);
 
@@ -83,4 +83,11 @@ public sealed partial class SettingsSimilarityIbDescriptor : SerializableDescrip
 		writer.WriteStringValue("IB");
 		writer.WriteEndObject();
 	}
+
+	SettingsSimilarityIb IBuildableDescriptor<SettingsSimilarityIb>.Build() => new()
+	{
+		Distribution = DistributionValue,
+		Lambda = LambdaValue,
+		Normalization = NormalizationValue
+	};
 }

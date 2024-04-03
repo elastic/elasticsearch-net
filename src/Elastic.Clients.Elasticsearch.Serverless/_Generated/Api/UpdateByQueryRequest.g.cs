@@ -399,10 +399,6 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
-	internal UpdateByQueryRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -449,12 +445,12 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
-	private SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
-	private Action<SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
@@ -485,7 +481,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -493,7 +489,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public UpdateByQueryRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -521,7 +517,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Slice(SlicedScrollDescriptor<TDocument> descriptor)
+	public UpdateByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor<TDocument> descriptor)
 	{
 		SliceValue = null;
 		SliceDescriptorAction = null;
@@ -529,7 +525,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor<TDocument> Slice(Action<SlicedScrollDescriptor<TDocument>> configure)
+	public UpdateByQueryRequestDescriptor<TDocument> Slice(Action<Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor<TDocument>> configure)
 	{
 		SliceValue = null;
 		SliceDescriptor = null;
@@ -560,7 +556,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -582,7 +578,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 		else if (SliceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor<TDocument>(SliceDescriptorAction), options);
 		}
 		else if (SliceValue is not null)
 		{
@@ -602,10 +598,6 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	internal UpdateByQueryRequestDescriptor(Action<UpdateByQueryRequestDescriptor> configure) => configure.Invoke(this);
 
 	public UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal UpdateByQueryRequestDescriptor()
 	{
 	}
 
@@ -655,12 +647,12 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	private Elastic.Clients.Elasticsearch.Serverless.Conflicts? ConflictsValue { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SlicedScroll? SliceValue { get; set; }
-	private SlicedScrollDescriptor SliceDescriptor { get; set; }
-	private Action<SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor SliceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>What to do if update by query hits version conflicts: `abort` or `proceed`.</para>
@@ -691,7 +683,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -699,7 +691,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public UpdateByQueryRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -727,7 +719,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Slice(SlicedScrollDescriptor descriptor)
+	public UpdateByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor descriptor)
 	{
 		SliceValue = null;
 		SliceDescriptorAction = null;
@@ -735,7 +727,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateByQueryRequestDescriptor Slice(Action<SlicedScrollDescriptor> configure)
+	public UpdateByQueryRequestDescriptor Slice(Action<Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor> configure)
 	{
 		SliceValue = null;
 		SliceDescriptor = null;
@@ -766,7 +758,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -788,7 +780,7 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 		else if (SliceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("slice");
-			JsonSerializer.Serialize(writer, new SlicedScrollDescriptor(SliceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SlicedScrollDescriptor(SliceDescriptorAction), options);
 		}
 		else if (SliceValue is not null)
 		{

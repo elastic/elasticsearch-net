@@ -107,7 +107,7 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -186,7 +186,7 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 	/// </summary>
 	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public List<Core.MSearch.SearchRequestItem> Searches { get; set; }
+	public List<Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.SearchRequestItem> Searches { get; set; }
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
@@ -214,15 +214,19 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 /// <summary>
 /// <para>Allows to execute several search operations in one request.</para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>
 {
 	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public MultiSearchRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -253,33 +257,11 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	List<Core.MSearch.SearchRequestItem> _items = new();
+	List<Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.SearchRequestItem> _items = new();
 
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public MultiSearchRequestDescriptor<TDocument> AddSearches(Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.SearchRequestItem searches)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
-
-	public MultiSearchRequestDescriptor<TDocument> AddSearch(Core.MSearch.SearchRequestItem search)
-	{
-		_items.Add(search);
+		_items.Add(searches);
 		return this;
 	}
 }
@@ -287,15 +269,19 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 /// <summary>
 /// <para>Allows to execute several search operations in one request.</para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>, IStreamSerializable
+public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>
 {
 	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor> configure) => configure.Invoke(this);
+
+	public MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public MultiSearchRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMsearch;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -326,33 +312,11 @@ public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<Mul
 	{
 	}
 
-	List<Core.MSearch.SearchRequestItem> _items = new();
+	List<Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.SearchRequestItem> _items = new();
 
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public MultiSearchRequestDescriptor AddSearches(Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.SearchRequestItem searches)
 	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				serializable.Serialize(stream, settings, formatting);
-		}
-	}
-
-	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
-	{
-		if (_items is null)
-			return;
-		foreach (var item in _items)
-		{
-			if (item is IStreamSerializable serializable)
-				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
-		}
-	}
-
-	public MultiSearchRequestDescriptor AddSearch(Core.MSearch.SearchRequestItem search)
-	{
-		_items.Add(search);
+		_items.Add(searches);
 		return this;
 	}
 }

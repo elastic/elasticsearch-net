@@ -94,75 +94,74 @@ internal sealed partial class RegexpQueryConverter : JsonConverter<RegexpQuery>
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize RegexpQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.Flags))
-			{
-				writer.WritePropertyName("flags");
-				writer.WriteStringValue(value.Flags);
-			}
-
-			if (value.MaxDeterminizedStates.HasValue)
-			{
-				writer.WritePropertyName("max_determinized_states");
-				writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.CaseInsensitive.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(value.CaseInsensitive.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.Flags))
+		{
+			writer.WritePropertyName("flags");
+			writer.WriteStringValue(value.Flags);
+		}
+
+		if (value.MaxDeterminizedStates.HasValue)
+		{
+			writer.WritePropertyName("max_determinized_states");
+			writer.WriteNumberValue(value.MaxDeterminizedStates.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (!string.IsNullOrEmpty(value.Rewrite))
+		{
+			writer.WritePropertyName("rewrite");
+			writer.WriteStringValue(value.Rewrite);
+		}
+
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(value.Value);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(RegexpQueryConverter))]
-public sealed partial class RegexpQuery : SearchQuery
+public sealed partial class RegexpQuery
 {
-	public RegexpQuery(Field field)
+	public RegexpQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
 	/// <para>Allows case insensitive matching of the regular expression value with the indexed field values when set to `true`.<br/>When `false`, case sensitivity of matching depends on the underlying field’s mapping.</para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Enables optional operators for the regular expression.</para>
@@ -173,6 +172,7 @@ public sealed partial class RegexpQuery : SearchQuery
 	/// <para>Maximum number of automaton states required for the query.</para>
 	/// </summary>
 	public int? MaxDeterminizedStates { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Method used to rewrite the query.</para>
@@ -183,33 +183,16 @@ public sealed partial class RegexpQuery : SearchQuery
 	/// <para>Regular expression for terms you wish to find in the provided field.</para>
 	/// </summary>
 	public string Value { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator Query(RegexpQuery regexpQuery) => QueryDsl.Query.Regexp(regexpQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("regexp", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(RegexpQuery regexpQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Regexp(regexpQuery);
 }
 
 public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescriptor<RegexpQueryDescriptor<TDocument>>
 {
 	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal RegexpQueryDescriptor() : base()
+	public RegexpQueryDescriptor() : base()
 	{
-	}
-
-	public RegexpQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public RegexpQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -221,6 +204,9 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RegexpQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -243,6 +229,12 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	public RegexpQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public RegexpQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -327,10 +319,10 @@ public sealed partial class RegexpQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		writer.WritePropertyName("value");
@@ -344,15 +336,8 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 {
 	internal RegexpQueryDescriptor(Action<RegexpQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal RegexpQueryDescriptor() : base()
+	public RegexpQueryDescriptor() : base()
 	{
-	}
-
-	public RegexpQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -364,6 +349,9 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public RegexpQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -476,10 +464,10 @@ public sealed partial class RegexpQueryDescriptor : SerializableDescriptor<Regex
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		writer.WritePropertyName("value");

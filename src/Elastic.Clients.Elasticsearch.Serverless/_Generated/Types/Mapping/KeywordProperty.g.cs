@@ -47,6 +47,10 @@ public sealed partial class KeywordProperty : IProperty
 	public bool? Index { get; set; }
 	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.IndexOptions? IndexOptions { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("normalizer")]
@@ -63,12 +67,6 @@ public sealed partial class KeywordProperty : IProperty
 	public bool? SplitQueriesOnWhitespace { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keyword";
@@ -99,7 +97,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -137,15 +134,15 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public KeywordPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public KeywordPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -169,6 +166,9 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -199,15 +199,15 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public KeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public KeywordPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -228,15 +228,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	public KeywordPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	public KeywordPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -345,12 +336,6 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("keyword");
 		writer.WriteEndObject();
@@ -374,8 +359,7 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue
+		Store = StoreValue
 	};
 }
 
@@ -404,7 +388,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public KeywordPropertyDescriptor Boost(double? boost)
 	{
@@ -442,15 +425,15 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public KeywordPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public KeywordPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -474,6 +457,9 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public KeywordPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -504,15 +490,15 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public KeywordPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public KeywordPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public KeywordPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -533,15 +519,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	public KeywordPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	public KeywordPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -650,12 +627,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("keyword");
 		writer.WriteEndObject();
@@ -679,7 +650,6 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		Properties = PropertiesValue,
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue
+		Store = StoreValue
 	};
 }

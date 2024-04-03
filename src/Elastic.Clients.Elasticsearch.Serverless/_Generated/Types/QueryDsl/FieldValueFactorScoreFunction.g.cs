@@ -53,7 +53,7 @@ public sealed partial class FieldValueFactorScoreFunction
 	[JsonInclude, JsonPropertyName("modifier")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 
-	public static implicit operator FunctionScore(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => QueryDsl.FunctionScore.FieldValueFactor(fieldValueFactorScoreFunction);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore(FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScore.FieldValueFactor(fieldValueFactorScoreFunction);
 }
 
 public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> : SerializableDescriptor<FieldValueFactorScoreFunctionDescriptor<TDocument>>
@@ -91,6 +91,15 @@ public sealed partial class FieldValueFactorScoreFunctionDescriptor<TDocument> :
 	/// <para>Field to be extracted from the document.</para>
 	/// </summary>
 	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field to be extracted from the document.</para>
+	/// </summary>
+	public FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;

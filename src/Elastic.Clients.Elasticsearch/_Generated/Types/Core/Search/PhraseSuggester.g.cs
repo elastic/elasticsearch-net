@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 
 public sealed partial class PhraseSuggester
 {
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
@@ -49,6 +52,10 @@ public sealed partial class PhraseSuggester
 	/// </summary>
 	[JsonInclude, JsonPropertyName("direct_generator")]
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGenerator { get; set; }
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("force_unigrams")]
@@ -89,6 +96,10 @@ public sealed partial class PhraseSuggester
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
+
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
@@ -106,7 +117,7 @@ public sealed partial class PhraseSuggester
 	[JsonInclude, JsonPropertyName("token_limit")]
 	public int? TokenLimit { get; set; }
 
-	public static implicit operator FieldSuggester(PhraseSuggester phraseSuggester) => Core.Search.FieldSuggester.Phrase(phraseSuggester);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(PhraseSuggester phraseSuggester) => Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester.Phrase(phraseSuggester);
 }
 
 public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableDescriptor<PhraseSuggesterDescriptor<TDocument>>
@@ -119,30 +130,33 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 
 	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
-	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
-	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
 	private double? ConfidenceValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-	private DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
-	private Action<DirectGeneratorDescriptor<TDocument>> DirectGeneratorDescriptorAction { get; set; }
-	private Action<DirectGeneratorDescriptor<TDocument>>[] DirectGeneratorDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> DirectGeneratorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>> DirectGeneratorDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>>[] DirectGeneratorDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? ForceUnigramsValue { get; set; }
 	private int? GramSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? HighlightValue { get; set; }
-	private PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
 	private double? MaxErrorsValue { get; set; }
 	private double? RealWordErrorLikelihoodValue { get; set; }
 	private string? SeparatorValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
-	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
-	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor SmoothingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 	private string? TextValue { get; set; }
 	private int? TokenLimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -160,7 +174,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Collate(PhraseSuggestCollateDescriptor descriptor)
+	public PhraseSuggesterDescriptor<TDocument> Collate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor descriptor)
 	{
 		CollateValue = null;
 		CollateDescriptorAction = null;
@@ -168,7 +182,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Collate(Action<PhraseSuggestCollateDescriptor> configure)
+	public PhraseSuggesterDescriptor<TDocument> Collate(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> configure)
 	{
 		CollateValue = null;
 		CollateDescriptor = null;
@@ -197,7 +211,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(DirectGeneratorDescriptor<TDocument> descriptor)
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> descriptor)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptorAction = null;
@@ -206,7 +220,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(Action<DirectGeneratorDescriptor<TDocument>> configure)
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>> configure)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptor = null;
@@ -215,7 +229,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Action<DirectGeneratorDescriptor<TDocument>>[] configure)
+	public PhraseSuggesterDescriptor<TDocument> DirectGenerator(params Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>>[] configure)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptor = null;
@@ -224,13 +238,28 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
+	public PhraseSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -262,7 +291,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Highlight(PhraseSuggestHighlightDescriptor descriptor)
+	public PhraseSuggesterDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -270,7 +299,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Highlight(Action<PhraseSuggestHighlightDescriptor> configure)
+	public PhraseSuggesterDescriptor<TDocument> Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -314,6 +343,9 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor<TDocument> Size(int? size)
 	{
 		SizeValue = size;
@@ -331,7 +363,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Smoothing(SmoothingModelDescriptor descriptor)
+	public PhraseSuggesterDescriptor<TDocument> Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor descriptor)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptorAction = null;
@@ -339,7 +371,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor<TDocument> Smoothing(Action<SmoothingModelDescriptor> configure)
+	public PhraseSuggesterDescriptor<TDocument> Smoothing(Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> configure)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptor = null;
@@ -379,7 +411,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		else if (CollateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
 		}
 		else if (CollateValue is not null)
 		{
@@ -404,7 +436,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("direct_generator");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new DirectGeneratorDescriptor<TDocument>(DirectGeneratorDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(DirectGeneratorDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DirectGeneratorDescriptorActions is not null)
@@ -413,7 +445,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 			writer.WriteStartArray();
 			foreach (var action in DirectGeneratorDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new DirectGeneratorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -446,7 +478,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new PhraseSuggestHighlightDescriptor(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -492,7 +524,7 @@ public sealed partial class PhraseSuggesterDescriptor<TDocument> : SerializableD
 		else if (SmoothingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("smoothing");
-			JsonSerializer.Serialize(writer, new SmoothingModelDescriptor(SmoothingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(SmoothingDescriptorAction), options);
 		}
 		else if (SmoothingValue is not null)
 		{
@@ -526,30 +558,33 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 
 	private string? AnalyzerValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate? CollateValue { get; set; }
-	private PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
-	private Action<PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor CollateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> CollateDescriptorAction { get; set; }
 	private double? ConfidenceValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? DirectGeneratorValue { get; set; }
-	private DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
-	private Action<DirectGeneratorDescriptor> DirectGeneratorDescriptorAction { get; set; }
-	private Action<DirectGeneratorDescriptor>[] DirectGeneratorDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor DirectGeneratorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor> DirectGeneratorDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor>[] DirectGeneratorDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? ForceUnigramsValue { get; set; }
 	private int? GramSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight? HighlightValue { get; set; }
-	private PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
-	private Action<PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor HighlightDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> HighlightDescriptorAction { get; set; }
 	private double? MaxErrorsValue { get; set; }
 	private double? RealWordErrorLikelihoodValue { get; set; }
 	private string? SeparatorValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? SmoothingValue { get; set; }
-	private SmoothingModelDescriptor SmoothingDescriptor { get; set; }
-	private Action<SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor SmoothingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> SmoothingDescriptorAction { get; set; }
 	private string? TextValue { get; set; }
 	private int? TokenLimitValue { get; set; }
 
+	/// <summary>
+	/// <para>The analyzer to analyze the suggest text with.<br/>Defaults to the search analyzer of the suggest field.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor Analyzer(string? analyzer)
 	{
 		AnalyzerValue = analyzer;
@@ -567,7 +602,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Collate(PhraseSuggestCollateDescriptor descriptor)
+	public PhraseSuggesterDescriptor Collate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor descriptor)
 	{
 		CollateValue = null;
 		CollateDescriptorAction = null;
@@ -575,7 +610,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Collate(Action<PhraseSuggestCollateDescriptor> configure)
+	public PhraseSuggesterDescriptor Collate(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor> configure)
 	{
 		CollateValue = null;
 		CollateDescriptor = null;
@@ -604,7 +639,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor DirectGenerator(DirectGeneratorDescriptor descriptor)
+	public PhraseSuggesterDescriptor DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor descriptor)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptorAction = null;
@@ -613,7 +648,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor DirectGenerator(Action<DirectGeneratorDescriptor> configure)
+	public PhraseSuggesterDescriptor DirectGenerator(Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor> configure)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptor = null;
@@ -622,7 +657,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor DirectGenerator(params Action<DirectGeneratorDescriptor>[] configure)
+	public PhraseSuggesterDescriptor DirectGenerator(params Action<Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor>[] configure)
 	{
 		DirectGeneratorValue = null;
 		DirectGeneratorDescriptor = null;
@@ -631,18 +666,27 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
 	{
 		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The field to fetch the candidate suggestions from.<br/>Needs to be set globally or per suggestion.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
@@ -675,7 +719,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Highlight(PhraseSuggestHighlightDescriptor descriptor)
+	public PhraseSuggesterDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor descriptor)
 	{
 		HighlightValue = null;
 		HighlightDescriptorAction = null;
@@ -683,7 +727,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Highlight(Action<PhraseSuggestHighlightDescriptor> configure)
+	public PhraseSuggesterDescriptor Highlight(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor> configure)
 	{
 		HighlightValue = null;
 		HighlightDescriptor = null;
@@ -727,6 +771,9 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum corrections to be returned per suggest text token.</para>
+	/// </summary>
 	public PhraseSuggesterDescriptor Size(int? size)
 	{
 		SizeValue = size;
@@ -744,7 +791,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Smoothing(SmoothingModelDescriptor descriptor)
+	public PhraseSuggesterDescriptor Smoothing(Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor descriptor)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptorAction = null;
@@ -752,7 +799,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PhraseSuggesterDescriptor Smoothing(Action<SmoothingModelDescriptor> configure)
+	public PhraseSuggesterDescriptor Smoothing(Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> configure)
 	{
 		SmoothingValue = null;
 		SmoothingDescriptor = null;
@@ -792,7 +839,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		else if (CollateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collate");
-			JsonSerializer.Serialize(writer, new PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(CollateDescriptorAction), options);
 		}
 		else if (CollateValue is not null)
 		{
@@ -817,7 +864,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		{
 			writer.WritePropertyName("direct_generator");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new DirectGeneratorDescriptor(DirectGeneratorDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(DirectGeneratorDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DirectGeneratorDescriptorActions is not null)
@@ -826,7 +873,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 			writer.WriteStartArray();
 			foreach (var action in DirectGeneratorDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new DirectGeneratorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -859,7 +906,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		else if (HighlightDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight");
-			JsonSerializer.Serialize(writer, new PhraseSuggestHighlightDescriptor(HighlightDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(HighlightDescriptorAction), options);
 		}
 		else if (HighlightValue is not null)
 		{
@@ -905,7 +952,7 @@ public sealed partial class PhraseSuggesterDescriptor : SerializableDescriptor<P
 		else if (SmoothingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("smoothing");
-			JsonSerializer.Serialize(writer, new SmoothingModelDescriptor(SmoothingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor(SmoothingDescriptorAction), options);
 		}
 		else if (SmoothingValue is not null)
 		{

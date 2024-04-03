@@ -87,21 +87,15 @@ public sealed partial class MatchOnlyTextPropertyDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
-	/// </summary>
-	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
-	/// </summary>
-	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public MatchOnlyTextPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -183,21 +177,15 @@ public sealed partial class MatchOnlyTextPropertyDescriptor : SerializableDescri
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
-	/// </summary>
-	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one<br/>field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.</para>
-	/// </summary>
-	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public MatchOnlyTextPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;

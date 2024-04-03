@@ -72,10 +72,6 @@ public sealed partial class GetScriptRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal GetScriptRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGetScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -105,10 +101,6 @@ public sealed partial class GetScriptRequestDescriptor : RequestDescriptor<GetSc
 	internal GetScriptRequestDescriptor(Action<GetScriptRequestDescriptor> configure) => configure.Invoke(this);
 
 	public GetScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal GetScriptRequestDescriptor()
 	{
 	}
 
