@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -27,8 +28,4 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class ExistsIndexTemplateResponse : ElasticsearchResponse
 {
-	public bool Exists => ApiCallDetails is
-	{
-		HasSuccessfulStatusCode: true, HttpStatusCode: 200
-	};
 }

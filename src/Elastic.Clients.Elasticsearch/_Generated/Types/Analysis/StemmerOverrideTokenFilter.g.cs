@@ -88,10 +88,10 @@ public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableD
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("stemmer_override");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

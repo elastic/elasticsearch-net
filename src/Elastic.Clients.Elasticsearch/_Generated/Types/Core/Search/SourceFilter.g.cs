@@ -82,6 +82,48 @@ public sealed partial class SourceFilter
 	public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 }
 
+public sealed partial class SourceFilterDescriptor<TDocument> : SerializableDescriptor<SourceFilterDescriptor<TDocument>>
+{
+	internal SourceFilterDescriptor(Action<SourceFilterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public SourceFilterDescriptor() : base()
+	{
+	}
+
+	private Elastic.Clients.Elasticsearch.Fields? ExcludesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? IncludesValue { get; set; }
+
+	public SourceFilterDescriptor<TDocument> Excludes(Elastic.Clients.Elasticsearch.Fields? excludes)
+	{
+		ExcludesValue = excludes;
+		return Self;
+	}
+
+	public SourceFilterDescriptor<TDocument> Includes(Elastic.Clients.Elasticsearch.Fields? includes)
+	{
+		IncludesValue = includes;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (ExcludesValue is not null)
+		{
+			writer.WritePropertyName("excludes");
+			JsonSerializer.Serialize(writer, ExcludesValue, options);
+		}
+
+		if (IncludesValue is not null)
+		{
+			writer.WritePropertyName("includes");
+			JsonSerializer.Serialize(writer, IncludesValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
 public sealed partial class SourceFilterDescriptor : SerializableDescriptor<SourceFilterDescriptor>
 {
 	internal SourceFilterDescriptor(Action<SourceFilterDescriptor> configure) => configure.Invoke(this);

@@ -194,6 +194,10 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 {
 	internal MultiTermVectorsRequestDescriptor(Action<MultiTermVectorsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
+
 	public MultiTermVectorsRequestDescriptor()
 	{
 	}
@@ -225,9 +229,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperation>? DocsValue { get; set; }
-	private Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> DocsDescriptor { get; set; }
-	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> DocsDescriptorAction { get; set; }
-	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] DocsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> DocsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> DocsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] DocsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? IdsValue { get; set; }
 
 	/// <summary>
@@ -242,7 +246,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> descriptor)
+	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument> descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -251,7 +255,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> configure)
+	public MultiTermVectorsRequestDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -260,7 +264,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor<TDocument> Docs(params Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] configure)
+	public MultiTermVectorsRequestDescriptor<TDocument> Docs(params Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -292,7 +296,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -301,7 +305,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -328,6 +332,10 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescriptor<MultiTermVectorsRequestDescriptor, MultiTermVectorsRequestParameters>
 {
 	internal MultiTermVectorsRequestDescriptor(Action<MultiTermVectorsRequestDescriptor> configure) => configure.Invoke(this);
+
+	public MultiTermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
 
 	public MultiTermVectorsRequestDescriptor()
 	{
@@ -360,9 +368,9 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperation>? DocsValue { get; set; }
-	private Core.Mtermvectors.MultiTermVectorsOperationDescriptor DocsDescriptor { get; set; }
-	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] DocsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor DocsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor> DocsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] DocsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id>? IdsValue { get; set; }
 
 	/// <summary>
@@ -377,7 +385,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(Core.Mtermvectors.MultiTermVectorsOperationDescriptor descriptor)
+	public MultiTermVectorsRequestDescriptor Docs(Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -386,7 +394,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor> configure)
+	public MultiTermVectorsRequestDescriptor Docs(Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -395,7 +403,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public MultiTermVectorsRequestDescriptor Docs(params Action<Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] configure)
+	public MultiTermVectorsRequestDescriptor Docs(params Action<Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -427,7 +435,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.Mtermvectors.MultiTermVectorsOperationDescriptor(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -436,7 +444,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor : RequestDescripto
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.Mtermvectors.MultiTermVectorsOperationDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Mtermvectors.MultiTermVectorsOperationDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

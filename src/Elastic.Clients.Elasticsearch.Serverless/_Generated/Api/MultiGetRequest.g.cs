@@ -85,7 +85,7 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -161,11 +161,15 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 {
 	internal MultiGetRequestDescriptor(Action<MultiGetRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
+
 	public MultiGetRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -189,9 +193,9 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
-	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
-	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument> DocsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>> DocsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>>[] DocsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ids? IdsValue { get; set; }
 
 	/// <summary>
@@ -206,7 +210,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(Core.MGet.MultiGetOperationDescriptor descriptor)
+	public MultiGetRequestDescriptor<TDocument> Docs(Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument> descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -215,7 +219,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(Action<Core.MGet.MultiGetOperationDescriptor> configure)
+	public MultiGetRequestDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -224,7 +228,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor<TDocument> Docs(params Action<Core.MGet.MultiGetOperationDescriptor>[] configure)
+	public MultiGetRequestDescriptor<TDocument> Docs(params Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -256,7 +260,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -265,7 +269,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -293,11 +297,15 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 {
 	internal MultiGetRequestDescriptor(Action<MultiGetRequestDescriptor> configure) => configure.Invoke(this);
 
+	public MultiGetRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName? index) : base(r => r.Optional("index", index))
+	{
+	}
+
 	public MultiGetRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMget;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceMultiGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
@@ -321,9 +329,9 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperation>? DocsValue { get; set; }
-	private Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
-	private Action<Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor DocsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor> DocsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor>[] DocsDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ids? IdsValue { get; set; }
 
 	/// <summary>
@@ -338,7 +346,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(Core.MGet.MultiGetOperationDescriptor descriptor)
+	public MultiGetRequestDescriptor Docs(Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor descriptor)
 	{
 		DocsValue = null;
 		DocsDescriptorAction = null;
@@ -347,7 +355,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(Action<Core.MGet.MultiGetOperationDescriptor> configure)
+	public MultiGetRequestDescriptor Docs(Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor> configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -356,7 +364,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		return Self;
 	}
 
-	public MultiGetRequestDescriptor Docs(params Action<Core.MGet.MultiGetOperationDescriptor>[] configure)
+	public MultiGetRequestDescriptor Docs(params Action<Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor>[] configure)
 	{
 		DocsValue = null;
 		DocsDescriptor = null;
@@ -388,7 +396,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 		{
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(DocsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor(DocsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (DocsDescriptorActions is not null)
@@ -397,7 +405,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 			writer.WriteStartArray();
 			foreach (var action in DocsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Core.MGet.MultiGetOperationDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.MGet.MultiGetOperationDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

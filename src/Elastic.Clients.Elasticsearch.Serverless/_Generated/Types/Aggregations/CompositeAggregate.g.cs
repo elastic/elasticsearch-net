@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class CompositeAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("after_key")]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? AfterKey { get; init; }
+	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? AfterKey { get; init; }
 	[JsonInclude, JsonPropertyName("buckets")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeBucket> Buckets { get; init; }
 	[JsonInclude, JsonPropertyName("meta")]

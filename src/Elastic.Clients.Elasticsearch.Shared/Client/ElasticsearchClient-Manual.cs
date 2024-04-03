@@ -96,21 +96,12 @@ public partial class ElasticsearchClient
 	/// <para>Updates a document with a script or partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
-		configureRequest?.Invoke(descriptor);
-		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, IndexName index, Id id)
 	{
-		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 		descriptor.BeforeRequest();
+		descriptor.Upsert(document);
+		descriptor.Doc(partialDocument);
 		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
 	}
 
@@ -120,9 +111,11 @@ public partial class ElasticsearchClient
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, IndexName index, Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(document, index, id);
+		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
+		descriptor.Upsert(document);
+		descriptor.Doc(partialDocument);
+		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -132,17 +125,6 @@ public partial class ElasticsearchClient
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id)
 	{
 		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
-		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IndexName index, Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
-	{
-		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
-		configureRequest?.Invoke(descriptor);
 		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
 	}
 }

@@ -34,6 +34,10 @@ public sealed partial class StoredScriptId
 	/// </summary>
 	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+
+	/// <summary>
+	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 }
@@ -58,6 +62,9 @@ public sealed partial class StoredScriptIdDescriptor : SerializableDescriptor<St
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// </summary>
 	public StoredScriptIdDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());

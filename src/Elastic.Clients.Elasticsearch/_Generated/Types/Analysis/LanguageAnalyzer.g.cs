@@ -34,7 +34,7 @@ public sealed partial class LanguageAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("stem_exclusion")]
 	public ICollection<string> StemExclusion { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
@@ -111,10 +111,10 @@ public sealed partial class LanguageAnalyzerDescriptor : SerializableDescriptor<
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("language");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

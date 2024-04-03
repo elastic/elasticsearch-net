@@ -27,111 +27,19 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class AdjacencyMatrixAggregationConverter : JsonConverter<AdjacencyMatrixAggregation>
+public sealed partial class AdjacencyMatrixAggregation
 {
-	public override AdjacencyMatrixAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "adjacency_matrix")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new AdjacencyMatrixAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("filters"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Filters = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, AdjacencyMatrixAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("adjacency_matrix");
-		writer.WriteStartObject();
-		if (value.Filters is not null)
-		{
-			writer.WritePropertyName("filters");
-			JsonSerializer.Serialize(writer, value.Filters, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(AdjacencyMatrixAggregationConverter))]
-public sealed partial class AdjacencyMatrixAggregation : SearchAggregation
-{
-	public AdjacencyMatrixAggregation(string name) => Name = name;
-
-	internal AdjacencyMatrixAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("filters")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filters { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(AdjacencyMatrixAggregation adjacencyMatrixAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.AdjacencyMatrix(adjacencyMatrixAggregation);
 }
 
 public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : SerializableDescriptor<AdjacencyMatrixAggregationDescriptor<TDocument>>
@@ -142,42 +50,16 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? FiltersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> FiltersValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
-
-	public AdjacencyMatrixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public AdjacencyMatrixAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public AdjacencyMatrixAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
+	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
 	/// </summary>
-	public AdjacencyMatrixAggregationDescriptor<TDocument> Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>> selector)
+	public AdjacencyMatrixAggregationDescriptor<TDocument> Filters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>> selector)
 	{
-		FiltersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>());
+		FiltersValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -187,10 +69,14 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	public AdjacencyMatrixAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("adjacency_matrix");
 		writer.WriteStartObject();
 		if (FiltersValue is not null)
 		{
@@ -198,27 +84,16 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, FiltersValue, options);
 		}
 
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (AggregationsDescriptor is not null)
+		if (!string.IsNullOrEmpty(NameValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();
@@ -233,42 +108,16 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? FiltersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> FiltersValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
-
-	public AdjacencyMatrixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public AdjacencyMatrixAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public AdjacencyMatrixAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
+	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
 	/// </summary>
-	public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>> selector)
+	public AdjacencyMatrixAggregationDescriptor Filters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>> selector)
 	{
-		FiltersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>());
+		FiltersValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>());
 		return Self;
 	}
 
@@ -278,10 +127,14 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 		return Self;
 	}
 
+	public AdjacencyMatrixAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("adjacency_matrix");
 		writer.WriteStartObject();
 		if (FiltersValue is not null)
 		{
@@ -289,27 +142,16 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 			JsonSerializer.Serialize(writer, FiltersValue, options);
 		}
 
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (AggregationsDescriptor is not null)
+		if (!string.IsNullOrEmpty(NameValue))
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

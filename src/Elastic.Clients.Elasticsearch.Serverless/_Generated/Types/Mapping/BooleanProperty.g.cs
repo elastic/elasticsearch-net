@@ -45,6 +45,10 @@ public sealed partial class BooleanProperty : IProperty
 	public int? IgnoreAbove { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -73,8 +77,8 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -116,7 +120,7 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Fielddata(IndexManagement.NumericFielddataDescriptor descriptor)
+	public BooleanPropertyDescriptor<TDocument> Fielddata(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor descriptor)
 	{
 		FielddataValue = null;
 		FielddataDescriptorAction = null;
@@ -124,7 +128,7 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Fielddata(Action<IndexManagement.NumericFielddataDescriptor> configure)
+	public BooleanPropertyDescriptor<TDocument> Fielddata(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor> configure)
 	{
 		FielddataValue = null;
 		FielddataDescriptor = null;
@@ -138,15 +142,15 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public BooleanPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public BooleanPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -164,6 +168,9 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public BooleanPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -182,15 +189,15 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public BooleanPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public BooleanPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -243,7 +250,7 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		else if (FielddataDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata");
-			JsonSerializer.Serialize(writer, new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
 		}
 		else if (FielddataValue is not null)
 		{
@@ -311,15 +318,15 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 			return FielddataValue;
 		}
 
-		if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildable)
+		if ((object)FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}
@@ -359,8 +366,8 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -402,7 +409,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Fielddata(IndexManagement.NumericFielddataDescriptor descriptor)
+	public BooleanPropertyDescriptor Fielddata(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor descriptor)
 	{
 		FielddataValue = null;
 		FielddataDescriptorAction = null;
@@ -410,7 +417,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Fielddata(Action<IndexManagement.NumericFielddataDescriptor> configure)
+	public BooleanPropertyDescriptor Fielddata(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor> configure)
 	{
 		FielddataValue = null;
 		FielddataDescriptor = null;
@@ -424,15 +431,15 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public BooleanPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public BooleanPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -450,6 +457,9 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public BooleanPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -468,15 +478,15 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public BooleanPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public BooleanPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public BooleanPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -529,7 +539,7 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		else if (FielddataDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata");
-			JsonSerializer.Serialize(writer, new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
 		}
 		else if (FielddataValue is not null)
 		{
@@ -597,15 +607,15 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 			return FielddataValue;
 		}
 
-		if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildable)
+		if ((object)FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.NumericFielddata?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}

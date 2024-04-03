@@ -58,23 +58,23 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 	{
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
-	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
 	/// </summary>
-	public IndexTemplateMappingDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	public IndexTemplateMappingDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -86,7 +86,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(DataStreamLifecycleDescriptor descriptor)
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -94,7 +94,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
+	public IndexTemplateMappingDescriptor<TDocument> Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -113,7 +113,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	public IndexTemplateMappingDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -121,7 +121,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor<TDocument>> configure)
+	public IndexTemplateMappingDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -140,7 +140,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Settings(IndexSettingsDescriptor<TDocument> descriptor)
+	public IndexTemplateMappingDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -148,7 +148,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
+	public IndexTemplateMappingDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -173,7 +173,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{
@@ -189,7 +189,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -205,7 +205,7 @@ public sealed partial class IndexTemplateMappingDescriptor<TDocument> : Serializ
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{
@@ -225,23 +225,23 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 	{
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? LifecycleValue { get; set; }
-	private DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
 	/// </summary>
-	public IndexTemplateMappingDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>> selector)
+	public IndexTemplateMappingDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>());
 		return Self;
 	}
 
@@ -253,7 +253,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Lifecycle(DataStreamLifecycleDescriptor descriptor)
+	public IndexTemplateMappingDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor descriptor)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptorAction = null;
@@ -261,7 +261,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Lifecycle(Action<DataStreamLifecycleDescriptor> configure)
+	public IndexTemplateMappingDescriptor Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> configure)
 	{
 		LifecycleValue = null;
 		LifecycleDescriptor = null;
@@ -280,7 +280,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+	public IndexTemplateMappingDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -288,7 +288,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+	public IndexTemplateMappingDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -307,7 +307,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Settings(IndexSettingsDescriptor descriptor)
+	public IndexTemplateMappingDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -315,7 +315,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public IndexTemplateMappingDescriptor Settings(Action<IndexSettingsDescriptor> configure)
+	public IndexTemplateMappingDescriptor Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -340,7 +340,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		else if (LifecycleDescriptorAction is not null)
 		{
 			writer.WritePropertyName("lifecycle");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor(LifecycleDescriptorAction), options);
 		}
 		else if (LifecycleValue is not null)
 		{
@@ -356,7 +356,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -372,7 +372,7 @@ public sealed partial class IndexTemplateMappingDescriptor : SerializableDescrip
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{

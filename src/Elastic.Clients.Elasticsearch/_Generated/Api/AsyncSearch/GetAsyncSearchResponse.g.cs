@@ -28,18 +28,33 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>Indicates when the async search completed. Only present<br/>when the search has completed.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_time")]
 	public DateTimeOffset? CompletionTime { get; init; }
 	[JsonInclude, JsonPropertyName("completion_time_in_millis")]
 	public long? CompletionTimeInMillis { get; init; }
+
+	/// <summary>
+	/// <para>Indicates when the async search will expire.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("expiration_time")]
 	public DateTimeOffset? ExpirationTime { get; init; }
 	[JsonInclude, JsonPropertyName("expiration_time_in_millis")]
 	public long ExpirationTimeInMillis { get; init; }
 	[JsonInclude, JsonPropertyName("id")]
 	public string? Id { get; init; }
+
+	/// <summary>
+	/// <para>When the query is no longer running, this property indicates whether the search failed or was successfully completed on all shards.<br/>While the query is running, `is_partial` is always set to `true`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_partial")]
 	public bool IsPartial { get; init; }
+
+	/// <summary>
+	/// <para>Indicates whether the search is still running or has completed.<br/>NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though `is_running` is `false`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
 	public bool IsRunning { get; init; }
 	[JsonInclude, JsonPropertyName("response")]

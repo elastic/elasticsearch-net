@@ -94,10 +94,6 @@ public sealed partial class ExistsTemplateRequestDescriptor : RequestDescriptor<
 	{
 	}
 
-	internal ExistsTemplateRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExistsTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;

@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class ExistsQuery : SearchQuery
+public sealed partial class ExistsQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -39,10 +40,10 @@ public sealed partial class ExistsQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	public static implicit operator Query(ExistsQuery existsQuery) => QueryDsl.Query.Exists(existsQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("exists", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(ExistsQuery existsQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Exists(existsQuery);
 }
 
 public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescriptor<ExistsQueryDescriptor<TDocument>>
@@ -57,6 +58,9 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -76,6 +80,15 @@ public sealed partial class ExistsQueryDescriptor<TDocument> : SerializableDescr
 	/// <para>Name of the field you wish to search.</para>
 	/// </summary>
 	public ExistsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Name of the field you wish to search.</para>
+	/// </summary>
+	public ExistsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -120,6 +133,9 @@ public sealed partial class ExistsQueryDescriptor : SerializableDescriptor<Exist
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public ExistsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

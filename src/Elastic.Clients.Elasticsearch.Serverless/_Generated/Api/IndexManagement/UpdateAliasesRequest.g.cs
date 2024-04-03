@@ -71,7 +71,7 @@ public sealed partial class UpdateAliasesRequest : PlainRequest<UpdateAliasesReq
 	/// <para>Actions to perform.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("actions")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? Actions { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? Actions { get; set; }
 }
 
 /// <summary>
@@ -96,15 +96,15 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 	public UpdateAliasesRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? ActionsValue { get; set; }
-	private ActionDescriptor<TDocument> ActionsDescriptor { get; set; }
-	private Action<ActionDescriptor<TDocument>> ActionsDescriptorAction { get; set; }
-	private Action<ActionDescriptor<TDocument>>[] ActionsDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? ActionsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> ActionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>> ActionsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Actions to perform.</para>
 	/// </summary>
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? actions)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? actions)
 	{
 		ActionsDescriptor = null;
 		ActionsDescriptorAction = null;
@@ -113,7 +113,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(ActionDescriptor<TDocument> descriptor)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument> descriptor)
 	{
 		ActionsValue = null;
 		ActionsDescriptorAction = null;
@@ -122,7 +122,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(Action<ActionDescriptor<TDocument>> configure)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>> configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -131,7 +131,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor<TDocument> Actions(params Action<ActionDescriptor<TDocument>>[] configure)
+	public UpdateAliasesRequestDescriptor<TDocument> Actions(params Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>>[] configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -154,7 +154,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 		{
 			writer.WritePropertyName("actions");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ActionDescriptor<TDocument>(ActionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(ActionsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ActionsDescriptorActions is not null)
@@ -163,7 +163,7 @@ public sealed partial class UpdateAliasesRequestDescriptor<TDocument> : RequestD
 			writer.WriteStartArray();
 			foreach (var action in ActionsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ActionDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -200,15 +200,15 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 	public UpdateAliasesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Serverless.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public UpdateAliasesRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? ActionsValue { get; set; }
-	private ActionDescriptor ActionsDescriptor { get; set; }
-	private Action<ActionDescriptor> ActionsDescriptorAction { get; set; }
-	private Action<ActionDescriptor>[] ActionsDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? ActionsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor ActionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor> ActionsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor>[] ActionsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>Actions to perform.</para>
 	/// </summary>
-	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Action>? actions)
+	public UpdateAliasesRequestDescriptor Actions(ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction>? actions)
 	{
 		ActionsDescriptor = null;
 		ActionsDescriptorAction = null;
@@ -217,7 +217,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(ActionDescriptor descriptor)
+	public UpdateAliasesRequestDescriptor Actions(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor descriptor)
 	{
 		ActionsValue = null;
 		ActionsDescriptorAction = null;
@@ -226,7 +226,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(Action<ActionDescriptor> configure)
+	public UpdateAliasesRequestDescriptor Actions(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor> configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -235,7 +235,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 		return Self;
 	}
 
-	public UpdateAliasesRequestDescriptor Actions(params Action<ActionDescriptor>[] configure)
+	public UpdateAliasesRequestDescriptor Actions(params Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor>[] configure)
 	{
 		ActionsValue = null;
 		ActionsDescriptor = null;
@@ -258,7 +258,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 		{
 			writer.WritePropertyName("actions");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ActionDescriptor(ActionsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor(ActionsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (ActionsDescriptorActions is not null)
@@ -267,7 +267,7 @@ public sealed partial class UpdateAliasesRequestDescriptor : RequestDescriptor<U
 			writer.WriteStartArray();
 			foreach (var action in ActionsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ActionDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesActionDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

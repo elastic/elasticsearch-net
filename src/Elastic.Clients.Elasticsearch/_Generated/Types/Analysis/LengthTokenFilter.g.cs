@@ -88,10 +88,10 @@ public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("length");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

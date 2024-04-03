@@ -51,7 +51,7 @@ public sealed partial class ClusterStatsRequest : PlainRequest<ClusterStatsReque
 	{
 	}
 
-	public ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serverless.NodeIds? node_id) : base(r => r.Optional("node_id", node_id))
+	public ClusterStatsRequest(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
 	{
 	}
 
@@ -83,6 +83,10 @@ public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<Cl
 {
 	internal ClusterStatsRequestDescriptor(Action<ClusterStatsRequestDescriptor> configure) => configure.Invoke(this);
 
+	public ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
+	{
+	}
+
 	public ClusterStatsRequestDescriptor()
 	{
 	}
@@ -98,9 +102,9 @@ public sealed partial class ClusterStatsRequestDescriptor : RequestDescriptor<Cl
 	public ClusterStatsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Serverless.Duration? timeout) => Qs("timeout", timeout);
 
-	public ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Serverless.NodeIds? node_id)
+	public ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId)
 	{
-		RouteValues.Optional("node_id", node_id);
+		RouteValues.Optional("node_id", nodeId);
 		return Self;
 	}
 

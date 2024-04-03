@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
 
 public sealed partial class MultiSearchResponseItem<TDocument> : Union<Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.MultiSearchItem<TDocument>, Elastic.Clients.Elasticsearch.Serverless.ErrorResponseBase>
 {
-	public MultiSearchResponseItem(Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.MultiSearchItem<TDocument> result) : base(result)
+	public MultiSearchResponseItem(Elastic.Clients.Elasticsearch.Serverless.Core.MSearch.MultiSearchItem<TDocument> Result) : base(Result)
 	{
 	}
 
-	public MultiSearchResponseItem(Elastic.Clients.Elasticsearch.Serverless.ErrorResponseBase failure) : base(failure)
+	public MultiSearchResponseItem(Elastic.Clients.Elasticsearch.Serverless.ErrorResponseBase Failure) : base(Failure)
 	{
 	}
 }

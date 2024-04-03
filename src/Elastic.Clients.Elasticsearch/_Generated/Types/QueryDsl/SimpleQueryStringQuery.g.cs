@@ -27,10 +27,13 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class SimpleQueryStringQuery : SearchQuery
+public sealed partial class SimpleQueryStringQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Analyzer used to convert text in the query string into tokens.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("analyzer")]
+	public string? Analyzer { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, the query attempts to analyze wildcard terms in the query string.</para>
@@ -39,16 +42,14 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	public bool? AnalyzeWildcard { get; set; }
 
 	/// <summary>
-	/// <para>Analyzer used to convert text in the query string into tokens.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
-	public string? Analyzer { get; set; }
-
-	/// <summary>
 	/// <para>If `true`, the parser creates a match_phrase query for each multi-position token.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_generate_synonyms_phrase_query")]
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
+
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -62,13 +63,13 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public Fields? Fields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>List of enabled operators for the simple query string syntax.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("flags")]
-	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? Flags { get; set; }
+	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? Flags { get; set; }
 
 	/// <summary>
 	/// <para>Maximum number of terms to which the query expands for fuzzy matching.</para>
@@ -105,6 +106,8 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Suffix appended to quoted text in the query string.</para>
@@ -112,9 +115,7 @@ public sealed partial class SimpleQueryStringQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("quote_field_suffix")]
 	public string? QuoteFieldSuffix { get; set; }
 
-	public static implicit operator Query(SimpleQueryStringQuery simpleQueryStringQuery) => QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("simple_query_string", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SimpleQueryStringQuery simpleQueryStringQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SimpleQueryString(simpleQueryStringQuery);
 }
 
 public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : SerializableDescriptor<SimpleQueryStringQueryDescriptor<TDocument>>
@@ -130,8 +131,8 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-	private Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? FlagsValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
 	private bool? FuzzyTranspositionsValue { get; set; }
@@ -168,6 +169,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SimpleQueryStringQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -186,7 +190,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// <summary>
 	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Fields(Fields? fields)
+	public SimpleQueryStringQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -195,7 +199,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor<TDocument> : Serial
 	/// <summary>
 	/// <para>List of enabled operators for the simple query string syntax.</para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+	public SimpleQueryStringQueryDescriptor<TDocument> Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? flags)
 	{
 		FlagsValue = flags;
 		return Self;
@@ -376,8 +380,8 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
-	private Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? FlagsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? FlagsValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
 	private bool? FuzzyTranspositionsValue { get; set; }
@@ -414,6 +418,9 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SimpleQueryStringQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -432,7 +439,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// <summary>
 	/// <para>Array of fields you wish to search.<br/>Accepts wildcard expressions.<br/>You also can boost relevance scores for matches to particular fields using a caret (`^`) notation.<br/>Defaults to the `index.query.default_field index` setting, which has a default value of `*`.</para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Fields(Fields? fields)
+	public SimpleQueryStringQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -441,7 +448,7 @@ public sealed partial class SimpleQueryStringQueryDescriptor : SerializableDescr
 	/// <summary>
 	/// <para>List of enabled operators for the simple query string syntax.</para>
 	/// </summary>
-	public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? flags)
+	public SimpleQueryStringQueryDescriptor Flags(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlag? flags)
 	{
 		FlagsValue = flags;
 		return Self;

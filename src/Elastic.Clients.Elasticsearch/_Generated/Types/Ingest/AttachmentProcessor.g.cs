@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class AttachmentProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -37,8 +40,16 @@ public sealed partial class AttachmentProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -59,6 +70,10 @@ public sealed partial class AttachmentProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indexed_chars_field")]
 	public Elastic.Clients.Elasticsearch.Field? IndexedCharsField { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
@@ -69,10 +84,20 @@ public sealed partial class AttachmentProcessor
 	public ICollection<string>? Properties { get; set; }
 
 	/// <summary>
+	/// <para>If true, the binary field will be removed from the document</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("remove_binary")]
+	public bool? RemoveBinary { get; set; }
+
+	/// <summary>
 	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("resource_name")]
 	public string? ResourceName { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -82,7 +107,7 @@ public sealed partial class AttachmentProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(AttachmentProcessor attachmentProcessor) => Ingest.Processor.Attachment(attachmentProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(AttachmentProcessor attachmentProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Attachment(attachmentProcessor);
 }
 
 public sealed partial class AttachmentProcessorDescriptor<TDocument> : SerializableDescriptor<AttachmentProcessorDescriptor<TDocument>>
@@ -101,14 +126,18 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	private long? IndexedCharsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? IndexedCharsFieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
+	private bool? RemoveBinaryValue { get; set; }
 	private string? ResourceNameValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -133,12 +162,27 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>The field to get the base64 encoded field from.</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -181,6 +225,18 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Field name from which you can overwrite the number of chars being used for extraction.</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor<TDocument> IndexedCharsField(Expression<Func<TDocument, object>> indexedCharsField)
+	{
+		IndexedCharsFieldValue = indexedCharsField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -190,7 +246,7 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -199,7 +255,7 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -208,7 +264,7 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public AttachmentProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -227,6 +283,15 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	}
 
 	/// <summary>
+	/// <para>If true, the binary field will be removed from the document</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor<TDocument> RemoveBinary(bool? removeBinary = true)
+	{
+		RemoveBinaryValue = removeBinary;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> ResourceName(string? resourceName)
@@ -235,6 +300,9 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -254,6 +322,15 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 	/// <para>The field that will hold the attachment information.</para>
 	/// </summary>
 	public AttachmentProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field that will hold the attachment information.</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -311,7 +388,7 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -320,7 +397,7 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -335,6 +412,12 @@ public sealed partial class AttachmentProcessorDescriptor<TDocument> : Serializa
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (RemoveBinaryValue.HasValue)
+		{
+			writer.WritePropertyName("remove_binary");
+			writer.WriteBooleanValue(RemoveBinaryValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(ResourceNameValue))
@@ -375,14 +458,18 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	private long? IndexedCharsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? IndexedCharsFieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private ICollection<string>? PropertiesValue { get; set; }
+	private bool? RemoveBinaryValue { get; set; }
 	private string? ResourceNameValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -416,12 +503,18 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -473,6 +566,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -482,7 +578,7 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public AttachmentProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -491,7 +587,7 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public AttachmentProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -500,7 +596,7 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public AttachmentProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public AttachmentProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -519,6 +615,15 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 	}
 
 	/// <summary>
+	/// <para>If true, the binary field will be removed from the document</para>
+	/// </summary>
+	public AttachmentProcessorDescriptor RemoveBinary(bool? removeBinary = true)
+	{
+		RemoveBinaryValue = removeBinary;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Field containing the name of the resource to decode.<br/>If specified, the processor passes this resource name to the underlying Tika library to enable Resource Name Based Detection.</para>
 	/// </summary>
 	public AttachmentProcessorDescriptor ResourceName(string? resourceName)
@@ -527,6 +632,9 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public AttachmentProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -612,7 +720,7 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -621,7 +729,7 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -636,6 +744,12 @@ public sealed partial class AttachmentProcessorDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (RemoveBinaryValue.HasValue)
+		{
+			writer.WritePropertyName("remove_binary");
+			writer.WriteBooleanValue(RemoveBinaryValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(ResourceNameValue))

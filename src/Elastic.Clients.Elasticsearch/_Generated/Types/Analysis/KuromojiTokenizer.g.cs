@@ -159,10 +159,10 @@ public sealed partial class KuromojiTokenizerDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, UserDictionaryRulesValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

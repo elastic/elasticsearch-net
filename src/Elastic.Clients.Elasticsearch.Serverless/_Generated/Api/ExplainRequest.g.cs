@@ -199,30 +199,6 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	public ExplainRequestDescriptor(TDocument document) : this(typeof(TDocument), Serverless.Id.From(document))
-	{
-	}
-
-	public ExplainRequestDescriptor(TDocument document, IndexName index, Id id) : this(index, id)
-	{
-	}
-
-	public ExplainRequestDescriptor(TDocument document, IndexName index) : this(index, Serverless.Id.From(document))
-	{
-	}
-
-	public ExplainRequestDescriptor(TDocument document, Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	public ExplainRequestDescriptor(Id id) : this(typeof(TDocument), id)
-	{
-	}
-
-	internal ExplainRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -257,8 +233,8 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -271,7 +247,7 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExplainRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public ExplainRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -279,7 +255,7 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 		return Self;
 	}
 
-	public ExplainRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public ExplainRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -298,7 +274,7 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -318,10 +294,6 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 	internal ExplainRequestDescriptor(Action<ExplainRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("index", index).Required("id", id))
-	{
-	}
-
-	internal ExplainRequestDescriptor()
 	{
 	}
 
@@ -359,8 +331,8 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -373,7 +345,7 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 		return Self;
 	}
 
-	public ExplainRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public ExplainRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -381,7 +353,7 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 		return Self;
 	}
 
-	public ExplainRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public ExplainRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -400,7 +372,7 @@ public sealed partial class ExplainRequestDescriptor : RequestDescriptor<Explain
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

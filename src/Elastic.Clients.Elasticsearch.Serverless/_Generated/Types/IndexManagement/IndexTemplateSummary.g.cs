@@ -33,20 +33,353 @@ public sealed partial class IndexTemplateSummary
 	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aliases")]
-	[ReadOnlyIndexNameDictionaryConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias))]
-	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? Aliases { get; init; }
+	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? Aliases { get; set; }
 	[JsonInclude, JsonPropertyName("lifecycle")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 
 	/// <summary>
 	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mappings")]
-	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? Mappings { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
 	/// <para>Configuration options for the index.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("settings")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? Settings { get; set; }
+}
+
+public sealed partial class IndexTemplateSummaryDescriptor<TDocument> : SerializableDescriptor<IndexTemplateSummaryDescriptor<TDocument>>
+{
+	internal IndexTemplateSummaryDescriptor(Action<IndexTemplateSummaryDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public IndexTemplateSummaryDescriptor() : base()
+	{
+	}
+
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? LifecycleValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>());
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Lifecycle(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
+	{
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = null;
+		MappingsValue = mappings;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	{
+		MappingsValue = null;
+		MappingsDescriptorAction = null;
+		MappingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> configure)
+	{
+		MappingsValue = null;
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
+	{
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = null;
+		SettingsValue = settings;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
+	{
+		SettingsValue = null;
+		SettingsDescriptorAction = null;
+		SettingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
+	{
+		SettingsValue = null;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
+		if (MappingsDescriptor is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+		}
+		else if (MappingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+		}
+		else if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
+		}
+
+		if (SettingsDescriptor is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+		}
+		else if (SettingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+		}
+		else if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+public sealed partial class IndexTemplateSummaryDescriptor : SerializableDescriptor<IndexTemplateSummaryDescriptor>
+{
+	internal IndexTemplateSummaryDescriptor(Action<IndexTemplateSummaryDescriptor> configure) => configure.Invoke(this);
+
+	public IndexTemplateSummaryDescriptor() : base()
+	{
+	}
+
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? LifecycleValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor LifecycleDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> LifecycleDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>Aliases to add.<br/>If the index template includes a `data_stream` object, these are data stream aliases.<br/>Otherwise, these are index aliases.<br/>Data stream aliases ignore the `index_routing`, `routing`, and `search_routing` options.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>> selector)
+	{
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.IndexName, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>());
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? lifecycle)
+	{
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = null;
+		LifecycleValue = lifecycle;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptorAction = null;
+		LifecycleDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Lifecycle(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor> configure)
+	{
+		LifecycleValue = null;
+		LifecycleDescriptor = null;
+		LifecycleDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Mapping for fields in the index.<br/>If specified, this mapping can include field names, field data types, and mapping parameters.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? mappings)
+	{
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = null;
+		MappingsValue = mappings;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor descriptor)
+	{
+		MappingsValue = null;
+		MappingsDescriptorAction = null;
+		MappingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> configure)
+	{
+		MappingsValue = null;
+		MappingsDescriptor = null;
+		MappingsDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Configuration options for the index.</para>
+	/// </summary>
+	public IndexTemplateSummaryDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? settings)
+	{
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = null;
+		SettingsValue = settings;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor descriptor)
+	{
+		SettingsValue = null;
+		SettingsDescriptorAction = null;
+		SettingsDescriptor = descriptor;
+		return Self;
+	}
+
+	public IndexTemplateSummaryDescriptor Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> configure)
+	{
+		SettingsValue = null;
+		SettingsDescriptor = null;
+		SettingsDescriptorAction = configure;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AliasesValue is not null)
+		{
+			writer.WritePropertyName("aliases");
+			JsonSerializer.Serialize(writer, AliasesValue, options);
+		}
+
+		if (LifecycleDescriptor is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleDescriptor, options);
+		}
+		else if (LifecycleDescriptorAction is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(LifecycleDescriptorAction), options);
+		}
+		else if (LifecycleValue is not null)
+		{
+			writer.WritePropertyName("lifecycle");
+			JsonSerializer.Serialize(writer, LifecycleValue, options);
+		}
+
+		if (MappingsDescriptor is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
+		}
+		else if (MappingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+		}
+		else if (MappingsValue is not null)
+		{
+			writer.WritePropertyName("mappings");
+			JsonSerializer.Serialize(writer, MappingsValue, options);
+		}
+
+		if (SettingsDescriptor is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
+		}
+		else if (SettingsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
+		}
+		else if (SettingsValue is not null)
+		{
+			writer.WritePropertyName("settings");
+			JsonSerializer.Serialize(writer, SettingsValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }

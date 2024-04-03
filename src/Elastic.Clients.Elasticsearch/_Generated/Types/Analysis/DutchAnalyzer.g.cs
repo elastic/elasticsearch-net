@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class DutchAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]

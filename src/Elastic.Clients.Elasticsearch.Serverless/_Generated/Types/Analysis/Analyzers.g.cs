@@ -66,47 +66,47 @@ public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<Analyz
 	{
 	}
 
-	public AnalyzersDescriptor Custom(string analyzerName) => AssignVariant<CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Custom(string analyzerName, Action<CustomAnalyzerDescriptor> configure) => AssignVariant<CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Custom(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Custom(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzerDescriptor, CustomAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Custom(string analyzerName, CustomAnalyzer customAnalyzer) => AssignVariant(analyzerName, customAnalyzer);
-	public AnalyzersDescriptor Dutch(string analyzerName) => AssignVariant<DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Dutch(string analyzerName, Action<DutchAnalyzerDescriptor> configure) => AssignVariant<DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Dutch(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Dutch(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.DutchAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.DutchAnalyzerDescriptor, DutchAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Dutch(string analyzerName, DutchAnalyzer dutchAnalyzer) => AssignVariant(analyzerName, dutchAnalyzer);
-	public AnalyzersDescriptor Fingerprint(string analyzerName) => AssignVariant<FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Fingerprint(string analyzerName, Action<FingerprintAnalyzerDescriptor> configure) => AssignVariant<FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Fingerprint(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Fingerprint(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.FingerprintAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.FingerprintAnalyzerDescriptor, FingerprintAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Fingerprint(string analyzerName, FingerprintAnalyzer fingerprintAnalyzer) => AssignVariant(analyzerName, fingerprintAnalyzer);
-	public AnalyzersDescriptor Icu(string analyzerName) => AssignVariant<IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Icu(string analyzerName, Action<IcuAnalyzerDescriptor> configure) => AssignVariant<IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Icu(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Icu(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuAnalyzerDescriptor, IcuAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Icu(string analyzerName, IcuAnalyzer icuAnalyzer) => AssignVariant(analyzerName, icuAnalyzer);
-	public AnalyzersDescriptor Keyword(string analyzerName) => AssignVariant<KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Keyword(string analyzerName, Action<KeywordAnalyzerDescriptor> configure) => AssignVariant<KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Keyword(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Keyword(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.KeywordAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.KeywordAnalyzerDescriptor, KeywordAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Keyword(string analyzerName, KeywordAnalyzer keywordAnalyzer) => AssignVariant(analyzerName, keywordAnalyzer);
-	public AnalyzersDescriptor Kuromoji(string analyzerName) => AssignVariant<KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Kuromoji(string analyzerName, Action<KuromojiAnalyzerDescriptor> configure) => AssignVariant<KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Kuromoji(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Kuromoji(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.KuromojiAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Kuromoji(string analyzerName, KuromojiAnalyzer kuromojiAnalyzer) => AssignVariant(analyzerName, kuromojiAnalyzer);
-	public AnalyzersDescriptor Language(string analyzerName) => AssignVariant<LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Language(string analyzerName, Action<LanguageAnalyzerDescriptor> configure) => AssignVariant<LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Language(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Language(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.LanguageAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Language(string analyzerName, LanguageAnalyzer languageAnalyzer) => AssignVariant(analyzerName, languageAnalyzer);
-	public AnalyzersDescriptor Nori(string analyzerName) => AssignVariant<NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Nori(string analyzerName, Action<NoriAnalyzerDescriptor> configure) => AssignVariant<NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Nori(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Nori(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.NoriAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.NoriAnalyzerDescriptor, NoriAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Nori(string analyzerName, NoriAnalyzer noriAnalyzer) => AssignVariant(analyzerName, noriAnalyzer);
-	public AnalyzersDescriptor Pattern(string analyzerName) => AssignVariant<PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Pattern(string analyzerName, Action<PatternAnalyzerDescriptor> configure) => AssignVariant<PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Pattern(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Pattern(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternAnalyzerDescriptor, PatternAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Pattern(string analyzerName, PatternAnalyzer patternAnalyzer) => AssignVariant(analyzerName, patternAnalyzer);
-	public AnalyzersDescriptor Simple(string analyzerName) => AssignVariant<SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Simple(string analyzerName, Action<SimpleAnalyzerDescriptor> configure) => AssignVariant<SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Simple(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Simple(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimpleAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimpleAnalyzerDescriptor, SimpleAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Simple(string analyzerName, SimpleAnalyzer simpleAnalyzer) => AssignVariant(analyzerName, simpleAnalyzer);
-	public AnalyzersDescriptor Snowball(string analyzerName) => AssignVariant<SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Snowball(string analyzerName, Action<SnowballAnalyzerDescriptor> configure) => AssignVariant<SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Snowball(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Snowball(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballAnalyzerDescriptor, SnowballAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Snowball(string analyzerName, SnowballAnalyzer snowballAnalyzer) => AssignVariant(analyzerName, snowballAnalyzer);
-	public AnalyzersDescriptor Standard(string analyzerName) => AssignVariant<StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Standard(string analyzerName, Action<StandardAnalyzerDescriptor> configure) => AssignVariant<StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Standard(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Standard(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardAnalyzerDescriptor, StandardAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Standard(string analyzerName, StandardAnalyzer standardAnalyzer) => AssignVariant(analyzerName, standardAnalyzer);
-	public AnalyzersDescriptor Stop(string analyzerName) => AssignVariant<StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Stop(string analyzerName, Action<StopAnalyzerDescriptor> configure) => AssignVariant<StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Stop(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Stop(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.StopAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.StopAnalyzerDescriptor, StopAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Stop(string analyzerName, StopAnalyzer stopAnalyzer) => AssignVariant(analyzerName, stopAnalyzer);
-	public AnalyzersDescriptor Whitespace(string analyzerName) => AssignVariant<WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Whitespace(string analyzerName, Action<WhitespaceAnalyzerDescriptor> configure) => AssignVariant<WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, configure);
+	public AnalyzersDescriptor Whitespace(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, null);
+	public AnalyzersDescriptor Whitespace(string analyzerName, Action<Elastic.Clients.Elasticsearch.Serverless.Analysis.WhitespaceAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Analysis.WhitespaceAnalyzerDescriptor, WhitespaceAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Whitespace(string analyzerName, WhitespaceAnalyzer whitespaceAnalyzer) => AssignVariant(analyzerName, whitespaceAnalyzer);
 }
 
@@ -124,39 +124,36 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 
 		switch (type)
 		{
-			case "dutch":
-				return JsonSerializer.Deserialize<DutchAnalyzer>(ref reader, options);
-			case "snowball":
-				return JsonSerializer.Deserialize<SnowballAnalyzer>(ref reader, options);
-			case "kuromoji":
-				return JsonSerializer.Deserialize<KuromojiAnalyzer>(ref reader, options);
-			case "icu_analyzer":
-				return JsonSerializer.Deserialize<IcuAnalyzer>(ref reader, options);
-			case "whitespace":
-				return JsonSerializer.Deserialize<WhitespaceAnalyzer>(ref reader, options);
-			case "stop":
-				return JsonSerializer.Deserialize<StopAnalyzer>(ref reader, options);
-			case "standard":
-				return JsonSerializer.Deserialize<StandardAnalyzer>(ref reader, options);
-			case "simple":
-				return JsonSerializer.Deserialize<SimpleAnalyzer>(ref reader, options);
-			case "pattern":
-				return JsonSerializer.Deserialize<PatternAnalyzer>(ref reader, options);
-			case "nori":
-				return JsonSerializer.Deserialize<NoriAnalyzer>(ref reader, options);
-			case "language":
-				return JsonSerializer.Deserialize<LanguageAnalyzer>(ref reader, options);
-			case "keyword":
-				return JsonSerializer.Deserialize<KeywordAnalyzer>(ref reader, options);
-			case "fingerprint":
-				return JsonSerializer.Deserialize<FingerprintAnalyzer>(ref reader, options);
 			case "custom":
-				return JsonSerializer.Deserialize<CustomAnalyzer>(ref reader, options);
-			case null:
-				return JsonSerializer.Deserialize<CustomAnalyzer>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzer>(ref reader, options);
+			case "dutch":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.DutchAnalyzer>(ref reader, options);
+			case "fingerprint":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.FingerprintAnalyzer>(ref reader, options);
+			case "icu_analyzer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuAnalyzer>(ref reader, options);
+			case "keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.KeywordAnalyzer>(ref reader, options);
+			case "kuromoji":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.KuromojiAnalyzer>(ref reader, options);
+			case "language":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.LanguageAnalyzer>(ref reader, options);
+			case "nori":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.NoriAnalyzer>(ref reader, options);
+			case "pattern":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternAnalyzer>(ref reader, options);
+			case "simple":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.SimpleAnalyzer>(ref reader, options);
+			case "snowball":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballAnalyzer>(ref reader, options);
+			case "standard":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardAnalyzer>(ref reader, options);
+			case "stop":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.StopAnalyzer>(ref reader, options);
+			case "whitespace":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.WhitespaceAnalyzer>(ref reader, options);
 			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(IAnalyzer));
-				return null;
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzer>(ref reader, options);
 		}
 	}
 
@@ -170,47 +167,47 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 
 		switch (value.Type)
 		{
+			case "custom":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.CustomAnalyzer), options);
+				return;
 			case "dutch":
-				JsonSerializer.Serialize(writer, value, typeof(DutchAnalyzer), options);
-				return;
-			case "snowball":
-				JsonSerializer.Serialize(writer, value, typeof(SnowballAnalyzer), options);
-				return;
-			case "kuromoji":
-				JsonSerializer.Serialize(writer, value, typeof(KuromojiAnalyzer), options);
-				return;
-			case "icu_analyzer":
-				JsonSerializer.Serialize(writer, value, typeof(IcuAnalyzer), options);
-				return;
-			case "whitespace":
-				JsonSerializer.Serialize(writer, value, typeof(WhitespaceAnalyzer), options);
-				return;
-			case "stop":
-				JsonSerializer.Serialize(writer, value, typeof(StopAnalyzer), options);
-				return;
-			case "standard":
-				JsonSerializer.Serialize(writer, value, typeof(StandardAnalyzer), options);
-				return;
-			case "simple":
-				JsonSerializer.Serialize(writer, value, typeof(SimpleAnalyzer), options);
-				return;
-			case "pattern":
-				JsonSerializer.Serialize(writer, value, typeof(PatternAnalyzer), options);
-				return;
-			case "nori":
-				JsonSerializer.Serialize(writer, value, typeof(NoriAnalyzer), options);
-				return;
-			case "language":
-				JsonSerializer.Serialize(writer, value, typeof(LanguageAnalyzer), options);
-				return;
-			case "keyword":
-				JsonSerializer.Serialize(writer, value, typeof(KeywordAnalyzer), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.DutchAnalyzer), options);
 				return;
 			case "fingerprint":
-				JsonSerializer.Serialize(writer, value, typeof(FingerprintAnalyzer), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.FingerprintAnalyzer), options);
 				return;
-			case "custom":
-				JsonSerializer.Serialize(writer, value, typeof(CustomAnalyzer), options);
+			case "icu_analyzer":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.IcuAnalyzer), options);
+				return;
+			case "keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.KeywordAnalyzer), options);
+				return;
+			case "kuromoji":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.KuromojiAnalyzer), options);
+				return;
+			case "language":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.LanguageAnalyzer), options);
+				return;
+			case "nori":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.NoriAnalyzer), options);
+				return;
+			case "pattern":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.PatternAnalyzer), options);
+				return;
+			case "simple":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.SimpleAnalyzer), options);
+				return;
+			case "snowball":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballAnalyzer), options);
+				return;
+			case "standard":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.StandardAnalyzer), options);
+				return;
+			case "stop":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.StopAnalyzer), options);
+				return;
+			case "whitespace":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Analysis.WhitespaceAnalyzer), options);
 				return;
 			default:
 				var type = value.GetType();
@@ -223,5 +220,5 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 [JsonConverter(typeof(AnalyzerInterfaceConverter))]
 public partial interface IAnalyzer
 {
-	public string Type { get; }
+	public string? Type { get; }
 }

@@ -74,6 +74,8 @@ public sealed partial class ShardStats
 	[JsonInclude, JsonPropertyName("shards")]
 	[ReadOnlyIndexNameDictionaryConverter(typeof(object))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.IndexName, object>? Shards { get; init; }
+	[JsonInclude, JsonPropertyName("shard_stats")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats2 { get; init; }
 	[JsonInclude, JsonPropertyName("store")]
 	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; init; }
 	[JsonInclude, JsonPropertyName("translog")]

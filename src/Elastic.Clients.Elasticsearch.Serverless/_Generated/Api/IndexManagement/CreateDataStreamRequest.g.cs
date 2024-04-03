@@ -62,10 +62,6 @@ public sealed partial class CreateDataStreamRequestDescriptor : RequestDescripto
 	{
 	}
 
-	internal CreateDataStreamRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreateDataStream;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

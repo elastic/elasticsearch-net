@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 public sealed partial class ShardStoreIndex
 {
 	[JsonInclude, JsonPropertyName("aliases")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? Aliases { get; init; }
+	public IReadOnlyCollection<string>? Aliases { get; init; }
 	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; init; }
 }

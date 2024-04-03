@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class HasChildQuery : SearchQuery
+public sealed partial class HasChildQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -63,6 +64,8 @@ public sealed partial class HasChildQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Indicates how scores for matching child documents affect the root parent document’s relevance score.</para>
@@ -76,9 +79,7 @@ public sealed partial class HasChildQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 
-	public static implicit operator Query(HasChildQuery hasChildQuery) => QueryDsl.Query.HasChild(hasChildQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("has_child", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(HasChildQuery hasChildQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.HasChild(hasChildQuery);
 }
 
 public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDescriptor<HasChildQueryDescriptor<TDocument>>
@@ -92,17 +93,20 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-	private Action<Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
 	private int? MaxChildrenValue { get; set; }
 	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 	private string TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public HasChildQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -129,7 +133,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> InnerHits(Core.Search.InnerHitsDescriptor<TDocument> descriptor)
+	public HasChildQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> descriptor)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptorAction = null;
@@ -137,7 +141,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> InnerHits(Action<Core.Search.InnerHitsDescriptor<TDocument>> configure)
+	public HasChildQueryDescriptor<TDocument> InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -174,7 +178,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(QueryDescriptor<TDocument> descriptor)
+	public HasChildQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -182,7 +186,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public HasChildQueryDescriptor<TDocument> Query(Action<QueryDescriptor<TDocument>> configure)
+	public HasChildQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -237,7 +241,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
 		}
 		else if (InnerHitsValue is not null)
 		{
@@ -265,7 +269,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -286,7 +290,7 @@ public sealed partial class HasChildQueryDescriptor<TDocument> : SerializableDes
 		}
 
 		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteStringValue(TypeValue);
 		writer.WriteEndObject();
 	}
 }
@@ -302,17 +306,20 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 	private float? BoostValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHitsValue { get; set; }
-	private Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-	private Action<Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
 	private int? MaxChildrenValue { get; set; }
 	private int? MinChildrenValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query QueryValue { get; set; }
-	private QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreModeValue { get; set; }
 	private string TypeValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public HasChildQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -339,7 +346,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor InnerHits(Core.Search.InnerHitsDescriptor descriptor)
+	public HasChildQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor descriptor)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptorAction = null;
@@ -347,7 +354,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor InnerHits(Action<Core.Search.InnerHitsDescriptor> configure)
+	public HasChildQueryDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -384,7 +391,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Query(QueryDescriptor descriptor)
+	public HasChildQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -392,7 +399,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		return Self;
 	}
 
-	public HasChildQueryDescriptor Query(Action<QueryDescriptor> configure)
+	public HasChildQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -447,7 +454,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
 		}
 		else if (InnerHitsValue is not null)
 		{
@@ -475,7 +482,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -496,7 +503,7 @@ public sealed partial class HasChildQueryDescriptor : SerializableDescriptor<Has
 		}
 
 		writer.WritePropertyName("type");
-		JsonSerializer.Serialize(writer, TypeValue, options);
+		writer.WriteStringValue(TypeValue);
 		writer.WriteEndObject();
 	}
 }

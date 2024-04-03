@@ -142,10 +142,6 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal EqlSearchRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -168,18 +164,18 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
@@ -210,6 +206,15 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
+	/// <para>Field containing the event classification, such as process, file, or network.</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Expression<Func<TDocument, object>> eventCategoryField)
+	{
+		EventCategoryFieldValue = eventCategoryField;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Maximum number of events to search at a time for sequence queries.</para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> FetchSize(int? fetchSize)
@@ -230,7 +235,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	public EqlSearchRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = null;
 		FieldsDescriptorAction = null;
@@ -239,7 +244,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(Action<QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	public EqlSearchRequestDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -248,7 +253,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(params Action<QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	public EqlSearchRequestDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -269,7 +274,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public EqlSearchRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -278,7 +283,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public EqlSearchRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -287,7 +292,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(params Action<QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	public EqlSearchRequestDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -323,9 +328,9 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	public EqlSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -357,6 +362,15 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	/// <summary>
+	/// <para>Field used to sort hits with the same timestamp in ascending order</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> TiebreakerField(Expression<Func<TDocument, object>> tiebreakerField)
+	{
+		TiebreakerFieldValue = tiebreakerField;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Field containing event timestamp. Default "@timestamp"</para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? timestampField)
@@ -369,6 +383,15 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// <para>Field containing event timestamp. Default "@timestamp"</para>
 	/// </summary>
 	public EqlSearchRequestDescriptor<TDocument> TimestampField<TValue>(Expression<Func<TDocument, TValue>> timestampField)
+	{
+		TimestampFieldValue = timestampField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field containing event timestamp. Default "@timestamp"</para>
+	/// </summary>
+	public EqlSearchRequestDescriptor<TDocument> TimestampField(Expression<Func<TDocument, object>> timestampField)
 	{
 		TimestampFieldValue = timestampField;
 		return Self;
@@ -409,7 +432,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		else if (FieldsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
 		}
 		else if (FieldsDescriptorActions is not null)
 		{
@@ -418,7 +441,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
 			}
 
 			if (FieldsDescriptorActions.Length > 1)
@@ -438,7 +461,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterDescriptorActions is not null)
 		{
@@ -447,7 +470,7 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
 			if (FilterDescriptorActions.Length > 1)
@@ -524,10 +547,6 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	{
 	}
 
-	internal EqlSearchRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -550,18 +569,18 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
 	private int? FetchSizeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
 	private bool? KeepOnCompletionValue { get; set; }
 	private string QueryValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappingsValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
 	private int? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
@@ -621,7 +640,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Fields(QueryDsl.FieldAndFormatDescriptor descriptor)
+	public EqlSearchRequestDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
 	{
 		FieldsValue = null;
 		FieldsDescriptorAction = null;
@@ -630,7 +649,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Fields(Action<QueryDsl.FieldAndFormatDescriptor> configure)
+	public EqlSearchRequestDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -639,7 +658,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Fields(params Action<QueryDsl.FieldAndFormatDescriptor>[] configure)
+	public EqlSearchRequestDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
 	{
 		FieldsValue = null;
 		FieldsDescriptor = null;
@@ -660,7 +679,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public EqlSearchRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -669,7 +688,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public EqlSearchRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -678,7 +697,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor Filter(params Action<QueryDsl.QueryDescriptor>[] configure)
+	public EqlSearchRequestDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -714,9 +733,9 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		return Self;
 	}
 
-	public EqlSearchRequestDescriptor RuntimeMappings(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>> selector)
+	public EqlSearchRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>());
+		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
 		return Self;
 	}
 
@@ -818,7 +837,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		else if (FieldsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
 		}
 		else if (FieldsDescriptorActions is not null)
 		{
@@ -827,7 +846,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.FieldAndFormatDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
 			}
 
 			if (FieldsDescriptorActions.Length > 1)
@@ -847,7 +866,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterDescriptorActions is not null)
 		{
@@ -856,7 +875,7 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
 			if (FilterDescriptorActions.Length > 1)

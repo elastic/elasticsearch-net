@@ -62,10 +62,6 @@ public sealed partial class DeletePolicyRequestDescriptor : RequestDescriptor<De
 	{
 	}
 
-	internal DeletePolicyRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichDeletePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

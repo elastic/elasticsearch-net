@@ -116,10 +116,6 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	internal DeleteIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -153,10 +149,6 @@ public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<Del
 	internal DeleteIndexRequestDescriptor(Action<DeleteIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeleteIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal DeleteIndexRequestDescriptor()
 	{
 	}
 

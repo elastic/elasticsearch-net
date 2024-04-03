@@ -29,6 +29,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Get;
 
 public sealed partial class GetResult<TDocument>
 {
+	[JsonInclude, JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
+	[JsonInclude, JsonPropertyName("found")]
+	public bool Found { get; init; }
 	[JsonInclude, JsonPropertyName("_id")]
 	public string Id { get; init; }
 	[JsonInclude, JsonPropertyName("_index")]
@@ -40,12 +44,7 @@ public sealed partial class GetResult<TDocument>
 	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 	[JsonInclude, JsonPropertyName("_source")]
-	[SourceConverter]
 	public TDocument? Source { get; init; }
 	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
-	[JsonInclude, JsonPropertyName("fields")]
-	public Elastic.Clients.Elasticsearch.FieldValues? Fields { get; init; }
-	[JsonInclude, JsonPropertyName("found")]
-	public bool Found { get; init; }
 }

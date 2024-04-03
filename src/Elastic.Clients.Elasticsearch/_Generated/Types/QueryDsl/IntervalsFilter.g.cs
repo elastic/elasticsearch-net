@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -44,6 +45,28 @@ public sealed partial class IntervalsFilter
 
 	internal object Variant { get; }
 	internal string VariantName { get; }
+
+	public static IntervalsFilter After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("after", intervalsContainer);
+	public static IntervalsFilter Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("before", intervalsContainer);
+	public static IntervalsFilter ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("contained_by", intervalsContainer);
+	public static IntervalsFilter Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("containing", intervalsContainer);
+	public static IntervalsFilter NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_contained_by", intervalsContainer);
+	public static IntervalsFilter NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_containing", intervalsContainer);
+	public static IntervalsFilter NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("not_overlapping", intervalsContainer);
+	public static IntervalsFilter Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => new IntervalsFilter("overlapping", intervalsContainer);
+	public static IntervalsFilter Script(Elastic.Clients.Elasticsearch.Script script) => new IntervalsFilter("script", script);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class IntervalsFilterConverter : JsonConverter<IntervalsFilter>
@@ -55,23 +78,129 @@ internal sealed partial class IntervalsFilterConverter : JsonConverter<Intervals
 			throw new JsonException("Expected start token.");
 		}
 
-		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "after")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "before")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "contained_by")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "containing")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "not_contained_by")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "not_containing")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "not_overlapping")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "overlapping")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "script")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsFilter' from the response.");
 		}
 
-		var propertyName = reader.GetString();
 		reader.Read();
-		throw new JsonException();
+		var result = new IntervalsFilter(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IntervalsFilter value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "after":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "before":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "contained_by":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "containing":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "not_contained_by":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "not_containing":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "not_overlapping":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "overlapping":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Intervals)value.Variant, options);
+					break;
+				case "script":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Script>(writer, (Elastic.Clients.Elasticsearch.Script)value.Variant, options);
+					break;
+			}
 		}
 
 		writer.WriteEndObject();
@@ -109,24 +238,40 @@ public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public IntervalsFilterDescriptor<TDocument> After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "after");
+	public IntervalsFilterDescriptor<TDocument> After(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "after");
+	public IntervalsFilterDescriptor<TDocument> Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "before");
+	public IntervalsFilterDescriptor<TDocument> Before(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "before");
+	public IntervalsFilterDescriptor<TDocument> ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "contained_by");
+	public IntervalsFilterDescriptor<TDocument> ContainedBy(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "contained_by");
+	public IntervalsFilterDescriptor<TDocument> Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "containing");
+	public IntervalsFilterDescriptor<TDocument> Containing(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "containing");
+	public IntervalsFilterDescriptor<TDocument> NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_contained_by");
+	public IntervalsFilterDescriptor<TDocument> NotContainedBy(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_contained_by");
+	public IntervalsFilterDescriptor<TDocument> NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_containing");
+	public IntervalsFilterDescriptor<TDocument> NotContaining(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_containing");
+	public IntervalsFilterDescriptor<TDocument> NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_overlapping");
+	public IntervalsFilterDescriptor<TDocument> NotOverlapping(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "not_overlapping");
+	public IntervalsFilterDescriptor<TDocument> Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
+	public IntervalsFilterDescriptor<TDocument> Overlapping(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "overlapping");
+	public IntervalsFilterDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -162,24 +307,40 @@ public sealed partial class IntervalsFilterDescriptor : SerializableDescriptor<I
 		return Self;
 	}
 
+	public IntervalsFilterDescriptor After(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "after");
+	public IntervalsFilterDescriptor After<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "after");
+	public IntervalsFilterDescriptor Before(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "before");
+	public IntervalsFilterDescriptor Before<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "before");
+	public IntervalsFilterDescriptor ContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "contained_by");
+	public IntervalsFilterDescriptor ContainedBy<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "contained_by");
+	public IntervalsFilterDescriptor Containing(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "containing");
+	public IntervalsFilterDescriptor Containing<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "containing");
+	public IntervalsFilterDescriptor NotContainedBy(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_contained_by");
+	public IntervalsFilterDescriptor NotContainedBy<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_contained_by");
+	public IntervalsFilterDescriptor NotContaining(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_containing");
+	public IntervalsFilterDescriptor NotContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_containing");
+	public IntervalsFilterDescriptor NotOverlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "not_overlapping");
+	public IntervalsFilterDescriptor NotOverlapping<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "not_overlapping");
+	public IntervalsFilterDescriptor Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
+	public IntervalsFilterDescriptor Overlapping<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "overlapping");
+	public IntervalsFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

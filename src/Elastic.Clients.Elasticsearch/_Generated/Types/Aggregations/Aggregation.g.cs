@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -30,335 +31,941 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [JsonConverter(typeof(AggregationConverter))]
 public sealed partial class Aggregation
 {
-	internal Aggregation(ISearchAggregation variant) => Variant = variant ?? throw new ArgumentNullException(nameof(variant));
+	internal Aggregation(string variantName, object variant)
+	{
+		if (variantName is null)
+			throw new ArgumentNullException(nameof(variantName));
+		if (variant is null)
+			throw new ArgumentNullException(nameof(variant));
+		if (string.IsNullOrWhiteSpace(variantName))
+			throw new ArgumentException("Variant name must not be empty or whitespace.");
+		VariantName = variantName;
+		Variant = variant;
+	}
 
-	internal ISearchAggregation Variant { get; }
+	internal object Variant { get; }
+	internal string VariantName { get; }
+
+	public static Aggregation AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation adjacencyMatrixAggregation) => new Aggregation("adjacency_matrix", adjacencyMatrixAggregation);
+	public static Aggregation AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation autoDateHistogramAggregation) => new Aggregation("auto_date_histogram", autoDateHistogramAggregation);
+	public static Aggregation Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation averageAggregation) => new Aggregation("avg", averageAggregation);
+	public static Aggregation AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation averageBucketAggregation) => new Aggregation("avg_bucket", averageBucketAggregation);
+	public static Aggregation Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation boxplotAggregation) => new Aggregation("boxplot", boxplotAggregation);
+	public static Aggregation BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation bucketCorrelationAggregation) => new Aggregation("bucket_correlation", bucketCorrelationAggregation);
+	public static Aggregation BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation bucketKsAggregation) => new Aggregation("bucket_count_ks_test", bucketKsAggregation);
+	public static Aggregation BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation bucketScriptAggregation) => new Aggregation("bucket_script", bucketScriptAggregation);
+	public static Aggregation BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation bucketSelectorAggregation) => new Aggregation("bucket_selector", bucketSelectorAggregation);
+	public static Aggregation BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation bucketSortAggregation) => new Aggregation("bucket_sort", bucketSortAggregation);
+	public static Aggregation Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => new Aggregation("cardinality", cardinalityAggregation);
+	public static Aggregation CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation categorizeTextAggregation) => new Aggregation("categorize_text", categorizeTextAggregation);
+	public static Aggregation Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation childrenAggregation) => new Aggregation("children", childrenAggregation);
+	public static Aggregation Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => new Aggregation("composite", compositeAggregation);
+	public static Aggregation CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation cumulativeCardinalityAggregation) => new Aggregation("cumulative_cardinality", cumulativeCardinalityAggregation);
+	public static Aggregation CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation cumulativeSumAggregation) => new Aggregation("cumulative_sum", cumulativeSumAggregation);
+	public static Aggregation DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => new Aggregation("date_histogram", dateHistogramAggregation);
+	public static Aggregation DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => new Aggregation("date_range", dateRangeAggregation);
+	public static Aggregation Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation derivativeAggregation) => new Aggregation("derivative", derivativeAggregation);
+	public static Aggregation DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation diversifiedSamplerAggregation) => new Aggregation("diversified_sampler", diversifiedSamplerAggregation);
+	public static Aggregation ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation extendedStatsAggregation) => new Aggregation("extended_stats", extendedStatsAggregation);
+	public static Aggregation ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation extendedStatsBucketAggregation) => new Aggregation("extended_stats_bucket", extendedStatsBucketAggregation);
+	public static Aggregation Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query queryContainer) => new Aggregation("filter", queryContainer);
+	public static Aggregation Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation filtersAggregation) => new Aggregation("filters", filtersAggregation);
+	public static Aggregation FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation frequentItemSetsAggregation) => new Aggregation("frequent_item_sets", frequentItemSetsAggregation);
+	public static Aggregation GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation geoBoundsAggregation) => new Aggregation("geo_bounds", geoBoundsAggregation);
+	public static Aggregation GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation geoCentroidAggregation) => new Aggregation("geo_centroid", geoCentroidAggregation);
+	public static Aggregation GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation geoDistanceAggregation) => new Aggregation("geo_distance", geoDistanceAggregation);
+	public static Aggregation GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation geohashGridAggregation) => new Aggregation("geohash_grid", geohashGridAggregation);
+	public static Aggregation GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation geohexGridAggregation) => new Aggregation("geohex_grid", geohexGridAggregation);
+	public static Aggregation GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => new Aggregation("geo_line", geoLineAggregation);
+	public static Aggregation GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => new Aggregation("geotile_grid", geotileGridAggregation);
+	public static Aggregation Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation globalAggregation) => new Aggregation("global", globalAggregation);
+	public static Aggregation Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new Aggregation("histogram", histogramAggregation);
+	public static Aggregation Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation inferenceAggregation) => new Aggregation("inference", inferenceAggregation);
+	public static Aggregation IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation ipPrefixAggregation) => new Aggregation("ip_prefix", ipPrefixAggregation);
+	public static Aggregation IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation ipRangeAggregation) => new Aggregation("ip_range", ipRangeAggregation);
+	public static Aggregation Line(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => new Aggregation("line", geoLineAggregation);
+	public static Aggregation MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation matrixStatsAggregation) => new Aggregation("matrix_stats", matrixStatsAggregation);
+	public static Aggregation Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation maxAggregation) => new Aggregation("max", maxAggregation);
+	public static Aggregation MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation maxBucketAggregation) => new Aggregation("max_bucket", maxBucketAggregation);
+	public static Aggregation MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation medianAbsoluteDeviationAggregation) => new Aggregation("median_absolute_deviation", medianAbsoluteDeviationAggregation);
+	public static Aggregation Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation minAggregation) => new Aggregation("min", minAggregation);
+	public static Aggregation MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation minBucketAggregation) => new Aggregation("min_bucket", minBucketAggregation);
+	public static Aggregation Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => new Aggregation("missing", missingAggregation);
+	public static Aggregation MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation movingFunctionAggregation) => new Aggregation("moving_fn", movingFunctionAggregation);
+	public static Aggregation MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation movingPercentilesAggregation) => new Aggregation("moving_percentiles", movingPercentilesAggregation);
+	public static Aggregation MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation multiTermsAggregation) => new Aggregation("multi_terms", multiTermsAggregation);
+	public static Aggregation Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation nestedAggregation) => new Aggregation("nested", nestedAggregation);
+	public static Aggregation Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation normalizeAggregation) => new Aggregation("normalize", normalizeAggregation);
+	public static Aggregation Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation parentAggregation) => new Aggregation("parent", parentAggregation);
+	public static Aggregation PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation percentileRanksAggregation) => new Aggregation("percentile_ranks", percentileRanksAggregation);
+	public static Aggregation Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation percentilesAggregation) => new Aggregation("percentiles", percentilesAggregation);
+	public static Aggregation PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => new Aggregation("percentiles_bucket", percentilesBucketAggregation);
+	public static Aggregation Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => new Aggregation("range", rangeAggregation);
+	public static Aggregation RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => new Aggregation("rare_terms", rareTermsAggregation);
+	public static Aggregation Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation rateAggregation) => new Aggregation("rate", rateAggregation);
+	public static Aggregation ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation reverseNestedAggregation) => new Aggregation("reverse_nested", reverseNestedAggregation);
+	public static Aggregation Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation samplerAggregation) => new Aggregation("sampler", samplerAggregation);
+	public static Aggregation ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation scriptedMetricAggregation) => new Aggregation("scripted_metric", scriptedMetricAggregation);
+	public static Aggregation SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation serialDifferencingAggregation) => new Aggregation("serial_diff", serialDifferencingAggregation);
+	public static Aggregation SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation significantTermsAggregation) => new Aggregation("significant_terms", significantTermsAggregation);
+	public static Aggregation SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation significantTextAggregation) => new Aggregation("significant_text", significantTextAggregation);
+	public static Aggregation Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation statsAggregation) => new Aggregation("stats", statsAggregation);
+	public static Aggregation StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation statsBucketAggregation) => new Aggregation("stats_bucket", statsBucketAggregation);
+	public static Aggregation StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation stringStatsAggregation) => new Aggregation("string_stats", stringStatsAggregation);
+	public static Aggregation Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation sumAggregation) => new Aggregation("sum", sumAggregation);
+	public static Aggregation SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation sumBucketAggregation) => new Aggregation("sum_bucket", sumBucketAggregation);
+	public static Aggregation Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new Aggregation("terms", termsAggregation);
+	public static Aggregation TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => new Aggregation("top_hits", topHitsAggregation);
+	public static Aggregation TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => new Aggregation("top_metrics", topMetricsAggregation);
+	public static Aggregation TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation tTestAggregation) => new Aggregation("t_test", tTestAggregation);
+	public static Aggregation ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => new Aggregation("value_count", valueCountAggregation);
+	public static Aggregation VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation variableWidthHistogramAggregation) => new Aggregation("variable_width_histogram", variableWidthHistogramAggregation);
+	public static Aggregation WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation weightedAverageAggregation) => new Aggregation("weighted_avg", weightedAverageAggregation);
+
+	/// <summary>
+	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("aggregations")]
+	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
+	public IDictionary<string, object>? Meta { get; set; }
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 {
 	public override Aggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		var readerCopy = reader;
-		readerCopy.Read();
-		if (readerCopy.TokenType != JsonTokenType.PropertyName)
+		if (reader.TokenType != JsonTokenType.StartObject)
 		{
-			throw new JsonException();
+			throw new JsonException("Expected start token.");
 		}
 
-		var propertyName = readerCopy.GetString();
-		if (propertyName == "adjacency_matrix")
+		object? variantValue = default;
+		string? variantNameValue = default;
+		IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? aggregationsValue = default;
+		IDictionary<string, object>? metaValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>("adjacency_matrix", ref reader, options);
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "aggregations")
+			{
+				aggregationsValue = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "meta")
+			{
+				metaValue = JsonSerializer.Deserialize<IDictionary<string, object>?>(ref reader, options);
+				continue;
+			}
+
+			if (propertyName == "adjacency_matrix")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "auto_date_histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "avg")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "avg_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "boxplot")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bucket_correlation")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bucket_count_ks_test")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bucket_script")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bucket_selector")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "bucket_sort")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "cardinality")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "categorize_text")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "children")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "composite")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "cumulative_cardinality")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "cumulative_sum")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "date_histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "date_range")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "derivative")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "diversified_sampler")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "extended_stats")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "extended_stats_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "filter")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "filters")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "frequent_item_sets")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_bounds")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_centroid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_distance")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geohash_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geohex_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_line")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geotile_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "global")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "inference")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "ip_prefix")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "ip_range")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "line")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "matrix_stats")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "max")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "max_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "median_absolute_deviation")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "min")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "min_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "missing")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "moving_fn")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "moving_percentiles")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "multi_terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "nested")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "normalize")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "parent")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "percentile_ranks")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "percentiles")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "percentiles_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "range")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "rare_terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "rate")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "reverse_nested")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "sampler")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "scripted_metric")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "serial_diff")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "significant_terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "significant_text")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "stats")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "stats_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "string_stats")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "sum")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "sum_bucket")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "top_hits")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "top_metrics")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "t_test")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "value_count")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "variable_width_histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "weighted_avg")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Aggregation' from the response.");
 		}
 
-		if (propertyName == "auto_date_histogram")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation?>("auto_date_histogram", ref reader, options);
-		}
-
-		if (propertyName == "avg")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation?>("avg", ref reader, options);
-		}
-
-		if (propertyName == "boxplot")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation?>("boxplot", ref reader, options);
-		}
-
-		if (propertyName == "bucket_sort")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation?>("bucket_sort", ref reader, options);
-		}
-
-		if (propertyName == "cardinality")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation?>("cardinality", ref reader, options);
-		}
-
-		if (propertyName == "children")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation?>("children", ref reader, options);
-		}
-
-		if (propertyName == "composite")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation?>("composite", ref reader, options);
-		}
-
-		if (propertyName == "cumulative_cardinality")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation?>("cumulative_cardinality", ref reader, options);
-		}
-
-		if (propertyName == "cumulative_sum")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation?>("cumulative_sum", ref reader, options);
-		}
-
-		if (propertyName == "date_histogram")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>("date_histogram", ref reader, options);
-		}
-
-		if (propertyName == "date_range")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation?>("date_range", ref reader, options);
-		}
-
-		if (propertyName == "derivative")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation?>("derivative", ref reader, options);
-		}
-
-		if (propertyName == "diversified_sampler")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation?>("diversified_sampler", ref reader, options);
-		}
-
-		if (propertyName == "extended_stats")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation?>("extended_stats", ref reader, options);
-		}
-
-		if (propertyName == "extended_stats_bucket")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation?>("extended_stats_bucket", ref reader, options);
-		}
-
-		if (propertyName == "filters")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation?>("filters", ref reader, options);
-		}
-
-		if (propertyName == "geo_bounds")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation?>("geo_bounds", ref reader, options);
-		}
-
-		if (propertyName == "geo_centroid")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation?>("geo_centroid", ref reader, options);
-		}
-
-		if (propertyName == "geo_distance")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation?>("geo_distance", ref reader, options);
-		}
-
-		if (propertyName == "geohash_grid")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation?>("geohash_grid", ref reader, options);
-		}
-
-		if (propertyName == "geohex_grid")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation?>("geohex_grid", ref reader, options);
-		}
-
-		if (propertyName == "geo_line")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation?>("geo_line", ref reader, options);
-		}
-
-		if (propertyName == "geotile_grid")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>("geotile_grid", ref reader, options);
-		}
-
-		if (propertyName == "global")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation?>("global", ref reader, options);
-		}
-
-		if (propertyName == "histogram")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>("histogram", ref reader, options);
-		}
-
-		if (propertyName == "inference")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation?>("inference", ref reader, options);
-		}
-
-		if (propertyName == "ip_prefix")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation?>("ip_prefix", ref reader, options);
-		}
-
-		if (propertyName == "ip_range")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation?>("ip_range", ref reader, options);
-		}
-
-		if (propertyName == "matrix_stats")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation?>("matrix_stats", ref reader, options);
-		}
-
-		if (propertyName == "max")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation?>("max", ref reader, options);
-		}
-
-		if (propertyName == "median_absolute_deviation")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation?>("median_absolute_deviation", ref reader, options);
-		}
-
-		if (propertyName == "min")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation?>("min", ref reader, options);
-		}
-
-		if (propertyName == "missing")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation?>("missing", ref reader, options);
-		}
-
-		if (propertyName == "multi_terms")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation?>("multi_terms", ref reader, options);
-		}
-
-		if (propertyName == "nested")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation?>("nested", ref reader, options);
-		}
-
-		if (propertyName == "parent")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation?>("parent", ref reader, options);
-		}
-
-		if (propertyName == "percentile_ranks")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation?>("percentile_ranks", ref reader, options);
-		}
-
-		if (propertyName == "percentiles")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation?>("percentiles", ref reader, options);
-		}
-
-		if (propertyName == "percentiles_bucket")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation?>("percentiles_bucket", ref reader, options);
-		}
-
-		if (propertyName == "range")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation?>("range", ref reader, options);
-		}
-
-		if (propertyName == "rare_terms")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation?>("rare_terms", ref reader, options);
-		}
-
-		if (propertyName == "rate")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation?>("rate", ref reader, options);
-		}
-
-		if (propertyName == "reverse_nested")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation?>("reverse_nested", ref reader, options);
-		}
-
-		if (propertyName == "sampler")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation?>("sampler", ref reader, options);
-		}
-
-		if (propertyName == "scripted_metric")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation?>("scripted_metric", ref reader, options);
-		}
-
-		if (propertyName == "significant_terms")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation?>("significant_terms", ref reader, options);
-		}
-
-		if (propertyName == "stats")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation?>("stats", ref reader, options);
-		}
-
-		if (propertyName == "stats_bucket")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation?>("stats_bucket", ref reader, options);
-		}
-
-		if (propertyName == "string_stats")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation?>("string_stats", ref reader, options);
-		}
-
-		if (propertyName == "sum")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation?>("sum", ref reader, options);
-		}
-
-		if (propertyName == "terms")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>("terms", ref reader, options);
-		}
-
-		if (propertyName == "top_hits")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation?>("top_hits", ref reader, options);
-		}
-
-		if (propertyName == "top_metrics")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation?>("top_metrics", ref reader, options);
-		}
-
-		if (propertyName == "t_test")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation?>("t_test", ref reader, options);
-		}
-
-		if (propertyName == "value_count")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation?>("value_count", ref reader, options);
-		}
-
-		if (propertyName == "variable_width_histogram")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation?>("variable_width_histogram", ref reader, options);
-		}
-
-		if (propertyName == "weighted_avg")
-		{
-			return AggregationSerializationHelper.ReadContainer<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation?>("weighted_avg", ref reader, options);
-		}
-
-		throw new JsonException();
+		reader.Read();
+		var result = new Aggregation(variantNameValue, variantValue);
+		result.Aggregations = aggregationsValue;
+		result.Meta = metaValue;
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Aggregation value, JsonSerializerOptions options)
 	{
-		if (value is null)
+		writer.WriteStartObject();
+		if (value.Aggregations is not null)
 		{
-			writer.WriteNullValue();
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, value.Aggregations, options);
 		}
-		else if (value.SerializeFluent is not null)
+
+		if (value.Meta is not null)
 		{
-			value.SerializeFluent(writer, options);
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, value.Meta, options);
 		}
-		else if (value.Variant is not null)
+
+		if (value.VariantName is not null && value.Variant is not null)
 		{
-			var type = value.Variant.GetType();
-			JsonSerializer.Serialize(writer, value.Variant, type, options);
+			writer.WritePropertyName(value.VariantName);
+			switch (value.VariantName)
+			{
+				case "adjacency_matrix":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation)value.Variant, options);
+					break;
+				case "auto_date_histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation)value.Variant, options);
+					break;
+				case "avg":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation)value.Variant, options);
+					break;
+				case "avg_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation)value.Variant, options);
+					break;
+				case "boxplot":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation)value.Variant, options);
+					break;
+				case "bucket_correlation":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation)value.Variant, options);
+					break;
+				case "bucket_count_ks_test":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation)value.Variant, options);
+					break;
+				case "bucket_script":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation)value.Variant, options);
+					break;
+				case "bucket_selector":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation)value.Variant, options);
+					break;
+				case "bucket_sort":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation)value.Variant, options);
+					break;
+				case "cardinality":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)value.Variant, options);
+					break;
+				case "categorize_text":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation)value.Variant, options);
+					break;
+				case "children":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation)value.Variant, options);
+					break;
+				case "composite":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation)value.Variant, options);
+					break;
+				case "cumulative_cardinality":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation)value.Variant, options);
+					break;
+				case "cumulative_sum":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation)value.Variant, options);
+					break;
+				case "date_histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation)value.Variant, options);
+					break;
+				case "date_range":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation)value.Variant, options);
+					break;
+				case "derivative":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation)value.Variant, options);
+					break;
+				case "diversified_sampler":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation)value.Variant, options);
+					break;
+				case "extended_stats":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation)value.Variant, options);
+					break;
+				case "extended_stats_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation)value.Variant, options);
+					break;
+				case "filter":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.Query)value.Variant, options);
+					break;
+				case "filters":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation)value.Variant, options);
+					break;
+				case "frequent_item_sets":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation)value.Variant, options);
+					break;
+				case "geo_bounds":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation)value.Variant, options);
+					break;
+				case "geo_centroid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation)value.Variant, options);
+					break;
+				case "geo_distance":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation)value.Variant, options);
+					break;
+				case "geohash_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation)value.Variant, options);
+					break;
+				case "geohex_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation)value.Variant, options);
+					break;
+				case "geo_line":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation)value.Variant, options);
+					break;
+				case "geotile_grid":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation)value.Variant, options);
+					break;
+				case "global":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation)value.Variant, options);
+					break;
+				case "histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation)value.Variant, options);
+					break;
+				case "inference":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation)value.Variant, options);
+					break;
+				case "ip_prefix":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation)value.Variant, options);
+					break;
+				case "ip_range":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation)value.Variant, options);
+					break;
+				case "line":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation)value.Variant, options);
+					break;
+				case "matrix_stats":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation)value.Variant, options);
+					break;
+				case "max":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation)value.Variant, options);
+					break;
+				case "max_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation)value.Variant, options);
+					break;
+				case "median_absolute_deviation":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation)value.Variant, options);
+					break;
+				case "min":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MinAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MinAggregation)value.Variant, options);
+					break;
+				case "min_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation)value.Variant, options);
+					break;
+				case "missing":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation)value.Variant, options);
+					break;
+				case "moving_fn":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation)value.Variant, options);
+					break;
+				case "moving_percentiles":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation)value.Variant, options);
+					break;
+				case "multi_terms":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation)value.Variant, options);
+					break;
+				case "nested":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation)value.Variant, options);
+					break;
+				case "normalize":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation)value.Variant, options);
+					break;
+				case "parent":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation)value.Variant, options);
+					break;
+				case "percentile_ranks":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation)value.Variant, options);
+					break;
+				case "percentiles":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation)value.Variant, options);
+					break;
+				case "percentiles_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation)value.Variant, options);
+					break;
+				case "range":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation)value.Variant, options);
+					break;
+				case "rare_terms":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation)value.Variant, options);
+					break;
+				case "rate":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.RateAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.RateAggregation)value.Variant, options);
+					break;
+				case "reverse_nested":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation)value.Variant, options);
+					break;
+				case "sampler":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation)value.Variant, options);
+					break;
+				case "scripted_metric":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation)value.Variant, options);
+					break;
+				case "serial_diff":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation)value.Variant, options);
+					break;
+				case "significant_terms":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation)value.Variant, options);
+					break;
+				case "significant_text":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation)value.Variant, options);
+					break;
+				case "stats":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation)value.Variant, options);
+					break;
+				case "stats_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation)value.Variant, options);
+					break;
+				case "string_stats":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation)value.Variant, options);
+					break;
+				case "sum":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SumAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SumAggregation)value.Variant, options);
+					break;
+				case "sum_bucket":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation)value.Variant, options);
+					break;
+				case "terms":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation)value.Variant, options);
+					break;
+				case "top_hits":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation)value.Variant, options);
+					break;
+				case "top_metrics":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation)value.Variant, options);
+					break;
+				case "t_test":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation)value.Variant, options);
+					break;
+				case "value_count":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation)value.Variant, options);
+					break;
+				case "variable_width_histogram":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation)value.Variant, options);
+					break;
+				case "weighted_avg":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation>(writer, (Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation)value.Variant, options);
+					break;
+			}
 		}
-		else
-		{
-			throw new JsonException("Invalid container cannot be serialized");
-		}
+
+		writer.WriteEndObject();
 	}
 }
 
@@ -370,294 +977,227 @@ public sealed partial class AggregationDescriptor<TDocument> : SerializableDescr
 	{
 	}
 
-	public AggregationDescriptor<TDocument> AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
+	private bool ContainsVariant { get; set; }
+	private string ContainedVariantName { get; set; }
+	private object Variant { get; set; }
+	private Descriptor Descriptor { get; set; }
+
+	private AggregationDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
 	{
-		return SetContainer(name, Aggregation.CreateWithAction("adjacency_matrix", configure));
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
 	}
 
-	public AggregationDescriptor<TDocument> AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure)
+	private AggregationDescriptor<TDocument> Set(object variant, string variantName)
 	{
-		return SetContainer(name, Aggregation.CreateWithAction("auto_date_histogram", configure));
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
 	}
 
-	public AggregationDescriptor<TDocument> Avg(string name, Action<AverageAggregationDescriptor<TDocument>> configure)
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+
+	/// <summary>
+	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// </summary>
+	public AggregationDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
 	{
-		return SetContainer(name, Aggregation.CreateWithAction("avg", configure));
+		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
+		return Self;
 	}
 
-	public AggregationDescriptor<TDocument> Boxplot(string name, Action<BoxplotAggregationDescriptor<TDocument>> configure)
+	public AggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
-		return SetContainer(name, Aggregation.CreateWithAction("boxplot", configure));
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
 	}
 
-	public AggregationDescriptor<TDocument> BucketSort(string name, Action<BucketSortAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
-	}
+	public AggregationDescriptor<TDocument> AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation adjacencyMatrixAggregation) => Set(adjacencyMatrixAggregation, "adjacency_matrix");
+	public AggregationDescriptor<TDocument> AdjacencyMatrix(Action<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor<TDocument>> configure) => Set(configure, "adjacency_matrix");
+	public AggregationDescriptor<TDocument> AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation autoDateHistogramAggregation) => Set(autoDateHistogramAggregation, "auto_date_histogram");
+	public AggregationDescriptor<TDocument> AutoDateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "auto_date_histogram");
+	public AggregationDescriptor<TDocument> Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation averageAggregation) => Set(averageAggregation, "avg");
+	public AggregationDescriptor<TDocument> Avg(Action<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor<TDocument>> configure) => Set(configure, "avg");
+	public AggregationDescriptor<TDocument> AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation averageBucketAggregation) => Set(averageBucketAggregation, "avg_bucket");
+	public AggregationDescriptor<TDocument> AvgBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor> configure) => Set(configure, "avg_bucket");
+	public AggregationDescriptor<TDocument> Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation boxplotAggregation) => Set(boxplotAggregation, "boxplot");
+	public AggregationDescriptor<TDocument> Boxplot(Action<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument>> configure) => Set(configure, "boxplot");
+	public AggregationDescriptor<TDocument> BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation bucketCorrelationAggregation) => Set(bucketCorrelationAggregation, "bucket_correlation");
+	public AggregationDescriptor<TDocument> BucketCorrelation(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor> configure) => Set(configure, "bucket_correlation");
+	public AggregationDescriptor<TDocument> BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation bucketKsAggregation) => Set(bucketKsAggregation, "bucket_count_ks_test");
+	public AggregationDescriptor<TDocument> BucketCountKsTest(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor> configure) => Set(configure, "bucket_count_ks_test");
+	public AggregationDescriptor<TDocument> BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation bucketScriptAggregation) => Set(bucketScriptAggregation, "bucket_script");
+	public AggregationDescriptor<TDocument> BucketScript(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor> configure) => Set(configure, "bucket_script");
+	public AggregationDescriptor<TDocument> BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation bucketSelectorAggregation) => Set(bucketSelectorAggregation, "bucket_selector");
+	public AggregationDescriptor<TDocument> BucketSelector(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor> configure) => Set(configure, "bucket_selector");
+	public AggregationDescriptor<TDocument> BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation bucketSortAggregation) => Set(bucketSortAggregation, "bucket_sort");
+	public AggregationDescriptor<TDocument> BucketSort(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor<TDocument>> configure) => Set(configure, "bucket_sort");
+	public AggregationDescriptor<TDocument> Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => Set(cardinalityAggregation, "cardinality");
+	public AggregationDescriptor<TDocument> Cardinality(Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>> configure) => Set(configure, "cardinality");
+	public AggregationDescriptor<TDocument> CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation categorizeTextAggregation) => Set(categorizeTextAggregation, "categorize_text");
+	public AggregationDescriptor<TDocument> CategorizeText(Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>> configure) => Set(configure, "categorize_text");
+	public AggregationDescriptor<TDocument> Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation childrenAggregation) => Set(childrenAggregation, "children");
+	public AggregationDescriptor<TDocument> Children(Action<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor> configure) => Set(configure, "children");
+	public AggregationDescriptor<TDocument> Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => Set(compositeAggregation, "composite");
+	public AggregationDescriptor<TDocument> Composite(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>> configure) => Set(configure, "composite");
+	public AggregationDescriptor<TDocument> CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation cumulativeCardinalityAggregation) => Set(cumulativeCardinalityAggregation, "cumulative_cardinality");
+	public AggregationDescriptor<TDocument> CumulativeCardinality(Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor> configure) => Set(configure, "cumulative_cardinality");
+	public AggregationDescriptor<TDocument> CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation cumulativeSumAggregation) => Set(cumulativeSumAggregation, "cumulative_sum");
+	public AggregationDescriptor<TDocument> CumulativeSum(Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor> configure) => Set(configure, "cumulative_sum");
+	public AggregationDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public AggregationDescriptor<TDocument> DateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public AggregationDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => Set(dateRangeAggregation, "date_range");
+	public AggregationDescriptor<TDocument> DateRange(Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>> configure) => Set(configure, "date_range");
+	public AggregationDescriptor<TDocument> Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation derivativeAggregation) => Set(derivativeAggregation, "derivative");
+	public AggregationDescriptor<TDocument> Derivative(Action<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor> configure) => Set(configure, "derivative");
+	public AggregationDescriptor<TDocument> DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation diversifiedSamplerAggregation) => Set(diversifiedSamplerAggregation, "diversified_sampler");
+	public AggregationDescriptor<TDocument> DiversifiedSampler(Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor<TDocument>> configure) => Set(configure, "diversified_sampler");
+	public AggregationDescriptor<TDocument> ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation extendedStatsAggregation) => Set(extendedStatsAggregation, "extended_stats");
+	public AggregationDescriptor<TDocument> ExtendedStats(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor<TDocument>> configure) => Set(configure, "extended_stats");
+	public AggregationDescriptor<TDocument> ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation extendedStatsBucketAggregation) => Set(extendedStatsBucketAggregation, "extended_stats_bucket");
+	public AggregationDescriptor<TDocument> ExtendedStatsBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor> configure) => Set(configure, "extended_stats_bucket");
+	public AggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query queryContainer) => Set(queryContainer, "filter");
+	public AggregationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure) => Set(configure, "filter");
+	public AggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation filtersAggregation) => Set(filtersAggregation, "filters");
+	public AggregationDescriptor<TDocument> Filters(Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor<TDocument>> configure) => Set(configure, "filters");
+	public AggregationDescriptor<TDocument> FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation frequentItemSetsAggregation) => Set(frequentItemSetsAggregation, "frequent_item_sets");
+	public AggregationDescriptor<TDocument> FrequentItemSets(Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor<TDocument>> configure) => Set(configure, "frequent_item_sets");
+	public AggregationDescriptor<TDocument> GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation geoBoundsAggregation) => Set(geoBoundsAggregation, "geo_bounds");
+	public AggregationDescriptor<TDocument> GeoBounds(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor<TDocument>> configure) => Set(configure, "geo_bounds");
+	public AggregationDescriptor<TDocument> GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation geoCentroidAggregation) => Set(geoCentroidAggregation, "geo_centroid");
+	public AggregationDescriptor<TDocument> GeoCentroid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument>> configure) => Set(configure, "geo_centroid");
+	public AggregationDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation geoDistanceAggregation) => Set(geoDistanceAggregation, "geo_distance");
+	public AggregationDescriptor<TDocument> GeoDistance(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public AggregationDescriptor<TDocument> GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation geohashGridAggregation) => Set(geohashGridAggregation, "geohash_grid");
+	public AggregationDescriptor<TDocument> GeohashGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geohash_grid");
+	public AggregationDescriptor<TDocument> GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation geohexGridAggregation) => Set(geohexGridAggregation, "geohex_grid");
+	public AggregationDescriptor<TDocument> GeohexGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geohex_grid");
+	public AggregationDescriptor<TDocument> GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => Set(geoLineAggregation, "geo_line");
+	public AggregationDescriptor<TDocument> GeoLine(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>> configure) => Set(configure, "geo_line");
+	public AggregationDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public AggregationDescriptor<TDocument> GeotileGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
+	public AggregationDescriptor<TDocument> Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation globalAggregation) => Set(globalAggregation, "global");
+	public AggregationDescriptor<TDocument> Global(Action<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor> configure) => Set(configure, "global");
+	public AggregationDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public AggregationDescriptor<TDocument> Histogram(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public AggregationDescriptor<TDocument> Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation inferenceAggregation) => Set(inferenceAggregation, "inference");
+	public AggregationDescriptor<TDocument> Inference(Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor<TDocument>> configure) => Set(configure, "inference");
+	public AggregationDescriptor<TDocument> IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation ipPrefixAggregation) => Set(ipPrefixAggregation, "ip_prefix");
+	public AggregationDescriptor<TDocument> IpPrefix(Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor<TDocument>> configure) => Set(configure, "ip_prefix");
+	public AggregationDescriptor<TDocument> IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation ipRangeAggregation) => Set(ipRangeAggregation, "ip_range");
+	public AggregationDescriptor<TDocument> IpRange(Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor<TDocument>> configure) => Set(configure, "ip_range");
+	public AggregationDescriptor<TDocument> Line(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => Set(geoLineAggregation, "line");
+	public AggregationDescriptor<TDocument> Line(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>> configure) => Set(configure, "line");
+	public AggregationDescriptor<TDocument> MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation matrixStatsAggregation) => Set(matrixStatsAggregation, "matrix_stats");
+	public AggregationDescriptor<TDocument> MatrixStats(Action<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>> configure) => Set(configure, "matrix_stats");
+	public AggregationDescriptor<TDocument> Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation maxAggregation) => Set(maxAggregation, "max");
+	public AggregationDescriptor<TDocument> Max(Action<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor<TDocument>> configure) => Set(configure, "max");
+	public AggregationDescriptor<TDocument> MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation maxBucketAggregation) => Set(maxBucketAggregation, "max_bucket");
+	public AggregationDescriptor<TDocument> MaxBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor> configure) => Set(configure, "max_bucket");
+	public AggregationDescriptor<TDocument> MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation medianAbsoluteDeviationAggregation) => Set(medianAbsoluteDeviationAggregation, "median_absolute_deviation");
+	public AggregationDescriptor<TDocument> MedianAbsoluteDeviation(Action<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure) => Set(configure, "median_absolute_deviation");
+	public AggregationDescriptor<TDocument> Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation minAggregation) => Set(minAggregation, "min");
+	public AggregationDescriptor<TDocument> Min(Action<Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor<TDocument>> configure) => Set(configure, "min");
+	public AggregationDescriptor<TDocument> MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation minBucketAggregation) => Set(minBucketAggregation, "min_bucket");
+	public AggregationDescriptor<TDocument> MinBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor> configure) => Set(configure, "min_bucket");
+	public AggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => Set(missingAggregation, "missing");
+	public AggregationDescriptor<TDocument> Missing(Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>> configure) => Set(configure, "missing");
+	public AggregationDescriptor<TDocument> MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation movingFunctionAggregation) => Set(movingFunctionAggregation, "moving_fn");
+	public AggregationDescriptor<TDocument> MovingFn(Action<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor> configure) => Set(configure, "moving_fn");
+	public AggregationDescriptor<TDocument> MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation movingPercentilesAggregation) => Set(movingPercentilesAggregation, "moving_percentiles");
+	public AggregationDescriptor<TDocument> MovingPercentiles(Action<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor> configure) => Set(configure, "moving_percentiles");
+	public AggregationDescriptor<TDocument> MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation multiTermsAggregation) => Set(multiTermsAggregation, "multi_terms");
+	public AggregationDescriptor<TDocument> MultiTerms(Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument>> configure) => Set(configure, "multi_terms");
+	public AggregationDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation nestedAggregation) => Set(nestedAggregation, "nested");
+	public AggregationDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor<TDocument>> configure) => Set(configure, "nested");
+	public AggregationDescriptor<TDocument> Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation normalizeAggregation) => Set(normalizeAggregation, "normalize");
+	public AggregationDescriptor<TDocument> Normalize(Action<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor> configure) => Set(configure, "normalize");
+	public AggregationDescriptor<TDocument> Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation parentAggregation) => Set(parentAggregation, "parent");
+	public AggregationDescriptor<TDocument> Parent(Action<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor> configure) => Set(configure, "parent");
+	public AggregationDescriptor<TDocument> PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation percentileRanksAggregation) => Set(percentileRanksAggregation, "percentile_ranks");
+	public AggregationDescriptor<TDocument> PercentileRanks(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor<TDocument>> configure) => Set(configure, "percentile_ranks");
+	public AggregationDescriptor<TDocument> Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation percentilesAggregation) => Set(percentilesAggregation, "percentiles");
+	public AggregationDescriptor<TDocument> Percentiles(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor<TDocument>> configure) => Set(configure, "percentiles");
+	public AggregationDescriptor<TDocument> PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => Set(percentilesBucketAggregation, "percentiles_bucket");
+	public AggregationDescriptor<TDocument> PercentilesBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
+	public AggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
+	public AggregationDescriptor<TDocument> Range(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>> configure) => Set(configure, "range");
+	public AggregationDescriptor<TDocument> RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => Set(rareTermsAggregation, "rare_terms");
+	public AggregationDescriptor<TDocument> RareTerms(Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>> configure) => Set(configure, "rare_terms");
+	public AggregationDescriptor<TDocument> Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation rateAggregation) => Set(rateAggregation, "rate");
+	public AggregationDescriptor<TDocument> Rate(Action<Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor<TDocument>> configure) => Set(configure, "rate");
+	public AggregationDescriptor<TDocument> ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation reverseNestedAggregation) => Set(reverseNestedAggregation, "reverse_nested");
+	public AggregationDescriptor<TDocument> ReverseNested(Action<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor<TDocument>> configure) => Set(configure, "reverse_nested");
+	public AggregationDescriptor<TDocument> Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation samplerAggregation) => Set(samplerAggregation, "sampler");
+	public AggregationDescriptor<TDocument> Sampler(Action<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor> configure) => Set(configure, "sampler");
+	public AggregationDescriptor<TDocument> ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation scriptedMetricAggregation) => Set(scriptedMetricAggregation, "scripted_metric");
+	public AggregationDescriptor<TDocument> ScriptedMetric(Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor<TDocument>> configure) => Set(configure, "scripted_metric");
+	public AggregationDescriptor<TDocument> SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation serialDifferencingAggregation) => Set(serialDifferencingAggregation, "serial_diff");
+	public AggregationDescriptor<TDocument> SerialDiff(Action<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor> configure) => Set(configure, "serial_diff");
+	public AggregationDescriptor<TDocument> SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation significantTermsAggregation) => Set(significantTermsAggregation, "significant_terms");
+	public AggregationDescriptor<TDocument> SignificantTerms(Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument>> configure) => Set(configure, "significant_terms");
+	public AggregationDescriptor<TDocument> SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation significantTextAggregation) => Set(significantTextAggregation, "significant_text");
+	public AggregationDescriptor<TDocument> SignificantText(Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor<TDocument>> configure) => Set(configure, "significant_text");
+	public AggregationDescriptor<TDocument> Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation statsAggregation) => Set(statsAggregation, "stats");
+	public AggregationDescriptor<TDocument> Stats(Action<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor<TDocument>> configure) => Set(configure, "stats");
+	public AggregationDescriptor<TDocument> StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation statsBucketAggregation) => Set(statsBucketAggregation, "stats_bucket");
+	public AggregationDescriptor<TDocument> StatsBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor> configure) => Set(configure, "stats_bucket");
+	public AggregationDescriptor<TDocument> StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation stringStatsAggregation) => Set(stringStatsAggregation, "string_stats");
+	public AggregationDescriptor<TDocument> StringStats(Action<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor<TDocument>> configure) => Set(configure, "string_stats");
+	public AggregationDescriptor<TDocument> Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation sumAggregation) => Set(sumAggregation, "sum");
+	public AggregationDescriptor<TDocument> Sum(Action<Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor<TDocument>> configure) => Set(configure, "sum");
+	public AggregationDescriptor<TDocument> SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation sumBucketAggregation) => Set(sumBucketAggregation, "sum_bucket");
+	public AggregationDescriptor<TDocument> SumBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
+	public AggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public AggregationDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public AggregationDescriptor<TDocument> TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => Set(topHitsAggregation, "top_hits");
+	public AggregationDescriptor<TDocument> TopHits(Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>> configure) => Set(configure, "top_hits");
+	public AggregationDescriptor<TDocument> TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => Set(topMetricsAggregation, "top_metrics");
+	public AggregationDescriptor<TDocument> TopMetrics(Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor<TDocument>> configure) => Set(configure, "top_metrics");
+	public AggregationDescriptor<TDocument> TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation tTestAggregation) => Set(tTestAggregation, "t_test");
+	public AggregationDescriptor<TDocument> TTest(Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>> configure) => Set(configure, "t_test");
+	public AggregationDescriptor<TDocument> ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => Set(valueCountAggregation, "value_count");
+	public AggregationDescriptor<TDocument> ValueCount(Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>> configure) => Set(configure, "value_count");
+	public AggregationDescriptor<TDocument> VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation variableWidthHistogramAggregation) => Set(variableWidthHistogramAggregation, "variable_width_histogram");
+	public AggregationDescriptor<TDocument> VariableWidthHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "variable_width_histogram");
+	public AggregationDescriptor<TDocument> WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation weightedAverageAggregation) => Set(weightedAverageAggregation, "weighted_avg");
+	public AggregationDescriptor<TDocument> WeightedAvg(Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor<TDocument>> configure) => Set(configure, "weighted_avg");
 
-	public AggregationDescriptor<TDocument> Cardinality(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		return SetContainer(name, Aggregation.CreateWithAction("cardinality", configure));
-	}
+		writer.WriteStartObject();
+		if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
+		}
 
-	public AggregationDescriptor<TDocument> Children(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("children", configure));
-	}
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
 
-	public AggregationDescriptor<TDocument> Composite(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("composite", configure));
-	}
+		if (!string.IsNullOrEmpty(ContainedVariantName))
+		{
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
 
-	public AggregationDescriptor<TDocument> CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cumulative_cardinality", configure));
-	}
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
 
-	public AggregationDescriptor<TDocument> CumulativeSum(string name, Action<CumulativeSumAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cumulative_sum", configure));
-	}
-
-	public AggregationDescriptor<TDocument> DateHistogram(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_histogram", configure));
-	}
-
-	public AggregationDescriptor<TDocument> DateRange(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_range", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Derivative(string name, Action<DerivativeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("derivative", configure));
-	}
-
-	public AggregationDescriptor<TDocument> DiversifiedSampler(string name, Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
-	}
-
-	public AggregationDescriptor<TDocument> ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("extended_stats", configure));
-	}
-
-	public AggregationDescriptor<TDocument> ExtendedStatsBucket(string name, Action<ExtendedStatsBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("extended_stats_bucket", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Filters(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeoBounds(string name, Action<GeoBoundsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeoCentroid(string name, Action<GeoCentroidAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeoDistance(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeoLine(string name, Action<GeoLineAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeohashGrid(string name, Action<GeohashGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeohexGrid(string name, Action<GeohexGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
-	}
-
-	public AggregationDescriptor<TDocument> GeotileGrid(string name, Action<GeotileGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Global(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("global", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Histogram(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("histogram", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Inference(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("inference", configure));
-	}
-
-	public AggregationDescriptor<TDocument> IpPrefix(string name, Action<IpPrefixAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
-	}
-
-	public AggregationDescriptor<TDocument> IpRange(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_range", configure));
-	}
-
-	public AggregationDescriptor<TDocument> MatrixStats(string name, Action<MatrixStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("matrix_stats", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Max(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("max", configure));
-	}
-
-	public AggregationDescriptor<TDocument> MedianAbsoluteDeviation(string name, Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("median_absolute_deviation", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Min(string name, Action<MinAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("min", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Missing(string name, Action<MissingAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("missing", configure));
-	}
-
-	public AggregationDescriptor<TDocument> MultiTerms(string name, Action<MultiTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("multi_terms", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Nested(string name, Action<NestedAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("nested", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Parent(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("parent", configure));
-	}
-
-	public AggregationDescriptor<TDocument> PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Percentiles(string name, Action<PercentilesAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
-	}
-
-	public AggregationDescriptor<TDocument> PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentiles_bucket", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Range(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("range", configure));
-	}
-
-	public AggregationDescriptor<TDocument> RareTerms(string name, Action<RareTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Rate(string name, Action<RateAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rate", configure));
-	}
-
-	public AggregationDescriptor<TDocument> ReverseNested(string name, Action<ReverseNestedAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("reverse_nested", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Sampler(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sampler", configure));
-	}
-
-	public AggregationDescriptor<TDocument> ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("scripted_metric", configure));
-	}
-
-	public AggregationDescriptor<TDocument> SignificantTerms(string name, Action<SignificantTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Stats(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("stats", configure));
-	}
-
-	public AggregationDescriptor<TDocument> StatsBucket(string name, Action<StatsBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("stats_bucket", configure));
-	}
-
-	public AggregationDescriptor<TDocument> StringStats(string name, Action<StringStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("string_stats", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Sum(string name, Action<SumAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sum", configure));
-	}
-
-	public AggregationDescriptor<TDocument> TTest(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("t_test", configure));
-	}
-
-	public AggregationDescriptor<TDocument> Terms(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("terms", configure));
-	}
-
-	public AggregationDescriptor<TDocument> TopHits(string name, Action<TopHitsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_hits", configure));
-	}
-
-	public AggregationDescriptor<TDocument> TopMetrics(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_metrics", configure));
-	}
-
-	public AggregationDescriptor<TDocument> ValueCount(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("value_count", configure));
-	}
-
-	public AggregationDescriptor<TDocument> VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("variable_width_histogram", configure));
-	}
-
-	public AggregationDescriptor<TDocument> WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("weighted_avg", configure));
+		writer.WriteEndObject();
 	}
 }
 
@@ -669,553 +1209,226 @@ public sealed partial class AggregationDescriptor : SerializableDescriptor<Aggre
 	{
 	}
 
-	public AggregationDescriptor AdjacencyMatrix(string name, Action<AdjacencyMatrixAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("adjacency_matrix", configure));
-	}
-
-	public AggregationDescriptor AdjacencyMatrix<TDocument>(string name, Action<AdjacencyMatrixAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("adjacency_matrix", configure));
-	}
-
-	public AggregationDescriptor AutoDateHistogram(string name, Action<AutoDateHistogramAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("auto_date_histogram", configure));
-	}
-
-	public AggregationDescriptor AutoDateHistogram<TDocument>(string name, Action<AutoDateHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("auto_date_histogram", configure));
-	}
-
-	public AggregationDescriptor Avg(string name, Action<AverageAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("avg", configure));
-	}
-
-	public AggregationDescriptor Avg<TDocument>(string name, Action<AverageAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("avg", configure));
-	}
-
-	public AggregationDescriptor Boxplot(string name, Action<BoxplotAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("boxplot", configure));
-	}
-
-	public AggregationDescriptor Boxplot<TDocument>(string name, Action<BoxplotAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("boxplot", configure));
-	}
-
-	public AggregationDescriptor BucketSort(string name, Action<BucketSortAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
-	}
-
-	public AggregationDescriptor BucketSort<TDocument>(string name, Action<BucketSortAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("bucket_sort", configure));
-	}
-
-	public AggregationDescriptor Cardinality(string name, Action<CardinalityAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cardinality", configure));
-	}
-
-	public AggregationDescriptor Cardinality<TDocument>(string name, Action<CardinalityAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cardinality", configure));
-	}
-
-	public AggregationDescriptor Children(string name, Action<ChildrenAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("children", configure));
-	}
-
-	public AggregationDescriptor Children<TDocument>(string name, Action<ChildrenAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("children", configure));
-	}
-
-	public AggregationDescriptor Composite(string name, Action<CompositeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("composite", configure));
-	}
-
-	public AggregationDescriptor Composite<TDocument>(string name, Action<CompositeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("composite", configure));
-	}
-
-	public AggregationDescriptor CumulativeCardinality(string name, Action<CumulativeCardinalityAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cumulative_cardinality", configure));
-	}
-
-	public AggregationDescriptor CumulativeSum(string name, Action<CumulativeSumAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("cumulative_sum", configure));
-	}
-
-	public AggregationDescriptor DateHistogram(string name, Action<DateHistogramAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_histogram", configure));
-	}
-
-	public AggregationDescriptor DateHistogram<TDocument>(string name, Action<DateHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_histogram", configure));
-	}
-
-	public AggregationDescriptor DateRange(string name, Action<DateRangeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_range", configure));
-	}
-
-	public AggregationDescriptor DateRange<TDocument>(string name, Action<DateRangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("date_range", configure));
-	}
-
-	public AggregationDescriptor Derivative(string name, Action<DerivativeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("derivative", configure));
-	}
-
-	public AggregationDescriptor DiversifiedSampler(string name, Action<DiversifiedSamplerAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
-	}
-
-	public AggregationDescriptor DiversifiedSampler<TDocument>(string name, Action<DiversifiedSamplerAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("diversified_sampler", configure));
-	}
-
-	public AggregationDescriptor ExtendedStats(string name, Action<ExtendedStatsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("extended_stats", configure));
-	}
-
-	public AggregationDescriptor ExtendedStats<TDocument>(string name, Action<ExtendedStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("extended_stats", configure));
-	}
-
-	public AggregationDescriptor ExtendedStatsBucket(string name, Action<ExtendedStatsBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("extended_stats_bucket", configure));
-	}
-
-	public AggregationDescriptor Filters(string name, Action<FiltersAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
-	}
-
-	public AggregationDescriptor Filters<TDocument>(string name, Action<FiltersAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("filters", configure));
-	}
-
-	public AggregationDescriptor GeoBounds(string name, Action<GeoBoundsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
-	}
-
-	public AggregationDescriptor GeoBounds<TDocument>(string name, Action<GeoBoundsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_bounds", configure));
-	}
-
-	public AggregationDescriptor GeoCentroid(string name, Action<GeoCentroidAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
-	}
-
-	public AggregationDescriptor GeoCentroid<TDocument>(string name, Action<GeoCentroidAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_centroid", configure));
-	}
-
-	public AggregationDescriptor GeoDistance(string name, Action<GeoDistanceAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
-	}
-
-	public AggregationDescriptor GeoDistance<TDocument>(string name, Action<GeoDistanceAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_distance", configure));
-	}
-
-	public AggregationDescriptor GeoLine(string name, Action<GeoLineAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
-	}
-
-	public AggregationDescriptor GeoLine<TDocument>(string name, Action<GeoLineAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geo_line", configure));
-	}
-
-	public AggregationDescriptor GeohashGrid(string name, Action<GeohashGridAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
-	}
-
-	public AggregationDescriptor GeohashGrid<TDocument>(string name, Action<GeohashGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohash_grid", configure));
-	}
-
-	public AggregationDescriptor GeohexGrid(string name, Action<GeohexGridAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
-	}
-
-	public AggregationDescriptor GeohexGrid<TDocument>(string name, Action<GeohexGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geohex_grid", configure));
-	}
-
-	public AggregationDescriptor GeotileGrid(string name, Action<GeotileGridAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
-	}
-
-	public AggregationDescriptor GeotileGrid<TDocument>(string name, Action<GeotileGridAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("geotile_grid", configure));
-	}
-
-	public AggregationDescriptor Global(string name, Action<GlobalAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("global", configure));
-	}
-
-	public AggregationDescriptor Global<TDocument>(string name, Action<GlobalAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("global", configure));
-	}
-
-	public AggregationDescriptor Histogram(string name, Action<HistogramAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("histogram", configure));
-	}
-
-	public AggregationDescriptor Histogram<TDocument>(string name, Action<HistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("histogram", configure));
-	}
-
-	public AggregationDescriptor Inference(string name, Action<InferenceAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("inference", configure));
-	}
-
-	public AggregationDescriptor Inference<TDocument>(string name, Action<InferenceAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("inference", configure));
-	}
-
-	public AggregationDescriptor IpPrefix(string name, Action<IpPrefixAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
-	}
-
-	public AggregationDescriptor IpPrefix<TDocument>(string name, Action<IpPrefixAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_prefix", configure));
-	}
-
-	public AggregationDescriptor IpRange(string name, Action<IpRangeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_range", configure));
-	}
-
-	public AggregationDescriptor IpRange<TDocument>(string name, Action<IpRangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("ip_range", configure));
-	}
-
-	public AggregationDescriptor MatrixStats(string name, Action<MatrixStatsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("matrix_stats", configure));
-	}
-
-	public AggregationDescriptor MatrixStats<TDocument>(string name, Action<MatrixStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("matrix_stats", configure));
-	}
-
-	public AggregationDescriptor Max(string name, Action<MaxAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("max", configure));
-	}
-
-	public AggregationDescriptor Max<TDocument>(string name, Action<MaxAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("max", configure));
-	}
-
-	public AggregationDescriptor MedianAbsoluteDeviation(string name, Action<MedianAbsoluteDeviationAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("median_absolute_deviation", configure));
-	}
-
-	public AggregationDescriptor MedianAbsoluteDeviation<TDocument>(string name, Action<MedianAbsoluteDeviationAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("median_absolute_deviation", configure));
-	}
-
-	public AggregationDescriptor Min(string name, Action<MinAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("min", configure));
-	}
-
-	public AggregationDescriptor Min<TDocument>(string name, Action<MinAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("min", configure));
-	}
-
-	public AggregationDescriptor Missing(string name, Action<MissingAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("missing", configure));
-	}
-
-	public AggregationDescriptor Missing<TDocument>(string name, Action<MissingAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("missing", configure));
-	}
-
-	public AggregationDescriptor MultiTerms(string name, Action<MultiTermsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("multi_terms", configure));
-	}
-
-	public AggregationDescriptor MultiTerms<TDocument>(string name, Action<MultiTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("multi_terms", configure));
-	}
-
-	public AggregationDescriptor Nested(string name, Action<NestedAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("nested", configure));
-	}
-
-	public AggregationDescriptor Nested<TDocument>(string name, Action<NestedAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("nested", configure));
-	}
-
-	public AggregationDescriptor Parent(string name, Action<ParentAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("parent", configure));
-	}
-
-	public AggregationDescriptor Parent<TDocument>(string name, Action<ParentAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("parent", configure));
-	}
-
-	public AggregationDescriptor PercentileRanks(string name, Action<PercentileRanksAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
-	}
-
-	public AggregationDescriptor PercentileRanks<TDocument>(string name, Action<PercentileRanksAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentile_ranks", configure));
-	}
-
-	public AggregationDescriptor Percentiles(string name, Action<PercentilesAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
-	}
-
-	public AggregationDescriptor Percentiles<TDocument>(string name, Action<PercentilesAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentiles", configure));
-	}
-
-	public AggregationDescriptor PercentilesBucket(string name, Action<PercentilesBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("percentiles_bucket", configure));
-	}
-
-	public AggregationDescriptor Range(string name, Action<RangeAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("range", configure));
-	}
-
-	public AggregationDescriptor Range<TDocument>(string name, Action<RangeAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("range", configure));
-	}
-
-	public AggregationDescriptor RareTerms(string name, Action<RareTermsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
-	}
-
-	public AggregationDescriptor RareTerms<TDocument>(string name, Action<RareTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rare_terms", configure));
-	}
-
-	public AggregationDescriptor Rate(string name, Action<RateAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rate", configure));
-	}
-
-	public AggregationDescriptor Rate<TDocument>(string name, Action<RateAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("rate", configure));
-	}
-
-	public AggregationDescriptor ReverseNested(string name, Action<ReverseNestedAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("reverse_nested", configure));
-	}
-
-	public AggregationDescriptor ReverseNested<TDocument>(string name, Action<ReverseNestedAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("reverse_nested", configure));
-	}
-
-	public AggregationDescriptor Sampler(string name, Action<SamplerAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sampler", configure));
-	}
-
-	public AggregationDescriptor Sampler<TDocument>(string name, Action<SamplerAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sampler", configure));
-	}
-
-	public AggregationDescriptor ScriptedMetric(string name, Action<ScriptedMetricAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("scripted_metric", configure));
-	}
-
-	public AggregationDescriptor ScriptedMetric<TDocument>(string name, Action<ScriptedMetricAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("scripted_metric", configure));
-	}
-
-	public AggregationDescriptor SignificantTerms(string name, Action<SignificantTermsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
-	}
-
-	public AggregationDescriptor SignificantTerms<TDocument>(string name, Action<SignificantTermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("significant_terms", configure));
-	}
-
-	public AggregationDescriptor Stats(string name, Action<StatsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("stats", configure));
-	}
-
-	public AggregationDescriptor Stats<TDocument>(string name, Action<StatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("stats", configure));
-	}
-
-	public AggregationDescriptor StatsBucket(string name, Action<StatsBucketAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("stats_bucket", configure));
-	}
-
-	public AggregationDescriptor StringStats(string name, Action<StringStatsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("string_stats", configure));
-	}
-
-	public AggregationDescriptor StringStats<TDocument>(string name, Action<StringStatsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("string_stats", configure));
-	}
-
-	public AggregationDescriptor Sum(string name, Action<SumAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sum", configure));
-	}
-
-	public AggregationDescriptor Sum<TDocument>(string name, Action<SumAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("sum", configure));
-	}
-
-	public AggregationDescriptor TTest(string name, Action<TTestAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("t_test", configure));
-	}
-
-	public AggregationDescriptor TTest<TDocument>(string name, Action<TTestAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("t_test", configure));
-	}
-
-	public AggregationDescriptor Terms(string name, Action<TermsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("terms", configure));
-	}
-
-	public AggregationDescriptor Terms<TDocument>(string name, Action<TermsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("terms", configure));
-	}
-
-	public AggregationDescriptor TopHits(string name, Action<TopHitsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_hits", configure));
-	}
-
-	public AggregationDescriptor TopHits<TDocument>(string name, Action<TopHitsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_hits", configure));
-	}
-
-	public AggregationDescriptor TopMetrics(string name, Action<TopMetricsAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_metrics", configure));
-	}
-
-	public AggregationDescriptor TopMetrics<TDocument>(string name, Action<TopMetricsAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("top_metrics", configure));
-	}
-
-	public AggregationDescriptor ValueCount(string name, Action<ValueCountAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("value_count", configure));
-	}
-
-	public AggregationDescriptor ValueCount<TDocument>(string name, Action<ValueCountAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("value_count", configure));
-	}
-
-	public AggregationDescriptor VariableWidthHistogram(string name, Action<VariableWidthHistogramAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("variable_width_histogram", configure));
-	}
-
-	public AggregationDescriptor VariableWidthHistogram<TDocument>(string name, Action<VariableWidthHistogramAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("variable_width_histogram", configure));
-	}
-
-	public AggregationDescriptor WeightedAvg(string name, Action<WeightedAverageAggregationDescriptor> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("weighted_avg", configure));
-	}
-
-	public AggregationDescriptor WeightedAvg<TDocument>(string name, Action<WeightedAverageAggregationDescriptor<TDocument>> configure)
-	{
-		return SetContainer(name, Aggregation.CreateWithAction("weighted_avg", configure));
+	private bool ContainsVariant { get; set; }
+	private string ContainedVariantName { get; set; }
+	private object Variant { get; set; }
+	private Descriptor Descriptor { get; set; }
+
+	private AggregationDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	{
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
+		descriptorAction?.Invoke(descriptor);
+		Descriptor = descriptor;
+		return Self;
+	}
+
+	private AggregationDescriptor Set(object variant, string variantName)
+	{
+		Variant = variant;
+		ContainedVariantName = variantName;
+		ContainsVariant = true;
+		return Self;
+	}
+
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsValue { get; set; }
+	private IDictionary<string, object>? MetaValue { get; set; }
+
+	/// <summary>
+	/// <para>Sub-aggregations for this aggregation.<br/>Only applies to bucket aggregations.</para>
+	/// </summary>
+	public AggregationDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	{
+		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
+		return Self;
+	}
+
+	public AggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	{
+		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public AggregationDescriptor AdjacencyMatrix(Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregation adjacencyMatrixAggregation) => Set(adjacencyMatrixAggregation, "adjacency_matrix");
+	public AggregationDescriptor AdjacencyMatrix<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregationDescriptor> configure) => Set(configure, "adjacency_matrix");
+	public AggregationDescriptor AutoDateHistogram(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation autoDateHistogramAggregation) => Set(autoDateHistogramAggregation, "auto_date_histogram");
+	public AggregationDescriptor AutoDateHistogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor> configure) => Set(configure, "auto_date_histogram");
+	public AggregationDescriptor Avg(Elastic.Clients.Elasticsearch.Aggregations.AverageAggregation averageAggregation) => Set(averageAggregation, "avg");
+	public AggregationDescriptor Avg<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregationDescriptor> configure) => Set(configure, "avg");
+	public AggregationDescriptor AvgBucket(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation averageBucketAggregation) => Set(averageBucketAggregation, "avg_bucket");
+	public AggregationDescriptor AvgBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor> configure) => Set(configure, "avg_bucket");
+	public AggregationDescriptor Boxplot(Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation boxplotAggregation) => Set(boxplotAggregation, "boxplot");
+	public AggregationDescriptor Boxplot<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor> configure) => Set(configure, "boxplot");
+	public AggregationDescriptor BucketCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation bucketCorrelationAggregation) => Set(bucketCorrelationAggregation, "bucket_correlation");
+	public AggregationDescriptor BucketCorrelation(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor> configure) => Set(configure, "bucket_correlation");
+	public AggregationDescriptor BucketCountKsTest(Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation bucketKsAggregation) => Set(bucketKsAggregation, "bucket_count_ks_test");
+	public AggregationDescriptor BucketCountKsTest(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor> configure) => Set(configure, "bucket_count_ks_test");
+	public AggregationDescriptor BucketScript(Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregation bucketScriptAggregation) => Set(bucketScriptAggregation, "bucket_script");
+	public AggregationDescriptor BucketScript(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketScriptAggregationDescriptor> configure) => Set(configure, "bucket_script");
+	public AggregationDescriptor BucketSelector(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation bucketSelectorAggregation) => Set(bucketSelectorAggregation, "bucket_selector");
+	public AggregationDescriptor BucketSelector(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregationDescriptor> configure) => Set(configure, "bucket_selector");
+	public AggregationDescriptor BucketSort(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation bucketSortAggregation) => Set(bucketSortAggregation, "bucket_sort");
+	public AggregationDescriptor BucketSort<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregationDescriptor> configure) => Set(configure, "bucket_sort");
+	public AggregationDescriptor Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation cardinalityAggregation) => Set(cardinalityAggregation, "cardinality");
+	public AggregationDescriptor Cardinality<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor> configure) => Set(configure, "cardinality");
+	public AggregationDescriptor CategorizeText(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation categorizeTextAggregation) => Set(categorizeTextAggregation, "categorize_text");
+	public AggregationDescriptor CategorizeText<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor> configure) => Set(configure, "categorize_text");
+	public AggregationDescriptor Children(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation childrenAggregation) => Set(childrenAggregation, "children");
+	public AggregationDescriptor Children(Action<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor> configure) => Set(configure, "children");
+	public AggregationDescriptor Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation compositeAggregation) => Set(compositeAggregation, "composite");
+	public AggregationDescriptor Composite<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor> configure) => Set(configure, "composite");
+	public AggregationDescriptor CumulativeCardinality(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation cumulativeCardinalityAggregation) => Set(cumulativeCardinalityAggregation, "cumulative_cardinality");
+	public AggregationDescriptor CumulativeCardinality(Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregationDescriptor> configure) => Set(configure, "cumulative_cardinality");
+	public AggregationDescriptor CumulativeSum(Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregation cumulativeSumAggregation) => Set(cumulativeSumAggregation, "cumulative_sum");
+	public AggregationDescriptor CumulativeSum(Action<Elastic.Clients.Elasticsearch.Aggregations.CumulativeSumAggregationDescriptor> configure) => Set(configure, "cumulative_sum");
+	public AggregationDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public AggregationDescriptor DateHistogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+	public AggregationDescriptor DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation dateRangeAggregation) => Set(dateRangeAggregation, "date_range");
+	public AggregationDescriptor DateRange<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor> configure) => Set(configure, "date_range");
+	public AggregationDescriptor Derivative(Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregation derivativeAggregation) => Set(derivativeAggregation, "derivative");
+	public AggregationDescriptor Derivative(Action<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregationDescriptor> configure) => Set(configure, "derivative");
+	public AggregationDescriptor DiversifiedSampler(Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation diversifiedSamplerAggregation) => Set(diversifiedSamplerAggregation, "diversified_sampler");
+	public AggregationDescriptor DiversifiedSampler<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregationDescriptor> configure) => Set(configure, "diversified_sampler");
+	public AggregationDescriptor ExtendedStats(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregation extendedStatsAggregation) => Set(extendedStatsAggregation, "extended_stats");
+	public AggregationDescriptor ExtendedStats<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregationDescriptor> configure) => Set(configure, "extended_stats");
+	public AggregationDescriptor ExtendedStatsBucket(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation extendedStatsBucketAggregation) => Set(extendedStatsBucketAggregation, "extended_stats_bucket");
+	public AggregationDescriptor ExtendedStatsBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor> configure) => Set(configure, "extended_stats_bucket");
+	public AggregationDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query queryContainer) => Set(queryContainer, "filter");
+	public AggregationDescriptor Filter<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure) => Set(configure, "filter");
+	public AggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation filtersAggregation) => Set(filtersAggregation, "filters");
+	public AggregationDescriptor Filters<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationDescriptor> configure) => Set(configure, "filters");
+	public AggregationDescriptor FrequentItemSets(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation frequentItemSetsAggregation) => Set(frequentItemSetsAggregation, "frequent_item_sets");
+	public AggregationDescriptor FrequentItemSets<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregationDescriptor> configure) => Set(configure, "frequent_item_sets");
+	public AggregationDescriptor GeoBounds(Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregation geoBoundsAggregation) => Set(geoBoundsAggregation, "geo_bounds");
+	public AggregationDescriptor GeoBounds<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregationDescriptor> configure) => Set(configure, "geo_bounds");
+	public AggregationDescriptor GeoCentroid(Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation geoCentroidAggregation) => Set(geoCentroidAggregation, "geo_centroid");
+	public AggregationDescriptor GeoCentroid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor> configure) => Set(configure, "geo_centroid");
+	public AggregationDescriptor GeoDistance(Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation geoDistanceAggregation) => Set(geoDistanceAggregation, "geo_distance");
+	public AggregationDescriptor GeoDistance<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregationDescriptor> configure) => Set(configure, "geo_distance");
+	public AggregationDescriptor GeohashGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregation geohashGridAggregation) => Set(geohashGridAggregation, "geohash_grid");
+	public AggregationDescriptor GeohashGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregationDescriptor> configure) => Set(configure, "geohash_grid");
+	public AggregationDescriptor GeohexGrid(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation geohexGridAggregation) => Set(geohexGridAggregation, "geohex_grid");
+	public AggregationDescriptor GeohexGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor> configure) => Set(configure, "geohex_grid");
+	public AggregationDescriptor GeoLine(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => Set(geoLineAggregation, "geo_line");
+	public AggregationDescriptor GeoLine<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor> configure) => Set(configure, "geo_line");
+	public AggregationDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public AggregationDescriptor GeotileGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor> configure) => Set(configure, "geotile_grid");
+	public AggregationDescriptor Global(Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregation globalAggregation) => Set(globalAggregation, "global");
+	public AggregationDescriptor Global(Action<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregationDescriptor> configure) => Set(configure, "global");
+	public AggregationDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public AggregationDescriptor Histogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+	public AggregationDescriptor Inference(Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregation inferenceAggregation) => Set(inferenceAggregation, "inference");
+	public AggregationDescriptor Inference<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregationDescriptor> configure) => Set(configure, "inference");
+	public AggregationDescriptor IpPrefix(Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation ipPrefixAggregation) => Set(ipPrefixAggregation, "ip_prefix");
+	public AggregationDescriptor IpPrefix<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregationDescriptor> configure) => Set(configure, "ip_prefix");
+	public AggregationDescriptor IpRange(Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregation ipRangeAggregation) => Set(ipRangeAggregation, "ip_range");
+	public AggregationDescriptor IpRange<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationDescriptor> configure) => Set(configure, "ip_range");
+	public AggregationDescriptor Line(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation geoLineAggregation) => Set(geoLineAggregation, "line");
+	public AggregationDescriptor Line<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor> configure) => Set(configure, "line");
+	public AggregationDescriptor MatrixStats(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation matrixStatsAggregation) => Set(matrixStatsAggregation, "matrix_stats");
+	public AggregationDescriptor MatrixStats<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor> configure) => Set(configure, "matrix_stats");
+	public AggregationDescriptor Max(Elastic.Clients.Elasticsearch.Aggregations.MaxAggregation maxAggregation) => Set(maxAggregation, "max");
+	public AggregationDescriptor Max<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregationDescriptor> configure) => Set(configure, "max");
+	public AggregationDescriptor MaxBucket(Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregation maxBucketAggregation) => Set(maxBucketAggregation, "max_bucket");
+	public AggregationDescriptor MaxBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.MaxBucketAggregationDescriptor> configure) => Set(configure, "max_bucket");
+	public AggregationDescriptor MedianAbsoluteDeviation(Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation medianAbsoluteDeviationAggregation) => Set(medianAbsoluteDeviationAggregation, "median_absolute_deviation");
+	public AggregationDescriptor MedianAbsoluteDeviation<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor> configure) => Set(configure, "median_absolute_deviation");
+	public AggregationDescriptor Min(Elastic.Clients.Elasticsearch.Aggregations.MinAggregation minAggregation) => Set(minAggregation, "min");
+	public AggregationDescriptor Min<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MinAggregationDescriptor> configure) => Set(configure, "min");
+	public AggregationDescriptor MinBucket(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation minBucketAggregation) => Set(minBucketAggregation, "min_bucket");
+	public AggregationDescriptor MinBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor> configure) => Set(configure, "min_bucket");
+	public AggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation missingAggregation) => Set(missingAggregation, "missing");
+	public AggregationDescriptor Missing<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor> configure) => Set(configure, "missing");
+	public AggregationDescriptor MovingFn(Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregation movingFunctionAggregation) => Set(movingFunctionAggregation, "moving_fn");
+	public AggregationDescriptor MovingFn(Action<Elastic.Clients.Elasticsearch.Aggregations.MovingFunctionAggregationDescriptor> configure) => Set(configure, "moving_fn");
+	public AggregationDescriptor MovingPercentiles(Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation movingPercentilesAggregation) => Set(movingPercentilesAggregation, "moving_percentiles");
+	public AggregationDescriptor MovingPercentiles(Action<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregationDescriptor> configure) => Set(configure, "moving_percentiles");
+	public AggregationDescriptor MultiTerms(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation multiTermsAggregation) => Set(multiTermsAggregation, "multi_terms");
+	public AggregationDescriptor MultiTerms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor> configure) => Set(configure, "multi_terms");
+	public AggregationDescriptor Nested(Elastic.Clients.Elasticsearch.Aggregations.NestedAggregation nestedAggregation) => Set(nestedAggregation, "nested");
+	public AggregationDescriptor Nested<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregationDescriptor> configure) => Set(configure, "nested");
+	public AggregationDescriptor Normalize(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation normalizeAggregation) => Set(normalizeAggregation, "normalize");
+	public AggregationDescriptor Normalize(Action<Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor> configure) => Set(configure, "normalize");
+	public AggregationDescriptor Parent(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation parentAggregation) => Set(parentAggregation, "parent");
+	public AggregationDescriptor Parent(Action<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor> configure) => Set(configure, "parent");
+	public AggregationDescriptor PercentileRanks(Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregation percentileRanksAggregation) => Set(percentileRanksAggregation, "percentile_ranks");
+	public AggregationDescriptor PercentileRanks<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentileRanksAggregationDescriptor> configure) => Set(configure, "percentile_ranks");
+	public AggregationDescriptor Percentiles(Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregation percentilesAggregation) => Set(percentilesAggregation, "percentiles");
+	public AggregationDescriptor Percentiles<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesAggregationDescriptor> configure) => Set(configure, "percentiles");
+	public AggregationDescriptor PercentilesBucket(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation percentilesBucketAggregation) => Set(percentilesBucketAggregation, "percentiles_bucket");
+	public AggregationDescriptor PercentilesBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor> configure) => Set(configure, "percentiles_bucket");
+	public AggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation rangeAggregation) => Set(rangeAggregation, "range");
+	public AggregationDescriptor Range<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor> configure) => Set(configure, "range");
+	public AggregationDescriptor RareTerms(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation rareTermsAggregation) => Set(rareTermsAggregation, "rare_terms");
+	public AggregationDescriptor RareTerms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor> configure) => Set(configure, "rare_terms");
+	public AggregationDescriptor Rate(Elastic.Clients.Elasticsearch.Aggregations.RateAggregation rateAggregation) => Set(rateAggregation, "rate");
+	public AggregationDescriptor Rate<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.RateAggregationDescriptor> configure) => Set(configure, "rate");
+	public AggregationDescriptor ReverseNested(Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation reverseNestedAggregation) => Set(reverseNestedAggregation, "reverse_nested");
+	public AggregationDescriptor ReverseNested<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregationDescriptor> configure) => Set(configure, "reverse_nested");
+	public AggregationDescriptor Sampler(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation samplerAggregation) => Set(samplerAggregation, "sampler");
+	public AggregationDescriptor Sampler(Action<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor> configure) => Set(configure, "sampler");
+	public AggregationDescriptor ScriptedMetric(Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation scriptedMetricAggregation) => Set(scriptedMetricAggregation, "scripted_metric");
+	public AggregationDescriptor ScriptedMetric<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregationDescriptor> configure) => Set(configure, "scripted_metric");
+	public AggregationDescriptor SerialDiff(Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregation serialDifferencingAggregation) => Set(serialDifferencingAggregation, "serial_diff");
+	public AggregationDescriptor SerialDiff(Action<Elastic.Clients.Elasticsearch.Aggregations.SerialDifferencingAggregationDescriptor> configure) => Set(configure, "serial_diff");
+	public AggregationDescriptor SignificantTerms(Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregation significantTermsAggregation) => Set(significantTermsAggregation, "significant_terms");
+	public AggregationDescriptor SignificantTerms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor> configure) => Set(configure, "significant_terms");
+	public AggregationDescriptor SignificantText(Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation significantTextAggregation) => Set(significantTextAggregation, "significant_text");
+	public AggregationDescriptor SignificantText<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregationDescriptor> configure) => Set(configure, "significant_text");
+	public AggregationDescriptor Stats(Elastic.Clients.Elasticsearch.Aggregations.StatsAggregation statsAggregation) => Set(statsAggregation, "stats");
+	public AggregationDescriptor Stats<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregationDescriptor> configure) => Set(configure, "stats");
+	public AggregationDescriptor StatsBucket(Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregation statsBucketAggregation) => Set(statsBucketAggregation, "stats_bucket");
+	public AggregationDescriptor StatsBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregationDescriptor> configure) => Set(configure, "stats_bucket");
+	public AggregationDescriptor StringStats(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregation stringStatsAggregation) => Set(stringStatsAggregation, "string_stats");
+	public AggregationDescriptor StringStats<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregationDescriptor> configure) => Set(configure, "string_stats");
+	public AggregationDescriptor Sum(Elastic.Clients.Elasticsearch.Aggregations.SumAggregation sumAggregation) => Set(sumAggregation, "sum");
+	public AggregationDescriptor Sum<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.SumAggregationDescriptor> configure) => Set(configure, "sum");
+	public AggregationDescriptor SumBucket(Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation sumBucketAggregation) => Set(sumBucketAggregation, "sum_bucket");
+	public AggregationDescriptor SumBucket(Action<Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor> configure) => Set(configure, "sum_bucket");
+	public AggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public AggregationDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
+	public AggregationDescriptor TopHits(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation topHitsAggregation) => Set(topHitsAggregation, "top_hits");
+	public AggregationDescriptor TopHits<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor> configure) => Set(configure, "top_hits");
+	public AggregationDescriptor TopMetrics(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregation topMetricsAggregation) => Set(topMetricsAggregation, "top_metrics");
+	public AggregationDescriptor TopMetrics<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregationDescriptor> configure) => Set(configure, "top_metrics");
+	public AggregationDescriptor TTest(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation tTestAggregation) => Set(tTestAggregation, "t_test");
+	public AggregationDescriptor TTest<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor> configure) => Set(configure, "t_test");
+	public AggregationDescriptor ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation valueCountAggregation) => Set(valueCountAggregation, "value_count");
+	public AggregationDescriptor ValueCount<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor> configure) => Set(configure, "value_count");
+	public AggregationDescriptor VariableWidthHistogram(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation variableWidthHistogramAggregation) => Set(variableWidthHistogramAggregation, "variable_width_histogram");
+	public AggregationDescriptor VariableWidthHistogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor> configure) => Set(configure, "variable_width_histogram");
+	public AggregationDescriptor WeightedAvg(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation weightedAverageAggregation) => Set(weightedAverageAggregation, "weighted_avg");
+	public AggregationDescriptor WeightedAvg<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationDescriptor> configure) => Set(configure, "weighted_avg");
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AggregationsValue is not null)
+		{
+			writer.WritePropertyName("aggregations");
+			JsonSerializer.Serialize(writer, AggregationsValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(ContainedVariantName))
+		{
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

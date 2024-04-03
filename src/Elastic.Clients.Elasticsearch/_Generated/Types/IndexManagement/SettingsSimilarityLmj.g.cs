@@ -27,16 +27,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityLmj
+public sealed partial class SettingsSimilarityLmj : ISettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("lambda")]
-	public double Lambda { get; set; }
+	public double? Lambda { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMJelinekMercer";
 }
 
-public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptor<SettingsSimilarityLmjDescriptor>
+public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptor<SettingsSimilarityLmjDescriptor>, IBuildableDescriptor<SettingsSimilarityLmj>
 {
 	internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
 
@@ -44,9 +44,9 @@ public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescri
 	{
 	}
 
-	private double LambdaValue { get; set; }
+	private double? LambdaValue { get; set; }
 
-	public SettingsSimilarityLmjDescriptor Lambda(double lambda)
+	public SettingsSimilarityLmjDescriptor Lambda(double? lambda)
 	{
 		LambdaValue = lambda;
 		return Self;
@@ -55,10 +55,19 @@ public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("lambda");
-		writer.WriteNumberValue(LambdaValue);
+		if (LambdaValue.HasValue)
+		{
+			writer.WritePropertyName("lambda");
+			writer.WriteNumberValue(LambdaValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("LMJelinekMercer");
 		writer.WriteEndObject();
 	}
+
+	SettingsSimilarityLmj IBuildableDescriptor<SettingsSimilarityLmj>.Build() => new()
+	{
+		Lambda = LambdaValue
+	};
 }

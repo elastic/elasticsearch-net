@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 public sealed partial class TermsQueryField : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>, Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup>
 {
-	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> value) : base(value)
+	public TermsQueryField(IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> Value) : base(Value)
 	{
 	}
 
-	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup lookup) : base(lookup)
+	public TermsQueryField(Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup Lookup) : base(Lookup)
 	{
 	}
 }

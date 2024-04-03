@@ -80,10 +80,10 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 		JsonSerializer.Serialize(writer, ScriptValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("condition");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -116,6 +116,10 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 {
 	internal GetMappingRequestDescriptor(Action<GetMappingRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public GetMappingRequestDescriptor()
 	{
 	}
@@ -151,6 +155,10 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 public sealed partial class GetMappingRequestDescriptor : RequestDescriptor<GetMappingRequestDescriptor, GetMappingRequestParameters>
 {
 	internal GetMappingRequestDescriptor(Action<GetMappingRequestDescriptor> configure) => configure.Invoke(this);
+
+	public GetMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public GetMappingRequestDescriptor()
 	{

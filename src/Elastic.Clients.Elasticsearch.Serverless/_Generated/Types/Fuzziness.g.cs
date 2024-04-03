@@ -30,13 +30,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
+/// <summary>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/common-options.html#fuzziness">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
 public sealed partial class Fuzziness : Union<string, int>
 {
-	public Fuzziness(string fuzziness) : base(fuzziness)
+	public Fuzziness(string Fuzziness) : base(Fuzziness)
 	{
 	}
 
-	public Fuzziness(int fuzziness) : base(fuzziness)
+	public Fuzziness(int Fuzziness) : base(Fuzziness)
 	{
 	}
 }

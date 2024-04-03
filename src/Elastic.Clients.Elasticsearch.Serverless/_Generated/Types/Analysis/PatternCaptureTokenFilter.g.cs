@@ -32,7 +32,6 @@ public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
 	[JsonInclude, JsonPropertyName("preserve_original")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? PreserveOriginal { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -77,18 +76,18 @@ public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDe
 		writer.WriteStartObject();
 		writer.WritePropertyName("patterns");
 		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (PreserveOriginalValue is not null)
+		if (PreserveOriginalValue.HasValue)
 		{
 			writer.WritePropertyName("preserve_original");
-			JsonSerializer.Serialize(writer, PreserveOriginalValue, options);
+			writer.WriteBooleanValue(PreserveOriginalValue.Value);
 		}
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("pattern_capture");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -76,89 +76,72 @@ internal sealed partial class TermQueryConverter : JsonConverter<TermQuery>
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize TermQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			writer.WritePropertyName("value");
-			JsonSerializer.Serialize(writer, value.Value, options);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.CaseInsensitive.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(value.CaseInsensitive.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		writer.WritePropertyName("value");
+		JsonSerializer.Serialize(writer, value.Value, options);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(TermQueryConverter))]
-public sealed partial class TermQuery : SearchQuery
+public sealed partial class TermQuery
 {
-	public TermQuery(Field field)
+	public TermQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
 	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>When `false`, the case sensitivity of matching depends on the underlying field’s mapping.</para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Term you wish to find in the provided field.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue Value { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
-	public static implicit operator Query(TermQuery termQuery) => QueryDsl.Query.Term(termQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("term", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TermQuery termQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Term(termQuery);
 }
 
 public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescriptor<TermQueryDescriptor<TDocument>>
 {
 	internal TermQueryDescriptor(Action<TermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal TermQueryDescriptor() : base()
+	public TermQueryDescriptor() : base()
 	{
-	}
-
-	public TermQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public TermQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -167,6 +150,9 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -189,6 +175,12 @@ public sealed partial class TermQueryDescriptor<TDocument> : SerializableDescrip
 	}
 
 	public TermQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TermQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -245,15 +237,8 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 {
 	internal TermQueryDescriptor(Action<TermQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal TermQueryDescriptor() : base()
+	public TermQueryDescriptor() : base()
 	{
-	}
-
-	public TermQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -262,6 +247,9 @@ public sealed partial class TermQueryDescriptor : SerializableDescriptor<TermQue
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TermQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

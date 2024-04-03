@@ -43,7 +43,6 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Executes an ES|QL request</para>
 /// </summary>
 public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestParameters>
@@ -86,7 +85,7 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
-	public ICollection<System.Text.Json.JsonElement>? Params { get; set; }
+	public ICollection<object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.</para>
@@ -96,7 +95,6 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Executes an ES|QL request</para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescriptor<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryRequestParameters>
@@ -120,10 +118,10 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private string? LocaleValue { get; set; }
-	private ICollection<System.Text.Json.JsonElement>? ParamsValue { get; set; }
+	private ICollection<object>? ParamsValue { get; set; }
 	private string QueryValue { get; set; }
 
 	/// <summary>
@@ -146,7 +144,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -154,7 +152,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public EsqlQueryRequestDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public EsqlQueryRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -171,9 +169,9 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// <summary>
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<System.Text.Json.JsonElement>? parameters)
+	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<object>? value)
 	{
-		ParamsValue = parameters;
+		ParamsValue = value;
 		return Self;
 	}
 
@@ -203,7 +201,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -230,7 +228,6 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// EXPERIMENTAL! May change in ways that are not backwards compatible or be removed entirely.
 /// <para>Executes an ES|QL request</para>
 /// </summary>
 public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQueryRequestDescriptor, EsqlQueryRequestParameters>
@@ -254,10 +251,10 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private string? LocaleValue { get; set; }
-	private ICollection<System.Text.Json.JsonElement>? ParamsValue { get; set; }
+	private ICollection<object>? ParamsValue { get; set; }
 	private string QueryValue { get; set; }
 
 	/// <summary>
@@ -280,7 +277,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		return Self;
 	}
 
-	public EsqlQueryRequestDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -288,7 +285,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		return Self;
 	}
 
-	public EsqlQueryRequestDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public EsqlQueryRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -305,9 +302,9 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// <summary>
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Params(ICollection<System.Text.Json.JsonElement>? parameters)
+	public EsqlQueryRequestDescriptor Params(ICollection<object>? value)
 	{
-		ParamsValue = parameters;
+		ParamsValue = value;
 		return Self;
 	}
 
@@ -337,7 +334,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

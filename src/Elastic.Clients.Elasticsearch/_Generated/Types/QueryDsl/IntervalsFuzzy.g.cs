@@ -64,6 +64,9 @@ public sealed partial class IntervalsFuzzy
 	/// </summary>
 	[JsonInclude, JsonPropertyName("use_field")]
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(IntervalsFuzzy intervalsFuzzy) => Elastic.Clients.Elasticsearch.QueryDsl.Intervals.Fuzzy(intervalsFuzzy);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery(IntervalsFuzzy intervalsFuzzy) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.Fuzzy(intervalsFuzzy);
 }
 
 public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDescriptor<IntervalsFuzzyDescriptor<TDocument>>
@@ -139,6 +142,15 @@ public sealed partial class IntervalsFuzzyDescriptor<TDocument> : SerializableDe
 	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
 	/// </summary>
 	public IntervalsFuzzyDescriptor<TDocument> UseField<TValue>(Expression<Func<TDocument, TValue>> useField)
+	{
+		UseFieldValue = useField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If specified, match intervals from this field rather than the top-level field.<br/>The `term` is normalized using the search analyzer from this field, unless `analyzer` is specified separately.</para>
+	/// </summary>
+	public IntervalsFuzzyDescriptor<TDocument> UseField(Expression<Func<TDocument, object>> useField)
 	{
 		UseFieldValue = useField;
 		return Self;

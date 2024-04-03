@@ -83,10 +83,6 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 	{
 	}
 
-	internal ExplainDataLifecycleRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExplainDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -117,10 +113,6 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor : RequestDescr
 	internal ExplainDataLifecycleRequestDescriptor(Action<ExplainDataLifecycleRequestDescriptor> configure) => configure.Invoke(this);
 
 	public ExplainDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal ExplainDataLifecycleRequestDescriptor()
 	{
 	}
 

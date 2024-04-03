@@ -27,433 +27,103 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class SignificantTermsAggregationConverter : JsonConverter<SignificantTermsAggregation>
+public sealed partial class SignificantTermsAggregation
 {
-	public override SignificantTermsAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "significant_terms")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new SignificantTermsAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("background_filter"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.BackgroundFilter = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("chi_square"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ChiSquare = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("exclude"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsExclude?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Exclude = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("execution_hint"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ExecutionHint = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("gnd"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Gnd = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("include"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsInclude?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Include = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("jlh"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.EmptyObject?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Jlh = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<long?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("mutual_information"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MutualInformation = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("percentage"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Percentage = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script_heuristic"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ScriptHeuristic = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("shard_min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<long?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShardMinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("shard_size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.ShardSize = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("size"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Size = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SignificantTermsAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("significant_terms");
-		writer.WriteStartObject();
-		if (value.BackgroundFilter is not null)
-		{
-			writer.WritePropertyName("background_filter");
-			JsonSerializer.Serialize(writer, value.BackgroundFilter, options);
-		}
-
-		if (value.ChiSquare is not null)
-		{
-			writer.WritePropertyName("chi_square");
-			JsonSerializer.Serialize(writer, value.ChiSquare, options);
-		}
-
-		if (value.Exclude is not null)
-		{
-			writer.WritePropertyName("exclude");
-			JsonSerializer.Serialize(writer, value.Exclude, options);
-		}
-
-		if (value.ExecutionHint is not null)
-		{
-			writer.WritePropertyName("execution_hint");
-			JsonSerializer.Serialize(writer, value.ExecutionHint, options);
-		}
-
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (value.Gnd is not null)
-		{
-			writer.WritePropertyName("gnd");
-			JsonSerializer.Serialize(writer, value.Gnd, options);
-		}
-
-		if (value.Include is not null)
-		{
-			writer.WritePropertyName("include");
-			JsonSerializer.Serialize(writer, value.Include, options);
-		}
-
-		if (value.Jlh is not null)
-		{
-			writer.WritePropertyName("jlh");
-			JsonSerializer.Serialize(writer, value.Jlh, options);
-		}
-
-		if (value.MinDocCount.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(value.MinDocCount.Value);
-		}
-
-		if (value.MutualInformation is not null)
-		{
-			writer.WritePropertyName("mutual_information");
-			JsonSerializer.Serialize(writer, value.MutualInformation, options);
-		}
-
-		if (value.Percentage is not null)
-		{
-			writer.WritePropertyName("percentage");
-			JsonSerializer.Serialize(writer, value.Percentage, options);
-		}
-
-		if (value.ScriptHeuristic is not null)
-		{
-			writer.WritePropertyName("script_heuristic");
-			JsonSerializer.Serialize(writer, value.ScriptHeuristic, options);
-		}
-
-		if (value.ShardMinDocCount.HasValue)
-		{
-			writer.WritePropertyName("shard_min_doc_count");
-			writer.WriteNumberValue(value.ShardMinDocCount.Value);
-		}
-
-		if (value.ShardSize.HasValue)
-		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(value.ShardSize.Value);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(SignificantTermsAggregationConverter))]
-public sealed partial class SignificantTermsAggregation : SearchAggregation
-{
-	public SignificantTermsAggregation(string name) => Name = name;
-
-	internal SignificantTermsAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("background_filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilter { get; set; }
 
 	/// <summary>
 	/// <para>Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("chi_square")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquare { get; set; }
 
 	/// <summary>
 	/// <para>Terms to exclude.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("exclude")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
 	/// <summary>
 	/// <para>Mechanism by which the aggregation should be executed: using field values directly or using global ordinals.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("execution_hint")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
 	/// <para>The field from which to return significant terms.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
 	/// <summary>
 	/// <para>Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("gnd")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? Gnd { get; set; }
 
 	/// <summary>
 	/// <para>Terms to include.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
 	/// <summary>
 	/// <para>Use JLH score as the significance score.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("jlh")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Jlh { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only return terms that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
 
 	/// <summary>
 	/// <para>Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("mutual_information")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("percentage")]
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? Percentage { get; set; }
 
 	/// <summary>
 	/// <para>Customized score, implemented via a script.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("script_heuristic")]
 	public Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristic { get; set; }
 
 	/// <summary>
 	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
 	public long? ShardMinDocCount { get; set; }
 
 	/// <summary>
 	/// <para>Can be used to control the volumes of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_size")]
 	public int? ShardSize { get; set; }
 
 	/// <summary>
 	/// <para>The number of buckets returned out of the overall terms list.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(SignificantTermsAggregation significantTermsAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantTerms(significantTermsAggregation);
 }
 
 public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : SerializableDescriptor<SignificantTermsAggregationDescriptor<TDocument>>
@@ -464,63 +134,37 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> BackgroundFilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> BackgroundFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> BackgroundFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> BackgroundFilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquareValue { get; set; }
-	private ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; set; }
-	private Action<ChiSquareHeuristicDescriptor> ChiSquareDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> ChiSquareDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? GndValue { get; set; }
-	private GoogleNormalizedDistanceHeuristicDescriptor GndDescriptor { get; set; }
-	private Action<GoogleNormalizedDistanceHeuristicDescriptor> GndDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor GndDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> GndDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.EmptyObject? JlhValue { get; set; }
-	private EmptyObjectDescriptor JlhDescriptor { get; set; }
-	private Action<EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.EmptyObjectDescriptor JlhDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformationValue { get; set; }
-	private MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
-	private Action<MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? PercentageValue { get; set; }
-	private PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
-	private Action<PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristicValue { get; set; }
-	private ScriptedHeuristicDescriptor ScriptHeuristicDescriptor { get; set; }
-	private Action<ScriptedHeuristicDescriptor> ScriptHeuristicDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor ScriptHeuristicDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> ScriptHeuristicDescriptorAction { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
-
-	public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SignificantTermsAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
@@ -533,7 +177,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		BackgroundFilterValue = null;
 		BackgroundFilterDescriptorAction = null;
@@ -541,7 +185,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> BackgroundFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		BackgroundFilterValue = null;
 		BackgroundFilterDescriptor = null;
@@ -560,7 +204,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(ChiSquareHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor descriptor)
 	{
 		ChiSquareValue = null;
 		ChiSquareDescriptorAction = null;
@@ -568,7 +212,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Action<ChiSquareHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> ChiSquare(Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> configure)
 	{
 		ChiSquareValue = null;
 		ChiSquareDescriptor = null;
@@ -613,6 +257,15 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 	}
 
 	/// <summary>
+	/// <para>The field from which to return significant terms.</para>
+	/// </summary>
+	public SignificantTermsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.</para>
 	/// </summary>
 	public SignificantTermsAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? gnd)
@@ -623,7 +276,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Gnd(GoogleNormalizedDistanceHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor)
 	{
 		GndValue = null;
 		GndDescriptorAction = null;
@@ -631,7 +284,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Gnd(Action<GoogleNormalizedDistanceHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> Gnd(Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> configure)
 	{
 		GndValue = null;
 		GndDescriptor = null;
@@ -659,7 +312,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Jlh(EmptyObjectDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> Jlh(Elastic.Clients.Elasticsearch.EmptyObjectDescriptor descriptor)
 	{
 		JlhValue = null;
 		JlhDescriptorAction = null;
@@ -667,7 +320,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Jlh(Action<EmptyObjectDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> Jlh(Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> configure)
 	{
 		JlhValue = null;
 		JlhDescriptor = null;
@@ -701,7 +354,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(MutualInformationHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor descriptor)
 	{
 		MutualInformationValue = null;
 		MutualInformationDescriptorAction = null;
@@ -709,11 +362,17 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Action<MutualInformationHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> MutualInformation(Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor> configure)
 	{
 		MutualInformationValue = null;
 		MutualInformationDescriptor = null;
 		MutualInformationDescriptorAction = configure;
+		return Self;
+	}
+
+	public SignificantTermsAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -728,7 +387,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Percentage(PercentageScoreHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor descriptor)
 	{
 		PercentageValue = null;
 		PercentageDescriptorAction = null;
@@ -736,7 +395,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> Percentage(Action<PercentageScoreHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> Percentage(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor> configure)
 	{
 		PercentageValue = null;
 		PercentageDescriptor = null;
@@ -755,7 +414,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(ScriptedHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor descriptor)
 	{
 		ScriptHeuristicValue = null;
 		ScriptHeuristicDescriptorAction = null;
@@ -763,7 +422,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Action<ScriptedHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor<TDocument> ScriptHeuristic(Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> configure)
 	{
 		ScriptHeuristicValue = null;
 		ScriptHeuristicDescriptor = null;
@@ -801,8 +460,6 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("significant_terms");
-		writer.WriteStartObject();
 		if (BackgroundFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("background_filter");
@@ -811,7 +468,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (BackgroundFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("background_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(BackgroundFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(BackgroundFilterDescriptorAction), options);
 		}
 		else if (BackgroundFilterValue is not null)
 		{
@@ -827,7 +484,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (ChiSquareDescriptorAction is not null)
 		{
 			writer.WritePropertyName("chi_square");
-			JsonSerializer.Serialize(writer, new ChiSquareHeuristicDescriptor(ChiSquareDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(ChiSquareDescriptorAction), options);
 		}
 		else if (ChiSquareValue is not null)
 		{
@@ -861,7 +518,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (GndDescriptorAction is not null)
 		{
 			writer.WritePropertyName("gnd");
-			JsonSerializer.Serialize(writer, new GoogleNormalizedDistanceHeuristicDescriptor(GndDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(GndDescriptorAction), options);
 		}
 		else if (GndValue is not null)
 		{
@@ -883,12 +540,18 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (JlhDescriptorAction is not null)
 		{
 			writer.WritePropertyName("jlh");
-			JsonSerializer.Serialize(writer, new EmptyObjectDescriptor(JlhDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(JlhDescriptorAction), options);
 		}
 		else if (JlhValue is not null)
 		{
 			writer.WritePropertyName("jlh");
 			JsonSerializer.Serialize(writer, JlhValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -905,12 +568,18 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (MutualInformationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mutual_information");
-			JsonSerializer.Serialize(writer, new MutualInformationHeuristicDescriptor(MutualInformationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(MutualInformationDescriptorAction), options);
 		}
 		else if (MutualInformationValue is not null)
 		{
 			writer.WritePropertyName("mutual_information");
 			JsonSerializer.Serialize(writer, MutualInformationValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (PercentageDescriptor is not null)
@@ -921,7 +590,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (PercentageDescriptorAction is not null)
 		{
 			writer.WritePropertyName("percentage");
-			JsonSerializer.Serialize(writer, new PercentageScoreHeuristicDescriptor(PercentageDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor(PercentageDescriptorAction), options);
 		}
 		else if (PercentageValue is not null)
 		{
@@ -937,7 +606,7 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		else if (ScriptHeuristicDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script_heuristic");
-			JsonSerializer.Serialize(writer, new ScriptedHeuristicDescriptor(ScriptHeuristicDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor(ScriptHeuristicDescriptorAction), options);
 		}
 		else if (ScriptHeuristicValue is not null)
 		{
@@ -964,29 +633,6 @@ public sealed partial class SignificantTermsAggregationDescriptor<TDocument> : S
 		}
 
 		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
-
-		writer.WriteEndObject();
 	}
 }
 
@@ -998,63 +644,37 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? BackgroundFilterValue { get; set; }
-	private QueryDsl.QueryDescriptor BackgroundFilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> BackgroundFilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor BackgroundFilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> BackgroundFilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic? ChiSquareValue { get; set; }
-	private ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; set; }
-	private Action<ChiSquareHeuristicDescriptor> ChiSquareDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor ChiSquareDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> ChiSquareDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? ExcludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? ExecutionHintValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic? GndValue { get; set; }
-	private GoogleNormalizedDistanceHeuristicDescriptor GndDescriptor { get; set; }
-	private Action<GoogleNormalizedDistanceHeuristicDescriptor> GndDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor GndDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> GndDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.EmptyObject? JlhValue { get; set; }
-	private EmptyObjectDescriptor JlhDescriptor { get; set; }
-	private Action<EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.EmptyObjectDescriptor JlhDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic? MutualInformationValue { get; set; }
-	private MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
-	private Action<MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic? PercentageValue { get; set; }
-	private PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
-	private Action<PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic? ScriptHeuristicValue { get; set; }
-	private ScriptedHeuristicDescriptor ScriptHeuristicDescriptor { get; set; }
-	private Action<ScriptedHeuristicDescriptor> ScriptHeuristicDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor ScriptHeuristicDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> ScriptHeuristicDescriptorAction { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
-
-	public SignificantTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public SignificantTermsAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SignificantTermsAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.</para>
@@ -1067,7 +687,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor BackgroundFilter(QueryDsl.QueryDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor BackgroundFilter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
 	{
 		BackgroundFilterValue = null;
 		BackgroundFilterDescriptorAction = null;
@@ -1075,7 +695,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor BackgroundFilter(Action<QueryDsl.QueryDescriptor> configure)
+	public SignificantTermsAggregationDescriptor BackgroundFilter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
 	{
 		BackgroundFilterValue = null;
 		BackgroundFilterDescriptor = null;
@@ -1094,7 +714,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor ChiSquare(ChiSquareHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor ChiSquare(Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor descriptor)
 	{
 		ChiSquareValue = null;
 		ChiSquareDescriptorAction = null;
@@ -1102,7 +722,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor ChiSquare(Action<ChiSquareHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor ChiSquare(Action<Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor> configure)
 	{
 		ChiSquareValue = null;
 		ChiSquareDescriptor = null;
@@ -1166,7 +786,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Gnd(GoogleNormalizedDistanceHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor Gnd(Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor descriptor)
 	{
 		GndValue = null;
 		GndDescriptorAction = null;
@@ -1174,7 +794,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Gnd(Action<GoogleNormalizedDistanceHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor Gnd(Action<Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor> configure)
 	{
 		GndValue = null;
 		GndDescriptor = null;
@@ -1202,7 +822,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Jlh(EmptyObjectDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor Jlh(Elastic.Clients.Elasticsearch.EmptyObjectDescriptor descriptor)
 	{
 		JlhValue = null;
 		JlhDescriptorAction = null;
@@ -1210,7 +830,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Jlh(Action<EmptyObjectDescriptor> configure)
+	public SignificantTermsAggregationDescriptor Jlh(Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor> configure)
 	{
 		JlhValue = null;
 		JlhDescriptor = null;
@@ -1244,7 +864,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor MutualInformation(MutualInformationHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor MutualInformation(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor descriptor)
 	{
 		MutualInformationValue = null;
 		MutualInformationDescriptorAction = null;
@@ -1252,11 +872,17 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor MutualInformation(Action<MutualInformationHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor MutualInformation(Action<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor> configure)
 	{
 		MutualInformationValue = null;
 		MutualInformationDescriptor = null;
 		MutualInformationDescriptorAction = configure;
+		return Self;
+	}
+
+	public SignificantTermsAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -1271,7 +897,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Percentage(PercentageScoreHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor Percentage(Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor descriptor)
 	{
 		PercentageValue = null;
 		PercentageDescriptorAction = null;
@@ -1279,7 +905,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor Percentage(Action<PercentageScoreHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor Percentage(Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor> configure)
 	{
 		PercentageValue = null;
 		PercentageDescriptor = null;
@@ -1298,7 +924,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor ScriptHeuristic(ScriptedHeuristicDescriptor descriptor)
+	public SignificantTermsAggregationDescriptor ScriptHeuristic(Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor descriptor)
 	{
 		ScriptHeuristicValue = null;
 		ScriptHeuristicDescriptorAction = null;
@@ -1306,7 +932,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		return Self;
 	}
 
-	public SignificantTermsAggregationDescriptor ScriptHeuristic(Action<ScriptedHeuristicDescriptor> configure)
+	public SignificantTermsAggregationDescriptor ScriptHeuristic(Action<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor> configure)
 	{
 		ScriptHeuristicValue = null;
 		ScriptHeuristicDescriptor = null;
@@ -1344,8 +970,6 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("significant_terms");
-		writer.WriteStartObject();
 		if (BackgroundFilterDescriptor is not null)
 		{
 			writer.WritePropertyName("background_filter");
@@ -1354,7 +978,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (BackgroundFilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("background_filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(BackgroundFilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(BackgroundFilterDescriptorAction), options);
 		}
 		else if (BackgroundFilterValue is not null)
 		{
@@ -1370,7 +994,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (ChiSquareDescriptorAction is not null)
 		{
 			writer.WritePropertyName("chi_square");
-			JsonSerializer.Serialize(writer, new ChiSquareHeuristicDescriptor(ChiSquareDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristicDescriptor(ChiSquareDescriptorAction), options);
 		}
 		else if (ChiSquareValue is not null)
 		{
@@ -1404,7 +1028,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (GndDescriptorAction is not null)
 		{
 			writer.WritePropertyName("gnd");
-			JsonSerializer.Serialize(writer, new GoogleNormalizedDistanceHeuristicDescriptor(GndDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristicDescriptor(GndDescriptorAction), options);
 		}
 		else if (GndValue is not null)
 		{
@@ -1426,12 +1050,18 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (JlhDescriptorAction is not null)
 		{
 			writer.WritePropertyName("jlh");
-			JsonSerializer.Serialize(writer, new EmptyObjectDescriptor(JlhDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.EmptyObjectDescriptor(JlhDescriptorAction), options);
 		}
 		else if (JlhValue is not null)
 		{
 			writer.WritePropertyName("jlh");
 			JsonSerializer.Serialize(writer, JlhValue, options);
+		}
+
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -1448,12 +1078,18 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (MutualInformationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mutual_information");
-			JsonSerializer.Serialize(writer, new MutualInformationHeuristicDescriptor(MutualInformationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(MutualInformationDescriptorAction), options);
 		}
 		else if (MutualInformationValue is not null)
 		{
 			writer.WritePropertyName("mutual_information");
 			JsonSerializer.Serialize(writer, MutualInformationValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		if (PercentageDescriptor is not null)
@@ -1464,7 +1100,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (PercentageDescriptorAction is not null)
 		{
 			writer.WritePropertyName("percentage");
-			JsonSerializer.Serialize(writer, new PercentageScoreHeuristicDescriptor(PercentageDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor(PercentageDescriptorAction), options);
 		}
 		else if (PercentageValue is not null)
 		{
@@ -1480,7 +1116,7 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		else if (ScriptHeuristicDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script_heuristic");
-			JsonSerializer.Serialize(writer, new ScriptedHeuristicDescriptor(ScriptHeuristicDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristicDescriptor(ScriptHeuristicDescriptorAction), options);
 		}
 		else if (ScriptHeuristicValue is not null)
 		{
@@ -1504,29 +1140,6 @@ public sealed partial class SignificantTermsAggregationDescriptor : Serializable
 		{
 			writer.WritePropertyName("size");
 			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

@@ -27,18 +27,78 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
+internal sealed partial class InferenceAggregateConverter : JsonConverter<InferenceAggregate>
+{
+	public override InferenceAggregate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceFeatureImportance>? featureImportance = default;
+		IReadOnlyDictionary<string, object>? meta = default;
+		IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceTopClassEntry>? topClasses = default;
+		Elastic.Clients.Elasticsearch.Serverless.FieldValue? value = default;
+		string? warning = default;
+		Dictionary<string, object> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				var property = reader.GetString();
+				if (property == "feature_importance")
+				{
+					featureImportance = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceFeatureImportance>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "meta")
+				{
+					meta = JsonSerializer.Deserialize<IReadOnlyDictionary<string, object>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "top_classes")
+				{
+					topClasses = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceTopClassEntry>?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "value")
+				{
+					value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.FieldValue?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "warning")
+				{
+					warning = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				additionalProperties ??= new Dictionary<string, object>();
+				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
+				additionalProperties.Add(property, additionalValue);
+			}
+		}
+
+		return new InferenceAggregate { Data = additionalProperties, FeatureImportance = featureImportance, Meta = meta, TopClasses = topClasses, Value = value, Warning = warning };
+	}
+
+	public override void Write(Utf8JsonWriter writer, InferenceAggregate value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'InferenceAggregate' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(InferenceAggregateConverter))]
 public sealed partial class InferenceAggregate : IAggregate
 {
-	[JsonInclude, JsonPropertyName("data")]
+	/// <summary>
+	/// <para>Additional data</para>
+	/// </summary>
 	public IReadOnlyDictionary<string, object> Data { get; init; }
-	[JsonInclude, JsonPropertyName("feature_importance")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceFeatureImportance>? FeatureImportance { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("top_classes")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.InferenceTopClassEntry>? TopClasses { get; init; }
-	[JsonInclude, JsonPropertyName("value")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Value { get; init; }
-	[JsonInclude, JsonPropertyName("warning")]
 	public string? Warning { get; init; }
 }

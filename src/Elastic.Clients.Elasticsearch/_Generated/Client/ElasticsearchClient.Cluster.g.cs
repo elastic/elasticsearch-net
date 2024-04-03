@@ -18,6 +18,7 @@
 #nullable restore
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public partial class ClusterNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="ClusterNamespacedClient"/> class for mocking.
+	/// <para>Initializes a new instance of the <see cref="ClusterNamespacedClient"/> class for mocking.</para>
 	/// </summary>
 	protected ClusterNamespacedClient() : base()
 	{
@@ -38,7 +39,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
 	{
@@ -48,7 +49,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)
 	{
@@ -58,8 +59,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain()
 	{
 		var descriptor = new AllocationExplainRequestDescriptor();
@@ -69,8 +71,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -79,8 +82,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(Action<AllocationExplainRequestDescriptor> configureRequest)
 	{
 		var descriptor = new AllocationExplainRequestDescriptor();
@@ -91,7 +95,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(CancellationToken cancellationToken = default)
 	{
@@ -102,7 +106,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -112,7 +116,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(Action<AllocationExplainRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -123,94 +127,364 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
+	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request);
+		return DoRequest<DeleteComponentTemplateRequest, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(request);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<DeleteComponentTemplateRequest, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClusterStatsResponse Stats()
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
+		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClusterStatsResponse Stats(ClusterStatsRequestDescriptor descriptor)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
+		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+		return DoRequest<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
+		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Deletes a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClusterStatsRequestDescriptor();
+		var descriptor = new DeleteComponentTemplateRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<DeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<DeleteVotingConfigExclusionsRequest, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()
+	{
+		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clears cluster voting config exclusions.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteVotingConfigExclusionsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteVotingConfigExclusionsRequestDescriptor, DeleteVotingConfigExclusionsResponse, DeleteVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ExistsComponentTemplateRequest, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ExistsComponentTemplateRequest, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsComponentTemplateRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetComponentTemplateRequest, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetComponentTemplateRequest, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetComponentTemplateResponse GetComponentTemplate()
+	{
+		var descriptor = new GetComponentTemplateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetComponentTemplateResponse GetComponentTemplate(Action<GetComponentTemplateRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetComponentTemplateRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetComponentTemplateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns one or more component templates</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetComponentTemplateRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetComponentTemplateRequestDescriptor, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
 	{
@@ -220,7 +494,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -230,8 +504,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings()
 	{
 		var descriptor = new GetClusterSettingsRequestDescriptor();
@@ -241,8 +516,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -251,8 +527,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(Action<GetClusterSettingsRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GetClusterSettingsRequestDescriptor();
@@ -263,7 +540,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -274,7 +551,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -284,7 +561,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(Action<GetClusterSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -296,7 +573,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual HealthResponse Health(HealthRequest request)
 	{
@@ -306,7 +583,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{
@@ -316,8 +593,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health()
 	{
 		var descriptor = new HealthRequestDescriptor();
@@ -327,8 +605,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(HealthRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -337,8 +616,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(Action<HealthRequestDescriptor> configureRequest)
 	{
 		var descriptor = new HealthRequestDescriptor();
@@ -349,29 +629,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
@@ -382,7 +640,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -392,7 +650,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -403,30 +661,97 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual ClusterInfoResponse Info(ClusterInfoRequest request)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		request.BeforeRequest();
+		return DoRequest<ClusterInfoRequest, ClusterInfoResponse, ClusterInfoRequestParameters>(request);
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor<TDocument>();
+		request.BeforeRequest();
+		return DoRequestAsync<ClusterInfoRequest, ClusterInfoResponse, ClusterInfoRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
+	{
+		var descriptor = new ClusterInfoRequestDescriptor(target);
+		descriptor.BeforeRequest();
+		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterInfoResponse Info(ClusterInfoRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ClusterInfoRequestDescriptor(target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClusterInfoRequestDescriptor(target);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns different information about the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClusterInfoRequestDescriptor(target);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterInfoRequestDescriptor, ClusterInfoResponse, ClusterInfoRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
 	{
@@ -436,7 +761,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)
 	{
@@ -446,8 +771,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks()
 	{
 		var descriptor = new PendingTasksRequestDescriptor();
@@ -457,8 +783,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -467,8 +794,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(Action<PendingTasksRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PendingTasksRequestDescriptor();
@@ -479,7 +807,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(CancellationToken cancellationToken = default)
 	{
@@ -490,7 +818,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -500,7 +828,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.12/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(Action<PendingTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -508,5 +836,295 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PostVotingConfigExclusionsRequest, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions()
+	{
+		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PostVotingConfigExclusionsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsResponse, PostVotingConfigExclusionsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutComponentTemplateRequest, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutComponentTemplateRequest, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutComponentTemplateRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutComponentTemplateRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a component template</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutComponentTemplateRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutComponentTemplateRequestDescriptor<TDocument>, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterStatsResponse Stats()
+	{
+		var descriptor = new ClusterStatsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterStatsResponse Stats(ClusterStatsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ClusterStatsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClusterStatsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns high-level overview of cluster statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ClusterStatsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ClusterStatsRequestDescriptor, ClusterStatsResponse, ClusterStatsRequestParameters>(descriptor, cancellationToken);
 	}
 }

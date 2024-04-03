@@ -43,7 +43,7 @@ public partial class IndicesNamespacedClient
 
 	public virtual GetAliasResponse GetAlias(Indices indicies, Action<GetAliasRequestDescriptor> configureRequest)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indicies);
+		var descriptor = new GetAliasRequestDescriptor(indicies, null);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
@@ -51,7 +51,7 @@ public partial class IndicesNamespacedClient
 
 	public virtual Task<GetAliasResponse> GetAliasAsync(Indices indicies, Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indicies);
+		var descriptor = new GetAliasRequestDescriptor(indicies, null);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);

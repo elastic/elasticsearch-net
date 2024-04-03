@@ -149,10 +149,6 @@ public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	internal GetIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -189,10 +185,6 @@ public sealed partial class GetIndexRequestDescriptor : RequestDescriptor<GetInd
 	internal GetIndexRequestDescriptor(Action<GetIndexRequestDescriptor> configure) => configure.Invoke(this);
 
 	public GetIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices indices) : base(r => r.Required("index", indices))
-	{
-	}
-
-	internal GetIndexRequestDescriptor()
 	{
 	}
 
