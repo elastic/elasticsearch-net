@@ -69,10 +69,10 @@ public sealed partial class PredicateTokenFilterDescriptor : SerializableDescrip
 		JsonSerializer.Serialize(writer, ScriptValue, options);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("predicate_token_filter");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -59,7 +59,7 @@ public sealed partial class DownsampleConfigDescriptor : SerializableDescriptor<
 	{
 		writer.WriteStartObject();
 		writer.WritePropertyName("fixed_interval");
-		JsonSerializer.Serialize(writer, FixedIntervalValue, options);
+		writer.WriteStringValue(FixedIntervalValue);
 		writer.WriteEndObject();
 	}
 }

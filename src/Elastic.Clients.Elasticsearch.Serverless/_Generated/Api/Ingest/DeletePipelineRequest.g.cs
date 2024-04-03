@@ -83,10 +83,6 @@ public sealed partial class DeletePipelineRequestDescriptor<TDocument> : Request
 	{
 	}
 
-	internal DeletePipelineRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestDeletePipeline;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -117,10 +113,6 @@ public sealed partial class DeletePipelineRequestDescriptor : RequestDescriptor<
 	internal DeletePipelineRequestDescriptor(Action<DeletePipelineRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeletePipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal DeletePipelineRequestDescriptor()
 	{
 	}
 

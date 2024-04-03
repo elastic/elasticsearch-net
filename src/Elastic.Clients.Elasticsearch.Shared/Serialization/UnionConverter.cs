@@ -162,13 +162,13 @@ internal sealed class UnionConverter : JsonConverterFactory
 					if (verifiable.IsSuccessful)
 					{
 						reader = readerCopy;
-						return (TItem1)Activator.CreateInstance(typeof(TItem1), itemOne);
+						return (Union<TItem1, TItem2>)Activator.CreateInstance(typeof(Union<TItem1, TItem2>), itemOne);
 					}
 				}
 				else if (itemOne is not null)
 				{
 					reader = readerCopy;
-					return (TItem1)Activator.CreateInstance(typeof(TItem1), itemOne);
+					return (Union<TItem1, TItem2>)Activator.CreateInstance(typeof(Union<TItem1, TItem2>), itemOne);
 				}
 			}
 			catch
@@ -182,7 +182,7 @@ internal sealed class UnionConverter : JsonConverterFactory
 
 				if (itemTwo is not null)
 				{
-					return (TItem2)Activator.CreateInstance(typeof(TItem2), itemTwo);
+					return (Union<TItem1, TItem2>)Activator.CreateInstance(typeof(Union<TItem1, TItem2>), itemTwo);
 				}
 			}
 			catch

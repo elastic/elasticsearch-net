@@ -30,19 +30,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSettingBlocks
 {
 	[JsonInclude, JsonPropertyName("metadata")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Metadata { get; set; }
 	[JsonInclude, JsonPropertyName("read")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Read { get; set; }
 	[JsonInclude, JsonPropertyName("read_only")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? ReadOnly { get; set; }
 	[JsonInclude, JsonPropertyName("read_only_allow_delete")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? ReadOnlyAllowDelete { get; set; }
 	[JsonInclude, JsonPropertyName("write")]
-	[JsonConverter(typeof(StringifiedBoolConverter))]
 	public bool? Write { get; set; }
 }
 
@@ -93,34 +88,34 @@ public sealed partial class IndexSettingBlocksDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetadataValue is not null)
+		if (MetadataValue.HasValue)
 		{
 			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
+			writer.WriteBooleanValue(MetadataValue.Value);
 		}
 
-		if (ReadValue is not null)
+		if (ReadValue.HasValue)
 		{
 			writer.WritePropertyName("read");
-			JsonSerializer.Serialize(writer, ReadValue, options);
+			writer.WriteBooleanValue(ReadValue.Value);
 		}
 
-		if (ReadOnlyValue is not null)
+		if (ReadOnlyValue.HasValue)
 		{
 			writer.WritePropertyName("read_only");
-			JsonSerializer.Serialize(writer, ReadOnlyValue, options);
+			writer.WriteBooleanValue(ReadOnlyValue.Value);
 		}
 
-		if (ReadOnlyAllowDeleteValue is not null)
+		if (ReadOnlyAllowDeleteValue.HasValue)
 		{
 			writer.WritePropertyName("read_only_allow_delete");
-			JsonSerializer.Serialize(writer, ReadOnlyAllowDeleteValue, options);
+			writer.WriteBooleanValue(ReadOnlyAllowDeleteValue.Value);
 		}
 
-		if (WriteValue is not null)
+		if (WriteValue.HasValue)
 		{
 			writer.WritePropertyName("write");
-			JsonSerializer.Serialize(writer, WriteValue, options);
+			writer.WriteBooleanValue(WriteValue.Value);
 		}
 
 		writer.WriteEndObject();

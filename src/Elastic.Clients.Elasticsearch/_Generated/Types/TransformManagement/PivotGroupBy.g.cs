@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -49,6 +50,18 @@ public sealed partial class PivotGroupBy
 	public static PivotGroupBy GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => new PivotGroupBy("geotile_grid", geotileGridAggregation);
 	public static PivotGroupBy Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => new PivotGroupBy("histogram", histogramAggregation);
 	public static PivotGroupBy Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => new PivotGroupBy("terms", termsAggregation);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy>
@@ -60,49 +73,62 @@ internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy
 			throw new JsonException("Expected start token.");
 		}
 
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
+
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
+			reader.Read();
+			if (propertyName == "date_histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geotile_grid")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "histogram")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "terms")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PivotGroupBy' from the response.");
+		}
+
 		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
-		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
-
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "date_histogram")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation?>(ref reader, options);
-			reader.Read();
-			return new PivotGroupBy(propertyName, variant);
-		}
-
-		if (propertyName == "geotile_grid")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation?>(ref reader, options);
-			reader.Read();
-			return new PivotGroupBy(propertyName, variant);
-		}
-
-		if (propertyName == "histogram")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation?>(ref reader, options);
-			reader.Read();
-			return new PivotGroupBy(propertyName, variant);
-		}
-
-		if (propertyName == "terms")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation?>(ref reader, options);
-			reader.Read();
-			return new PivotGroupBy(propertyName, variant);
-		}
-
-		throw new JsonException();
+		var result = new PivotGroupBy(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, PivotGroupBy value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -157,33 +183,31 @@ public sealed partial class PivotGroupByDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public PivotGroupByDescriptor<TDocument> DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByDescriptor<TDocument> DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-	public PivotGroupByDescriptor<TDocument> GeotileGrid(Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
-	public PivotGroupByDescriptor<TDocument> GeotileGrid(Action<Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
-	public PivotGroupByDescriptor<TDocument> Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByDescriptor<TDocument> Histogram(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-	public PivotGroupByDescriptor<TDocument> Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByDescriptor<TDocument> Terms(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public PivotGroupByDescriptor<TDocument> DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public PivotGroupByDescriptor<TDocument> DateHistogram(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor<TDocument> GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public PivotGroupByDescriptor<TDocument> GeotileGrid(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
+	public PivotGroupByDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public PivotGroupByDescriptor<TDocument> Histogram(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
+	public PivotGroupByDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public PivotGroupByDescriptor<TDocument> Terms(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -219,37 +243,31 @@ public sealed partial class PivotGroupByDescriptor : SerializableDescriptor<Pivo
 		return Self;
 	}
 
-	public PivotGroupByDescriptor DateHistogram(Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
-	public PivotGroupByDescriptor DateHistogram(Action<Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
-	public PivotGroupByDescriptor DateHistogram<TDocument>(Action<Aggregations.DateHistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "date_histogram");
-	public PivotGroupByDescriptor GeotileGrid(Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
-	public PivotGroupByDescriptor GeotileGrid(Action<Aggregations.GeotileGridAggregationDescriptor> configure) => Set(configure, "geotile_grid");
-	public PivotGroupByDescriptor GeotileGrid<TDocument>(Action<Aggregations.GeotileGridAggregationDescriptor<TDocument>> configure) => Set(configure, "geotile_grid");
-	public PivotGroupByDescriptor Histogram(Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
-	public PivotGroupByDescriptor Histogram(Action<Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
-	public PivotGroupByDescriptor Histogram<TDocument>(Action<Aggregations.HistogramAggregationDescriptor<TDocument>> configure) => Set(configure, "histogram");
-	public PivotGroupByDescriptor Terms(Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
-	public PivotGroupByDescriptor Terms(Action<Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
-	public PivotGroupByDescriptor Terms<TDocument>(Action<Aggregations.TermsAggregationDescriptor<TDocument>> configure) => Set(configure, "terms");
+	public PivotGroupByDescriptor DateHistogram(Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregation dateHistogramAggregation) => Set(dateHistogramAggregation, "date_histogram");
+	public PivotGroupByDescriptor DateHistogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregationDescriptor> configure) => Set(configure, "date_histogram");
+	public PivotGroupByDescriptor GeotileGrid(Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregation geotileGridAggregation) => Set(geotileGridAggregation, "geotile_grid");
+	public PivotGroupByDescriptor GeotileGrid<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor> configure) => Set(configure, "geotile_grid");
+	public PivotGroupByDescriptor Histogram(Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation histogramAggregation) => Set(histogramAggregation, "histogram");
+	public PivotGroupByDescriptor Histogram<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor> configure) => Set(configure, "histogram");
+	public PivotGroupByDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation termsAggregation) => Set(termsAggregation, "terms");
+	public PivotGroupByDescriptor Terms<TDocument>(Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor> configure) => Set(configure, "terms");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

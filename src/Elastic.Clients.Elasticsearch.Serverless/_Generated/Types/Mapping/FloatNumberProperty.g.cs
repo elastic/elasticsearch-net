@@ -47,6 +47,10 @@ public sealed partial class FloatNumberProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -61,10 +65,6 @@ public sealed partial class FloatNumberProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_metric")]
-	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "float";
@@ -94,8 +94,6 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public FloatNumberPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -133,15 +131,15 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public FloatNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public FloatNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -165,6 +163,9 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public FloatNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -189,15 +190,15 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public FloatNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public FloatNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -218,18 +219,6 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 	public FloatNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public FloatNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public FloatNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -332,18 +321,6 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("float");
 		writer.WriteEndObject();
@@ -366,9 +343,7 @@ public sealed partial class FloatNumberPropertyDescriptor<TDocument> : Serializa
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }
 
@@ -396,8 +371,6 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public FloatNumberPropertyDescriptor Boost(double? boost)
 	{
@@ -435,15 +408,15 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public FloatNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public FloatNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -467,6 +440,9 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public FloatNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -491,15 +467,15 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public FloatNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public FloatNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public FloatNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -520,18 +496,6 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 	public FloatNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public FloatNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public FloatNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -634,18 +598,6 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("float");
 		writer.WriteEndObject();
@@ -668,8 +620,6 @@ public sealed partial class FloatNumberPropertyDescriptor : SerializableDescript
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }

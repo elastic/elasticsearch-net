@@ -27,264 +27,55 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed class HistogramAggregationConverter : JsonConverter<HistogramAggregation>
+public sealed partial class HistogramAggregation
 {
-	public override HistogramAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "histogram")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new HistogramAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("field"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Field?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Field = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("interval"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Interval = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("min_doc_count"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<int?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.MinDocCount = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("missing"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Missing = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("offset"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<double?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Offset = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("order"))
-				{
-					reader.Read();
-					var value = SingleOrManySerializationHelper.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Order = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("script"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Script?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Script = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("aggs") || reader.ValueTextEquals("aggregations"))
-				{
-					var value = JsonSerializer.Deserialize<AggregationDictionary>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Aggregations = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, HistogramAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("histogram");
-		writer.WriteStartObject();
-		if (value.Field is not null)
-		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, value.Field, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.Interval.HasValue)
-		{
-			writer.WritePropertyName("interval");
-			writer.WriteNumberValue(value.Interval.Value);
-		}
-
-		if (value.MinDocCount.HasValue)
-		{
-			writer.WritePropertyName("min_doc_count");
-			writer.WriteNumberValue(value.MinDocCount.Value);
-		}
-
-		if (value.Missing.HasValue)
-		{
-			writer.WritePropertyName("missing");
-			writer.WriteNumberValue(value.Missing.Value);
-		}
-
-		if (value.Offset.HasValue)
-		{
-			writer.WritePropertyName("offset");
-			writer.WriteNumberValue(value.Offset.Value);
-		}
-
-		if (value.Order is not null)
-		{
-			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(value.Order, writer, options);
-		}
-
-		if (value.Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, value.Script, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(HistogramAggregationConverter))]
-public sealed partial class HistogramAggregation : SearchAggregation
-{
-	public HistogramAggregation(string name) => Name = name;
-
-	internal HistogramAggregation()
-	{
-	}
-
-	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? Aggregations { get; set; }
-
 	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
 
 	/// <summary>
 	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("interval")]
 	public double? Interval { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("offset")]
 	public double? Offset { get; set; }
-	[JsonConverter(typeof(AggregateOrderConverter))]
+
 	/// <summary>
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
-	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	[JsonInclude, JsonPropertyName("order")]
+	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
+	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(HistogramAggregation histogramAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Histogram(histogramAggregation);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy(HistogramAggregation histogramAggregation) => Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy.Histogram(histogramAggregation);
 }
 
 public sealed partial class HistogramAggregationDescriptor<TDocument> : SerializableDescriptor<HistogramAggregationDescriptor<TDocument>>
@@ -295,42 +86,16 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private double? IntervalValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
+	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-	public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
@@ -345,6 +110,15 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// <para>The name of the field to aggregate on.</para>
 	/// </summary>
 	public HistogramAggregationDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The name of the field to aggregate on.</para>
+	/// </summary>
+	public HistogramAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -389,6 +163,12 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	public HistogramAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
 	/// </summary>
@@ -401,7 +181,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// <summary>
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public HistogramAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -415,8 +195,6 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("histogram");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -436,6 +214,12 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 			writer.WriteNumberValue(IntervalValue.Value);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -448,6 +232,12 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 			writer.WriteNumberValue(MissingValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OffsetValue.HasValue)
 		{
 			writer.WritePropertyName("offset");
@@ -457,36 +247,13 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor<TDocument>(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -501,42 +268,16 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor AggregationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private double? IntervalValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
+	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
-	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
+	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-
-	public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDictionary? aggregations)
-	{
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = null;
-		AggregationsValue = aggregations;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor Aggregations(Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor descriptor)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptorAction = null;
-		AggregationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor Aggregations(Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> configure)
-	{
-		AggregationsValue = null;
-		AggregationsDescriptor = null;
-		AggregationsDescriptorAction = configure;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
@@ -604,6 +345,12 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	public HistogramAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
 	/// </summary>
@@ -616,7 +363,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// <summary>
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
-	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
+	public HistogramAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -630,8 +377,6 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("histogram");
 		writer.WriteStartObject();
 		if (FieldValue is not null)
 		{
@@ -651,6 +396,12 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 			writer.WriteNumberValue(IntervalValue.Value);
 		}
 
+		if (MetaValue is not null)
+		{
+			writer.WritePropertyName("meta");
+			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -663,6 +414,12 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 			writer.WriteNumberValue(MissingValue.Value);
 		}
 
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
 		if (OffsetValue.HasValue)
 		{
 			writer.WritePropertyName("offset");
@@ -672,36 +429,13 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (AggregationsDescriptor is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsDescriptor, options);
-		}
-		else if (AggregationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, new AggregationDescriptor(AggregationsDescriptorAction), options);
-		}
-		else if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
 		}
 
 		writer.WriteEndObject();

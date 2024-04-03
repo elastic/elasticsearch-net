@@ -116,9 +116,11 @@ internal sealed partial class GeoBoundingBoxQueryConverter : JsonConverter<GeoBo
 }
 
 [JsonConverter(typeof(GeoBoundingBoxQueryConverter))]
-public sealed partial class GeoBoundingBoxQuery : SearchQuery
+public sealed partial class GeoBoundingBoxQuery
 {
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBox { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
@@ -127,15 +129,14 @@ public sealed partial class GeoBoundingBoxQuery : SearchQuery
 	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 
-	public static implicit operator Query(GeoBoundingBoxQuery geoBoundingBoxQuery) => QueryDsl.Query.GeoBoundingBox(geoBoundingBoxQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("geo_bounding_box", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(GeoBoundingBoxQuery geoBoundingBoxQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.GeoBoundingBox(geoBoundingBoxQuery);
 }
 
 public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : SerializableDescriptor<GeoBoundingBoxQueryDescriptor<TDocument>>
@@ -147,15 +148,42 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBoxValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBoxValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(Elastic.Clients.Elasticsearch.Serverless.GeoBounds boundingBox)
+	{
+		BoundingBoxValue = boundingBox;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
 		return Self;
 	}
 
@@ -180,24 +208,6 @@ public sealed partial class GeoBoundingBoxQueryDescriptor<TDocument> : Serializa
 	public GeoBoundingBoxQueryDescriptor<TDocument> ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
 	{
 		ValidationMethodValue = validationMethod;
-		return Self;
-	}
-
-	public GeoBoundingBoxQueryDescriptor<TDocument> BoundingBox(Elastic.Clients.Elasticsearch.Serverless.GeoBounds boundingBox)
-	{
-		BoundingBoxValue = boundingBox;
-		return Self;
-	}
-
-	public GeoBoundingBoxQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoBoundingBoxQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
 		return Self;
 	}
 
@@ -248,39 +258,18 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBoxValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? ValidationMethodValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds BoundingBoxValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public GeoBoundingBoxQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
-	/// </summary>
-	public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
-	{
-		QueryNameValue = queryName;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
-	/// </summary>
-	public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
-	{
-		ValidationMethodValue = validationMethod;
 		return Self;
 	}
 
@@ -305,6 +294,30 @@ public sealed partial class GeoBoundingBoxQueryDescriptor : SerializableDescript
 	public GeoBoundingBoxQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Set to `true` to ignore an unmapped field and not match any documents for this query.<br/>Set to `false` to throw an exception if the field is not mapped.</para>
+	/// </summary>
+	public GeoBoundingBoxQueryDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoBoundingBoxQueryDescriptor QueryName(string? queryName)
+	{
+		QueryNameValue = queryName;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude.<br/>Set to `COERCE` to also try to infer correct latitude or longitude.</para>
+	/// </summary>
+	public GeoBoundingBoxQueryDescriptor ValidationMethod(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoValidationMethod? validationMethod)
+	{
+		ValidationMethodValue = validationMethod;
 		return Self;
 	}
 

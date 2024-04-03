@@ -32,7 +32,7 @@ public sealed partial class SnowballAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Serverless.Analysis.SnowballLanguage Language { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[JsonConverter(typeof(StopWordsConverter))]
+	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
@@ -85,10 +85,10 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("snowball");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

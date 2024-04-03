@@ -27,138 +27,31 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class TTestAggregationConverter : JsonConverter<TTestAggregation>
+public sealed partial class TTestAggregation
 {
-	public override TTestAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "t_test")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new TTestAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("a"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.a = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("b"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.b = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("type"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestType?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Type = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, TTestAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("t_test");
-		writer.WriteStartObject();
-		if (value.a is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, value.a, options);
-		}
-
-		if (value.b is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, value.b, options);
-		}
-
-		if (value.Type is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, value.Type, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(TTestAggregationConverter))]
-public sealed partial class TTestAggregation : SearchAggregation
-{
-	public TTestAggregation(string name) => Name = name;
-
-	internal TTestAggregation()
-	{
-	}
-
 	/// <summary>
 	/// <para>Test population A.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("a")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? a { get; set; }
 
 	/// <summary>
 	/// <para>Test population B.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("b")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? b { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The type of test.</para>
 	/// </summary>
+	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestType? Type { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(TTestAggregation tTestAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.TTest(tTestAggregation);
 }
 
 public sealed partial class TTestAggregationDescriptor<TDocument> : SerializableDescriptor<TTestAggregationDescriptor<TDocument>>
@@ -170,12 +63,13 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? aValue { get; set; }
-	private TestPopulationDescriptor<TDocument> aDescriptor { get; set; }
-	private Action<TestPopulationDescriptor<TDocument>> aDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument> aDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>> aDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? bValue { get; set; }
-	private TestPopulationDescriptor<TDocument> bDescriptor { get; set; }
-	private Action<TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument> bDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
@@ -189,7 +83,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TTestAggregationDescriptor<TDocument> a(TestPopulationDescriptor<TDocument> descriptor)
+	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument> descriptor)
 	{
 		aValue = null;
 		aDescriptorAction = null;
@@ -197,7 +91,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TTestAggregationDescriptor<TDocument> a(Action<TestPopulationDescriptor<TDocument>> configure)
+	public TTestAggregationDescriptor<TDocument> a(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>> configure)
 	{
 		aValue = null;
 		aDescriptor = null;
@@ -216,7 +110,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TTestAggregationDescriptor<TDocument> b(TestPopulationDescriptor<TDocument> descriptor)
+	public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument> descriptor)
 	{
 		bValue = null;
 		bDescriptorAction = null;
@@ -224,7 +118,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TTestAggregationDescriptor<TDocument> b(Action<TestPopulationDescriptor<TDocument>> configure)
+	public TTestAggregationDescriptor<TDocument> b(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>> configure)
 	{
 		bValue = null;
 		bDescriptor = null;
@@ -235,6 +129,12 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	public TTestAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TTestAggregationDescriptor<TDocument> Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -250,8 +150,6 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("t_test");
-		writer.WriteStartObject();
 		if (aDescriptor is not null)
 		{
 			writer.WritePropertyName("a");
@@ -260,7 +158,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		else if (aDescriptorAction is not null)
 		{
 			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, new TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
 		}
 		else if (aValue is not null)
 		{
@@ -276,7 +174,7 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		else if (bDescriptorAction is not null)
 		{
 			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, new TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
 		}
 		else if (bValue is not null)
 		{
@@ -284,17 +182,22 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, bValue, options);
 		}
 
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
+		if (TypeValue is not null)
+		{
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, TypeValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -310,12 +213,13 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? aValue { get; set; }
-	private TestPopulationDescriptor aDescriptor { get; set; }
-	private Action<TestPopulationDescriptor> aDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor aDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor> aDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulation? bValue { get; set; }
-	private TestPopulationDescriptor bDescriptor { get; set; }
-	private Action<TestPopulationDescriptor> bDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor bDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor> bDescriptorAction { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
@@ -329,7 +233,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TTestAggregationDescriptor a(TestPopulationDescriptor descriptor)
+	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor descriptor)
 	{
 		aValue = null;
 		aDescriptorAction = null;
@@ -337,7 +241,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TTestAggregationDescriptor a(Action<TestPopulationDescriptor> configure)
+	public TTestAggregationDescriptor a(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor> configure)
 	{
 		aValue = null;
 		aDescriptor = null;
@@ -356,7 +260,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TTestAggregationDescriptor b(TestPopulationDescriptor descriptor)
+	public TTestAggregationDescriptor b(Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor descriptor)
 	{
 		bValue = null;
 		bDescriptorAction = null;
@@ -364,7 +268,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TTestAggregationDescriptor b(Action<TestPopulationDescriptor> configure)
+	public TTestAggregationDescriptor b(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor> configure)
 	{
 		bValue = null;
 		bDescriptor = null;
@@ -375,6 +279,12 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	public TTestAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
+		return Self;
+	}
+
+	public TTestAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
 		return Self;
 	}
 
@@ -390,8 +300,6 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("t_test");
-		writer.WriteStartObject();
 		if (aDescriptor is not null)
 		{
 			writer.WritePropertyName("a");
@@ -400,7 +308,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		else if (aDescriptorAction is not null)
 		{
 			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, new TestPopulationDescriptor(aDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor(aDescriptorAction), options);
 		}
 		else if (aValue is not null)
 		{
@@ -416,7 +324,7 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		else if (bDescriptorAction is not null)
 		{
 			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, new TestPopulationDescriptor(bDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.TestPopulationDescriptor(bDescriptorAction), options);
 		}
 		else if (bValue is not null)
 		{
@@ -424,17 +332,22 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, bValue, options);
 		}
 
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
+		}
+
+		if (TypeValue is not null)
+		{
+			writer.WritePropertyName("type");
+			JsonSerializer.Serialize(writer, TypeValue, options);
 		}
 
 		writer.WriteEndObject();

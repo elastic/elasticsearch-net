@@ -45,6 +45,10 @@ public sealed partial class IpProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -59,12 +63,6 @@ public sealed partial class IpProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "ip";
@@ -93,7 +91,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public IpPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -125,15 +122,15 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IpPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public IpPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IpPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public IpPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -157,6 +154,9 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public IpPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -181,15 +181,15 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public IpPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public IpPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IpPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public IpPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -210,15 +210,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	public IpPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	public IpPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -315,12 +306,6 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("ip");
 		writer.WriteEndObject();
@@ -342,8 +327,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue
+		Store = StoreValue
 	};
 }
 
@@ -370,7 +354,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public IpPropertyDescriptor Boost(double? boost)
 	{
@@ -402,15 +385,15 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
-	public IpPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public IpPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IpPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public IpPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -434,6 +417,9 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public IpPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -458,15 +444,15 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		return Self;
 	}
 
-	public IpPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public IpPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public IpPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public IpPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -487,15 +473,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	public IpPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.</para>
-	/// </summary>
-	public IpPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -592,12 +569,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("ip");
 		writer.WriteEndObject();
@@ -619,7 +590,6 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue
+		Store = StoreValue
 	};
 }

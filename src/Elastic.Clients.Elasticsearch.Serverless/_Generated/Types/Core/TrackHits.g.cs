@@ -30,13 +30,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 
+/// <summary>
+/// <para>Number of hits matching the query to count accurately. If true, the exact<br/>number of hits is returned at the cost of some performance. If false, the<br/>response does not include the total number of hits matching the query.<br/>Defaults to 10,000 hits.</para>
+/// </summary>
 public sealed partial class TrackHits : Union<bool, int>
 {
-	public TrackHits(bool enabled) : base(enabled)
+	public TrackHits(bool Enabled) : base(Enabled)
 	{
 	}
 
-	public TrackHits(int count) : base(count)
+	public TrackHits(int Count) : base(Count)
 	{
 	}
 }

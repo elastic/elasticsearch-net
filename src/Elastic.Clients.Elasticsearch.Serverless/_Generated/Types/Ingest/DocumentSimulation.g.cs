@@ -89,12 +89,12 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 				}
 
 				additionalProperties ??= new Dictionary<string, string>();
-				var value = JsonSerializer.Deserialize<string>(ref reader, options);
-				additionalProperties.Add(property, value);
+				var additionalValue = JsonSerializer.Deserialize<string>(ref reader, options);
+				additionalProperties.Add(property, additionalValue);
 			}
 		}
 
-		return new DocumentSimulation { Id = id, Index = index, Ingest = ingest, Routing = routing, Source = source, Version = version, VersionType = versionType, Metadata = additionalProperties };
+		return new DocumentSimulation { Id = id, Index = index, Ingest = ingest, Metadata = additionalProperties, Routing = routing, Source = source, Version = version, VersionType = versionType };
 	}
 
 	public override void Write(Utf8JsonWriter writer, DocumentSimulation value, JsonSerializerOptions options)
@@ -103,10 +103,10 @@ internal sealed partial class DocumentSimulationConverter : JsonConverter<Docume
 	}
 }
 
-[JsonConverter(typeof(DocumentSimulationConverter))]
 /// <summary>
 /// <para>The simulated document, with optional metadata.</para>
 /// </summary>
+[JsonConverter(typeof(DocumentSimulationConverter))]
 public sealed partial class DocumentSimulation
 {
 	/// <summary>
@@ -121,6 +121,11 @@ public sealed partial class DocumentSimulation
 	public Elastic.Clients.Elasticsearch.Serverless.Ingest.IngestInfo Ingest { get; init; }
 
 	/// <summary>
+	/// <para>Additional metadata</para>
+	/// </summary>
+	public IReadOnlyDictionary<string, string> Metadata { get; init; }
+
+	/// <summary>
 	/// <para>Value used to send the document to a specific primary shard.</para>
 	/// </summary>
 	public string? Routing { get; init; }
@@ -129,8 +134,6 @@ public sealed partial class DocumentSimulation
 	/// <para>JSON body for the document.</para>
 	/// </summary>
 	public IReadOnlyDictionary<string, object> Source { get; init; }
-	[JsonConverter(typeof(StringifiedLongConverter))]
 	public long? Version { get; init; }
 	public Elastic.Clients.Elasticsearch.Serverless.VersionType? VersionType { get; init; }
-	public IReadOnlyDictionary<string, string> Metadata { get; init; }
 }

@@ -88,10 +88,10 @@ public sealed partial class MappingCharFilterDescriptor : SerializableDescriptor
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("mapping");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -134,9 +134,8 @@ internal sealed class GeoLocationConverter : MultiItemUnionConverter<GeoLocation
 {
 	public GeoLocationConverter()
 	{
-		_arrayType = typeof(double[]);
-		_types = new Dictionary<GeoLocation.Kind, Type> { { GeoLocation.Kind.LatitudeLongitude, typeof(Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation) }, { GeoLocation.Kind.Geohash, typeof(Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation) }, { GeoLocation.Kind.Coordinates, typeof(double[]) }, { GeoLocation.Kind.Text, typeof(string) } };
-		_factories = new Dictionary<Type, Func<object, GeoLocation>> { { typeof(Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation), o => GeoLocation.LatitudeLongitude((Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation)o) }, { typeof(Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation), o => GeoLocation.Geohash((Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation)o) }, { typeof(double[]), o => GeoLocation.Coordinates((double[])o) }, { typeof(string), o => GeoLocation.Text((string)o) } };
+		_types = new Dictionary<GeoLocation.Kind, Type> { { GeoLocation.Kind.LatitudeLongitude, typeof(Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation) }, { GeoLocation.Kind.Geohash, typeof(Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation) } };
+		_factories = new Dictionary<Type, Func<object, GeoLocation>> { { typeof(Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation), o => GeoLocation.LatitudeLongitude((Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation)o) }, { typeof(Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation), o => GeoLocation.Geohash((Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation)o) } };
 		_uniquePropertyToType = new Dictionary<string, Type> { { "lat", typeof(Elastic.Clients.Elasticsearch.Serverless.LatLonGeoLocation) }, { "geohash", typeof(Elastic.Clients.Elasticsearch.Serverless.GeoHashLocation) } };
 	}
 }

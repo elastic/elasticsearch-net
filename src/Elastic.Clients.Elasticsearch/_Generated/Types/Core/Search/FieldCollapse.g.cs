@@ -61,13 +61,13 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
-	private Action<FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> CollapseDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> CollapseDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
-	private InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
-	private Action<InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-	private Action<InnerHitsDescriptor<TDocument>>[] InnerHitsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>[] InnerHitsDescriptorActions { get; set; }
 	private int? MaxConcurrentGroupSearchesValue { get; set; }
 
 	public FieldCollapseDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
@@ -78,7 +78,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> Collapse(FieldCollapseDescriptor<TDocument> descriptor)
+	public FieldCollapseDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument> descriptor)
 	{
 		CollapseValue = null;
 		CollapseDescriptorAction = null;
@@ -86,7 +86,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> Collapse(Action<FieldCollapseDescriptor<TDocument>> configure)
+	public FieldCollapseDescriptor<TDocument> Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> configure)
 	{
 		CollapseValue = null;
 		CollapseDescriptor = null;
@@ -113,6 +113,15 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 	}
 
 	/// <summary>
+	/// <para>The field to collapse the result set on</para>
+	/// </summary>
+	public FieldCollapseDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The number of inner hits and their sort order</para>
 	/// </summary>
 	public FieldCollapseDescriptor<TDocument> InnerHits(ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? innerHits)
@@ -124,7 +133,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> InnerHits(InnerHitsDescriptor<TDocument> descriptor)
+	public FieldCollapseDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> descriptor)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptorAction = null;
@@ -133,7 +142,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> InnerHits(Action<InnerHitsDescriptor<TDocument>> configure)
+	public FieldCollapseDescriptor<TDocument> InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>> configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -142,7 +151,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public FieldCollapseDescriptor<TDocument> InnerHits(params Action<InnerHitsDescriptor<TDocument>>[] configure)
+	public FieldCollapseDescriptor<TDocument> InnerHits(params Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>[] configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -171,7 +180,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		else if (CollapseDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>(CollapseDescriptorAction), options);
 		}
 		else if (CollapseValue is not null)
 		{
@@ -189,7 +198,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(InnerHitsDescriptorAction), options);
 		}
 		else if (InnerHitsDescriptorActions is not null)
 		{
@@ -198,7 +207,7 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>(action), options);
 			}
 
 			if (InnerHitsDescriptorActions.Length > 1)
@@ -229,13 +238,13 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 	}
 
 	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? CollapseValue { get; set; }
-	private FieldCollapseDescriptor CollapseDescriptor { get; set; }
-	private Action<FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor CollapseDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> CollapseDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? InnerHitsValue { get; set; }
-	private InnerHitsDescriptor InnerHitsDescriptor { get; set; }
-	private Action<InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-	private Action<InnerHitsDescriptor>[] InnerHitsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>[] InnerHitsDescriptorActions { get; set; }
 	private int? MaxConcurrentGroupSearchesValue { get; set; }
 
 	public FieldCollapseDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? collapse)
@@ -246,7 +255,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor Collapse(FieldCollapseDescriptor descriptor)
+	public FieldCollapseDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor descriptor)
 	{
 		CollapseValue = null;
 		CollapseDescriptorAction = null;
@@ -254,7 +263,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor Collapse(Action<FieldCollapseDescriptor> configure)
+	public FieldCollapseDescriptor Collapse(Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> configure)
 	{
 		CollapseValue = null;
 		CollapseDescriptor = null;
@@ -301,7 +310,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor InnerHits(InnerHitsDescriptor descriptor)
+	public FieldCollapseDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor descriptor)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptorAction = null;
@@ -310,7 +319,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor InnerHits(Action<InnerHitsDescriptor> configure)
+	public FieldCollapseDescriptor InnerHits(Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor> configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -319,7 +328,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		return Self;
 	}
 
-	public FieldCollapseDescriptor InnerHits(params Action<InnerHitsDescriptor>[] configure)
+	public FieldCollapseDescriptor InnerHits(params Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>[] configure)
 	{
 		InnerHitsValue = null;
 		InnerHitsDescriptor = null;
@@ -348,7 +357,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		else if (CollapseDescriptorAction is not null)
 		{
 			writer.WritePropertyName("collapse");
-			JsonSerializer.Serialize(writer, new FieldCollapseDescriptor(CollapseDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor(CollapseDescriptorAction), options);
 		}
 		else if (CollapseValue is not null)
 		{
@@ -366,7 +375,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		else if (InnerHitsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			JsonSerializer.Serialize(writer, new InnerHitsDescriptor(InnerHitsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(InnerHitsDescriptorAction), options);
 		}
 		else if (InnerHitsDescriptorActions is not null)
 		{
@@ -375,7 +384,7 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new InnerHitsDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor(action), options);
 			}
 
 			if (InnerHitsDescriptorActions.Length > 1)

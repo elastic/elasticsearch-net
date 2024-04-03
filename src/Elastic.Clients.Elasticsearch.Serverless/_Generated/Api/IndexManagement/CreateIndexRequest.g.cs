@@ -112,14 +112,6 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	public CreateIndexRequestDescriptor(TDocument document) : this(typeof(TDocument))
-	{
-	}
-
-	internal CreateIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -138,20 +130,20 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Aliases for the index.</para>
 	/// </summary>
-	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>> selector)
+	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor<TDocument>>());
 		return Self;
 	}
 
@@ -166,7 +158,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Mappings(Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument> descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -174,7 +166,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Mappings(Action<Mapping.TypeMappingDescriptor<TDocument>> configure)
+	public CreateIndexRequestDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -193,7 +185,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Settings(IndexSettingsDescriptor<TDocument> descriptor)
+	public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -201,7 +193,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Settings(Action<IndexSettingsDescriptor<TDocument>> configure)
+	public CreateIndexRequestDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -226,7 +218,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -242,7 +234,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{
@@ -265,10 +257,6 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	{
 	}
 
-	internal CreateIndexRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -287,20 +275,20 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>? AliasesValue { get; set; }
+	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-	private Action<Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Aliases for the index.</para>
 	/// </summary>
-	public CreateIndexRequestDescriptor Aliases(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>> selector)
+	public CreateIndexRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>> selector)
 	{
-		AliasesValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Alias>());
+		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Serverless.Name, Elastic.Clients.Elasticsearch.Serverless.IndexManagement.AliasDescriptor>());
 		return Self;
 	}
 
@@ -315,7 +303,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor Mappings(Mapping.TypeMappingDescriptor descriptor)
+	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor descriptor)
 	{
 		MappingsValue = null;
 		MappingsDescriptorAction = null;
@@ -323,7 +311,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor Mappings(Action<Mapping.TypeMappingDescriptor> configure)
+	public CreateIndexRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor> configure)
 	{
 		MappingsValue = null;
 		MappingsDescriptor = null;
@@ -342,7 +330,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor Settings(IndexSettingsDescriptor descriptor)
+	public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor descriptor)
 	{
 		SettingsValue = null;
 		SettingsDescriptorAction = null;
@@ -350,7 +338,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		return Self;
 	}
 
-	public CreateIndexRequestDescriptor Settings(Action<IndexSettingsDescriptor> configure)
+	public CreateIndexRequestDescriptor Settings(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor> configure)
 	{
 		SettingsValue = null;
 		SettingsDescriptor = null;
@@ -375,7 +363,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		else if (MappingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
 		}
 		else if (MappingsValue is not null)
 		{
@@ -391,7 +379,7 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 		else if (SettingsDescriptorAction is not null)
 		{
 			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new IndexSettingsDescriptor(SettingsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
 		}
 		else if (SettingsValue is not null)
 		{

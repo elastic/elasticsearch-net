@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -47,6 +48,18 @@ public sealed partial class InferenceConfig
 
 	public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => new InferenceConfig("classification", inferenceConfigClassification);
 	public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => new InferenceConfig("regression", inferenceConfigRegression);
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class InferenceConfigConverter : JsonConverter<InferenceConfig>
@@ -58,35 +71,48 @@ internal sealed partial class InferenceConfigConverter : JsonConverter<Inference
 			throw new JsonException("Expected start token.");
 		}
 
-		reader.Read();
-		if (reader.TokenType != JsonTokenType.PropertyName)
+		object? variantValue = default;
+		string? variantNameValue = default;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			throw new JsonException("Expected a property name token representing the variant held within this container.");
-		}
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token.");
+			}
 
-		var propertyName = reader.GetString();
-		reader.Read();
-		if (propertyName == "classification")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(ref reader, options);
+			if (reader.TokenType != JsonTokenType.PropertyName)
+			{
+				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
+			}
+
+			var propertyName = reader.GetString();
 			reader.Read();
-			return new InferenceConfig(propertyName, variant);
+			if (propertyName == "classification")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "regression")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfig' from the response.");
 		}
 
-		if (propertyName == "regression")
-		{
-			var variant = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression?>(ref reader, options);
-			reader.Read();
-			return new InferenceConfig(propertyName, variant);
-		}
-
-		throw new JsonException();
+		reader.Read();
+		var result = new InferenceConfig(variantNameValue, variantValue);
+		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, InferenceConfig value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -135,29 +161,27 @@ public sealed partial class InferenceConfigDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public InferenceConfigDescriptor<TDocument> Classification(InferenceConfigClassification inferenceConfigClassification) => Set(inferenceConfigClassification, "classification");
-	public InferenceConfigDescriptor<TDocument> Classification(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-	public InferenceConfigDescriptor<TDocument> Regression(InferenceConfigRegression inferenceConfigRegression) => Set(inferenceConfigRegression, "regression");
-	public InferenceConfigDescriptor<TDocument> Regression(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
+	public InferenceConfigDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => Set(inferenceConfigClassification, "classification");
+	public InferenceConfigDescriptor<TDocument> Classification(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
+	public InferenceConfigDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => Set(inferenceConfigRegression, "regression");
+	public InferenceConfigDescriptor<TDocument> Regression(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }
@@ -193,31 +217,27 @@ public sealed partial class InferenceConfigDescriptor : SerializableDescriptor<I
 		return Self;
 	}
 
-	public InferenceConfigDescriptor Classification(InferenceConfigClassification inferenceConfigClassification) => Set(inferenceConfigClassification, "classification");
-	public InferenceConfigDescriptor Classification(Action<InferenceConfigClassificationDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigDescriptor Classification<TDocument>(Action<InferenceConfigClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-	public InferenceConfigDescriptor Regression(InferenceConfigRegression inferenceConfigRegression) => Set(inferenceConfigRegression, "regression");
-	public InferenceConfigDescriptor Regression(Action<InferenceConfigRegressionDescriptor> configure) => Set(configure, "regression");
-	public InferenceConfigDescriptor Regression<TDocument>(Action<InferenceConfigRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
+	public InferenceConfigDescriptor Classification(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification inferenceConfigClassification) => Set(inferenceConfigClassification, "classification");
+	public InferenceConfigDescriptor Classification<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassificationDescriptor> configure) => Set(configure, "classification");
+	public InferenceConfigDescriptor Regression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression inferenceConfigRegression) => Set(inferenceConfigRegression, "regression");
+	public InferenceConfigDescriptor Regression<TDocument>(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor> configure) => Set(configure, "regression");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (!ContainsVariant)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStartObject();
-		writer.WritePropertyName(ContainedVariantName);
-		if (Variant is not null)
+		if (!string.IsNullOrEmpty(ContainedVariantName))
 		{
-			JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName(ContainedVariantName);
+			if (Variant is not null)
+			{
+				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
+				writer.WriteEndObject();
+				return;
+			}
+
+			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
-		JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		writer.WriteEndObject();
 	}
 }

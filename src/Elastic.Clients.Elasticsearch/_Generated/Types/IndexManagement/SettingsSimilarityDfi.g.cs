@@ -27,7 +27,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityDfi
+public sealed partial class SettingsSimilarityDfi : ISettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("independence_measure")]
 	public Elastic.Clients.Elasticsearch.DFIIndependenceMeasure IndependenceMeasure { get; set; }
@@ -36,7 +36,7 @@ public sealed partial class SettingsSimilarityDfi
 	public string Type => "DFI";
 }
 
-public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescriptor<SettingsSimilarityDfiDescriptor>
+public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescriptor<SettingsSimilarityDfiDescriptor>, IBuildableDescriptor<SettingsSimilarityDfi>
 {
 	internal SettingsSimilarityDfiDescriptor(Action<SettingsSimilarityDfiDescriptor> configure) => configure.Invoke(this);
 
@@ -61,4 +61,9 @@ public sealed partial class SettingsSimilarityDfiDescriptor : SerializableDescri
 		writer.WriteStringValue("DFI");
 		writer.WriteEndObject();
 	}
+
+	SettingsSimilarityDfi IBuildableDescriptor<SettingsSimilarityDfi>.Build() => new()
+	{
+		IndependenceMeasure = IndependenceMeasureValue
+	};
 }

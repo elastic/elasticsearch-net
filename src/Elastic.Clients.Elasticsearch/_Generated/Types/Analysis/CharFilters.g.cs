@@ -66,20 +66,20 @@ public sealed partial class CharFiltersDescriptor : IsADictionaryDescriptor<Char
 	{
 	}
 
-	public CharFiltersDescriptor HtmlStrip(string charFilterName) => AssignVariant<HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor HtmlStrip(string charFilterName, Action<HtmlStripCharFilterDescriptor> configure) => AssignVariant<HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, configure);
+	public CharFiltersDescriptor HtmlStrip(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, null);
+	public CharFiltersDescriptor HtmlStrip(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor, HtmlStripCharFilter>(charFilterName, configure);
 	public CharFiltersDescriptor HtmlStrip(string charFilterName, HtmlStripCharFilter htmlStripCharFilter) => AssignVariant(charFilterName, htmlStripCharFilter);
-	public CharFiltersDescriptor IcuNormalization(string charFilterName) => AssignVariant<IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor IcuNormalization(string charFilterName, Action<IcuNormalizationCharFilterDescriptor> configure) => AssignVariant<IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, configure);
+	public CharFiltersDescriptor IcuNormalization(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, null);
+	public CharFiltersDescriptor IcuNormalization(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor, IcuNormalizationCharFilter>(charFilterName, configure);
 	public CharFiltersDescriptor IcuNormalization(string charFilterName, IcuNormalizationCharFilter icuNormalizationCharFilter) => AssignVariant(charFilterName, icuNormalizationCharFilter);
-	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName) => AssignVariant<KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName, Action<KuromojiIterationMarkCharFilterDescriptor> configure) => AssignVariant<KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, configure);
+	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, null);
+	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilterDescriptor, KuromojiIterationMarkCharFilter>(charFilterName, configure);
 	public CharFiltersDescriptor KuromojiIterationMark(string charFilterName, KuromojiIterationMarkCharFilter kuromojiIterationMarkCharFilter) => AssignVariant(charFilterName, kuromojiIterationMarkCharFilter);
-	public CharFiltersDescriptor Mapping(string charFilterName) => AssignVariant<MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor Mapping(string charFilterName, Action<MappingCharFilterDescriptor> configure) => AssignVariant<MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, configure);
+	public CharFiltersDescriptor Mapping(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, null);
+	public CharFiltersDescriptor Mapping(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterDescriptor, MappingCharFilter>(charFilterName, configure);
 	public CharFiltersDescriptor Mapping(string charFilterName, MappingCharFilter mappingCharFilter) => AssignVariant(charFilterName, mappingCharFilter);
-	public CharFiltersDescriptor PatternReplace(string charFilterName) => AssignVariant<PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, null);
-	public CharFiltersDescriptor PatternReplace(string charFilterName, Action<PatternReplaceCharFilterDescriptor> configure) => AssignVariant<PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, configure);
+	public CharFiltersDescriptor PatternReplace(string charFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, null);
+	public CharFiltersDescriptor PatternReplace(string charFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilterDescriptor, PatternReplaceCharFilter>(charFilterName, configure);
 	public CharFiltersDescriptor PatternReplace(string charFilterName, PatternReplaceCharFilter patternReplaceCharFilter) => AssignVariant(charFilterName, patternReplaceCharFilter);
 }
 
@@ -97,16 +97,16 @@ internal sealed partial class CharFilterInterfaceConverter : JsonConverter<IChar
 
 		switch (type)
 		{
-			case "kuromoji_iteration_mark":
-				return JsonSerializer.Deserialize<KuromojiIterationMarkCharFilter>(ref reader, options);
-			case "icu_normalizer":
-				return JsonSerializer.Deserialize<IcuNormalizationCharFilter>(ref reader, options);
-			case "pattern_replace":
-				return JsonSerializer.Deserialize<PatternReplaceCharFilter>(ref reader, options);
-			case "mapping":
-				return JsonSerializer.Deserialize<MappingCharFilter>(ref reader, options);
 			case "html_strip":
-				return JsonSerializer.Deserialize<HtmlStripCharFilter>(ref reader, options);
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>(ref reader, options);
+			case "icu_normalizer":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter>(ref reader, options);
+			case "kuromoji_iteration_mark":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(ref reader, options);
+			case "mapping":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(ref reader, options);
+			case "pattern_replace":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(ref reader, options);
 			default:
 				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(ICharFilter));
 				return null;
@@ -123,20 +123,20 @@ internal sealed partial class CharFilterInterfaceConverter : JsonConverter<IChar
 
 		switch (value.Type)
 		{
-			case "kuromoji_iteration_mark":
-				JsonSerializer.Serialize(writer, value, typeof(KuromojiIterationMarkCharFilter), options);
+			case "html_strip":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter), options);
 				return;
 			case "icu_normalizer":
-				JsonSerializer.Serialize(writer, value, typeof(IcuNormalizationCharFilter), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter), options);
 				return;
-			case "pattern_replace":
-				JsonSerializer.Serialize(writer, value, typeof(PatternReplaceCharFilter), options);
+			case "kuromoji_iteration_mark":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter), options);
 				return;
 			case "mapping":
-				JsonSerializer.Serialize(writer, value, typeof(MappingCharFilter), options);
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter), options);
 				return;
-			case "html_strip":
-				JsonSerializer.Serialize(writer, value, typeof(HtmlStripCharFilter), options);
+			case "pattern_replace":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter), options);
 				return;
 			default:
 				var type = value.GetType();
@@ -149,5 +149,5 @@ internal sealed partial class CharFilterInterfaceConverter : JsonConverter<IChar
 [JsonConverter(typeof(CharFilterInterfaceConverter))]
 public partial interface ICharFilter
 {
-	public string Type { get; }
+	public string? Type { get; }
 }

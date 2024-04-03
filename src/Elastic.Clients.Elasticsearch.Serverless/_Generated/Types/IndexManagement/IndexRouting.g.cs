@@ -44,11 +44,11 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocation? AllocationValue { get; set; }
-	private IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
-	private Action<IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocationDescriptor AllocationDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocationDescriptor> AllocationDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalance? RebalanceValue { get; set; }
-	private IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
-	private Action<IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalanceDescriptor RebalanceDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalanceDescriptor> RebalanceDescriptorAction { get; set; }
 
 	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocation? allocation)
 	{
@@ -58,7 +58,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		return Self;
 	}
 
-	public IndexRoutingDescriptor Allocation(IndexRoutingAllocationDescriptor descriptor)
+	public IndexRoutingDescriptor Allocation(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocationDescriptor descriptor)
 	{
 		AllocationValue = null;
 		AllocationDescriptorAction = null;
@@ -66,7 +66,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		return Self;
 	}
 
-	public IndexRoutingDescriptor Allocation(Action<IndexRoutingAllocationDescriptor> configure)
+	public IndexRoutingDescriptor Allocation(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocationDescriptor> configure)
 	{
 		AllocationValue = null;
 		AllocationDescriptor = null;
@@ -82,7 +82,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		return Self;
 	}
 
-	public IndexRoutingDescriptor Rebalance(IndexRoutingRebalanceDescriptor descriptor)
+	public IndexRoutingDescriptor Rebalance(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalanceDescriptor descriptor)
 	{
 		RebalanceValue = null;
 		RebalanceDescriptorAction = null;
@@ -90,7 +90,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		return Self;
 	}
 
-	public IndexRoutingDescriptor Rebalance(Action<IndexRoutingRebalanceDescriptor> configure)
+	public IndexRoutingDescriptor Rebalance(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalanceDescriptor> configure)
 	{
 		RebalanceValue = null;
 		RebalanceDescriptor = null;
@@ -109,7 +109,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		else if (AllocationDescriptorAction is not null)
 		{
 			writer.WritePropertyName("allocation");
-			JsonSerializer.Serialize(writer, new IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingAllocationDescriptor(AllocationDescriptorAction), options);
 		}
 		else if (AllocationValue is not null)
 		{
@@ -125,7 +125,7 @@ public sealed partial class IndexRoutingDescriptor : SerializableDescriptor<Inde
 		else if (RebalanceDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rebalance");
-			JsonSerializer.Serialize(writer, new IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexRoutingRebalanceDescriptor(RebalanceDescriptorAction), options);
 		}
 		else if (RebalanceValue is not null)
 		{

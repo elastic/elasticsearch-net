@@ -18,6 +18,7 @@
 #nullable restore
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.
+	/// <para>Initializes a new instance of the <see cref="DanglingIndicesNamespacedClient"/> class for mocking.</para>
 	/// </summary>
 	protected DanglingIndicesNamespacedClient() : base()
 	{
@@ -60,6 +61,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices()
 	{
 		var descriptor = new ListDanglingIndicesRequestDescriptor();
@@ -71,6 +73,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -81,6 +84,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(Action<ListDanglingIndicesRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ListDanglingIndicesRequestDescriptor();

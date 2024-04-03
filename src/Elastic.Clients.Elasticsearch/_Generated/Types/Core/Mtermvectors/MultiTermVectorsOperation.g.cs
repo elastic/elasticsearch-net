@@ -30,6 +30,30 @@ namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 public sealed partial class MultiTermVectorsOperation
 {
 	/// <summary>
+	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("doc")]
+	public object? Doc { get; set; }
+
+	/// <summary>
+	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+
+	/// <summary>
+	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("field_statistics")]
+	public bool? FieldStatistics { get; set; }
+
+	/// <summary>
+	/// <para>Filter terms based on their tf-idf scores.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
+
+	/// <summary>
 	/// <para>The ID of the document.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
@@ -40,30 +64,6 @@ public sealed partial class MultiTermVectorsOperation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
-
-	/// <summary>
-	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("doc")]
-	public object? Doc { get; set; }
-
-	/// <summary>
-	/// <para>If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("field_statistics")]
-	public bool? FieldStatistics { get; set; }
-
-	/// <summary>
-	/// <para>Comma-separated list or wildcard expressions of fields to include in the statistics.<br/>Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
-
-	/// <summary>
-	/// <para>Filter terms based on their tf-idf scores.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, the response includes term offsets.</para>
@@ -120,8 +120,8 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
-	private Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
-	private Action<Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
@@ -170,7 +170,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Core.TermVectors.FilterDescriptor descriptor)
+	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -178,7 +178,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Action<Core.TermVectors.FilterDescriptor> configure)
+	public MultiTermVectorsOperationDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -296,7 +296,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -342,10 +342,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 			writer.WriteBooleanValue(TermStatisticsValue.Value);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		if (VersionTypeValue is not null)
@@ -370,8 +370,8 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
-	private Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
-	private Action<Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
@@ -420,7 +420,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		return Self;
 	}
 
-	public MultiTermVectorsOperationDescriptor Filter(Core.TermVectors.FilterDescriptor descriptor)
+	public MultiTermVectorsOperationDescriptor Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -428,7 +428,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		return Self;
 	}
 
-	public MultiTermVectorsOperationDescriptor Filter(Action<Core.TermVectors.FilterDescriptor> configure)
+	public MultiTermVectorsOperationDescriptor Filter(Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -546,7 +546,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -592,10 +592,10 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 			writer.WriteBooleanValue(TermStatisticsValue.Value);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		if (VersionTypeValue is not null)

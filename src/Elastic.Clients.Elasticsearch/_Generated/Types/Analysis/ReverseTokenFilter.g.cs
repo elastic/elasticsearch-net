@@ -57,10 +57,10 @@ public sealed partial class ReverseTokenFilterDescriptor : SerializableDescripto
 		writer.WriteStartObject();
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("reverse");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

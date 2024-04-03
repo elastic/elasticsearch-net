@@ -44,12 +44,6 @@ public partial class IndexRequest<TDocument> : ICustomJsonWriter
 
 public sealed partial class IndexRequestDescriptor<TDocument> : ICustomJsonWriter
 {
-	public IndexRequestDescriptor<TDocument> Document(TDocument document)
-	{
-		DocumentValue = document;
-		return Self;
-	}
-
 	internal Id _id;
 
 	public void WriteJson(Utf8JsonWriter writer, Serializer sourceSerializer) => SourceSerialization.Serialize(DocumentValue, writer, sourceSerializer);

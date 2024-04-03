@@ -61,8 +61,8 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogDurability? DurabilityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.ByteSize? FlushThresholdSizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetention? RetentionValue { get; set; }
-	private TranslogRetentionDescriptor RetentionDescriptor { get; set; }
-	private Action<TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetentionDescriptor RetentionDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetentionDescriptor> RetentionDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? SyncIntervalValue { get; set; }
 
 	/// <summary>
@@ -91,7 +91,7 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 		return Self;
 	}
 
-	public TranslogDescriptor Retention(TranslogRetentionDescriptor descriptor)
+	public TranslogDescriptor Retention(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetentionDescriptor descriptor)
 	{
 		RetentionValue = null;
 		RetentionDescriptorAction = null;
@@ -99,7 +99,7 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 		return Self;
 	}
 
-	public TranslogDescriptor Retention(Action<TranslogRetentionDescriptor> configure)
+	public TranslogDescriptor Retention(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetentionDescriptor> configure)
 	{
 		RetentionValue = null;
 		RetentionDescriptor = null;
@@ -139,7 +139,7 @@ public sealed partial class TranslogDescriptor : SerializableDescriptor<Translog
 		else if (RetentionDescriptorAction is not null)
 		{
 			writer.WritePropertyName("retention");
-			JsonSerializer.Serialize(writer, new TranslogRetentionDescriptor(RetentionDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.TranslogRetentionDescriptor(RetentionDescriptorAction), options);
 		}
 		else if (RetentionValue is not null)
 		{

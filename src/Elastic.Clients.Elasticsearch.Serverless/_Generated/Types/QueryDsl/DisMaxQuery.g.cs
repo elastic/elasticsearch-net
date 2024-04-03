@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
-public sealed partial class DisMaxQuery : SearchQuery
+public sealed partial class DisMaxQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -39,6 +40,8 @@ public sealed partial class DisMaxQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("queries")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> Queries { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.</para>
@@ -46,9 +49,7 @@ public sealed partial class DisMaxQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("tie_breaker")]
 	public double? TieBreaker { get; set; }
 
-	public static implicit operator Query(DisMaxQuery disMaxQuery) => QueryDsl.Query.DisMax(disMaxQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("dis_max", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(DisMaxQuery disMaxQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.DisMax(disMaxQuery);
 }
 
 public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescriptor<DisMaxQueryDescriptor<TDocument>>
@@ -61,12 +62,15 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 
 	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> QueriesValue { get; set; }
-	private QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
-	private Action<QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
-	private Action<QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueriesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueriesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>[] QueriesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public DisMaxQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -85,7 +89,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(QueryDescriptor<TDocument> descriptor)
+	public DisMaxQueryDescriptor<TDocument> Queries(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueriesValue = null;
 		QueriesDescriptorAction = null;
@@ -94,7 +98,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(Action<QueryDescriptor<TDocument>> configure)
+	public DisMaxQueryDescriptor<TDocument> Queries(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -103,7 +107,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor<TDocument> Queries(params Action<QueryDescriptor<TDocument>>[] configure)
+	public DisMaxQueryDescriptor<TDocument> Queries(params Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>>[] configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -147,7 +151,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 		{
 			writer.WritePropertyName("queries");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(QueriesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueriesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (QueriesDescriptorActions is not null)
@@ -156,7 +160,7 @@ public sealed partial class DisMaxQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStartArray();
 			foreach (var action in QueriesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -193,12 +197,15 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 
 	private float? BoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query> QueriesValue { get; set; }
-	private QueryDescriptor QueriesDescriptor { get; set; }
-	private Action<QueryDescriptor> QueriesDescriptorAction { get; set; }
-	private Action<QueryDescriptor>[] QueriesDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueriesDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueriesDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>[] QueriesDescriptorActions { get; set; }
 	private string? QueryNameValue { get; set; }
 	private double? TieBreakerValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public DisMaxQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -217,7 +224,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(QueryDescriptor descriptor)
+	public DisMaxQueryDescriptor Queries(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueriesValue = null;
 		QueriesDescriptorAction = null;
@@ -226,7 +233,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(Action<QueryDescriptor> configure)
+	public DisMaxQueryDescriptor Queries(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -235,7 +242,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		return Self;
 	}
 
-	public DisMaxQueryDescriptor Queries(params Action<QueryDescriptor>[] configure)
+	public DisMaxQueryDescriptor Queries(params Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor>[] configure)
 	{
 		QueriesValue = null;
 		QueriesDescriptor = null;
@@ -279,7 +286,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 		{
 			writer.WritePropertyName("queries");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new QueryDescriptor(QueriesDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueriesDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (QueriesDescriptorActions is not null)
@@ -288,7 +295,7 @@ public sealed partial class DisMaxQueryDescriptor : SerializableDescriptor<DisMa
 			writer.WriteStartArray();
 			foreach (var action in QueriesDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new QueryDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

@@ -80,10 +80,6 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	internal PutPolicyRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -99,14 +95,14 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? GeoMatchValue { get; set; }
-	private EnrichPolicyDescriptor<TDocument> GeoMatchDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor<TDocument>> GeoMatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> GeoMatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> GeoMatchDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? MatchValue { get; set; }
-	private EnrichPolicyDescriptor<TDocument> MatchDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor<TDocument>> MatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> MatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> MatchDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? RangeValue { get; set; }
-	private EnrichPolicyDescriptor<TDocument> RangeDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor<TDocument>> RangeDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> RangeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> RangeDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
@@ -119,7 +115,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> GeoMatch(EnrichPolicyDescriptor<TDocument> descriptor)
+	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
 	{
 		GeoMatchValue = null;
 		GeoMatchDescriptorAction = null;
@@ -127,7 +123,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Action<EnrichPolicyDescriptor<TDocument>> configure)
+	public PutPolicyRequestDescriptor<TDocument> GeoMatch(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
 	{
 		GeoMatchValue = null;
 		GeoMatchDescriptor = null;
@@ -146,7 +142,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Match(EnrichPolicyDescriptor<TDocument> descriptor)
+	public PutPolicyRequestDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
 	{
 		MatchValue = null;
 		MatchDescriptorAction = null;
@@ -154,7 +150,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Match(Action<EnrichPolicyDescriptor<TDocument>> configure)
+	public PutPolicyRequestDescriptor<TDocument> Match(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
 	{
 		MatchValue = null;
 		MatchDescriptor = null;
@@ -173,7 +169,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Range(EnrichPolicyDescriptor<TDocument> descriptor)
+	public PutPolicyRequestDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument> descriptor)
 	{
 		RangeValue = null;
 		RangeDescriptorAction = null;
@@ -181,7 +177,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor<TDocument> Range(Action<EnrichPolicyDescriptor<TDocument>> configure)
+	public PutPolicyRequestDescriptor<TDocument> Range(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>> configure)
 	{
 		RangeValue = null;
 		RangeDescriptor = null;
@@ -200,7 +196,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		else if (GeoMatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor<TDocument>(GeoMatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>(GeoMatchDescriptorAction), options);
 		}
 		else if (GeoMatchValue is not null)
 		{
@@ -216,7 +212,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		else if (MatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor<TDocument>(MatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>(MatchDescriptorAction), options);
 		}
 		else if (MatchValue is not null)
 		{
@@ -232,7 +228,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 		else if (RangeDescriptorAction is not null)
 		{
 			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor<TDocument>(RangeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor<TDocument>(RangeDescriptorAction), options);
 		}
 		else if (RangeValue is not null)
 		{
@@ -255,10 +251,6 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	{
 	}
 
-	internal PutPolicyRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EnrichPutPolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -274,14 +266,14 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? GeoMatchValue { get; set; }
-	private EnrichPolicyDescriptor GeoMatchDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor> GeoMatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor GeoMatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> GeoMatchDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? MatchValue { get; set; }
-	private EnrichPolicyDescriptor MatchDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor> MatchDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor MatchDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> MatchDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy? RangeValue { get; set; }
-	private EnrichPolicyDescriptor RangeDescriptor { get; set; }
-	private Action<EnrichPolicyDescriptor> RangeDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor RangeDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> RangeDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Matches enrich data to incoming documents based on a `geo_shape` query.</para>
@@ -294,7 +286,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor GeoMatch(EnrichPolicyDescriptor descriptor)
+	public PutPolicyRequestDescriptor GeoMatch(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor descriptor)
 	{
 		GeoMatchValue = null;
 		GeoMatchDescriptorAction = null;
@@ -302,7 +294,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor GeoMatch(Action<EnrichPolicyDescriptor> configure)
+	public PutPolicyRequestDescriptor GeoMatch(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> configure)
 	{
 		GeoMatchValue = null;
 		GeoMatchDescriptor = null;
@@ -321,7 +313,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor Match(EnrichPolicyDescriptor descriptor)
+	public PutPolicyRequestDescriptor Match(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor descriptor)
 	{
 		MatchValue = null;
 		MatchDescriptorAction = null;
@@ -329,7 +321,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor Match(Action<EnrichPolicyDescriptor> configure)
+	public PutPolicyRequestDescriptor Match(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> configure)
 	{
 		MatchValue = null;
 		MatchDescriptor = null;
@@ -348,7 +340,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor Range(EnrichPolicyDescriptor descriptor)
+	public PutPolicyRequestDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor descriptor)
 	{
 		RangeValue = null;
 		RangeDescriptorAction = null;
@@ -356,7 +348,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		return Self;
 	}
 
-	public PutPolicyRequestDescriptor Range(Action<EnrichPolicyDescriptor> configure)
+	public PutPolicyRequestDescriptor Range(Action<Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor> configure)
 	{
 		RangeValue = null;
 		RangeDescriptor = null;
@@ -375,7 +367,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		else if (GeoMatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("geo_match");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor(GeoMatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor(GeoMatchDescriptorAction), options);
 		}
 		else if (GeoMatchValue is not null)
 		{
@@ -391,7 +383,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		else if (MatchDescriptorAction is not null)
 		{
 			writer.WritePropertyName("match");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor(MatchDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor(MatchDescriptorAction), options);
 		}
 		else if (MatchValue is not null)
 		{
@@ -407,7 +399,7 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 		else if (RangeDescriptorAction is not null)
 		{
 			writer.WritePropertyName("range");
-			JsonSerializer.Serialize(writer, new EnrichPolicyDescriptor(RangeDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicyDescriptor(RangeDescriptorAction), options);
 		}
 		else if (RangeValue is not null)
 		{

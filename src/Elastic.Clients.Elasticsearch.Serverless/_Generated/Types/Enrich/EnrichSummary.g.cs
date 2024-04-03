@@ -30,5 +30,5 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Enrich;
 public sealed partial class EnrichSummary
 {
 	[JsonInclude, JsonPropertyName("config")]
-	public KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Enrich.PolicyType, Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy> Config { get; init; }
+	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Enrich.PolicyType, Elastic.Clients.Elasticsearch.Serverless.Enrich.EnrichPolicy> Config { get; init; }
 }

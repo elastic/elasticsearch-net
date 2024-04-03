@@ -33,188 +33,26 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
 public sealed partial class MultisearchHeader
 {
 	[JsonInclude, JsonPropertyName("allow_no_indices")]
-	public bool? AllowNoIndices { get; set; }
+	public bool? AllowNoIndices { get; init; }
 	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
-	public bool? AllowPartialSearchResults { get; set; }
+	public bool? AllowPartialSearchResults { get; init; }
 	[JsonInclude, JsonPropertyName("ccs_minimize_roundtrips")]
-	public bool? CcsMinimizeRoundtrips { get; set; }
+	public bool? CcsMinimizeRoundtrips { get; init; }
 	[JsonInclude, JsonPropertyName("expand_wildcards")]
-	[JsonConverter(typeof(ExpandWildcardsConverter))]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get; set; }
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard))]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcards { get; init; }
 	[JsonInclude, JsonPropertyName("ignore_throttled")]
-	public bool? IgnoreThrottled { get; set; }
+	public bool? IgnoreThrottled { get; init; }
 	[JsonInclude, JsonPropertyName("ignore_unavailable")]
-	public bool? IgnoreUnavailable { get; set; }
+	public bool? IgnoreUnavailable { get; init; }
 	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.Serverless.Indices? Index { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Indices? Indices { get; init; }
 	[JsonInclude, JsonPropertyName("preference")]
-	public string? Preference { get; set; }
+	public string? Preference { get; init; }
 	[JsonInclude, JsonPropertyName("request_cache")]
-	public bool? RequestCache { get; set; }
+	public bool? RequestCache { get; init; }
 	[JsonInclude, JsonPropertyName("routing")]
-	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Routing? Routing { get; init; }
 	[JsonInclude, JsonPropertyName("search_type")]
-	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get; set; }
-}
-
-/// <summary>
-/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
-/// </summary>
-public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor<MultisearchHeaderDescriptor>
-{
-	internal MultisearchHeaderDescriptor(Action<MultisearchHeaderDescriptor> configure) => configure.Invoke(this);
-
-	public MultisearchHeaderDescriptor() : base()
-	{
-	}
-
-	private bool? AllowNoIndicesValue { get; set; }
-	private bool? AllowPartialSearchResultsValue { get; set; }
-	private bool? CcsMinimizeRoundtripsValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? ExpandWildcardsValue { get; set; }
-	private bool? IgnoreThrottledValue { get; set; }
-	private bool? IgnoreUnavailableValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndexValue { get; set; }
-	private string? PreferenceValue { get; set; }
-	private bool? RequestCacheValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchTypeValue { get; set; }
-
-	public MultisearchHeaderDescriptor AllowNoIndices(bool? allowNoIndices = true)
-	{
-		AllowNoIndicesValue = allowNoIndices;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)
-	{
-		AllowPartialSearchResultsValue = allowPartialSearchResults;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true)
-	{
-		CcsMinimizeRoundtripsValue = ccsMinimizeRoundtrips;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>? expandWildcards)
-	{
-		ExpandWildcardsValue = expandWildcards;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor IgnoreThrottled(bool? ignoreThrottled = true)
-	{
-		IgnoreThrottledValue = ignoreThrottled;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
-	{
-		IgnoreUnavailableValue = ignoreUnavailable;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor Index(Elastic.Clients.Elasticsearch.Serverless.Indices? index)
-	{
-		IndexValue = index;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor Preference(string? preference)
-	{
-		PreferenceValue = preference;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor RequestCache(bool? requestCache = true)
-	{
-		RequestCacheValue = requestCache;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor Routing(Elastic.Clients.Elasticsearch.Serverless.Routing? routing)
-	{
-		RoutingValue = routing;
-		return Self;
-	}
-
-	public MultisearchHeaderDescriptor SearchType(Elastic.Clients.Elasticsearch.Serverless.SearchType? searchType)
-	{
-		SearchTypeValue = searchType;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AllowNoIndicesValue.HasValue)
-		{
-			writer.WritePropertyName("allow_no_indices");
-			writer.WriteBooleanValue(AllowNoIndicesValue.Value);
-		}
-
-		if (AllowPartialSearchResultsValue.HasValue)
-		{
-			writer.WritePropertyName("allow_partial_search_results");
-			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
-		}
-
-		if (CcsMinimizeRoundtripsValue.HasValue)
-		{
-			writer.WritePropertyName("ccs_minimize_roundtrips");
-			writer.WriteBooleanValue(CcsMinimizeRoundtripsValue.Value);
-		}
-
-		if (ExpandWildcardsValue is not null)
-		{
-			writer.WritePropertyName("expand_wildcards");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.ExpandWildcard>(ExpandWildcardsValue, writer, options);
-		}
-
-		if (IgnoreThrottledValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_throttled");
-			writer.WriteBooleanValue(IgnoreThrottledValue.Value);
-		}
-
-		if (IgnoreUnavailableValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_unavailable");
-			writer.WriteBooleanValue(IgnoreUnavailableValue.Value);
-		}
-
-		if (IndexValue is not null)
-		{
-			writer.WritePropertyName("index");
-			JsonSerializer.Serialize(writer, IndexValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(PreferenceValue))
-		{
-			writer.WritePropertyName("preference");
-			writer.WriteStringValue(PreferenceValue);
-		}
-
-		if (RequestCacheValue.HasValue)
-		{
-			writer.WritePropertyName("request_cache");
-			writer.WriteBooleanValue(RequestCacheValue.Value);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (SearchTypeValue is not null)
-		{
-			writer.WritePropertyName("search_type");
-			JsonSerializer.Serialize(writer, SearchTypeValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
+	public Elastic.Clients.Elasticsearch.Serverless.SearchType? SearchType { get; init; }
 }

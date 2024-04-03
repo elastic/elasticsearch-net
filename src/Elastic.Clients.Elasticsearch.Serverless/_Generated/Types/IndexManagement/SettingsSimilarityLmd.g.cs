@@ -27,16 +27,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
-public sealed partial class SettingsSimilarityLmd
+public sealed partial class SettingsSimilarityLmd : ISettingsSimilarity
 {
 	[JsonInclude, JsonPropertyName("mu")]
-	public int Mu { get; set; }
+	public double? Mu { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMDirichlet";
 }
 
-public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescriptor<SettingsSimilarityLmdDescriptor>
+public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescriptor<SettingsSimilarityLmdDescriptor>, IBuildableDescriptor<SettingsSimilarityLmd>
 {
 	internal SettingsSimilarityLmdDescriptor(Action<SettingsSimilarityLmdDescriptor> configure) => configure.Invoke(this);
 
@@ -44,9 +44,9 @@ public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescri
 	{
 	}
 
-	private int MuValue { get; set; }
+	private double? MuValue { get; set; }
 
-	public SettingsSimilarityLmdDescriptor Mu(int mu)
+	public SettingsSimilarityLmdDescriptor Mu(double? mu)
 	{
 		MuValue = mu;
 		return Self;
@@ -55,10 +55,19 @@ public sealed partial class SettingsSimilarityLmdDescriptor : SerializableDescri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("mu");
-		writer.WriteNumberValue(MuValue);
+		if (MuValue.HasValue)
+		{
+			writer.WritePropertyName("mu");
+			writer.WriteNumberValue(MuValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("LMDirichlet");
 		writer.WriteEndObject();
 	}
+
+	SettingsSimilarityLmd IBuildableDescriptor<SettingsSimilarityLmd>.Build() => new()
+	{
+		Mu = MuValue
+	};
 }

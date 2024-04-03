@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Ingest;
 
 public sealed partial class InferenceProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -37,8 +40,16 @@ public sealed partial class InferenceProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field_map")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, object>? FieldMap { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -53,8 +64,16 @@ public sealed partial class InferenceProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public Elastic.Clients.Elasticsearch.Serverless.Id ModelId { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailure { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -64,7 +83,7 @@ public sealed partial class InferenceProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(InferenceProcessor inferenceProcessor) => Ingest.Processor.Inference(inferenceProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor(InferenceProcessor inferenceProcessor) => Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor.Inference(inferenceProcessor);
 }
 
 public sealed partial class InferenceProcessorDescriptor<TDocument> : SerializableDescriptor<InferenceProcessorDescriptor<TDocument>>
@@ -80,16 +99,19 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id ModelIdValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -105,12 +127,18 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -128,7 +156,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> InferenceConfig(InferenceConfigDescriptor<TDocument> descriptor)
+	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor<TDocument> descriptor)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptorAction = null;
@@ -136,7 +164,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<InferenceConfigDescriptor<TDocument>> configure)
+	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor<TDocument>> configure)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
@@ -153,6 +181,9 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -162,7 +193,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public InferenceProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -171,7 +202,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public InferenceProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -180,7 +211,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public InferenceProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -189,6 +220,9 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -208,6 +242,15 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	/// <para>Field added to incoming documents to contain results objects.</para>
 	/// </summary>
 	public InferenceProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field added to incoming documents to contain results objects.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -248,7 +291,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		else if (InferenceConfigDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
 		}
 		else if (InferenceConfigValue is not null)
 		{
@@ -269,7 +312,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -278,7 +321,7 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -318,16 +361,19 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Id ModelIdValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -343,12 +389,18 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public InferenceProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -366,7 +418,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor InferenceConfig(InferenceConfigDescriptor descriptor)
+	public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor descriptor)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptorAction = null;
@@ -374,7 +426,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor InferenceConfig(Action<InferenceConfigDescriptor> configure)
+	public InferenceProcessorDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor> configure)
 	{
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
@@ -391,6 +443,9 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -400,7 +455,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public InferenceProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -409,7 +464,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public InferenceProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -418,7 +473,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public InferenceProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public InferenceProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -427,6 +482,9 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public InferenceProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -495,7 +553,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		else if (InferenceConfigDescriptorAction is not null)
 		{
 			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
 		}
 		else if (InferenceConfigValue is not null)
 		{
@@ -516,7 +574,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -525,7 +583,7 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

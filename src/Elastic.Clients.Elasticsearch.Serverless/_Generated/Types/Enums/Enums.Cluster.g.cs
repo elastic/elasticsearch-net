@@ -17,14 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Cluster;
 
@@ -58,7 +58,8 @@ internal sealed class AllocationExplainDecisionConverter : JsonConverter<Allocat
 				return AllocationExplainDecision.Always;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, AllocationExplainDecision value, JsonSerializerOptions options)
@@ -129,7 +130,8 @@ internal sealed class DecisionConverter : JsonConverter<Decision>
 				return Decision.AllocationDelayed;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Decision value, JsonSerializerOptions options)
@@ -240,7 +242,8 @@ internal sealed class UnassignedInformationReasonConverter : JsonConverter<Unass
 				return UnassignedInformationReason.AllocationFailed;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, UnassignedInformationReason value, JsonSerializerOptions options)

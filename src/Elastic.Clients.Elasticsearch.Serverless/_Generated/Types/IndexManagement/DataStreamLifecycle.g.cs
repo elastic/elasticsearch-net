@@ -51,8 +51,8 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? DataRetentionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
-	private DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
-	private Action<DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
 
 	public DataStreamLifecycleDescriptor DataRetention(Elastic.Clients.Elasticsearch.Serverless.Duration? dataRetention)
 	{
@@ -68,7 +68,7 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public DataStreamLifecycleDescriptor Downsampling(DataStreamLifecycleDownsamplingDescriptor descriptor)
+	public DataStreamLifecycleDescriptor Downsampling(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor descriptor)
 	{
 		DownsamplingValue = null;
 		DownsamplingDescriptorAction = null;
@@ -76,7 +76,7 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public DataStreamLifecycleDescriptor Downsampling(Action<DataStreamLifecycleDownsamplingDescriptor> configure)
+	public DataStreamLifecycleDescriptor Downsampling(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> configure)
 	{
 		DownsamplingValue = null;
 		DownsamplingDescriptor = null;
@@ -101,7 +101,7 @@ public sealed partial class DataStreamLifecycleDescriptor : SerializableDescript
 		else if (DownsamplingDescriptorAction is not null)
 		{
 			writer.WritePropertyName("downsampling");
-			JsonSerializer.Serialize(writer, new DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleDownsamplingDescriptor(DownsamplingDescriptorAction), options);
 		}
 		else if (DownsamplingValue is not null)
 		{

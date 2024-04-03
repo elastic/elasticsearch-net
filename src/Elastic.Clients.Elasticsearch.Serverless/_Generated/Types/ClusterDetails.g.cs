@@ -29,12 +29,12 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 
 public sealed partial class ClusterDetails
 {
-	[JsonInclude, JsonPropertyName("_shards")]
-	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics? Shards { get; init; }
 	[JsonInclude, JsonPropertyName("failures")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ShardFailure>? Failures { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public string Indices { get; init; }
+	[JsonInclude, JsonPropertyName("_shards")]
+	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics? Shards { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Serverless.ClusterSearchStatus Status { get; init; }
 	[JsonInclude, JsonPropertyName("timed_out")]

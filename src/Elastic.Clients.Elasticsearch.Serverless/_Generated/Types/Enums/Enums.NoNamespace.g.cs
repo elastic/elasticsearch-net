@@ -17,16 +17,79 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
+
+[JsonConverter(typeof(ClusterInfoTargetConverter))]
+public enum ClusterInfoTarget
+{
+	[EnumMember(Value = "thread_pool")]
+	ThreadPool,
+	[EnumMember(Value = "script")]
+	Script,
+	[EnumMember(Value = "ingest")]
+	Ingest,
+	[EnumMember(Value = "http")]
+	Http,
+	[EnumMember(Value = "_all")]
+	All
+}
+
+internal sealed class ClusterInfoTargetConverter : JsonConverter<ClusterInfoTarget>
+{
+	public override ClusterInfoTarget Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "thread_pool":
+				return ClusterInfoTarget.ThreadPool;
+			case "script":
+				return ClusterInfoTarget.Script;
+			case "ingest":
+				return ClusterInfoTarget.Ingest;
+			case "http":
+				return ClusterInfoTarget.Http;
+			case "_all":
+				return ClusterInfoTarget.All;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ClusterInfoTarget value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ClusterInfoTarget.ThreadPool:
+				writer.WriteStringValue("thread_pool");
+				return;
+			case ClusterInfoTarget.Script:
+				writer.WriteStringValue("script");
+				return;
+			case ClusterInfoTarget.Ingest:
+				writer.WriteStringValue("ingest");
+				return;
+			case ClusterInfoTarget.Http:
+				writer.WriteStringValue("http");
+				return;
+			case ClusterInfoTarget.All:
+				writer.WriteStringValue("_all");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
 
 [JsonConverter(typeof(ClusterSearchStatusConverter))]
 public enum ClusterSearchStatus
@@ -62,7 +125,8 @@ internal sealed class ClusterSearchStatusConverter : JsonConverter<ClusterSearch
 				return ClusterSearchStatus.Failed;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ClusterSearchStatus value, JsonSerializerOptions options)
@@ -118,7 +182,8 @@ internal sealed class ConflictsConverter : JsonConverter<Conflicts>
 				return Conflicts.Abort;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Conflicts value, JsonSerializerOptions options)
@@ -163,7 +228,8 @@ internal sealed class DFIIndependenceMeasureConverter : JsonConverter<DFIIndepen
 				return DFIIndependenceMeasure.Chisquared;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFIIndependenceMeasure value, JsonSerializerOptions options)
@@ -211,7 +277,8 @@ internal sealed class DFRAfterEffectConverter : JsonConverter<DFRAfterEffect>
 				return DFRAfterEffect.b;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFRAfterEffect value, JsonSerializerOptions options)
@@ -275,7 +342,8 @@ internal sealed class DFRBasicModelConverter : JsonConverter<DFRBasicModel>
 				return DFRBasicModel.Be;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DFRBasicModel value, JsonSerializerOptions options)
@@ -359,7 +427,8 @@ internal sealed class DistanceUnitConverter : JsonConverter<DistanceUnit>
 				return DistanceUnit.Centimeters;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, DistanceUnit value, JsonSerializerOptions options)
@@ -448,7 +517,8 @@ internal sealed class ExpandWildcardConverter : JsonConverter<ExpandWildcard>
 				return ExpandWildcard.All;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ExpandWildcard value, JsonSerializerOptions options)
@@ -506,7 +576,8 @@ internal sealed class FieldSortNumericTypeConverter : JsonConverter<FieldSortNum
 				return FieldSortNumericType.Date;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldSortNumericType value, JsonSerializerOptions options)
@@ -559,7 +630,8 @@ internal sealed class GeoDistanceTypeConverter : JsonConverter<GeoDistanceType>
 				return GeoDistanceType.Arc;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoDistanceType value, JsonSerializerOptions options)
@@ -620,7 +692,8 @@ internal sealed class GeoShapeRelationConverter : JsonConverter<GeoShapeRelation
 				return GeoShapeRelation.Contains;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoShapeRelation value, JsonSerializerOptions options)
@@ -683,7 +756,8 @@ internal sealed class HealthStatusConverter : JsonConverter<HealthStatus>
 				return HealthStatus.Green;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, HealthStatus value, JsonSerializerOptions options)
@@ -727,7 +801,8 @@ internal sealed class IBDistributionConverter : JsonConverter<IBDistribution>
 				return IBDistribution.Ll;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IBDistribution value, JsonSerializerOptions options)
@@ -768,7 +843,8 @@ internal sealed class IBLambdaConverter : JsonConverter<IBLambda>
 				return IBLambda.Df;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IBLambda value, JsonSerializerOptions options)
@@ -813,7 +889,8 @@ internal sealed class LevelConverter : JsonConverter<Level>
 				return Level.Cluster;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Level value, JsonSerializerOptions options)
@@ -828,6 +905,55 @@ internal sealed class LevelConverter : JsonConverter<Level>
 				return;
 			case Level.Cluster:
 				writer.WriteStringValue("cluster");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(LifecycleOperationModeConverter))]
+public enum LifecycleOperationMode
+{
+	[EnumMember(Value = "STOPPING")]
+	Stopping,
+	[EnumMember(Value = "STOPPED")]
+	Stopped,
+	[EnumMember(Value = "RUNNING")]
+	Running
+}
+
+internal sealed class LifecycleOperationModeConverter : JsonConverter<LifecycleOperationMode>
+{
+	public override LifecycleOperationMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "STOPPING":
+				return LifecycleOperationMode.Stopping;
+			case "STOPPED":
+				return LifecycleOperationMode.Stopped;
+			case "RUNNING":
+				return LifecycleOperationMode.Running;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, LifecycleOperationMode value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case LifecycleOperationMode.Stopping:
+				writer.WriteStringValue("STOPPING");
+				return;
+			case LifecycleOperationMode.Stopped:
+				writer.WriteStringValue("STOPPED");
+				return;
+			case LifecycleOperationMode.Running:
+				writer.WriteStringValue("RUNNING");
 				return;
 		}
 
@@ -905,7 +1031,8 @@ internal sealed class NodeRoleConverter : JsonConverter<NodeRole>
 				return NodeRole.Client;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, NodeRole value, JsonSerializerOptions options)
@@ -994,7 +1121,8 @@ internal sealed class NormalizationConverter : JsonConverter<Normalization>
 				return Normalization.H1;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Normalization value, JsonSerializerOptions options)
@@ -1056,7 +1184,8 @@ internal sealed class ResultConverter : JsonConverter<Result>
 				return Result.Created;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Result value, JsonSerializerOptions options)
@@ -1152,7 +1281,8 @@ internal sealed class ScriptSortTypeConverter : JsonConverter<ScriptSortType>
 				return ScriptSortType.Number;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ScriptSortType value, JsonSerializerOptions options)
@@ -1202,7 +1332,8 @@ internal sealed class SearchTypeConverter : JsonConverter<SearchType>
 				return SearchType.DfsQueryThenFetch;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SearchType value, JsonSerializerOptions options)
@@ -1242,7 +1373,8 @@ internal sealed class SlicesCalculationConverter : JsonConverter<SlicesCalculati
 				return SlicesCalculation.Auto;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SlicesCalculation value, JsonSerializerOptions options)
@@ -1292,7 +1424,8 @@ internal sealed class SortModeConverter : JsonConverter<SortMode>
 				return SortMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SortMode value, JsonSerializerOptions options)
@@ -1348,7 +1481,8 @@ internal sealed class SortOrderConverter : JsonConverter<SortOrder>
 				return SortOrder.Asc;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SortOrder value, JsonSerializerOptions options)
@@ -1402,7 +1536,8 @@ internal sealed class SuggestModeConverter : JsonConverter<SuggestMode>
 				return SuggestMode.Always;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, SuggestMode value, JsonSerializerOptions options)
@@ -1424,6 +1559,69 @@ internal sealed class SuggestModeConverter : JsonConverter<SuggestMode>
 	}
 }
 
+[JsonConverter(typeof(ThreadTypeConverter))]
+public enum ThreadType
+{
+	[EnumMember(Value = "wait")]
+	Wait,
+	[EnumMember(Value = "mem")]
+	Mem,
+	[EnumMember(Value = "gpu")]
+	Gpu,
+	[EnumMember(Value = "cpu")]
+	Cpu,
+	[EnumMember(Value = "block")]
+	Block
+}
+
+internal sealed class ThreadTypeConverter : JsonConverter<ThreadType>
+{
+	public override ThreadType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "wait":
+				return ThreadType.Wait;
+			case "mem":
+				return ThreadType.Mem;
+			case "gpu":
+				return ThreadType.Gpu;
+			case "cpu":
+				return ThreadType.Cpu;
+			case "block":
+				return ThreadType.Block;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ThreadType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ThreadType.Wait:
+				writer.WriteStringValue("wait");
+				return;
+			case ThreadType.Mem:
+				writer.WriteStringValue("mem");
+				return;
+			case ThreadType.Gpu:
+				writer.WriteStringValue("gpu");
+				return;
+			case ThreadType.Cpu:
+				writer.WriteStringValue("cpu");
+				return;
+			case ThreadType.Block:
+				writer.WriteStringValue("block");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(TimeUnitConverter))]
 public enum TimeUnit
 {
@@ -1431,12 +1629,12 @@ public enum TimeUnit
 	Seconds,
 	[EnumMember(Value = "nanos")]
 	Nanoseconds,
+	[EnumMember(Value = "m")]
+	Minutes,
 	[EnumMember(Value = "ms")]
 	Milliseconds,
 	[EnumMember(Value = "micros")]
 	Microseconds,
-	[EnumMember(Value = "m")]
-	Minutes,
 	[EnumMember(Value = "h")]
 	Hours,
 	[EnumMember(Value = "d")]
@@ -1454,19 +1652,20 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 				return TimeUnit.Seconds;
 			case "nanos":
 				return TimeUnit.Nanoseconds;
+			case "m":
+				return TimeUnit.Minutes;
 			case "ms":
 				return TimeUnit.Milliseconds;
 			case "micros":
 				return TimeUnit.Microseconds;
-			case "m":
-				return TimeUnit.Minutes;
 			case "h":
 				return TimeUnit.Hours;
 			case "d":
 				return TimeUnit.Days;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TimeUnit value, JsonSerializerOptions options)
@@ -1479,14 +1678,14 @@ internal sealed class TimeUnitConverter : JsonConverter<TimeUnit>
 			case TimeUnit.Nanoseconds:
 				writer.WriteStringValue("nanos");
 				return;
+			case TimeUnit.Minutes:
+				writer.WriteStringValue("m");
+				return;
 			case TimeUnit.Milliseconds:
 				writer.WriteStringValue("ms");
 				return;
 			case TimeUnit.Microseconds:
 				writer.WriteStringValue("micros");
-				return;
-			case TimeUnit.Minutes:
-				writer.WriteStringValue("m");
 				return;
 			case TimeUnit.Hours:
 				writer.WriteStringValue("h");
@@ -1539,7 +1738,8 @@ internal sealed class VersionTypeConverter : JsonConverter<VersionType>
 				return VersionType.External;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, VersionType value, JsonSerializerOptions options)
@@ -1602,7 +1802,8 @@ internal sealed class WaitForEventsConverter : JsonConverter<WaitForEvents>
 				return WaitForEvents.High;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, WaitForEvents value, JsonSerializerOptions options)

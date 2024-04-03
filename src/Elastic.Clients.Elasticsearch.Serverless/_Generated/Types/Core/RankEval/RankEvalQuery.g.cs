@@ -44,8 +44,8 @@ public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 
 	public RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
@@ -56,7 +56,7 @@ public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public RankEvalQueryDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public RankEvalQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -64,7 +64,7 @@ public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public RankEvalQueryDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public RankEvalQueryDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -89,7 +89,7 @@ public sealed partial class RankEvalQueryDescriptor<TDocument> : SerializableDes
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else
 		{
@@ -116,8 +116,8 @@ public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<Ran
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private int? SizeValue { get; set; }
 
 	public RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query query)
@@ -128,7 +128,7 @@ public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<Ran
 		return Self;
 	}
 
-	public RankEvalQueryDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public RankEvalQueryDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -136,7 +136,7 @@ public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<Ran
 		return Self;
 	}
 
-	public RankEvalQueryDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public RankEvalQueryDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -161,7 +161,7 @@ public sealed partial class RankEvalQueryDescriptor : SerializableDescriptor<Ran
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else
 		{

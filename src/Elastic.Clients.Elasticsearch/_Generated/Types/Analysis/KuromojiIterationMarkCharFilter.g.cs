@@ -80,10 +80,10 @@ public sealed partial class KuromojiIterationMarkCharFilterDescriptor : Serializ
 		writer.WriteBooleanValue(NormalizeKanjiValue);
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("kuromoji_iteration_mark");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

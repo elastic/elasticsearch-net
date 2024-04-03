@@ -212,6 +212,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 {
 	internal SearchTemplateRequestDescriptor(Action<SearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
+
 	public SearchTemplateRequestDescriptor()
 	{
 	}
@@ -336,6 +340,10 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 public sealed partial class SearchTemplateRequestDescriptor : RequestDescriptor<SearchTemplateRequestDescriptor, SearchTemplateRequestParameters>
 {
 	internal SearchTemplateRequestDescriptor(Action<SearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
+
+	public SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
+	{
+	}
 
 	public SearchTemplateRequestDescriptor()
 	{
