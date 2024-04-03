@@ -64,6 +64,15 @@ public sealed partial class GeoLineSortDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The name of the numeric field to use as the sort key for ordering the points.</para>
+	/// </summary>
+	public GeoLineSortDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();

@@ -57,10 +57,10 @@ public sealed partial class WhitespaceAnalyzerDescriptor : SerializableDescripto
 		writer.WriteStartObject();
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("whitespace");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

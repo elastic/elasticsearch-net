@@ -45,9 +45,9 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 	}
 
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRound> RoundsValue { get; set; }
-	private DownsamplingRoundDescriptor RoundsDescriptor { get; set; }
-	private Action<DownsamplingRoundDescriptor> RoundsDescriptorAction { get; set; }
-	private Action<DownsamplingRoundDescriptor>[] RoundsDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor RoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor> RoundsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor>[] RoundsDescriptorActions { get; set; }
 
 	/// <summary>
 	/// <para>The list of downsampling rounds to execute as part of this downsampling configuration</para>
@@ -61,7 +61,7 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 		return Self;
 	}
 
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(DownsamplingRoundDescriptor descriptor)
+	public DataStreamLifecycleDownsamplingDescriptor Rounds(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor descriptor)
 	{
 		RoundsValue = null;
 		RoundsDescriptorAction = null;
@@ -70,7 +70,7 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 		return Self;
 	}
 
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(Action<DownsamplingRoundDescriptor> configure)
+	public DataStreamLifecycleDownsamplingDescriptor Rounds(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor> configure)
 	{
 		RoundsValue = null;
 		RoundsDescriptor = null;
@@ -79,7 +79,7 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 		return Self;
 	}
 
-	public DataStreamLifecycleDownsamplingDescriptor Rounds(params Action<DownsamplingRoundDescriptor>[] configure)
+	public DataStreamLifecycleDownsamplingDescriptor Rounds(params Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor>[] configure)
 	{
 		RoundsValue = null;
 		RoundsDescriptor = null;
@@ -102,7 +102,7 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 		{
 			writer.WritePropertyName("rounds");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new DownsamplingRoundDescriptor(RoundsDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor(RoundsDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (RoundsDescriptorActions is not null)
@@ -111,7 +111,7 @@ public sealed partial class DataStreamLifecycleDownsamplingDescriptor : Serializ
 			writer.WriteStartArray();
 			foreach (var action in RoundsDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new DownsamplingRoundDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DownsamplingRoundDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

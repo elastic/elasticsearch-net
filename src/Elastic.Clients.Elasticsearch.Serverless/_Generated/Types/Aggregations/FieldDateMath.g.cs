@@ -30,13 +30,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-public sealed partial class FieldDateMath : Union<Elastic.Clients.Elasticsearch.Serverless.DateMath, double>
+/// <summary>
+/// <para>A date range limit, represented either as a DateMath expression or a number expressed<br/>according to the target field's precision.</para>
+/// </summary>
+public sealed partial class FieldDateMath : Union<string, double>
 {
-	public FieldDateMath(Elastic.Clients.Elasticsearch.Serverless.DateMath expr) : base(expr)
+	public FieldDateMath(string Expr) : base(Expr)
 	{
 	}
 
-	public FieldDateMath(double value) : base(value)
+	public FieldDateMath(double Value) : base(Value)
 	{
 	}
 }

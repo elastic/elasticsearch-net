@@ -34,6 +34,10 @@ public sealed partial class WeightedAverageAggregate : IAggregate
 {
 	[JsonInclude, JsonPropertyName("meta")]
 	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+
+	/// <summary>
+	/// <para>The metric value. A missing value generally means that there was no data to aggregate,<br/>unless specified otherwise.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("value")]
 	public double? Value { get; init; }
 	[JsonInclude, JsonPropertyName("value_as_string")]

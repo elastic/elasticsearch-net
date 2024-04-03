@@ -30,13 +30,13 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-public sealed partial class Percentiles : Union<IReadOnlyDictionary<string, object>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ArrayPercentilesItem>>
+public sealed partial class Percentiles : Union<IReadOnlyDictionary<string, object?>, IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ArrayPercentilesItem>>
 {
-	public Percentiles(IReadOnlyDictionary<string, object> dictionary) : base(dictionary)
+	public Percentiles(IReadOnlyDictionary<string, object?> Keyed) : base(Keyed)
 	{
 	}
 
-	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ArrayPercentilesItem> collection) : base(collection)
+	public Percentiles(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ArrayPercentilesItem> Array) : base(Array)
 	{
 	}
 }

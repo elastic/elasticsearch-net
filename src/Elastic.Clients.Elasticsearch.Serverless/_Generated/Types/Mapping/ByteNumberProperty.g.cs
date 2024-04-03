@@ -47,10 +47,14 @@ public sealed partial class ByteNumberProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
-	public double? NullValue { get; set; }
+	public byte? NullValue { get; set; }
 	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
@@ -61,10 +65,6 @@ public sealed partial class ByteNumberProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_metric")]
-	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "byte";
@@ -88,14 +88,12 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
-	private double? NullValueValue { get; set; }
+	private byte? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public ByteNumberPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -133,15 +131,15 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public ByteNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public ByteNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -165,13 +163,16 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ByteNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor<TDocument> NullValue(double? nullValue)
+	public ByteNumberPropertyDescriptor<TDocument> NullValue(byte? nullValue)
 	{
 		NullValueValue = nullValue;
 		return Self;
@@ -189,15 +190,15 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public ByteNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public ByteNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -218,18 +219,6 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 	public ByteNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public ByteNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public ByteNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -296,10 +285,10 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (NullValueValue is not null)
+		if (NullValueValue.HasValue)
 		{
 			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
+			writer.WriteNumberValue(NullValueValue.Value);
 		}
 
 		if (OnScriptErrorValue is not null)
@@ -332,18 +321,6 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("byte");
 		writer.WriteEndObject();
@@ -366,9 +343,7 @@ public sealed partial class ByteNumberPropertyDescriptor<TDocument> : Serializab
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }
 
@@ -390,14 +365,12 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
-	private double? NullValueValue { get; set; }
+	private byte? NullValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public ByteNumberPropertyDescriptor Boost(double? boost)
 	{
@@ -435,15 +408,15 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ByteNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ByteNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -467,13 +440,16 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ByteNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor NullValue(double? nullValue)
+	public ByteNumberPropertyDescriptor NullValue(byte? nullValue)
 	{
 		NullValueValue = nullValue;
 		return Self;
@@ -491,15 +467,15 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ByteNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ByteNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ByteNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -520,18 +496,6 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 	public ByteNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public ByteNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public ByteNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -598,10 +562,10 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
-		if (NullValueValue is not null)
+		if (NullValueValue.HasValue)
 		{
 			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
+			writer.WriteNumberValue(NullValueValue.Value);
 		}
 
 		if (OnScriptErrorValue is not null)
@@ -634,18 +598,6 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("byte");
 		writer.WriteEndObject();
@@ -668,8 +620,6 @@ public sealed partial class ByteNumberPropertyDescriptor : SerializableDescripto
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }

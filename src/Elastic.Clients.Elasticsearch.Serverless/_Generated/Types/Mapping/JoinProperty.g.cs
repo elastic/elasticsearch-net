@@ -37,12 +37,16 @@ public sealed partial class JoinProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 	[JsonInclude, JsonPropertyName("relations")]
-	public IDictionary<string, ICollection<string>>? Relations { get; set; }
+	public IDictionary<string, Union<string, ICollection<string>>>? Relations { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "join";
@@ -62,7 +66,7 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private IDictionary<string, ICollection<string>>? RelationsValue { get; set; }
+	private IDictionary<string, Union<string, ICollection<string>>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
@@ -82,15 +86,15 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public JoinPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public JoinPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -102,6 +106,9 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public JoinPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -114,23 +121,23 @@ public sealed partial class JoinPropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public JoinPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public JoinPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor<TDocument> Relations(Func<FluentDictionary<string, ICollection<string>>, FluentDictionary<string, ICollection<string>>> selector)
+	public JoinPropertyDescriptor<TDocument> Relations(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
 	{
-		RelationsValue = selector?.Invoke(new FluentDictionary<string, ICollection<string>>());
+		RelationsValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
 		return Self;
 	}
 
@@ -210,7 +217,7 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
-	private IDictionary<string, ICollection<string>>? RelationsValue { get; set; }
+	private IDictionary<string, Union<string, ICollection<string>>>? RelationsValue { get; set; }
 
 	public JoinPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
@@ -230,15 +237,15 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public JoinPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public JoinPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -250,6 +257,9 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public JoinPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -262,23 +272,23 @@ public sealed partial class JoinPropertyDescriptor : SerializableDescriptor<Join
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public JoinPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public JoinPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public JoinPropertyDescriptor Relations(Func<FluentDictionary<string, ICollection<string>>, FluentDictionary<string, ICollection<string>>> selector)
+	public JoinPropertyDescriptor Relations(Func<FluentDictionary<string, Union<string, ICollection<string>>>, FluentDictionary<string, Union<string, ICollection<string>>>> selector)
 	{
-		RelationsValue = selector?.Invoke(new FluentDictionary<string, ICollection<string>>());
+		RelationsValue = selector?.Invoke(new FluentDictionary<string, Union<string, ICollection<string>>>());
 		return Self;
 	}
 

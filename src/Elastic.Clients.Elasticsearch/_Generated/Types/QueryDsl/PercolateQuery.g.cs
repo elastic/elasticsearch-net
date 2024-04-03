@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class PercolateQuery : SearchQuery
+public sealed partial class PercolateQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -75,6 +76,8 @@ public sealed partial class PercolateQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("preference")]
 	public string? Preference { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Routing used to fetch document to percolate.</para>
@@ -88,9 +91,7 @@ public sealed partial class PercolateQuery : SearchQuery
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
 
-	public static implicit operator Query(PercolateQuery percolateQuery) => QueryDsl.Query.Percolate(percolateQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("percolate", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(PercolateQuery percolateQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Percolate(percolateQuery);
 }
 
 public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDescriptor<PercolateQueryDescriptor<TDocument>>
@@ -113,6 +114,9 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -150,6 +154,15 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
 	/// </summary>
 	public PercolateQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Field that holds the indexed queries. The field must use the `percolator` mapping type.</para>
+	/// </summary>
+	public PercolateQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -274,10 +287,10 @@ public sealed partial class PercolateQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();
@@ -304,6 +317,9 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private long? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PercolateQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -474,10 +490,10 @@ public sealed partial class PercolateQueryDescriptor : SerializableDescriptor<Pe
 			JsonSerializer.Serialize(writer, RoutingValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();

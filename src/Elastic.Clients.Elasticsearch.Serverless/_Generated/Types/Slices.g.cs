@@ -30,13 +30,16 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
+/// <summary>
+/// <para>Slices configuration used to parallelize a process.</para>
+/// </summary>
 public sealed partial class Slices : Union<int, Elastic.Clients.Elasticsearch.Serverless.SlicesCalculation>
 {
-	public Slices(int value) : base(value)
+	public Slices(int Value) : base(Value)
 	{
 	}
 
-	public Slices(Elastic.Clients.Elasticsearch.Serverless.SlicesCalculation computed) : base(computed)
+	public Slices(Elastic.Clients.Elasticsearch.Serverless.SlicesCalculation Computed) : base(Computed)
 	{
 	}
 }

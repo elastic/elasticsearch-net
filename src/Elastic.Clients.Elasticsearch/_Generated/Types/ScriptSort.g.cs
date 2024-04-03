@@ -40,7 +40,7 @@ public sealed partial class ScriptSort
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
 
-	public static implicit operator SortOptions(ScriptSort scriptSort) => SortOptions.Script(scriptSort);
+	public static implicit operator Elastic.Clients.Elasticsearch.SortOptions(ScriptSort scriptSort) => Elastic.Clients.Elasticsearch.SortOptions.Script(scriptSort);
 }
 
 public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescriptor<ScriptSortDescriptor<TDocument>>
@@ -53,8 +53,8 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
@@ -73,7 +73,7 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public ScriptSortDescriptor<TDocument> Nested(NestedSortValueDescriptor<TDocument> descriptor)
+	public ScriptSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument> descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -81,7 +81,7 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public ScriptSortDescriptor<TDocument> Nested(Action<NestedSortValueDescriptor<TDocument>> configure)
+	public ScriptSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -124,7 +124,7 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{
@@ -160,8 +160,8 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 
 	private Elastic.Clients.Elasticsearch.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.NestedSortValue? NestedValue { get; set; }
-	private NestedSortValueDescriptor NestedDescriptor { get; set; }
-	private Action<NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.NestedSortValueDescriptor NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
@@ -180,7 +180,7 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 		return Self;
 	}
 
-	public ScriptSortDescriptor Nested(NestedSortValueDescriptor descriptor)
+	public ScriptSortDescriptor Nested(Elastic.Clients.Elasticsearch.NestedSortValueDescriptor descriptor)
 	{
 		NestedValue = null;
 		NestedDescriptorAction = null;
@@ -188,7 +188,7 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 		return Self;
 	}
 
-	public ScriptSortDescriptor Nested(Action<NestedSortValueDescriptor> configure)
+	public ScriptSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> configure)
 	{
 		NestedValue = null;
 		NestedDescriptor = null;
@@ -231,7 +231,7 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 		else if (NestedDescriptorAction is not null)
 		{
 			writer.WritePropertyName("nested");
-			JsonSerializer.Serialize(writer, new NestedSortValueDescriptor(NestedDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.NestedSortValueDescriptor(NestedDescriptorAction), options);
 		}
 		else if (NestedValue is not null)
 		{

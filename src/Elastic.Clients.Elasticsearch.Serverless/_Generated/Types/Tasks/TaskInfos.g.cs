@@ -32,11 +32,11 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Tasks;
 
 public sealed partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Tasks.TaskInfo>, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Tasks.ParentTaskInfo>>
 {
-	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Tasks.TaskInfo> flat) : base(flat)
+	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.Tasks.TaskInfo> Flat) : base(Flat)
 	{
 	}
 
-	public TaskInfos(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Tasks.ParentTaskInfo> grouped) : base(grouped)
+	public TaskInfos(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Tasks.ParentTaskInfo> Grouped) : base(Grouped)
 	{
 	}
 }

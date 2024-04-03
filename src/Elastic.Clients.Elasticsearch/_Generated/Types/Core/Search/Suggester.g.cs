@@ -47,8 +47,8 @@ internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 				}
 
 				additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>();
-				var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>(ref reader, options);
-				additionalProperties.Add(property, value);
+				var additionalValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>(ref reader, options);
+				additionalProperties.Add(property, additionalValue);
 			}
 		}
 
@@ -59,7 +59,7 @@ internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 	public override void Write(Utf8JsonWriter writer, Suggester value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Suggesters != null)
+		if (value.Suggesters is not null)
 		{
 			foreach (var additionalProperty in value.Suggesters)
 			{
@@ -81,12 +81,66 @@ internal sealed partial class SuggesterConverter : JsonConverter<Suggester>
 [JsonConverter(typeof(SuggesterConverter))]
 public sealed partial class Suggester
 {
+	/// <summary>
+	/// <para>The named suggesters</para>
+	/// </summary>
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> Suggesters { get; set; }
 
 	/// <summary>
 	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
 	/// </summary>
 	public string? Text { get; set; }
+}
+
+public sealed partial class SuggesterDescriptor<TDocument> : SerializableDescriptor<SuggesterDescriptor<TDocument>>
+{
+	internal SuggesterDescriptor(Action<SuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+
+	public SuggesterDescriptor() : base()
+	{
+	}
+
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>> SuggestersValue { get; set; }
+	private string? TextValue { get; set; }
+
+	/// <summary>
+	/// <para>The named suggesters</para>
+	/// </summary>
+	public SuggesterDescriptor<TDocument> Suggesters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>>> selector)
+	{
+		SuggestersValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>>());
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Global suggest text, to avoid repetition when the same text is used in several suggesters</para>
+	/// </summary>
+	public SuggesterDescriptor<TDocument> Text(string? text)
+	{
+		TextValue = text;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (!string.IsNullOrEmpty(TextValue))
+		{
+			writer.WritePropertyName("text");
+			writer.WriteStringValue(TextValue);
+		}
+
+		if (SuggestersValue is not null)
+		{
+			foreach (var additionalProperty in SuggestersValue)
+			{
+				writer.WritePropertyName(additionalProperty.Key);
+				JsonSerializer.Serialize(writer, additionalProperty.Value, options);
+			}
+		}
+
+		writer.WriteEndObject();
+	}
 }
 
 public sealed partial class SuggesterDescriptor : SerializableDescriptor<SuggesterDescriptor>
@@ -97,12 +151,15 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 	{
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester> SuggestersValue { get; set; }
+	private IDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor> SuggestersValue { get; set; }
 	private string? TextValue { get; set; }
 
-	public SuggesterDescriptor Suggesters(Func<FluentDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>, FluentDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>> selector)
+	/// <summary>
+	/// <para>The named suggesters</para>
+	/// </summary>
+	public SuggesterDescriptor Suggesters(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor>> selector)
 	{
-		SuggestersValue = selector?.Invoke(new FluentDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>());
+		SuggestersValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor>());
 		return Self;
 	}
 
@@ -124,7 +181,7 @@ public sealed partial class SuggesterDescriptor : SerializableDescriptor<Suggest
 			writer.WriteStringValue(TextValue);
 		}
 
-		if (SuggestersValue != null)
+		if (SuggestersValue is not null)
 		{
 			foreach (var additionalProperty in SuggestersValue)
 			{

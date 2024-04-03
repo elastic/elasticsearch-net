@@ -114,10 +114,6 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 	{
 	}
 
-	internal PutIndexTemplateRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
@@ -136,14 +132,14 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
-	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -166,7 +162,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(DataStreamVisibilityDescriptor descriptor)
+	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor descriptor)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptorAction = null;
@@ -174,7 +170,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Action<DataStreamVisibilityDescriptor> configure)
+	public PutIndexTemplateRequestDescriptor<TDocument> DataStream(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> configure)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptor = null;
@@ -220,7 +216,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> Template(IndexTemplateMappingDescriptor<TDocument> descriptor)
+	public PutIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument> descriptor)
 	{
 		TemplateValue = null;
 		TemplateDescriptorAction = null;
@@ -228,7 +224,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor<TDocument> Template(Action<IndexTemplateMappingDescriptor<TDocument>> configure)
+	public PutIndexTemplateRequestDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> configure)
 	{
 		TemplateValue = null;
 		TemplateDescriptor = null;
@@ -262,7 +258,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		else if (DataStreamDescriptorAction is not null)
 		{
 			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 		}
 		else if (DataStreamValue is not null)
 		{
@@ -296,7 +292,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 		else if (TemplateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
 		}
 		else if (TemplateValue is not null)
 		{
@@ -304,10 +300,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor<TDocument> : Reque
 			JsonSerializer.Serialize(writer, TemplateValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();
@@ -322,10 +318,6 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 	internal PutIndexTemplateRequestDescriptor(Action<PutIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
 	public PutIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
-	{
-	}
-
-	internal PutIndexTemplateRequestDescriptor()
 	{
 	}
 
@@ -347,14 +339,14 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 
 	private ICollection<Elastic.Clients.Elasticsearch.Name>? ComposedOfValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Indices? IndexPatternsValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
-	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -377,7 +369,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor DataStream(DataStreamVisibilityDescriptor descriptor)
+	public PutIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor descriptor)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptorAction = null;
@@ -385,7 +377,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor DataStream(Action<DataStreamVisibilityDescriptor> configure)
+	public PutIndexTemplateRequestDescriptor DataStream(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor> configure)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptor = null;
@@ -431,7 +423,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor Template(IndexTemplateMappingDescriptor descriptor)
+	public PutIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor descriptor)
 	{
 		TemplateValue = null;
 		TemplateDescriptorAction = null;
@@ -439,7 +431,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
-	public PutIndexTemplateRequestDescriptor Template(Action<IndexTemplateMappingDescriptor> configure)
+	public PutIndexTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor> configure)
 	{
 		TemplateValue = null;
 		TemplateDescriptor = null;
@@ -473,7 +465,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		else if (DataStreamDescriptorAction is not null)
 		{
 			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 		}
 		else if (DataStreamValue is not null)
 		{
@@ -507,7 +499,7 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 		else if (TemplateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new IndexTemplateMappingDescriptor(TemplateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor(TemplateDescriptorAction), options);
 		}
 		else if (TemplateValue is not null)
 		{
@@ -515,10 +507,10 @@ public sealed partial class PutIndexTemplateRequestDescriptor : RequestDescripto
 			JsonSerializer.Serialize(writer, TemplateValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();

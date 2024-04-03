@@ -27,36 +27,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[JsonConverter(typeof(VariableWidthHistogramBucketConverter))]
-public sealed partial class VariableWidthHistogramBucket : AggregateDictionary
+internal sealed partial class VariableWidthHistogramBucketConverter : JsonConverter<VariableWidthHistogramBucket>
 {
-	public VariableWidthHistogramBucket(IReadOnlyDictionary<string, IAggregate> backingDictionary) : base(backingDictionary)
-	{
-	}
-
-	[JsonInclude, JsonPropertyName("doc_count")]
-	public long DocCount { get; init; }
-	[JsonInclude, JsonPropertyName("key")]
-	public double Key { get; init; }
-	[JsonInclude, JsonPropertyName("key_as_string")]
-	public string? KeyAsString { get; init; }
-	[JsonInclude, JsonPropertyName("max")]
-	public double Max { get; init; }
-	[JsonInclude, JsonPropertyName("max_as_string")]
-	public string? MaxAsString { get; init; }
-	[JsonInclude, JsonPropertyName("min")]
-	public double Min { get; init; }
-	[JsonInclude, JsonPropertyName("min_as_string")]
-	public string? MinAsString { get; init; }
-}
-
-internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<VariableWidthHistogramBucket>
-{
-	public override VariableWidthHistogramBucket? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override VariableWidthHistogramBucket Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException($"Expected {JsonTokenType.StartObject} but read {reader.TokenType}.");
-		var subAggs = new Dictionary<string, IAggregate>();// TODO - Optimise this and only create if we need it.
+			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
 		double key = default;
 		string? keyAsString = default;
@@ -64,67 +40,86 @@ internal sealed class VariableWidthHistogramBucketConverter : JsonConverter<Vari
 		string? maxAsString = default;
 		double min = default;
 		string? minAsString = default;
-		while (reader.Read())
+		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 		{
-			if (reader.TokenType == JsonTokenType.EndObject)
-				break;
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Expected {JsonTokenType.PropertyName} but read {reader.TokenType}.");
-			var name = reader.GetString();// TODO: Future optimisation, get raw bytes span and parse based on those
-			reader.Read();
-			if (name.Equals("doc_count", StringComparison.Ordinal))
+			if (reader.TokenType == JsonTokenType.PropertyName)
 			{
-				docCount = JsonSerializer.Deserialize<long>(ref reader, options);
-				continue;
-			}
+				var property = reader.GetString();
+				if (property == "doc_count")
+				{
+					docCount = JsonSerializer.Deserialize<long>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key", StringComparison.Ordinal))
-			{
-				key = JsonSerializer.Deserialize<double>(ref reader, options);
-				continue;
-			}
+				if (property == "key")
+				{
+					key = JsonSerializer.Deserialize<double>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("key_as_string", StringComparison.Ordinal))
-			{
-				keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "key_as_string")
+				{
+					keyAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("max", StringComparison.Ordinal))
-			{
-				max = JsonSerializer.Deserialize<double>(ref reader, options);
-				continue;
-			}
+				if (property == "max")
+				{
+					max = JsonSerializer.Deserialize<double>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("max_as_string", StringComparison.Ordinal))
-			{
-				maxAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "max_as_string")
+				{
+					maxAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("min", StringComparison.Ordinal))
-			{
-				min = JsonSerializer.Deserialize<double>(ref reader, options);
-				continue;
-			}
+				if (property == "min")
+				{
+					min = JsonSerializer.Deserialize<double>(ref reader, options);
+					continue;
+				}
 
-			if (name.Equals("min_as_string", StringComparison.Ordinal))
-			{
-				minAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
-				continue;
-			}
+				if (property == "min_as_string")
+				{
+					minAsString = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
 
-			if (name.Contains("#"))
-			{
-				AggregateDictionaryConverter.ReadAggregate(ref reader, options, subAggs, name);
-				continue;
-			}
+				if (property.Contains("#"))
+				{
+					additionalProperties ??= new Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
+					AggregateDictionaryConverter.ReadItem(ref reader, options, additionalProperties, property);
+					continue;
+				}
 
-			throw new JsonException("Unknown property read from JSON.");
+				throw new JsonException("Unknown property read from JSON.");
+			}
 		}
 
-		return new VariableWidthHistogramBucket(subAggs) { DocCount = docCount, Key = key, KeyAsString = keyAsString, Max = max, MaxAsString = maxAsString, Min = min, MinAsString = minAsString };
+		return new VariableWidthHistogramBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, Key = key, KeyAsString = keyAsString, Max = max, MaxAsString = maxAsString, Min = min, MinAsString = minAsString };
 	}
 
-	public override void Write(Utf8JsonWriter writer, VariableWidthHistogramBucket value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, VariableWidthHistogramBucket value, JsonSerializerOptions options)
+	{
+		throw new NotImplementedException("'VariableWidthHistogramBucket' is a readonly type, used only on responses and does not support being written to JSON.");
+	}
+}
+
+[JsonConverter(typeof(VariableWidthHistogramBucketConverter))]
+public sealed partial class VariableWidthHistogramBucket
+{
+	/// <summary>
+	/// <para>Nested aggregations</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
+	public long DocCount { get; init; }
+	public double Key { get; init; }
+	public string? KeyAsString { get; init; }
+	public double Max { get; init; }
+	public string? MaxAsString { get; init; }
+	public double Min { get; init; }
+	public string? MinAsString { get; init; }
 }

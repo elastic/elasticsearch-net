@@ -89,7 +89,7 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("composed_of")]
-	public ICollection<string>? ComposedOf { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Name>? ComposedOf { get; set; }
 
 	/// <summary>
 	/// <para>If this object is included, the template is used to create data streams and their backing indices.<br/>Supports an empty object.<br/>Data streams require a matching index template with a `data_stream` object.</para>
@@ -136,10 +136,6 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	{
 	}
 
-	internal SimulateIndexTemplateRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementSimulateIndexTemplate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
@@ -159,16 +155,16 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	}
 
 	private bool? AllowAutoCreateValue { get; set; }
-	private ICollection<string>? ComposedOfValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Name>? ComposedOfValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndexPatternsValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
-	private Action<IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor<TDocument> TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> TemplateDescriptorAction { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -183,7 +179,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 	/// <summary>
 	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
 	/// </summary>
-	public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<string>? composedOf)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Serverless.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;
@@ -200,7 +196,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(DataStreamVisibilityDescriptor descriptor)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor descriptor)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptorAction = null;
@@ -208,7 +204,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Action<DataStreamVisibilityDescriptor> configure)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> DataStream(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor> configure)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptor = null;
@@ -254,7 +250,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor<TDocument> Template(IndexTemplateMappingDescriptor<TDocument> descriptor)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor<TDocument> descriptor)
 	{
 		TemplateValue = null;
 		TemplateDescriptorAction = null;
@@ -262,7 +258,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor<TDocument> Template(Action<IndexTemplateMappingDescriptor<TDocument>> configure)
+	public SimulateIndexTemplateRequestDescriptor<TDocument> Template(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor<TDocument>> configure)
 	{
 		TemplateValue = null;
 		TemplateDescriptor = null;
@@ -302,7 +298,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		else if (DataStreamDescriptorAction is not null)
 		{
 			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 		}
 		else if (DataStreamValue is not null)
 		{
@@ -336,7 +332,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 		else if (TemplateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor<TDocument>(TemplateDescriptorAction), options);
 		}
 		else if (TemplateValue is not null)
 		{
@@ -344,10 +340,10 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor<TDocument> : 
 			JsonSerializer.Serialize(writer, TemplateValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();
@@ -359,10 +355,6 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
 	public SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Name name) : base(r => r.Required("name", name))
-	{
-	}
-
-	internal SimulateIndexTemplateRequestDescriptor()
 	{
 	}
 
@@ -385,16 +377,16 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	}
 
 	private bool? AllowAutoCreateValue { get; set; }
-	private ICollection<string>? ComposedOfValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Name>? ComposedOfValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibility? DataStreamValue { get; set; }
-	private DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
-	private Action<DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor DataStreamDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor> DataStreamDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndexPatternsValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMapping? TemplateValue { get; set; }
-	private IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
-	private Action<IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor TemplateDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor> TemplateDescriptorAction { get; set; }
 	private long? VersionValue { get; set; }
 
 	/// <summary>
@@ -409,7 +401,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 	/// <summary>
 	/// <para>An ordered list of component template names.<br/>Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.</para>
 	/// </summary>
-	public SimulateIndexTemplateRequestDescriptor ComposedOf(ICollection<string>? composedOf)
+	public SimulateIndexTemplateRequestDescriptor ComposedOf(ICollection<Elastic.Clients.Elasticsearch.Serverless.Name>? composedOf)
 	{
 		ComposedOfValue = composedOf;
 		return Self;
@@ -426,7 +418,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor DataStream(DataStreamVisibilityDescriptor descriptor)
+	public SimulateIndexTemplateRequestDescriptor DataStream(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor descriptor)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptorAction = null;
@@ -434,7 +426,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor DataStream(Action<DataStreamVisibilityDescriptor> configure)
+	public SimulateIndexTemplateRequestDescriptor DataStream(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor> configure)
 	{
 		DataStreamValue = null;
 		DataStreamDescriptor = null;
@@ -480,7 +472,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor Template(IndexTemplateMappingDescriptor descriptor)
+	public SimulateIndexTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor descriptor)
 	{
 		TemplateValue = null;
 		TemplateDescriptorAction = null;
@@ -488,7 +480,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		return Self;
 	}
 
-	public SimulateIndexTemplateRequestDescriptor Template(Action<IndexTemplateMappingDescriptor> configure)
+	public SimulateIndexTemplateRequestDescriptor Template(Action<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor> configure)
 	{
 		TemplateValue = null;
 		TemplateDescriptor = null;
@@ -528,7 +520,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		else if (DataStreamDescriptorAction is not null)
 		{
 			writer.WritePropertyName("data_stream");
-			JsonSerializer.Serialize(writer, new DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamVisibilityDescriptor(DataStreamDescriptorAction), options);
 		}
 		else if (DataStreamValue is not null)
 		{
@@ -562,7 +554,7 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 		else if (TemplateDescriptorAction is not null)
 		{
 			writer.WritePropertyName("template");
-			JsonSerializer.Serialize(writer, new IndexTemplateMappingDescriptor(TemplateDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexTemplateMappingDescriptor(TemplateDescriptorAction), options);
 		}
 		else if (TemplateValue is not null)
 		{
@@ -570,10 +562,10 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 			JsonSerializer.Serialize(writer, TemplateValue, options);
 		}
 
-		if (VersionValue is not null)
+		if (VersionValue.HasValue)
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteNumberValue(VersionValue.Value);
 		}
 
 		writer.WriteEndObject();

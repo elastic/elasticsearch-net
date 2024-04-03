@@ -37,7 +37,7 @@ public sealed partial class FielddataFrequencyFilter
 	public int MinSegmentSize { get; set; }
 }
 
-public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDescriptor<FielddataFrequencyFilterDescriptor>, IBuildableDescriptor<FielddataFrequencyFilter>
+public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDescriptor<FielddataFrequencyFilterDescriptor>
 {
 	internal FielddataFrequencyFilterDescriptor(Action<FielddataFrequencyFilterDescriptor> configure) => configure.Invoke(this);
 
@@ -78,11 +78,4 @@ public sealed partial class FielddataFrequencyFilterDescriptor : SerializableDes
 		writer.WriteNumberValue(MinSegmentSizeValue);
 		writer.WriteEndObject();
 	}
-
-	FielddataFrequencyFilter IBuildableDescriptor<FielddataFrequencyFilter>.Build() => new()
-	{
-		Max = MaxValue,
-		Min = MinValue,
-		MinSegmentSize = MinSegmentSizeValue
-	};
 }

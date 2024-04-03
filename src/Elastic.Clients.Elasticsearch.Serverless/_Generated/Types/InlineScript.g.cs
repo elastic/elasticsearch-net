@@ -36,6 +36,10 @@ public sealed partial class InlineScript
 	public Elastic.Clients.Elasticsearch.Serverless.ScriptLanguage? Language { get; set; }
 	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, string>? Options { get; set; }
+
+	/// <summary>
+	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 
@@ -74,6 +78,9 @@ public sealed partial class InlineScriptDescriptor : SerializableDescriptor<Inli
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies any named parameters that are passed into the script as variables.<br/>Use parameters instead of hard-coded values to decrease compile time.</para>
+	/// </summary>
 	public InlineScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 	{
 		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());

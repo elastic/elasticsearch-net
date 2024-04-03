@@ -83,10 +83,6 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	internal DeleteScriptRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteScript;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
@@ -117,10 +113,6 @@ public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<De
 	internal DeleteScriptRequestDescriptor(Action<DeleteScriptRequestDescriptor> configure) => configure.Invoke(this);
 
 	public DeleteScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal DeleteScriptRequestDescriptor()
 	{
 	}
 

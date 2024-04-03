@@ -168,15 +168,11 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 {
 	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public IndicesStatsRequestDescriptor()
-	{
-	}
-
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
-	{
-	}
-
 	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+	{
+	}
+
+	public IndicesStatsRequestDescriptor()
 	{
 	}
 
@@ -198,15 +194,15 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 	public IndicesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Serverless.Level? level) => Qs("level", level);
 
-	public IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Serverless.Metrics? metric)
-	{
-		RouteValues.Optional("metric", metric);
-		return Self;
-	}
-
 	public IndicesStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Serverless.Metrics? metric)
+	{
+		RouteValues.Optional("metric", metric);
 		return Self;
 	}
 
@@ -222,15 +218,11 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 {
 	internal IndicesStatsRequestDescriptor(Action<IndicesStatsRequestDescriptor> configure) => configure.Invoke(this);
 
-	public IndicesStatsRequestDescriptor()
-	{
-	}
-
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
-	{
-	}
-
 	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+	{
+	}
+
+	public IndicesStatsRequestDescriptor()
 	{
 	}
 
@@ -252,15 +244,15 @@ public sealed partial class IndicesStatsRequestDescriptor : RequestDescriptor<In
 	public IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Serverless.Level? level) => Qs("level", level);
 
-	public IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Serverless.Metrics? metric)
-	{
-		RouteValues.Optional("metric", metric);
-		return Self;
-	}
-
 	public IndicesStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
 		RouteValues.Optional("index", indices);
+		return Self;
+	}
+
+	public IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Serverless.Metrics? metric)
+	{
+		RouteValues.Optional("metric", metric);
 		return Self;
 	}
 

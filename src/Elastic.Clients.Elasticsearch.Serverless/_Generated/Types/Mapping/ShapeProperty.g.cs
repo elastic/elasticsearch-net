@@ -29,6 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 
 /// <summary>
 /// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapeProperty : IProperty
 {
@@ -48,6 +49,10 @@ public sealed partial class ShapeProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("orientation")]
@@ -65,6 +70,7 @@ public sealed partial class ShapeProperty : IProperty
 
 /// <summary>
 /// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDescriptor<ShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<ShapeProperty>
 {
@@ -118,15 +124,15 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public ShapePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public ShapePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShapePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShapePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -150,6 +156,9 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ShapePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -168,15 +177,15 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
-	public ShapePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public ShapePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShapePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShapePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -300,6 +309,7 @@ public sealed partial class ShapePropertyDescriptor<TDocument> : SerializableDes
 
 /// <summary>
 /// <para>The `shape` data type facilitates the indexing of and searching with arbitrary `x, y` cartesian shapes such as<br/>rectangles and polygons.</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<ShapePropertyDescriptor>, IBuildableDescriptor<ShapeProperty>
 {
@@ -353,15 +363,15 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		return Self;
 	}
 
-	public ShapePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ShapePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShapePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShapePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -385,6 +395,9 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public ShapePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -403,15 +416,15 @@ public sealed partial class ShapePropertyDescriptor : SerializableDescriptor<Sha
 		return Self;
 	}
 
-	public ShapePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public ShapePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public ShapePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public ShapePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;

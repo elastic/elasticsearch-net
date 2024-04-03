@@ -35,8 +35,14 @@ public sealed partial class RankFeaturesProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
+	[JsonInclude, JsonPropertyName("positive_score_impact")]
+	public bool? PositiveScoreImpact { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Properties { get; set; }
 
@@ -56,6 +62,7 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
+	private bool? PositiveScoreImpactValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 
 	public RankFeaturesPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
@@ -70,15 +77,15 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturesPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturesPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -90,9 +97,18 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public RankFeaturesPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public RankFeaturesPropertyDescriptor<TDocument> PositiveScoreImpact(bool? positiveScoreImpact = true)
+	{
+		PositiveScoreImpactValue = positiveScoreImpact;
 		return Self;
 	}
 
@@ -102,15 +118,15 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturesPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturesPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -143,6 +159,12 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
+		if (PositiveScoreImpactValue.HasValue)
+		{
+			writer.WritePropertyName("positive_score_impact");
+			writer.WriteBooleanValue(PositiveScoreImpactValue.Value);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
@@ -160,6 +182,7 @@ public sealed partial class RankFeaturesPropertyDescriptor<TDocument> : Serializ
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
+		PositiveScoreImpact = PositiveScoreImpactValue,
 		Properties = PropertiesValue
 	};
 }
@@ -176,6 +199,7 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
+	private bool? PositiveScoreImpactValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 
 	public RankFeaturesPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
@@ -190,15 +214,15 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturesPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturesPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -210,9 +234,18 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public RankFeaturesPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
+		return Self;
+	}
+
+	public RankFeaturesPropertyDescriptor PositiveScoreImpact(bool? positiveScoreImpact = true)
+	{
+		PositiveScoreImpactValue = positiveScoreImpact;
 		return Self;
 	}
 
@@ -222,15 +255,15 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public RankFeaturesPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public RankFeaturesPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public RankFeaturesPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -263,6 +296,12 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, MetaValue, options);
 		}
 
+		if (PositiveScoreImpactValue.HasValue)
+		{
+			writer.WritePropertyName("positive_score_impact");
+			writer.WriteBooleanValue(PositiveScoreImpactValue.Value);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
@@ -280,6 +319,7 @@ public sealed partial class RankFeaturesPropertyDescriptor : SerializableDescrip
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Meta = MetaValue,
+		PositiveScoreImpact = PositiveScoreImpactValue,
 		Properties = PropertiesValue
 	};
 }

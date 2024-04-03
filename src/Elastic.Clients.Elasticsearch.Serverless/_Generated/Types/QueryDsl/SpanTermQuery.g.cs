@@ -70,72 +70,58 @@ internal sealed partial class SpanTermQueryConverter : JsonConverter<SpanTermQue
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize SpanTermQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(value.Value);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(SpanTermQueryConverter))]
-public sealed partial class SpanTermQuery : SearchQuery
+public sealed partial class SpanTermQuery
 {
-	public SpanTermQuery(Field field)
+	public SpanTermQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
-	public string Value { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+	public string? QueryName { get; set; }
+	public string Value { get; set; }
 
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("span_term", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(SpanTermQuery spanTermQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.SpanTerm(spanTermQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery(SpanTermQuery spanTermQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanQuery.SpanTerm(spanTermQuery);
 }
 
 public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDescriptor<SpanTermQueryDescriptor<TDocument>>
 {
 	internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal SpanTermQueryDescriptor() : base()
+	public SpanTermQueryDescriptor() : base()
 	{
-	}
-
-	public SpanTermQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public SpanTermQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -143,6 +129,9 @@ public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDes
 	private string? QueryNameValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanTermQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -156,6 +145,12 @@ public sealed partial class SpanTermQueryDescriptor<TDocument> : SerializableDes
 	}
 
 	public SpanTermQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public SpanTermQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -203,15 +198,8 @@ public sealed partial class SpanTermQueryDescriptor : SerializableDescriptor<Spa
 {
 	internal SpanTermQueryDescriptor(Action<SpanTermQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal SpanTermQueryDescriptor() : base()
+	public SpanTermQueryDescriptor() : base()
 	{
-	}
-
-	public SpanTermQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -219,6 +207,9 @@ public sealed partial class SpanTermQueryDescriptor : SerializableDescriptor<Spa
 	private string? QueryNameValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public SpanTermQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

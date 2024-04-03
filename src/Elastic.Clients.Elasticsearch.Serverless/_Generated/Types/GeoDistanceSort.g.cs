@@ -138,7 +138,7 @@ public sealed partial class GeoDistanceSort
 	public Elastic.Clients.Elasticsearch.Serverless.SortOrder? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? Unit { get; set; }
 
-	public static implicit operator SortOptions(GeoDistanceSort geoDistanceSort) => SortOptions.GeoDistance(geoDistanceSort);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.SortOptions(GeoDistanceSort geoDistanceSort) => Elastic.Clients.Elasticsearch.Serverless.SortOptions.GeoDistance(geoDistanceSort);
 }
 
 public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableDescriptor<GeoDistanceSortDescriptor<TDocument>>
@@ -150,12 +150,12 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.GeoDistanceType? DistanceTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? UnitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 
 	public GeoDistanceSortDescriptor<TDocument> DistanceType(Elastic.Clients.Elasticsearch.Serverless.GeoDistanceType? distanceType)
 	{
@@ -163,9 +163,33 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
 	public GeoDistanceSortDescriptor<TDocument> IgnoreUnmapped(bool? ignoreUnmapped = true)
 	{
 		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Location(ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> location)
+	{
+		LocationValue = location;
 		return Self;
 	}
 
@@ -184,24 +208,6 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 	public GeoDistanceSortDescriptor<TDocument> Unit(Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? unit)
 	{
 		UnitValue = unit;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor<TDocument> Location(ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> location)
-	{
-		LocationValue = location;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
-	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
 		return Self;
 	}
 
@@ -258,46 +264,16 @@ public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<G
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.GeoDistanceType? DistanceTypeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private bool? IgnoreUnmappedValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? UnitValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 
 	public GeoDistanceSortDescriptor DistanceType(Elastic.Clients.Elasticsearch.Serverless.GeoDistanceType? distanceType)
 	{
 		DistanceTypeValue = distanceType;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
-	{
-		IgnoreUnmappedValue = ignoreUnmapped;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.Serverless.SortMode? mode)
-	{
-		ModeValue = mode;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.Serverless.SortOrder? order)
-	{
-		OrderValue = order;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? unit)
-	{
-		UnitValue = unit;
-		return Self;
-	}
-
-	public GeoDistanceSortDescriptor Location(ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> location)
-	{
-		LocationValue = location;
 		return Self;
 	}
 
@@ -316,6 +292,36 @@ public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<G
 	public GeoDistanceSortDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor IgnoreUnmapped(bool? ignoreUnmapped = true)
+	{
+		IgnoreUnmappedValue = ignoreUnmapped;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Location(ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> location)
+	{
+		LocationValue = location;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Mode(Elastic.Clients.Elasticsearch.Serverless.SortMode? mode)
+	{
+		ModeValue = mode;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.Serverless.SortOrder? order)
+	{
+		OrderValue = order;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Unit(Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? unit)
+	{
+		UnitValue = unit;
 		return Self;
 	}
 

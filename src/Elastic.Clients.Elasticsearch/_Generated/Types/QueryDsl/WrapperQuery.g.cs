@@ -27,10 +27,11 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class WrapperQuery : SearchQuery
+public sealed partial class WrapperQuery
 {
-	[JsonInclude, JsonPropertyName("_name")]
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
 
@@ -39,10 +40,10 @@ public sealed partial class WrapperQuery : SearchQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+	[JsonInclude, JsonPropertyName("_name")]
+	public string? QueryName { get; set; }
 
-	public static implicit operator Query(WrapperQuery wrapperQuery) => QueryDsl.Query.Wrapper(wrapperQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("wrapper", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(WrapperQuery wrapperQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Wrapper(wrapperQuery);
 }
 
 public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<WrapperQueryDescriptor>
@@ -57,6 +58,9 @@ public sealed partial class WrapperQueryDescriptor : SerializableDescriptor<Wrap
 	private string QueryValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public WrapperQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

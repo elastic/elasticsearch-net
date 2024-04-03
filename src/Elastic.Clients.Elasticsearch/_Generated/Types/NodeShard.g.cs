@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class NodeShard
 {
 	[JsonInclude, JsonPropertyName("allocation_id")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? AllocationId { get; init; }
+	public IReadOnlyDictionary<string, string>? AllocationId { get; init; }
 	[JsonInclude, JsonPropertyName("index")]
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("node")]
@@ -38,7 +38,7 @@ public sealed partial class NodeShard
 	[JsonInclude, JsonPropertyName("primary")]
 	public bool Primary { get; init; }
 	[JsonInclude, JsonPropertyName("recovery_source")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Id>? RecoverySource { get; init; }
+	public IReadOnlyDictionary<string, string>? RecoverySource { get; init; }
 	[JsonInclude, JsonPropertyName("relocating_node")]
 	public string? RelocatingNode { get; init; }
 	[JsonInclude, JsonPropertyName("relocation_failure_info")]

@@ -82,63 +82,63 @@ internal sealed partial class PrefixQueryConverter : JsonConverter<PrefixQuery>
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize PrefixQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.CaseInsensitive.HasValue)
-			{
-				writer.WritePropertyName("case_insensitive");
-				writer.WriteBooleanValue(value.CaseInsensitive.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Rewrite is not null)
-			{
-				writer.WritePropertyName("rewrite");
-				JsonSerializer.Serialize(writer, value.Rewrite, options);
-			}
-
-			writer.WritePropertyName("value");
-			writer.WriteStringValue(value.Value);
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.CaseInsensitive.HasValue)
+		{
+			writer.WritePropertyName("case_insensitive");
+			writer.WriteBooleanValue(value.CaseInsensitive.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (!string.IsNullOrEmpty(value.Rewrite))
+		{
+			writer.WritePropertyName("rewrite");
+			writer.WriteStringValue(value.Rewrite);
+		}
+
+		writer.WritePropertyName("value");
+		writer.WriteStringValue(value.Value);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(PrefixQueryConverter))]
-public sealed partial class PrefixQuery : SearchQuery
+public sealed partial class PrefixQuery
 {
-	public PrefixQuery(Field field)
+	public PrefixQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
 
 	/// <summary>
 	/// <para>Allows ASCII case insensitive matching of the value with the indexed field values when set to `true`.<br/>Default is `false` which means the case sensitivity of matching depends on the underlying field’s mapping.</para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>Method used to rewrite the query.</para>
@@ -149,33 +149,16 @@ public sealed partial class PrefixQuery : SearchQuery
 	/// <para>Beginning characters of terms you wish to find in the provided field.</para>
 	/// </summary>
 	public string Value { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	public static implicit operator Query(PrefixQuery prefixQuery) => QueryDsl.Query.Prefix(prefixQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("prefix", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(PrefixQuery prefixQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.Prefix(prefixQuery);
 }
 
 public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescriptor<PrefixQueryDescriptor<TDocument>>
 {
 	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal PrefixQueryDescriptor() : base()
+	public PrefixQueryDescriptor() : base()
 	{
-	}
-
-	public PrefixQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public PrefixQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -185,6 +168,9 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PrefixQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -207,6 +193,12 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 	}
 
 	public PrefixQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public PrefixQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -261,10 +253,10 @@ public sealed partial class PrefixQueryDescriptor<TDocument> : SerializableDescr
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		writer.WritePropertyName("value");
@@ -278,15 +270,8 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 {
 	internal PrefixQueryDescriptor(Action<PrefixQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal PrefixQueryDescriptor() : base()
+	public PrefixQueryDescriptor() : base()
 	{
-	}
-
-	public PrefixQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -296,6 +281,9 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 	private string? RewriteValue { get; set; }
 	private string ValueValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public PrefixQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -378,10 +366,10 @@ public sealed partial class PrefixQueryDescriptor : SerializableDescriptor<Prefi
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		if (RewriteValue is not null)
+		if (!string.IsNullOrEmpty(RewriteValue))
 		{
 			writer.WritePropertyName("rewrite");
-			JsonSerializer.Serialize(writer, RewriteValue, options);
+			writer.WriteStringValue(RewriteValue);
 		}
 
 		writer.WritePropertyName("value");

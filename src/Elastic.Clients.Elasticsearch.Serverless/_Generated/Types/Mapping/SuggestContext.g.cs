@@ -34,7 +34,7 @@ public sealed partial class SuggestContext
 	[JsonInclude, JsonPropertyName("path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Path { get; set; }
 	[JsonInclude, JsonPropertyName("precision")]
-	public Union<int?, string?>? Precision { get; set; }
+	public object? Precision { get; set; }
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 }
@@ -49,7 +49,7 @@ public sealed partial class SuggestContextDescriptor<TDocument> : SerializableDe
 
 	private Elastic.Clients.Elasticsearch.Serverless.Name NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? PathValue { get; set; }
-	private Union<int?, string?>? PrecisionValue { get; set; }
+	private object? PrecisionValue { get; set; }
 	private string TypeValue { get; set; }
 
 	public SuggestContextDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Serverless.Name name)
@@ -70,7 +70,13 @@ public sealed partial class SuggestContextDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public SuggestContextDescriptor<TDocument> Precision(Union<int?, string?>? precision)
+	public SuggestContextDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	{
+		PathValue = path;
+		return Self;
+	}
+
+	public SuggestContextDescriptor<TDocument> Precision(object? precision)
 	{
 		PrecisionValue = precision;
 		return Self;
@@ -115,7 +121,7 @@ public sealed partial class SuggestContextDescriptor : SerializableDescriptor<Su
 
 	private Elastic.Clients.Elasticsearch.Serverless.Name NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? PathValue { get; set; }
-	private Union<int?, string?>? PrecisionValue { get; set; }
+	private object? PrecisionValue { get; set; }
 	private string TypeValue { get; set; }
 
 	public SuggestContextDescriptor Name(Elastic.Clients.Elasticsearch.Serverless.Name name)
@@ -142,7 +148,7 @@ public sealed partial class SuggestContextDescriptor : SerializableDescriptor<Su
 		return Self;
 	}
 
-	public SuggestContextDescriptor Precision(Union<int?, string?>? precision)
+	public SuggestContextDescriptor Precision(object? precision)
 	{
 		PrecisionValue = precision;
 		return Self;

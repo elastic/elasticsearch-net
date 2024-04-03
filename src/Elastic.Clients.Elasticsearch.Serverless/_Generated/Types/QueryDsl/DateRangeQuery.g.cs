@@ -118,98 +118,97 @@ internal sealed partial class DateRangeQueryConverter : JsonConverter<DateRangeQ
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize DateRangeQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.Format is not null)
-			{
-				writer.WritePropertyName("format");
-				JsonSerializer.Serialize(writer, value.Format, options);
-			}
-
-			if (value.From is not null)
-			{
-				writer.WritePropertyName("from");
-				JsonSerializer.Serialize(writer, value.From, options);
-			}
-
-			if (value.Gt is not null)
-			{
-				writer.WritePropertyName("gt");
-				JsonSerializer.Serialize(writer, value.Gt, options);
-			}
-
-			if (value.Gte is not null)
-			{
-				writer.WritePropertyName("gte");
-				JsonSerializer.Serialize(writer, value.Gte, options);
-			}
-
-			if (value.Lt is not null)
-			{
-				writer.WritePropertyName("lt");
-				JsonSerializer.Serialize(writer, value.Lt, options);
-			}
-
-			if (value.Lte is not null)
-			{
-				writer.WritePropertyName("lte");
-				JsonSerializer.Serialize(writer, value.Lte, options);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Relation is not null)
-			{
-				writer.WritePropertyName("relation");
-				JsonSerializer.Serialize(writer, value.Relation, options);
-			}
-
-			if (value.TimeZone is not null)
-			{
-				writer.WritePropertyName("time_zone");
-				JsonSerializer.Serialize(writer, value.TimeZone, options);
-			}
-
-			if (value.To is not null)
-			{
-				writer.WritePropertyName("to");
-				JsonSerializer.Serialize(writer, value.To, options);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (!string.IsNullOrEmpty(value.Format))
+		{
+			writer.WritePropertyName("format");
+			writer.WriteStringValue(value.Format);
+		}
+
+		if (value.From is not null)
+		{
+			writer.WritePropertyName("from");
+			JsonSerializer.Serialize(writer, value.From, options);
+		}
+
+		if (value.Gt is not null)
+		{
+			writer.WritePropertyName("gt");
+			JsonSerializer.Serialize(writer, value.Gt, options);
+		}
+
+		if (value.Gte is not null)
+		{
+			writer.WritePropertyName("gte");
+			JsonSerializer.Serialize(writer, value.Gte, options);
+		}
+
+		if (value.Lt is not null)
+		{
+			writer.WritePropertyName("lt");
+			JsonSerializer.Serialize(writer, value.Lt, options);
+		}
+
+		if (value.Lte is not null)
+		{
+			writer.WritePropertyName("lte");
+			JsonSerializer.Serialize(writer, value.Lte, options);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (value.Relation is not null)
+		{
+			writer.WritePropertyName("relation");
+			JsonSerializer.Serialize(writer, value.Relation, options);
+		}
+
+		if (!string.IsNullOrEmpty(value.TimeZone))
+		{
+			writer.WritePropertyName("time_zone");
+			writer.WriteStringValue(value.TimeZone);
+		}
+
+		if (value.To is not null)
+		{
+			writer.WritePropertyName("to");
+			JsonSerializer.Serialize(writer, value.To, options);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(DateRangeQueryConverter))]
-public sealed partial class DateRangeQuery : RangeQuery
+public sealed partial class DateRangeQuery
 {
-	public DateRangeQuery(Field field)
+	public DateRangeQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>Date format used to convert `date` values in the query.</para>
@@ -236,6 +235,11 @@ public sealed partial class DateRangeQuery : RangeQuery
 	/// <para>Less than or equal to.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.DateMath? Lte { get; set; }
+	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? Relation { get; set; }
 
 	/// <summary>
@@ -243,33 +247,14 @@ public sealed partial class DateRangeQuery : RangeQuery
 	/// </summary>
 	public string? TimeZone { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.DateMath? To { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
-
-	public static implicit operator Query(DateRangeQuery dateRangeQuery) => QueryDsl.Query.Range(dateRangeQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("range", this);
 }
 
 public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDescriptor<DateRangeQueryDescriptor<TDocument>>
 {
 	internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal DateRangeQueryDescriptor() : base()
+	public DateRangeQueryDescriptor() : base()
 	{
-	}
-
-	public DateRangeQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public DateRangeQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -285,6 +270,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DateMath? ToValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -298,6 +286,12 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	public DateRangeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public DateRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -360,6 +354,9 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;
@@ -394,10 +391,10 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (FormatValue is not null)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
 			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, FormatValue, options);
+			writer.WriteStringValue(FormatValue);
 		}
 
 		if (FromValue is not null)
@@ -442,10 +439,10 @@ public sealed partial class DateRangeQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, RelationValue, options);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (ToValue is not null)
@@ -463,15 +460,8 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 {
 	internal DateRangeQueryDescriptor(Action<DateRangeQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal DateRangeQueryDescriptor() : base()
+	public DateRangeQueryDescriptor() : base()
 	{
-	}
-
-	public DateRangeQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -487,6 +477,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 	private string? TimeZoneValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DateMath? ToValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -568,6 +561,9 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public DateRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;
@@ -602,10 +598,10 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 			writer.WriteNumberValue(BoostValue.Value);
 		}
 
-		if (FormatValue is not null)
+		if (!string.IsNullOrEmpty(FormatValue))
 		{
 			writer.WritePropertyName("format");
-			JsonSerializer.Serialize(writer, FormatValue, options);
+			writer.WriteStringValue(FormatValue);
 		}
 
 		if (FromValue is not null)
@@ -650,10 +646,10 @@ public sealed partial class DateRangeQueryDescriptor : SerializableDescriptor<Da
 			JsonSerializer.Serialize(writer, RelationValue, options);
 		}
 
-		if (TimeZoneValue is not null)
+		if (!string.IsNullOrEmpty(TimeZoneValue))
 		{
 			writer.WritePropertyName("time_zone");
-			JsonSerializer.Serialize(writer, TimeZoneValue, options);
+			writer.WriteStringValue(TimeZoneValue);
 		}
 
 		if (ToValue is not null)

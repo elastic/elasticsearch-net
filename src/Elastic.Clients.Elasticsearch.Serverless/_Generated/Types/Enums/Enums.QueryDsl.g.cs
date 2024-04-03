@@ -17,14 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serverless.Core;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Transport;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
@@ -62,7 +62,8 @@ internal sealed class ChildScoreModeConverter : JsonConverter<ChildScoreMode>
 				return ChildScoreMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ChildScoreMode value, JsonSerializerOptions options)
@@ -112,7 +113,8 @@ internal sealed class CombinedFieldsOperatorConverter : JsonConverter<CombinedFi
 				return CombinedFieldsOperator.And;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CombinedFieldsOperator value, JsonSerializerOptions options)
@@ -159,7 +161,8 @@ internal sealed class CombinedFieldsZeroTermsConverter : JsonConverter<CombinedF
 				return CombinedFieldsZeroTerms.All;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, CombinedFieldsZeroTerms value, JsonSerializerOptions options)
@@ -262,7 +265,8 @@ internal sealed class FieldValueFactorModifierConverter : JsonConverter<FieldVal
 				return FieldValueFactorModifier.Ln;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FieldValueFactorModifier value, JsonSerializerOptions options)
@@ -361,7 +365,8 @@ internal sealed class FunctionBoostModeConverter : JsonConverter<FunctionBoostMo
 				return FunctionBoostMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FunctionBoostMode value, JsonSerializerOptions options)
@@ -448,7 +453,8 @@ internal sealed class FunctionScoreModeConverter : JsonConverter<FunctionScoreMo
 				return FunctionScoreMode.Avg;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, FunctionScoreMode value, JsonSerializerOptions options)
@@ -511,7 +517,8 @@ internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidation
 				return GeoValidationMethod.Coerce;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoValidationMethod value, JsonSerializerOptions options)
@@ -557,7 +564,8 @@ internal sealed class OperatorConverter : JsonConverter<Operator>
 				return Operator.And;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, Operator value, JsonSerializerOptions options)
@@ -611,7 +619,8 @@ internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
 				return RangeRelation.Contains;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, RangeRelation value, JsonSerializerOptions options)
@@ -633,9 +642,9 @@ internal sealed class RangeRelationConverter : JsonConverter<RangeRelation>
 	}
 }
 
-[JsonConverter(typeof(SimpleQueryStringFlagsConverter))]
+[JsonConverter(typeof(SimpleQueryStringFlagConverter))]
 [Flags]
-public enum SimpleQueryStringFlags
+public enum SimpleQueryStringFlag
 {
 	/// <summary>
 	/// <para>Enables whitespace as split characters.</para>
@@ -704,9 +713,9 @@ public enum SimpleQueryStringFlags
 	All = 1 << 12
 }
 
-internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQueryStringFlags>
+internal sealed class SimpleQueryStringFlagConverter : JsonConverter<SimpleQueryStringFlag>
 {
-	public override SimpleQueryStringFlags Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override SimpleQueryStringFlag Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		var s = reader.GetString();
 		if (string.IsNullOrEmpty(s))
@@ -715,24 +724,24 @@ internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQuer
 		}
 
 		var flags = s.Split('|');
-		var result = default(SimpleQueryStringFlags);
+		var result = default(SimpleQueryStringFlag);
 		foreach (var flag in flags)
 		{
 			result |= flag switch
 			{
-				"WHITESPACE" => SimpleQueryStringFlags.Whitespace,
-				"SLOP" => SimpleQueryStringFlags.Slop,
-				"PREFIX" => SimpleQueryStringFlags.Prefix,
-				"PRECEDENCE" => SimpleQueryStringFlags.Precedence,
-				"PHRASE" => SimpleQueryStringFlags.Phrase,
-				"OR" => SimpleQueryStringFlags.Or,
-				"NOT" => SimpleQueryStringFlags.Not,
-				"NONE" => SimpleQueryStringFlags.None,
-				"NEAR" => SimpleQueryStringFlags.Near,
-				"FUZZY" => SimpleQueryStringFlags.Fuzzy,
-				"ESCAPE" => SimpleQueryStringFlags.Escape,
-				"AND" => SimpleQueryStringFlags.And,
-				"ALL" => SimpleQueryStringFlags.All,
+				"WHITESPACE" => SimpleQueryStringFlag.Whitespace,
+				"SLOP" => SimpleQueryStringFlag.Slop,
+				"PREFIX" => SimpleQueryStringFlag.Prefix,
+				"PRECEDENCE" => SimpleQueryStringFlag.Precedence,
+				"PHRASE" => SimpleQueryStringFlag.Phrase,
+				"OR" => SimpleQueryStringFlag.Or,
+				"NOT" => SimpleQueryStringFlag.Not,
+				"NONE" => SimpleQueryStringFlag.None,
+				"NEAR" => SimpleQueryStringFlag.Near,
+				"FUZZY" => SimpleQueryStringFlag.Fuzzy,
+				"ESCAPE" => SimpleQueryStringFlag.Escape,
+				"AND" => SimpleQueryStringFlag.And,
+				"ALL" => SimpleQueryStringFlag.All,
 				_ => throw new JsonException($"Invalid flag value '{flag}' for type '{typeToConvert.Name}'.")
 			};
 		}
@@ -740,7 +749,7 @@ internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQuer
 		return result;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlags value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, SimpleQueryStringFlag value, JsonSerializerOptions options)
 	{
 		if (value == default)
 		{
@@ -749,31 +758,31 @@ internal sealed class SimpleQueryStringFlagsConverter : JsonConverter<SimpleQuer
 		}
 
 		var sb = new StringBuilder();
-		if (value.HasFlag(SimpleQueryStringFlags.Whitespace))
+		if (value.HasFlag(SimpleQueryStringFlag.Whitespace))
 			sb.Append("WHITESPACE|");
-		if (value.HasFlag(SimpleQueryStringFlags.Slop))
+		if (value.HasFlag(SimpleQueryStringFlag.Slop))
 			sb.Append("SLOP|");
-		if (value.HasFlag(SimpleQueryStringFlags.Prefix))
+		if (value.HasFlag(SimpleQueryStringFlag.Prefix))
 			sb.Append("PREFIX|");
-		if (value.HasFlag(SimpleQueryStringFlags.Precedence))
+		if (value.HasFlag(SimpleQueryStringFlag.Precedence))
 			sb.Append("PRECEDENCE|");
-		if (value.HasFlag(SimpleQueryStringFlags.Phrase))
+		if (value.HasFlag(SimpleQueryStringFlag.Phrase))
 			sb.Append("PHRASE|");
-		if (value.HasFlag(SimpleQueryStringFlags.Or))
+		if (value.HasFlag(SimpleQueryStringFlag.Or))
 			sb.Append("OR|");
-		if (value.HasFlag(SimpleQueryStringFlags.Not))
+		if (value.HasFlag(SimpleQueryStringFlag.Not))
 			sb.Append("NOT|");
-		if (value.HasFlag(SimpleQueryStringFlags.None))
+		if (value.HasFlag(SimpleQueryStringFlag.None))
 			sb.Append("NONE|");
-		if (value.HasFlag(SimpleQueryStringFlags.Near))
+		if (value.HasFlag(SimpleQueryStringFlag.Near))
 			sb.Append("NEAR|");
-		if (value.HasFlag(SimpleQueryStringFlags.Fuzzy))
+		if (value.HasFlag(SimpleQueryStringFlag.Fuzzy))
 			sb.Append("FUZZY|");
-		if (value.HasFlag(SimpleQueryStringFlags.Escape))
+		if (value.HasFlag(SimpleQueryStringFlag.Escape))
 			sb.Append("ESCAPE|");
-		if (value.HasFlag(SimpleQueryStringFlags.And))
+		if (value.HasFlag(SimpleQueryStringFlag.And))
 			sb.Append("AND|");
-		if (value.HasFlag(SimpleQueryStringFlags.All))
+		if (value.HasFlag(SimpleQueryStringFlag.All))
 			sb.Append("ALL|");
 		if (sb.Length == 0)
 		{
@@ -842,7 +851,8 @@ internal sealed class TextQueryTypeConverter : JsonConverter<TextQueryType>
 				return TextQueryType.BestFields;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TextQueryType value, JsonSerializerOptions options)
@@ -901,7 +911,8 @@ internal sealed class ZeroTermsQueryConverter : JsonConverter<ZeroTermsQuery>
 				return ZeroTermsQuery.All;
 		}
 
-		ThrowHelper.ThrowJsonException(); return default;
+		ThrowHelper.ThrowJsonException();
+		return default;
 	}
 
 	public override void Write(Utf8JsonWriter writer, ZeroTermsQuery value, JsonSerializerOptions options)

@@ -96,7 +96,7 @@ public sealed partial class AddAction
 	[JsonInclude, JsonPropertyName("search_routing")]
 	public Elastic.Clients.Elasticsearch.Serverless.Routing? SearchRouting { get; set; }
 
-	public static implicit operator Action(AddAction addAction) => IndexManagement.Action.Add(addAction);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction(AddAction addAction) => Elastic.Clients.Elasticsearch.Serverless.IndexManagement.IndexUpdateAliasesAction.Add(addAction);
 }
 
 public sealed partial class AddActionDescriptor<TDocument> : SerializableDescriptor<AddActionDescriptor<TDocument>>
@@ -110,8 +110,8 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.IndexAlias? AliasValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexAlias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRoutingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndicesValue { get; set; }
@@ -150,7 +150,7 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public AddActionDescriptor<TDocument> Filter(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public AddActionDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -158,7 +158,7 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public AddActionDescriptor<TDocument> Filter(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public AddActionDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -261,7 +261,7 @@ public sealed partial class AddActionDescriptor<TDocument> : SerializableDescrip
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{
@@ -332,8 +332,8 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 	private Elastic.Clients.Elasticsearch.Serverless.IndexAlias? AliasValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.IndexAlias>? AliasesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? FilterValue { get; set; }
-	private QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? IndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Routing? IndexRoutingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndicesValue { get; set; }
@@ -372,7 +372,7 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 		return Self;
 	}
 
-	public AddActionDescriptor Filter(QueryDsl.QueryDescriptor descriptor)
+	public AddActionDescriptor Filter(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		FilterValue = null;
 		FilterDescriptorAction = null;
@@ -380,7 +380,7 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 		return Self;
 	}
 
-	public AddActionDescriptor Filter(Action<QueryDsl.QueryDescriptor> configure)
+	public AddActionDescriptor Filter(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		FilterValue = null;
 		FilterDescriptor = null;
@@ -483,7 +483,7 @@ public sealed partial class AddActionDescriptor : SerializableDescriptor<AddActi
 		else if (FilterDescriptorAction is not null)
 		{
 			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
 		}
 		else if (FilterValue is not null)
 		{

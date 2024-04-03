@@ -67,10 +67,10 @@ internal sealed partial class StemmerTokenFilterConverter : JsonConverter<Stemme
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("stemmer");
-		if (value.Version is not null)
+		if (!string.IsNullOrEmpty(value.Version))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, value.Version, options);
+			writer.WriteStringValue(value.Version);
 		}
 
 		writer.WriteEndObject();
@@ -82,7 +82,6 @@ public sealed partial class StemmerTokenFilter : ITokenFilter
 {
 	public string? Language { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "stemmer";
 
 	public string? Version { get; set; }
@@ -122,10 +121,10 @@ public sealed partial class StemmerTokenFilterDescriptor : SerializableDescripto
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("stemmer");
-		if (VersionValue is not null)
+		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
-			JsonSerializer.Serialize(writer, VersionValue, options);
+			writer.WriteStringValue(VersionValue);
 		}
 
 		writer.WriteEndObject();

@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -50,6 +51,10 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; init; }
+
+	/// <summary>
+	/// <para>Contains statistics about the number of nodes selected by the request’s node filters.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("_nodes")]
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
 

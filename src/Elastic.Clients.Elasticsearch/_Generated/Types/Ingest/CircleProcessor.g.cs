@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class CircleProcessor
 {
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
@@ -43,8 +46,16 @@ public sealed partial class CircleProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("if")]
 	public string? If { get; set; }
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
@@ -53,6 +64,10 @@ public sealed partial class CircleProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
 	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
@@ -61,6 +76,10 @@ public sealed partial class CircleProcessor
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shape_type")]
 	public Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
+
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
@@ -70,7 +89,7 @@ public sealed partial class CircleProcessor
 	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 
-	public static implicit operator Processor(CircleProcessor circleProcessor) => Ingest.Processor.Circle(circleProcessor);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(CircleProcessor circleProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Circle(circleProcessor);
 }
 
 public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableDescriptor<CircleProcessorDescriptor<TDocument>>
@@ -88,13 +107,16 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeTypeValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> Description(string? description)
 	{
 		DescriptionValue = description;
@@ -128,12 +150,27 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public CircleProcessorDescriptor<TDocument> If(string? ifValue)
+	/// <summary>
+	/// <para>The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.</para>
+	/// </summary>
+	public CircleProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
-		IfValue = ifValue;
+		FieldValue = field;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public CircleProcessorDescriptor<TDocument> If(string? value)
+	{
+		IfValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -149,6 +186,9 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -158,7 +198,7 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public CircleProcessorDescriptor<TDocument> OnFailure(ProcessorDescriptor<TDocument> descriptor)
+	public CircleProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -167,7 +207,7 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public CircleProcessorDescriptor<TDocument> OnFailure(Action<ProcessorDescriptor<TDocument>> configure)
+	public CircleProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -176,7 +216,7 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
-	public CircleProcessorDescriptor<TDocument> OnFailure(params Action<ProcessorDescriptor<TDocument>>[] configure)
+	public CircleProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -194,6 +234,9 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public CircleProcessorDescriptor<TDocument> Tag(string? tag)
 	{
 		TagValue = tag;
@@ -213,6 +256,15 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
 	/// </summary>
 	public CircleProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
+	{
+		TargetFieldValue = targetField;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>The field to assign the polygon shape to<br/>By default, the field is updated in-place.</para>
+	/// </summary>
+	public CircleProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
 	{
 		TargetFieldValue = targetField;
 		return Self;
@@ -260,7 +312,7 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -269,7 +321,7 @@ public sealed partial class CircleProcessorDescriptor<TDocument> : SerializableD
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
 			}
 
 			writer.WriteEndArray();
@@ -313,13 +365,16 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeTypeValue { get; set; }
 	private string? TagValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
 
+	/// <summary>
+	/// <para>Description of the processor.<br/>Useful for describing the purpose of the processor or its configuration.</para>
+	/// </summary>
 	public CircleProcessorDescriptor Description(string? description)
 	{
 		DescriptionValue = description;
@@ -362,12 +417,18 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
-	public CircleProcessorDescriptor If(string? ifValue)
+	/// <summary>
+	/// <para>Conditionally execute the processor.</para>
+	/// </summary>
+	public CircleProcessorDescriptor If(string? value)
 	{
-		IfValue = ifValue;
+		IfValue = value;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Ignore failures for the processor.</para>
+	/// </summary>
 	public CircleProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
 		IgnoreFailureValue = ignoreFailure;
@@ -383,6 +444,9 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Handle failures for the processor.</para>
+	/// </summary>
 	public CircleProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
 	{
 		OnFailureDescriptor = null;
@@ -392,7 +456,7 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
-	public CircleProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)
+	public CircleProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptorAction = null;
@@ -401,7 +465,7 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
-	public CircleProcessorDescriptor OnFailure(Action<ProcessorDescriptor> configure)
+	public CircleProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -410,7 +474,7 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
-	public CircleProcessorDescriptor OnFailure(params Action<ProcessorDescriptor>[] configure)
+	public CircleProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
 	{
 		OnFailureValue = null;
 		OnFailureDescriptor = null;
@@ -428,6 +492,9 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Identifier for the processor.<br/>Useful for debugging and metrics.</para>
+	/// </summary>
 	public CircleProcessorDescriptor Tag(string? tag)
 	{
 		TagValue = tag;
@@ -503,7 +570,7 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 		{
 			writer.WritePropertyName("on_failure");
 			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new ProcessorDescriptor(OnFailureDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
 			writer.WriteEndArray();
 		}
 		else if (OnFailureDescriptorActions is not null)
@@ -512,7 +579,7 @@ public sealed partial class CircleProcessorDescriptor : SerializableDescriptor<C
 			writer.WriteStartArray();
 			foreach (var action in OnFailureDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new ProcessorDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
 			}
 
 			writer.WriteEndArray();

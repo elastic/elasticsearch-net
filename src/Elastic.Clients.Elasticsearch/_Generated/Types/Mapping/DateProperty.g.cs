@@ -51,6 +51,10 @@ public sealed partial class DateProperty : IProperty
 	public bool? Index { get; set; }
 	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -81,8 +85,8 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private string? FormatValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
@@ -128,7 +132,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Fielddata(IndexManagement.NumericFielddataDescriptor descriptor)
+	public DatePropertyDescriptor<TDocument> Fielddata(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor descriptor)
 	{
 		FielddataValue = null;
 		FielddataDescriptorAction = null;
@@ -136,7 +140,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Fielddata(Action<IndexManagement.NumericFielddataDescriptor> configure)
+	public DatePropertyDescriptor<TDocument> Fielddata(Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> configure)
 	{
 		FielddataValue = null;
 		FielddataDescriptor = null;
@@ -150,15 +154,15 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public DatePropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public DatePropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -194,6 +198,9 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public DatePropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -218,15 +225,15 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public DatePropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public DatePropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public DatePropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -279,7 +286,7 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 		else if (FielddataDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata");
-			JsonSerializer.Serialize(writer, new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
 		}
 		else if (FielddataValue is not null)
 		{
@@ -371,15 +378,15 @@ public sealed partial class DatePropertyDescriptor<TDocument> : SerializableDesc
 			return FielddataValue;
 		}
 
-		if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+		if ((object)FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}
@@ -423,8 +430,8 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 	private bool? DocValuesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata? FielddataValue { get; set; }
-	private IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
-	private Action<IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor FielddataDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private string? FormatValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
@@ -470,7 +477,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
-	public DatePropertyDescriptor Fielddata(IndexManagement.NumericFielddataDescriptor descriptor)
+	public DatePropertyDescriptor Fielddata(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor descriptor)
 	{
 		FielddataValue = null;
 		FielddataDescriptorAction = null;
@@ -478,7 +485,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
-	public DatePropertyDescriptor Fielddata(Action<IndexManagement.NumericFielddataDescriptor> configure)
+	public DatePropertyDescriptor Fielddata(Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> configure)
 	{
 		FielddataValue = null;
 		FielddataDescriptor = null;
@@ -492,15 +499,15 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
-	public DatePropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public DatePropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public DatePropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public DatePropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -536,6 +543,9 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public DatePropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -560,15 +570,15 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		return Self;
 	}
 
-	public DatePropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public DatePropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public DatePropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public DatePropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -621,7 +631,7 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 		else if (FielddataDescriptorAction is not null)
 		{
 			writer.WritePropertyName("fielddata");
-			JsonSerializer.Serialize(writer, new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction), options);
 		}
 		else if (FielddataValue is not null)
 		{
@@ -713,15 +723,15 @@ public sealed partial class DatePropertyDescriptor : SerializableDescriptor<Date
 			return FielddataValue;
 		}
 
-		if (FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
+		if ((object)FielddataDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildable)
 		{
 			return buildable.Build();
 		}
 
 		if (FielddataDescriptorAction is not null)
 		{
-			var descriptor = new IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
-			if (descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
+			var descriptor = new Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor(FielddataDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddata?> buildableFromAction)
 			{
 				return buildableFromAction.Build();
 			}

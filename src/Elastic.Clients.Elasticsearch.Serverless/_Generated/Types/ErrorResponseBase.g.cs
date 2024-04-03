@@ -19,7 +19,6 @@
 
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -31,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 /// <summary>
 /// <para>The response returned by Elasticsearch when request execution did not succeed.</para>
 /// </summary>
-public abstract partial class ErrorResponseBase
+public sealed partial class ErrorResponseBase
 {
 	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.Serverless.ErrorCause Error { get; init; }

@@ -47,6 +47,10 @@ public sealed partial class UnsignedLongNumberProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
+
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
@@ -61,10 +65,6 @@ public sealed partial class UnsignedLongNumberProperty : IProperty
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_dimension")]
-	public bool? TimeSeriesDimension { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_metric")]
-	public Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "unsigned_long";
@@ -94,8 +94,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -133,15 +131,15 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(PropertiesDescriptor<TDocument> descriptor)
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(Action<PropertiesDescriptor<TDocument>> configure)
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -165,6 +163,9 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -189,15 +190,15 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(PropertiesDescriptor<TDocument> descriptor)
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Action<PropertiesDescriptor<TDocument>> configure)
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -218,18 +219,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public UnsignedLongNumberPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public UnsignedLongNumberPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -332,18 +321,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("unsigned_long");
 		writer.WriteEndObject();
@@ -366,9 +343,7 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }
 
@@ -396,8 +371,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? TimeSeriesDimensionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
 
 	public UnsignedLongNumberPropertyDescriptor Boost(double? boost)
 	{
@@ -435,15 +408,15 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public UnsignedLongNumberPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		FieldsValue = descriptor.PromisedValue;
 		return Self;
@@ -467,6 +440,9 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Metadata about the field.</para>
+	/// </summary>
 	public UnsignedLongNumberPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
 	{
 		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
@@ -491,15 +467,15 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(PropertiesDescriptor<TDocument> descriptor)
+	public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument> descriptor)
 	{
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
 	}
 
-	public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(Action<PropertiesDescriptor<TDocument>> configure)
+	public UnsignedLongNumberPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>> configure)
 	{
-		var descriptor = new PropertiesDescriptor<TDocument>();
+		var descriptor = new Elastic.Clients.Elasticsearch.Serverless.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
 		return Self;
@@ -520,18 +496,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 	public UnsignedLongNumberPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
-		return Self;
-	}
-
-	public UnsignedLongNumberPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
-	{
-		TimeSeriesDimensionValue = timeSeriesDimension;
-		return Self;
-	}
-
-	public UnsignedLongNumberPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Serverless.Mapping.TimeSeriesMetricType? timeSeriesMetric)
-	{
-		TimeSeriesMetricValue = timeSeriesMetric;
 		return Self;
 	}
 
@@ -634,18 +598,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (TimeSeriesDimensionValue.HasValue)
-		{
-			writer.WritePropertyName("time_series_dimension");
-			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("unsigned_long");
 		writer.WriteEndObject();
@@ -668,8 +620,6 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		Properties = PropertiesValue,
 		Script = ScriptValue,
 		Similarity = SimilarityValue,
-		Store = StoreValue,
-		TimeSeriesDimension = TimeSeriesDimensionValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
+		Store = StoreValue
 	};
 }

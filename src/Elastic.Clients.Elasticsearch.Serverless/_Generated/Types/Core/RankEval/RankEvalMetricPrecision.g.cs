@@ -29,6 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 
 /// <summary>
 /// <para>Precision at K (P@k)</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricPrecision
 {
@@ -37,14 +38,23 @@ public sealed partial class RankEvalMetricPrecision
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_unlabeled")]
 	public bool? IgnoreUnlabeled { get; set; }
+
+	/// <summary>
+	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
 	public int? k { get; set; }
+
+	/// <summary>
+	/// <para>Sets the rating threshold above which documents are considered to be "relevant".</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 
 /// <summary>
 /// <para>Precision at K (P@k)</para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDescriptor<RankEvalMetricPrecisionDescriptor>
 {
@@ -67,12 +77,18 @@ public sealed partial class RankEvalMetricPrecisionDescriptor : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.</para>
+	/// </summary>
 	public RankEvalMetricPrecisionDescriptor k(int? k)
 	{
 		kValue = k;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sets the rating threshold above which documents are considered to be "relevant".</para>
+	/// </summary>
 	public RankEvalMetricPrecisionDescriptor RelevantRatingThreshold(int? relevantRatingThreshold)
 	{
 		RelevantRatingThresholdValue = relevantRatingThreshold;

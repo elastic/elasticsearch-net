@@ -52,8 +52,8 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 
 	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLeaseValue { get; set; }
-	private RetentionLeaseDescriptor RetentionLeaseDescriptor { get; set; }
-	private Action<RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor RetentionLeaseDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> RetentionLeaseDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Indicates whether soft deletes are enabled on the index.</para>
@@ -75,7 +75,7 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 		return Self;
 	}
 
-	public SoftDeletesDescriptor RetentionLease(RetentionLeaseDescriptor descriptor)
+	public SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor descriptor)
 	{
 		RetentionLeaseValue = null;
 		RetentionLeaseDescriptorAction = null;
@@ -83,7 +83,7 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 		return Self;
 	}
 
-	public SoftDeletesDescriptor RetentionLease(Action<RetentionLeaseDescriptor> configure)
+	public SoftDeletesDescriptor RetentionLease(Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> configure)
 	{
 		RetentionLeaseValue = null;
 		RetentionLeaseDescriptor = null;
@@ -108,7 +108,7 @@ public sealed partial class SoftDeletesDescriptor : SerializableDescriptor<SoftD
 		else if (RetentionLeaseDescriptorAction is not null)
 		{
 			writer.WritePropertyName("retention_lease");
-			JsonSerializer.Serialize(writer, new RetentionLeaseDescriptor(RetentionLeaseDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor(RetentionLeaseDescriptorAction), options);
 		}
 		else if (RetentionLeaseValue is not null)
 		{

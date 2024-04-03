@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -66,6 +67,18 @@ public sealed partial class FieldSuggester
 	/// </summary>
 	[JsonInclude, JsonPropertyName("text")]
 	public string? Text { get; set; }
+
+	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	{
+		result = default;
+		if (Variant is T variant)
+		{
+			result = variant;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSuggester>
@@ -167,7 +180,7 @@ internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSugge
 			writer.WriteStringValue(value.Text);
 		}
 
-		if (value.VariantName is not null & value.Variant is not null)
+		if (value.VariantName is not null && value.Variant is not null)
 		{
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
@@ -250,12 +263,12 @@ public sealed partial class FieldSuggesterDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public FieldSuggesterDescriptor<TDocument> Completion(CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
-	public FieldSuggesterDescriptor<TDocument> Completion(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor<TDocument> Phrase(PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
-	public FieldSuggesterDescriptor<TDocument> Phrase(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor<TDocument> Term(TermSuggester termSuggester) => Set(termSuggester, "term");
-	public FieldSuggesterDescriptor<TDocument> Term(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+	public FieldSuggesterDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
+	public FieldSuggesterDescriptor<TDocument> Completion(Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
+	public FieldSuggesterDescriptor<TDocument> Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
+	public FieldSuggesterDescriptor<TDocument> Phrase(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
+	public FieldSuggesterDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => Set(termSuggester, "term");
+	public FieldSuggesterDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -357,15 +370,12 @@ public sealed partial class FieldSuggesterDescriptor : SerializableDescriptor<Fi
 		return Self;
 	}
 
-	public FieldSuggesterDescriptor Completion(CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
-	public FieldSuggesterDescriptor Completion(Action<CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor Completion<TDocument>(Action<CompletionSuggesterDescriptor<TDocument>> configure) => Set(configure, "completion");
-	public FieldSuggesterDescriptor Phrase(PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
-	public FieldSuggesterDescriptor Phrase(Action<PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor Phrase<TDocument>(Action<PhraseSuggesterDescriptor<TDocument>> configure) => Set(configure, "phrase");
-	public FieldSuggesterDescriptor Term(TermSuggester termSuggester) => Set(termSuggester, "term");
-	public FieldSuggesterDescriptor Term(Action<TermSuggesterDescriptor> configure) => Set(configure, "term");
-	public FieldSuggesterDescriptor Term<TDocument>(Action<TermSuggesterDescriptor<TDocument>> configure) => Set(configure, "term");
+	public FieldSuggesterDescriptor Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester completionSuggester) => Set(completionSuggester, "completion");
+	public FieldSuggesterDescriptor Completion<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor> configure) => Set(configure, "completion");
+	public FieldSuggesterDescriptor Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester phraseSuggester) => Set(phraseSuggester, "phrase");
+	public FieldSuggesterDescriptor Phrase<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor> configure) => Set(configure, "phrase");
+	public FieldSuggesterDescriptor Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester termSuggester) => Set(termSuggester, "term");
+	public FieldSuggesterDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor> configure) => Set(configure, "term");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

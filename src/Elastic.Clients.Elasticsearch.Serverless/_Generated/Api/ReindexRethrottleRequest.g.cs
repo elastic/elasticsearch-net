@@ -42,7 +42,7 @@ public sealed partial class ReindexRethrottleRequestParameters : RequestParamete
 /// </summary>
 public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethrottleRequestParameters>
 {
-	public ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serverless.Id task_id) : base(r => r.Required("task_id", task_id))
+	public ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serverless.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -68,11 +68,7 @@ public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescript
 {
 	internal ReindexRethrottleRequestDescriptor(Action<ReindexRethrottleRequestDescriptor> configure) => configure.Invoke(this);
 
-	public ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id task_id) : base(r => r.Required("task_id", task_id))
-	{
-	}
-
-	internal ReindexRethrottleRequestDescriptor()
+	public ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
 
@@ -86,9 +82,9 @@ public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescript
 
 	public ReindexRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
 
-	public ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Serverless.Id task_id)
+	public ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Serverless.Id taskId)
 	{
-		RouteValues.Required("task_id", task_id);
+		RouteValues.Required("task_id", taskId);
 		return Self;
 	}
 

@@ -76,48 +76,47 @@ internal sealed partial class TextExpansionQueryConverter : JsonConverter<TextEx
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize TextExpansionQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			writer.WritePropertyName("model_id");
-			writer.WriteStringValue(value.ModelId);
-			writer.WritePropertyName("model_text");
-			writer.WriteStringValue(value.ModelText);
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WritePropertyName("model_id");
+		writer.WriteStringValue(value.ModelId);
+		writer.WritePropertyName("model_text");
+		writer.WriteStringValue(value.ModelText);
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(TextExpansionQueryConverter))]
-public sealed partial class TextExpansionQuery : SearchQuery
+public sealed partial class TextExpansionQuery
 {
-	public TextExpansionQuery(Field field)
+	public TextExpansionQuery(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>The text expansion NLP model to use</para>
@@ -128,33 +127,17 @@ public sealed partial class TextExpansionQuery : SearchQuery
 	/// <para>The query text</para>
 	/// </summary>
 	public string ModelText { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
+	public string? QueryName { get; set; }
 
-	public static implicit operator Query(TextExpansionQuery textExpansionQuery) => QueryDsl.Query.TextExpansion(textExpansionQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("text_expansion", this);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TextExpansionQuery textExpansionQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.TextExpansion(textExpansionQuery);
 }
 
 public sealed partial class TextExpansionQueryDescriptor<TDocument> : SerializableDescriptor<TextExpansionQueryDescriptor<TDocument>>
 {
 	internal TextExpansionQueryDescriptor(Action<TextExpansionQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal TextExpansionQueryDescriptor() : base()
+	public TextExpansionQueryDescriptor() : base()
 	{
-	}
-
-	public TextExpansionQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public TextExpansionQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -163,6 +146,9 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	private string ModelTextValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TextExpansionQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -176,6 +162,12 @@ public sealed partial class TextExpansionQueryDescriptor<TDocument> : Serializab
 	}
 
 	public TextExpansionQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public TextExpansionQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -237,15 +229,8 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 {
 	internal TextExpansionQueryDescriptor(Action<TextExpansionQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal TextExpansionQueryDescriptor() : base()
+	public TextExpansionQueryDescriptor() : base()
 	{
-	}
-
-	public TextExpansionQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -254,6 +239,9 @@ public sealed partial class TextExpansionQueryDescriptor : SerializableDescripto
 	private string ModelTextValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public TextExpansionQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;

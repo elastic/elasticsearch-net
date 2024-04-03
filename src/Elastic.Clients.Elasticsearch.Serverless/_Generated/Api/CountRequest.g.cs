@@ -221,11 +221,11 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 {
 	internal CountRequestDescriptor(Action<CountRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	public CountRequestDescriptor() : this(typeof(TDocument))
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	public CountRequestDescriptor(Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	public CountRequestDescriptor()
 	{
 	}
 
@@ -259,8 +259,8 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -273,7 +273,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
-	public CountRequestDescriptor<TDocument> Query(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public CountRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -281,7 +281,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 		return Self;
 	}
 
-	public CountRequestDescriptor<TDocument> Query(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public CountRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -300,7 +300,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{
@@ -319,7 +319,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 {
 	internal CountRequestDescriptor(Action<CountRequestDescriptor> configure) => configure.Invoke(this);
 
-	public CountRequestDescriptor(Serverless.Indices? indices) : base(r => r.Optional("index", indices))
+	public CountRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
@@ -357,8 +357,8 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? QueryValue { get; set; }
-	private QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>Defines the search definition using the Query DSL.</para>
@@ -371,7 +371,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 		return Self;
 	}
 
-	public CountRequestDescriptor Query(QueryDsl.QueryDescriptor descriptor)
+	public CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		QueryValue = null;
 		QueryDescriptorAction = null;
@@ -379,7 +379,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 		return Self;
 	}
 
-	public CountRequestDescriptor Query(Action<QueryDsl.QueryDescriptor> configure)
+	public CountRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		QueryValue = null;
 		QueryDescriptor = null;
@@ -398,7 +398,7 @@ public sealed partial class CountRequestDescriptor : RequestDescriptor<CountRequ
 		else if (QueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
 		}
 		else if (QueryValue is not null)
 		{

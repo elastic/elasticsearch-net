@@ -75,6 +75,15 @@ public sealed partial class WeightedAverageValueDescriptor<TDocument> : Serializ
 	}
 
 	/// <summary>
+	/// <para>The field from which to extract the values or weights.</para>
+	/// </summary>
+	public WeightedAverageValueDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>A value or weight to use if the field is missing.</para>
 	/// </summary>
 	public WeightedAverageValueDescriptor<TDocument> Missing(double? missing)

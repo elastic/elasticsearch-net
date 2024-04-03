@@ -106,86 +106,85 @@ internal sealed partial class NumberRangeQueryConverter : JsonConverter<NumberRa
 	{
 		if (value.Field is null)
 			throw new JsonException("Unable to serialize NumberRangeQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (options.TryGetClientSettings(out var settings))
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WriteStartObject();
+		if (value.Boost.HasValue)
 		{
-			writer.WriteStartObject();
-			writer.WritePropertyName(settings.Inferrer.Field(value.Field));
-			writer.WriteStartObject();
-			if (value.Boost.HasValue)
-			{
-				writer.WritePropertyName("boost");
-				writer.WriteNumberValue(value.Boost.Value);
-			}
-
-			if (value.From.HasValue)
-			{
-				writer.WritePropertyName("from");
-				writer.WriteNumberValue(value.From.Value);
-			}
-
-			if (value.Gt.HasValue)
-			{
-				writer.WritePropertyName("gt");
-				writer.WriteNumberValue(value.Gt.Value);
-			}
-
-			if (value.Gte.HasValue)
-			{
-				writer.WritePropertyName("gte");
-				writer.WriteNumberValue(value.Gte.Value);
-			}
-
-			if (value.Lt.HasValue)
-			{
-				writer.WritePropertyName("lt");
-				writer.WriteNumberValue(value.Lt.Value);
-			}
-
-			if (value.Lte.HasValue)
-			{
-				writer.WritePropertyName("lte");
-				writer.WriteNumberValue(value.Lte.Value);
-			}
-
-			if (!string.IsNullOrEmpty(value.QueryName))
-			{
-				writer.WritePropertyName("_name");
-				writer.WriteStringValue(value.QueryName);
-			}
-
-			if (value.Relation is not null)
-			{
-				writer.WritePropertyName("relation");
-				JsonSerializer.Serialize(writer, value.Relation, options);
-			}
-
-			if (value.To.HasValue)
-			{
-				writer.WritePropertyName("to");
-				writer.WriteNumberValue(value.To.Value);
-			}
-
-			writer.WriteEndObject();
-			writer.WriteEndObject();
-			return;
+			writer.WritePropertyName("boost");
+			writer.WriteNumberValue(value.Boost.Value);
 		}
 
-		throw new JsonException("Unable to retrieve client settings required to infer field.");
+		if (value.From.HasValue)
+		{
+			writer.WritePropertyName("from");
+			writer.WriteNumberValue(value.From.Value);
+		}
+
+		if (value.Gt.HasValue)
+		{
+			writer.WritePropertyName("gt");
+			writer.WriteNumberValue(value.Gt.Value);
+		}
+
+		if (value.Gte.HasValue)
+		{
+			writer.WritePropertyName("gte");
+			writer.WriteNumberValue(value.Gte.Value);
+		}
+
+		if (value.Lt.HasValue)
+		{
+			writer.WritePropertyName("lt");
+			writer.WriteNumberValue(value.Lt.Value);
+		}
+
+		if (value.Lte.HasValue)
+		{
+			writer.WritePropertyName("lte");
+			writer.WriteNumberValue(value.Lte.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.QueryName))
+		{
+			writer.WritePropertyName("_name");
+			writer.WriteStringValue(value.QueryName);
+		}
+
+		if (value.Relation is not null)
+		{
+			writer.WritePropertyName("relation");
+			JsonSerializer.Serialize(writer, value.Relation, options);
+		}
+
+		if (value.To.HasValue)
+		{
+			writer.WritePropertyName("to");
+			writer.WriteNumberValue(value.To.Value);
+		}
+
+		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
 [JsonConverter(typeof(NumberRangeQueryConverter))]
-public sealed partial class NumberRangeQuery : RangeQuery
+public sealed partial class NumberRangeQuery
 {
-	public NumberRangeQuery(Field field)
+	public NumberRangeQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
 		if (field is null)
 			throw new ArgumentNullException(nameof(field));
 		Field = field;
 	}
 
-	public string? QueryName { get; set; }
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public float? Boost { get; set; }
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public double? From { get; set; }
 
 	/// <summary>
@@ -207,35 +206,21 @@ public sealed partial class NumberRangeQuery : RangeQuery
 	/// <para>Less than or equal to.</para>
 	/// </summary>
 	public double? Lte { get; set; }
+	public string? QueryName { get; set; }
+
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	public double? To { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-
-	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => QueryDsl.Query.Range(numberRangeQuery);
-
-	internal override void InternalWrapInContainer(Query container) => container.WrapVariant("range", this);
 }
 
 public sealed partial class NumberRangeQueryDescriptor<TDocument> : SerializableDescriptor<NumberRangeQueryDescriptor<TDocument>>
 {
 	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
 
-	internal NumberRangeQueryDescriptor() : base()
+	public NumberRangeQueryDescriptor() : base()
 	{
-	}
-
-	public NumberRangeQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
-	}
-
-	public NumberRangeQueryDescriptor(Expression<Func<TDocument, object>> field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -249,6 +234,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private double? ToValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -262,6 +250,12 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 	}
 
 	public NumberRangeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public NumberRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
 		return Self;
@@ -315,6 +309,9 @@ public sealed partial class NumberRangeQueryDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;
@@ -397,15 +394,8 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 {
 	internal NumberRangeQueryDescriptor(Action<NumberRangeQueryDescriptor> configure) => configure.Invoke(this);
 
-	internal NumberRangeQueryDescriptor() : base()
+	public NumberRangeQueryDescriptor() : base()
 	{
-	}
-
-	public NumberRangeQueryDescriptor(Field field)
-	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
-		FieldValue = field;
 	}
 
 	private float? BoostValue { get; set; }
@@ -419,6 +409,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
 	private double? ToValue { get; set; }
 
+	/// <summary>
+	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
@@ -491,6 +484,9 @@ public sealed partial class NumberRangeQueryDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Indicates how the range query matches values for `range` fields.</para>
+	/// </summary>
 	public NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
 	{
 		RelationValue = relation;

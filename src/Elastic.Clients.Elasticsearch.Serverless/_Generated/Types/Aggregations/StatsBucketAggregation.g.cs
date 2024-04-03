@@ -27,127 +27,31 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
-internal sealed class StatsBucketAggregationConverter : JsonConverter<StatsBucketAggregation>
+public sealed partial class StatsBucketAggregation
 {
-	public override StatsBucketAggregation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		reader.Read();
-		var aggName = reader.GetString();
-		if (aggName != "stats_bucket")
-			throw new JsonException("Unexpected JSON detected.");
-		var agg = new StatsBucketAggregation(aggName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("buckets_path"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.BucketsPath = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("format"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<string?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Format = value;
-					}
-
-					continue;
-				}
-
-				if (reader.ValueTextEquals("gap_policy"))
-				{
-					reader.Read();
-					var value = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy?>(ref reader, options);
-					if (value is not null)
-					{
-						agg.GapPolicy = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				if (reader.ValueTextEquals("meta"))
-				{
-					var value = JsonSerializer.Deserialize<Dictionary<string, object>>(ref reader, options);
-					if (value is not null)
-					{
-						agg.Meta = value;
-					}
-
-					continue;
-				}
-			}
-		}
-
-		return agg;
-	}
-
-	public override void Write(Utf8JsonWriter writer, StatsBucketAggregation value, JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("stats_bucket");
-		writer.WriteStartObject();
-		if (value.BucketsPath is not null)
-		{
-			writer.WritePropertyName("buckets_path");
-			JsonSerializer.Serialize(writer, value.BucketsPath, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.GapPolicy is not null)
-		{
-			writer.WritePropertyName("gap_policy");
-			JsonSerializer.Serialize(writer, value.GapPolicy, options);
-		}
-
-		writer.WriteEndObject();
-		if (value.Meta is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, value.Meta, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[JsonConverter(typeof(StatsBucketAggregationConverter))]
-public sealed partial class StatsBucketAggregation : SearchAggregation
-{
-	public StatsBucketAggregation(string name) => Name = name;
-
-	internal StatsBucketAggregation()
-	{
-	}
-
+	/// <summary>
+	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("buckets_path")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPath { get; set; }
+
+	/// <summary>
+	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
+
+	/// <summary>
+	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
+	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }
-	override public string? Name { get; internal set; }
+	[JsonInclude, JsonPropertyName("name")]
+	public string? Name { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(StatsBucketAggregation statsBucketAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.StatsBucket(statsBucketAggregation);
 }
 
 public sealed partial class StatsBucketAggregationDescriptor : SerializableDescriptor<StatsBucketAggregationDescriptor>
@@ -162,19 +66,29 @@ public sealed partial class StatsBucketAggregationDescriptor : SerializableDescr
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private IDictionary<string, object>? MetaValue { get; set; }
+	private string? NameValue { get; set; }
 
+	/// <summary>
+	/// <para>Path to the buckets that contain one set of values to correlate.</para>
+	/// </summary>
 	public StatsBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? bucketsPath)
 	{
 		BucketsPathValue = bucketsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>`DecimalFormat` pattern for the output value.<br/>If specified, the formatted value is returned in the aggregation’s `value_as_string` property.</para>
+	/// </summary>
 	public StatsBucketAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Policy to apply when gaps are found in the data.</para>
+	/// </summary>
 	public StatsBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
 		GapPolicyValue = gapPolicy;
@@ -187,10 +101,14 @@ public sealed partial class StatsBucketAggregationDescriptor : SerializableDescr
 		return Self;
 	}
 
+	public StatsBucketAggregationDescriptor Name(string? name)
+	{
+		NameValue = name;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("stats_bucket");
 		writer.WriteStartObject();
 		if (BucketsPathValue is not null)
 		{
@@ -210,11 +128,16 @@ public sealed partial class StatsBucketAggregationDescriptor : SerializableDescr
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		writer.WriteEndObject();
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
 			JsonSerializer.Serialize(writer, MetaValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(NameValue))
+		{
+			writer.WritePropertyName("name");
+			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

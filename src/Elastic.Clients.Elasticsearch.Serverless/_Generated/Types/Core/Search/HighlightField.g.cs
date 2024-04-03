@@ -30,49 +30,111 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.Search;
 public sealed partial class HighlightField
 {
 	[JsonInclude, JsonPropertyName("analyzer")]
-	public Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? Analyzer { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Analysis.IAnalyzer? Analyzer { get; set; }
+
+	/// <summary>
+	/// <para>A string that contains each boundary character.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boundary_chars")]
 	public string? BoundaryChars { get; set; }
+
+	/// <summary>
+	/// <para>How far to scan for boundary characters.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boundary_max_scan")]
 	public int? BoundaryMaxScan { get; set; }
+
+	/// <summary>
+	/// <para>Specifies how to break the highlighted fragments: chars, sentence, or word.<br/>Only valid for the unified and fvh highlighters.<br/>Defaults to `sentence` for the `unified` highlighter. Defaults to `chars` for the `fvh` highlighter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boundary_scanner")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? BoundaryScanner { get; set; }
+
+	/// <summary>
+	/// <para>Controls which locale is used to search for sentence and word boundaries.<br/>This parameter takes a form of a language tag, for example: `"en-US"`, `"fr-FR"`, `"ja-JP"`.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("boundary_scanner_locale")]
 	public string? BoundaryScannerLocale { get; set; }
-	[JsonInclude, JsonPropertyName("force_source")]
-	public bool? ForceSource { get; set; }
-	[JsonInclude, JsonPropertyName("fragment_offset")]
-	public int? FragmentOffset { get; set; }
-	[JsonInclude, JsonPropertyName("fragment_size")]
-	public int? FragmentSize { get; set; }
+
+	/// <summary>
+	/// <para>Specifies how text should be broken up in highlight snippets: `simple` or `span`.<br/>Only valid for the `plain` highlighter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("fragmenter")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? Fragmenter { get; set; }
+	[JsonInclude, JsonPropertyName("fragment_offset")]
+	public int? FragmentOffset { get; set; }
+
+	/// <summary>
+	/// <para>The size of the highlighted fragment in characters.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fragment_size")]
+	public int? FragmentSize { get; set; }
 	[JsonInclude, JsonPropertyName("highlight_filter")]
 	public bool? HighlightFilter { get; set; }
+
+	/// <summary>
+	/// <para>Highlight matches for a query other than the search query.<br/>This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQuery { get; set; }
 	[JsonInclude, JsonPropertyName("matched_fields")]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? MatchedFields { get; set; }
+
+	/// <summary>
+	/// <para>If set to a non-negative value, highlighting stops at this defined maximum limit.<br/>The rest of the text is not processed, thus not highlighted and no error is returned<br/>The `max_analyzed_offset` query setting does not override the `index.highlight.max_analyzed_offset` setting, which prevails when it’s set to lower value than the query setting.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_analyzed_offset")]
 	public int? MaxAnalyzedOffset { get; set; }
 	[JsonInclude, JsonPropertyName("max_fragment_length")]
 	public int? MaxFragmentLength { get; set; }
+
+	/// <summary>
+	/// <para>The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("no_match_size")]
 	public int? NoMatchSize { get; set; }
+
+	/// <summary>
+	/// <para>The maximum number of fragments to return.<br/>If the number of fragments is set to `0`, no fragments are returned.<br/>Instead, the entire field contents are highlighted and returned.<br/>This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.<br/>If `number_of_fragments` is `0`, `fragment_size` is ignored.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_fragments")]
 	public int? NumberOfFragments { get; set; }
 	[JsonInclude, JsonPropertyName("options")]
 	public IDictionary<string, object>? Options { get; set; }
+
+	/// <summary>
+	/// <para>Sorts highlighted fragments by score when set to `score`.<br/>By default, fragments will be output in the order they appear in the field (order: `none`).<br/>Setting this option to `score` will output the most relevant fragments first.<br/>Each highlighter applies its own logic to compute relevancy scores.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterOrder? Order { get; set; }
+
+	/// <summary>
+	/// <para>Controls the number of matching phrases in a document that are considered.<br/>Prevents the `fvh` highlighter from analyzing too many phrases and consuming too much memory.<br/>When using `matched_fields`, `phrase_limit` phrases per matched field are considered. Raising the limit increases query time and consumes more memory.<br/>Only supported by the `fvh` highlighter.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("phrase_limit")]
 	public int? PhraseLimit { get; set; }
+
+	/// <summary>
+	/// <para>Use in conjunction with `pre_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("post_tags")]
 	public ICollection<string>? PostTags { get; set; }
+
+	/// <summary>
+	/// <para>Use in conjunction with `post_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pre_tags")]
 	public ICollection<string>? PreTags { get; set; }
+
+	/// <summary>
+	/// <para>By default, only fields that contains a query match are highlighted.<br/>Set to `false` to highlight all fields.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("require_field_match")]
 	public bool? RequireFieldMatch { get; set; }
+
+	/// <summary>
+	/// <para>Set to `styled` to use the built-in tag schema.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("tags_schema")]
 	public Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? TagsSchema { get; set; }
 	[JsonInclude, JsonPropertyName("type")]
@@ -87,19 +149,18 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? AnalyzerValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Analysis.IAnalyzer? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
 	private string? BoundaryScannerLocaleValue { get; set; }
-	private bool? ForceSourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private int? FragmentOffsetValue { get; set; }
 	private int? FragmentSizeValue { get; set; }
 	private bool? HighlightFilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> HighlightQueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? MatchedFieldsValue { get; set; }
 	private int? MaxAnalyzedOffsetValue { get; set; }
 	private int? MaxFragmentLengthValue { get; set; }
@@ -114,42 +175,51 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterType? TypeValue { get; set; }
 
-	public HighlightFieldDescriptor<TDocument> Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? analyzer)
+	public HighlightFieldDescriptor<TDocument> Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.IAnalyzer? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A string that contains each boundary character.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> BoundaryChars(string? boundaryChars)
 	{
 		BoundaryCharsValue = boundaryChars;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How far to scan for boundary characters.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> BoundaryMaxScan(int? boundaryMaxScan)
 	{
 		BoundaryMaxScanValue = boundaryMaxScan;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how to break the highlighted fragments: chars, sentence, or word.<br/>Only valid for the unified and fvh highlighters.<br/>Defaults to `sentence` for the `unified` highlighter. Defaults to `chars` for the `fvh` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> BoundaryScanner(Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? boundaryScanner)
 	{
 		BoundaryScannerValue = boundaryScanner;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls which locale is used to search for sentence and word boundaries.<br/>This parameter takes a form of a language tag, for example: `"en-US"`, `"fr-FR"`, `"ja-JP"`.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> BoundaryScannerLocale(string? boundaryScannerLocale)
 	{
 		BoundaryScannerLocaleValue = boundaryScannerLocale;
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> ForceSource(bool? forceSource = true)
-	{
-		ForceSourceValue = forceSource;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>Specifies how text should be broken up in highlight snippets: `simple` or `span`.<br/>Only valid for the `plain` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
 	{
 		FragmenterValue = fragmenter;
@@ -162,6 +232,9 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The size of the highlighted fragment in characters.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> FragmentSize(int? fragmentSize)
 	{
 		FragmentSizeValue = fragmentSize;
@@ -174,6 +247,9 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Highlight matches for a query other than the search query.<br/>This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
 	{
 		HighlightQueryDescriptor = null;
@@ -182,7 +258,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(QueryDsl.QueryDescriptor<TDocument> descriptor)
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> descriptor)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptorAction = null;
@@ -190,7 +266,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<QueryDsl.QueryDescriptor<TDocument>> configure)
+	public HighlightFieldDescriptor<TDocument> HighlightQuery(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> configure)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptor = null;
@@ -204,6 +280,9 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If set to a non-negative value, highlighting stops at this defined maximum limit.<br/>The rest of the text is not processed, thus not highlighted and no error is returned<br/>The `max_analyzed_offset` query setting does not override the `index.highlight.max_analyzed_offset` setting, which prevails when it’s set to lower value than the query setting.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> MaxAnalyzedOffset(int? maxAnalyzedOffset)
 	{
 		MaxAnalyzedOffsetValue = maxAnalyzedOffset;
@@ -216,12 +295,18 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> NoMatchSize(int? noMatchSize)
 	{
 		NoMatchSizeValue = noMatchSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of fragments to return.<br/>If the number of fragments is set to `0`, no fragments are returned.<br/>Instead, the entire field contents are highlighted and returned.<br/>This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.<br/>If `number_of_fragments` is `0`, `fragment_size` is ignored.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> NumberOfFragments(int? numberOfFragments)
 	{
 		NumberOfFragmentsValue = numberOfFragments;
@@ -234,36 +319,54 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sorts highlighted fragments by score when set to `score`.<br/>By default, fragments will be output in the order they appear in the field (order: `none`).<br/>Setting this option to `score` will output the most relevant fragments first.<br/>Each highlighter applies its own logic to compute relevancy scores.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterOrder? order)
 	{
 		OrderValue = order;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the number of matching phrases in a document that are considered.<br/>Prevents the `fvh` highlighter from analyzing too many phrases and consuming too much memory.<br/>When using `matched_fields`, `phrase_limit` phrases per matched field are considered. Raising the limit increases query time and consumes more memory.<br/>Only supported by the `fvh` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> PhraseLimit(int? phraseLimit)
 	{
 		PhraseLimitValue = phraseLimit;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use in conjunction with `pre_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> PostTags(ICollection<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use in conjunction with `post_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> PreTags(ICollection<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>By default, only fields that contains a query match are highlighted.<br/>Set to `false` to highlight all fields.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> RequireFieldMatch(bool? requireFieldMatch = true)
 	{
 		RequireFieldMatchValue = requireFieldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `styled` to use the built-in tag schema.</para>
+	/// </summary>
 	public HighlightFieldDescriptor<TDocument> TagsSchema(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? tagsSchema)
 	{
 		TagsSchemaValue = tagsSchema;
@@ -309,12 +412,6 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 			writer.WriteStringValue(BoundaryScannerLocaleValue);
 		}
 
-		if (ForceSourceValue.HasValue)
-		{
-			writer.WritePropertyName("force_source");
-			writer.WriteBooleanValue(ForceSourceValue.Value);
-		}
-
 		if (FragmenterValue is not null)
 		{
 			writer.WritePropertyName("fragmenter");
@@ -347,7 +444,7 @@ public sealed partial class HighlightFieldDescriptor<TDocument> : SerializableDe
 		else if (HighlightQueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>(HighlightQueryDescriptorAction), options);
 		}
 		else if (HighlightQueryValue is not null)
 		{
@@ -445,19 +542,18 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? AnalyzerValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Analysis.IAnalyzer? AnalyzerValue { get; set; }
 	private string? BoundaryCharsValue { get; set; }
 	private int? BoundaryMaxScanValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? BoundaryScannerValue { get; set; }
 	private string? BoundaryScannerLocaleValue { get; set; }
-	private bool? ForceSourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? FragmenterValue { get; set; }
 	private int? FragmentOffsetValue { get; set; }
 	private int? FragmentSizeValue { get; set; }
 	private bool? HighlightFilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? HighlightQueryValue { get; set; }
-	private QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
-	private Action<QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor HighlightQueryDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> HighlightQueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Fields? MatchedFieldsValue { get; set; }
 	private int? MaxAnalyzedOffsetValue { get; set; }
 	private int? MaxFragmentLengthValue { get; set; }
@@ -472,42 +568,51 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? TagsSchemaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterType? TypeValue { get; set; }
 
-	public HighlightFieldDescriptor Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.Analyzers? analyzer)
+	public HighlightFieldDescriptor Analyzer(Elastic.Clients.Elasticsearch.Serverless.Analysis.IAnalyzer? analyzer)
 	{
 		AnalyzerValue = analyzer;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>A string that contains each boundary character.</para>
+	/// </summary>
 	public HighlightFieldDescriptor BoundaryChars(string? boundaryChars)
 	{
 		BoundaryCharsValue = boundaryChars;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>How far to scan for boundary characters.</para>
+	/// </summary>
 	public HighlightFieldDescriptor BoundaryMaxScan(int? boundaryMaxScan)
 	{
 		BoundaryMaxScanValue = boundaryMaxScan;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Specifies how to break the highlighted fragments: chars, sentence, or word.<br/>Only valid for the unified and fvh highlighters.<br/>Defaults to `sentence` for the `unified` highlighter. Defaults to `chars` for the `fvh` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor BoundaryScanner(Elastic.Clients.Elasticsearch.Serverless.Core.Search.BoundaryScanner? boundaryScanner)
 	{
 		BoundaryScannerValue = boundaryScanner;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls which locale is used to search for sentence and word boundaries.<br/>This parameter takes a form of a language tag, for example: `"en-US"`, `"fr-FR"`, `"ja-JP"`.</para>
+	/// </summary>
 	public HighlightFieldDescriptor BoundaryScannerLocale(string? boundaryScannerLocale)
 	{
 		BoundaryScannerLocaleValue = boundaryScannerLocale;
 		return Self;
 	}
 
-	public HighlightFieldDescriptor ForceSource(bool? forceSource = true)
-	{
-		ForceSourceValue = forceSource;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>Specifies how text should be broken up in highlight snippets: `simple` or `span`.<br/>Only valid for the `plain` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor Fragmenter(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterFragmenter? fragmenter)
 	{
 		FragmenterValue = fragmenter;
@@ -520,6 +625,9 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The size of the highlighted fragment in characters.</para>
+	/// </summary>
 	public HighlightFieldDescriptor FragmentSize(int? fragmentSize)
 	{
 		FragmentSizeValue = fragmentSize;
@@ -532,6 +640,9 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Highlight matches for a query other than the search query.<br/>This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.</para>
+	/// </summary>
 	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query? highlightQuery)
 	{
 		HighlightQueryDescriptor = null;
@@ -540,7 +651,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor HighlightQuery(QueryDsl.QueryDescriptor descriptor)
+	public HighlightFieldDescriptor HighlightQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor descriptor)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptorAction = null;
@@ -548,7 +659,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
-	public HighlightFieldDescriptor HighlightQuery(Action<QueryDsl.QueryDescriptor> configure)
+	public HighlightFieldDescriptor HighlightQuery(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> configure)
 	{
 		HighlightQueryValue = null;
 		HighlightQueryDescriptor = null;
@@ -562,6 +673,9 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>If set to a non-negative value, highlighting stops at this defined maximum limit.<br/>The rest of the text is not processed, thus not highlighted and no error is returned<br/>The `max_analyzed_offset` query setting does not override the `index.highlight.max_analyzed_offset` setting, which prevails when it’s set to lower value than the query setting.</para>
+	/// </summary>
 	public HighlightFieldDescriptor MaxAnalyzedOffset(int? maxAnalyzedOffset)
 	{
 		MaxAnalyzedOffsetValue = maxAnalyzedOffset;
@@ -574,12 +688,18 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.</para>
+	/// </summary>
 	public HighlightFieldDescriptor NoMatchSize(int? noMatchSize)
 	{
 		NoMatchSizeValue = noMatchSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The maximum number of fragments to return.<br/>If the number of fragments is set to `0`, no fragments are returned.<br/>Instead, the entire field contents are highlighted and returned.<br/>This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.<br/>If `number_of_fragments` is `0`, `fragment_size` is ignored.</para>
+	/// </summary>
 	public HighlightFieldDescriptor NumberOfFragments(int? numberOfFragments)
 	{
 		NumberOfFragmentsValue = numberOfFragments;
@@ -592,36 +712,54 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Sorts highlighted fragments by score when set to `score`.<br/>By default, fragments will be output in the order they appear in the field (order: `none`).<br/>Setting this option to `score` will output the most relevant fragments first.<br/>Each highlighter applies its own logic to compute relevancy scores.</para>
+	/// </summary>
 	public HighlightFieldDescriptor Order(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterOrder? order)
 	{
 		OrderValue = order;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Controls the number of matching phrases in a document that are considered.<br/>Prevents the `fvh` highlighter from analyzing too many phrases and consuming too much memory.<br/>When using `matched_fields`, `phrase_limit` phrases per matched field are considered. Raising the limit increases query time and consumes more memory.<br/>Only supported by the `fvh` highlighter.</para>
+	/// </summary>
 	public HighlightFieldDescriptor PhraseLimit(int? phraseLimit)
 	{
 		PhraseLimitValue = phraseLimit;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use in conjunction with `pre_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	public HighlightFieldDescriptor PostTags(ICollection<string>? postTags)
 	{
 		PostTagsValue = postTags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Use in conjunction with `post_tags` to define the HTML tags to use for the highlighted text.<br/>By default, highlighted text is wrapped in `<em>` and `</em>` tags.</para>
+	/// </summary>
 	public HighlightFieldDescriptor PreTags(ICollection<string>? preTags)
 	{
 		PreTagsValue = preTags;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>By default, only fields that contains a query match are highlighted.<br/>Set to `false` to highlight all fields.</para>
+	/// </summary>
 	public HighlightFieldDescriptor RequireFieldMatch(bool? requireFieldMatch = true)
 	{
 		RequireFieldMatchValue = requireFieldMatch;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Set to `styled` to use the built-in tag schema.</para>
+	/// </summary>
 	public HighlightFieldDescriptor TagsSchema(Elastic.Clients.Elasticsearch.Serverless.Core.Search.HighlighterTagsSchema? tagsSchema)
 	{
 		TagsSchemaValue = tagsSchema;
@@ -667,12 +805,6 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 			writer.WriteStringValue(BoundaryScannerLocaleValue);
 		}
 
-		if (ForceSourceValue.HasValue)
-		{
-			writer.WritePropertyName("force_source");
-			writer.WriteBooleanValue(ForceSourceValue.Value);
-		}
-
 		if (FragmenterValue is not null)
 		{
 			writer.WritePropertyName("fragmenter");
@@ -705,7 +837,7 @@ public sealed partial class HighlightFieldDescriptor : SerializableDescriptor<Hi
 		else if (HighlightQueryDescriptorAction is not null)
 		{
 			writer.WritePropertyName("highlight_query");
-			JsonSerializer.Serialize(writer, new QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor(HighlightQueryDescriptorAction), options);
 		}
 		else if (HighlightQueryValue is not null)
 		{

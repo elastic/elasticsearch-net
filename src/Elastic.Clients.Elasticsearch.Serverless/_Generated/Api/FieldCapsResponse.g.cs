@@ -20,6 +20,7 @@
 using Elastic.Clients.Elasticsearch.Serverless.Fluent;
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using Elastic.Transport.Products.Elasticsearch;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -31,5 +32,6 @@ public sealed partial class FieldCapsResponse : ElasticsearchResponse
 	[ReadOnlyFieldDictionaryConverter(typeof(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.FieldCaps.FieldCapability>))]
 	public IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.FieldCaps.FieldCapability>> Fields { get; init; }
 	[JsonInclude, JsonPropertyName("indices")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexName> Indices { get; init; }
+	[SingleOrManyCollectionConverter(typeof(string))]
+	public IReadOnlyCollection<string> Indices { get; init; }
 }

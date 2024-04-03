@@ -83,10 +83,6 @@ public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	internal EqlGetRequestDescriptor()
-	{
-	}
-
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
@@ -117,10 +113,6 @@ public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRe
 	internal EqlGetRequestDescriptor(Action<EqlGetRequestDescriptor> configure) => configure.Invoke(this);
 
 	public EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal EqlGetRequestDescriptor()
 	{
 	}
 
