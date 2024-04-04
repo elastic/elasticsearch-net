@@ -69,8 +69,8 @@ public sealed partial class HistogramAggregation
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
+	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
@@ -94,7 +94,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	private double? MissingValue { get; set; }
 	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 
 	/// <summary>
@@ -181,7 +181,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	/// <summary>
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
-	public HistogramAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public HistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -247,7 +247,7 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)
@@ -276,7 +276,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	private double? MissingValue { get; set; }
 	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 
 	/// <summary>
@@ -363,7 +363,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	/// <summary>
 	/// <para>The sort order of the returned buckets.<br/>By default, the returned buckets are sorted by their key ascending.</para>
 	/// </summary>
-	public HistogramAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public HistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -429,7 +429,7 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ScriptValue is not null)

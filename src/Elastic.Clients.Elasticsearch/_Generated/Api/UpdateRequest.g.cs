@@ -180,6 +180,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// <para>A partial update to an existing document.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
+	[SourceConverter]
 	public TPartialDocument? Doc { get; set; }
 
 	/// <summary>
@@ -210,6 +211,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// <para>If the document does not already exist, the contents of 'upsert' are inserted as a<br/>new document. If the document exists, the 'script' is executed.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("upsert")]
+	[SourceConverter]
 	public TDocument? Upsert { get; set; }
 }
 
@@ -339,7 +341,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			SourceSerialization.Serialize(DocValue, writer, settings.SourceSerializer);
 		}
 
 		if (DocAsUpsertValue.HasValue)
@@ -369,7 +371,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 		if (UpsertValue is not null)
 		{
 			writer.WritePropertyName("upsert");
-			JsonSerializer.Serialize(writer, UpsertValue, options);
+			SourceSerialization.Serialize(UpsertValue, writer, settings.SourceSerializer);
 		}
 
 		writer.WriteEndObject();

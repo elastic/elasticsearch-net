@@ -46,6 +46,7 @@ public sealed partial class CompletionSuggestOption<TDocument>
 	[JsonInclude, JsonPropertyName("_score")]
 	public double? Score0 { get; init; }
 	[JsonInclude, JsonPropertyName("_source")]
+	[SourceConverter]
 	public TDocument? Source { get; init; }
 	[JsonInclude, JsonPropertyName("text")]
 	public string Text { get; init; }
