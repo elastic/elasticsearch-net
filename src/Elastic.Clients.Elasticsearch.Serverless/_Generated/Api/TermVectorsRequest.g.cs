@@ -178,6 +178,7 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 	/// <para>An artificial document (a document not present in the index) for which you want to retrieve term vectors.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("doc")]
+	[SourceConverter]
 	public TDocument? Doc { get; set; }
 
 	/// <summary>
@@ -297,7 +298,7 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		if (DocValue is not null)
 		{
 			writer.WritePropertyName("doc");
-			JsonSerializer.Serialize(writer, DocValue, options);
+			SourceSerialization.Serialize(DocValue, writer, settings.SourceSerializer);
 		}
 
 		if (FilterDescriptor is not null)

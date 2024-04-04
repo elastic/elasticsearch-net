@@ -49,5 +49,6 @@ public sealed partial class HitsEvent<TEvent>
 	/// <para>Original JSON body passed for the event at index time.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
+	[SourceConverter]
 	public TEvent Source { get; init; }
 }
