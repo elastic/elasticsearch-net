@@ -79,8 +79,8 @@ public sealed partial class DateHistogramAggregation
 	/// <para>The sort order of the returned buckets.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
+	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
 	[JsonInclude, JsonPropertyName("params")]
 	public IDictionary<string, object>? Params { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
@@ -113,7 +113,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	private DateTimeOffset? MissingValue { get; set; }
 	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? TimeZoneValue { get; set; }
@@ -214,7 +214,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	/// <summary>
 	/// <para>The sort order of the returned buckets.</para>
 	/// </summary>
-	public DateHistogramAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public DateHistogramAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -301,7 +301,7 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ParamsValue is not null)
@@ -343,7 +343,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	private DateTimeOffset? MissingValue { get; set; }
 	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private string? TimeZoneValue { get; set; }
@@ -444,7 +444,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	/// <summary>
 	/// <para>The sort order of the returned buckets.</para>
 	/// </summary>
-	public DateHistogramAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public DateHistogramAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -531,7 +531,7 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ParamsValue is not null)

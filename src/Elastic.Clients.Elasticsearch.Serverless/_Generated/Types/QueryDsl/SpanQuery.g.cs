@@ -49,7 +49,7 @@ public sealed partial class SpanQuery
 	public static SpanQuery FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("field_masking_span", spanFieldMaskingQuery);
 	public static SpanQuery SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => new SpanQuery("span_containing", spanContainingQuery);
 	public static SpanQuery SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => new SpanQuery("span_first", spanFirstQuery);
-	public static SpanQuery SpanGap(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => new SpanQuery("span_gap", integer);
+	public static SpanQuery SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => new SpanQuery("span_gap", integer);
 	public static SpanQuery SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => new SpanQuery("span_multi", spanMultiTermQuery);
 	public static SpanQuery SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => new SpanQuery("span_near", spanNearQuery);
 	public static SpanQuery SpanNot(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNotQuery spanNotQuery) => new SpanQuery("span_not", spanNotQuery);
@@ -118,7 +118,7 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 
 			if (propertyName == "span_gap")
 			{
-				variantValue = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int>?>(ref reader, options);
+				variantValue = JsonSerializer.Deserialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int>?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -191,7 +191,7 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery)value.Variant, options);
 					break;
 				case "span_gap":
-					JsonSerializer.Serialize<IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int>>(writer, (IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int>)value.Variant, options);
+					JsonSerializer.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int>>(writer, (KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int>)value.Variant, options);
 					break;
 				case "span_multi":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery)value.Variant, options);
@@ -255,7 +255,7 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 	public SpanQueryDescriptor<TDocument> SpanContaining(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
 	public SpanQueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor<TDocument> SpanFirst(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor<TDocument> SpanGap(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => Set(integer, "span_gap");
+	public SpanQueryDescriptor<TDocument> SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => Set(integer, "span_gap");
 	public SpanQueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
 	public SpanQueryDescriptor<TDocument> SpanMulti(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_multi");
 	public SpanQueryDescriptor<TDocument> SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");
@@ -326,7 +326,7 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 	public SpanQueryDescriptor SpanContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
 	public SpanQueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor SpanFirst<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
-	public SpanQueryDescriptor SpanGap(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => Set(integer, "span_gap");
+	public SpanQueryDescriptor SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, int> integer) => Set(integer, "span_gap");
 	public SpanQueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
 	public SpanQueryDescriptor SpanMulti<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQueryDescriptor> configure) => Set(configure, "span_multi");
 	public SpanQueryDescriptor SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => Set(spanNearQuery, "span_near");

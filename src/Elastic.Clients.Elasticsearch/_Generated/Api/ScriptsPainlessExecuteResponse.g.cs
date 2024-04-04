@@ -29,5 +29,6 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ScriptsPainlessExecuteResponse<TResult> : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("result")]
+	[SourceConverter]
 	public TResult Result { get; init; }
 }
