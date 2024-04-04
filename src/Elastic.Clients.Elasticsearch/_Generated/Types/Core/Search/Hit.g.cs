@@ -64,6 +64,7 @@ public sealed partial class Hit<TDocument>
 	[JsonInclude, JsonPropertyName("sort")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; init; }
 	[JsonInclude, JsonPropertyName("_source")]
+	[SourceConverter]
 	public TDocument? Source { get; init; }
 	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }
