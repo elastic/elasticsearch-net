@@ -49,8 +49,8 @@ public sealed partial class MultiTermsAggregation
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
-	[SingleOrManyCollectionConverter(typeof(IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
+	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>))]
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? Order { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket on each shard for it to be returned.</para>
@@ -97,7 +97,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private string? NameValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
@@ -140,7 +140,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public MultiTermsAggregationDescriptor<TDocument> Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor<TDocument> Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -251,7 +251,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ShardMinDocCountValue.HasValue)
@@ -325,7 +325,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private string? NameValue { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
@@ -368,7 +368,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
-	public MultiTermsAggregationDescriptor Order(ICollection<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
+	public MultiTermsAggregationDescriptor Order(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? order)
 	{
 		OrderValue = order;
 		return Self;
@@ -479,7 +479,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
-			SingleOrManySerializationHelper.Serialize<IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>(OrderValue, writer, options);
 		}
 
 		if (ShardMinDocCountValue.HasValue)

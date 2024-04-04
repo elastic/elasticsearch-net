@@ -44,6 +44,7 @@ public sealed partial class GetResult<TDocument>
 	[JsonInclude, JsonPropertyName("_seq_no")]
 	public long? SeqNo { get; init; }
 	[JsonInclude, JsonPropertyName("_source")]
+	[SourceConverter]
 	public TDocument? Source { get; init; }
 	[JsonInclude, JsonPropertyName("_version")]
 	public long? Version { get; init; }

@@ -85,7 +85,7 @@ public sealed partial class TermsAggregation
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("order")]
-	[JsonConverter(typeof(SingleOrManyCollectionConverter<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>))]
+	[SingleOrManyCollectionConverter(typeof(KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>))]
 	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
