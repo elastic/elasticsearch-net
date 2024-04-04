@@ -2,7 +2,9 @@
 name: Bug report for version 8.x
 about: File a bug report for Elastic.Clients.Elasticsearch version 8.x
 title: ''
-labels: 'Category: Bug', 8.x
+labels: 
+  - 'Category: Bug'
+  - '8.x'
 assignees: ''
 
 ---
