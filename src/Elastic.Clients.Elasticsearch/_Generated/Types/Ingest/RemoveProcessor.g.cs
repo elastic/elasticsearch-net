@@ -39,6 +39,7 @@ public sealed partial class RemoveProcessor
 	/// <para>Fields to be removed. Supports template snippets.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 
 	/// <summary>

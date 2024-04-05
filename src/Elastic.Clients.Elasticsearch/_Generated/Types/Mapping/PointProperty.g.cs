@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class PointProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }

@@ -35,7 +35,8 @@ public sealed partial class LikeDocument
 	[JsonInclude, JsonPropertyName("doc")]
 	public object? Doc { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
 	/// <para>ID of a document.</para>
@@ -67,7 +68,7 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 	}
 
 	private object? DocValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
@@ -84,7 +85,7 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
-	public LikeDocumentDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
+	public LikeDocumentDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -196,7 +197,7 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 	}
 
 	private object? DocValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
@@ -213,7 +214,7 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 		return Self;
 	}
 
-	public LikeDocumentDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
+	public LikeDocumentDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;

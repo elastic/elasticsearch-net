@@ -45,7 +45,8 @@ public sealed partial class CombinedFieldsQuery
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> Fields { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>Minimum number of clauses that must match for a document to be returned.</para>
@@ -86,7 +87,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
@@ -114,7 +115,7 @@ public sealed partial class CombinedFieldsQueryDescriptor<TDocument> : Serializa
 	/// <summary>
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> fields)
+	public CombinedFieldsQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -219,7 +220,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 
 	private bool? AutoGenerateSynonymsPhraseQueryValue { get; set; }
 	private float? BoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsOperator? OperatorValue { get; set; }
 	private string QueryValue { get; set; }
@@ -247,7 +248,7 @@ public sealed partial class CombinedFieldsQueryDescriptor : SerializableDescript
 	/// <summary>
 	/// <para>List of fields to search. Field wildcard patterns are allowed. Only `text` fields are supported, and they must all have the same search `analyzer`.</para>
 	/// </summary>
-	public CombinedFieldsQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> fields)
+	public CombinedFieldsQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields fields)
 	{
 		FieldsValue = fields;
 		return Self;

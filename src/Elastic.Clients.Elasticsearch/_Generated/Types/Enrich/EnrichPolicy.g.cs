@@ -32,6 +32,7 @@ public sealed partial class EnrichPolicy
 	[JsonInclude, JsonPropertyName("elasticsearch_version")]
 	public string? ElasticsearchVersion { get; set; }
 	[JsonInclude, JsonPropertyName("enrich_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
 	[JsonInclude, JsonPropertyName("indices")]
 	public Elastic.Clients.Elasticsearch.Indices Indices { get; set; }

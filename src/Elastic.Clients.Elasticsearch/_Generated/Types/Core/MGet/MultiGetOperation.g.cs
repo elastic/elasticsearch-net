@@ -57,6 +57,7 @@ public sealed partial class MultiGetOperation
 	/// <para>The stored fields you want to retrieve.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
 	public long? Version { get; set; }
