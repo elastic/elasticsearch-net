@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 public sealed partial class ObjectProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? Dynamic { get; set; }

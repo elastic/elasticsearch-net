@@ -57,7 +57,8 @@ public sealed partial class MoreLikeThisQuery
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? Fields { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>
 	/// <para>Specifies whether the input documents should also be included in the search results returned.</para>
@@ -157,7 +158,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
 	private bool? IncludeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> LikeValue { get; set; }
 	private int? MaxDocFreqValue { get; set; }
@@ -214,7 +215,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	/// <summary>
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? fields)
+	public MoreLikeThisQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -493,7 +494,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private float? BoostValue { get; set; }
 	private double? BoostTermsValue { get; set; }
 	private bool? FailOnUnsupportedFieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields? FieldsValue { get; set; }
 	private bool? IncludeValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Like> LikeValue { get; set; }
 	private int? MaxDocFreqValue { get; set; }
@@ -550,7 +551,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	/// <summary>
 	/// <para>A list of fields to fetch and analyze the text from.<br/>Defaults to the `index.query.default_field` index setting, which has a default value of `*`.</para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field>? fields)
+	public MoreLikeThisQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Serverless.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;

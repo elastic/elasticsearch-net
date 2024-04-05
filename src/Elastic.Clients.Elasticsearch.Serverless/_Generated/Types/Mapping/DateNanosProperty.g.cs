@@ -32,6 +32,7 @@ public sealed partial class DateNanosProperty : IProperty
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }

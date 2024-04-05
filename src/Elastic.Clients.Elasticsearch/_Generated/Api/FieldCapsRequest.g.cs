@@ -134,6 +134,7 @@ public sealed partial class FieldCapsRequest : PlainRequest<FieldCapsRequestPara
 	/// <para>List of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>

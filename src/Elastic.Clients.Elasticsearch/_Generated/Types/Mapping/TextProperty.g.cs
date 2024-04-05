@@ -34,6 +34,7 @@ public sealed partial class TextProperty : IProperty
 	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
