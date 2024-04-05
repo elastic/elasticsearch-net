@@ -139,7 +139,6 @@ internal sealed partial class PinnedQueryConverter : JsonConverter<PinnedQuery>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PinnedQuery' from the response.");
 		}
 
-		reader.Read();
 		var result = new PinnedQuery(variantNameValue, variantValue);
 		result.Boost = boostValue;
 		result.Organic = organicValue;

@@ -112,7 +112,6 @@ internal sealed partial class SmoothingModelConverter : JsonConverter<SmoothingM
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SmoothingModel' from the response.");
 		}
 
-		reader.Read();
 		var result = new SmoothingModel(variantNameValue, variantValue);
 		return result;
 	}

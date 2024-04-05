@@ -523,7 +523,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Query' from the response.");
 		}
 
-		reader.Read();
 		var result = new Query(variantNameValue, variantValue);
 		return result;
 	}
