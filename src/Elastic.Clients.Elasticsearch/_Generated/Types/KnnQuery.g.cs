@@ -301,14 +301,14 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
@@ -583,14 +583,14 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)

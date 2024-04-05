@@ -203,14 +203,14 @@ public sealed partial class FieldCollapseDescriptor<TDocument> : SerializableDes
 		else if (InnerHitsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			if (InnerHitsDescriptorActions.Length > 1)
+			if (InnerHitsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor<TDocument>(action), options);
 			}
 
-			if (InnerHitsDescriptorActions.Length > 1)
+			if (InnerHitsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (InnerHitsValue is not null)
@@ -380,14 +380,14 @@ public sealed partial class FieldCollapseDescriptor : SerializableDescriptor<Fie
 		else if (InnerHitsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("inner_hits");
-			if (InnerHitsDescriptorActions.Length > 1)
+			if (InnerHitsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in InnerHitsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor(action), options);
 			}
 
-			if (InnerHitsDescriptorActions.Length > 1)
+			if (InnerHitsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (InnerHitsValue is not null)
