@@ -36,6 +36,7 @@ public sealed partial class MatchOnlyTextProperty : IProperty
 	/// <para>Allows you to copy the values of multiple fields into a group<br/>field, which can then be queried as a single field.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 
 	/// <summary>

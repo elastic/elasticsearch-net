@@ -33,6 +33,7 @@ public sealed partial class MatrixStatsAggregation
 	/// <para>An array of fields for computing the statistics.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("meta")]
 	public IDictionary<string, object>? Meta { get; set; }

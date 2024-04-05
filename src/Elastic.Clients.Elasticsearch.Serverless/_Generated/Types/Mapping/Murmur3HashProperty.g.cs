@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
 public sealed partial class Murmur3HashProperty : IProperty
 {
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }

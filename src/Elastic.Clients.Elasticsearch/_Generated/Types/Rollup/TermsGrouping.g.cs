@@ -33,6 +33,7 @@ public sealed partial class TermsGrouping
 	/// <para>The set of fields that you wish to collect terms for.<br/>This array can contain fields that are both keyword and numerics.<br/>Order does not matter.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 }
 

@@ -10,7 +10,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Elastic.Transport;
 
 #if ELASTICSEARCH_SERVERLESS
@@ -19,7 +18,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless;
 namespace Elastic.Clients.Elasticsearch;
 #endif
 
-[JsonConverter(typeof(FieldsConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class Fields : IUrlParameter, IEnumerable<Field>, IEquatable<Fields>
 {
