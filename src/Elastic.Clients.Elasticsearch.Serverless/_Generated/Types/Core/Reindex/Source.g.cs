@@ -68,6 +68,7 @@ public sealed partial class Source
 	/// <para>If `true` reindexes all source fields.<br/>Set to a list to reindex select fields.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? SourceFields { get; set; }
 }
 

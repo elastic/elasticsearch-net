@@ -78,6 +78,7 @@ public sealed partial class HighlightField
 	[JsonInclude, JsonPropertyName("highlight_query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? HighlightQuery { get; set; }
 	[JsonInclude, JsonPropertyName("matched_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? MatchedFields { get; set; }
 
 	/// <summary>

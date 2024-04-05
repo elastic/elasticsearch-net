@@ -36,6 +36,7 @@ public sealed partial class InnerHits
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
@@ -73,6 +74,7 @@ public sealed partial class InnerHits
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 	[JsonInclude, JsonPropertyName("stored_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	[JsonInclude, JsonPropertyName("track_scores")]
 	public bool? TrackScores { get; set; }

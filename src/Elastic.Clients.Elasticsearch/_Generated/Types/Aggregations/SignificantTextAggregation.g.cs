@@ -133,6 +133,7 @@ public sealed partial class SignificantTextAggregation
 	/// <para>Overrides the JSON `_source` fields from which text will be analyzed.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("source_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(SignificantTextAggregation significantTextAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.SignificantText(significantTextAggregation);

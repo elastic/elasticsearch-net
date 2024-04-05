@@ -63,7 +63,8 @@ public sealed partial class AnalysisConfig
 	/// <para>A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("influencers")]
-	public ICollection<Elastic.Clients.Elasticsearch.Field>? Influencers { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Fields? Influencers { get; set; }
 
 	/// <summary>
 	/// <para>The size of the window in which to expect data that is out of time order. If you specify a non-zero value, it must be greater than or equal to one second. NOTE: Latency is applicable only when you send data by using the post data API.</para>
@@ -112,7 +113,7 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? InfluencersValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? InfluencersValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
 	private bool? MultivariateByFieldsValue { get; set; }
@@ -217,7 +218,7 @@ public sealed partial class AnalysisConfigDescriptor<TDocument> : SerializableDe
 	/// <summary>
 	/// <para>A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.</para>
 	/// </summary>
-	public AnalysisConfigDescriptor<TDocument> Influencers(ICollection<Elastic.Clients.Elasticsearch.Field>? influencers)
+	public AnalysisConfigDescriptor<TDocument> Influencers(Elastic.Clients.Elasticsearch.Fields? influencers)
 	{
 		InfluencersValue = influencers;
 		return Self;
@@ -428,7 +429,7 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> DetectorsDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? InfluencersValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? InfluencersValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? LatencyValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
 	private bool? MultivariateByFieldsValue { get; set; }
@@ -533,7 +534,7 @@ public sealed partial class AnalysisConfigDescriptor : SerializableDescriptor<An
 	/// <summary>
 	/// <para>A comma separated list of influencer field names. Typically these can be the by, over, or partition fields that are used in the detector configuration. You might also want to use a field name that is not specifically named in a detector, but is available as part of the input data. When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.</para>
 	/// </summary>
-	public AnalysisConfigDescriptor Influencers(ICollection<Elastic.Clients.Elasticsearch.Field>? influencers)
+	public AnalysisConfigDescriptor Influencers(Elastic.Clients.Elasticsearch.Fields? influencers)
 	{
 		InfluencersValue = influencers;
 		return Self;
