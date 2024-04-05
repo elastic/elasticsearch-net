@@ -1745,14 +1745,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		else if (KnnDescriptorActions is not null)
 		{
 			writer.WritePropertyName("knn");
-			if (KnnDescriptorActions.Length > 1)
+			if (KnnDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.KnnQueryDescriptor<TDocument>(action), options);
 			}
 
-			if (KnnDescriptorActions.Length > 1)
+			if (KnnDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (KnnValue is not null)
@@ -1834,14 +1834,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		else if (RescoreDescriptorActions is not null)
 		{
 			writer.WritePropertyName("rescore");
-			if (RescoreDescriptorActions.Length > 1)
+			if (RescoreDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor<TDocument>(action), options);
 			}
 
-			if (RescoreDescriptorActions.Length > 1)
+			if (RescoreDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (RescoreValue is not null)
@@ -1909,14 +1909,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)
@@ -2791,14 +2791,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		else if (KnnDescriptorActions is not null)
 		{
 			writer.WritePropertyName("knn");
-			if (KnnDescriptorActions.Length > 1)
+			if (KnnDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.KnnQueryDescriptor(action), options);
 			}
 
-			if (KnnDescriptorActions.Length > 1)
+			if (KnnDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (KnnValue is not null)
@@ -2880,14 +2880,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		else if (RescoreDescriptorActions is not null)
 		{
 			writer.WritePropertyName("rescore");
-			if (RescoreDescriptorActions.Length > 1)
+			if (RescoreDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in RescoreDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Core.Search.RescoreDescriptor(action), options);
 			}
 
-			if (RescoreDescriptorActions.Length > 1)
+			if (RescoreDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (RescoreValue is not null)
@@ -2955,14 +2955,14 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)

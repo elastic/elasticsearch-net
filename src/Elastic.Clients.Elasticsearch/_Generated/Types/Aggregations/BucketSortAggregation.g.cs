@@ -203,14 +203,14 @@ public sealed partial class BucketSortAggregationDescriptor<TDocument> : Seriali
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)
@@ -365,14 +365,14 @@ public sealed partial class BucketSortAggregationDescriptor : SerializableDescri
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)
