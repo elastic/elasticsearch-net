@@ -131,7 +131,6 @@ internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionSco
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FunctionScore' from the response.");
 		}
 
-		reader.Read();
 		var result = new FunctionScore(variantNameValue, variantValue);
 		result.Filter = filterValue;
 		result.Weight = weightValue;

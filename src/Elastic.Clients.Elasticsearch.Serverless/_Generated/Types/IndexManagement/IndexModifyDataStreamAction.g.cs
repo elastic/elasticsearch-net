@@ -104,7 +104,6 @@ internal sealed partial class IndexModifyDataStreamActionConverter : JsonConvert
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IndexModifyDataStreamAction' from the response.");
 		}
 
-		reader.Read();
 		var result = new IndexModifyDataStreamAction(variantNameValue, variantValue);
 		return result;
 	}

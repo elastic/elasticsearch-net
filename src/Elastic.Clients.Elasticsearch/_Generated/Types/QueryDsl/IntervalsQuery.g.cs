@@ -158,7 +158,6 @@ internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQ
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsQuery' from the response.");
 		}
 
-		reader.Read();
 		var result = new IntervalsQuery(variantNameValue, variantValue);
 		result.Boost = boostValue;
 		result.QueryName = queryNameValue;

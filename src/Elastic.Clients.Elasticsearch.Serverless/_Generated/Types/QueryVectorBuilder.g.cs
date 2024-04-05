@@ -96,7 +96,6 @@ internal sealed partial class QueryVectorBuilderConverter : JsonConverter<QueryV
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'QueryVectorBuilder' from the response.");
 		}
 
-		reader.Read();
 		var result = new QueryVectorBuilder(variantNameValue, variantValue);
 		return result;
 	}
