@@ -34,6 +34,7 @@ public sealed partial class CompletionProperty : IProperty
 	[JsonInclude, JsonPropertyName("contexts")]
 	public ICollection<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>? Contexts { get; set; }
 	[JsonInclude, JsonPropertyName("copy_to")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
 	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }

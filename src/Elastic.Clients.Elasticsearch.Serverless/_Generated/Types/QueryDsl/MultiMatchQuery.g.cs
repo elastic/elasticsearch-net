@@ -51,6 +51,7 @@ public sealed partial class MultiMatchQuery
 	/// <para>The fields to be queried.<br/>Defaults to the `index.query.default_field` index settings, which in turn defaults to `*`.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? Fields { get; set; }
 
 	/// <summary>

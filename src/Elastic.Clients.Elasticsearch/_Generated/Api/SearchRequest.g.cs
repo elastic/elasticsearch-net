@@ -956,6 +956,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <para>List of stored fields to return as part of a hit.<br/>If no fields are specified, no stored fields are included in the response.<br/>If this field is specified, the `_source` parameter defaults to `false`.<br/>You can pass `_source: true` to return both source fields and stored fields in the search response.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
 	/// <summary>

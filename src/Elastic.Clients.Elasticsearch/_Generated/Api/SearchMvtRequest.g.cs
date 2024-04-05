@@ -79,6 +79,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// <para>Fields to return in the `hits` layer. Supports wildcards (`*`).<br/>This parameter does not support fields with array values. Fields with array<br/>values may return inconsistent results.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>

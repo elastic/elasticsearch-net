@@ -83,7 +83,8 @@ public sealed partial class QueryStringQuery
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fields")]
-	public ICollection<Elastic.Clients.Elasticsearch.Field>? Fields { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
 	/// <para>Maximum edit distance allowed for fuzzy matching.</para>
@@ -203,7 +204,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private bool? EnablePositionIncrementsValue { get; set; }
 	private bool? EscapeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
@@ -321,7 +322,7 @@ public sealed partial class QueryStringQueryDescriptor<TDocument> : Serializable
 	/// <summary>
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
-	public QueryStringQueryDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
+	public QueryStringQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;
@@ -659,7 +660,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperatorValue { get; set; }
 	private bool? EnablePositionIncrementsValue { get; set; }
 	private bool? EscapeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Field>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Fuzziness? FuzzinessValue { get; set; }
 	private int? FuzzyMaxExpansionsValue { get; set; }
 	private int? FuzzyPrefixLengthValue { get; set; }
@@ -777,7 +778,7 @@ public sealed partial class QueryStringQueryDescriptor : SerializableDescriptor<
 	/// <summary>
 	/// <para>Array of fields to search. Supports wildcards (`*`).</para>
 	/// </summary>
-	public QueryStringQueryDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.Field>? fields)
+	public QueryStringQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
 	{
 		FieldsValue = fields;
 		return Self;

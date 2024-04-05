@@ -30,6 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexSegmentSort
 {
 	[JsonInclude, JsonPropertyName("field")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Field { get; set; }
 	[JsonInclude, JsonPropertyName("missing")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing))]

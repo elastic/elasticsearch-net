@@ -39,7 +39,8 @@ public sealed partial class Latest
 	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("unique_key")]
-	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> UniqueKey { get; set; }
+	[JsonConverter(typeof(FieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields UniqueKey { get; set; }
 }
 
 public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor<LatestDescriptor<TDocument>>
@@ -51,7 +52,7 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field SortValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> UniqueKeyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields UniqueKeyValue { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the date field that is used to identify the latest documents.</para>
@@ -83,7 +84,7 @@ public sealed partial class LatestDescriptor<TDocument> : SerializableDescriptor
 	/// <summary>
 	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
 	/// </summary>
-	public LatestDescriptor<TDocument> UniqueKey(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> uniqueKey)
+	public LatestDescriptor<TDocument> UniqueKey(Elastic.Clients.Elasticsearch.Serverless.Fields uniqueKey)
 	{
 		UniqueKeyValue = uniqueKey;
 		return Self;
@@ -109,7 +110,7 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field SortValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> UniqueKeyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields UniqueKeyValue { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the date field that is used to identify the latest documents.</para>
@@ -141,7 +142,7 @@ public sealed partial class LatestDescriptor : SerializableDescriptor<LatestDesc
 	/// <summary>
 	/// <para>Specifies an array of one or more fields that are used to group the data.</para>
 	/// </summary>
-	public LatestDescriptor UniqueKey(ICollection<Elastic.Clients.Elasticsearch.Serverless.Field> uniqueKey)
+	public LatestDescriptor UniqueKey(Elastic.Clients.Elasticsearch.Serverless.Fields uniqueKey)
 	{
 		UniqueKeyValue = uniqueKey;
 		return Self;
