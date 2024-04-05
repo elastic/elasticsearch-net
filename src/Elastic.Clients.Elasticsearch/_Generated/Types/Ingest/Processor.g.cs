@@ -368,7 +368,6 @@ internal sealed partial class ProcessorConverter : JsonConverter<Processor>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Processor' from the response.");
 		}
 
-		reader.Read();
 		var result = new Processor(variantNameValue, variantValue);
 		return result;
 	}

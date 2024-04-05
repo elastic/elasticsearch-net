@@ -112,7 +112,6 @@ internal sealed partial class DataframeEvaluationConverter : JsonConverter<Dataf
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DataframeEvaluation' from the response.");
 		}
 
-		reader.Read();
 		var result = new DataframeEvaluation(variantNameValue, variantValue);
 		return result;
 	}

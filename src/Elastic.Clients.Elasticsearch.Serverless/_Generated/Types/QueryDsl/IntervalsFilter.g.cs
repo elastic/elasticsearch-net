@@ -160,7 +160,6 @@ internal sealed partial class IntervalsFilterConverter : JsonConverter<Intervals
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsFilter' from the response.");
 		}
 
-		reader.Read();
 		var result = new IntervalsFilter(variantNameValue, variantValue);
 		return result;
 	}
