@@ -115,7 +115,6 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'TokenizationConfig' from the response.");
 		}
 
-		reader.Read();
 		var result = new TokenizationConfig(variantNameValue, variantValue);
 		return result;
 	}

@@ -710,7 +710,6 @@ internal sealed partial class AggregationConverter : JsonConverter<Aggregation>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Aggregation' from the response.");
 		}
 
-		reader.Read();
 		var result = new Aggregation(variantNameValue, variantValue);
 		result.Aggregations = aggregationsValue;
 		result.Meta = metaValue;

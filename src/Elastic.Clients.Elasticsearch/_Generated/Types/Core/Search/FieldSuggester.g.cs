@@ -151,7 +151,6 @@ internal sealed partial class FieldSuggesterConverter : JsonConverter<FieldSugge
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'FieldSuggester' from the response.");
 		}
 
-		reader.Read();
 		var result = new FieldSuggester(variantNameValue, variantValue);
 		result.Prefix = prefixValue;
 		result.Regex = regexValue;
