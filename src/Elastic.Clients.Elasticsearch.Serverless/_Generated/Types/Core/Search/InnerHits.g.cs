@@ -448,14 +448,14 @@ public sealed partial class InnerHitsDescriptor<TDocument> : SerializableDescrip
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor<TDocument>(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)
@@ -858,14 +858,14 @@ public sealed partial class InnerHitsDescriptor : SerializableDescriptor<InnerHi
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.SortOptionsDescriptor(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)

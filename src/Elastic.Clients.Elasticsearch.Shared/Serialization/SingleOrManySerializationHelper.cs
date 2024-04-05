@@ -16,59 +16,37 @@ internal static class SingleOrManySerializationHelper
 {
 	public static IList<TItem> Deserialize<TItem>(ref Utf8JsonReader reader, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.StartObject)
+		switch (reader.TokenType)
 		{
-			var singleItem = JsonSerializer.Deserialize<TItem>(ref reader, options);
-			return new TItem[] { singleItem };
-		}
+			case JsonTokenType.Null:
+				return [default];
 
-		if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var list = new List<TItem>();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+			case JsonTokenType.StartArray:
+				return JsonSerializer.Deserialize<List<TItem>>(ref reader, options);
+
+			default:
 			{
-				var item = JsonSerializer.Deserialize<TItem>(ref reader, options);
-				list.Add(item);
+				var item = (TItem)JsonSerializer.Deserialize(ref reader, typeof(TItem), options);
+				return [item];
 			}
-			return list;
 		}
-
-		// Handles situations such as a single sort value which can be a string
-		// e.g. GET nuget-stats/_search
-		// {
-		//    "sort": "version"
-		// }
-		if (reader.TokenType == JsonTokenType.String)
-		{
-			var item = (TItem)JsonSerializer.Deserialize(ref reader, typeof(TItem), options);
-			return new TItem[] { item };
-		}
-
-		throw new JsonException("Unexpected token.");
 	}
 
 	public static void Serialize<TItem>(ICollection<TItem> value, Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
-		var count = value.Count;
-
-		if (count == 0)
+		switch (value)
 		{
-			writer.WriteStartObject();
-			writer.WriteEndObject();
-			return;
-		}
+			case null:
+				writer.WriteNullValue();
+				break;
 
-		if (count == 1)
-		{
-			JsonSerializer.Serialize<TItem>(writer, value.Single(), options);
-			return;
-		}
+			case { Count: 1 }:
+				JsonSerializer.Serialize(writer, value.First(), options);
+				break;
 
-		writer.WriteStartArray();
-		foreach (var item in value)
-		{
-			JsonSerializer.Serialize<TItem>(writer, item, options);
+			default:
+				JsonSerializer.Serialize(writer, value, options);
+				break;
 		}
-		writer.WriteEndArray();
 	}
 }

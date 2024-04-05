@@ -238,14 +238,14 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		else if (MetricsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("metrics");
-			if (MetricsDescriptorActions.Length > 1)
+			if (MetricsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MetricsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument>(action), options);
 			}
 
-			if (MetricsDescriptorActions.Length > 1)
+			if (MetricsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MetricsValue is not null)
@@ -285,14 +285,14 @@ public sealed partial class TopMetricsAggregationDescriptor<TDocument> : Seriali
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)
@@ -477,14 +477,14 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		else if (MetricsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("metrics");
-			if (MetricsDescriptorActions.Length > 1)
+			if (MetricsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MetricsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor(action), options);
 			}
 
-			if (MetricsDescriptorActions.Length > 1)
+			if (MetricsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MetricsValue is not null)
@@ -524,14 +524,14 @@ public sealed partial class TopMetricsAggregationDescriptor : SerializableDescri
 		else if (SortDescriptorActions is not null)
 		{
 			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in SortDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
 			}
 
-			if (SortDescriptorActions.Length > 1)
+			if (SortDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (SortValue is not null)

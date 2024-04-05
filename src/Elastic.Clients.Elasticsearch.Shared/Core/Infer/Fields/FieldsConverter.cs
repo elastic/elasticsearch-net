@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 #if ELASTICSEARCH_SERVERLESS
 namespace Elastic.Clients.Elasticsearch.Serverless;
 #else
@@ -17,24 +19,18 @@ internal sealed class FieldsConverter : JsonConverter<Fields>
 {
 	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.String)
+		switch (reader.TokenType)
 		{
-			Fields fields = reader.GetString();
-			return fields;
-		}
-		else if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var fields = new List<Field>();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-			{
-				var field = JsonSerializer.Deserialize<Field>(ref reader, options);
-				fields.Add(field);
-			}
-			return new Fields(fields);
-		}
+			case JsonTokenType.Null:
+				return null;
 
-		reader.Read();
-		return null;
+			case JsonTokenType.StartArray:
+				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
+				return new Fields(fields);
+
+			default:
+				throw new JsonException("Unexpected token.");
+		}
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
@@ -45,12 +41,7 @@ internal sealed class FieldsConverter : JsonConverter<Fields>
 			return;
 		}
 
-		writer.WriteStartArray();
-		foreach (var field in value.ListOfFields)
-		{
-			JsonSerializer.Serialize(writer, field, options);
-		}
-		writer.WriteEndArray();
+		JsonSerializer.Serialize(writer, value.ListOfFields, options);
 	}
 }
 
@@ -58,25 +49,22 @@ internal sealed class SingleOrManyFieldsConverter : JsonConverter<Fields>
 {
 	public override Fields? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.String)
+		switch (reader.TokenType)
 		{
-			Fields fields = reader.GetString();
-			return fields;
-		}
+			case JsonTokenType.Null:
+				return null;
 
-		if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var fields = new List<Field>();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-			{
+			case JsonTokenType.String:
 				var field = JsonSerializer.Deserialize<Field>(ref reader, options);
-				fields.Add(field);
-			}
-			return new Fields(fields);
-		}
+				return new Fields([field]);
 
-		reader.Read();
-		return null;
+			case JsonTokenType.StartArray:
+				var fields = JsonSerializer.Deserialize<List<Field>>(ref reader, options);
+				return new Fields(fields);
+
+			default:
+				throw new JsonException("Unexpected token.");
+		}
 	}
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
@@ -87,24 +75,12 @@ internal sealed class SingleOrManyFieldsConverter : JsonConverter<Fields>
 			return;
 		}
 
-		//if (value.ListOfFields.Count == 0)
-		//{
-		//	writer.WriteStartObject();
-		//	writer.WriteEndObject();
-		//	return;
-		//}
-
 		if (value.ListOfFields.Count == 1)
 		{
 			JsonSerializer.Serialize(writer, value.ListOfFields[0], options);
 			return;
 		}
 
-		writer.WriteStartArray();
-		foreach (var field in value.ListOfFields)
-		{
-			JsonSerializer.Serialize(writer, field, options);
-		}
-		writer.WriteEndArray();
+		JsonSerializer.Serialize(writer, value.ListOfFields, options);
 	}
 }
