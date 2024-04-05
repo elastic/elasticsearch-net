@@ -96,7 +96,6 @@ internal sealed partial class RankConverter : JsonConverter<Rank>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Rank' from the response.");
 		}
 
-		reader.Read();
 		var result = new Rank(variantNameValue, variantValue);
 		return result;
 	}

@@ -120,7 +120,6 @@ internal sealed partial class PivotGroupByConverter : JsonConverter<PivotGroupBy
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'PivotGroupBy' from the response.");
 		}
 
-		reader.Read();
 		var result = new PivotGroupBy(variantNameValue, variantValue);
 		return result;
 	}

@@ -128,7 +128,6 @@ internal sealed partial class DataframeAnalysisFeatureProcessorConverter : JsonC
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DataframeAnalysisFeatureProcessor' from the response.");
 		}
 
-		reader.Read();
 		var result = new DataframeAnalysisFeatureProcessor(variantNameValue, variantValue);
 		return result;
 	}

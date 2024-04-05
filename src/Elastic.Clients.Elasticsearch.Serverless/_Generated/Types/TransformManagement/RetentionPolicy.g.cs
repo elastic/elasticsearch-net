@@ -96,7 +96,6 @@ internal sealed partial class RetentionPolicyConverter : JsonConverter<Retention
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'RetentionPolicy' from the response.");
 		}
 
-		reader.Read();
 		var result = new RetentionPolicy(variantNameValue, variantValue);
 		return result;
 	}

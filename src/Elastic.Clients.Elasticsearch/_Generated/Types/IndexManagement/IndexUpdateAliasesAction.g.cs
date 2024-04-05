@@ -112,7 +112,6 @@ internal sealed partial class IndexUpdateAliasesActionConverter : JsonConverter<
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IndexUpdateAliasesAction' from the response.");
 		}
 
-		reader.Read();
 		var result = new IndexUpdateAliasesAction(variantNameValue, variantValue);
 		return result;
 	}
