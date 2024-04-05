@@ -33,6 +33,7 @@ public sealed partial class TopHitsAggregation
 	/// <para>Fields for which to return doc values.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? DocvalueFields { get; set; }
 
 	/// <summary>
@@ -102,6 +103,7 @@ public sealed partial class TopHitsAggregation
 	/// <para>Returns values for the specified stored fields (fields that use the `store` mapping option).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields? StoredFields { get; set; }
 
 	/// <summary>

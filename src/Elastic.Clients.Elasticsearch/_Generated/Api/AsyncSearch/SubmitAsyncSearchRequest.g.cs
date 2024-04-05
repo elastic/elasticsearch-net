@@ -911,6 +911,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// <para>List of stored fields to return as part of a hit. If no fields are specified,<br/>no stored fields are included in the response. If this field is specified, the _source<br/>parameter defaults to false. You can pass _source: true to return both source fields<br/>and stored fields in the search response.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stored_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 	[JsonInclude, JsonPropertyName("suggest")]
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }

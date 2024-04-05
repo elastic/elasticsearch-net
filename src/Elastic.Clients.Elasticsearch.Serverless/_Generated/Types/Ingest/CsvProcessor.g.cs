@@ -93,6 +93,7 @@ public sealed partial class CsvProcessor
 	/// <para>The array of fields to assign extracted values to.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("target_fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Serverless.Fields TargetFields { get; set; }
 
 	/// <summary>
