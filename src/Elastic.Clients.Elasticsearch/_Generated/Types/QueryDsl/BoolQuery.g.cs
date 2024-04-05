@@ -304,14 +304,14 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
@@ -339,14 +339,14 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		else if (MustDescriptorActions is not null)
 		{
 			writer.WritePropertyName("must");
-			if (MustDescriptorActions.Length > 1)
+			if (MustDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MustDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (MustDescriptorActions.Length > 1)
+			if (MustDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MustValue is not null)
@@ -368,14 +368,14 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		else if (MustNotDescriptorActions is not null)
 		{
 			writer.WritePropertyName("must_not");
-			if (MustNotDescriptorActions.Length > 1)
+			if (MustNotDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MustNotDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (MustNotDescriptorActions.Length > 1)
+			if (MustNotDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MustNotValue is not null)
@@ -403,14 +403,14 @@ public sealed partial class BoolQueryDescriptor<TDocument> : SerializableDescrip
 		else if (ShouldDescriptorActions is not null)
 		{
 			writer.WritePropertyName("should");
-			if (ShouldDescriptorActions.Length > 1)
+			if (ShouldDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in ShouldDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (ShouldDescriptorActions.Length > 1)
+			if (ShouldDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (ShouldValue is not null)
@@ -653,14 +653,14 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
@@ -688,14 +688,14 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		else if (MustDescriptorActions is not null)
 		{
 			writer.WritePropertyName("must");
-			if (MustDescriptorActions.Length > 1)
+			if (MustDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MustDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (MustDescriptorActions.Length > 1)
+			if (MustDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MustValue is not null)
@@ -717,14 +717,14 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		else if (MustNotDescriptorActions is not null)
 		{
 			writer.WritePropertyName("must_not");
-			if (MustNotDescriptorActions.Length > 1)
+			if (MustNotDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in MustNotDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (MustNotDescriptorActions.Length > 1)
+			if (MustNotDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (MustNotValue is not null)
@@ -752,14 +752,14 @@ public sealed partial class BoolQueryDescriptor : SerializableDescriptor<BoolQue
 		else if (ShouldDescriptorActions is not null)
 		{
 			writer.WritePropertyName("should");
-			if (ShouldDescriptorActions.Length > 1)
+			if (ShouldDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in ShouldDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (ShouldDescriptorActions.Length > 1)
+			if (ShouldDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (ShouldValue is not null)
