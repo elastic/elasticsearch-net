@@ -437,14 +437,14 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		else if (FieldsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("fields");
-			if (FieldsDescriptorActions.Length > 1)
+			if (FieldsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
 			}
 
-			if (FieldsDescriptorActions.Length > 1)
+			if (FieldsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FieldsValue is not null)
@@ -466,14 +466,14 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
@@ -842,14 +842,14 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		else if (FieldsDescriptorActions is not null)
 		{
 			writer.WritePropertyName("fields");
-			if (FieldsDescriptorActions.Length > 1)
+			if (FieldsDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FieldsDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
 			}
 
-			if (FieldsDescriptorActions.Length > 1)
+			if (FieldsDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FieldsValue is not null)
@@ -871,14 +871,14 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 		else if (FilterDescriptorActions is not null)
 		{
 			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteStartArray();
 			foreach (var action in FilterDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
 			}
 
-			if (FilterDescriptorActions.Length > 1)
+			if (FilterDescriptorActions.Length != 1)
 				writer.WriteEndArray();
 		}
 		else if (FilterValue is not null)
