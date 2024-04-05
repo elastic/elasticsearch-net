@@ -168,7 +168,6 @@ internal sealed partial class InferenceConfigUpdateConverter : JsonConverter<Inf
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfigUpdate' from the response.");
 		}
 
-		reader.Read();
 		var result = new InferenceConfigUpdate(variantNameValue, variantValue);
 		return result;
 	}

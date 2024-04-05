@@ -112,7 +112,6 @@ internal sealed partial class PreprocessorConverter : JsonConverter<Preprocessor
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Preprocessor' from the response.");
 		}
 
-		reader.Read();
 		var result = new Preprocessor(variantNameValue, variantValue);
 		return result;
 	}

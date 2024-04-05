@@ -96,7 +96,6 @@ internal sealed partial class SyncConverter : JsonConverter<Sync>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'Sync' from the response.");
 		}
 
-		reader.Read();
 		var result = new Sync(variantNameValue, variantValue);
 		return result;
 	}

@@ -168,7 +168,6 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'SpanQuery' from the response.");
 		}
 
-		reader.Read();
 		var result = new SpanQuery(variantNameValue, variantValue);
 		return result;
 	}
