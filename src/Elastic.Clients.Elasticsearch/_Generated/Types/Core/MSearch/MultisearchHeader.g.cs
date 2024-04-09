@@ -33,26 +33,188 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 public sealed partial class MultisearchHeader
 {
 	[JsonInclude, JsonPropertyName("allow_no_indices")]
-	public bool? AllowNoIndices { get; init; }
+	public bool? AllowNoIndices { get; set; }
 	[JsonInclude, JsonPropertyName("allow_partial_search_results")]
-	public bool? AllowPartialSearchResults { get; init; }
+	public bool? AllowPartialSearchResults { get; set; }
 	[JsonInclude, JsonPropertyName("ccs_minimize_roundtrips")]
-	public bool? CcsMinimizeRoundtrips { get; init; }
+	public bool? CcsMinimizeRoundtrips { get; set; }
 	[JsonInclude, JsonPropertyName("expand_wildcards")]
 	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.ExpandWildcard))]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; init; }
+	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_throttled")]
-	public bool? IgnoreThrottled { get; init; }
+	public bool? IgnoreThrottled { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_unavailable")]
-	public bool? IgnoreUnavailable { get; init; }
+	public bool? IgnoreUnavailable { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.Indices? Indices { get; init; }
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 	[JsonInclude, JsonPropertyName("preference")]
-	public string? Preference { get; init; }
+	public string? Preference { get; set; }
 	[JsonInclude, JsonPropertyName("request_cache")]
-	public bool? RequestCache { get; init; }
+	public bool? RequestCache { get; set; }
 	[JsonInclude, JsonPropertyName("routing")]
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; init; }
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	[JsonInclude, JsonPropertyName("search_type")]
-	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; init; }
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
+}
+
+/// <summary>
+/// <para>Contains parameters used to limit or change the subsequent search body request.</para>
+/// </summary>
+public sealed partial class MultisearchHeaderDescriptor : SerializableDescriptor<MultisearchHeaderDescriptor>
+{
+	internal MultisearchHeaderDescriptor(Action<MultisearchHeaderDescriptor> configure) => configure.Invoke(this);
+
+	public MultisearchHeaderDescriptor() : base()
+	{
+	}
+
+	private bool? AllowNoIndicesValue { get; set; }
+	private bool? AllowPartialSearchResultsValue { get; set; }
+	private bool? CcsMinimizeRoundtripsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcardsValue { get; set; }
+	private bool? IgnoreThrottledValue { get; set; }
+	private bool? IgnoreUnavailableValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Indices? IndicesValue { get; set; }
+	private string? PreferenceValue { get; set; }
+	private bool? RequestCacheValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.SearchType? SearchTypeValue { get; set; }
+
+	public MultisearchHeaderDescriptor AllowNoIndices(bool? allowNoIndices = true)
+	{
+		AllowNoIndicesValue = allowNoIndices;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor AllowPartialSearchResults(bool? allowPartialSearchResults = true)
+	{
+		AllowPartialSearchResultsValue = allowPartialSearchResults;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor CcsMinimizeRoundtrips(bool? ccsMinimizeRoundtrips = true)
+	{
+		CcsMinimizeRoundtripsValue = ccsMinimizeRoundtrips;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards)
+	{
+		ExpandWildcardsValue = expandWildcards;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor IgnoreThrottled(bool? ignoreThrottled = true)
+	{
+		IgnoreThrottledValue = ignoreThrottled;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true)
+	{
+		IgnoreUnavailableValue = ignoreUnavailable;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		IndicesValue = indices;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor Preference(string? preference)
+	{
+		PreferenceValue = preference;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor RequestCache(bool? requestCache = true)
+	{
+		RequestCacheValue = requestCache;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	public MultisearchHeaderDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? searchType)
+	{
+		SearchTypeValue = searchType;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (AllowNoIndicesValue.HasValue)
+		{
+			writer.WritePropertyName("allow_no_indices");
+			writer.WriteBooleanValue(AllowNoIndicesValue.Value);
+		}
+
+		if (AllowPartialSearchResultsValue.HasValue)
+		{
+			writer.WritePropertyName("allow_partial_search_results");
+			writer.WriteBooleanValue(AllowPartialSearchResultsValue.Value);
+		}
+
+		if (CcsMinimizeRoundtripsValue.HasValue)
+		{
+			writer.WritePropertyName("ccs_minimize_roundtrips");
+			writer.WriteBooleanValue(CcsMinimizeRoundtripsValue.Value);
+		}
+
+		if (ExpandWildcardsValue is not null)
+		{
+			writer.WritePropertyName("expand_wildcards");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.ExpandWildcard>(ExpandWildcardsValue, writer, options);
+		}
+
+		if (IgnoreThrottledValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_throttled");
+			writer.WriteBooleanValue(IgnoreThrottledValue.Value);
+		}
+
+		if (IgnoreUnavailableValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_unavailable");
+			writer.WriteBooleanValue(IgnoreUnavailableValue.Value);
+		}
+
+		if (IndicesValue is not null)
+		{
+			writer.WritePropertyName("index");
+			JsonSerializer.Serialize(writer, IndicesValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(PreferenceValue))
+		{
+			writer.WritePropertyName("preference");
+			writer.WriteStringValue(PreferenceValue);
+		}
+
+		if (RequestCacheValue.HasValue)
+		{
+			writer.WritePropertyName("request_cache");
+			writer.WriteBooleanValue(RequestCacheValue.Value);
+		}
+
+		if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
+		if (SearchTypeValue is not null)
+		{
+			writer.WritePropertyName("search_type");
+			JsonSerializer.Serialize(writer, SearchTypeValue, options);
+		}
+
+		writer.WriteEndObject();
+	}
 }
