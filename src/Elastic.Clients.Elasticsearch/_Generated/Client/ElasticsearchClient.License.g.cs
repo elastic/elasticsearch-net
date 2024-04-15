@@ -62,9 +62,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete()
+	public virtual DeleteLicenseResponse Delete(DeleteLicenseRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete(DeleteLicenseRequestDescriptor descriptor)
+	public virtual DeleteLicenseResponse Delete()
 	{
+		var descriptor = new DeleteLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(CancellationToken cancellationToken = default)
+	public virtual Task<DeleteLicenseResponse> DeleteAsync(DeleteLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(DeleteLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteLicenseResponse> DeleteAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +151,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get()
+	public virtual GetLicenseResponse Get(GetLicenseRequestDescriptor descriptor)
 	{
-		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor);
 	}
@@ -163,8 +162,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get(GetLicenseRequestDescriptor descriptor)
+	public virtual GetLicenseResponse Get()
 	{
+		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor);
 	}
@@ -186,9 +186,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +196,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,9 +240,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus()
+	public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequestDescriptor descriptor)
 	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor);
 	}
@@ -252,8 +251,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequestDescriptor descriptor)
+	public virtual GetBasicStatusResponse GetBasicStatus()
 	{
+		var descriptor = new GetBasicStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor);
 	}
@@ -275,9 +275,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(GetBasicStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -286,8 +285,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(GetBasicStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetBasicStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,9 +329,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus()
+	public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequestDescriptor descriptor)
 	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor);
 	}
@@ -341,8 +340,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequestDescriptor descriptor)
+	public virtual GetTrialStatusResponse GetTrialStatus()
 	{
+		var descriptor = new GetTrialStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor);
 	}
@@ -364,9 +364,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(GetTrialStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -375,8 +374,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(GetTrialStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetTrialStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,9 +418,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post()
+	public virtual PostResponse Post(PostRequestDescriptor descriptor)
 	{
-		var descriptor = new PostRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor);
 	}
@@ -430,8 +429,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post(PostRequestDescriptor descriptor)
+	public virtual PostResponse Post()
 	{
+		var descriptor = new PostRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor);
 	}
@@ -453,9 +453,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the license for the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostResponse> PostAsync(CancellationToken cancellationToken = default)
+	public virtual Task<PostResponse> PostAsync(PostRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor, cancellationToken);
 	}
@@ -464,8 +463,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the license for the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostResponse> PostAsync(PostRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PostResponse> PostAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new PostRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,9 +507,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic()
+	public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequestDescriptor descriptor)
 	{
-		var descriptor = new PostStartBasicRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor);
 	}
@@ -519,8 +518,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequestDescriptor descriptor)
+	public virtual PostStartBasicResponse PostStartBasic()
 	{
+		var descriptor = new PostStartBasicRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor);
 	}
@@ -542,9 +542,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an indefinite basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(CancellationToken cancellationToken = default)
+	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostStartBasicRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor, cancellationToken);
 	}
@@ -553,8 +552,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an indefinite basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new PostStartBasicRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor, cancellationToken);
 	}
@@ -596,9 +596,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial()
+	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequestDescriptor descriptor)
 	{
-		var descriptor = new PostStartTrialRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor);
 	}
@@ -608,8 +607,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequestDescriptor descriptor)
+	public virtual PostStartTrialResponse PostStartTrial()
 	{
+		var descriptor = new PostStartTrialRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor);
 	}
@@ -631,9 +631,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>starts a limited time trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
+	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostStartTrialRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor, cancellationToken);
 	}
@@ -642,8 +641,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>starts a limited time trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new PostStartTrialRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor, cancellationToken);
 	}

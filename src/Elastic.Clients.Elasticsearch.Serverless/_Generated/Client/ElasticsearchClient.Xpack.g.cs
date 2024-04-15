@@ -61,9 +61,8 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new XpackInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -72,8 +71,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new XpackInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -114,9 +114,8 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new XpackUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor, cancellationToken);
 	}
@@ -125,8 +124,9 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new XpackUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor, cancellationToken);
 	}
