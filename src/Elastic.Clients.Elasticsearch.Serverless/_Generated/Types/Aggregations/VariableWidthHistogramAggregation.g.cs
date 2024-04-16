@@ -46,6 +46,8 @@ public sealed partial class VariableWidthHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("initial_buffer")]
 	public int? InitialBuffer { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
 	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
@@ -67,6 +69,7 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 	private int? BucketsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private int? InitialBufferValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
 	/// <summary>
@@ -114,6 +117,12 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 		return Self;
 	}
 
+	public VariableWidthHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
 	/// </summary>
@@ -144,6 +153,12 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor<TDocumen
 			writer.WriteNumberValue(InitialBufferValue.Value);
 		}
 
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		if (ShardSizeValue.HasValue)
 		{
 			writer.WritePropertyName("shard_size");
@@ -165,6 +180,7 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 	private int? BucketsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private int? InitialBufferValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
 	/// <summary>
@@ -212,6 +228,12 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 		return Self;
 	}
 
+	public VariableWidthHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
+	{
+		ScriptValue = script;
+		return Self;
+	}
+
 	/// <summary>
 	/// <para>The number of buckets that the coordinating node will request from each shard.<br/>Defaults to `buckets * 50`.</para>
 	/// </summary>
@@ -240,6 +262,12 @@ public sealed partial class VariableWidthHistogramAggregationDescriptor : Serial
 		{
 			writer.WritePropertyName("initial_buffer");
 			writer.WriteNumberValue(InitialBufferValue.Value);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (ShardSizeValue.HasValue)

@@ -52,16 +52,12 @@ public sealed partial class RareTermsAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_doc_count")]
 	public long? MaxDocCount { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The precision of the internal CuckooFilters.<br/>Smaller precision leads to better approximation, but higher memory usage.</para>
@@ -86,9 +82,7 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private long? MaxDocCountValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? PrecisionValue { get; set; }
 	private string? ValueTypeValue { get; set; }
 
@@ -146,24 +140,12 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public RareTermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public RareTermsAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public RareTermsAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -209,22 +191,10 @@ public sealed partial class RareTermsAggregationDescriptor<TDocument> : Serializ
 			writer.WriteNumberValue(MaxDocCountValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (PrecisionValue.HasValue)
@@ -255,9 +225,7 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
 	private long? MaxDocCountValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? PrecisionValue { get; set; }
 	private string? ValueTypeValue { get; set; }
 
@@ -315,24 +283,12 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public RareTermsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public RareTermsAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public RareTermsAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -378,22 +334,10 @@ public sealed partial class RareTermsAggregationDescriptor : SerializableDescrip
 			writer.WriteNumberValue(MaxDocCountValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (PrecisionValue.HasValue)

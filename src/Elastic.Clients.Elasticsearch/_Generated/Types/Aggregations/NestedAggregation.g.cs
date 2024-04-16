@@ -29,11 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class NestedAggregation
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-
 	/// <summary>
 	/// <para>The path to the field of type `nested`.</para>
 	/// </summary>
@@ -51,21 +46,7 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public NestedAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public NestedAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The path to the field of type `nested`.</para>
@@ -97,18 +78,6 @@ public sealed partial class NestedAggregationDescriptor<TDocument> : Serializabl
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PathValue is not null)
 		{
 			writer.WritePropertyName("path");
@@ -127,21 +96,7 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public NestedAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public NestedAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The path to the field of type `nested`.</para>
@@ -173,18 +128,6 @@ public sealed partial class NestedAggregationDescriptor : SerializableDescriptor
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PathValue is not null)
 		{
 			writer.WritePropertyName("path");

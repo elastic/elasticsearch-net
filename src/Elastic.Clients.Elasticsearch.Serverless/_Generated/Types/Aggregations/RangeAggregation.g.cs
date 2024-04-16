@@ -36,16 +36,12 @@ public sealed partial class RangeAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public int? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>An array of ranges used to bucket documents.</para>
@@ -68,9 +64,7 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
@@ -110,24 +104,12 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public RangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public RangeAggregationDescriptor<TDocument> Missing(int? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -191,22 +173,10 @@ public sealed partial class RangeAggregationDescriptor<TDocument> : Serializable
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue.HasValue)
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)
@@ -260,9 +230,7 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregationRangeDescriptor> RangesDescriptorAction { get; set; }
@@ -302,24 +270,12 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public RangeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public RangeAggregationDescriptor Missing(int? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public RangeAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -383,22 +339,10 @@ public sealed partial class RangeAggregationDescriptor : SerializableDescriptor<
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue.HasValue)
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)

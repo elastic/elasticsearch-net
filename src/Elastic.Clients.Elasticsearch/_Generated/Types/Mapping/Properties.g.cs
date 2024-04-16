@@ -341,7 +341,7 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(ref reader, options);
 			case "double_range":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(ref reader, options);
-			case "{dynamic_property}":
+			case "{dynamic_type}":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>(ref reader, options);
 			case "alias":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.FieldAliasProperty>(ref reader, options);
@@ -462,7 +462,7 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 			case "double_range":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty), options);
 				return;
-			case "{dynamic_property}":
+			case "{dynamic_type}":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty), options);
 				return;
 			case "alias":

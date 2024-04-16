@@ -40,10 +40,6 @@ public sealed partial class TTestAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("b")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The type of test.</para>
@@ -68,8 +64,6 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> bDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
@@ -126,18 +120,6 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TTestAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TTestAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The type of test.</para>
 	/// </summary>
@@ -182,18 +164,6 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, bValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (TypeValue is not null)
 		{
 			writer.WritePropertyName("type");
@@ -218,8 +188,6 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor bDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> bDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
 
 	/// <summary>
@@ -276,18 +244,6 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TTestAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public TTestAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The type of test.</para>
 	/// </summary>
@@ -330,18 +286,6 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("b");
 			JsonSerializer.Serialize(writer, bValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (TypeValue is not null)

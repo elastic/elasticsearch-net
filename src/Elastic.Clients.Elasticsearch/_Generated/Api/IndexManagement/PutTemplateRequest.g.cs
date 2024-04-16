@@ -31,25 +31,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class PutTemplateRequestParameters : RequestParameters
 {
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
 	/// <summary>
 	/// <para>If true, this request cannot replace or update existing index templates.</para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
-	/// </summary>
-	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -69,6 +61,9 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	internal override string OperationName => "indices.put_template";
 
+	[JsonIgnore]
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
 	/// <summary>
 	/// <para>If true, this request cannot replace or update existing index templates.</para>
 	/// </summary>
@@ -76,22 +71,10 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
-	/// <para>If `true`, returns settings in flat format.</para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
-
-	/// <summary>
 	/// <para>Period to wait for a connection to the master node. If no response is<br/>received before the timeout expires, the request fails and returns an error.</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>Period to wait for a response.<br/>If no response is received before the timeout expires, the request fails and returns an error.</para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>Aliases for the index.</para>
@@ -151,10 +134,9 @@ public sealed partial class PutTemplateRequestDescriptor<TDocument> : RequestDes
 
 	internal override string OperationName => "indices.put_template";
 
+	public PutTemplateRequestDescriptor<TDocument> Cause(string? cause) => Qs("cause", cause);
 	public PutTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
-	public PutTemplateRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public PutTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutTemplateRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public PutTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -316,10 +298,9 @@ public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<Put
 
 	internal override string OperationName => "indices.put_template";
 
+	public PutTemplateRequestDescriptor Cause(string? cause) => Qs("cause", cause);
 	public PutTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
-	public PutTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
 	public PutTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutTemplateRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public PutTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

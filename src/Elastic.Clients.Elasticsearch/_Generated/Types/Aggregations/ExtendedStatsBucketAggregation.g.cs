@@ -46,10 +46,6 @@ public sealed partial class ExtendedStatsBucketAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The number of standard deviations above/below the mean to display.</para>
@@ -71,8 +67,6 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? SigmaValue { get; set; }
 
 	/// <summary>
@@ -99,18 +93,6 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 	public ExtendedStatsBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
 		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
-	public ExtendedStatsBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ExtendedStatsBucketAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -142,18 +124,6 @@ public sealed partial class ExtendedStatsBucketAggregationDescriptor : Serializa
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (SigmaValue.HasValue)

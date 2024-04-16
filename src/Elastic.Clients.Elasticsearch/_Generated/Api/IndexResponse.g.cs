@@ -35,7 +35,7 @@ public sealed partial class IndexResponse : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("_primary_term")]
-	public long PrimaryTerm { get; init; }
+	public long? PrimaryTerm { get; init; }
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 	[JsonInclude, JsonPropertyName("_seq_no")]

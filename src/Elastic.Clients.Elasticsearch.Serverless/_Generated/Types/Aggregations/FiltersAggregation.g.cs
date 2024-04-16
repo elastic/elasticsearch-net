@@ -34,10 +34,6 @@ public sealed partial class FiltersAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("filters")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filters { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Set to `true` to add a bucket to the response which will contain all documents that do not match any of the given filters.</para>
@@ -63,8 +59,6 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? FiltersValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private bool? OtherBucketValue { get; set; }
 	private string? OtherBucketKeyValue { get; set; }
 
@@ -74,18 +68,6 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 	public FiltersAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Serverless.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
-		return Self;
-	}
-
-	public FiltersAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public FiltersAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -116,18 +98,6 @@ public sealed partial class FiltersAggregationDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, FiltersValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (OtherBucketValue.HasValue)
 		{
 			writer.WritePropertyName("other_bucket");
@@ -153,8 +123,6 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? FiltersValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private bool? OtherBucketValue { get; set; }
 	private string? OtherBucketKeyValue { get; set; }
 
@@ -164,18 +132,6 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 	public FiltersAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Serverless.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? filters)
 	{
 		FiltersValue = filters;
-		return Self;
-	}
-
-	public FiltersAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public FiltersAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -204,18 +160,6 @@ public sealed partial class FiltersAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("filters");
 			JsonSerializer.Serialize(writer, FiltersValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OtherBucketValue.HasValue)

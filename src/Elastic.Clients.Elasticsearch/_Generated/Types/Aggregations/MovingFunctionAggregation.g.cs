@@ -46,10 +46,6 @@ public sealed partial class MovingFunctionAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The script that should be executed on each window of data.</para>
@@ -83,8 +79,6 @@ public sealed partial class MovingFunctionAggregationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private string? ScriptValue { get; set; }
 	private int? ShiftValue { get; set; }
 	private int? WindowValue { get; set; }
@@ -113,18 +107,6 @@ public sealed partial class MovingFunctionAggregationDescriptor : SerializableDe
 	public MovingFunctionAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? gapPolicy)
 	{
 		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
-	public MovingFunctionAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public MovingFunctionAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -174,18 +156,6 @@ public sealed partial class MovingFunctionAggregationDescriptor : SerializableDe
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (!string.IsNullOrEmpty(ScriptValue))

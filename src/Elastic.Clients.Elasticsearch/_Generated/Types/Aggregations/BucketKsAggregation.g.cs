@@ -49,10 +49,6 @@ public sealed partial class BucketKsAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("fractions")]
 	public ICollection<double>? Fractions { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Indicates the sampling methodology when calculating the K-S test. Note, this is sampling of the returned values.<br/>This determines the cumulative distribution function (CDF) points used comparing the two samples. Default is<br/>`upper_tail`, which emphasizes the upper end of the CDF points. Valid options are: `upper_tail`, `uniform`,<br/>and `lower_tail`.</para>
@@ -77,8 +73,6 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	private ICollection<string>? AlternativeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private ICollection<double>? FractionsValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private string? SamplingMethodValue { get; set; }
 
 	/// <summary>
@@ -105,18 +99,6 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 	public BucketKsAggregationDescriptor Fractions(ICollection<double>? fractions)
 	{
 		FractionsValue = fractions;
-		return Self;
-	}
-
-	public BucketKsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public BucketKsAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -148,18 +130,6 @@ public sealed partial class BucketKsAggregationDescriptor : SerializableDescript
 		{
 			writer.WritePropertyName("fractions");
 			JsonSerializer.Serialize(writer, FractionsValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (!string.IsNullOrEmpty(SamplingMethodValue))
