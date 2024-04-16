@@ -39,6 +39,8 @@ public sealed partial class SynonymGraphTokenFilter : ITokenFilter
 	public ICollection<string>? Synonyms { get; set; }
 	[JsonInclude, JsonPropertyName("synonyms_path")]
 	public string? SynonymsPath { get; set; }
+	[JsonInclude, JsonPropertyName("synonyms_set")]
+	public string? SynonymsSet { get; set; }
 	[JsonInclude, JsonPropertyName("tokenizer")]
 	public string? Tokenizer { get; set; }
 
@@ -64,6 +66,7 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 	private bool? LenientValue { get; set; }
 	private ICollection<string>? SynonymsValue { get; set; }
 	private string? SynonymsPathValue { get; set; }
+	private string? SynonymsSetValue { get; set; }
 	private string? TokenizerValue { get; set; }
 	private bool? UpdateableValue { get; set; }
 	private string? VersionValue { get; set; }
@@ -95,6 +98,12 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 	public SynonymGraphTokenFilterDescriptor SynonymsPath(string? synonymsPath)
 	{
 		SynonymsPathValue = synonymsPath;
+		return Self;
+	}
+
+	public SynonymGraphTokenFilterDescriptor SynonymsSet(string? synonymsSet)
+	{
+		SynonymsSetValue = synonymsSet;
 		return Self;
 	}
 
@@ -149,6 +158,12 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 			writer.WriteStringValue(SynonymsPathValue);
 		}
 
+		if (!string.IsNullOrEmpty(SynonymsSetValue))
+		{
+			writer.WritePropertyName("synonyms_set");
+			writer.WriteStringValue(SynonymsSetValue);
+		}
+
 		if (!string.IsNullOrEmpty(TokenizerValue))
 		{
 			writer.WritePropertyName("tokenizer");
@@ -179,6 +194,7 @@ public sealed partial class SynonymGraphTokenFilterDescriptor : SerializableDesc
 		Lenient = LenientValue,
 		Synonyms = SynonymsValue,
 		SynonymsPath = SynonymsPathValue,
+		SynonymsSet = SynonymsSetValue,
 		Tokenizer = TokenizerValue,
 		Updateable = UpdateableValue,
 		Version = VersionValue

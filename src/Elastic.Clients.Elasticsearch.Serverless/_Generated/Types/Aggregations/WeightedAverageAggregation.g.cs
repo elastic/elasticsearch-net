@@ -34,10 +34,6 @@ public sealed partial class WeightedAverageAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Configuration for the field that provides the values.</para>
@@ -65,8 +61,6 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 	}
 
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValue? ValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValueDescriptor<TDocument> ValueDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValueDescriptor<TDocument>> ValueDescriptorAction { get; set; }
@@ -81,18 +75,6 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 	public WeightedAverageAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -165,18 +147,6 @@ public sealed partial class WeightedAverageAggregationDescriptor<TDocument> : Se
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (ValueDescriptor is not null)
 		{
 			writer.WritePropertyName("value");
@@ -228,8 +198,6 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 	}
 
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValue? ValueValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValueDescriptor ValueDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.WeightedAverageValueDescriptor> ValueDescriptorAction { get; set; }
@@ -244,18 +212,6 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 	public WeightedAverageAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public WeightedAverageAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -326,18 +282,6 @@ public sealed partial class WeightedAverageAggregationDescriptor : SerializableD
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (ValueDescriptor is not null)

@@ -114,12 +114,6 @@ public sealed partial class MoreLikeThisQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_length")]
 	public int? MinWordLength { get; set; }
-
-	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("per_field_analyzer")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 	[JsonInclude, JsonPropertyName("routing")]
@@ -168,7 +162,6 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private int? MinTermFreqValue { get; set; }
 	private int? MinWordLengthValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private ICollection<string>? StopWordsValue { get; set; }
@@ -302,15 +295,6 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
-	/// </summary>
-	public MoreLikeThisQueryDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
-	{
-		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
-		return Self;
-	}
-
 	public MoreLikeThisQueryDescriptor<TDocument> QueryName(string? queryName)
 	{
 		QueryNameValue = queryName;
@@ -436,12 +420,6 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 			writer.WriteNumberValue(MinWordLengthValue.Value);
 		}
 
-		if (PerFieldAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("per_field_analyzer");
-			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
-		}
-
 		if (!string.IsNullOrEmpty(QueryNameValue))
 		{
 			writer.WritePropertyName("_name");
@@ -504,7 +482,6 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatchValue { get; set; }
 	private int? MinTermFreqValue { get; set; }
 	private int? MinWordLengthValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
 	private ICollection<string>? StopWordsValue { get; set; }
@@ -638,15 +615,6 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		return Self;
 	}
 
-	/// <summary>
-	/// <para>Overrides the default analyzer.</para>
-	/// </summary>
-	public MoreLikeThisQueryDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
-	{
-		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
-		return Self;
-	}
-
 	public MoreLikeThisQueryDescriptor QueryName(string? queryName)
 	{
 		QueryNameValue = queryName;
@@ -770,12 +738,6 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		{
 			writer.WritePropertyName("min_word_length");
 			writer.WriteNumberValue(MinWordLengthValue.Value);
-		}
-
-		if (PerFieldAnalyzerValue is not null)
-		{
-			writer.WritePropertyName("per_field_analyzer");
-			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(QueryNameValue))

@@ -40,10 +40,6 @@ public sealed partial class GeotileGridAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Integer zoom of the key used to define cells/buckets in the results.<br/>Values outside of the range [0,29] will be rejected.</para>
@@ -77,8 +73,6 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 
 	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds? BoundsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? PrecisionValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -116,18 +110,6 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 	public GeotileGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeotileGridAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeotileGridAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -173,18 +155,6 @@ public sealed partial class GeotileGridAggregationDescriptor<TDocument> : Serial
 			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PrecisionValue.HasValue)
 		{
 			writer.WritePropertyName("precision");
@@ -217,8 +187,6 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.Serverless.GeoBounds? BoundsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? PrecisionValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -256,18 +224,6 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 	public GeotileGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeotileGridAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeotileGridAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -311,18 +267,6 @@ public sealed partial class GeotileGridAggregationDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (PrecisionValue.HasValue)

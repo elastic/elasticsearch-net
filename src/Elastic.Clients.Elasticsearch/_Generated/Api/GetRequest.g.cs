@@ -32,6 +32,11 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class GetRequestParameters : RequestParameters
 {
 	/// <summary>
+	/// <para>Should this request force synthetic _source?<br/>Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.<br/>Fetches with this enabled will be slower the enabling synthetic source natively in the index.</para>
+	/// </summary>
+	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
+
+	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -98,6 +103,12 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "get";
+
+	/// <summary>
+	/// <para>Should this request force synthetic _source?<br/>Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.<br/>Fetches with this enabled will be slower the enabling synthetic source natively in the index.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
@@ -179,6 +190,7 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 
 	internal override string OperationName => "get";
 
+	public GetRequestDescriptor<TDocument> ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
 	public GetRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public GetRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
@@ -226,6 +238,7 @@ public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestD
 
 	internal override string OperationName => "get";
 
+	public GetRequestDescriptor ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
 	public GetRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public GetRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public GetRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);

@@ -46,10 +46,6 @@ public sealed partial class MovingPercentilesAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>By default, the window consists of the last n values excluding the current bucket.<br/>Increasing `shift` by 1, moves the starting window position by 1 to the right.</para>
@@ -77,8 +73,6 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? ShiftValue { get; set; }
 	private int? WindowValue { get; set; }
 
@@ -106,18 +100,6 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 	public MovingPercentilesAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? gapPolicy)
 	{
 		GapPolicyValue = gapPolicy;
-		return Self;
-	}
-
-	public MovingPercentilesAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public MovingPercentilesAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -158,18 +140,6 @@ public sealed partial class MovingPercentilesAggregationDescriptor : Serializabl
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (ShiftValue.HasValue)

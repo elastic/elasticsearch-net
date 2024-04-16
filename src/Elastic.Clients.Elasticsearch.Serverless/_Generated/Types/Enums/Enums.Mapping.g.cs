@@ -660,6 +660,8 @@ public enum RuntimeFieldType
 	Double,
 	[EnumMember(Value = "date")]
 	Date,
+	[EnumMember(Value = "composite")]
+	Composite,
 	[EnumMember(Value = "boolean")]
 	Boolean
 }
@@ -685,6 +687,8 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 				return RuntimeFieldType.Double;
 			case "date":
 				return RuntimeFieldType.Date;
+			case "composite":
+				return RuntimeFieldType.Composite;
 			case "boolean":
 				return RuntimeFieldType.Boolean;
 		}
@@ -717,6 +721,9 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 				return;
 			case RuntimeFieldType.Date:
 				writer.WriteStringValue("date");
+				return;
+			case RuntimeFieldType.Composite:
+				writer.WriteStringValue("composite");
 				return;
 			case RuntimeFieldType.Boolean:
 				writer.WriteStringValue("boolean");

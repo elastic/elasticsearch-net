@@ -40,16 +40,12 @@ public sealed partial class DateRangeAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Array of date ranges.</para>
@@ -76,9 +72,7 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
@@ -121,24 +115,12 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public DateRangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public DateRangeAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public DateRangeAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -205,22 +187,10 @@ public sealed partial class DateRangeAggregationDescriptor<TDocument> : Serializ
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)
@@ -274,9 +244,7 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor> RangesDescriptorAction { get; set; }
@@ -319,24 +287,12 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public DateRangeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The value to apply to documents that do not have a value.<br/>By default, documents without a value are ignored.</para>
 	/// </summary>
 	public DateRangeAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public DateRangeAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -403,22 +359,10 @@ public sealed partial class DateRangeAggregationDescriptor : SerializableDescrip
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)

@@ -34,10 +34,6 @@ public sealed partial class CompositeAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("after")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? After { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The number of composite buckets that should be returned.</para>
@@ -63,8 +59,6 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? AfterValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
@@ -74,18 +68,6 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 	public CompositeAggregationDescriptor<TDocument> After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>> selector)
 	{
 		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>());
-		return Self;
-	}
-
-	public CompositeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public CompositeAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -116,18 +98,6 @@ public sealed partial class CompositeAggregationDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, AfterValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (SizeValue.HasValue)
 		{
 			writer.WritePropertyName("size");
@@ -153,8 +123,6 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	}
 
 	private IDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>? AfterValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? SizeValue { get; set; }
 	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.CompositeAggregationSource>>? SourcesValue { get; set; }
 
@@ -164,18 +132,6 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 	public CompositeAggregationDescriptor After(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>, FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>> selector)
 	{
 		AfterValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.FieldValue>());
-		return Self;
-	}
-
-	public CompositeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public CompositeAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -204,18 +160,6 @@ public sealed partial class CompositeAggregationDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("after");
 			JsonSerializer.Serialize(writer, AfterValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (SizeValue.HasValue)

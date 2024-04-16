@@ -46,16 +46,12 @@ public sealed partial class IpPrefixAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_ipv6")]
 	public bool? IsIpv6 { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].<br/>For IPv6 addresses the accepted range is [0, 128].</para>
@@ -77,9 +73,7 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 	private bool? AppendPrefixLengthValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? IsIpv6Value { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private int PrefixLengthValue { get; set; }
 
 	/// <summary>
@@ -127,24 +121,12 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 		return Self;
 	}
 
-	public IpPrefixAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -174,22 +156,10 @@ public sealed partial class IpPrefixAggregationDescriptor<TDocument> : Serializa
 			writer.WriteBooleanValue(IsIpv6Value.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WritePropertyName("prefix_length");
@@ -209,9 +179,7 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 	private bool? AppendPrefixLengthValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private bool? IsIpv6Value { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private int PrefixLengthValue { get; set; }
 
 	/// <summary>
@@ -259,24 +227,12 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public IpPrefixAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Minimum number of documents in a bucket for it to be included in the response.</para>
 	/// </summary>
 	public IpPrefixAggregationDescriptor MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public IpPrefixAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -306,22 +262,10 @@ public sealed partial class IpPrefixAggregationDescriptor : SerializableDescript
 			writer.WriteBooleanValue(IsIpv6Value.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WritePropertyName("prefix_length");

@@ -29,6 +29,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class HtmlStripCharFilter : ICharFilter
 {
+	[JsonInclude, JsonPropertyName("escaped_tags")]
+	public ICollection<string>? EscapedTags { get; set; }
+
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "html_strip";
 
@@ -44,7 +47,14 @@ public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescript
 	{
 	}
 
+	private ICollection<string>? EscapedTagsValue { get; set; }
 	private string? VersionValue { get; set; }
+
+	public HtmlStripCharFilterDescriptor EscapedTags(ICollection<string>? escapedTags)
+	{
+		EscapedTagsValue = escapedTags;
+		return Self;
+	}
 
 	public HtmlStripCharFilterDescriptor Version(string? version)
 	{
@@ -55,6 +65,12 @@ public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (EscapedTagsValue is not null)
+		{
+			writer.WritePropertyName("escaped_tags");
+			JsonSerializer.Serialize(writer, EscapedTagsValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("html_strip");
 		if (!string.IsNullOrEmpty(VersionValue))
@@ -68,6 +84,7 @@ public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescript
 
 	HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
 	{
+		EscapedTags = EscapedTagsValue,
 		Version = VersionValue
 	};
 }

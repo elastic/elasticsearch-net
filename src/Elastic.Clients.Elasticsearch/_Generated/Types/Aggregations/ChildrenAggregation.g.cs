@@ -29,11 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class ChildrenAggregation
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-
 	/// <summary>
 	/// <para>The child type that should be selected.</para>
 	/// </summary>
@@ -51,21 +46,7 @@ public sealed partial class ChildrenAggregationDescriptor : SerializableDescript
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private string? TypeValue { get; set; }
-
-	public ChildrenAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ChildrenAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>The child type that should be selected.</para>
@@ -79,18 +60,6 @@ public sealed partial class ChildrenAggregationDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (!string.IsNullOrEmpty(TypeValue))
 		{
 			writer.WritePropertyName("type");
