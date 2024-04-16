@@ -62,9 +62,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteQueryRulesetResponse Delete(Elastic.Clients.Elasticsearch.Id rulesetId)
+	public virtual DeleteQueryRulesetResponse Delete(DeleteQueryRulesetRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteQueryRulesetRequestDescriptor, DeleteQueryRulesetResponse, DeleteQueryRulesetRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteQueryRulesetResponse Delete(DeleteQueryRulesetRequestDescriptor descriptor)
+	public virtual DeleteQueryRulesetResponse Delete(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var descriptor = new DeleteQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteQueryRulesetRequestDescriptor, DeleteQueryRulesetResponse, DeleteQueryRulesetRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteQueryRulesetResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id rulesetId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteQueryRulesetResponse> DeleteAsync(DeleteQueryRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteQueryRulesetRequestDescriptor, DeleteQueryRulesetResponse, DeleteQueryRulesetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteQueryRulesetResponse> DeleteAsync(DeleteQueryRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteQueryRulesetResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id rulesetId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteQueryRulesetRequestDescriptor, DeleteQueryRulesetResponse, DeleteQueryRulesetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +151,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetQueryRulesetResponse Get(Elastic.Clients.Elasticsearch.Id rulesetId)
+	public virtual GetQueryRulesetResponse Get(GetQueryRulesetRequestDescriptor descriptor)
 	{
-		var descriptor = new GetQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetQueryRulesetRequestDescriptor, GetQueryRulesetResponse, GetQueryRulesetRequestParameters>(descriptor);
 	}
@@ -163,8 +162,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetQueryRulesetResponse Get(GetQueryRulesetRequestDescriptor descriptor)
+	public virtual GetQueryRulesetResponse Get(Elastic.Clients.Elasticsearch.Id rulesetId)
 	{
+		var descriptor = new GetQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetQueryRulesetRequestDescriptor, GetQueryRulesetResponse, GetQueryRulesetRequestParameters>(descriptor);
 	}
@@ -186,9 +186,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the details about a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetQueryRulesetResponse> GetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, CancellationToken cancellationToken = default)
+	public virtual Task<GetQueryRulesetResponse> GetAsync(GetQueryRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetQueryRulesetRequestDescriptor, GetQueryRulesetResponse, GetQueryRulesetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +196,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the details about a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetQueryRulesetResponse> GetAsync(GetQueryRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetQueryRulesetResponse> GetAsync(Elastic.Clients.Elasticsearch.Id rulesetId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetQueryRulesetRequestDescriptor, GetQueryRulesetResponse, GetQueryRulesetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,9 +240,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List()
+	public virtual ListResponse List(ListRequestDescriptor descriptor)
 	{
-		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
 	}
@@ -252,8 +251,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequestDescriptor descriptor)
+	public virtual ListResponse List()
 	{
+		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
 	}
@@ -275,9 +275,8 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Lists query rulesets.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
@@ -286,8 +285,9 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Lists query rulesets.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
@@ -340,6 +340,18 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutQueryRulesetResponse Put(Elastic.Clients.Elasticsearch.Id rulesetId)
+	{
+		var descriptor = new PutQueryRulesetRequestDescriptor(rulesetId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutQueryRulesetRequestDescriptor, PutQueryRulesetResponse, PutQueryRulesetRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a query ruleset.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutQueryRulesetResponse Put(Elastic.Clients.Elasticsearch.Id rulesetId, Action<PutQueryRulesetRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutQueryRulesetRequestDescriptor(rulesetId);
@@ -354,6 +366,17 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<PutQueryRulesetResponse> PutAsync(PutQueryRulesetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutQueryRulesetRequestDescriptor, PutQueryRulesetResponse, PutQueryRulesetRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a query ruleset.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutQueryRulesetResponse> PutAsync(Elastic.Clients.Elasticsearch.Id rulesetId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutQueryRulesetRequestDescriptor(rulesetId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutQueryRulesetRequestDescriptor, PutQueryRulesetResponse, PutQueryRulesetRequestParameters>(descriptor, cancellationToken);
 	}

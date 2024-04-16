@@ -61,9 +61,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -72,8 +71,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -114,9 +137,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -125,8 +147,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -167,11 +213,56 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -188,9 +279,20 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor();
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
@@ -200,22 +302,23 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new NodesStatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+		var descriptor = new NodesStatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -242,9 +345,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns low-level information about REST actions usage on nodes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
 	}
@@ -253,8 +355,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns low-level information about REST actions usage on nodes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
 	}
