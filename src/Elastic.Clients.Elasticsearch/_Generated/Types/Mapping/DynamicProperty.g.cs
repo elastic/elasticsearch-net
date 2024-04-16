@@ -98,7 +98,7 @@ public sealed partial class DynamicProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
-	public string Type => "{dynamic_property}";
+	public string Type => "{dynamic_type}";
 }
 
 public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableDescriptor<DynamicPropertyDescriptor<TDocument>>, IBuildableDescriptor<DynamicProperty>
@@ -578,7 +578,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		}
 
 		writer.WritePropertyName("type");
-		writer.WriteStringValue("{dynamic_property}");
+		writer.WriteStringValue("{dynamic_type}");
 		writer.WriteEndObject();
 	}
 
@@ -1119,7 +1119,7 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		}
 
 		writer.WritePropertyName("type");
-		writer.WriteStringValue("{dynamic_property}");
+		writer.WriteStringValue("{dynamic_type}");
 		writer.WriteEndObject();
 	}
 

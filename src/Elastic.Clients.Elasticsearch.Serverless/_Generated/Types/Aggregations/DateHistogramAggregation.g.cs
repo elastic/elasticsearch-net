@@ -52,8 +52,6 @@ public sealed partial class DateHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
@@ -66,8 +64,6 @@ public sealed partial class DateHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public DateTimeOffset? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Changes the start value of each bucket by the specified positive (`+`) or negative offset (`-`) duration.</para>
@@ -108,10 +104,8 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FixedIntervalValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
@@ -172,12 +166,6 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		return Self;
 	}
 
-	public DateHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
 	/// </summary>
@@ -193,12 +181,6 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	public DateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public DateHistogramAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -268,12 +250,6 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -284,12 +260,6 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OffsetValue is not null)
@@ -338,10 +308,8 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FixedIntervalValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
@@ -402,12 +370,6 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
-	public DateHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
 	/// </summary>
@@ -423,12 +385,6 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	public DateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public DateHistogramAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -498,12 +454,6 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -514,12 +464,6 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OffsetValue is not null)

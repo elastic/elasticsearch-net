@@ -61,16 +61,12 @@ public sealed partial class CategorizeTextAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_unique_tokens")]
 	public int? MaxUniqueTokens { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket to be returned to the results.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public int? MinDocCount { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket to be returned from the shard before merging.</para>
@@ -115,9 +111,7 @@ public sealed partial class CategorizeTextAggregationDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private int? MaxMatchedTokensValue { get; set; }
 	private int? MaxUniqueTokensValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SimilarityThresholdValue { get; set; }
@@ -186,24 +180,12 @@ public sealed partial class CategorizeTextAggregationDescriptor<TDocument> : Ser
 		return Self;
 	}
 
-	public CategorizeTextAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket to be returned to the results.</para>
 	/// </summary>
 	public CategorizeTextAggregationDescriptor<TDocument> MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public CategorizeTextAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -272,22 +254,10 @@ public sealed partial class CategorizeTextAggregationDescriptor<TDocument> : Ser
 			writer.WriteNumberValue(MaxUniqueTokensValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (ShardMinDocCountValue.HasValue)
@@ -334,9 +304,7 @@ public sealed partial class CategorizeTextAggregationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private int? MaxMatchedTokensValue { get; set; }
 	private int? MaxUniqueTokensValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SimilarityThresholdValue { get; set; }
@@ -405,24 +373,12 @@ public sealed partial class CategorizeTextAggregationDescriptor : SerializableDe
 		return Self;
 	}
 
-	public CategorizeTextAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket to be returned to the results.</para>
 	/// </summary>
 	public CategorizeTextAggregationDescriptor MinDocCount(int? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public CategorizeTextAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -491,22 +447,10 @@ public sealed partial class CategorizeTextAggregationDescriptor : SerializableDe
 			writer.WriteNumberValue(MaxUniqueTokensValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (ShardMinDocCountValue.HasValue)

@@ -46,16 +46,12 @@ public sealed partial class NormalizeAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The specific method to apply.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("method")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? Method { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(NormalizeAggregation normalizeAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Normalize(normalizeAggregation);
 }
@@ -71,9 +67,7 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? MethodValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -102,24 +96,12 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public NormalizeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The specific method to apply.</para>
 	/// </summary>
 	public NormalizeAggregationDescriptor Method(Elastic.Clients.Elasticsearch.Serverless.Aggregations.NormalizeMethod? method)
 	{
 		MethodValue = method;
-		return Self;
-	}
-
-	public NormalizeAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -144,22 +126,10 @@ public sealed partial class NormalizeAggregationDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MethodValue is not null)
 		{
 			writer.WritePropertyName("method");
 			JsonSerializer.Serialize(writer, MethodValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

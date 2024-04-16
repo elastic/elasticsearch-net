@@ -52,6 +52,8 @@ public sealed partial class RescoreQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("score_mode")]
 	public Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? ScoreMode { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(RescoreQuery rescoreQuery) => Elastic.Clients.Elasticsearch.Core.Search.Rescore.Query(rescoreQuery);
 }
 
 public sealed partial class RescoreQueryDescriptor<TDocument> : SerializableDescriptor<RescoreQueryDescriptor<TDocument>>
