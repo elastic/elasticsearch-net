@@ -62,9 +62,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CleanupRepositoryResponse CleanupRepository(Elastic.Clients.Elasticsearch.Name name)
+	public virtual CleanupRepositoryResponse CleanupRepository(CleanupRepositoryRequestDescriptor descriptor)
 	{
-		var descriptor = new CleanupRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<CleanupRepositoryRequestDescriptor, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CleanupRepositoryResponse CleanupRepository(CleanupRepositoryRequestDescriptor descriptor)
+	public virtual CleanupRepositoryResponse CleanupRepository(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var descriptor = new CleanupRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<CleanupRepositoryRequestDescriptor, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Removes stale data from repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(CleanupRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CleanupRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CleanupRepositoryRequestDescriptor, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Removes stale data from repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(CleanupRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new CleanupRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CleanupRepositoryRequestDescriptor, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -162,6 +162,18 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CloneSnapshotResponse Clone(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot)
+	{
+		var descriptor = new CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
+		descriptor.BeforeRequest();
+		return DoRequest<CloneSnapshotRequestDescriptor, CloneSnapshotResponse, CloneSnapshotRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneSnapshotResponse Clone(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot, Action<CloneSnapshotRequestDescriptor> configureRequest)
 	{
 		var descriptor = new CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
@@ -176,6 +188,17 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<CloneSnapshotResponse> CloneAsync(CloneSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CloneSnapshotRequestDescriptor, CloneSnapshotResponse, CloneSnapshotRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CloneSnapshotResponse> CloneAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CloneSnapshotRequestDescriptor, CloneSnapshotResponse, CloneSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -217,9 +240,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateSnapshotResponse Create(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	public virtual CreateSnapshotResponse Create(CreateSnapshotRequestDescriptor descriptor)
 	{
-		var descriptor = new CreateSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<CreateSnapshotRequestDescriptor, CreateSnapshotResponse, CreateSnapshotRequestParameters>(descriptor);
 	}
@@ -229,8 +251,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateSnapshotResponse Create(CreateSnapshotRequestDescriptor descriptor)
+	public virtual CreateSnapshotResponse Create(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
+		var descriptor = new CreateSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<CreateSnapshotRequestDescriptor, CreateSnapshotResponse, CreateSnapshotRequestParameters>(descriptor);
 	}
@@ -252,9 +275,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a snapshot in a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CreateSnapshotResponse> CreateAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+	public virtual Task<CreateSnapshotResponse> CreateAsync(CreateSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CreateSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CreateSnapshotRequestDescriptor, CreateSnapshotResponse, CreateSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -263,8 +285,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a snapshot in a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CreateSnapshotResponse> CreateAsync(CreateSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<CreateSnapshotResponse> CreateAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new CreateSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CreateSnapshotRequestDescriptor, CreateSnapshotResponse, CreateSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -317,6 +340,18 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateRepositoryResponse CreateRepository(Elastic.Clients.Elasticsearch.Snapshot.IRepository repository, Elastic.Clients.Elasticsearch.Name name)
+	{
+		var descriptor = new CreateRepositoryRequestDescriptor(repository, name);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateRepositoryRequestDescriptor, CreateRepositoryResponse, CreateRepositoryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateRepositoryResponse CreateRepository(Elastic.Clients.Elasticsearch.Snapshot.IRepository repository, Elastic.Clients.Elasticsearch.Name name, Action<CreateRepositoryRequestDescriptor> configureRequest)
 	{
 		var descriptor = new CreateRepositoryRequestDescriptor(repository, name);
@@ -331,6 +366,17 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<CreateRepositoryResponse> CreateRepositoryAsync(CreateRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateRepositoryRequestDescriptor, CreateRepositoryResponse, CreateRepositoryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateRepositoryResponse> CreateRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.IRepository repository, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateRepositoryRequestDescriptor(repository, name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CreateRepositoryRequestDescriptor, CreateRepositoryResponse, CreateRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -372,9 +418,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	public virtual DeleteSnapshotResponse Delete(DeleteSnapshotRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteSnapshotRequestDescriptor, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(descriptor);
 	}
@@ -384,8 +429,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSnapshotResponse Delete(DeleteSnapshotRequestDescriptor descriptor)
+	public virtual DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
+		var descriptor = new DeleteSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteSnapshotRequestDescriptor, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(descriptor);
 	}
@@ -407,9 +453,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes one or more snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteSnapshotResponse> DeleteAsync(DeleteSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSnapshotRequestDescriptor, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,8 +463,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes one or more snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteSnapshotResponse> DeleteAsync(DeleteSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSnapshotRequestDescriptor, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -461,9 +507,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRepositoryResponse DeleteRepository(Elastic.Clients.Elasticsearch.Names name)
+	public virtual DeleteRepositoryResponse DeleteRepository(DeleteRepositoryRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteRepositoryRequestDescriptor, DeleteRepositoryResponse, DeleteRepositoryRequestParameters>(descriptor);
 	}
@@ -473,8 +518,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRepositoryResponse DeleteRepository(DeleteRepositoryRequestDescriptor descriptor)
+	public virtual DeleteRepositoryResponse DeleteRepository(Elastic.Clients.Elasticsearch.Names name)
 	{
+		var descriptor = new DeleteRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteRepositoryRequestDescriptor, DeleteRepositoryResponse, DeleteRepositoryRequestParameters>(descriptor);
 	}
@@ -496,9 +542,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteRepositoryResponse> DeleteRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteRepositoryResponse> DeleteRepositoryAsync(DeleteRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteRepositoryRequestDescriptor, DeleteRepositoryResponse, DeleteRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,8 +552,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteRepositoryResponse> DeleteRepositoryAsync(DeleteRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteRepositoryResponse> DeleteRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteRepositoryRequestDescriptor, DeleteRepositoryResponse, DeleteRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -550,9 +596,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSnapshotResponse Get(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
+	public virtual GetSnapshotResponse Get(GetSnapshotRequestDescriptor descriptor)
 	{
-		var descriptor = new GetSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<GetSnapshotRequestDescriptor, GetSnapshotResponse, GetSnapshotRequestParameters>(descriptor);
 	}
@@ -562,8 +607,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSnapshotResponse Get(GetSnapshotRequestDescriptor descriptor)
+	public virtual GetSnapshotResponse Get(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
 	{
+		var descriptor = new GetSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<GetSnapshotRequestDescriptor, GetSnapshotResponse, GetSnapshotRequestParameters>(descriptor);
 	}
@@ -585,9 +631,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSnapshotResponse> GetAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, CancellationToken cancellationToken = default)
+	public virtual Task<GetSnapshotResponse> GetAsync(GetSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSnapshotRequestDescriptor, GetSnapshotResponse, GetSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -596,8 +641,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSnapshotResponse> GetAsync(GetSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetSnapshotResponse> GetAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetSnapshotRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSnapshotRequestDescriptor, GetSnapshotResponse, GetSnapshotRequestParameters>(descriptor, cancellationToken);
 	}
@@ -639,9 +685,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoryResponse GetRepository()
+	public virtual GetRepositoryResponse GetRepository(GetRepositoryRequestDescriptor descriptor)
 	{
-		var descriptor = new GetRepositoryRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor);
 	}
@@ -651,8 +696,34 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoryResponse GetRepository(GetRepositoryRequestDescriptor descriptor)
+	public virtual GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name)
 	{
+		var descriptor = new GetRepositoryRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name, Action<GetRepositoryRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetRepositoryRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRepositoryResponse GetRepository()
+	{
+		var descriptor = new GetRepositoryRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor);
 	}
@@ -674,9 +745,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(GetRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRepositoryRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -685,8 +755,32 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(GetRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetRepositoryRequestDescriptor(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetRepositoryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRepositoryRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about a repository.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRepositoryResponse> GetRepositoryAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRepositoryRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -728,44 +822,20 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
-	{
-		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
-		descriptor.BeforeRequest();
-		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Restores a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RestoreResponse Restore(RestoreRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Restores a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<RestoreRequestDescriptor> configureRequest)
-	{
-		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Restores a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RestoreResponse Restore<TDocument>(RestoreRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<RestoreRequestDescriptor<TDocument>, RestoreResponse, RestoreRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RestoreResponse Restore<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	{
+		var descriptor = new RestoreRequestDescriptor<TDocument>(repository, snapshot);
 		descriptor.BeforeRequest();
 		return DoRequest<RestoreRequestDescriptor<TDocument>, RestoreResponse, RestoreRequestParameters>(descriptor);
 	}
@@ -787,33 +857,36 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Restores a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RestoreResponse Restore(RestoreRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
 		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Restores a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RestoreResponse> RestoreAsync(RestoreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Restores a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<RestoreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<RestoreRequestDescriptor> configureRequest)
 	{
 		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -830,12 +903,56 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Restores a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<RestoreResponse> RestoreAsync<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RestoreRequestDescriptor<TDocument>(repository, snapshot);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RestoreRequestDescriptor<TDocument>, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<RestoreResponse> RestoreAsync<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<RestoreRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new RestoreRequestDescriptor<TDocument>(repository, snapshot);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RestoreRequestDescriptor<TDocument>, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RestoreResponse> RestoreAsync(RestoreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Restores a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Action<RestoreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RestoreRequestDescriptor(repository, snapshot);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RestoreRequestDescriptor, RestoreResponse, RestoreRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -863,9 +980,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SnapshotStatusResponse Status()
+	public virtual SnapshotStatusResponse Status(SnapshotStatusRequestDescriptor descriptor)
 	{
-		var descriptor = new SnapshotStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor);
 	}
@@ -875,8 +991,34 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SnapshotStatusResponse Status(SnapshotStatusRequestDescriptor descriptor)
+	public virtual SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot)
 	{
+		var descriptor = new SnapshotStatusRequestDescriptor(repository, snapshot);
+		descriptor.BeforeRequest();
+		return DoRequest<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about the status of a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, Action<SnapshotStatusRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SnapshotStatusRequestDescriptor(repository, snapshot);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about the status of a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SnapshotStatusResponse Status()
+	{
+		var descriptor = new SnapshotStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor);
 	}
@@ -898,9 +1040,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about the status of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SnapshotStatusResponse> StatusAsync(CancellationToken cancellationToken = default)
+	public virtual Task<SnapshotStatusResponse> StatusAsync(SnapshotStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SnapshotStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -909,8 +1050,32 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about the status of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SnapshotStatusResponse> StatusAsync(SnapshotStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new SnapshotStatusRequestDescriptor(repository, snapshot);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about the status of a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, Action<SnapshotStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SnapshotStatusRequestDescriptor(repository, snapshot);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about the status of a snapshot.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SnapshotStatusResponse> StatusAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SnapshotStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -952,9 +1117,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual VerifyRepositoryResponse VerifyRepository(Elastic.Clients.Elasticsearch.Name name)
+	public virtual VerifyRepositoryResponse VerifyRepository(VerifyRepositoryRequestDescriptor descriptor)
 	{
-		var descriptor = new VerifyRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<VerifyRepositoryRequestDescriptor, VerifyRepositoryResponse, VerifyRepositoryRequestParameters>(descriptor);
 	}
@@ -964,8 +1128,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual VerifyRepositoryResponse VerifyRepository(VerifyRepositoryRequestDescriptor descriptor)
+	public virtual VerifyRepositoryResponse VerifyRepository(Elastic.Clients.Elasticsearch.Name name)
 	{
+		var descriptor = new VerifyRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequest<VerifyRepositoryRequestDescriptor, VerifyRepositoryResponse, VerifyRepositoryRequestParameters>(descriptor);
 	}
@@ -987,9 +1152,8 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Verifies a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<VerifyRepositoryResponse> VerifyRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	public virtual Task<VerifyRepositoryResponse> VerifyRepositoryAsync(VerifyRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new VerifyRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<VerifyRepositoryRequestDescriptor, VerifyRepositoryResponse, VerifyRepositoryRequestParameters>(descriptor, cancellationToken);
 	}
@@ -998,8 +1162,9 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Verifies a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<VerifyRepositoryResponse> VerifyRepositoryAsync(VerifyRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<VerifyRepositoryResponse> VerifyRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new VerifyRepositoryRequestDescriptor(name);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<VerifyRepositoryRequestDescriptor, VerifyRepositoryResponse, VerifyRepositoryRequestParameters>(descriptor, cancellationToken);
 	}

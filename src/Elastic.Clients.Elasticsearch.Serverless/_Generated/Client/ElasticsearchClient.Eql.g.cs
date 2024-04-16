@@ -61,7 +61,17 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(EqlDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new EqlDeleteRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -72,8 +82,31 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<EqlDeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlDeleteRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<EqlDeleteResponse> DeleteAsync(EqlDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EqlDeleteRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
 	}
@@ -114,9 +147,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns async results from previously executed Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlGetRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -125,8 +157,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns async results from previously executed Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new EqlGetRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlGetRequestDescriptor, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
 	}
@@ -167,7 +200,17 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(GetEqlStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -178,8 +221,31 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetEqlStatusRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -220,9 +286,8 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
+	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequestDescriptor<TEvent> descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
 	}
@@ -231,8 +296,9 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequestDescriptor<TEvent> descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
 	}

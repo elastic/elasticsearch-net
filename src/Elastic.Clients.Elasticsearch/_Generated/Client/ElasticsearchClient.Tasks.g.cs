@@ -62,9 +62,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel()
+	public virtual CancelResponse Cancel(CancelRequestDescriptor descriptor)
 	{
-		var descriptor = new CancelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
 	}
@@ -74,8 +73,34 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CancelResponse Cancel(CancelRequestDescriptor descriptor)
+	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId)
 	{
+		var descriptor = new CancelRequestDescriptor(taskId);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest)
+	{
+		var descriptor = new CancelRequestDescriptor(taskId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelResponse Cancel()
+	{
+		var descriptor = new CancelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor);
 	}
@@ -97,9 +122,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
+	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CancelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +132,32 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CancelResponse> CancelAsync(CancelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new CancelRequestDescriptor(taskId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, Action<CancelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelRequestDescriptor(taskId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Cancels a task, if it can be cancelled through an API.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelResponse> CancelAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CancelRequestDescriptor, CancelResponse, CancelRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +199,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId)
+	public virtual GetTasksResponse Get(GetTasksRequestDescriptor descriptor)
 	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
 	}
@@ -163,8 +210,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTasksResponse Get(GetTasksRequestDescriptor descriptor)
+	public virtual GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId)
 	{
+		var descriptor = new GetTasksRequestDescriptor(taskId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor);
 	}
@@ -186,9 +234,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a task.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
+	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTasksRequestDescriptor(taskId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +244,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a task.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTasksResponse> GetAsync(GetTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetTasksRequestDescriptor(taskId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTasksRequestDescriptor, GetTasksResponse, GetTasksRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,9 +288,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List()
+	public virtual ListResponse List(ListRequestDescriptor descriptor)
 	{
-		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
 	}
@@ -252,8 +299,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequestDescriptor descriptor)
+	public virtual ListResponse List()
 	{
+		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
 	}
@@ -275,9 +323,8 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of tasks.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}
@@ -286,8 +333,9 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of tasks.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ListRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
 	}

@@ -62,7 +62,18 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id)
+	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(DeleteSynonymRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeleteSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -74,8 +85,33 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteSynonymResponse DeleteSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteSynonymResponse DeleteSynonym(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeleteSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor);
 	}
@@ -97,7 +133,17 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(DeleteSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -108,8 +154,31 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSynonymRequestDescriptor, DeleteSynonymResponse, DeleteSynonymRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +220,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor);
 	}
@@ -163,8 +231,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequestDescriptor descriptor)
+	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor);
 	}
@@ -186,9 +255,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym rule in a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +265,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym rule in a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,7 +309,18 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id)
+	public virtual GetSynonymResponse GetSynonym<TDocument>(GetSynonymRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetSynonymResponse GetSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new GetSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -252,8 +332,33 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetSynonymResponse GetSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSynonymResponse GetSynonym(GetSynonymRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetSynonymResponse GetSynonym(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new GetSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor);
 	}
@@ -275,7 +380,17 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(GetSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -286,8 +401,31 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetSynonymResponse> GetSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetSynonymResponse> GetSynonymAsync(GetSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetSynonymResponse> GetSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymRequestDescriptor, GetSynonymResponse, GetSynonymRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,9 +467,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequestDescriptor descriptor)
 	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor);
 	}
@@ -341,8 +478,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequestDescriptor descriptor)
+	public virtual GetSynonymRuleResponse GetSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
 	{
+		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor);
 	}
@@ -364,9 +502,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym rule from a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
+	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -375,8 +512,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym rule from a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymRuleRequestDescriptor, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,9 +556,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets()
+	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequestDescriptor descriptor)
 	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor);
 	}
@@ -430,8 +567,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequestDescriptor descriptor)
+	public virtual GetSynonymsSetsResponse GetSynonymsSets()
 	{
+		var descriptor = new GetSynonymsSetsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor);
 	}
@@ -453,9 +591,8 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a summary of all defined synonym sets</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSynonymsSetsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -464,8 +601,9 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a summary of all defined synonym sets</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetSynonymsSetsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,8 +645,56 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutSynonymResponse PutSynonym<TDocument>(PutSynonymRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutSynonymResponse PutSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutSynonymResponse PutSynonym<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutSynonymResponse PutSynonym(PutSynonymRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutSynonymResponse PutSynonym(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor);
 	}
@@ -530,8 +716,52 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a synonyms set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonyms set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutSynonymRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
 	}
@@ -584,6 +814,18 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId)
+	{
+		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutSynonymRuleResponse PutSynonymRule(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, Action<PutSynonymRuleRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
@@ -598,6 +840,17 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(PutSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a synonym rule in a synonym set</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutSynonymRuleResponse> PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutSynonymRuleRequestDescriptor(setId, ruleId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutSynonymRuleRequestDescriptor, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(descriptor, cancellationToken);
 	}

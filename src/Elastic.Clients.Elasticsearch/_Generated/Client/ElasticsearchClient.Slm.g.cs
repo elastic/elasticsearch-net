@@ -62,9 +62,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequestDescriptor descriptor)
 	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequestDescriptor descriptor)
+	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
+		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes an existing snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes an existing snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +151,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequestDescriptor descriptor)
 	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor);
 	}
@@ -163,8 +162,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequestDescriptor descriptor)
+	public virtual ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
+		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor);
 	}
@@ -186,9 +186,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
+	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(ExecuteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +196,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(ExecuteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,9 +240,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention()
+	public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequestDescriptor descriptor)
 	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor);
 	}
@@ -252,8 +251,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequestDescriptor descriptor)
+	public virtual ExecuteRetentionResponse ExecuteRetention()
 	{
+		var descriptor = new ExecuteRetentionRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor);
 	}
@@ -275,9 +275,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes any snapshots that are expired according to the policy's retention rules.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(ExecuteRetentionRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor, cancellationToken);
 	}
@@ -286,8 +285,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes any snapshots that are expired according to the policy's retention rules.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(ExecuteRetentionRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ExecuteRetentionRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,9 +329,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle()
+	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequestDescriptor descriptor)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
 	}
@@ -341,8 +340,34 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequestDescriptor descriptor)
+	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId)
 	{
+		var descriptor = new GetLifecycleRequestDescriptor(policyId);
+		descriptor.BeforeRequest();
+		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId, Action<GetLifecycleRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetLifecycleRequestDescriptor(policyId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetLifecycleResponse GetLifecycle()
+	{
+		var descriptor = new GetLifecycleRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
 	}
@@ -364,9 +389,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -375,8 +399,32 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetLifecycleRequestDescriptor(policyId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetLifecycleRequestDescriptor(policyId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetLifecycleRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,9 +466,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats()
+	public virtual GetStatsResponse GetStats(GetStatsRequestDescriptor descriptor)
 	{
-		var descriptor = new GetStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor);
 	}
@@ -430,8 +477,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats(GetStatsRequestDescriptor descriptor)
+	public virtual GetStatsResponse GetStats()
 	{
+		var descriptor = new GetStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor);
 	}
@@ -453,9 +501,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Returns global and policy-level statistics about actions taken by snapshot lifecycle management.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetStatsResponse> GetStatsAsync(GetStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -464,8 +511,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Returns global and policy-level statistics about actions taken by snapshot lifecycle management.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(GetStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetStatsResponse> GetStatsAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,9 +555,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus()
+	public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequestDescriptor descriptor)
 	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor);
 	}
@@ -519,8 +566,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequestDescriptor descriptor)
+	public virtual GetSlmStatusResponse GetStatus()
 	{
+		var descriptor = new GetSlmStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor);
 	}
@@ -542,9 +590,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves the status of snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetSlmStatusResponse> GetStatusAsync(GetSlmStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -553,8 +600,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves the status of snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(GetSlmStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetSlmStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetSlmStatusRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor, cancellationToken);
 	}
@@ -596,9 +644,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequestDescriptor descriptor)
 	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
 	}
@@ -608,8 +655,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequestDescriptor descriptor)
+	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
 	{
+		var descriptor = new PutLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
 	}
@@ -631,9 +679,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Creates or updates a snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
+	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -642,8 +689,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Creates or updates a snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new PutLifecycleRequestDescriptor(policyId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
@@ -685,9 +733,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start()
+	public virtual StartSlmResponse Start(StartSlmRequestDescriptor descriptor)
 	{
-		var descriptor = new StartSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor);
 	}
@@ -697,8 +744,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start(StartSlmRequestDescriptor descriptor)
+	public virtual StartSlmResponse Start()
 	{
+		var descriptor = new StartSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor);
 	}
@@ -720,9 +768,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns on snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(CancellationToken cancellationToken = default)
+	public virtual Task<StartSlmResponse> StartAsync(StartSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor, cancellationToken);
 	}
@@ -731,8 +778,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns on snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(StartSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StartSlmResponse> StartAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new StartSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor, cancellationToken);
 	}
@@ -774,9 +822,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop()
+	public virtual StopSlmResponse Stop(StopSlmRequestDescriptor descriptor)
 	{
-		var descriptor = new StopSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor);
 	}
@@ -786,8 +833,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop(StopSlmRequestDescriptor descriptor)
+	public virtual StopSlmResponse Stop()
 	{
+		var descriptor = new StopSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor);
 	}
@@ -809,9 +857,8 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns off snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(CancellationToken cancellationToken = default)
+	public virtual Task<StopSlmResponse> StopAsync(StopSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor, cancellationToken);
 	}
@@ -820,8 +867,9 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns off snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(StopSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StopSlmResponse> StopAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new StopSlmRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor, cancellationToken);
 	}

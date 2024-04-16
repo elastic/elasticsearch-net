@@ -61,9 +61,8 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
 	}
@@ -72,8 +71,9 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetLicenseRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
 	}
