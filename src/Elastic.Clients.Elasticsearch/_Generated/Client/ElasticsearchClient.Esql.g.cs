@@ -62,32 +62,20 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query(EsqlQueryRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Executes an ESQL request</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EsqlQueryResponse Query(Action<EsqlQueryRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EsqlQueryRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Executes an ESQL request</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual EsqlQueryResponse Query<TDocument>()
+	{
+		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
 		return DoRequest<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
 	}
@@ -109,22 +97,36 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>Executes an ESQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual EsqlQueryResponse Query(EsqlQueryRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Executes an ESQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<EsqlQueryResponse> QueryAsync(Action<EsqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual EsqlQueryResponse Query()
+	{
+		var descriptor = new EsqlQueryRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual EsqlQueryResponse Query(Action<EsqlQueryRequestDescriptor> configureRequest)
 	{
 		var descriptor = new EsqlQueryRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -141,11 +143,55 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>Executes an ESQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<EsqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EsqlQueryRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Executes an ESQL request</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<EsqlQueryResponse> QueryAsync(Action<EsqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EsqlQueryRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor, EsqlQueryResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
 	}
 }
