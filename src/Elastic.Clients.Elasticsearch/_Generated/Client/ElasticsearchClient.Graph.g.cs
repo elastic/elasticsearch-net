@@ -62,44 +62,20 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices)
-	{
-		var descriptor = new ExploreRequestDescriptor(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExploreResponse Explore(ExploreRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ExploreRequestDescriptor(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExploreResponse Explore<TDocument>(ExploreRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExploreResponse Explore<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new ExploreRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
 		return DoRequest<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor);
 	}
@@ -121,33 +97,36 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExploreResponse Explore(ExploreRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var descriptor = new ExploreRequestDescriptor(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExploreResponse Explore(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ExploreRequestDescriptor(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -164,11 +143,55 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExploreRequestDescriptor<TDocument>(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ExploreRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExploreRequestDescriptor<TDocument>, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExploreRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExploreResponse> ExploreAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExploreRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExploreRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExploreRequestDescriptor, ExploreResponse, ExploreRequestParameters>(descriptor, cancellationToken);
 	}
 }

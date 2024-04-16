@@ -62,9 +62,8 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures()
+	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequestDescriptor descriptor)
 	{
-		var descriptor = new GetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequestDescriptor descriptor)
+	public virtual GetFeaturesResponse GetFeatures()
 	{
+		var descriptor = new GetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetFeaturesRequestDescriptor, GetFeaturesResponse, GetFeaturesRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +151,8 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures()
+	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequestDescriptor descriptor)
 	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor);
 	}
@@ -163,8 +162,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequestDescriptor descriptor)
+	public virtual ResetFeaturesResponse ResetFeatures()
 	{
+		var descriptor = new ResetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor);
 	}
@@ -186,9 +186,8 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Resets the internal state of features, usually by deleting system indices</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ResetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +196,9 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Resets the internal state of features, usually by deleting system indices</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ResetFeaturesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResetFeaturesRequestDescriptor, ResetFeaturesResponse, ResetFeaturesRequestParameters>(descriptor, cancellationToken);
 	}

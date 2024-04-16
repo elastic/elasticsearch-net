@@ -61,9 +61,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -72,8 +71,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new DeleteTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteTransformRequestDescriptor, DeleteTransformResponse, DeleteTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -114,9 +114,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -125,8 +124,32 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Names? transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetTransformRequestDescriptor(transformId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetTransformRequestDescriptor(transformId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetTransformResponse> GetTransformAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetTransformRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTransformRequestDescriptor, GetTransformResponse, GetTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -167,9 +190,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Serverless.Names transformId, CancellationToken cancellationToken = default)
+	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -178,8 +200,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Serverless.Names transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetTransformStatsRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTransformStatsRequestDescriptor, GetTransformStatsResponse, GetTransformStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -220,9 +243,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Previews a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(CancellationToken cancellationToken = default)
+	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -231,8 +253,32 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Previews a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Serverless.Id? transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Previews a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Serverless.Id? transformId, Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PreviewTransformRequestDescriptor<TTransform>(transformId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Previews a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PreviewTransformRequestDescriptor<TTransform>();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PreviewTransformRequestDescriptor<TTransform>, PreviewTransformResponse<TTransform>, PreviewTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -273,30 +319,19 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a transform.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, Action<PutTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a transform.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(PutTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Instantiates a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutTransformRequestDescriptor<TDocument>(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -311,6 +346,39 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutTransformRequestDescriptor<TDocument>, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Instantiates a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Instantiates a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutTransformRequestDescriptor(transformId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Instantiates a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, Action<PutTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutTransformRequestDescriptor(transformId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutTransformRequestDescriptor, PutTransformResponse, PutTransformRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -337,9 +405,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Resets an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ResetTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -348,8 +415,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Resets an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ResetTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResetTransformRequestDescriptor, ResetTransformResponse, ResetTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -390,9 +458,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Schedules now a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -401,8 +468,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Schedules now a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ScheduleNowTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformResponse, ScheduleNowTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -443,9 +511,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -454,8 +521,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new StartTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartTransformRequestDescriptor, StartTransformResponse, StartTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -496,9 +564,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Name transformId, CancellationToken cancellationToken = default)
+	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,8 +574,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Name transformId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new StopTransformRequestDescriptor(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopTransformRequestDescriptor, StopTransformResponse, StopTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -549,30 +617,19 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateTransformRequestDescriptor(transformId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(UpdateTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateTransformRequestDescriptor<TDocument>(transformId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
 	}
@@ -587,6 +644,39 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateTransformRequestDescriptor(transformId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of a transform.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Serverless.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateTransformRequestDescriptor(transformId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTransformRequestDescriptor, UpdateTransformResponse, UpdateTransformRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -613,9 +703,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Upgrades all transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpgradeTransformsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -624,8 +713,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Upgrades all transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new UpgradeTransformsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpgradeTransformsRequestDescriptor, UpgradeTransformsResponse, UpgradeTransformsRequestParameters>(descriptor, cancellationToken);
 	}

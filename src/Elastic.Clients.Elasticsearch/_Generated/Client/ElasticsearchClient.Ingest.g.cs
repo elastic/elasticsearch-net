@@ -62,7 +62,18 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
+	public virtual DeletePipelineResponse DeletePipeline<TDocument>(DeletePipelineRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -74,8 +85,33 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeletePipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeletePipelineRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
 	}
@@ -97,7 +133,17 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeletePipelineRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -108,8 +154,31 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeletePipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeletePipelineRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +220,8 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats()
+	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
 	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
@@ -163,8 +231,9 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
+	public virtual GeoIpStatsResponse GeoIpStats()
 	{
+		var descriptor = new GeoIpStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
 	}
@@ -186,9 +255,8 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about geoip databases</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +265,9 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about geoip databases</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GeoIpStatsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,7 +309,43 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline()
+	public virtual GetPipelineResponse GetPipeline<TDocument>(GetPipelineRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline<TDocument>()
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -252,8 +357,58 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline<TDocument>(Action<GetPipelineRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetPipelineRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(GetPipelineRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetPipelineResponse GetPipeline()
+	{
+		var descriptor = new GetPipelineRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
 	}
@@ -275,7 +430,40 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetPipelineRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -286,8 +474,54 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetPipelineRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,9 +563,8 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok()
+	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
 	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
@@ -341,8 +574,9 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
+	public virtual ProcessorGrokResponse ProcessorGrok()
 	{
+		var descriptor = new ProcessorGrokRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
 	}
@@ -364,9 +598,8 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of the built-in patterns.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
 	}
@@ -375,8 +608,9 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of the built-in patterns.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ProcessorGrokRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,32 +652,20 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
 		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
@@ -465,22 +687,36 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Creates or updates a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutPipelineRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -497,12 +733,56 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutPipelineRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates a pipeline.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutPipelineRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -530,44 +810,45 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate()
-	{
-		var descriptor = new SimulateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Allows to simulate a pipeline with example documents.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Allows to simulate a pipeline with example documents.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SimulateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Allows to simulate a pipeline with example documents.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>(SimulateRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate<TDocument>()
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
 		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
@@ -589,33 +870,61 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Allows to simulate a pipeline with example documents.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new SimulateRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SimulateRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate()
 	{
 		var descriptor = new SimulateRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Allows to simulate a pipeline with example documents.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Allows to simulate a pipeline with example documents.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
 	{
 		var descriptor = new SimulateRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -632,11 +941,101 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Allows to simulate a pipeline with example documents.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new SimulateRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Allows to simulate a pipeline with example documents.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SimulateResponse> SimulateAsync(Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SimulateRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
 	}
 }
