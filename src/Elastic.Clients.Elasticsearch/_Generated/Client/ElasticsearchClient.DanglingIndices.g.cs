@@ -62,9 +62,8 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices()
+	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequestDescriptor descriptor)
 	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequestDescriptor descriptor)
+	public virtual ListDanglingIndicesResponse ListDanglingIndices()
 	{
+		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ListDanglingIndicesRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ListDanglingIndicesRequestDescriptor, ListDanglingIndicesResponse, ListDanglingIndicesRequestParameters>(descriptor, cancellationToken);
 	}

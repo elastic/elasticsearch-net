@@ -62,7 +62,18 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
+	public virtual DeleteJobResponse DeleteJob<TDocument>(DeleteJobRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new DeleteJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -74,8 +85,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest)
+	{
+		var descriptor = new DeleteJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new DeleteJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor);
 	}
@@ -97,7 +133,17 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new DeleteJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -108,8 +154,31 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an existing rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,7 +220,43 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetJobsResponse GetJobs()
+	public virtual GetJobsResponse GetJobs<TDocument>(GetJobsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs<TDocument>()
 	{
 		var descriptor = new GetJobsRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -163,8 +268,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs<TDocument>(Action<GetJobsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetJobsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetJobsResponse GetJobs()
+	{
+		var descriptor = new GetJobsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor);
 	}
@@ -186,7 +341,40 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetJobsResponse> GetJobsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(GetJobsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetJobsRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -197,8 +385,54 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetJobsResponse> GetJobsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetJobsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,7 +474,43 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupCapsResponse GetRollupCaps()
+	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(GetRollupCapsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>()
 	{
 		var descriptor = new GetRollupCapsRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -252,8 +522,58 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Action<GetRollupCapsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupCapsResponse GetRollupCaps()
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor);
 	}
@@ -275,7 +595,40 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(GetRollupCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetRollupCapsRequestDescriptor();
 		descriptor.BeforeRequest();
@@ -286,8 +639,54 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupCapsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRollupCapsRequestDescriptor, GetRollupCapsResponse, GetRollupCapsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,7 +728,18 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
+	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(GetRollupIndexCapsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index)
 	{
 		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
 		descriptor.BeforeRequest();
@@ -341,8 +751,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
+	{
+		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
 		descriptor.BeforeRequest();
 		return DoRequest<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor);
 	}
@@ -364,7 +799,17 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
+	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(GetRollupIndexCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
 		descriptor.BeforeRequest();
@@ -375,8 +820,31 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetRollupIndexCapsRequestDescriptor(index);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRollupIndexCapsRequestDescriptor, GetRollupIndexCapsResponse, GetRollupIndexCapsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,32 +886,20 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Creates a rollup job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutJobRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Creates a rollup job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(PutJobRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
 		return DoRequest<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor);
 	}
@@ -465,22 +921,36 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Creates a rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new PutJobRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest)
 	{
 		var descriptor = new PutJobRequestDescriptor(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -497,12 +967,56 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutJobRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutJobRequestDescriptor<TDocument>, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutJobRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJobRequestDescriptor, PutJobResponse, PutJobRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -530,9 +1044,8 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
 		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
 	}
@@ -542,8 +1055,9 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor)
+	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
 		return DoRequest<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor);
 	}
@@ -565,9 +1079,8 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Enables searching rolled-up data using the standard query DSL.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
 	}
@@ -576,8 +1089,9 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Enables searching rolled-up data using the standard query DSL.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new RollupSearchRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RollupSearchRequestDescriptor<TDocument>, RollupSearchResponse<TDocument>, RollupSearchRequestParameters>(descriptor, cancellationToken);
 	}
@@ -619,7 +1133,18 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
+	public virtual StartJobResponse StartJob<TDocument>(StartJobRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new StartJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -631,8 +1156,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest)
+	{
+		var descriptor = new StartJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new StartJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor);
 	}
@@ -654,7 +1204,17 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an existing, stopped rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(StartJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new StartJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -665,8 +1225,31 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an existing, stopped rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StartJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Starts an existing, stopped rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StartJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartJobRequestDescriptor, StartJobResponse, StartJobRequestParameters>(descriptor, cancellationToken);
 	}
@@ -708,7 +1291,18 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
+	public virtual StopJobResponse StopJob<TDocument>(StopJobRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
 	{
 		var descriptor = new StopJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -720,8 +1314,33 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest)
+	{
+		var descriptor = new StopJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequestDescriptor descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new StopJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequest<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor);
 	}
@@ -743,7 +1362,17 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Stops an existing, started rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(StopJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new StopJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
@@ -754,8 +1383,31 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Stops an existing, started rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StopJobRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Stops an existing, started rollup job.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StopJobRequestDescriptor(id);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopJobRequestDescriptor, StopJobResponse, StopJobRequestParameters>(descriptor, cancellationToken);
 	}

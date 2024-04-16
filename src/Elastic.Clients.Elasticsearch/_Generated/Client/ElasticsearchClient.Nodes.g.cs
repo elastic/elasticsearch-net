@@ -62,9 +62,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
+	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor)
 	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
 		descriptor.BeforeRequest();
 		return DoRequest<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor);
 	}
@@ -74,8 +73,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor)
+	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
 	{
+		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
 		descriptor.BeforeRequest();
 		return DoRequest<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor);
 	}
@@ -97,9 +97,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Removes the archived repositories metering information present in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, CancellationToken cancellationToken = default)
+	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor, cancellationToken);
 	}
@@ -108,8 +107,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Removes the archived repositories metering information present in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor, cancellationToken);
 	}
@@ -151,9 +151,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequestDescriptor descriptor)
 	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor);
 	}
@@ -163,8 +162,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequestDescriptor descriptor)
+	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId)
 	{
+		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
 		descriptor.BeforeRequest();
 		return DoRequest<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor);
 	}
@@ -186,9 +186,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns cluster repositories metering information.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, CancellationToken cancellationToken = default)
+	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -197,8 +196,9 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns cluster repositories metering information.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -240,9 +240,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads()
+	public virtual HotThreadsResponse HotThreads(HotThreadsRequestDescriptor descriptor)
 	{
-		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
 	}
@@ -252,8 +251,34 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(HotThreadsRequestDescriptor descriptor)
+	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		descriptor.BeforeRequest();
+		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual HotThreadsResponse HotThreads()
+	{
+		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
 	}
@@ -275,9 +300,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -286,8 +310,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new HotThreadsRequestDescriptor(nodeId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about hot threads on each node in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new HotThreadsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -329,9 +377,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info()
+	public virtual NodesInfoResponse Info(NodesInfoRequestDescriptor descriptor)
 	{
-		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
 	}
@@ -341,8 +388,34 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(NodesInfoRequestDescriptor descriptor)
+	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest)
+	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesInfoResponse Info()
+	{
+		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
 	}
@@ -364,9 +437,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -375,8 +447,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesInfoRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
 	}
@@ -418,9 +514,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings()
+	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(ReloadSecureSettingsRequestDescriptor descriptor)
 	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
 	}
@@ -430,8 +525,34 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(ReloadSecureSettingsRequestDescriptor descriptor)
+	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
 	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
+		descriptor.BeforeRequest();
+		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Reloads secure settings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ReloadSecureSettingsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Reloads secure settings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ReloadSecureSettingsResponse ReloadSecureSettings()
+	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
 	}
@@ -453,9 +574,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Reloads secure settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(CancellationToken cancellationToken = default)
+	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -464,8 +584,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Reloads secure settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Reloads secure settings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ReloadSecureSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Reloads secure settings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReloadSecureSettingsRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
 	}
@@ -507,44 +651,45 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats()
-	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(NodesStatsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(Action<NodesStatsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor)
 	{
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats<TDocument>()
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
 		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
 	}
@@ -566,33 +711,61 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats(NodesStatsRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	{
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest)
+	{
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats()
 	{
 		var descriptor = new NodesStatsRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesStatsResponse Stats(Action<NodesStatsRequestDescriptor> configureRequest)
 	{
 		var descriptor = new NodesStatsRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -609,12 +782,102 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns statistical information about nodes in the cluster.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesStatsRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -642,9 +905,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage()
+	public virtual NodesUsageResponse Usage(NodesUsageRequestDescriptor descriptor)
 	{
-		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
 	}
@@ -654,8 +916,34 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(NodesUsageRequestDescriptor descriptor)
+	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest)
+	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual NodesUsageResponse Usage()
+	{
+		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
 	}
@@ -677,9 +965,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns low-level information about REST actions usage on nodes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
 	}
@@ -688,8 +975,32 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns low-level information about REST actions usage on nodes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns low-level information about REST actions usage on nodes.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new NodesUsageRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
 	}

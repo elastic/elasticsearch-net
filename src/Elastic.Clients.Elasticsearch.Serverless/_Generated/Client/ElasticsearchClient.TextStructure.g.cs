@@ -61,9 +61,8 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>Tests a Grok pattern on some text.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(CancellationToken cancellationToken = default)
+	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new TestGrokPatternRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor, cancellationToken);
 	}
@@ -72,8 +71,9 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>Tests a Grok pattern on some text.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(CancellationToken cancellationToken = default)
 	{
+		var descriptor = new TestGrokPatternRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor, cancellationToken);
 	}
