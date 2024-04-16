@@ -248,7 +248,7 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 
 				if (property == "knn")
 				{
-					variant.Knn = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.KnnQuery>?>(ref reader, options);
+					variant.Knn = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?>(ref reader, options);
 					continue;
 				}
 
@@ -836,8 +836,8 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// <para>Defines the approximate kNN search to run.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("knn")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.KnnQuery))]
-	public ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? Knn { get; set; }
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.KnnSearch))]
+	public ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
 	/// <summary>
 	/// <para>Minimum _score for matching documents. Documents with a lower _score are<br/>not included in the search results.</para>
@@ -1028,10 +1028,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? KnnValue { get; set; }
-	private Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> KnnDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> KnnDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
+	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> KnnDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> KnnDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] KnnDescriptorActions { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
@@ -1242,7 +1242,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// <summary>
 	/// <para>Defines the approximate kNN search to run.</para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? knn)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
 	{
 		KnnDescriptor = null;
 		KnnDescriptorAction = null;
@@ -1251,7 +1251,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> descriptor)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> descriptor)
 	{
 		KnnValue = null;
 		KnnDescriptorAction = null;
@@ -1260,7 +1260,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>> configure)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -1269,7 +1269,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>>[] configure)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> Knn(params Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -1740,7 +1740,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		else if (KnnDescriptorAction is not null)
 		{
 			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>(KnnDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(KnnDescriptorAction), options);
 		}
 		else if (KnnDescriptorActions is not null)
 		{
@@ -1749,7 +1749,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument>(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(action), options);
 			}
 
 			if (KnnDescriptorActions.Length != 1)
@@ -1758,7 +1758,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 		else if (KnnValue is not null)
 		{
 			writer.WritePropertyName("knn");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnQuery>(KnnValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnSearch>(KnnValue, writer, options);
 		}
 
 		if (MinScoreValue.HasValue)
@@ -2074,10 +2074,10 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
 	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? KnnValue { get; set; }
-	private Elastic.Clients.Elasticsearch.KnnQueryDescriptor KnnDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor> KnnDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor>[] KnnDescriptorActions { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
+	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor KnnDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> KnnDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] KnnDescriptorActions { get; set; }
 	private double? MinScoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? PitValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor PitDescriptor { get; set; }
@@ -2288,7 +2288,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// <summary>
 	/// <para>Defines the approximate kNN search to run.</para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.KnnQuery>? knn)
+	public SubmitAsyncSearchRequestDescriptor Knn(ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? knn)
 	{
 		KnnDescriptor = null;
 		KnnDescriptorAction = null;
@@ -2297,7 +2297,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnQueryDescriptor descriptor)
+	public SubmitAsyncSearchRequestDescriptor Knn(Elastic.Clients.Elasticsearch.KnnSearchDescriptor descriptor)
 	{
 		KnnValue = null;
 		KnnDescriptorAction = null;
@@ -2306,7 +2306,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor> configure)
+	public SubmitAsyncSearchRequestDescriptor Knn(Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -2315,7 +2315,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		return Self;
 	}
 
-	public SubmitAsyncSearchRequestDescriptor Knn(params Action<Elastic.Clients.Elasticsearch.KnnQueryDescriptor>[] configure)
+	public SubmitAsyncSearchRequestDescriptor Knn(params Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] configure)
 	{
 		KnnValue = null;
 		KnnDescriptor = null;
@@ -2786,7 +2786,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		else if (KnnDescriptorAction is not null)
 		{
 			writer.WritePropertyName("knn");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor(KnnDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor(KnnDescriptorAction), options);
 		}
 		else if (KnnDescriptorActions is not null)
 		{
@@ -2795,7 +2795,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 				writer.WriteStartArray();
 			foreach (var action in KnnDescriptorActions)
 			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnQueryDescriptor(action), options);
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.KnnSearchDescriptor(action), options);
 			}
 
 			if (KnnDescriptorActions.Length != 1)
@@ -2804,7 +2804,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 		else if (KnnValue is not null)
 		{
 			writer.WritePropertyName("knn");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnQuery>(KnnValue, writer, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.KnnSearch>(KnnValue, writer, options);
 		}
 
 		if (MinScoreValue.HasValue)

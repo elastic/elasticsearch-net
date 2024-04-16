@@ -40,10 +40,6 @@ public sealed partial class GeohexGridAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Integer zoom of the key used to defined cells or buckets<br/>in the results. Value should be between 0-15.</para>
@@ -76,8 +72,6 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 
 	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? PrecisionValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -115,18 +109,6 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 	public GeohexGridAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeohexGridAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeohexGridAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -168,18 +150,6 @@ public sealed partial class GeohexGridAggregationDescriptor<TDocument> : Seriali
 
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PrecisionValue.HasValue)
 		{
 			writer.WritePropertyName("precision");
@@ -212,8 +182,6 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 
 	private Elastic.Clients.Elasticsearch.GeoBounds? BoundsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? PrecisionValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -251,18 +219,6 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 	public GeohexGridAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeohexGridAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeohexGridAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -304,18 +260,6 @@ public sealed partial class GeohexGridAggregationDescriptor : SerializableDescri
 
 		writer.WritePropertyName("field");
 		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PrecisionValue.HasValue)
 		{
 			writer.WritePropertyName("precision");

@@ -43,10 +43,6 @@ public sealed partial class BucketCorrelationAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("function")]
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(BucketCorrelationAggregation bucketCorrelationAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.BucketCorrelation(bucketCorrelationAggregation);
 }
@@ -66,8 +62,6 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction FunctionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor FunctionDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> FunctionDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -105,18 +99,6 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 		return Self;
 	}
 
-	public BucketCorrelationAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public BucketCorrelationAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -140,18 +122,6 @@ public sealed partial class BucketCorrelationAggregationDescriptor : Serializabl
 		{
 			writer.WritePropertyName("function");
 			JsonSerializer.Serialize(writer, FunctionValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

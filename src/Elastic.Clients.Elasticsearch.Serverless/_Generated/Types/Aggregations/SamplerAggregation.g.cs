@@ -29,11 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
 public sealed partial class SamplerAggregation
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-
 	/// <summary>
 	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
 	/// </summary>
@@ -51,21 +46,7 @@ public sealed partial class SamplerAggregationDescriptor : SerializableDescripto
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private int? ShardSizeValue { get; set; }
-
-	public SamplerAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public SamplerAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Limits how many top-scoring documents are collected in the sample processed on each shard.</para>
@@ -79,18 +60,6 @@ public sealed partial class SamplerAggregationDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (ShardSizeValue.HasValue)
 		{
 			writer.WritePropertyName("shard_size");

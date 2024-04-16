@@ -29,12 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 
 public sealed partial class GlobalAggregation
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(GlobalAggregation globalAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Global(globalAggregation);
 }
 
 public sealed partial class GlobalAggregationDescriptor : SerializableDescriptor<GlobalAggregationDescriptor>
@@ -45,36 +39,9 @@ public sealed partial class GlobalAggregationDescriptor : SerializableDescriptor
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
-
-	public GlobalAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GlobalAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		writer.WriteEndObject();
 	}
 }

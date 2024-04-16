@@ -39,7 +39,7 @@ public sealed partial class IndexSettingsLifecycle
 	/// <para>The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("name")]
-	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 	/// <summary>
 	/// <para>If specified, this is the timestamp used to calculate the index age for its phase transitions. Use this setting<br/>if you create a new index that contains old data and want to use the original creation date to calculate the index<br/>age. Specified as a Unix epoch value in milliseconds.</para>
@@ -71,7 +71,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	}
 
 	private bool? IndexingCompleteValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
 	private long? OriginationDateValue { get; set; }
 	private bool? ParseOriginationDateValue { get; set; }
 	private string? RolloverAliasValue { get; set; }
@@ -91,7 +91,7 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 	/// <summary>
 	/// <para>The name of the policy to use to manage the index. For information about how Elasticsearch applies policy changes, see Policy updates.</para>
 	/// </summary>
-	public IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public IndexSettingsLifecycleDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		NameValue = name;
 		return Self;
@@ -157,8 +157,12 @@ public sealed partial class IndexSettingsLifecycleDescriptor : SerializableDescr
 			writer.WriteBooleanValue(IndexingCompleteValue.Value);
 		}
 
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
+		if (NameValue is not null)
+		{
+			writer.WritePropertyName("name");
+			JsonSerializer.Serialize(writer, NameValue, options);
+		}
+
 		if (OriginationDateValue.HasValue)
 		{
 			writer.WritePropertyName("origination_date");

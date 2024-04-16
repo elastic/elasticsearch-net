@@ -34,10 +34,6 @@ public sealed partial class IpRangeAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Array of IP ranges.</para>
@@ -57,8 +53,6 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRangeDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRangeDescriptor> RangesDescriptorAction { get; set; }
@@ -88,18 +82,6 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 	public IpRangeAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public IpRangeAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public IpRangeAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -151,18 +133,6 @@ public sealed partial class IpRangeAggregationDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (RangesDescriptor is not null)
 		{
 			writer.WritePropertyName("ranges");
@@ -207,8 +177,6 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRangeDescriptor RangesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.IpRangeAggregationRangeDescriptor> RangesDescriptorAction { get; set; }
@@ -238,18 +206,6 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 	public IpRangeAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public IpRangeAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public IpRangeAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -299,18 +255,6 @@ public sealed partial class IpRangeAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (RangesDescriptor is not null)

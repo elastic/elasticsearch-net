@@ -32,6 +32,11 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class MultiGetRequestParameters : RequestParameters
 {
 	/// <summary>
+	/// <para>Should this request force synthetic _source?<br/>Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.<br/>Fetches with this enabled will be slower the enabling synthetic source natively in the index.</para>
+	/// </summary>
+	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
+
+	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -92,6 +97,12 @@ public sealed partial class MultiGetRequest : PlainRequest<MultiGetRequestParame
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "mget";
+
+	/// <summary>
+	/// <para>Should this request force synthetic _source?<br/>Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.<br/>Fetches with this enabled will be slower the enabling synthetic source natively in the index.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
 	/// <summary>
 	/// <para>Specifies the node or shard the operation should be performed on. Random by default.</para>
@@ -177,6 +188,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 
 	internal override string OperationName => "mget";
 
+	public MultiGetRequestDescriptor<TDocument> ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
 	public MultiGetRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public MultiGetRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public MultiGetRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
@@ -313,6 +325,7 @@ public sealed partial class MultiGetRequestDescriptor : RequestDescriptor<MultiG
 
 	internal override string OperationName => "mget";
 
+	public MultiGetRequestDescriptor ForceSyntheticSource(bool? forceSyntheticSource = true) => Qs("force_synthetic_source", forceSyntheticSource);
 	public MultiGetRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public MultiGetRequestDescriptor Realtime(bool? realtime = true) => Qs("realtime", realtime);
 	public MultiGetRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);

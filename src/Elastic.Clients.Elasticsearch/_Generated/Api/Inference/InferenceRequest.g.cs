@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class InferenceRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>Specifies the amount of time to wait for the inference request to complete.</para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -55,11 +59,23 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	internal override string OperationName => "inference.inference";
 
 	/// <summary>
+	/// <para>Specifies the amount of time to wait for the inference request to complete.</para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
 	/// <para>Text input to the model.<br/>Either a string or an array of strings.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string> Input { get; set; }
+
+	/// <summary>
+	/// <para>Query input, required for rerank task.<br/>Not required for other tasks.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("query")]
+	public string? Query { get; set; }
 
 	/// <summary>
 	/// <para>Optional task settings</para>
@@ -91,6 +107,8 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 
 	internal override string OperationName => "inference.inference";
 
+	public InferenceRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public InferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 		RouteValues.Required("inference_id", inferenceId);
@@ -104,6 +122,7 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	}
 
 	private ICollection<string> InputValue { get; set; }
+	private string? QueryValue { get; set; }
 	private object? TaskSettingsValue { get; set; }
 
 	/// <summary>
@@ -112,6 +131,15 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	public InferenceRequestDescriptor Input(ICollection<string> input)
 	{
 		InputValue = input;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Query input, required for rerank task.<br/>Not required for other tasks.</para>
+	/// </summary>
+	public InferenceRequestDescriptor Query(string? query)
+	{
+		QueryValue = query;
 		return Self;
 	}
 
@@ -129,6 +157,12 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 		writer.WriteStartObject();
 		writer.WritePropertyName("input");
 		SingleOrManySerializationHelper.Serialize<string>(InputValue, writer, options);
+		if (!string.IsNullOrEmpty(QueryValue))
+		{
+			writer.WritePropertyName("query");
+			writer.WriteStringValue(QueryValue);
+		}
+
 		if (TaskSettingsValue is not null)
 		{
 			writer.WritePropertyName("task_settings");

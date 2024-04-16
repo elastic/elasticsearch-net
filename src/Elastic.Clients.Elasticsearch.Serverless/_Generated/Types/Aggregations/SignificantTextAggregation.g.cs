@@ -82,8 +82,6 @@ public sealed partial class SignificantTextAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("jlh")]
 	public Elastic.Clients.Elasticsearch.Serverless.EmptyObject? Jlh { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
@@ -96,8 +94,6 @@ public sealed partial class SignificantTextAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("mutual_information")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristic? MutualInformation { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.</para>
@@ -164,12 +160,10 @@ public sealed partial class SignificantTextAggregationDescriptor<TDocument> : Se
 	private Elastic.Clients.Elasticsearch.Serverless.EmptyObject? JlhValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.EmptyObjectDescriptor JlhDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristic? MutualInformationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristic? PercentageValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
@@ -352,12 +346,6 @@ public sealed partial class SignificantTextAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
-	public SignificantTextAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
@@ -391,12 +379,6 @@ public sealed partial class SignificantTextAggregationDescriptor<TDocument> : Se
 		MutualInformationValue = null;
 		MutualInformationDescriptor = null;
 		MutualInformationDescriptorAction = configure;
-		return Self;
-	}
-
-	public SignificantTextAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -587,12 +569,6 @@ public sealed partial class SignificantTextAggregationDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, JlhValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -613,12 +589,6 @@ public sealed partial class SignificantTextAggregationDescriptor<TDocument> : Se
 		{
 			writer.WritePropertyName("mutual_information");
 			JsonSerializer.Serialize(writer, MutualInformationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (PercentageDescriptor is not null)
@@ -706,12 +676,10 @@ public sealed partial class SignificantTextAggregationDescriptor : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.EmptyObject? JlhValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.EmptyObjectDescriptor JlhDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.EmptyObjectDescriptor> JlhDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristic? MutualInformationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristicDescriptor MutualInformationDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.MutualInformationHeuristicDescriptor> MutualInformationDescriptorAction { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristic? PercentageValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristicDescriptor PercentageDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.PercentageScoreHeuristicDescriptor> PercentageDescriptorAction { get; set; }
@@ -894,12 +862,6 @@ public sealed partial class SignificantTextAggregationDescriptor : SerializableD
 		return Self;
 	}
 
-	public SignificantTextAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
@@ -933,12 +895,6 @@ public sealed partial class SignificantTextAggregationDescriptor : SerializableD
 		MutualInformationValue = null;
 		MutualInformationDescriptor = null;
 		MutualInformationDescriptorAction = configure;
-		return Self;
-	}
-
-	public SignificantTextAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -1129,12 +1085,6 @@ public sealed partial class SignificantTextAggregationDescriptor : SerializableD
 			JsonSerializer.Serialize(writer, JlhValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -1155,12 +1105,6 @@ public sealed partial class SignificantTextAggregationDescriptor : SerializableD
 		{
 			writer.WritePropertyName("mutual_information");
 			JsonSerializer.Serialize(writer, MutualInformationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (PercentageDescriptor is not null)

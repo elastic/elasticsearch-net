@@ -60,8 +60,6 @@ public sealed partial class TermsAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("include")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
@@ -78,8 +76,6 @@ public sealed partial class TermsAggregation
 	public bool? MissingBucket { get; set; }
 	[JsonInclude, JsonPropertyName("missing_order")]
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
@@ -132,12 +128,10 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private bool? MissingBucketValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
@@ -214,12 +208,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		return Self;
 	}
 
-	public TermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
@@ -247,12 +235,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	public TermsAggregationDescriptor<TDocument> MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
 	{
 		MissingOrderValue = missingOrder;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -346,12 +328,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -374,12 +350,6 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 		{
 			writer.WritePropertyName("missing_order");
 			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OrderValue is not null)
@@ -436,12 +406,10 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? IncludeValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private Elastic.Clients.Elasticsearch.FieldValue? MissingValue { get; set; }
 	private bool? MissingBucketValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrderValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
@@ -518,12 +486,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public TermsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only return values that are found in more than `min_doc_count` hits.</para>
 	/// </summary>
@@ -551,12 +513,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	public TermsAggregationDescriptor MissingOrder(Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? missingOrder)
 	{
 		MissingOrderValue = missingOrder;
-		return Self;
-	}
-
-	public TermsAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -650,12 +606,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, IncludeValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -678,12 +628,6 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("missing_order");
 			JsonSerializer.Serialize(writer, MissingOrderValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OrderValue is not null)
