@@ -34,7 +34,11 @@ public enum TaskType
 	[EnumMember(Value = "text_embedding")]
 	TextEmbedding,
 	[EnumMember(Value = "sparse_embedding")]
-	SparseEmbedding
+	SparseEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank,
+	[EnumMember(Value = "completion")]
+	Completion
 }
 
 internal sealed class TaskTypeConverter : JsonConverter<TaskType>
@@ -48,6 +52,10 @@ internal sealed class TaskTypeConverter : JsonConverter<TaskType>
 				return TaskType.TextEmbedding;
 			case "sparse_embedding":
 				return TaskType.SparseEmbedding;
+			case "rerank":
+				return TaskType.Rerank;
+			case "completion":
+				return TaskType.Completion;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -63,6 +71,12 @@ internal sealed class TaskTypeConverter : JsonConverter<TaskType>
 				return;
 			case TaskType.SparseEmbedding:
 				writer.WriteStringValue("sparse_embedding");
+				return;
+			case TaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+			case TaskType.Completion:
+				writer.WriteStringValue("completion");
 				return;
 		}
 

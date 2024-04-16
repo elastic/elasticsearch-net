@@ -49,6 +49,10 @@ public sealed partial class LikeDocument
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_index")]
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+
+	/// <summary>
+	/// <para>Overrides the default analyzer.</para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("per_field_analyzer")]
 	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 	[JsonInclude, JsonPropertyName("routing")]
@@ -109,6 +113,9 @@ public sealed partial class LikeDocumentDescriptor<TDocument> : SerializableDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Overrides the default analyzer.</para>
+	/// </summary>
 	public LikeDocumentDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
 	{
 		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());
@@ -238,6 +245,9 @@ public sealed partial class LikeDocumentDescriptor : SerializableDescriptor<Like
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Overrides the default analyzer.</para>
+	/// </summary>
 	public LikeDocumentDescriptor PerFieldAnalyzer(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>> selector)
 	{
 		PerFieldAnalyzerValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, string>());

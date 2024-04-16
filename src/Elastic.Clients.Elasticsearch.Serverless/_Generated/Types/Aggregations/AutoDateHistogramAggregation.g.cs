@@ -46,8 +46,6 @@ public sealed partial class AutoDateHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
@@ -60,8 +58,6 @@ public sealed partial class AutoDateHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public DateTimeOffset? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Time zone specified as a ISO 8601 UTC offset.</para>
@@ -93,10 +89,8 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	private int? BucketsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private string? OffsetValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
@@ -147,12 +141,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
 	/// </summary>
@@ -168,12 +156,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 	public AutoDateHistogramAggregationDescriptor<TDocument> Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public AutoDateHistogramAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -228,12 +210,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinimumIntervalValue is not null)
 		{
 			writer.WritePropertyName("minimum_interval");
@@ -244,12 +220,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor<TDocument> : 
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (!string.IsNullOrEmpty(OffsetValue))
@@ -291,10 +261,8 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	private int? BucketsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MinimumInterval? MinimumIntervalValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private string? OffsetValue { get; set; }
 	private IDictionary<string, object>? ParamsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
@@ -345,12 +313,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 		return Self;
 	}
 
-	public AutoDateHistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum rounding interval.<br/>This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than `minimum_interval`.</para>
 	/// </summary>
@@ -366,12 +328,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 	public AutoDateHistogramAggregationDescriptor Missing(DateTimeOffset? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public AutoDateHistogramAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -426,12 +382,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 			writer.WriteStringValue(FormatValue);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinimumIntervalValue is not null)
 		{
 			writer.WritePropertyName("minimum_interval");
@@ -442,12 +392,6 @@ public sealed partial class AutoDateHistogramAggregationDescriptor : Serializabl
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (!string.IsNullOrEmpty(OffsetValue))

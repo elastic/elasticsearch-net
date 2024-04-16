@@ -52,16 +52,12 @@ public sealed partial class InferenceAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfig { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The ID or alias for the trained model.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_id")]
 	public Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(InferenceAggregation inferenceAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Inference(inferenceAggregation);
 }
@@ -80,9 +76,7 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -138,24 +132,12 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The ID or alias for the trained model.</para>
 	/// </summary>
 	public InferenceAggregationDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Name modelId)
 	{
 		ModelIdValue = modelId;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -196,20 +178,8 @@ public sealed partial class InferenceAggregationDescriptor<TDocument> : Serializ
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		writer.WritePropertyName("model_id");
 		JsonSerializer.Serialize(writer, ModelIdValue, options);
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		writer.WriteEndObject();
 	}
 }
@@ -228,9 +198,7 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig? InferenceConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Name ModelIdValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -286,24 +254,12 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public InferenceAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The ID or alias for the trained model.</para>
 	/// </summary>
 	public InferenceAggregationDescriptor ModelId(Elastic.Clients.Elasticsearch.Name modelId)
 	{
 		ModelIdValue = modelId;
-		return Self;
-	}
-
-	public InferenceAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -344,20 +300,8 @@ public sealed partial class InferenceAggregationDescriptor : SerializableDescrip
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		writer.WritePropertyName("model_id");
 		JsonSerializer.Serialize(writer, ModelIdValue, options);
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		writer.WriteEndObject();
 	}
 }

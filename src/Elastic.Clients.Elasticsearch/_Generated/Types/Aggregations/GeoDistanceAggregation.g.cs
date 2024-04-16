@@ -40,10 +40,6 @@ public sealed partial class GeoDistanceAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>The origin  used to evaluate the distance.</para>
@@ -76,8 +72,6 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
@@ -118,18 +112,6 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 	public GeoDistanceAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -205,18 +187,6 @@ public sealed partial class GeoDistanceAggregationDescriptor<TDocument> : Serial
 			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (OriginValue is not null)
 		{
 			writer.WritePropertyName("origin");
@@ -274,8 +244,6 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 
 	private Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.GeoLocation? OriginValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? RangesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor RangesDescriptor { get; set; }
@@ -316,18 +284,6 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 	public GeoDistanceAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public GeoDistanceAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -401,18 +357,6 @@ public sealed partial class GeoDistanceAggregationDescriptor : SerializableDescr
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OriginValue is not null)

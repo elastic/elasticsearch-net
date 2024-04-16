@@ -33,25 +33,25 @@ public sealed partial class QueryCacheStats
 	/// <para>Total number of entries added to the query cache across all shards assigned to selected nodes.<br/>This number includes current and evicted entries.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cache_count")]
-	public int CacheCount { get; init; }
+	public long CacheCount { get; init; }
 
 	/// <summary>
 	/// <para>Total number of entries currently in the query cache across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("cache_size")]
-	public int CacheSize { get; init; }
+	public long CacheSize { get; init; }
 
 	/// <summary>
 	/// <para>Total number of query cache evictions across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("evictions")]
-	public int Evictions { get; init; }
+	public long Evictions { get; init; }
 
 	/// <summary>
 	/// <para>Total count of query cache hits across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("hit_count")]
-	public int HitCount { get; init; }
+	public long HitCount { get; init; }
 
 	/// <summary>
 	/// <para>Total amount of memory used for the query cache across all shards assigned to selected nodes.</para>
@@ -69,11 +69,11 @@ public sealed partial class QueryCacheStats
 	/// <para>Total count of query cache misses across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("miss_count")]
-	public int MissCount { get; init; }
+	public long MissCount { get; init; }
 
 	/// <summary>
 	/// <para>Total count of hits and misses in the query cache across all shards assigned to selected nodes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("total_count")]
-	public int TotalCount { get; init; }
+	public long TotalCount { get; init; }
 }
