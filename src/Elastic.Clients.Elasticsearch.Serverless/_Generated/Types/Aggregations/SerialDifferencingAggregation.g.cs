@@ -52,10 +52,6 @@ public sealed partial class SerialDifferencingAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lag")]
 	public int? Lag { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(SerialDifferencingAggregation serialDifferencingAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.SerialDiff(serialDifferencingAggregation);
 }
@@ -72,8 +68,6 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
 	private int? LagValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -111,18 +105,6 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 		return Self;
 	}
 
-	public SerialDifferencingAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public SerialDifferencingAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -148,18 +130,6 @@ public sealed partial class SerialDifferencingAggregationDescriptor : Serializab
 		{
 			writer.WritePropertyName("lag");
 			writer.WriteNumberValue(LagValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

@@ -28,4 +28,8 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
 public sealed partial class SimulateIndexTemplateResponse : ElasticsearchResponse
 {
+	[JsonInclude, JsonPropertyName("overlapping")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Overlapping>? Overlapping { get; init; }
+	[JsonInclude, JsonPropertyName("template")]
+	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.Template Template { get; init; }
 }

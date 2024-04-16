@@ -42,8 +42,6 @@ public sealed partial class HistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("interval")]
 	public double? Interval { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
@@ -56,8 +54,6 @@ public sealed partial class HistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("missing")]
 	public double? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>By default, the bucket keys start with 0 and then continue in even spaced steps of `interval`.<br/>The bucket boundaries can be shifted by using the `offset` option.</para>
@@ -89,10 +85,8 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private double? IntervalValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -139,12 +133,6 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
 	/// </summary>
@@ -160,12 +148,6 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	public HistogramAggregationDescriptor<TDocument> Missing(double? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -214,12 +196,6 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 			writer.WriteNumberValue(IntervalValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -230,12 +206,6 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OffsetValue.HasValue)
@@ -271,10 +241,8 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
 	private double? IntervalValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 	private double? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
@@ -321,12 +289,6 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public HistogramAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, the response will fill gaps in the histogram with empty buckets.</para>
 	/// </summary>
@@ -342,12 +304,6 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	public HistogramAggregationDescriptor Missing(double? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public HistogramAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -396,12 +352,6 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 			writer.WriteNumberValue(IntervalValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
@@ -412,12 +362,6 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("missing");
 			writer.WriteNumberValue(MissingValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OffsetValue.HasValue)

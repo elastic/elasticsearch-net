@@ -29,11 +29,6 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 public sealed partial class ReverseNestedAggregation
 {
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-
 	/// <summary>
 	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
 	/// </summary>
@@ -51,21 +46,7 @@ public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : Seri
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public ReverseNestedAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ReverseNestedAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
@@ -97,18 +78,6 @@ public sealed partial class ReverseNestedAggregationDescriptor<TDocument> : Seri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PathValue is not null)
 		{
 			writer.WritePropertyName("path");
@@ -127,21 +96,7 @@ public sealed partial class ReverseNestedAggregationDescriptor : SerializableDes
 	{
 	}
 
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-
-	public ReverseNestedAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public ReverseNestedAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
 
 	/// <summary>
 	/// <para>Defines the nested object field that should be joined back to.<br/>The default is empty, which means that it joins back to the root/main document level.</para>
@@ -173,18 +128,6 @@ public sealed partial class ReverseNestedAggregationDescriptor : SerializableDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (PathValue is not null)
 		{
 			writer.WritePropertyName("path");

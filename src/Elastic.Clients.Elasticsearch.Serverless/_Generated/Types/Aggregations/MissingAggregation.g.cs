@@ -34,12 +34,8 @@ public sealed partial class MissingAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("missing")]
 	public Elastic.Clients.Elasticsearch.Serverless.FieldValue? Missing { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(MissingAggregation missingAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.Missing(missingAggregation);
 }
@@ -53,9 +49,7 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>The name of the field.</para>
@@ -84,21 +78,9 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 		return Self;
 	}
 
-	public MissingAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	public MissingAggregationDescriptor<TDocument> Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public MissingAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -111,22 +93,10 @@ public sealed partial class MissingAggregationDescriptor<TDocument> : Serializab
 			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();
@@ -142,9 +112,7 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.FieldValue? MissingValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>The name of the field.</para>
@@ -173,21 +141,9 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 		return Self;
 	}
 
-	public MissingAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	public MissingAggregationDescriptor Missing(Elastic.Clients.Elasticsearch.Serverless.FieldValue? missing)
 	{
 		MissingValue = missing;
-		return Self;
-	}
-
-	public MissingAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -200,22 +156,10 @@ public sealed partial class MissingAggregationDescriptor : SerializableDescripto
 			JsonSerializer.Serialize(writer, FieldValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MissingValue is not null)
 		{
 			writer.WritePropertyName("missing");
 			JsonSerializer.Serialize(writer, MissingValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

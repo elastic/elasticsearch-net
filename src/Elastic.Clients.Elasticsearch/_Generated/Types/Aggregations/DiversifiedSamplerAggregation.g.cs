@@ -46,10 +46,6 @@ public sealed partial class DiversifiedSamplerAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("max_docs_per_value")]
 	public int? MaxDocsPerValue { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
@@ -73,8 +69,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHintValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private int? MaxDocsPerValueValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
@@ -123,18 +117,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 		return Self;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public DiversifiedSamplerAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	public DiversifiedSamplerAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -171,18 +153,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor<TDocument> :
 			writer.WriteNumberValue(MaxDocsPerValueValue.Value);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
 		if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
@@ -210,8 +180,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? ExecutionHintValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
 	private int? MaxDocsPerValueValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 
@@ -260,18 +228,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 		return Self;
 	}
 
-	public DiversifiedSamplerAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public DiversifiedSamplerAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	public DiversifiedSamplerAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptValue = script;
@@ -306,18 +262,6 @@ public sealed partial class DiversifiedSamplerAggregationDescriptor : Serializab
 		{
 			writer.WritePropertyName("max_docs_per_value");
 			writer.WriteNumberValue(MaxDocsPerValueValue.Value);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (ScriptValue is not null)

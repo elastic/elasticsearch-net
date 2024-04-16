@@ -46,10 +46,6 @@ public sealed partial class AverageBucketAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("gap_policy")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicy { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(AverageBucketAggregation averageBucketAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.AvgBucket(averageBucketAggregation);
 }
@@ -65,8 +61,6 @@ public sealed partial class AverageBucketAggregationDescriptor : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.BucketsPath? BucketsPathValue { get; set; }
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.GapPolicy? GapPolicyValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
-	private string? NameValue { get; set; }
 
 	/// <summary>
 	/// <para>Path to the buckets that contain one set of values to correlate.</para>
@@ -95,18 +89,6 @@ public sealed partial class AverageBucketAggregationDescriptor : SerializableDes
 		return Self;
 	}
 
-	public AverageBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	public AverageBucketAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -126,18 +108,6 @@ public sealed partial class AverageBucketAggregationDescriptor : SerializableDes
 		{
 			writer.WritePropertyName("gap_policy");
 			JsonSerializer.Serialize(writer, GapPolicyValue, options);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		writer.WriteEndObject();

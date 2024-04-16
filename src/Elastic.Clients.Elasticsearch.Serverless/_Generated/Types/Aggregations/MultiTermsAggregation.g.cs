@@ -34,16 +34,12 @@ public sealed partial class MultiTermsAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("collect_mode")]
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("min_doc_count")]
 	public long? MinDocCount { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>Specifies the sort order of the buckets.<br/>Defaults to sorting by descending document count.</para>
@@ -94,9 +90,7 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
@@ -116,24 +110,12 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor<TDocument> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor<TDocument> MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor<TDocument> Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -230,22 +212,10 @@ public sealed partial class MultiTermsAggregationDescriptor<TDocument> : Seriali
 			JsonSerializer.Serialize(writer, CollectModeValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OrderValue is not null)
@@ -322,9 +292,7 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.TermsAggregationCollectMode? CollectModeValue { get; set; }
-	private IDictionary<string, object>? MetaValue { get; set; }
 	private long? MinDocCountValue { get; set; }
-	private string? NameValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
@@ -344,24 +312,12 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 		return Self;
 	}
 
-	public MultiTermsAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
 	/// <summary>
 	/// <para>The minimum number of documents in a bucket for it to be returned.</para>
 	/// </summary>
 	public MultiTermsAggregationDescriptor MinDocCount(long? minDocCount)
 	{
 		MinDocCountValue = minDocCount;
-		return Self;
-	}
-
-	public MultiTermsAggregationDescriptor Name(string? name)
-	{
-		NameValue = name;
 		return Self;
 	}
 
@@ -458,22 +414,10 @@ public sealed partial class MultiTermsAggregationDescriptor : SerializableDescri
 			JsonSerializer.Serialize(writer, CollectModeValue, options);
 		}
 
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
 		if (MinDocCountValue.HasValue)
 		{
 			writer.WritePropertyName("min_doc_count");
 			writer.WriteNumberValue(MinDocCountValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
 		}
 
 		if (OrderValue is not null)
