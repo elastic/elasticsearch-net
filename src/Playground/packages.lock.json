@@ -16,9 +16,9 @@
       },
       "Elastic.Transport": {
         "type": "Direct",
-        "requested": "[0.4.18, )",
-        "resolved": "0.4.18",
-        "contentHash": "Q9nGgYxB0r1jTkUf8zWbFKLk5JHliZhVU6vukdMLHLH/1EBKQvHzPahkrnV8KsvGOPFFqFAVOhQvaxpjXuS3TA==",
+        "requested": "[0.4.19, )",
+        "resolved": "0.4.19",
+        "contentHash": "QsFtfHJi/DJDH4Gh602Y+hVTWS5KdpUPpRHxU57OSwty/nSDd/xRymThuIRgH5UxnSFVmQMEslyFtP7BkLFgmg==",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.Text.Json": "8.0.0"
@@ -145,7 +145,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.18, )"
+          "Elastic.Transport": "[0.4.19, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -158,7 +158,7 @@
       "elastic.clients.elasticsearch.serverless": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.18, )"
+          "Elastic.Transport": "[0.4.19, )"
         }
       }
     }
