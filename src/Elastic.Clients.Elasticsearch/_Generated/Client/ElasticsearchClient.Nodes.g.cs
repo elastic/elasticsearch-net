@@ -41,6 +41,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Removes the archived repositories metering information present in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns cluster repositories metering information.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(HotThreadsRequest request)
 	{
 		request.BeforeRequest();
@@ -356,6 +359,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(NodesInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -493,6 +497,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Reloads secure settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(ReloadSecureSettingsRequest request)
 	{
 		request.BeforeRequest();
@@ -630,6 +635,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(NodesStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -884,6 +890,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns low-level information about REST actions usage on nodes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(NodesUsageRequest request)
 	{
 		request.BeforeRequest();

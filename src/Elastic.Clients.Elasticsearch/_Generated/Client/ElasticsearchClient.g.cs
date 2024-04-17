@@ -119,6 +119,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequest request)
 	{
 		request.BeforeRequest();
@@ -373,6 +374,7 @@ public partial class ElasticsearchClient
 	/// <para>Explicitly clears the search context for a scroll.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
 	{
 		request.BeforeRequest();
@@ -462,6 +464,7 @@ public partial class ElasticsearchClient
 	/// <para>Close a point in time</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
 	{
 		request.BeforeRequest();
@@ -551,6 +554,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns number of documents matching a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(CountRequest request)
 	{
 		request.BeforeRequest();
@@ -806,6 +810,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns a 409 response when a document with a same ID already exists in the index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
 	{
 		request.BeforeRequest();
@@ -1058,6 +1063,7 @@ public partial class ElasticsearchClient
 	/// <para>Removes a document from the index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete(DeleteRequest request)
 	{
 		request.BeforeRequest();
@@ -1216,6 +1222,7 @@ public partial class ElasticsearchClient
 	/// <para>Deletes documents matching the provided query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
 	{
 		request.BeforeRequest();
@@ -1374,6 +1381,7 @@ public partial class ElasticsearchClient
 	/// <para>Changes the number of requests per second for a particular Delete By Query operation.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
 	{
 		request.BeforeRequest();
@@ -1463,6 +1471,7 @@ public partial class ElasticsearchClient
 	/// <para>Deletes a script.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
 	{
 		request.BeforeRequest();
@@ -1621,6 +1630,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about whether a document exists in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequest request)
 	{
 		request.BeforeRequest();
@@ -1779,6 +1789,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about whether a document source exists in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
 	{
 		request.BeforeRequest();
@@ -1937,6 +1948,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about why a specific matches (or doesn't match) a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
 	{
 		request.BeforeRequest();
@@ -2026,6 +2038,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns the information about the capabilities of fields among multiple indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(FieldCapsRequest request)
 	{
 		request.BeforeRequest();
@@ -2280,6 +2293,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(GetRequest request)
 	{
 		request.BeforeRequest();
@@ -2369,6 +2383,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns a script.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript(GetScriptRequest request)
 	{
 		request.BeforeRequest();
@@ -2527,6 +2542,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns all script contexts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptContextResponse GetScriptContext(GetScriptContextRequest request)
 	{
 		request.BeforeRequest();
@@ -2616,6 +2632,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns available script types, languages and contexts</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptLanguagesResponse GetScriptLanguages(GetScriptLanguagesRequest request)
 	{
 		request.BeforeRequest();
@@ -2705,6 +2722,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequest request)
 	{
 		request.BeforeRequest();
@@ -2794,6 +2812,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns the health of the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(HealthReportRequest request)
 	{
 		request.BeforeRequest();
@@ -2931,6 +2950,7 @@ public partial class ElasticsearchClient
 	/// <para>Creates or updates a document in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
 	{
 		request.BeforeRequest();
@@ -3164,6 +3184,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InfoResponse Info(InfoRequest request)
 	{
 		request.BeforeRequest();
@@ -3253,6 +3274,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns multiple termvectors in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(MultiTermVectorsRequest request)
 	{
 		request.BeforeRequest();
@@ -3507,6 +3529,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to get multiple documents in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
 	{
 		request.BeforeRequest();
@@ -3644,6 +3667,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to execute several search operations in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
 	{
 		request.BeforeRequest();
@@ -3781,6 +3805,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to execute several search template operations in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -3918,6 +3943,7 @@ public partial class ElasticsearchClient
 	/// <para>Open a point in time that can be used in subsequent searches</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
 	{
 		request.BeforeRequest();
@@ -4076,6 +4102,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PingResponse Ping(PingRequest request)
 	{
 		request.BeforeRequest();
@@ -4165,6 +4192,7 @@ public partial class ElasticsearchClient
 	/// <para>Creates or updates a script.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(PutScriptRequest request)
 	{
 		request.BeforeRequest();
@@ -4419,6 +4447,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to evaluate the quality of ranked search results over a set of typical search queries</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(RankEvalRequest request)
 	{
 		request.BeforeRequest();
@@ -4673,6 +4702,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex(ReindexRequest request)
 	{
 		request.BeforeRequest();
@@ -4831,6 +4861,7 @@ public partial class ElasticsearchClient
 	/// <para>Changes the number of requests per second for a particular Reindex operation.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
 	{
 		request.BeforeRequest();
@@ -4920,6 +4951,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -5174,6 +5206,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows an arbitrary script to be executed and a result to be returned</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(ScriptsPainlessExecuteRequest request)
 	{
 		request.BeforeRequest();
@@ -5263,6 +5296,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
 	{
 		request.BeforeRequest();
@@ -5283,6 +5317,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns results matching a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
 	{
 		request.BeforeRequest();
@@ -5420,6 +5455,7 @@ public partial class ElasticsearchClient
 	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt(SearchMvtRequest request)
 	{
 		request.BeforeRequest();
@@ -5578,6 +5614,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about the indices and shards that a search request would be executed against.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(SearchShardsRequest request)
 	{
 		request.BeforeRequest();
@@ -5832,6 +5869,7 @@ public partial class ElasticsearchClient
 	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -5969,6 +6007,7 @@ public partial class ElasticsearchClient
 	/// <para>The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum(TermsEnumRequest request)
 	{
 		request.BeforeRequest();
@@ -6127,6 +6166,7 @@ public partial class ElasticsearchClient
 	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TermVectorsRequest<TDocument> request)
 	{
 		request.BeforeRequest();
@@ -6264,6 +6304,7 @@ public partial class ElasticsearchClient
 	/// <para>Updates a document with a script or partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
 	{
 		request.BeforeRequest();
@@ -6353,6 +6394,7 @@ public partial class ElasticsearchClient
 	/// <para>Updates documents that match the specified query. If no query is specified,<br/> performs an update on every document in the index without changing the source,<br/>for example to pick up a mapping change.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
 	{
 		request.BeforeRequest();
@@ -6511,6 +6553,7 @@ public partial class ElasticsearchClient
 	/// <para>Changes the number of requests per second for a particular Update By Query operation.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
 	{
 		request.BeforeRequest();

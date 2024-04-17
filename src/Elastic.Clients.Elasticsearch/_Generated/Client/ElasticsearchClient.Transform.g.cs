@@ -41,6 +41,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(GetTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -267,6 +269,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -356,6 +359,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Previews a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(PreviewTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -493,6 +497,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform(PutTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -651,6 +656,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Resets an existing transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetTransformResponse ResetTransform(ResetTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -740,6 +746,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Schedules now a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -829,6 +836,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTransformResponse StartTransform(StartTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -918,6 +926,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTransformResponse StopTransform(StopTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -1007,6 +1016,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequest request)
 	{
 		request.BeforeRequest();
@@ -1165,6 +1175,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Upgrades all transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequest request)
 	{
 		request.BeforeRequest();

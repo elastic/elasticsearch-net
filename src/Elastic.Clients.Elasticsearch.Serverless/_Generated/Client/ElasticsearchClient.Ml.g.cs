@@ -41,16 +41,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Clear the cached results from a trained model deployment</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClearTrainedModelDeploymentCacheResponse ClearTrainedModelDeploymentCache(ClearTrainedModelDeploymentCacheRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearTrainedModelDeploymentCacheRequest, ClearTrainedModelDeploymentCacheResponse, ClearTrainedModelDeploymentCacheRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Clear the cached results from a trained model deployment</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(ClearTrainedModelDeploymentCacheRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -88,16 +78,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClearTrainedModelDeploymentCacheRequestDescriptor, ClearTrainedModelDeploymentCacheResponse, ClearTrainedModelDeploymentCacheRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Closes one or more anomaly detection jobs. A job can be opened and closed multiple times throughout its lifecycle.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual CloseJobResponse CloseJob(CloseJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CloseJobRequest, CloseJobResponse, CloseJobRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -147,16 +127,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteCalendarResponse DeleteCalendar(DeleteCalendarRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteCalendarRequest, DeleteCalendarResponse, DeleteCalendarRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(DeleteCalendarRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -194,16 +164,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteCalendarRequestDescriptor, DeleteCalendarResponse, DeleteCalendarRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(DeleteCalendarEventRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteCalendarEventRequest, DeleteCalendarEventResponse, DeleteCalendarEventRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -253,16 +213,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes anomaly detection jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteCalendarJobResponse DeleteCalendarJob(DeleteCalendarJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteCalendarJobRequest, DeleteCalendarJobResponse, DeleteCalendarJobRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(DeleteCalendarJobRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -306,16 +256,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteDatafeedResponse DeleteDatafeed(DeleteDatafeedRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteDatafeedRequest, DeleteDatafeedResponse, DeleteDatafeedRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(DeleteDatafeedRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -353,16 +293,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteDatafeedRequestDescriptor, DeleteDatafeedResponse, DeleteDatafeedRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes an existing data frame analytics job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(DeleteDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteDataFrameAnalyticsRequest, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -445,16 +375,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes expired and unused machine learning data.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteExpiredDataResponse DeleteExpiredData(DeleteExpiredDataRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteExpiredDataRequest, DeleteExpiredDataResponse, DeleteExpiredDataRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(DeleteExpiredDataRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -521,16 +441,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteFilterResponse DeleteFilter(DeleteFilterRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteFilterRequest, DeleteFilterResponse, DeleteFilterRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes a filter.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteFilterResponse> DeleteFilterAsync(DeleteFilterRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -568,16 +478,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteFilterRequestDescriptor, DeleteFilterResponse, DeleteFilterRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteForecastResponse DeleteForecast(DeleteForecastRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteForecastRequest, DeleteForecastResponse, DeleteForecastRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -650,16 +550,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteJobRequest, DeleteJobResponse, DeleteJobRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes an existing anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -697,16 +587,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteJobRequestDescriptor, DeleteJobResponse, DeleteJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes an existing model snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteModelSnapshotResponse DeleteModelSnapshot(DeleteModelSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteModelSnapshotRequest, DeleteModelSnapshotResponse, DeleteModelSnapshotRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -756,16 +636,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing trained inference model that is currently not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteTrainedModelResponse DeleteTrainedModel(DeleteTrainedModelRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteTrainedModelRequest, DeleteTrainedModelResponse, DeleteTrainedModelRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced by an ingest pipeline.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(DeleteTrainedModelRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -809,16 +679,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a model alias that refers to the trained model</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(DeleteTrainedModelAliasRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteTrainedModelAliasRequest, DeleteTrainedModelAliasResponse, DeleteTrainedModelAliasRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes a model alias that refers to the trained model</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(DeleteTrainedModelAliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -856,16 +716,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteTrainedModelAliasRequestDescriptor, DeleteTrainedModelAliasResponse, DeleteTrainedModelAliasRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Estimates the model memory</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual EstimateModelMemoryResponse EstimateModelMemory(EstimateModelMemoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EstimateModelMemoryRequest, EstimateModelMemoryResponse, EstimateModelMemoryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -948,16 +798,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Evaluates the data frame analytics for an annotated index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual EvaluateDataFrameResponse EvaluateDataFrame(EvaluateDataFrameRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EvaluateDataFrameRequest, EvaluateDataFrameResponse, EvaluateDataFrameRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(EvaluateDataFrameRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1028,16 +868,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<EvaluateDataFrameRequestDescriptor, EvaluateDataFrameResponse, EvaluateDataFrameRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Explains a data frame analytics config.</para>
-	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(ExplainDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExplainDataFrameAnalyticsRequest, ExplainDataFrameAnalyticsResponse, ExplainDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1166,16 +996,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Forces any buffered data to be processed by the job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual FlushJobResponse FlushJob(FlushJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<FlushJobRequest, FlushJobResponse, FlushJobRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Forces any buffered data to be processed by the job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<FlushJobResponse> FlushJobAsync(FlushJobRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1219,16 +1039,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Predicts the future behavior of a time series by using its historical behavior.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ForecastResponse Forecast(ForecastRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ForecastRequest, ForecastResponse, ForecastRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Predicts the future behavior of a time series by using its historical behavior.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ForecastResponse> ForecastAsync(ForecastRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1266,16 +1076,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ForecastRequestDescriptor, ForecastResponse, ForecastRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves anomaly detection job results for one or more buckets.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetBucketsResponse GetBuckets(GetBucketsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetBucketsRequest, GetBucketsResponse, GetBucketsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1404,16 +1204,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the scheduled events in calendars.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetCalendarEventsResponse GetCalendarEvents(GetCalendarEventsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetCalendarEventsRequest, GetCalendarEventsResponse, GetCalendarEventsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves information about the scheduled events in calendars.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetCalendarEventsResponse> GetCalendarEventsAsync(GetCalendarEventsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1451,16 +1241,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetCalendarEventsRequestDescriptor, GetCalendarEventsResponse, GetCalendarEventsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves configuration information for calendars.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetCalendarsResponse GetCalendars(GetCalendarsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetCalendarsRequest, GetCalendarsResponse, GetCalendarsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1533,16 +1313,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves anomaly detection job results for one or more categories.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetCategoriesResponse GetCategories(GetCategoriesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetCategoriesRequest, GetCategoriesResponse, GetCategoriesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves anomaly detection job results for one or more categories.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetCategoriesResponse> GetCategoriesAsync(GetCategoriesRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1603,16 +1373,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetCategoriesRequestDescriptor, GetCategoriesResponse, GetCategoriesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves configuration information for datafeeds.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetDatafeedsResponse GetDatafeeds(GetDatafeedsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetDatafeedsRequest, GetDatafeedsResponse, GetDatafeedsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1685,16 +1445,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetDatafeedStatsResponse GetDatafeedStats(GetDatafeedStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetDatafeedStatsRequest, GetDatafeedStatsResponse, GetDatafeedStatsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves usage information for datafeeds.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetDatafeedStatsResponse> GetDatafeedStatsAsync(GetDatafeedStatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1755,16 +1505,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetDatafeedStatsRequestDescriptor, GetDatafeedStatsResponse, GetDatafeedStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves configuration information for data frame analytics jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetDataFrameAnalyticsResponse GetDataFrameAnalytics(GetDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetDataFrameAnalyticsRequest, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1893,16 +1633,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(GetDataFrameAnalyticsStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetDataFrameAnalyticsStatsRequest, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves usage information for data frame analytics jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync(GetDataFrameAnalyticsStatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2025,16 +1755,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves filters.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetFiltersResponse GetFilters(GetFiltersRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetFiltersRequest, GetFiltersResponse, GetFiltersRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves filters.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetFiltersResponse> GetFiltersAsync(GetFiltersRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2095,16 +1815,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetFiltersRequestDescriptor, GetFiltersResponse, GetFiltersRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves anomaly detection job results for one or more influencers.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetInfluencersResponse GetInfluencers(GetInfluencersRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetInfluencersRequest, GetInfluencersResponse, GetInfluencersRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2187,16 +1897,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetJobsRequest, GetJobsResponse, GetJobsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves configuration information for anomaly detection jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2257,16 +1957,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetJobsRequestDescriptor, GetJobsResponse, GetJobsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves usage information for anomaly detection jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetJobStatsResponse GetJobStats(GetJobStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetJobStatsRequest, GetJobStatsResponse, GetJobStatsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2339,16 +2029,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information on how ML is using memory.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-memory.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetMemoryStatsResponse GetMemoryStats(GetMemoryStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetMemoryStatsRequest, GetMemoryStatsResponse, GetMemoryStatsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information on how ML is using memory.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-memory.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetMemoryStatsResponse> GetMemoryStatsAsync(GetMemoryStatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2409,16 +2089,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetMemoryStatsRequestDescriptor, GetMemoryStatsResponse, GetMemoryStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves information about model snapshots.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetModelSnapshotsResponse GetModelSnapshots(GetModelSnapshotsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetModelSnapshotsRequest, GetModelSnapshotsResponse, GetModelSnapshotsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2547,16 +2217,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Gets stats for anomaly detection job model snapshot upgrades that are in progress.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetModelSnapshotUpgradeStatsResponse GetModelSnapshotUpgradeStats(GetModelSnapshotUpgradeStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetModelSnapshotUpgradeStatsRequest, GetModelSnapshotUpgradeStatsResponse, GetModelSnapshotUpgradeStatsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Gets stats for anomaly detection job model snapshot upgrades that are in progress.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetModelSnapshotUpgradeStatsResponse> GetModelSnapshotUpgradeStatsAsync(GetModelSnapshotUpgradeStatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2600,16 +2260,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves overall bucket results that summarize the bucket results of multiple anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetOverallBucketsResponse GetOverallBuckets(GetOverallBucketsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetOverallBucketsRequest, GetOverallBucketsResponse, GetOverallBucketsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves overall bucket results that summarize the bucket results of multiple anomaly detection jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetOverallBucketsResponse> GetOverallBucketsAsync(GetOverallBucketsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2647,16 +2297,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetOverallBucketsRequestDescriptor, GetOverallBucketsResponse, GetOverallBucketsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves anomaly records for an anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetRecordsResponse GetRecords(GetRecordsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetRecordsRequest, GetRecordsResponse, GetRecordsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2739,16 +2379,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for a trained inference model.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetTrainedModelsResponse GetTrainedModels(GetTrainedModelsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetTrainedModelsRequest, GetTrainedModelsResponse, GetTrainedModelsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves configuration information for a trained inference model.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetTrainedModelsResponse> GetTrainedModelsAsync(GetTrainedModelsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2815,16 +2445,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for trained inference models.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetTrainedModelsStatsResponse GetTrainedModelsStats(GetTrainedModelsStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetTrainedModelsStatsRequest, GetTrainedModelsStatsResponse, GetTrainedModelsStatsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves usage information for trained inference models.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetTrainedModelsStatsResponse> GetTrainedModelsStatsAsync(GetTrainedModelsStatsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2885,16 +2505,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTrainedModelsStatsRequestDescriptor, GetTrainedModelsStatsResponse, GetTrainedModelsStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Evaluate a trained model.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual InferTrainedModelResponse InferTrainedModel(InferTrainedModelRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<InferTrainedModelRequest, InferTrainedModelResponse, InferTrainedModelRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2977,16 +2587,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Returns defaults and limits used by machine learning.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual MlInfoResponse Info(MlInfoRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<MlInfoRequest, MlInfoResponse, MlInfoRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns defaults and limits used by machine learning.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<MlInfoResponse> InfoAsync(MlInfoRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3024,16 +2624,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<MlInfoRequestDescriptor, MlInfoResponse, MlInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Opens one or more anomaly detection jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual OpenJobResponse OpenJob(OpenJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<OpenJobRequest, OpenJobResponse, OpenJobRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3083,16 +2673,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Posts scheduled events in a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PostCalendarEventsResponse PostCalendarEvents(PostCalendarEventsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PostCalendarEventsRequest, PostCalendarEventsResponse, PostCalendarEventsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Posts scheduled events in a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PostCalendarEventsResponse> PostCalendarEventsAsync(PostCalendarEventsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3130,16 +2710,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PostCalendarEventsRequestDescriptor, PostCalendarEventsResponse, PostCalendarEventsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Previews that will be analyzed given a data frame analytics config.</para>
-	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(PreviewDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PreviewDataFrameAnalyticsRequest, PreviewDataFrameAnalyticsResponse, PreviewDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3268,16 +2838,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutCalendarResponse PutCalendar(PutCalendarRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutCalendarRequest, PutCalendarResponse, PutCalendarRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutCalendarResponse> PutCalendarAsync(PutCalendarRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3321,16 +2881,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Adds an anomaly detection job to a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutCalendarJobResponse PutCalendarJob(PutCalendarJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutCalendarJobRequest, PutCalendarJobResponse, PutCalendarJobRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Adds an anomaly detection job to a calendar.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutCalendarJobResponse> PutCalendarJobAsync(PutCalendarJobRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3368,16 +2918,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutCalendarJobRequestDescriptor, PutCalendarJobResponse, PutCalendarJobRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a datafeed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutDatafeedResponse PutDatafeed(PutDatafeedRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutDatafeedRequest, PutDatafeedResponse, PutDatafeedRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3460,16 +3000,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(PutDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutDataFrameAnalyticsRequest, PutDataFrameAnalyticsResponse, PutDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a data frame analytics job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutDataFrameAnalyticsResponse> PutDataFrameAnalyticsAsync(PutDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3546,16 +3076,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutFilterResponse PutFilter(PutFilterRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutFilterRequest, PutFilterResponse, PutFilterRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Instantiates a filter.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutFilterResponse> PutFilterAsync(PutFilterRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3593,16 +3113,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutFilterRequestDescriptor, PutFilterResponse, PutFilterRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Instantiates an anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutJobResponse PutJob(PutJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutJobRequest, PutJobResponse, PutJobRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3685,16 +3195,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates an inference trained model.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutTrainedModelResponse PutTrainedModel(PutTrainedModelRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutTrainedModelRequest, PutTrainedModelResponse, PutTrainedModelRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Creates an inference trained model.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutTrainedModelResponse> PutTrainedModelAsync(PutTrainedModelRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3771,16 +3271,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a new model alias (or reassigns an existing one) to refer to the trained model</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutTrainedModelAliasResponse PutTrainedModelAlias(PutTrainedModelAliasRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutTrainedModelAliasRequest, PutTrainedModelAliasResponse, PutTrainedModelAliasRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Creates a new model alias (or reassigns an existing one) to refer to the trained model</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutTrainedModelAliasResponse> PutTrainedModelAliasAsync(PutTrainedModelAliasRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3818,16 +3308,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutTrainedModelAliasRequestDescriptor, PutTrainedModelAliasResponse, PutTrainedModelAliasRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates part of a trained model definition</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutTrainedModelDefinitionPartResponse PutTrainedModelDefinitionPart(PutTrainedModelDefinitionPartRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutTrainedModelDefinitionPartRequest, PutTrainedModelDefinitionPartResponse, PutTrainedModelDefinitionPartRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3877,16 +3357,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a trained model vocabulary</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-vocabulary.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PutTrainedModelVocabularyResponse PutTrainedModelVocabulary(PutTrainedModelVocabularyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutTrainedModelVocabularyRequest, PutTrainedModelVocabularyResponse, PutTrainedModelVocabularyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Creates a trained model vocabulary</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-vocabulary.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PutTrainedModelVocabularyResponse> PutTrainedModelVocabularyAsync(PutTrainedModelVocabularyRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3924,16 +3394,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutTrainedModelVocabularyRequestDescriptor, PutTrainedModelVocabularyResponse, PutTrainedModelVocabularyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Resets an existing anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ResetJobResponse ResetJob(ResetJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ResetJobRequest, ResetJobResponse, ResetJobRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3983,16 +3443,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Reverts to a specific snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual RevertModelSnapshotResponse RevertModelSnapshot(RevertModelSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<RevertModelSnapshotRequest, RevertModelSnapshotResponse, RevertModelSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Reverts to a specific snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<RevertModelSnapshotResponse> RevertModelSnapshotAsync(RevertModelSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4030,16 +3480,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<RevertModelSnapshotRequestDescriptor, RevertModelSnapshotResponse, RevertModelSnapshotRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Sets a cluster wide upgrade_mode setting that prepares machine learning indices for an upgrade.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual SetUpgradeModeResponse SetUpgradeMode(SetUpgradeModeRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SetUpgradeModeRequest, SetUpgradeModeResponse, SetUpgradeModeRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4089,16 +3529,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Starts one or more datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual StartDatafeedResponse StartDatafeed(StartDatafeedRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StartDatafeedRequest, StartDatafeedResponse, StartDatafeedRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Starts one or more datafeeds.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<StartDatafeedResponse> StartDatafeedAsync(StartDatafeedRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4136,16 +3566,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StartDatafeedRequestDescriptor, StartDatafeedResponse, StartDatafeedRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Starts a data frame analytics job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual StartDataFrameAnalyticsResponse StartDataFrameAnalytics(StartDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StartDataFrameAnalyticsRequest, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4228,16 +3648,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Start a trained model deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual StartTrainedModelDeploymentResponse StartTrainedModelDeployment(StartTrainedModelDeploymentRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StartTrainedModelDeploymentRequest, StartTrainedModelDeploymentResponse, StartTrainedModelDeploymentRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Start a trained model deployment.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<StartTrainedModelDeploymentResponse> StartTrainedModelDeploymentAsync(StartTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4281,16 +3691,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual StopDatafeedResponse StopDatafeed(StopDatafeedRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StopDatafeedRequest, StopDatafeedResponse, StopDatafeedRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Stops one or more datafeeds.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<StopDatafeedResponse> StopDatafeedAsync(StopDatafeedRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4328,16 +3728,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopDatafeedRequestDescriptor, StopDatafeedResponse, StopDatafeedRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Stops one or more data frame analytics jobs.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual StopDataFrameAnalyticsResponse StopDataFrameAnalytics(StopDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StopDataFrameAnalyticsRequest, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4420,16 +3810,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stop a trained model deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual StopTrainedModelDeploymentResponse StopTrainedModelDeployment(StopTrainedModelDeploymentRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<StopTrainedModelDeploymentRequest, StopTrainedModelDeploymentResponse, StopTrainedModelDeploymentRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Stop a trained model deployment.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<StopTrainedModelDeploymentResponse> StopTrainedModelDeploymentAsync(StopTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4467,16 +3847,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<StopTrainedModelDeploymentRequestDescriptor, StopTrainedModelDeploymentResponse, StopTrainedModelDeploymentRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of a datafeed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual UpdateDatafeedResponse UpdateDatafeed(UpdateDatafeedRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateDatafeedRequest, UpdateDatafeedResponse, UpdateDatafeedRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4559,16 +3929,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(UpdateDataFrameAnalyticsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateDataFrameAnalyticsRequest, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of a data frame analytics job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync(UpdateDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4645,16 +4005,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the description of a filter, adds items, or removes items.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual UpdateFilterResponse UpdateFilter(UpdateFilterRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateFilterRequest, UpdateFilterResponse, UpdateFilterRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Updates the description of a filter, adds items, or removes items.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpdateFilterResponse> UpdateFilterAsync(UpdateFilterRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4692,16 +4042,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateFilterRequestDescriptor, UpdateFilterResponse, UpdateFilterRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of an anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual UpdateJobResponse UpdateJob(UpdateJobRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateJobRequest, UpdateJobResponse, UpdateJobRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4784,16 +4124,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual UpdateModelSnapshotResponse UpdateModelSnapshot(UpdateModelSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateModelSnapshotRequest, UpdateModelSnapshotResponse, UpdateModelSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Updates certain properties of a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpdateModelSnapshotResponse> UpdateModelSnapshotAsync(UpdateModelSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4837,16 +4167,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Upgrades a given job snapshot to the current major version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual UpgradeJobSnapshotResponse UpgradeJobSnapshot(UpgradeJobSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpgradeJobSnapshotRequest, UpgradeJobSnapshotResponse, UpgradeJobSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Upgrades a given job snapshot to the current major version.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpgradeJobSnapshotResponse> UpgradeJobSnapshotAsync(UpgradeJobSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -4884,16 +4204,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpgradeJobSnapshotRequestDescriptor, UpgradeJobSnapshotResponse, UpgradeJobSnapshotRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Validates an anomaly detection job.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ValidateResponse Validate(ValidateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ValidateRequest, ValidateResponse, ValidateRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -4970,16 +4280,6 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ValidateRequestDescriptor, ValidateResponse, ValidateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Validates an anomaly detection detector.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ValidateDetectorResponse ValidateDetector(ValidateDetectorRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ValidateDetectorRequest, ValidateDetectorResponse, ValidateDetectorRequestParameters>(request);
 	}
 
 	/// <summary>

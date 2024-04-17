@@ -41,6 +41,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a search application.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteSearchApplicationResponse Delete(DeleteSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Delete a behavioral analytics collection.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(DeleteBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the details about a search application.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSearchApplicationResponse Get(GetSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the existing behavioral analytics collections.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(GetBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -445,6 +449,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the existing search applications.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(ListRequest request)
 	{
 		request.BeforeRequest();
@@ -534,6 +539,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a search application.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutSearchApplicationResponse Put(PutSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
@@ -623,6 +629,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a behavioral analytics collection.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(PutBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -712,6 +719,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	/// <para>Perform a search against a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchApplicationSearchResponse<TDocument> Search<TDocument>(SearchApplicationSearchRequest request)
 	{
 		request.BeforeRequest();

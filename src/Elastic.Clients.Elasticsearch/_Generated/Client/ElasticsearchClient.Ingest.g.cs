@@ -41,6 +41,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequest request)
 	{
 		request.BeforeRequest();
@@ -199,6 +200,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns statistical information about geoip databases</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -288,6 +290,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(GetPipelineRequest request)
 	{
 		request.BeforeRequest();
@@ -542,6 +545,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of the built-in patterns.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequest request)
 	{
 		request.BeforeRequest();
@@ -631,6 +635,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequest request)
 	{
 		request.BeforeRequest();
@@ -789,6 +794,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>Allows to simulate a pipeline with example documents.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(SimulateRequest request)
 	{
 		request.BeforeRequest();
