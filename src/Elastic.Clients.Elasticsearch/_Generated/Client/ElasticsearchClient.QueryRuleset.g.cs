@@ -41,6 +41,7 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteQueryRulesetResponse Delete(DeleteQueryRulesetRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the details about a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetQueryRulesetResponse Get(GetQueryRulesetRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Lists query rulesets.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(ListRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class QueryRulesetNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a query ruleset.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutQueryRulesetResponse Put(PutQueryRulesetRequest request)
 	{
 		request.BeforeRequest();

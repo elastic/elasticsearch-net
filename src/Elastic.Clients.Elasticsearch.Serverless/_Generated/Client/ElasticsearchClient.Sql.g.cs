@@ -41,16 +41,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Clears the SQL cursor</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClearCursorResponse ClearCursor(ClearCursorRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearCursorRequest, ClearCursorResponse, ClearCursorRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Clears the SQL cursor</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(ClearCursorRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -88,16 +78,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClearCursorRequestDescriptor, ClearCursorResponse, ClearCursorRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteAsyncRequest, DeleteAsyncResponse, DeleteAsyncRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -180,16 +160,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the current status and available results for an async SQL search or stored synchronous SQL search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetAsyncResponse GetAsync(GetAsyncRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetAsyncRequest, GetAsyncResponse, GetAsyncRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns the current status and available results for an async SQL search or stored synchronous SQL search</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync(GetAsyncRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -260,16 +230,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetAsyncRequestDescriptor, GetAsyncResponse, GetAsyncRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetAsyncStatusRequest, GetAsyncStatusResponse, GetAsyncStatusRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -352,16 +312,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Executes a SQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual QueryResponse Query(QueryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<QueryRequest, QueryResponse, QueryRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Executes a SQL request</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync(QueryRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -432,16 +382,6 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<QueryRequestDescriptor, QueryResponse, QueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Translates SQL into Elasticsearch queries</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual TranslateResponse Translate(TranslateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<TranslateRequest, TranslateResponse, TranslateRequestParameters>(request);
 	}
 
 	/// <summary>

@@ -41,6 +41,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Removes stale data from repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CleanupRepositoryResponse CleanupRepository(CleanupRepositoryRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneSnapshotResponse Clone(CloneSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a snapshot in a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateSnapshotResponse Create(CreateSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateRepositoryResponse CreateRepository(CreateRepositoryRequest request)
 	{
 		request.BeforeRequest();
@@ -397,6 +401,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes one or more snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteSnapshotResponse Delete(DeleteSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -486,6 +491,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRepositoryResponse DeleteRepository(DeleteRepositoryRequest request)
 	{
 		request.BeforeRequest();
@@ -575,6 +581,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSnapshotResponse Get(GetSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -664,6 +671,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRepositoryResponse GetRepository(GetRepositoryRequest request)
 	{
 		request.BeforeRequest();
@@ -801,6 +809,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Restores a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RestoreResponse Restore(RestoreRequest request)
 	{
 		request.BeforeRequest();
@@ -959,6 +968,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about the status of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SnapshotStatusResponse Status(SnapshotStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -1096,6 +1106,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Verifies a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual VerifyRepositoryResponse VerifyRepository(VerifyRepositoryRequest request)
 	{
 		request.BeforeRequest();

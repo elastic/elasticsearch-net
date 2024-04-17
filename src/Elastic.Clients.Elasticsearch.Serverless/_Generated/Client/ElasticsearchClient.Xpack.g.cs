@@ -41,16 +41,6 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual XpackInfoResponse Info(XpackInfoRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<XpackInfoRequest, XpackInfoResponse, XpackInfoRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -88,16 +78,6 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual XpackUsageResponse Usage(XpackUsageRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<XpackUsageRequest, XpackUsageResponse, XpackUsageRequestParameters>(request);
 	}
 
 	/// <summary>

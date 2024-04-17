@@ -41,16 +41,6 @@ public partial class GraphNamespacedClient : NamespacedClientProxy
 	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ExploreResponse Explore(ExploreRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExploreRequest, ExploreResponse, ExploreRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Explore extracted and summarized information about the documents and terms in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/graph-explore-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ExploreResponse> ExploreAsync(ExploreRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();

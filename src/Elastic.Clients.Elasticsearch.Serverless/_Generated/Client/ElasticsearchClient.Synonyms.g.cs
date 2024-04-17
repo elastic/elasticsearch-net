@@ -41,16 +41,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteSynonymRequest, DeleteSynonymResponse, DeleteSynonymRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes a synonym set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteSynonymResponse> DeleteSynonymAsync(DeleteSynonymRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -127,16 +117,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym rule in a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteSynonymRuleRequest, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes a synonym rule in a synonym set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteSynonymRuleResponse> DeleteSynonymRuleAsync(DeleteSynonymRuleRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -174,16 +154,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSynonymRuleRequestDescriptor, DeleteSynonymRuleResponse, DeleteSynonymRuleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Retrieves a synonym set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetSynonymResponse GetSynonym(GetSynonymRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetSynonymRequest, GetSynonymResponse, GetSynonymRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -266,16 +236,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym rule from a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetSynonymRuleRequest, GetSynonymRuleResponse, GetSynonymRuleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves a synonym rule from a synonym set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetSynonymRuleResponse> GetSynonymRuleAsync(GetSynonymRuleRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -319,16 +279,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a summary of all defined synonym sets</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetSynonymsSetsRequest, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves a summary of all defined synonym sets</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetSynonymsSetsResponse> GetSynonymsSetsAsync(GetSynonymsSetsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -366,16 +316,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSynonymsSetsRequestDescriptor, GetSynonymsSetsResponse, GetSynonymsSetsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutSynonymResponse PutSynonym(PutSynonymRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutSynonymRequest, PutSynonymResponse, PutSynonymRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -452,16 +392,6 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutSynonymRequestDescriptor, PutSynonymResponse, PutSynonymRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a synonym rule in a synonym set</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutSynonymRuleRequest, PutSynonymRuleResponse, PutSynonymRuleRequestParameters>(request);
 	}
 
 	/// <summary>

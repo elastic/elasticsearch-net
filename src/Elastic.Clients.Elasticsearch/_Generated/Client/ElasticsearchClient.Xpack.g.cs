@@ -41,6 +41,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual XpackInfoResponse Info(XpackInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual XpackUsageResponse Usage(XpackUsageRequest request)
 	{
 		request.BeforeRequest();

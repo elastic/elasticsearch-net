@@ -41,6 +41,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the analysis process on a text and return the tokens breakdown of the text.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(AnalyzeIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -295,6 +296,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Clears all or specific caches for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequest request)
 	{
 		request.BeforeRequest();
@@ -549,6 +551,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Clones an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(CloneIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -707,6 +710,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Closes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close(CloseIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -865,6 +869,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Creates an index with optional settings and mappings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(CreateIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -1023,6 +1028,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateDataStreamResponse CreateDataStream(CreateDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -1112,6 +1118,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides statistics on operations happening in a data stream.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(DataStreamsStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -1249,6 +1256,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete(DeleteIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -1407,6 +1415,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias(DeleteAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -1565,6 +1574,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes the data stream lifecycle of the selected data streams.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(DeleteDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -1654,6 +1664,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a data stream.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataStreamResponse DeleteDataStream(DeleteDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -1743,6 +1754,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexTemplateResponse DeleteIndexTemplate(DeleteIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -1832,6 +1844,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTemplateResponse DeleteTemplate(DeleteTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -1921,6 +1934,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage(DiskUsageRequest request)
 	{
 		request.BeforeRequest();
@@ -2079,6 +2093,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Downsample an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample(DownsampleRequest request)
 	{
 		request.BeforeRequest();
@@ -2237,6 +2252,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular index exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequest request)
 	{
 		request.BeforeRequest();
@@ -2395,6 +2411,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular alias exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(ExistsAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -2649,6 +2666,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular index template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsIndexTemplateResponse ExistsIndexTemplate(ExistsIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -2738,6 +2756,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular index template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsTemplateResponse ExistsTemplate(ExistsTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -2827,6 +2846,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(ExplainDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -2985,6 +3005,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the field usage stats for each field of an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(FieldUsageStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -3143,6 +3164,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the flush operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(FlushRequest request)
 	{
 		request.BeforeRequest();
@@ -3397,6 +3419,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the force merge operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(ForcemergeRequest request)
 	{
 		request.BeforeRequest();
@@ -3651,6 +3674,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get(GetIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -3809,6 +3833,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(GetAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -4063,6 +4088,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the data stream lifecycle of the selected data streams.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleResponse GetDataLifecycle(GetDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -4152,6 +4178,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns data streams.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(GetDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -4289,6 +4316,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns mapping for one or more fields.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(GetFieldMappingRequest request)
 	{
 		request.BeforeRequest();
@@ -4543,6 +4571,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(GetIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -4680,6 +4709,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns mappings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(GetMappingRequest request)
 	{
 		request.BeforeRequest();
@@ -4934,6 +4964,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns settings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(GetIndicesSettingsRequest request)
 	{
 		request.BeforeRequest();
@@ -5188,6 +5219,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(GetTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -5325,6 +5357,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Migrates an alias to a data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataStreamResponse MigrateToDataStream(MigrateToDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -5414,6 +5447,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Modifies a data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ModifyDataStreamResponse ModifyDataStream(ModifyDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -5503,6 +5537,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Opens an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open(OpenIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -5661,6 +5696,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Promotes a data stream from a replicated data stream managed by CCR to a regular data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PromoteDataStreamResponse PromoteDataStream(PromoteDataStreamRequest request)
 	{
 		request.BeforeRequest();
@@ -5750,6 +5786,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(PutAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -5908,6 +5945,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the data stream lifecycle of the selected data streams.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataLifecycleResponse PutDataLifecycle(PutDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -5997,6 +6035,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate(PutIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -6155,6 +6194,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the index mappings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(PutMappingRequest request)
 	{
 		request.BeforeRequest();
@@ -6313,6 +6353,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the index settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(PutIndicesSettingsRequest request)
 	{
 		request.BeforeRequest();
@@ -6567,6 +6608,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates an index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate(PutTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -6725,6 +6767,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about ongoing index shard recoveries.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(RecoveryRequest request)
 	{
 		request.BeforeRequest();
@@ -6979,6 +7022,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the refresh operation in one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(RefreshRequest request)
 	{
 		request.BeforeRequest();
@@ -7233,6 +7277,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Reloads an index's search analyzers and their resources.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(ReloadSearchAnalyzersRequest request)
 	{
 		request.BeforeRequest();
@@ -7391,6 +7436,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Resolves the specified index expressions to return information about each cluster, including the local cluster, if included.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveClusterResponse ResolveCluster(ResolveClusterRequest request)
 	{
 		request.BeforeRequest();
@@ -7480,6 +7526,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about any matching indices, aliases, and data streams</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveIndexResponse ResolveIndex(ResolveIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -7569,6 +7616,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Updates an alias to point to a new index when the existing index<br/>is considered to be too large or too old.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(RolloverRequest request)
 	{
 		request.BeforeRequest();
@@ -7823,6 +7871,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides low-level information about segments in a Lucene index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(SegmentsRequest request)
 	{
 		request.BeforeRequest();
@@ -8077,6 +8126,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides store information for shard copies of indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(ShardStoresRequest request)
 	{
 		request.BeforeRequest();
@@ -8331,6 +8381,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Allow to shrink an existing index into a new index with fewer primary shards.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink(ShrinkIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -8489,6 +8540,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Simulate matching the given index name against the index templates in the system</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateIndexTemplateResponse SimulateIndexTemplate(SimulateIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -8578,6 +8630,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Simulate resolving the given template name or body</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(SimulateTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -8832,6 +8885,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Allows you to split an existing index into a new index with more primary shards.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split(SplitIndexRequest request)
 	{
 		request.BeforeRequest();
@@ -8990,6 +9044,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides statistics on operations happening in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(IndicesStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -9244,6 +9299,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Updates index aliases.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases(UpdateAliasesRequest request)
 	{
 		request.BeforeRequest();
@@ -9402,6 +9458,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Allows a user to validate a potentially expensive query without executing it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(ValidateQueryRequest request)
 	{
 		request.BeforeRequest();

@@ -41,6 +41,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>Resets the internal state of features, usually by deleting system indices</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequest request)
 	{
 		request.BeforeRequest();

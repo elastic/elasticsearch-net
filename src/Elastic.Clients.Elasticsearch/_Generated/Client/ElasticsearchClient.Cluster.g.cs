@@ -41,6 +41,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a component template</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Clears cluster voting config exclusions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular component template exist</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -397,6 +401,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns one or more component templates</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -534,6 +539,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns cluster settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
 	{
 		request.BeforeRequest();
@@ -623,6 +629,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns basic information about the health of the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(HealthRequest request)
 	{
 		request.BeforeRequest();
@@ -877,6 +884,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns different information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterInfoResponse Info(ClusterInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -966,6 +974,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
 	{
 		request.BeforeRequest();
@@ -1055,6 +1064,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the cluster voting config exclusions by node ids or node names.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequest request)
 	{
 		request.BeforeRequest();
@@ -1144,6 +1154,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a component template</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -1302,6 +1313,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns high-level overview of cluster statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
 	{
 		request.BeforeRequest();

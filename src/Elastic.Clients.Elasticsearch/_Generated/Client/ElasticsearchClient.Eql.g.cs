@@ -41,6 +41,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EqlDeleteResponse Delete(EqlDeleteRequest request)
 	{
 		request.BeforeRequest();
@@ -199,6 +200,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns async results from previously executed Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EqlGetResponse<TEvent> Get<TEvent>(EqlGetRequest request)
 	{
 		request.BeforeRequest();
@@ -288,6 +290,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the status of a previously submitted async or stored Event Query Language (EQL) search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetEqlStatusResponse GetStatus(GetEqlStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -446,6 +449,7 @@ public partial class EqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns results matching a query expressed in Event Query Language (EQL)</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
 	{
 		request.BeforeRequest();

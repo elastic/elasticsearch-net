@@ -41,16 +41,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Provides explanations for shard allocations in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<AllocationExplainRequest, AllocationExplainResponse, AllocationExplainRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Provides explanations for shard allocations in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -88,16 +78,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<AllocationExplainRequestDescriptor, AllocationExplainResponse, AllocationExplainRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes a component template</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteComponentTemplateRequest, DeleteComponentTemplateResponse, DeleteComponentTemplateRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -147,16 +127,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular component template exist</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExistsComponentTemplateRequest, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about whether a particular component template exist</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -194,16 +164,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateResponse, ExistsComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns one or more component templates</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetComponentTemplateRequest, GetComponentTemplateResponse, GetComponentTemplateRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -276,16 +236,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns cluster settings.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetClusterSettingsRequest, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns cluster settings.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -323,16 +273,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetClusterSettingsRequestDescriptor, GetClusterSettingsResponse, GetClusterSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns basic information about the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual HealthResponse Health(HealthRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<HealthRequest, HealthResponse, HealthRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -461,16 +401,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns different information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClusterInfoResponse Info(ClusterInfoRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClusterInfoRequest, ClusterInfoResponse, ClusterInfoRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns different information about the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -514,16 +444,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PendingTasksRequest, PendingTasksResponse, PendingTasksRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns a list of any cluster-level changes (e.g. create index, update mapping,<br/>allocate or fail shard) which have not yet been executed.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -561,16 +481,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PendingTasksRequestDescriptor, PendingTasksResponse, PendingTasksRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a component template</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutComponentTemplateRequest, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -647,16 +557,6 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutComponentTemplateRequestDescriptor, PutComponentTemplateResponse, PutComponentTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns high-level overview of cluster statistics.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClusterStatsRequest, ClusterStatsResponse, ClusterStatsRequestParameters>(request);
 	}
 
 	/// <summary>

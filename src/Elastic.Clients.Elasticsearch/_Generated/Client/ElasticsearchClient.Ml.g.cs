@@ -41,6 +41,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Clear the cached results from a trained model deployment</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearTrainedModelDeploymentCacheResponse ClearTrainedModelDeploymentCache(ClearTrainedModelDeploymentCacheRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Closes one or more anomaly detection jobs. A job can be opened and closed multiple times throughout its lifecycle.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseJobResponse CloseJob(CloseJobRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarResponse DeleteCalendar(DeleteCalendarRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes scheduled events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarEventResponse DeleteCalendarEvent(DeleteCalendarEventRequest request)
 	{
 		request.BeforeRequest();
@@ -397,6 +401,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes anomaly detection jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteCalendarJobResponse DeleteCalendarJob(DeleteCalendarJobRequest request)
 	{
 		request.BeforeRequest();
@@ -486,6 +491,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDatafeedResponse DeleteDatafeed(DeleteDatafeedRequest request)
 	{
 		request.BeforeRequest();
@@ -575,6 +581,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataFrameAnalyticsResponse DeleteDataFrameAnalytics(DeleteDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -733,6 +740,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes expired and unused machine learning data.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteExpiredDataResponse DeleteExpiredData(DeleteExpiredDataRequest request)
 	{
 		request.BeforeRequest();
@@ -870,6 +878,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteFilterResponse DeleteFilter(DeleteFilterRequest request)
 	{
 		request.BeforeRequest();
@@ -959,6 +968,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes forecasts from a machine learning job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteForecastResponse DeleteForecast(DeleteForecastRequest request)
 	{
 		request.BeforeRequest();
@@ -1096,6 +1106,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
 	{
 		request.BeforeRequest();
@@ -1185,6 +1196,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing model snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteModelSnapshotResponse DeleteModelSnapshot(DeleteModelSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -1274,6 +1286,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing trained inference model that is currently not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTrainedModelResponse DeleteTrainedModel(DeleteTrainedModelRequest request)
 	{
 		request.BeforeRequest();
@@ -1363,6 +1376,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a model alias that refers to the trained model</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTrainedModelAliasResponse DeleteTrainedModelAlias(DeleteTrainedModelAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -1452,6 +1466,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Estimates the model memory</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EstimateModelMemoryResponse EstimateModelMemory(EstimateModelMemoryRequest request)
 	{
 		request.BeforeRequest();
@@ -1610,6 +1625,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Evaluates the data frame analytics for an annotated index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EvaluateDataFrameResponse EvaluateDataFrame(EvaluateDataFrameRequest request)
 	{
 		request.BeforeRequest();
@@ -1768,6 +1784,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Explains a data frame analytics config.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataFrameAnalyticsResponse ExplainDataFrameAnalytics(ExplainDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -2022,6 +2039,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Forces any buffered data to be processed by the job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushJobResponse FlushJob(FlushJobRequest request)
 	{
 		request.BeforeRequest();
@@ -2111,6 +2129,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Predicts the future behavior of a time series by using its historical behavior.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForecastResponse Forecast(ForecastRequest request)
 	{
 		request.BeforeRequest();
@@ -2200,6 +2219,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves anomaly detection job results for one or more buckets.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-bucket.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBucketsResponse GetBuckets(GetBucketsRequest request)
 	{
 		request.BeforeRequest();
@@ -2454,6 +2474,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the scheduled events in calendars.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetCalendarEventsResponse GetCalendarEvents(GetCalendarEventsRequest request)
 	{
 		request.BeforeRequest();
@@ -2543,6 +2564,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for calendars.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetCalendarsResponse GetCalendars(GetCalendarsRequest request)
 	{
 		request.BeforeRequest();
@@ -2680,6 +2702,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves anomaly detection job results for one or more categories.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-category.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetCategoriesResponse GetCategories(GetCategoriesRequest request)
 	{
 		request.BeforeRequest();
@@ -2817,6 +2840,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDatafeedsResponse GetDatafeeds(GetDatafeedsRequest request)
 	{
 		request.BeforeRequest();
@@ -2954,6 +2978,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDatafeedStatsResponse GetDatafeedStats(GetDatafeedStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -3091,6 +3116,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataFrameAnalyticsResponse GetDataFrameAnalytics(GetDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -3345,6 +3371,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataFrameAnalyticsStatsResponse GetDataFrameAnalyticsStats(GetDataFrameAnalyticsStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -3599,6 +3626,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves filters.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFiltersResponse GetFilters(GetFiltersRequest request)
 	{
 		request.BeforeRequest();
@@ -3736,6 +3764,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves anomaly detection job results for one or more influencers.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-influencer.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInfluencersResponse GetInfluencers(GetInfluencersRequest request)
 	{
 		request.BeforeRequest();
@@ -3894,6 +3923,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
 	{
 		request.BeforeRequest();
@@ -4031,6 +4061,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobStatsResponse GetJobStats(GetJobStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -4168,6 +4199,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information on how ML is using memory.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-memory.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMemoryStatsResponse GetMemoryStats(GetMemoryStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -4305,6 +4337,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about model snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetModelSnapshotsResponse GetModelSnapshots(GetModelSnapshotsRequest request)
 	{
 		request.BeforeRequest();
@@ -4559,6 +4592,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Gets stats for anomaly detection job model snapshot upgrades that are in progress.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-model-snapshot-upgrade-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetModelSnapshotUpgradeStatsResponse GetModelSnapshotUpgradeStats(GetModelSnapshotUpgradeStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -4648,6 +4682,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves overall bucket results that summarize the bucket results of multiple anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetOverallBucketsResponse GetOverallBuckets(GetOverallBucketsRequest request)
 	{
 		request.BeforeRequest();
@@ -4737,6 +4772,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves anomaly records for an anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-record.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRecordsResponse GetRecords(GetRecordsRequest request)
 	{
 		request.BeforeRequest();
@@ -4895,6 +4931,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for a trained inference model.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTrainedModelsResponse GetTrainedModels(GetTrainedModelsRequest request)
 	{
 		request.BeforeRequest();
@@ -5032,6 +5069,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for trained inference models.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTrainedModelsStatsResponse GetTrainedModelsStats(GetTrainedModelsStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -5169,6 +5207,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Evaluate a trained model.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferTrainedModelResponse InferTrainedModel(InferTrainedModelRequest request)
 	{
 		request.BeforeRequest();
@@ -5327,6 +5366,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Returns defaults and limits used by machine learning.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-ml-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MlInfoResponse Info(MlInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -5416,6 +5456,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Opens one or more anomaly detection jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenJobResponse OpenJob(OpenJobRequest request)
 	{
 		request.BeforeRequest();
@@ -5505,6 +5546,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Posts scheduled events in a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostCalendarEventsResponse PostCalendarEvents(PostCalendarEventsRequest request)
 	{
 		request.BeforeRequest();
@@ -5594,6 +5636,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Previews that will be analyzed given a data frame analytics config.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewDataFrameAnalyticsResponse PreviewDataFrameAnalytics(PreviewDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -5848,6 +5891,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutCalendarResponse PutCalendar(PutCalendarRequest request)
 	{
 		request.BeforeRequest();
@@ -5937,6 +5981,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Adds an anomaly detection job to a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutCalendarJobResponse PutCalendarJob(PutCalendarJobRequest request)
 	{
 		request.BeforeRequest();
@@ -6026,6 +6071,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDatafeedResponse PutDatafeed(PutDatafeedRequest request)
 	{
 		request.BeforeRequest();
@@ -6184,6 +6230,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/put-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataFrameAnalyticsResponse PutDataFrameAnalytics(PutDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -6342,6 +6389,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates a filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutFilterResponse PutFilter(PutFilterRequest request)
 	{
 		request.BeforeRequest();
@@ -6431,6 +6479,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Instantiates an anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequest request)
 	{
 		request.BeforeRequest();
@@ -6589,6 +6638,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates an inference trained model.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTrainedModelResponse PutTrainedModel(PutTrainedModelRequest request)
 	{
 		request.BeforeRequest();
@@ -6747,6 +6797,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a new model alias (or reassigns an existing one) to refer to the trained model</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTrainedModelAliasResponse PutTrainedModelAlias(PutTrainedModelAliasRequest request)
 	{
 		request.BeforeRequest();
@@ -6836,6 +6887,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates part of a trained model definition</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTrainedModelDefinitionPartResponse PutTrainedModelDefinitionPart(PutTrainedModelDefinitionPartRequest request)
 	{
 		request.BeforeRequest();
@@ -6925,6 +6977,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a trained model vocabulary</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-vocabulary.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTrainedModelVocabularyResponse PutTrainedModelVocabulary(PutTrainedModelVocabularyRequest request)
 	{
 		request.BeforeRequest();
@@ -7014,6 +7067,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Resets an existing anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetJobResponse ResetJob(ResetJobRequest request)
 	{
 		request.BeforeRequest();
@@ -7103,6 +7157,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Reverts to a specific snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-revert-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RevertModelSnapshotResponse RevertModelSnapshot(RevertModelSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -7192,6 +7247,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Sets a cluster wide upgrade_mode setting that prepares machine learning indices for an upgrade.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-set-upgrade-mode.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SetUpgradeModeResponse SetUpgradeMode(SetUpgradeModeRequest request)
 	{
 		request.BeforeRequest();
@@ -7281,6 +7337,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Starts one or more datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartDatafeedResponse StartDatafeed(StartDatafeedRequest request)
 	{
 		request.BeforeRequest();
@@ -7370,6 +7427,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Starts a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartDataFrameAnalyticsResponse StartDataFrameAnalytics(StartDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -7528,6 +7586,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Start a trained model deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTrainedModelDeploymentResponse StartTrainedModelDeployment(StartTrainedModelDeploymentRequest request)
 	{
 		request.BeforeRequest();
@@ -7617,6 +7676,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more datafeeds.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopDatafeedResponse StopDatafeed(StopDatafeedRequest request)
 	{
 		request.BeforeRequest();
@@ -7706,6 +7766,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopDataFrameAnalyticsResponse StopDataFrameAnalytics(StopDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -7864,6 +7925,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stop a trained model deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTrainedModelDeploymentResponse StopTrainedModelDeployment(StopTrainedModelDeploymentRequest request)
 	{
 		request.BeforeRequest();
@@ -7953,6 +8015,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateDatafeedResponse UpdateDatafeed(UpdateDatafeedRequest request)
 	{
 		request.BeforeRequest();
@@ -8111,6 +8174,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateDataFrameAnalyticsResponse UpdateDataFrameAnalytics(UpdateDataFrameAnalyticsRequest request)
 	{
 		request.BeforeRequest();
@@ -8269,6 +8333,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the description of a filter, adds items, or removes items.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateFilterResponse UpdateFilter(UpdateFilterRequest request)
 	{
 		request.BeforeRequest();
@@ -8358,6 +8423,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of an anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateJobResponse UpdateJob(UpdateJobRequest request)
 	{
 		request.BeforeRequest();
@@ -8516,6 +8582,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateModelSnapshotResponse UpdateModelSnapshot(UpdateModelSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -8605,6 +8672,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Upgrades a given job snapshot to the current major version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeJobSnapshotResponse UpgradeJobSnapshot(UpgradeJobSnapshotRequest request)
 	{
 		request.BeforeRequest();
@@ -8694,6 +8762,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Validates an anomaly detection job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateResponse Validate(ValidateRequest request)
 	{
 		request.BeforeRequest();
@@ -8852,6 +8921,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Validates an anomaly detection detector.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateDetectorResponse ValidateDetector(ValidateDetectorRequest request)
 	{
 		request.BeforeRequest();
