@@ -86,16 +86,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual BulkResponse Bulk(BulkRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<BulkRequest, BulkResponse, BulkRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to perform multiple index/update/delete operations in a single request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -218,16 +208,6 @@ public partial class ElasticsearchClient
 	/// <para>Explicitly clears the search context for a scroll.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearScrollRequest, ClearScrollResponse, ClearScrollRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Explicitly clears the search context for a scroll.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -271,16 +251,6 @@ public partial class ElasticsearchClient
 	/// <para>Close a point in time</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClosePointInTimeRequest, ClosePointInTimeResponse, ClosePointInTimeRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Close a point in time</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -318,16 +288,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ClosePointInTimeRequestDescriptor, ClosePointInTimeResponse, ClosePointInTimeRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns number of documents matching a query.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual CountResponse Count(CountRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CountRequest, CountResponse, CountRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -457,17 +417,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns a 409 response when a document with a same ID already exists in the index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateRequest<TDocument>, CreateResponse, CreateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Creates a new document in the index.</para>
-	/// <para>Returns a 409 response when a document with a same ID already exists in the index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -589,16 +538,6 @@ public partial class ElasticsearchClient
 	/// <para>Removes a document from the index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteResponse Delete(DeleteRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteRequest, DeleteResponse, DeleteRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Removes a document from the index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -669,16 +608,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteRequestDescriptor, DeleteResponse, DeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes documents matching the provided query.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteByQueryRequest, DeleteByQueryResponse, DeleteByQueryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -761,16 +690,6 @@ public partial class ElasticsearchClient
 	/// <para>Changes the number of requests per second for a particular Delete By Query operation.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteByQueryRethrottleRequest, DeleteByQueryRethrottleResponse, DeleteByQueryRethrottleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Changes the number of requests per second for a particular Delete By Query operation.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -808,16 +727,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteByQueryRethrottleRequestDescriptor, DeleteByQueryRethrottleResponse, DeleteByQueryRethrottleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes a script.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteScriptRequest, DeleteScriptResponse, DeleteScriptRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -900,16 +809,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about whether a document exists in an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ExistsResponse Exists(ExistsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExistsRequest, ExistsResponse, ExistsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about whether a document exists in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -980,16 +879,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns information about whether a document source exists in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExistsSourceRequest, ExistsSourceResponse, ExistsSourceRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1072,16 +961,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns information about why a specific matches (or doesn't match) a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ExplainRequest, ExplainResponse<TDocument>, ExplainRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about why a specific matches (or doesn't match) a query.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1119,16 +998,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ExplainRequestDescriptor<TDocument>, ExplainResponse<TDocument>, ExplainRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns the information about the capabilities of fields among multiple indices.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual FieldCapsResponse FieldCaps(FieldCapsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<FieldCapsRequest, FieldCapsResponse, FieldCapsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1257,16 +1126,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetResponse<TDocument> Get<TDocument>(GetRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetRequest, GetResponse<TDocument>, GetRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns a document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1304,16 +1163,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRequestDescriptor<TDocument>, GetResponse<TDocument>, GetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns a script.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetScriptResponse GetScript(GetScriptRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetScriptRequest, GetScriptResponse, GetScriptRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1396,16 +1245,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetSourceRequest, GetSourceResponse<TDocument>, GetSourceRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns the source of a document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1443,16 +1282,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSourceRequestDescriptor<TDocument>, GetSourceResponse<TDocument>, GetSourceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns the health of the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual HealthReportResponse HealthReport(HealthReportRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<HealthReportRequest, HealthReportResponse, HealthReportRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1519,16 +1348,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<HealthReportRequestDescriptor, HealthReportResponse, HealthReportRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a document in an index.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
-	{
-		request.BeforeRequest();
-		return DoRequest<IndexRequest<TDocument>, IndexResponse, IndexRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1647,16 +1466,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual InfoResponse Info(InfoRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<InfoRequest, InfoResponse, InfoRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns basic information about the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1694,16 +1503,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<InfoRequestDescriptor, InfoResponse, InfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns multiple termvectors in one request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual MultiTermVectorsResponse Mtermvectors(MultiTermVectorsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<MultiTermVectorsRequest, MultiTermVectorsResponse, MultiTermVectorsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1832,16 +1631,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to get multiple documents in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<MultiGetRequest, MultiGetResponse<TDocument>, MultiGetRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to get multiple documents in one request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -1902,16 +1691,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<MultiGetRequestDescriptor<TDocument>, MultiGetResponse<TDocument>, MultiGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Allows to execute several search operations in one request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<MultiSearchRequest, MultiSearchResponse<TDocument>, MultiSearchRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -1984,16 +1763,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to execute several search template operations in one request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<MultiSearchTemplateRequest, MultiSearchTemplateResponse<TDocument>, MultiSearchTemplateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to execute several search template operations in one request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2054,16 +1823,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateResponse<TDocument>, MultiSearchTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Open a point in time that can be used in subsequent searches</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<OpenPointInTimeRequest, OpenPointInTimeResponse, OpenPointInTimeRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2146,16 +1905,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual PingResponse Ping(PingRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PingRequest, PingResponse, PingRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns whether the cluster is running.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2193,16 +1942,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PingRequestDescriptor, PingResponse, PingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates or updates a script.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual PutScriptResponse PutScript(PutScriptRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutScriptRequest, PutScriptResponse, PutScriptRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2331,16 +2070,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to evaluate the quality of ranked search results over a set of typical search queries</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual RankEvalResponse RankEval(RankEvalRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<RankEvalRequest, RankEvalResponse, RankEvalRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to evaluate the quality of ranked search results over a set of typical search queries</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(RankEvalRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2463,16 +2192,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ReindexResponse Reindex(ReindexRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ReindexRequest, ReindexResponse, ReindexRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2549,16 +2268,6 @@ public partial class ElasticsearchClient
 	/// <para>Changes the number of requests per second for a particular Reindex operation.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ReindexRethrottleRequest, ReindexRethrottleResponse, ReindexRethrottleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Changes the number of requests per second for a particular Reindex operation.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2596,16 +2305,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ReindexRethrottleRequestDescriptor, ReindexRethrottleResponse, ReindexRethrottleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<RenderSearchTemplateRequest, RenderSearchTemplateResponse, RenderSearchTemplateRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2734,30 +2433,10 @@ public partial class ElasticsearchClient
 	/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ScrollRequest, ScrollResponse<TDocument>, ScrollRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to retrieve a large numbers of results from a single search request.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(ScrollRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<ScrollRequest, ScrollResponse<TDocument>, ScrollRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns results matching a query.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SearchRequest, SearchResponse<TDocument>, SearchRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2824,16 +2503,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SearchRequestDescriptor<TDocument>, SearchResponse<TDocument>, SearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual SearchMvtResponse SearchMvt(SearchMvtRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SearchMvtRequest, SearchMvtResponse, SearchMvtRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -2916,16 +2585,6 @@ public partial class ElasticsearchClient
 	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SearchTemplateRequest, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Allows to use the Mustache language to pre-render a search definition.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(SearchTemplateRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2986,16 +2645,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SearchTemplateRequestDescriptor, SearchTemplateResponse<TDocument>, SearchTemplateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual TermsEnumResponse TermsEnum(TermsEnumRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<TermsEnumRequest, TermsEnumResponse, TermsEnumRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3078,16 +2727,6 @@ public partial class ElasticsearchClient
 	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual TermVectorsResponse Termvectors<TDocument>(TermVectorsRequest<TDocument> request)
-	{
-		request.BeforeRequest();
-		return DoRequest<TermVectorsRequest<TDocument>, TermVectorsResponse, TermVectorsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TermVectorsRequest<TDocument> request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3154,16 +2793,6 @@ public partial class ElasticsearchClient
 	/// <para>Updates a document with a script or partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -3201,16 +2830,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Updates documents that match the specified query. If no query is specified,<br/> performs an update on every document in the index without changing the source,<br/>for example to pick up a mapping change.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateByQueryRequest, UpdateByQueryResponse, UpdateByQueryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -3287,16 +2906,6 @@ public partial class ElasticsearchClient
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UpdateByQueryRequestDescriptor, UpdateByQueryResponse, UpdateByQueryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Changes the number of requests per second for a particular Update By Query operation.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateByQueryRethrottleRequest, UpdateByQueryRethrottleResponse, UpdateByQueryRethrottleRequestParameters>(request);
 	}
 
 	/// <summary>

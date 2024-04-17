@@ -108,7 +108,9 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 		if (rc is not null)
 			request.RequestConfiguration = new RequestConfiguration { RequestMetaData = rc };
 
-		var refresh = _client.Indices.Refresh(request);
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
+		var refresh = _client.Indices.RefreshAsync(request).Result;
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
 
 		if (!refresh.IsValidResponse)
 			throw Throw($"Refreshing after all documents have indexed failed", refresh);

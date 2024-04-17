@@ -41,16 +41,6 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetLicenseResponse Get(GetLicenseRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetLicenseRequest, GetLicenseResponse, GetLicenseRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();

@@ -41,16 +41,6 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about hot threads on each node in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual HotThreadsResponse HotThreads(HotThreadsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<HotThreadsRequest, HotThreadsResponse, HotThreadsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -117,16 +107,6 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual NodesInfoResponse Info(NodesInfoRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<NodesInfoRequest, NodesInfoResponse, NodesInfoRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -187,16 +167,6 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual NodesStatsResponse Stats(NodesStatsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<NodesStatsRequest, NodesStatsResponse, NodesStatsRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -319,16 +289,6 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual NodesUsageResponse Usage(NodesUsageRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<NodesUsageRequest, NodesUsageResponse, NodesUsageRequestParameters>(request);
 	}
 
 	/// <summary>
