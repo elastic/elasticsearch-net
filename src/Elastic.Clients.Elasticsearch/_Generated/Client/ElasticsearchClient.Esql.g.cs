@@ -41,6 +41,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>Executes an ESQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query(EsqlQueryRequest request)
 	{
 		request.BeforeRequest();

@@ -41,6 +41,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieve node-level cache statistics about searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CacheStatsResponse CacheStats(CacheStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -178,6 +179,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Clear the cache of searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequest request)
 	{
 		request.BeforeRequest();
@@ -432,6 +434,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Mount a snapshot as a searchable index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-api-mount-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MountResponse Mount(MountRequest request)
 	{
 		request.BeforeRequest();
@@ -521,6 +524,7 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats(SearchableSnapshotsStatsRequest request)
 	{
 		request.BeforeRequest();

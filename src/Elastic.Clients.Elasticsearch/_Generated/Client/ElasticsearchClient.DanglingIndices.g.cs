@@ -41,6 +41,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns all dangling indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-gateway-dangling-indices.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequest request)
 	{
 		request.BeforeRequest();

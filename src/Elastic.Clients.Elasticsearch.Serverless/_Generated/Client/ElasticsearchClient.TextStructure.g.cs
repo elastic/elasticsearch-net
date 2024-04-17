@@ -41,16 +41,6 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// <para>Tests a Grok pattern on some text.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual TestGrokPatternResponse TestGrokPattern(TestGrokPatternRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<TestGrokPatternRequest, TestGrokPatternResponse, TestGrokPatternRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Tests a Grok pattern on some text.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
