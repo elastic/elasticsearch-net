@@ -3,21 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Aggregations;
-using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Mapping;
 using Elastic.Transport;
-using Moq;
-using Playground;
 
-var client = new ElasticsearchClient();
+var settings = new ElasticsearchClientSettings(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"))
+	.Authentication(new BasicAuthentication("elastic", "Oov35Wtxj5DzpZNzYAzFb0KZ"))
+	.DisableDirectStreaming()
+	.EnableDebugMode(cd =>
+	{
+		//var request = System.Text.Encoding.Default.GetString(cd.RequestBodyInBytes);
+		Console.WriteLine(cd.DebugInformation);
+	});
 
-var resp = client.Search<Person>();
-
-var adj = resp.Aggregations!.GetAdjacencyMatrix("test");
-var firstAdj = adj!.Buckets.First();
-var firstAdjSub = firstAdj.GetBoxplot("sub");
-
-var mis = resp.Aggregations!.GetMissing("test");
-var misSub = mis!.GetBoxplot("sub");
-
+var client = new ElasticsearchClient(settings);
