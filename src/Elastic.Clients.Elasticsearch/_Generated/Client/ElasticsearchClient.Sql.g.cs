@@ -41,6 +41,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Clears the SQL cursor</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCursorResponse ClearCursor(ClearCursorRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequest request)
 	{
 		request.BeforeRequest();
@@ -288,6 +290,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the current status and available results for an async SQL search or stored synchronous SQL search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync(GetAsyncRequest request)
 	{
 		request.BeforeRequest();
@@ -446,6 +449,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the current status of an async SQL search or a stored synchronous SQL search</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -604,6 +608,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Executes a SQL request</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query(QueryRequest request)
 	{
 		request.BeforeRequest();
@@ -762,6 +767,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>Translates SQL into Elasticsearch queries</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate(TranslateRequest request)
 	{
 		request.BeforeRequest();

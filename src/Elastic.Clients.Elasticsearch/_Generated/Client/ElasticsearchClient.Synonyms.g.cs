@@ -41,6 +41,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequest request)
 	{
 		request.BeforeRequest();
@@ -199,6 +200,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes a synonym rule in a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
@@ -288,6 +290,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSynonymResponse GetSynonym(GetSynonymRequest request)
 	{
 		request.BeforeRequest();
@@ -446,6 +449,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a synonym rule from a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
@@ -535,6 +539,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves a summary of all defined synonym sets</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequest request)
 	{
 		request.BeforeRequest();
@@ -624,6 +629,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a synonyms set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutSynonymResponse PutSynonym(PutSynonymRequest request)
 	{
 		request.BeforeRequest();
@@ -782,6 +788,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	/// <para>Creates or updates a synonym rule in a synonym set</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequest request)
 	{
 		request.BeforeRequest();
