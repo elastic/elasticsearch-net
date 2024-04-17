@@ -41,6 +41,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
 	{
 		request.BeforeRequest();
@@ -199,6 +200,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves the configuration, stats, and status of rollup jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
 	{
 		request.BeforeRequest();
@@ -453,6 +455,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequest request)
 	{
 		request.BeforeRequest();
@@ -707,6 +710,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the rollup capabilities of all jobs inside of a rollup index (e.g. the index where rollup data is stored).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequest request)
 	{
 		request.BeforeRequest();
@@ -865,6 +869,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequest request)
 	{
 		request.BeforeRequest();
@@ -1023,6 +1028,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Enables searching rolled-up data using the standard query DSL.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequest request)
 	{
 		request.BeforeRequest();
@@ -1112,6 +1118,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an existing, stopped rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequest request)
 	{
 		request.BeforeRequest();
@@ -1270,6 +1277,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>Stops an existing, started rollup job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequest request)
 	{
 		request.BeforeRequest();

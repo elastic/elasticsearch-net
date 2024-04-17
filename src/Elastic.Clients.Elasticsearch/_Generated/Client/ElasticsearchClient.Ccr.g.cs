@@ -41,6 +41,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Deletes auto-follow patterns.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-delete-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAutoFollowPatternResponse DeleteAutoFollowPattern(DeleteAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(FollowRequest request)
 	{
 		request.BeforeRequest();
@@ -288,6 +290,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Retrieves information about all follower indices, including parameters and status for each follower index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-get-follow-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowInfoResponse FollowInfo(FollowInfoRequest request)
 	{
 		request.BeforeRequest();
@@ -446,6 +449,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Retrieves follower stats. return shard-level stats about the following tasks associated with each shard for the specified indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-get-follow-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowStatsResponse FollowStats(FollowStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -604,6 +608,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Removes the follower retention leases from the leader.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(ForgetFollowerRequest request)
 	{
 		request.BeforeRequest();
@@ -762,6 +767,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Gets configured auto-follow patterns. Returns the specified auto-follow pattern collection.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-get-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAutoFollowPatternResponse GetAutoFollowPattern(GetAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
@@ -899,6 +905,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Pauses an auto-follow pattern</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-pause-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseAutoFollowPatternResponse PauseAutoFollowPattern(PauseAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
@@ -988,6 +995,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(PauseFollowRequest request)
 	{
 		request.BeforeRequest();
@@ -1146,6 +1154,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAutoFollowPatternResponse PutAutoFollowPattern(PutAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
@@ -1235,6 +1244,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Resumes an auto-follow pattern that has been paused</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-resume-auto-follow-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeAutoFollowPatternResponse ResumeAutoFollowPattern(ResumeAutoFollowPatternRequest request)
 	{
 		request.BeforeRequest();
@@ -1324,6 +1334,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Resumes a follower index that has been paused</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(ResumeFollowRequest request)
 	{
 		request.BeforeRequest();
@@ -1482,6 +1493,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Gets all stats related to cross-cluster replication.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CcrStatsResponse Stats(CcrStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -1571,6 +1583,7 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(UnfollowRequest request)
 	{
 		request.BeforeRequest();

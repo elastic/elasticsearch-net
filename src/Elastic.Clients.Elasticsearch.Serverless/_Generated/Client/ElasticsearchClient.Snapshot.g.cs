@@ -41,16 +41,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Removes stale data from repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual CleanupRepositoryResponse CleanupRepository(CleanupRepositoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CleanupRepositoryRequest, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Removes stale data from repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(CleanupRepositoryRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -88,16 +78,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CleanupRepositoryRequestDescriptor, CleanupRepositoryResponse, CleanupRepositoryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Clones indices from one snapshot into another snapshot in the same repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual CloneSnapshotResponse Clone(CloneSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CloneSnapshotRequest, CloneSnapshotResponse, CloneSnapshotRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -147,16 +127,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a snapshot in a repository.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual CreateSnapshotResponse Create(CreateSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateSnapshotRequest, CreateSnapshotResponse, CreateSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Creates a snapshot in a repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<CreateSnapshotResponse> CreateAsync(CreateSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -194,16 +164,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CreateSnapshotRequestDescriptor, CreateSnapshotResponse, CreateSnapshotRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Creates a repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual CreateRepositoryResponse CreateRepository(CreateRepositoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateRepositoryRequest, CreateRepositoryResponse, CreateRepositoryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -253,16 +213,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes one or more snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual DeleteSnapshotResponse Delete(DeleteSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteSnapshotRequest, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Deletes one or more snapshots.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<DeleteSnapshotResponse> DeleteAsync(DeleteSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -300,16 +250,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<DeleteSnapshotRequestDescriptor, DeleteSnapshotResponse, DeleteSnapshotRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Deletes a repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual DeleteRepositoryResponse DeleteRepository(DeleteRepositoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteRepositoryRequest, DeleteRepositoryResponse, DeleteRepositoryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -359,16 +299,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual GetSnapshotResponse Get(GetSnapshotRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetSnapshotRequest, GetSnapshotResponse, GetSnapshotRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<GetSnapshotResponse> GetAsync(GetSnapshotRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -406,16 +336,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetSnapshotRequestDescriptor, GetSnapshotResponse, GetSnapshotRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Returns information about a repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual GetRepositoryResponse GetRepository(GetRepositoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetRepositoryRequest, GetRepositoryResponse, GetRepositoryRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -482,16 +402,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetRepositoryRequestDescriptor, GetRepositoryResponse, GetRepositoryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Restores a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual RestoreResponse Restore(RestoreRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<RestoreRequest, RestoreResponse, RestoreRequestParameters>(request);
 	}
 
 	/// <summary>
@@ -574,16 +484,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about the status of a snapshot.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual SnapshotStatusResponse Status(SnapshotStatusRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SnapshotStatusRequest, SnapshotStatusResponse, SnapshotStatusRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>Returns information about the status of a snapshot.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
 	public virtual Task<SnapshotStatusResponse> StatusAsync(SnapshotStatusRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -644,16 +544,6 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<SnapshotStatusRequestDescriptor, SnapshotStatusResponse, SnapshotStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>Verifies a repository.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual VerifyRepositoryResponse VerifyRepository(VerifyRepositoryRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<VerifyRepositoryRequest, VerifyRepositoryResponse, VerifyRepositoryRequestParameters>(request);
 	}
 
 	/// <summary>

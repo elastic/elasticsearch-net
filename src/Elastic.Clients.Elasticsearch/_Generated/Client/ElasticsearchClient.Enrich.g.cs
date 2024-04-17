@@ -41,6 +41,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing enrich policy and its enrich index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePolicyResponse DeletePolicy(DeletePolicyRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	/// <para>Creates the enrich index for an existing enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/execute-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExecutePolicyResponse ExecutePolicy(ExecutePolicyRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	/// <para>Gets information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPolicyResponse GetPolicy(GetPolicyRequest request)
 	{
 		request.BeforeRequest();
@@ -356,6 +359,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	/// <para>Creates a new enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPolicyResponse PutPolicy(PutPolicyRequest request)
 	{
 		request.BeforeRequest();
@@ -514,6 +518,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	/// <para>Gets enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrichStatsResponse Stats(EnrichStatsRequest request)
 	{
 		request.BeforeRequest();

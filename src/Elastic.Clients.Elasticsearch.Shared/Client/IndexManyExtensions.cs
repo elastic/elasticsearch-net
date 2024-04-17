@@ -2,6 +2,7 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -23,6 +24,8 @@ namespace Elastic.Clients.Elasticsearch;
 /// </summary>
 public static class IndexManyExtensions
 {
+#if !ELASTICSEARCH_SERVERLESS
+
 	/// <summary>
 	/// Shortcut into the Bulk call that indexes the specified objects
 	/// <para> </para>
@@ -32,6 +35,7 @@ public static class IndexManyExtensions
 	/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="type">Override the inferred typename for T</param>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects)
 		where T : class
 	{
@@ -49,12 +53,15 @@ public static class IndexManyExtensions
 	/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 	/// <param name="index">Override the inferred indexname for T</param>
 	/// <param name="type">Override the inferred typename for T</param>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public static BulkResponse IndexMany<T>(this ElasticsearchClient client, IEnumerable<T> @objects, IndexName index)
 		where T : class
 	{
 		var bulkRequest = CreateIndexBulkRequest(objects, index);
 		return client.Bulk(bulkRequest);
 	}
+
+#endif
 
 	/// <summary>
 	/// Shortcut into the Bulk call that indexes the specified objects
