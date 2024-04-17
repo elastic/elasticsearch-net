@@ -41,6 +41,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Delete model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteModelResponse DeleteModel(DeleteModelRequest request)
 	{
 		request.BeforeRequest();
@@ -178,6 +179,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Get a model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetModelResponse GetModel(GetModelRequest request)
 	{
 		request.BeforeRequest();
@@ -315,6 +317,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Perform inference on a model</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(InferenceRequest request)
 	{
 		request.BeforeRequest();
@@ -452,6 +455,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Configure a model for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutModelResponse PutModel(PutModelRequest request)
 	{
 		request.BeforeRequest();

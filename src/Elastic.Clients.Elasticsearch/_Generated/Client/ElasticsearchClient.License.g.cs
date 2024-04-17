@@ -41,6 +41,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLicenseResponse Delete(DeleteLicenseRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves licensing information for the cluster</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLicenseResponse Get(GetLicenseRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the status of the trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -397,6 +401,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Updates the license for the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostResponse Post(PostRequest request)
 	{
 		request.BeforeRequest();
@@ -486,6 +491,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>Starts an indefinite basic license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequest request)
 	{
 		request.BeforeRequest();
@@ -575,6 +581,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	/// <para>starts a limited time trial license.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequest request)
 	{
 		request.BeforeRequest();

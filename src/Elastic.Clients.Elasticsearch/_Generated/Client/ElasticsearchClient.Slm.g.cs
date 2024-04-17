@@ -41,6 +41,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes an existing snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -130,6 +131,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -219,6 +221,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Deletes any snapshots that are expired according to the policy's retention rules.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequest request)
 	{
 		request.BeforeRequest();
@@ -308,6 +311,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -445,6 +449,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Returns global and policy-level statistics about actions taken by snapshot lifecycle management.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetStatsResponse GetStats(GetStatsRequest request)
 	{
 		request.BeforeRequest();
@@ -534,6 +539,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Retrieves the status of snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequest request)
 	{
 		request.BeforeRequest();
@@ -623,6 +629,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Creates or updates a snapshot lifecycle policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequest request)
 	{
 		request.BeforeRequest();
@@ -712,6 +719,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns on snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartSlmResponse Start(StartSlmRequest request)
 	{
 		request.BeforeRequest();
@@ -801,6 +809,7 @@ public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedCli
 	/// <para>Turns off snapshot lifecycle management (SLM).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopSlmResponse Stop(StopSlmRequest request)
 	{
 		request.BeforeRequest();

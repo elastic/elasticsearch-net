@@ -41,6 +41,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Cancels a task, if it can be cancelled through an API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CancelResponse Cancel(CancelRequest request)
 	{
 		request.BeforeRequest();
@@ -178,6 +179,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about a task.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTasksResponse Get(GetTasksRequest request)
 	{
 		request.BeforeRequest();
@@ -267,6 +269,7 @@ public partial class TasksNamespacedClient : NamespacedClientProxy
 	/// <para>Returns a list of tasks.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/tasks.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListResponse List(ListRequest request)
 	{
 		request.BeforeRequest();
