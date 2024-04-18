@@ -130,16 +130,15 @@ internal sealed class UnionConverter : JsonConverterFactory
 		public override void Write(Utf8JsonWriter writer, TType value,
 			JsonSerializerOptions options)
 		{
-			if (value.Item1 is not null)
+			switch (value.Tag)
 			{
-				JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
-				return;
-			}
+				case 0:
+					JsonSerializer.Serialize(writer, value.Item1, value.Item1!.GetType(), options);
+					return;
 
-			if (value.Item2 is not null)
-			{
-				JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
-				return;
+				case 1:
+					JsonSerializer.Serialize(writer, value.Item2, value.Item2!.GetType(), options);
+					return;
 			}
 
 			throw new JsonException("Invalid union type.");
@@ -196,16 +195,15 @@ internal sealed class UnionConverter : JsonConverterFactory
 		public override void Write(Utf8JsonWriter writer, Union<TItem1, TItem2> value,
 			JsonSerializerOptions options)
 		{
-			if (value.Item1 is not null)
+			switch (value.Tag)
 			{
-				JsonSerializer.Serialize(writer, value.Item1, value.Item1.GetType(), options);
-				return;
-			}
+				case 0:
+					JsonSerializer.Serialize(writer, value.Item1, value.Item1!.GetType(), options);
+					return;
 
-			if (value.Item2 is not null)
-			{
-				JsonSerializer.Serialize(writer, value.Item2, value.Item2.GetType(), options);
-				return;
+				case 1:
+					JsonSerializer.Serialize(writer, value.Item2, value.Item2!.GetType(), options);
+					return;
 			}
 
 			throw new JsonException("Invalid union type");
