@@ -58,7 +58,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	/// be used when serializing.
 	/// </summary>
 	/// <returns></returns>
-	protected abstract JsonSerializerOptions CreateJsonSerializerOptions();
+	protected abstract JsonSerializerOptions? CreateJsonSerializerOptions();
 
 	/// <inheritdoc />
 	public override T Deserialize<T>(Stream stream)
@@ -72,7 +72,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	}
 
 	/// <inheritdoc />
-	public override object Deserialize(Type type, Stream stream)
+	public override object? Deserialize(Type type, Stream stream)
 	{
 		Initialize();
 
@@ -90,7 +90,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	}
 
 	/// <inheritdoc />
-	public override ValueTask<object> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
+	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 	{
 		Initialize();
 		return JsonSerializer.DeserializeAsync(stream, type, Options, cancellationToken);
@@ -101,8 +101,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 		SerializationFormatting formatting = SerializationFormatting.None)
 	{
 		Initialize();
-		using var writer = new Utf8JsonWriter(writableStream);
-		JsonSerializer.Serialize(writer, data, typeof(T), formatting == SerializationFormatting.Indented && IndentedOptions is not null ? IndentedOptions : Options);
+		JsonSerializer.Serialize(writableStream, data, formatting == SerializationFormatting.Indented && IndentedOptions is not null ? IndentedOptions : Options);
 	}
 
 	/// <inheritdoc />
@@ -117,7 +116,7 @@ public abstract class SystemTextJsonSerializer : Serializer
 	private static bool TryReturnDefault<T>(Stream stream, out T deserialize)
 	{
 		deserialize = default;
-		return stream == null || stream == Stream.Null || (stream.CanSeek && stream.Length == 0);
+		return stream is null || stream == Stream.Null || (stream.CanSeek && stream.Length == 0);
 	}
 
 	/// <summary>
@@ -152,12 +151,12 @@ public abstract class SystemTextJsonSerializer : Serializer
 
 	private void LinkOptionsAndSettings()
 	{
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(Options, out _))
+		if (!ElasticsearchClient.SettingsTable.TryGetValue(Options!, out _))
 		{
 			ElasticsearchClient.SettingsTable.Add(Options, Settings);
 		}
 
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(IndentedOptions, out _))
+		if (!ElasticsearchClient.SettingsTable.TryGetValue(IndentedOptions!, out _))
 		{
 			ElasticsearchClient.SettingsTable.Add(IndentedOptions, Settings);
 		}
