@@ -36,6 +36,12 @@ public sealed partial class DateHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? CalendarInterval { get; set; }
 
 	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("extended_bounds")]
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? ExtendedBounds { get; set; }
+
+	/// <summary>
 	/// <para>The date field whose values are use to build a histogram.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
@@ -52,6 +58,12 @@ public sealed partial class DateHistogramAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
+
+	/// <summary>
+	/// <para>Limits the histogram to specified bounds.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("hard_bounds")]
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? HardBounds { get; set; }
 
 	/// <summary>
 	/// <para>Only returns buckets that have `min_doc_count` number of documents.<br/>By default, all buckets between the first bucket that matches documents and the last one are returned.</para>
@@ -101,9 +113,15 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? ExtendedBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor ExtendedBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> ExtendedBoundsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FixedIntervalValue { get; set; }
 	private string? FormatValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? HardBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor HardBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> HardBoundsDescriptorAction { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
@@ -118,6 +136,33 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	public DateHistogramAggregationDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? calendarInterval)
 	{
 		CalendarIntervalValue = calendarInterval;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	public DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? extendedBounds)
+	{
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsValue = extendedBounds;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor descriptor)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> configure)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -163,6 +208,33 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 	public DateHistogramAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the histogram to specified bounds.</para>
+	/// </summary>
+	public DateHistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? hardBounds)
+	{
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsValue = hardBounds;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor descriptor)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor<TDocument> HardBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> configure)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -232,6 +304,22 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
 		}
 
+		if (ExtendedBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
+		}
+		else if (ExtendedBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor(ExtendedBoundsDescriptorAction), options);
+		}
+		else if (ExtendedBoundsValue is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -248,6 +336,22 @@ public sealed partial class DateHistogramAggregationDescriptor<TDocument> : Seri
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (HardBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
+		}
+		else if (HardBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor(HardBoundsDescriptorAction), options);
+		}
+		else if (HardBoundsValue is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
@@ -305,9 +409,15 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? CalendarIntervalValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? ExtendedBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor ExtendedBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> ExtendedBoundsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FixedIntervalValue { get; set; }
 	private string? FormatValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? HardBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor HardBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> HardBoundsDescriptorAction { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private DateTimeOffset? MissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? OffsetValue { get; set; }
@@ -322,6 +432,33 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	public DateHistogramAggregationDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Serverless.Aggregations.CalendarInterval? calendarInterval)
 	{
 		CalendarIntervalValue = calendarInterval;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	public DateHistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? extendedBounds)
+	{
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsValue = extendedBounds;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor descriptor)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> configure)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -367,6 +504,33 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 	public DateHistogramAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the histogram to specified bounds.</para>
+	/// </summary>
+	public DateHistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDate? hardBounds)
+	{
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsValue = hardBounds;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor descriptor)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateHistogramAggregationDescriptor HardBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor> configure)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -436,6 +600,22 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 			JsonSerializer.Serialize(writer, CalendarIntervalValue, options);
 		}
 
+		if (ExtendedBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
+		}
+		else if (ExtendedBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor(ExtendedBoundsDescriptorAction), options);
+		}
+		else if (ExtendedBoundsValue is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -452,6 +632,22 @@ public sealed partial class DateHistogramAggregationDescriptor : SerializableDes
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (HardBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
+		}
+		else if (HardBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsDateDescriptor(HardBoundsDescriptorAction), options);
+		}
+		else if (HardBoundsValue is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsValue, options);
 		}
 
 		if (MinDocCountValue.HasValue)
