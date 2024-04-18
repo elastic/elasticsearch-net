@@ -30,12 +30,24 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
 public sealed partial class HistogramAggregation
 {
 	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("extended_bounds")]
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? ExtendedBounds { get; set; }
+
+	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Serverless.Field? Field { get; set; }
 	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
+
+	/// <summary>
+	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("hard_bounds")]
+	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? HardBounds { get; set; }
 
 	/// <summary>
 	/// <para>The interval for the buckets.<br/>Must be a positive decimal.</para>
@@ -82,14 +94,47 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? ExtendedBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor ExtendedBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> ExtendedBoundsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? HardBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor HardBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> HardBoundsDescriptorAction { get; set; }
 	private double? IntervalValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
 	private double? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+
+	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? extendedBounds)
+	{
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsValue = extendedBounds;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor<TDocument> ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> configure)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
@@ -121,6 +166,33 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	public HistogramAggregationDescriptor<TDocument> Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// </summary>
+	public HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? hardBounds)
+	{
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsValue = hardBounds;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor<TDocument> HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor<TDocument> HardBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> configure)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -178,6 +250,22 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ExtendedBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
+		}
+		else if (ExtendedBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor(ExtendedBoundsDescriptorAction), options);
+		}
+		else if (ExtendedBoundsValue is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -188,6 +276,22 @@ public sealed partial class HistogramAggregationDescriptor<TDocument> : Serializ
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (HardBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
+		}
+		else if (HardBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor(HardBoundsDescriptorAction), options);
+		}
+		else if (HardBoundsValue is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsValue, options);
 		}
 
 		if (IntervalValue.HasValue)
@@ -238,14 +342,47 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	{
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? ExtendedBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor ExtendedBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> ExtendedBoundsDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? FieldValue { get; set; }
 	private string? FormatValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? HardBoundsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor HardBoundsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> HardBoundsDescriptorAction { get; set; }
 	private double? IntervalValue { get; set; }
 	private int? MinDocCountValue { get; set; }
 	private double? MissingValue { get; set; }
 	private double? OffsetValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+
+	/// <summary>
+	/// <para>Enables extending the bounds of the histogram beyond the data itself.</para>
+	/// </summary>
+	public HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? extendedBounds)
+	{
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsValue = extendedBounds;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor ExtendedBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptorAction = null;
+		ExtendedBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor ExtendedBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> configure)
+	{
+		ExtendedBoundsValue = null;
+		ExtendedBoundsDescriptor = null;
+		ExtendedBoundsDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>The name of the field to aggregate on.</para>
@@ -277,6 +414,33 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	public HistogramAggregationDescriptor Format(string? format)
 	{
 		FormatValue = format;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Limits the range of buckets in the histogram.<br/>It is particularly useful in the case of open data ranges that can result in a very large number of buckets.</para>
+	/// </summary>
+	public HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloat? hardBounds)
+	{
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsValue = hardBounds;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor HardBounds(Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor descriptor)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptorAction = null;
+		HardBoundsDescriptor = descriptor;
+		return Self;
+	}
+
+	public HistogramAggregationDescriptor HardBounds(Action<Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor> configure)
+	{
+		HardBoundsValue = null;
+		HardBoundsDescriptor = null;
+		HardBoundsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -334,6 +498,22 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (ExtendedBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsDescriptor, options);
+		}
+		else if (ExtendedBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor(ExtendedBoundsDescriptorAction), options);
+		}
+		else if (ExtendedBoundsValue is not null)
+		{
+			writer.WritePropertyName("extended_bounds");
+			JsonSerializer.Serialize(writer, ExtendedBoundsValue, options);
+		}
+
 		if (FieldValue is not null)
 		{
 			writer.WritePropertyName("field");
@@ -344,6 +524,22 @@ public sealed partial class HistogramAggregationDescriptor : SerializableDescrip
 		{
 			writer.WritePropertyName("format");
 			writer.WriteStringValue(FormatValue);
+		}
+
+		if (HardBoundsDescriptor is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsDescriptor, options);
+		}
+		else if (HardBoundsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.Aggregations.ExtendedBoundsFloatDescriptor(HardBoundsDescriptorAction), options);
+		}
+		else if (HardBoundsValue is not null)
+		{
+			writer.WritePropertyName("hard_bounds");
+			JsonSerializer.Serialize(writer, HardBoundsValue, options);
 		}
 
 		if (IntervalValue.HasValue)
