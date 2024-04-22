@@ -34,7 +34,7 @@ public sealed class DataStreamNames : IUrlParameter, IEnumerable<DataStreamName>
 
 	public override string ToString() => string.Join(",", Names.Where(f => f is not null).Select(f => f.Name));
 
-	public static implicit operator DataStreamNames(string[] dataStreamNames) => dataStreamNames.IsEmpty() ? null : new DataStreamNames(dataStreamNames.Select(f => new DataStreamName(f)));
+	public static implicit operator DataStreamNames(string[] dataStreamNames) => dataStreamNames.IsNullOrEmpty() ? null : new DataStreamNames(dataStreamNames.Select(f => new DataStreamName(f)));
 
 	public static implicit operator DataStreamNames(string dataStreamName) => dataStreamName.IsNullOrEmptyCommaSeparatedList(out var split)
 		? null
@@ -42,7 +42,7 @@ public sealed class DataStreamNames : IUrlParameter, IEnumerable<DataStreamName>
 
 	public static implicit operator DataStreamNames(DataStreamName dataStreamName) => dataStreamName == null ? null : new DataStreamNames(new[] { dataStreamName });
 
-	public static implicit operator DataStreamNames(DataStreamName[] dataStreamNames) => dataStreamNames.IsEmpty() ? null : new DataStreamNames(dataStreamNames);
+	public static implicit operator DataStreamNames(DataStreamName[] dataStreamNames) => dataStreamNames.IsNullOrEmpty() ? null : new DataStreamNames(dataStreamNames);
 
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

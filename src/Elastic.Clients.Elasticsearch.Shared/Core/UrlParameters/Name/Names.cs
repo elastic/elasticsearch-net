@@ -43,7 +43,7 @@ public sealed class Names : IEquatable<Names>, IUrlParameter
 
 	public static implicit operator Names(string names) => Parse(names);
 
-	public static implicit operator Names(string[] names) => names.IsEmpty() ? null : new Names(names);
+	public static implicit operator Names(string[] names) => names.IsNullOrEmpty() ? null : new Names(names);
 
 	public static bool operator ==(Names left, Names right) => Equals(left, right);
 

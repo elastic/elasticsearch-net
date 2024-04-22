@@ -94,7 +94,7 @@ public class Routing : IEquatable<Routing>, IUrlParameter
 		routing.IsNullOrEmptyCommaSeparatedList(out _) ? null : new Routing(routing);
 
 	public static implicit operator Routing(string[] routing) =>
-		routing.IsEmpty() ? null : new Routing(string.Join(",", routing));
+		routing.IsNullOrEmpty() ? null : new Routing(string.Join(",", routing));
 
 	public static implicit operator Routing(long routing) => new(routing);
 
