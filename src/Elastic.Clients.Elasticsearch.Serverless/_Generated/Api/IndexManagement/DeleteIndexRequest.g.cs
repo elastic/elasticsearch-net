@@ -116,6 +116,10 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public DeleteIndexRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

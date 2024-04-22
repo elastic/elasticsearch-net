@@ -138,6 +138,10 @@ public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : Reques
 	{
 	}
 
+	public FieldUsageStatsRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementFieldUsageStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

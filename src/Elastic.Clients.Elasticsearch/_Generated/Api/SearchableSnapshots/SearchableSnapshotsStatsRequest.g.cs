@@ -76,7 +76,7 @@ public sealed partial class SearchableSnapshotsStatsRequestDescriptor<TDocument>
 	{
 	}
 
-	public SearchableSnapshotsStatsRequestDescriptor()
+	public SearchableSnapshotsStatsRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

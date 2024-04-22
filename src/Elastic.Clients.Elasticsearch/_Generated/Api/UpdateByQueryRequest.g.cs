@@ -399,6 +399,10 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
+	public UpdateByQueryRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdateByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

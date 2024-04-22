@@ -149,6 +149,10 @@ public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
+	public GetIndexRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
