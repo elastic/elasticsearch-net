@@ -171,6 +171,22 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 	{
 	}
 
+	public GetRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public GetRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public GetRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public GetRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceGet;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
