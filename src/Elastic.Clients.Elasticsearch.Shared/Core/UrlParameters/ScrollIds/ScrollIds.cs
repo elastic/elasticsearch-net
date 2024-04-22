@@ -34,7 +34,7 @@ public sealed class ScrollIds : IUrlParameter, IEnumerable<ScrollId>, IEquatable
 
 	public override string ToString() => string.Join(",", Ids.Where(f => f is not null).Select(f => f.Id));
 
-	public static implicit operator ScrollIds(string[] scrollIds) => scrollIds.IsEmpty() ? null : new ScrollIds(scrollIds.Select(f => new ScrollId(f)));
+	public static implicit operator ScrollIds(string[] scrollIds) => scrollIds.IsNullOrEmpty() ? null : new ScrollIds(scrollIds.Select(f => new ScrollId(f)));
 
 	public static implicit operator ScrollIds(string scrollIds) => scrollIds.IsNullOrEmptyCommaSeparatedList(out var split)
 		? null
@@ -42,7 +42,7 @@ public sealed class ScrollIds : IUrlParameter, IEnumerable<ScrollId>, IEquatable
 
 	public static implicit operator ScrollIds(ScrollId scrollId) => scrollId == null ? null : new ScrollIds(new[] { scrollId });
 
-	public static implicit operator ScrollIds(ScrollId[] scrollIds) => scrollIds.IsEmpty() ? null : new ScrollIds(scrollIds);
+	public static implicit operator ScrollIds(ScrollId[] scrollIds) => scrollIds.IsNullOrEmpty() ? null : new ScrollIds(scrollIds);
 
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

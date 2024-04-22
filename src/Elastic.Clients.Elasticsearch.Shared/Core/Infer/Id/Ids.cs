@@ -66,7 +66,7 @@ public partial class Ids : IUrlParameter, IEquatable<Ids>
 		value.IsNullOrEmptyCommaSeparatedList(out var arr) ? null : new Ids(arr);
 
 	public static implicit operator Ids(string[] value) =>
-		value.IsEmpty() ? null : new Ids(value);
+		value.IsNullOrEmpty() ? null : new Ids(value);
 
 	public override bool Equals(object obj) => obj is Ids other && Equals(other);
 
