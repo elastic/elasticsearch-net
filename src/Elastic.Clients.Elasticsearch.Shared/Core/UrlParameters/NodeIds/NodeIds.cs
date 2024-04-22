@@ -38,7 +38,7 @@ public sealed class NodeIds : IEquatable<NodeIds>, IUrlParameter
 
 	public static implicit operator NodeIds(string nodes) => Parse(nodes);
 
-	public static implicit operator NodeIds(string[] nodes) => nodes.IsEmpty() ? null : new NodeIds(nodes);
+	public static implicit operator NodeIds(string[] nodes) => nodes.IsNullOrEmpty() ? null : new NodeIds(nodes);
 
 	public static bool operator ==(NodeIds left, NodeIds right) => Equals(left, right);
 

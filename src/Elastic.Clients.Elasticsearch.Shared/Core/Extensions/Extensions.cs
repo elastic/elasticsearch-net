@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -172,13 +173,14 @@ internal static class Extensions
 
 	internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
 
-	internal static bool IsEmpty<T>(this IEnumerable<T> list)
+	internal static bool IsNullOrEmpty<T>(this IEnumerable<T>? list)
 	{
-		if (list == null)
+		if (list is null)
 			return true;
 
 		var enumerable = list as T[] ?? list.ToArray();
-		return !enumerable.Any() || enumerable.All(t => t == null);
+
+		return (enumerable.Length == 0) || enumerable.All(x => x is null);
 	}
 
 	internal static void ThrowIfNull<T>(this T value, string name, string message = null)
@@ -189,9 +191,9 @@ internal static class Extensions
 			throw new ArgumentNullException(name, "Argument can not be null when " + message);
 	}
 
-	internal static bool IsNullOrEmpty(this string value) => string.IsNullOrWhiteSpace(value);
+	internal static bool IsNullOrEmpty(this string? value) => string.IsNullOrWhiteSpace(value);
 
-	internal static bool IsNullOrEmptyCommaSeparatedList(this string value, out string[] split)
+	internal static bool IsNullOrEmptyCommaSeparatedList(this string? value, [NotNullWhen(false)] out string[]? split)
 	{
 		split = null;
 		if (string.IsNullOrWhiteSpace(value))
