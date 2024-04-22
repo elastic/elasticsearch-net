@@ -116,6 +116,10 @@ public sealed partial class DiskUsageRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
+	public DiskUsageRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDiskUsage;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

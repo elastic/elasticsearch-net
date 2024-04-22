@@ -166,6 +166,10 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
+	public RollupSearchRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupRollupSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

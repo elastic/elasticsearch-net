@@ -62,6 +62,10 @@ public sealed partial class FollowStatsRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public FollowStatsRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationFollowStats;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

@@ -387,6 +387,10 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
+	public DeleteByQueryRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDeleteByQuery;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

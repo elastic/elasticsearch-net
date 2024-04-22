@@ -161,7 +161,7 @@ public sealed partial class FieldCapsRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
-	public FieldCapsRequestDescriptor()
+	public FieldCapsRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 
