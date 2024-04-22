@@ -209,6 +209,22 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public TermVectorsRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public TermVectorsRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public TermVectorsRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id? id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public TermVectorsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id? id) : this(typeof(TDocument), id)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermvectors;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
