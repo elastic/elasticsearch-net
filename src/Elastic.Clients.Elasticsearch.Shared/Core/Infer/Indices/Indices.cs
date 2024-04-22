@@ -138,9 +138,9 @@ public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<
 
 	public static implicit operator Indices(string indicesString) => Parse(indicesString);
 
-	public static implicit operator Indices(string[] indices) => indices.IsEmpty() ? null : new Indices(indices);
+	public static implicit operator Indices(string[] indices) => indices.IsNullOrEmpty() ? null : new Indices(indices);
 
-	public static implicit operator Indices(IndexName[] indices) => indices.IsEmpty() ? null : new Indices(indices);
+	public static implicit operator Indices(IndexName[] indices) => indices.IsNullOrEmpty() ? null : new Indices(indices);
 
 	public static implicit operator Indices(IndexName index) => index == null ? null : new Indices(new[] { index });
 
