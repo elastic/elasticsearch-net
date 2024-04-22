@@ -107,6 +107,10 @@ public sealed partial class ExploreRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
+	public ExploreRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.GraphExplore;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

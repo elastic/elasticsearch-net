@@ -145,7 +145,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	{
 	}
 
-	public MultiSearchTemplateRequestDescriptor()
+	public MultiSearchTemplateRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

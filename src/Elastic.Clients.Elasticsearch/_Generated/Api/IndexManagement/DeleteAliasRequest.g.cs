@@ -83,6 +83,10 @@ public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public DeleteAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : this(typeof(TDocument), name)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDeleteAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;

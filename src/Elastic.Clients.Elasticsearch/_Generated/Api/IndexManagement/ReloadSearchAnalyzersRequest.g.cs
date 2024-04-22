@@ -94,6 +94,10 @@ public sealed partial class ReloadSearchAnalyzersRequestDescriptor<TDocument> : 
 	{
 	}
 
+	public ReloadSearchAnalyzersRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
