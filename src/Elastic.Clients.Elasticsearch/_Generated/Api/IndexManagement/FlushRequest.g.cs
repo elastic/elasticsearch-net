@@ -120,7 +120,7 @@ public sealed partial class FlushRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	public FlushRequestDescriptor()
+	public FlushRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

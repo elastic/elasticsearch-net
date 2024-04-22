@@ -195,6 +195,10 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
+	public PutMappingRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutMapping;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

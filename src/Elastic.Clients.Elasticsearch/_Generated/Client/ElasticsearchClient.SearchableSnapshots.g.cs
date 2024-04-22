@@ -201,10 +201,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCacheResponse ClearCache<TDocument>(ClearCacheRequestDescriptor descriptor)
+	public virtual ClearCacheResponse ClearCache<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
+		return DoRequest<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -214,9 +214,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new ClearCacheRequestDescriptor(indices);
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
+		return DoRequest<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -224,12 +224,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest)
+	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ClearCacheRequestDescriptor(indices);
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
+		return DoRequest<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -239,9 +239,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>()
 	{
-		var descriptor = new ClearCacheRequestDescriptor();
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
+		return DoRequest<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -249,12 +249,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCacheResponse ClearCache<TDocument>(Action<ClearCacheRequestDescriptor> configureRequest)
+	public virtual ClearCacheResponse ClearCache<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ClearCacheRequestDescriptor();
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
+		return DoRequest<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -322,10 +322,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Clear the cache of searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(ClearCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -334,21 +334,21 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearCacheRequestDescriptor(indices);
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Clear the cache of searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearCacheRequestDescriptor(indices);
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -357,21 +357,21 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearCacheRequestDescriptor();
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Clear the cache of searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearCacheRequestDescriptor();
+		var descriptor = new ClearCacheRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCacheRequestDescriptor, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ClearCacheRequestDescriptor<TDocument>, ClearCacheResponse, ClearCacheRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -546,10 +546,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(SearchableSnapshotsStatsRequestDescriptor descriptor)
+	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
+		return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -559,9 +559,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor(indices);
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
+		return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -569,12 +569,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest)
+	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor(indices);
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
+		return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -584,9 +584,9 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>()
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
+		return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -594,12 +594,12 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest)
+	public virtual SearchableSnapshotsStatsResponse Stats<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
+		return DoRequest<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -667,10 +667,10 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(SearchableSnapshotsStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -679,21 +679,21 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor(indices);
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor(indices);
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -702,21 +702,21 @@ public partial class SearchableSnapshotsNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieve shard-level statistics about searchable snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/searchable-snapshots-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<SearchableSnapshotsStatsResponse> StatsAsync<TDocument>(Action<SearchableSnapshotsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SearchableSnapshotsStatsRequestDescriptor();
+		var descriptor = new SearchableSnapshotsStatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SearchableSnapshotsStatsRequestDescriptor<TDocument>, SearchableSnapshotsStatsResponse, SearchableSnapshotsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

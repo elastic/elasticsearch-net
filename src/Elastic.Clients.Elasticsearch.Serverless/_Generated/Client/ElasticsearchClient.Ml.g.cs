@@ -309,10 +309,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an existing data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(DeleteDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(DeleteDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -321,21 +321,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new DeleteDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Deletes an existing data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new DeleteDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>, DeleteDataFrameAnalyticsResponse, DeleteDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1521,10 +1521,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves configuration information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(GetDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(GetDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1533,21 +1533,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new GetDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieves configuration information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<GetDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<GetDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new GetDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1556,21 +1556,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsRequestDescriptor();
+		var descriptor = new GetDataFrameAnalyticsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieves configuration information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Action<GetDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsResponse> GetDataFrameAnalyticsAsync<TDocument>(Action<GetDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsRequestDescriptor();
+		var descriptor = new GetDataFrameAnalyticsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsRequestDescriptor<TDocument>, GetDataFrameAnalyticsResponse, GetDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1643,10 +1643,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves usage information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(GetDataFrameAnalyticsStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1655,21 +1655,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor(id);
+		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieves usage information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<GetDataFrameAnalyticsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor(id);
+		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1678,21 +1678,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor();
+		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieves usage information for data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Action<GetDataFrameAnalyticsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetDataFrameAnalyticsStatsResponse> GetDataFrameAnalyticsStatsAsync<TDocument>(Action<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor();
+		var descriptor = new GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsResponse, GetDataFrameAnalyticsStatsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3582,10 +3582,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Starts a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync<TDocument>(StartDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync<TDocument>(StartDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor<TDocument>, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3594,21 +3594,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new StartDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor<TDocument>, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Starts a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<StartDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<StartDataFrameAnalyticsResponse> StartDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<StartDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new StartDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StartDataFrameAnalyticsRequestDescriptor<TDocument>, StartDataFrameAnalyticsResponse, StartDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3744,10 +3744,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Stops one or more data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync<TDocument>(StopDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync<TDocument>(StopDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor<TDocument>, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3756,21 +3756,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new StopDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor<TDocument>, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Stops one or more data frame analytics jobs.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<StopDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<StopDataFrameAnalyticsResponse> StopDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<StopDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new StopDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<StopDataFrameAnalyticsRequestDescriptor<TDocument>, StopDataFrameAnalyticsResponse, StopDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3939,10 +3939,10 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// <para>Updates certain properties of a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync<TDocument>(UpdateDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync<TDocument>(UpdateDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3951,21 +3951,21 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpdateDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new UpdateDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Updates certain properties of a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<UpdateDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<UpdateDataFrameAnalyticsResponse> UpdateDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new UpdateDataFrameAnalyticsRequestDescriptor(id);
+		var descriptor = new UpdateDataFrameAnalyticsRequestDescriptor<TDocument>(id);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<UpdateDataFrameAnalyticsRequestDescriptor<TDocument>, UpdateDataFrameAnalyticsResponse, UpdateDataFrameAnalyticsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

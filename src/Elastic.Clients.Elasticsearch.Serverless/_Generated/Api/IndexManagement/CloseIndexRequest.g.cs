@@ -127,6 +127,10 @@ public sealed partial class CloseIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
+	public CloseIndexRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClose;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
