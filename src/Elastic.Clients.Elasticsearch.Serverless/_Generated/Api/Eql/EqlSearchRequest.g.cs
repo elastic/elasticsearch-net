@@ -142,6 +142,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
+	public EqlSearchRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

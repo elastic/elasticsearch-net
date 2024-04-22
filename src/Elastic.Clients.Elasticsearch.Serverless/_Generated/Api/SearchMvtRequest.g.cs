@@ -149,6 +149,10 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
+	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y) : this(typeof(TDocument), field, zoom, x, y)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchMvt;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

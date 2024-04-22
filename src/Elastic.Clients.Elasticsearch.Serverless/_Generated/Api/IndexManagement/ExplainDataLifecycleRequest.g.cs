@@ -83,6 +83,10 @@ public sealed partial class ExplainDataLifecycleRequestDescriptor<TDocument> : R
 	{
 	}
 
+	public ExplainDataLifecycleRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExplainDataLifecycle;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;

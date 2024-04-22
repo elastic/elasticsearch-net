@@ -127,6 +127,10 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
+	public ExistsRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementExists;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.HEAD;

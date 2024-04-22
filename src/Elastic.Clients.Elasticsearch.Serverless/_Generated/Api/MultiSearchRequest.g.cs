@@ -222,7 +222,7 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	public MultiSearchRequestDescriptor()
+	public MultiSearchRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

@@ -1007,7 +1007,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	public SearchRequestDescriptor()
+	public SearchRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

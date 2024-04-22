@@ -121,7 +121,7 @@ public sealed partial class RankEvalRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public RankEvalRequestDescriptor()
+	public RankEvalRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 
