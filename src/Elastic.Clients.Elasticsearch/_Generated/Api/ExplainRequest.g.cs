@@ -199,6 +199,22 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
+	public ExplainRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document))
+	{
+	}
+
+	public ExplainRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Id.From(document))
+	{
+	}
+
+	public ExplainRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceExplain;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

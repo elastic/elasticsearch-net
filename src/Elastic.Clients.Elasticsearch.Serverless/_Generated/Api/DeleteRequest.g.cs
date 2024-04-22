@@ -149,6 +149,22 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
+	public DeleteRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public DeleteRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public DeleteRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public DeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceDelete;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
