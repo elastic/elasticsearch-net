@@ -186,7 +186,7 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 	{
 	}
 
-	public HealthRequestDescriptor()
+	public HealthRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

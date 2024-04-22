@@ -113,6 +113,10 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
+	public PutAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : this(typeof(TDocument), name)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutAlias;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

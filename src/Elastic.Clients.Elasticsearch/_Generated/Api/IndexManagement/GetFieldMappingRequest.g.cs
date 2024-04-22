@@ -120,7 +120,7 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 	{
 	}
 
-	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : base(r => r.Required("fields", fields))
+	public GetFieldMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Fields fields) : this(typeof(TDocument), fields)
 	{
 	}
 

@@ -116,6 +116,10 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	{
 	}
 
+	public OpenPointInTimeRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceOpenPointInTime;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

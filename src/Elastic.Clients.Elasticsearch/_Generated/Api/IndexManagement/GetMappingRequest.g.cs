@@ -120,7 +120,7 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	public GetMappingRequestDescriptor()
+	public GetMappingRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

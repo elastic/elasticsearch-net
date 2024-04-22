@@ -732,10 +732,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CloseIndexResponse Close<TDocument>(CloseIndexRequestDescriptor descriptor)
+	public virtual CloseIndexResponse Close<TDocument>(CloseIndexRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
+		return DoRequest<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -745,9 +745,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new CloseIndexRequestDescriptor(indices);
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
+		return DoRequest<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -755,12 +755,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor> configureRequest)
+	public virtual CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new CloseIndexRequestDescriptor(indices);
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
+		return DoRequest<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Closes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CloseIndexResponse Close<TDocument>()
+	{
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Closes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CloseIndexResponse Close<TDocument>(Action<CloseIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -803,10 +828,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Closes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CloseIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CloseIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -815,21 +840,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CloseIndexRequestDescriptor(indices);
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Closes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new CloseIndexRequestDescriptor(indices);
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<CloseIndexRequestDescriptor, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Closes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Closes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CloseIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CloseIndexRequestDescriptor<TDocument>, CloseIndexResponse, CloseIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1278,10 +1326,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteIndexResponse Delete<TDocument>(DeleteIndexRequestDescriptor descriptor)
+	public virtual DeleteIndexResponse Delete<TDocument>(DeleteIndexRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
+		return DoRequest<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1291,9 +1339,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new DeleteIndexRequestDescriptor(indices);
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
+		return DoRequest<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1301,12 +1349,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest)
+	public virtual DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new DeleteIndexRequestDescriptor(indices);
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
+		return DoRequest<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteIndexResponse Delete<TDocument>()
+	{
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteIndexResponse Delete<TDocument>(Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1349,10 +1422,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(DeleteIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(DeleteIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1361,21 +1434,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteIndexRequestDescriptor(indices);
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Deletes an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteIndexRequestDescriptor(indices);
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteIndexRequestDescriptor, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexResponse, DeleteIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1437,10 +1533,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAliasResponse DeleteAlias<TDocument>(DeleteAliasRequestDescriptor descriptor)
+	public virtual DeleteAliasResponse DeleteAlias<TDocument>(DeleteAliasRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1450,9 +1546,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
 	{
-		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1460,12 +1556,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest)
+	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Deletes an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1508,10 +1629,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Deletes an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(DeleteAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(DeleteAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1520,21 +1641,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Deletes an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteAliasRequestDescriptor(indices, name);
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteAliasRequestDescriptor, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Deletes an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DeleteAliasRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasResponse, DeleteAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1956,10 +2100,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DiskUsageResponse DiskUsage<TDocument>(DiskUsageRequestDescriptor descriptor)
+	public virtual DiskUsageResponse DiskUsage<TDocument>(DiskUsageRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
+		return DoRequest<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1969,9 +2113,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new DiskUsageRequestDescriptor(indices);
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
+		return DoRequest<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -1979,12 +2123,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor> configureRequest)
+	public virtual DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new DiskUsageRequestDescriptor(indices);
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
+		return DoRequest<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DiskUsageResponse DiskUsage<TDocument>()
+	{
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual DiskUsageResponse DiskUsage<TDocument>(Action<DiskUsageRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2027,10 +2196,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(DiskUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(DiskUsageRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2039,21 +2208,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DiskUsageRequestDescriptor(indices);
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DiskUsageRequestDescriptor(indices);
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DiskUsageRequestDescriptor, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Analyzes the disk usage of each field of an index or data stream</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Action<DiskUsageRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new DiskUsageRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<DiskUsageRequestDescriptor<TDocument>, DiskUsageResponse, DiskUsageRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2115,10 +2307,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DownsampleResponse Downsample<TDocument>(DownsampleRequestDescriptor descriptor)
+	public virtual DownsampleResponse Downsample<TDocument>(DownsampleRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor);
+		return DoRequest<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2128,9 +2320,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
 	{
-		var descriptor = new DownsampleRequestDescriptor(config, index, targetIndex);
+		var descriptor = new DownsampleRequestDescriptor<TDocument>(config, index, targetIndex);
 		descriptor.BeforeRequest();
-		return DoRequest<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor);
+		return DoRequest<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2138,12 +2330,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor> configureRequest)
+	public virtual DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new DownsampleRequestDescriptor(config, index, targetIndex);
+		var descriptor = new DownsampleRequestDescriptor<TDocument>(config, index, targetIndex);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor);
+		return DoRequest<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2186,10 +2378,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Downsample an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(DownsampleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(DownsampleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2198,21 +2390,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DownsampleRequestDescriptor(config, index, targetIndex);
+		var descriptor = new DownsampleRequestDescriptor<TDocument>(config, index, targetIndex);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Downsample an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DownsampleRequestDescriptor(config, index, targetIndex);
+		var descriptor = new DownsampleRequestDescriptor<TDocument>(config, index, targetIndex);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DownsampleRequestDescriptor, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DownsampleRequestDescriptor<TDocument>, DownsampleResponse, DownsampleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2274,10 +2466,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsResponse Exists<TDocument>(ExistsRequestDescriptor descriptor)
+	public virtual ExistsResponse Exists<TDocument>(ExistsRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2287,9 +2479,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new ExistsRequestDescriptor(indices);
+		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2297,12 +2489,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest)
+	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ExistsRequestDescriptor(indices);
+		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor);
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular index exists.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExistsResponse Exists<TDocument>()
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular index exists.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExistsResponse Exists<TDocument>(Action<ExistsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2345,10 +2562,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular index exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2357,21 +2574,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsRequestDescriptor(indices);
+		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about whether a particular index exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsRequestDescriptor(indices);
+		var descriptor = new ExistsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsRequestDescriptor, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular index exists.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about whether a particular index exists.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExistsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExistsRequestDescriptor<TDocument>, ExistsResponse, ExistsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2433,10 +2673,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsAliasResponse ExistsAlias<TDocument>(ExistsAliasRequestDescriptor descriptor)
+	public virtual ExistsAliasResponse ExistsAlias<TDocument>(ExistsAliasRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2446,9 +2686,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(indices, name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2456,12 +2696,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest)
+	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(indices, name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2471,9 +2711,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2481,12 +2721,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest)
+	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
+		return DoRequest<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2554,10 +2794,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about whether a particular alias exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(ExistsAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(ExistsAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2566,21 +2806,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(indices, name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about whether a particular alias exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(indices, name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2589,21 +2829,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about whether a particular alias exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExistsAliasRequestDescriptor(name);
+		var descriptor = new ExistsAliasRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExistsAliasRequestDescriptor, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasResponse, ExistsAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2868,10 +3108,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(ExplainDataLifecycleRequestDescriptor descriptor)
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2881,9 +3121,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2891,12 +3131,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest)
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>()
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -2939,10 +3204,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(ExplainDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -2951,21 +3216,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExplainDataLifecycleRequestDescriptor(indices);
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ExplainDataLifecycleRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ExplainDataLifecycleRequestDescriptor<TDocument>, ExplainDataLifecycleResponse, ExplainDataLifecycleRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3063,6 +3351,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>()
+	{
+		var descriptor = new FieldUsageStatsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsResponse, FieldUsageStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the field usage stats for each field of an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>(Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new FieldUsageStatsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsResponse, FieldUsageStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns the field usage stats for each field of an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(FieldUsageStatsRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -3131,6 +3444,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns the field usage stats for each field of an index</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
+	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FieldUsageStatsRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsResponse, FieldUsageStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the field usage stats for each field of an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FieldUsageStatsRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FieldUsageStatsRequestDescriptor<TDocument>, FieldUsageStatsResponse, FieldUsageStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns the field usage stats for each field of an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync(FieldUsageStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
@@ -3186,10 +3522,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual FlushResponse Flush<TDocument>(FlushRequestDescriptor descriptor)
+	public virtual FlushResponse Flush<TDocument>(FlushRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3199,9 +3535,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new FlushRequestDescriptor(indices);
+		var descriptor = new FlushRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3209,12 +3545,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor> configureRequest)
+	public virtual FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new FlushRequestDescriptor(indices);
+		var descriptor = new FlushRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3224,9 +3560,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>()
 	{
-		var descriptor = new FlushRequestDescriptor();
+		var descriptor = new FlushRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3234,12 +3570,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual FlushResponse Flush<TDocument>(Action<FlushRequestDescriptor> configureRequest)
+	public virtual FlushResponse Flush<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new FlushRequestDescriptor();
+		var descriptor = new FlushRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor);
+		return DoRequest<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3307,10 +3643,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the flush operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<FlushResponse> FlushAsync<TDocument>(FlushRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<FlushResponse> FlushAsync<TDocument>(FlushRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3319,21 +3655,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new FlushRequestDescriptor(indices);
+		var descriptor = new FlushRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the flush operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new FlushRequestDescriptor(indices);
+		var descriptor = new FlushRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3342,21 +3678,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new FlushRequestDescriptor();
+		var descriptor = new FlushRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the flush operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<FlushResponse> FlushAsync<TDocument>(Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<FlushResponse> FlushAsync<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new FlushRequestDescriptor();
+		var descriptor = new FlushRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<FlushRequestDescriptor, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<FlushRequestDescriptor<TDocument>, FlushResponse, FlushRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3441,10 +3777,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ForcemergeResponse Forcemerge<TDocument>(ForcemergeRequestDescriptor descriptor)
+	public virtual ForcemergeResponse Forcemerge<TDocument>(ForcemergeRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3454,9 +3790,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new ForcemergeRequestDescriptor(indices);
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3464,12 +3800,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor> configureRequest)
+	public virtual ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ForcemergeRequestDescriptor(indices);
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3479,9 +3815,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>()
 	{
-		var descriptor = new ForcemergeRequestDescriptor();
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3489,12 +3825,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ForcemergeResponse Forcemerge<TDocument>(Action<ForcemergeRequestDescriptor> configureRequest)
+	public virtual ForcemergeResponse Forcemerge<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ForcemergeRequestDescriptor();
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
+		return DoRequest<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3562,10 +3898,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the force merge operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(ForcemergeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(ForcemergeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3574,21 +3910,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ForcemergeRequestDescriptor(indices);
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the force merge operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ForcemergeRequestDescriptor(indices);
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3597,21 +3933,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ForcemergeRequestDescriptor();
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the force merge operation on one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Action<ForcemergeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ForcemergeRequestDescriptor();
+		var descriptor = new ForcemergeRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ForcemergeRequestDescriptor, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ForcemergeRequestDescriptor<TDocument>, ForcemergeResponse, ForcemergeRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3696,10 +4032,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIndexResponse Get<TDocument>(GetIndexRequestDescriptor descriptor)
+	public virtual GetIndexResponse Get<TDocument>(GetIndexRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor);
+		return DoRequest<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3709,9 +4045,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new GetIndexRequestDescriptor(indices);
+		var descriptor = new GetIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor);
+		return DoRequest<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3719,12 +4055,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest)
+	public virtual GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetIndexRequestDescriptor(indices);
+		var descriptor = new GetIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor);
+		return DoRequest<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetIndexResponse Get<TDocument>()
+	{
+		var descriptor = new GetIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns information about one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetIndexResponse Get<TDocument>(Action<GetIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3767,10 +4128,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetIndexResponse> GetAsync<TDocument>(GetIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetIndexResponse> GetAsync<TDocument>(GetIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3779,21 +4140,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndexRequestDescriptor(indices);
+		var descriptor = new GetIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndexRequestDescriptor(indices);
+		var descriptor = new GetIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndexRequestDescriptor, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetIndexResponse> GetAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns information about one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Action<GetIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetIndexRequestDescriptor<TDocument>, GetIndexResponse, GetIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3855,10 +4239,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAliasResponse GetAlias<TDocument>(GetAliasRequestDescriptor descriptor)
+	public virtual GetAliasResponse GetAlias<TDocument>(GetAliasRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3868,9 +4252,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indices, name);
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3878,12 +4262,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor> configureRequest)
+	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indices, name);
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3893,9 +4302,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>()
 	{
-		var descriptor = new GetAliasRequestDescriptor();
+		var descriptor = new GetAliasRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3903,12 +4312,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetAliasResponse GetAlias<TDocument>(Action<GetAliasRequestDescriptor> configureRequest)
+	public virtual GetAliasResponse GetAlias<TDocument>(Action<GetAliasRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetAliasRequestDescriptor();
+		var descriptor = new GetAliasRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor);
+		return DoRequest<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -3976,10 +4385,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(GetAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(GetAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -3988,21 +4397,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indices, name);
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAliasRequestDescriptor(indices, name);
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetAliasRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -4011,21 +4443,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAliasRequestDescriptor();
+		var descriptor = new GetAliasRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns an alias.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Action<GetAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetAliasRequestDescriptor();
+		var descriptor = new GetAliasRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetAliasRequestDescriptor, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetAliasRequestDescriptor<TDocument>, GetAliasResponse, GetAliasRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -4731,10 +5163,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetMappingResponse GetMapping<TDocument>(GetMappingRequestDescriptor descriptor)
+	public virtual GetMappingResponse GetMapping<TDocument>(GetMappingRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor);
+		return DoRequest<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4744,9 +5176,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new GetMappingRequestDescriptor(indices);
+		var descriptor = new GetMappingRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor);
+		return DoRequest<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4754,12 +5186,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor> configureRequest)
+	public virtual GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetMappingRequestDescriptor(indices);
+		var descriptor = new GetMappingRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor);
+		return DoRequest<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4769,9 +5201,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>()
 	{
-		var descriptor = new GetMappingRequestDescriptor();
+		var descriptor = new GetMappingRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor);
+		return DoRequest<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4779,12 +5211,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetMappingResponse GetMapping<TDocument>(Action<GetMappingRequestDescriptor> configureRequest)
+	public virtual GetMappingResponse GetMapping<TDocument>(Action<GetMappingRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetMappingRequestDescriptor();
+		var descriptor = new GetMappingRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor);
+		return DoRequest<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4852,10 +5284,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns mappings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(GetMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(GetMappingRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -4864,21 +5296,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetMappingRequestDescriptor(indices);
+		var descriptor = new GetMappingRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns mappings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetMappingRequestDescriptor(indices);
+		var descriptor = new GetMappingRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -4887,21 +5319,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetMappingRequestDescriptor();
+		var descriptor = new GetMappingRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns mappings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Action<GetMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Action<GetMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetMappingRequestDescriptor();
+		var descriptor = new GetMappingRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetMappingRequestDescriptor, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetMappingRequestDescriptor<TDocument>, GetMappingResponse, GetMappingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -4986,10 +5418,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(GetIndicesSettingsRequestDescriptor descriptor)
+	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(GetIndicesSettingsRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -4999,9 +5431,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor(indices, name);
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5009,12 +5441,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor> configureRequest)
+	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor(indices, name);
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns settings for one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Returns settings for one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5024,9 +5481,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>()
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor();
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5034,12 +5491,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Action<GetIndicesSettingsRequestDescriptor> configureRequest)
+	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor();
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
+		return DoRequest<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5107,10 +5564,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns settings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(GetIndicesSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(GetIndicesSettingsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -5119,21 +5576,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor(indices, name);
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns settings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor(indices, name);
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns settings for one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Returns settings for one or more indices.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -5142,21 +5622,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor();
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns settings for one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Action<GetIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIndicesSettingsRequestDescriptor();
+		var descriptor = new GetIndicesSettingsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsResponse, GetIndicesSettingsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -5559,10 +6039,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual OpenIndexResponse Open<TDocument>(OpenIndexRequestDescriptor descriptor)
+	public virtual OpenIndexResponse Open<TDocument>(OpenIndexRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
+		return DoRequest<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5572,9 +6052,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new OpenIndexRequestDescriptor(indices);
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
+		return DoRequest<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5582,12 +6062,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor> configureRequest)
+	public virtual OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new OpenIndexRequestDescriptor(indices);
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
+		return DoRequest<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Opens an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual OpenIndexResponse Open<TDocument>()
+	{
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Opens an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual OpenIndexResponse Open<TDocument>(Action<OpenIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -5630,10 +6135,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Opens an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(OpenIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(OpenIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -5642,21 +6147,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new OpenIndexRequestDescriptor(indices);
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Opens an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new OpenIndexRequestDescriptor(indices);
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<OpenIndexRequestDescriptor, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Opens an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Opens an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Action<OpenIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new OpenIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<OpenIndexRequestDescriptor<TDocument>, OpenIndexResponse, OpenIndexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -5844,6 +6372,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var descriptor = new PutAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PutAliasRequestDescriptor<TDocument>(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(PutAliasRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -5903,6 +6456,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutAliasRequestDescriptor<TDocument>(indices, name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAliasRequestDescriptor<TDocument>(name);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates or updates an alias.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAliasRequestDescriptor<TDocument>(name);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutAliasRequestDescriptor<TDocument>, PutAliasResponse, PutAliasRequestParameters>(descriptor, cancellationToken);
@@ -6252,6 +6828,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMappingResponse PutMapping<TDocument>()
+	{
+		var descriptor = new PutMappingRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates the index mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMappingResponse PutMapping<TDocument>(Action<PutMappingRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PutMappingRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates the index mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(PutMappingRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -6311,6 +6912,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PutMappingRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the index mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutMappingRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates the index mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(Action<PutMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutMappingRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PutMappingRequestDescriptor<TDocument>, PutMappingResponse, PutMappingRequestParameters>(descriptor, cancellationToken);
@@ -6789,10 +7413,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RecoveryResponse Recovery<TDocument>(RecoveryRequestDescriptor descriptor)
+	public virtual RecoveryResponse Recovery<TDocument>(RecoveryRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor);
+		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -6802,9 +7426,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new RecoveryRequestDescriptor(indices);
+		var descriptor = new RecoveryRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor);
+		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -6812,12 +7436,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor> configureRequest)
+	public virtual RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new RecoveryRequestDescriptor(indices);
+		var descriptor = new RecoveryRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor);
+		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -6827,9 +7451,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>()
 	{
-		var descriptor = new RecoveryRequestDescriptor();
+		var descriptor = new RecoveryRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor);
+		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -6837,12 +7461,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RecoveryResponse Recovery<TDocument>(Action<RecoveryRequestDescriptor> configureRequest)
+	public virtual RecoveryResponse Recovery<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new RecoveryRequestDescriptor();
+		var descriptor = new RecoveryRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor);
+		return DoRequest<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -6910,10 +7534,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Returns information about ongoing index shard recoveries.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(RecoveryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(RecoveryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -6922,21 +7546,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RecoveryRequestDescriptor(indices);
+		var descriptor = new RecoveryRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about ongoing index shard recoveries.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RecoveryRequestDescriptor(indices);
+		var descriptor = new RecoveryRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -6945,21 +7569,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RecoveryRequestDescriptor();
+		var descriptor = new RecoveryRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns information about ongoing index shard recoveries.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Action<RecoveryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RecoveryRequestDescriptor();
+		var descriptor = new RecoveryRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RecoveryRequestDescriptor, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RecoveryRequestDescriptor<TDocument>, RecoveryResponse, RecoveryRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7044,10 +7668,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RefreshResponse Refresh<TDocument>(RefreshRequestDescriptor descriptor)
+	public virtual RefreshResponse Refresh<TDocument>(RefreshRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7057,9 +7681,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new RefreshRequestDescriptor(indices);
+		var descriptor = new RefreshRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7067,12 +7691,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor> configureRequest)
+	public virtual RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new RefreshRequestDescriptor(indices);
+		var descriptor = new RefreshRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7082,9 +7706,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>()
 	{
-		var descriptor = new RefreshRequestDescriptor();
+		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7092,12 +7716,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RefreshResponse Refresh<TDocument>(Action<RefreshRequestDescriptor> configureRequest)
+	public virtual RefreshResponse Refresh<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new RefreshRequestDescriptor();
+		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor);
+		return DoRequest<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7165,10 +7789,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Performs the refresh operation in one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(RefreshRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(RefreshRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7177,21 +7801,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RefreshRequestDescriptor(indices);
+		var descriptor = new RefreshRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the refresh operation in one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RefreshRequestDescriptor(indices);
+		var descriptor = new RefreshRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7200,21 +7824,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RefreshRequestDescriptor();
+		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Performs the refresh operation in one or more indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Action<RefreshRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RefreshRequestDescriptor();
+		var descriptor = new RefreshRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<RefreshRequestDescriptor, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<RefreshRequestDescriptor<TDocument>, RefreshResponse, RefreshRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7299,10 +7923,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(ReloadSearchAnalyzersRequestDescriptor descriptor)
+	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(ReloadSearchAnalyzersRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
+		return DoRequest<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7312,9 +7936,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var descriptor = new ReloadSearchAnalyzersRequestDescriptor(indices);
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
+		return DoRequest<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7322,12 +7946,37 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor> configureRequest)
+	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ReloadSearchAnalyzersRequestDescriptor(indices);
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
+		return DoRequest<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Reloads an index's search analyzers and their resources.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>()
+	{
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Reloads an index's search analyzers and their resources.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7370,10 +8019,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Reloads an index's search analyzers and their resources.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(ReloadSearchAnalyzersRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(ReloadSearchAnalyzersRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7382,21 +8031,44 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSearchAnalyzersRequestDescriptor(indices);
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Reloads an index's search analyzers and their resources.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSearchAnalyzersRequestDescriptor(indices);
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Reloads an index's search analyzers and their resources.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Reloads an index's search analyzers and their resources.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ReloadSearchAnalyzersRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersResponse, ReloadSearchAnalyzersRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -7893,10 +8565,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SegmentsResponse Segments<TDocument>(SegmentsRequestDescriptor descriptor)
+	public virtual SegmentsResponse Segments<TDocument>(SegmentsRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor);
+		return DoRequest<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7906,9 +8578,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new SegmentsRequestDescriptor(indices);
+		var descriptor = new SegmentsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor);
+		return DoRequest<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7916,12 +8588,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor> configureRequest)
+	public virtual SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new SegmentsRequestDescriptor(indices);
+		var descriptor = new SegmentsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor);
+		return DoRequest<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7931,9 +8603,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>()
 	{
-		var descriptor = new SegmentsRequestDescriptor();
+		var descriptor = new SegmentsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor);
+		return DoRequest<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -7941,12 +8613,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SegmentsResponse Segments<TDocument>(Action<SegmentsRequestDescriptor> configureRequest)
+	public virtual SegmentsResponse Segments<TDocument>(Action<SegmentsRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new SegmentsRequestDescriptor();
+		var descriptor = new SegmentsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor);
+		return DoRequest<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8014,10 +8686,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides low-level information about segments in a Lucene index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(SegmentsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(SegmentsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -8026,21 +8698,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SegmentsRequestDescriptor(indices);
+		var descriptor = new SegmentsRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Provides low-level information about segments in a Lucene index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SegmentsRequestDescriptor(indices);
+		var descriptor = new SegmentsRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -8049,21 +8721,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SegmentsRequestDescriptor();
+		var descriptor = new SegmentsRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Provides low-level information about segments in a Lucene index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Action<SegmentsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Action<SegmentsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SegmentsRequestDescriptor();
+		var descriptor = new SegmentsRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<SegmentsRequestDescriptor, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<SegmentsRequestDescriptor<TDocument>, SegmentsResponse, SegmentsRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -8148,10 +8820,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ShardStoresResponse ShardStores<TDocument>(ShardStoresRequestDescriptor descriptor)
+	public virtual ShardStoresResponse ShardStores<TDocument>(ShardStoresRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
+		return DoRequest<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8161,9 +8833,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new ShardStoresRequestDescriptor(indices);
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
+		return DoRequest<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8171,12 +8843,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor> configureRequest)
+	public virtual ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ShardStoresRequestDescriptor(indices);
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
+		return DoRequest<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8186,9 +8858,9 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>()
 	{
-		var descriptor = new ShardStoresRequestDescriptor();
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
+		return DoRequest<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8196,12 +8868,12 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ShardStoresResponse ShardStores<TDocument>(Action<ShardStoresRequestDescriptor> configureRequest)
+	public virtual ShardStoresResponse ShardStores<TDocument>(Action<ShardStoresRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new ShardStoresRequestDescriptor();
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
+		return DoRequest<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -8269,10 +8941,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>Provides store information for shard copies of indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(ShardStoresRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(ShardStoresRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -8281,21 +8953,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ShardStoresRequestDescriptor(indices);
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Provides store information for shard copies of indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ShardStoresRequestDescriptor(indices);
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -8304,21 +8976,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ShardStoresRequestDescriptor();
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Provides store information for shard copies of indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Action<ShardStoresRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Action<ShardStoresRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ShardStoresRequestDescriptor();
+		var descriptor = new ShardStoresRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<ShardStoresRequestDescriptor, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<ShardStoresRequestDescriptor<TDocument>, ShardStoresResponse, ShardStoresRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -9102,6 +9774,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var descriptor = new IndicesStatsRequestDescriptor<TDocument>(metric);
+		descriptor.BeforeRequest();
+		return DoRequest<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsResponse, IndicesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Provides statistics on operations happening in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new IndicesStatsRequestDescriptor<TDocument>(metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsResponse, IndicesStatsRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Provides statistics on operations happening in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>()
 	{
 		var descriptor = new IndicesStatsRequestDescriptor<TDocument>();
@@ -9211,6 +9908,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new IndicesStatsRequestDescriptor<TDocument>(indices, metric);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsResponse, IndicesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Provides statistics on operations happening in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndicesStatsRequestDescriptor<TDocument>(metric);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsResponse, IndicesStatsRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Provides statistics on operations happening in an index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new IndicesStatsRequestDescriptor<TDocument>(metric);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<IndicesStatsRequestDescriptor<TDocument>, IndicesStatsResponse, IndicesStatsRequestParameters>(descriptor, cancellationToken);

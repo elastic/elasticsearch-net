@@ -651,10 +651,10 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor descriptor)
+	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -664,9 +664,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
+		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -674,12 +674,12 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest)
+	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
+		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -689,9 +689,9 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>()
 	{
-		var descriptor = new HealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -699,12 +699,12 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor> configureRequest)
+	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
 	{
-		var descriptor = new HealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor);
+		return DoRequest<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor);
 	}
 
 	/// <summary>
@@ -772,10 +772,10 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// <para>Returns basic information about the health of the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -784,21 +784,21 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
+		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor(indices);
+		var descriptor = new HealthRequestDescriptor<TDocument>(indices);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -807,21 +807,21 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>Returns basic information about the health of the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HealthRequestDescriptor();
+		var descriptor = new HealthRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<HealthRequestDescriptor, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<HealthRequestDescriptor<TDocument>, HealthResponse, HealthRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>

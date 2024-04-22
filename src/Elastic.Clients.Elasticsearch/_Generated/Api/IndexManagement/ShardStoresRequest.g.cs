@@ -109,7 +109,7 @@ public sealed partial class ShardStoresRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	public ShardStoresRequestDescriptor()
+	public ShardStoresRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

@@ -127,6 +127,10 @@ public sealed partial class OpenIndexRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
+	public OpenIndexRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementOpen;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
