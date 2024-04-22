@@ -226,6 +226,22 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	{
 	}
 
+	public UpdateRequestDescriptor(TDocument document) : this(typeof(TDocument), Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public UpdateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index) : this(index, Elastic.Clients.Elasticsearch.Serverless.Id.From(document))
+	{
+	}
+
+	public UpdateRequestDescriptor(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
+	public UpdateRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Id id) : this(typeof(TDocument), id)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceUpdate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
