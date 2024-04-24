@@ -18,7 +18,7 @@ concurrency:
 jobs:
   issue:
     name: 'Ingest'
-    uses: elastic/clients-team-automations/.github/workflows/issues_stats.yml
+    uses: elastic/clients-team-automations/.github/workflows/issues_stats.yml@main
     with:
       issue_payload: ${{ toJSON(github.event.issue) }}
     secrets:
