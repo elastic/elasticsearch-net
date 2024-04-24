@@ -1,0 +1,26 @@
+name: 'Ingest Issue'
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - closed
+      - deleted
+      - reopened
+      - labeled
+      - unlabeled
+
+concurrency:
+  group: 'issue-stats-${{github.event.issue.id}}'
+  cancel-in-progress: false
+
+jobs:
+  issue:
+    name: 'Ingest'
+    uses: elastic/clients-team-automations/.github/workflows/issues_stats.yml
+    with:
+      issue_payload: ${{ toJSON(github.event.issue) }}
+    secrets:
+      ES_CLOUD_ID: ${{ vars.ES_CLOUD_ID }}
+      ES_API_KEY: ${{ secrets.ES_API_KEY }}
