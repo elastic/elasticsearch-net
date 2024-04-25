@@ -17,10 +17,15 @@ concurrency:
 
 jobs:
   issue:
-    name: 'Ingest'
-    uses: elastic/clients-team-automations/.github/workflows/issues_stats.yml@main
-    with:
-      issue_payload: ${{ toJSON(github.event.issue) }}
-    secrets:
-      ES_CLOUD_ID: ${{ vars.ES_CLOUD_ID }}
-      ES_API_KEY: ${{ secrets.ES_API_KEY }}
+    name: Ingest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ingest Issue
+        uses: elastic/clients-team-automations/issues_stats@main
+        with:
+          issue_payload: ${{ toJSON(github.event.issue) }}
+          es_cloud_id: ${{ vars.ES_CLOUD_ID }}
+          es_api_key: ${{ secrets.ES_API_KEY }}
