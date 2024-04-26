@@ -38,11 +38,15 @@ public sealed partial class GetModelRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class GetModelRequest : PlainRequest<GetModelRequestParameters>
 {
-	public GetModelRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public GetModelRequest()
 	{
 	}
 
-	public GetModelRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	public GetModelRequest(Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("inference_id", inferenceId))
+	{
+	}
+
+	public GetModelRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
 	{
 	}
 
@@ -62,11 +66,11 @@ public sealed partial class GetModelRequestDescriptor : RequestDescriptor<GetMod
 {
 	internal GetModelRequestDescriptor(Action<GetModelRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetModelRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	public GetModelRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
 	{
 	}
 
-	public GetModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public GetModelRequestDescriptor()
 	{
 	}
 
@@ -78,9 +82,9 @@ public sealed partial class GetModelRequestDescriptor : RequestDescriptor<GetMod
 
 	internal override string OperationName => "inference.get_model";
 
-	public GetModelRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public GetModelRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
-		RouteValues.Required("inference_id", inferenceId);
+		RouteValues.Optional("inference_id", inferenceId);
 		return Self;
 	}
 

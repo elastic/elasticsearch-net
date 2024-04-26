@@ -609,6 +609,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target)
+	{
+		var descriptor = new CloneIndexRequestDescriptor<TDocument>(target);
+		descriptor.BeforeRequest();
+		return DoRequest<CloneIndexRequestDescriptor<TDocument>, CloneIndexResponse, CloneIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clones an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CloneIndexRequestDescriptor<TDocument>(target);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CloneIndexRequestDescriptor<TDocument>, CloneIndexResponse, CloneIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Clones an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(CloneIndexRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -668,6 +693,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CloneIndexRequestDescriptor<TDocument>(index, target);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CloneIndexRequestDescriptor<TDocument>, CloneIndexResponse, CloneIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clones an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CloneIndexRequestDescriptor<TDocument>(target);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CloneIndexRequestDescriptor<TDocument>, CloneIndexResponse, CloneIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Clones an index</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CloneIndexRequestDescriptor<TDocument>(target);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CloneIndexRequestDescriptor<TDocument>, CloneIndexResponse, CloneIndexRequestParameters>(descriptor, cancellationToken);
@@ -975,6 +1023,31 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateIndexResponse Create<TDocument>()
+	{
+		var descriptor = new CreateIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<CreateIndexRequestDescriptor<TDocument>, CreateIndexResponse, CreateIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates an index with optional settings and mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateIndexResponse Create<TDocument>(Action<CreateIndexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CreateIndexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateIndexRequestDescriptor<TDocument>, CreateIndexResponse, CreateIndexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates an index with optional settings and mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(CreateIndexRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -1034,6 +1107,29 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new CreateIndexRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateIndexRequestDescriptor<TDocument>, CreateIndexResponse, CreateIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates an index with optional settings and mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateIndexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateIndexRequestDescriptor<TDocument>, CreateIndexResponse, CreateIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates an index with optional settings and mappings.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateIndexRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<CreateIndexRequestDescriptor<TDocument>, CreateIndexResponse, CreateIndexRequestParameters>(descriptor, cancellationToken);

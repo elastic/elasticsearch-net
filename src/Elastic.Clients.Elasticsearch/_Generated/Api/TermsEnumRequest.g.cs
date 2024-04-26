@@ -100,6 +100,10 @@ public sealed partial class TermsEnumRequestDescriptor<TDocument> : RequestDescr
 	{
 	}
 
+	public TermsEnumRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceTermsEnum;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

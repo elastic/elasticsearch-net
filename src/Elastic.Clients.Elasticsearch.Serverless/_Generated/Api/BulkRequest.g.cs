@@ -164,7 +164,7 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 	{
 	}
 
-	public BulkRequestDescriptor()
+	public BulkRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 
