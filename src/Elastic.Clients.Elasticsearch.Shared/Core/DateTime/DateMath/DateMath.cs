@@ -20,7 +20,7 @@ namespace Elastic.Clients.Elasticsearch;
 public abstract class DateMath
 {
 	private static readonly Regex DateMathRegex =
-		new(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
+		new(@"^(?<anchor>now|.+\|\|)(?<ranges>(?:(?:\+|\-)\d+(?:y|M|w|d|h|m|s))+)?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
 
 	public static DateMathExpression Now => new("now");
 
