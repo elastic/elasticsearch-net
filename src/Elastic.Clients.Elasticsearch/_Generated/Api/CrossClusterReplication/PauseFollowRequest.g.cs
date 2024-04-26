@@ -62,6 +62,10 @@ public sealed partial class PauseFollowRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public PauseFollowRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPauseFollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

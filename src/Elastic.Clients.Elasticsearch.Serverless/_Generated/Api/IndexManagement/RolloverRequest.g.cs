@@ -133,7 +133,7 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias) : base(r => r.Required("alias", alias))
+	public RolloverRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.IndexAlias alias) : this(alias, typeof(TDocument))
 	{
 	}
 

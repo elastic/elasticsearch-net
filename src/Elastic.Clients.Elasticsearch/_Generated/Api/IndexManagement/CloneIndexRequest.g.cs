@@ -106,6 +106,10 @@ public sealed partial class CloneIndexRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
+	public CloneIndexRequestDescriptor(Elastic.Clients.Elasticsearch.Name target) : this(typeof(TDocument), target)
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementClone;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
