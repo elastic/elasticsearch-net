@@ -165,7 +165,7 @@ public sealed partial class MultiGetRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public MultiGetRequestDescriptor()
+	public MultiGetRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

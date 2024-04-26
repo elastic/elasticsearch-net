@@ -67,6 +67,10 @@ public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
+	public MoveToStepRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMoveToStep;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

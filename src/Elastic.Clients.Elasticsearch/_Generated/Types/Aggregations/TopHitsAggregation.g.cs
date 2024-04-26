@@ -33,8 +33,7 @@ public sealed partial class TopHitsAggregation
 	/// <para>Fields for which to return doc values.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("docvalue_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields? DocvalueFields { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>If `true`, returns detailed information about score computation as part of a hit.</para>
@@ -47,6 +46,12 @@ public sealed partial class TopHitsAggregation
 	/// </summary>
 	[JsonInclude, JsonPropertyName("field")]
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>Starting document offset.</para>
@@ -129,9 +134,16 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> DocvalueFieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> DocvalueFieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] DocvalueFieldsDescriptorActions { get; set; }
 	private bool? ExplainValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
@@ -153,9 +165,39 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	/// <summary>
 	/// <para>Fields for which to return doc values.</para>
 	/// </summary>
-	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields)
+	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = null;
 		DocvalueFieldsValue = docvalueFields;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = null;
+		DocvalueFieldsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorActions = null;
+		DocvalueFieldsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = configure;
 		return Self;
 	}
 
@@ -192,6 +234,45 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	public TopHitsAggregationDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
+	public TopHitsAggregationDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	{
+		FieldsDescriptor = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = null;
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	{
+		FieldsValue = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = null;
+		FieldsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	{
+		FieldsValue = null;
+		FieldsDescriptor = null;
+		FieldsDescriptorActions = null;
+		FieldsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	{
+		FieldsValue = null;
+		FieldsDescriptor = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = configure;
 		return Self;
 	}
 
@@ -351,7 +432,32 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (DocvalueFieldsValue is not null)
+		if (DocvalueFieldsDescriptor is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(DocvalueFieldsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			foreach (var action in DocvalueFieldsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsValue is not null)
 		{
 			writer.WritePropertyName("docvalue_fields");
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
@@ -367,6 +473,37 @@ public sealed partial class TopHitsAggregationDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (FieldsDescriptor is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (FieldsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (FieldsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			foreach (var action in FieldsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
 		if (FromValue.HasValue)
@@ -486,9 +623,16 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields? DocvalueFieldsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor DocvalueFieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> DocvalueFieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] DocvalueFieldsDescriptorActions { get; set; }
 	private bool? ExplainValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
 	private int? FromValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
@@ -510,9 +654,39 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	/// <summary>
 	/// <para>Fields for which to return doc values.</para>
 	/// </summary>
-	public TopHitsAggregationDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.Fields? docvalueFields)
+	public TopHitsAggregationDescriptor DocvalueFields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? docvalueFields)
 	{
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = null;
 		DocvalueFieldsValue = docvalueFields;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = null;
+		DocvalueFieldsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor DocvalueFields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorActions = null;
+		DocvalueFieldsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor DocvalueFields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
+	{
+		DocvalueFieldsValue = null;
+		DocvalueFieldsDescriptor = null;
+		DocvalueFieldsDescriptorAction = null;
+		DocvalueFieldsDescriptorActions = configure;
 		return Self;
 	}
 
@@ -549,6 +723,45 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	public TopHitsAggregationDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
 	{
 		FieldValue = field;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Array of wildcard (*) patterns. The request returns values for field names<br/>matching these patterns in the hits.fields property of the response.</para>
+	/// </summary>
+	public TopHitsAggregationDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	{
+		FieldsDescriptor = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = null;
+		FieldsValue = fields;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	{
+		FieldsValue = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = null;
+		FieldsDescriptor = descriptor;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	{
+		FieldsValue = null;
+		FieldsDescriptor = null;
+		FieldsDescriptorActions = null;
+		FieldsDescriptorAction = configure;
+		return Self;
+	}
+
+	public TopHitsAggregationDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
+	{
+		FieldsValue = null;
+		FieldsDescriptor = null;
+		FieldsDescriptorAction = null;
+		FieldsDescriptorActions = configure;
 		return Self;
 	}
 
@@ -708,7 +921,32 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (DocvalueFieldsValue is not null)
+		if (DocvalueFieldsDescriptor is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, DocvalueFieldsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(DocvalueFieldsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("docvalue_fields");
+			writer.WriteStartArray();
+			foreach (var action in DocvalueFieldsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (DocvalueFieldsValue is not null)
 		{
 			writer.WritePropertyName("docvalue_fields");
 			JsonSerializer.Serialize(writer, DocvalueFieldsValue, options);
@@ -724,6 +962,37 @@ public sealed partial class TopHitsAggregationDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("field");
 			JsonSerializer.Serialize(writer, FieldValue, options);
+		}
+
+		if (FieldsDescriptor is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
+			writer.WriteEndArray();
+		}
+		else if (FieldsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
+			writer.WriteEndArray();
+		}
+		else if (FieldsDescriptorActions is not null)
+		{
+			writer.WritePropertyName("fields");
+			writer.WriteStartArray();
+			foreach (var action in FieldsDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
+			}
+
+			writer.WriteEndArray();
+		}
+		else if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
 		}
 
 		if (FromValue.HasValue)
