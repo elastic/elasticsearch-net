@@ -198,7 +198,7 @@ public sealed partial class MultiTermVectorsRequestDescriptor<TDocument> : Reque
 	{
 	}
 
-	public MultiTermVectorsRequestDescriptor()
+	public MultiTermVectorsRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

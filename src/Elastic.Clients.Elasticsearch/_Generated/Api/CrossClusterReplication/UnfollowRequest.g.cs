@@ -62,6 +62,10 @@ public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
+	public UnfollowRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationUnfollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

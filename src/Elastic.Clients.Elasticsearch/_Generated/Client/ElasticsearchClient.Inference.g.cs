@@ -212,7 +212,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
 		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
@@ -224,7 +224,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<GetModelRequestDescriptor> configureRequest)
+	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetModelRequestDescriptor> configureRequest)
 	{
 		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
@@ -237,9 +237,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual GetModelResponse GetModel()
 	{
-		var descriptor = new GetModelRequestDescriptor(inferenceId);
+		var descriptor = new GetModelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
 	}
@@ -249,9 +249,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Id inferenceId, Action<GetModelRequestDescriptor> configureRequest)
+	public virtual GetModelResponse GetModel(Action<GetModelRequestDescriptor> configureRequest)
 	{
-		var descriptor = new GetModelRequestDescriptor(inferenceId);
+		var descriptor = new GetModelRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
@@ -271,7 +271,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Get a model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
@@ -282,7 +282,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Get a model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
@@ -294,9 +294,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Get a model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<GetModelResponse> GetModelAsync(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor(inferenceId);
+		var descriptor = new GetModelRequestDescriptor();
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
 	}
@@ -305,9 +305,9 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>Get a model in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetModelResponse> GetModelAsync(Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor(inferenceId);
+		var descriptor = new GetModelRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
