@@ -121,7 +121,7 @@ public sealed partial class AnalyzeIndexRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	public AnalyzeIndexRequestDescriptor()
+	public AnalyzeIndexRequestDescriptor() : this(typeof(TDocument))
 	{
 	}
 

@@ -112,6 +112,10 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
+	public CreateIndexRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;

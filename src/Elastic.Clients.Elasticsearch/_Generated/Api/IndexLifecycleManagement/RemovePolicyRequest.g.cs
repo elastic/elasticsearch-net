@@ -62,6 +62,10 @@ public sealed partial class RemovePolicyRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
+	public RemovePolicyRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementRemovePolicy;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
