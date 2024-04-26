@@ -189,6 +189,31 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FollowResponse Follow<TDocument>()
+	{
+		var descriptor = new FollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<FollowRequestDescriptor<TDocument>, FollowResponse, FollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual FollowResponse Follow<TDocument>(Action<FollowRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new FollowRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<FollowRequestDescriptor<TDocument>, FollowResponse, FollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FollowResponse Follow(FollowRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -248,6 +273,29 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	public virtual Task<FollowResponse> FollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<FollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new FollowRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FollowRequestDescriptor<TDocument>, FollowResponse, FollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FollowResponse> FollowAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<FollowRequestDescriptor<TDocument>, FollowResponse, FollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Creates a new follower index configured to follow the referenced leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-put-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<FollowResponse> FollowAsync<TDocument>(Action<FollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new FollowRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<FollowRequestDescriptor<TDocument>, FollowResponse, FollowRequestParameters>(descriptor, cancellationToken);
@@ -762,6 +810,31 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ForgetFollowerResponse ForgetFollower<TDocument>()
+	{
+		var descriptor = new ForgetFollowerRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerResponse, ForgetFollowerRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Removes the follower retention leases from the leader.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ForgetFollowerResponse ForgetFollower<TDocument>(Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ForgetFollowerRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerResponse, ForgetFollowerRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Removes the follower retention leases from the leader.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForgetFollowerResponse ForgetFollower(ForgetFollowerRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -821,6 +894,29 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ForgetFollowerRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerResponse, ForgetFollowerRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Removes the follower retention leases from the leader.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ForgetFollowerRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerResponse, ForgetFollowerRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Removes the follower retention leases from the leader.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-forget-follower.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ForgetFollowerResponse> ForgetFollowerAsync<TDocument>(Action<ForgetFollowerRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ForgetFollowerRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ForgetFollowerRequestDescriptor<TDocument>, ForgetFollowerResponse, ForgetFollowerRequestParameters>(descriptor, cancellationToken);
@@ -1149,6 +1245,31 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PauseFollowResponse PauseFollow<TDocument>()
+	{
+		var descriptor = new PauseFollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<PauseFollowRequestDescriptor<TDocument>, PauseFollowResponse, PauseFollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PauseFollowResponse PauseFollow<TDocument>(Action<PauseFollowRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new PauseFollowRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PauseFollowRequestDescriptor<TDocument>, PauseFollowResponse, PauseFollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PauseFollowResponse PauseFollow(PauseFollowRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -1208,6 +1329,29 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<PauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new PauseFollowRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PauseFollowRequestDescriptor<TDocument>, PauseFollowResponse, PauseFollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PauseFollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PauseFollowRequestDescriptor<TDocument>, PauseFollowResponse, PauseFollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Pauses a follower index. The follower index will not fetch any additional operations from the leader index.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-pause-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PauseFollowResponse> PauseFollowAsync<TDocument>(Action<PauseFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PauseFollowRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<PauseFollowRequestDescriptor<TDocument>, PauseFollowResponse, PauseFollowRequestParameters>(descriptor, cancellationToken);
@@ -1488,6 +1632,31 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ResumeFollowResponse ResumeFollow<TDocument>()
+	{
+		var descriptor = new ResumeFollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowResponse, ResumeFollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Resumes a follower index that has been paused</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ResumeFollowResponse ResumeFollow<TDocument>(Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new ResumeFollowRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowResponse, ResumeFollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Resumes a follower index that has been paused</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResumeFollowResponse ResumeFollow(ResumeFollowRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -1547,6 +1716,29 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ResumeFollowRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowResponse, ResumeFollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Resumes a follower index that has been paused</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ResumeFollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowResponse, ResumeFollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Resumes a follower index that has been paused</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-resume-follow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ResumeFollowResponse> ResumeFollowAsync<TDocument>(Action<ResumeFollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ResumeFollowRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResumeFollowRequestDescriptor<TDocument>, ResumeFollowResponse, ResumeFollowRequestParameters>(descriptor, cancellationToken);
@@ -1737,6 +1929,31 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UnfollowResponse Unfollow<TDocument>()
+	{
+		var descriptor = new UnfollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<UnfollowRequestDescriptor<TDocument>, UnfollowResponse, UnfollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UnfollowResponse Unfollow<TDocument>(Action<UnfollowRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new UnfollowRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UnfollowRequestDescriptor<TDocument>, UnfollowResponse, UnfollowRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UnfollowResponse Unfollow(UnfollowRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
@@ -1796,6 +2013,29 @@ public partial class CrossClusterReplicationNamespacedClient : NamespacedClientP
 	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<UnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new UnfollowRequestDescriptor<TDocument>(index);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UnfollowRequestDescriptor<TDocument>, UnfollowResponse, UnfollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UnfollowRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UnfollowRequestDescriptor<TDocument>, UnfollowResponse, UnfollowRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/ccr-post-unfollow.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UnfollowResponse> UnfollowAsync<TDocument>(Action<UnfollowRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UnfollowRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<UnfollowRequestDescriptor<TDocument>, UnfollowResponse, UnfollowRequestParameters>(descriptor, cancellationToken);

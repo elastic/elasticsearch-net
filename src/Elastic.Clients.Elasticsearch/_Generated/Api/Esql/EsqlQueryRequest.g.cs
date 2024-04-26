@@ -92,6 +92,12 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>The version of the ES|QL language in which the "query" field was written.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("version")]
+	public Elastic.Clients.Elasticsearch.Esql.Version Version { get; set; }
 }
 
 /// <summary>
@@ -123,6 +129,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	private string? LocaleValue { get; set; }
 	private ICollection<object>? ParamsValue { get; set; }
 	private string QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Esql.Version VersionValue { get; set; }
 
 	/// <summary>
 	/// <para>By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.</para>
@@ -184,6 +191,15 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The version of the ES|QL language in which the "query" field was written.</para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor<TDocument> Version(Elastic.Clients.Elasticsearch.Esql.Version version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -223,6 +239,8 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		writer.WritePropertyName("version");
+		JsonSerializer.Serialize(writer, VersionValue, options);
 		writer.WriteEndObject();
 	}
 }
@@ -256,6 +274,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	private string? LocaleValue { get; set; }
 	private ICollection<object>? ParamsValue { get; set; }
 	private string QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Esql.Version VersionValue { get; set; }
 
 	/// <summary>
 	/// <para>By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.</para>
@@ -317,6 +336,15 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>The version of the ES|QL language in which the "query" field was written.</para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor Version(Elastic.Clients.Elasticsearch.Esql.Version version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -356,6 +384,8 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		writer.WritePropertyName("version");
+		JsonSerializer.Serialize(writer, VersionValue, options);
 		writer.WriteEndObject();
 	}
 }

@@ -83,6 +83,10 @@ public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
+	public ResumeFollowRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationResumeFollow;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

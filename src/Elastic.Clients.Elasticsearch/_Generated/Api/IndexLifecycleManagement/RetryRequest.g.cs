@@ -62,6 +62,10 @@ public sealed partial class RetryRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
+	public RetryRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementRetry;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;

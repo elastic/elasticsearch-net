@@ -71,6 +71,10 @@ public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : Request
 	{
 	}
 
+	public ForgetFollowerRequestDescriptor() : this(typeof(TDocument))
+	{
+	}
+
 	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationForgetFollower;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
