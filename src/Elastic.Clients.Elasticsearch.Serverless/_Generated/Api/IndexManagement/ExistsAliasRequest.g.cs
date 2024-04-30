@@ -109,7 +109,7 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Names name) : this(typeof(TDocument), name)
+	public ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Names name) : base(r => r.Required("name", name))
 	{
 	}
 

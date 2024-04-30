@@ -142,7 +142,7 @@ public sealed partial class ClearCacheRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	public ClearCacheRequestDescriptor() : this(typeof(TDocument))
+	public ClearCacheRequestDescriptor()
 	{
 	}
 

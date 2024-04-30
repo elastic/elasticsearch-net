@@ -203,7 +203,7 @@ public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestD
 	{
 	}
 
-	public ValidateQueryRequestDescriptor() : this(typeof(TDocument))
+	public ValidateQueryRequestDescriptor()
 	{
 	}
 

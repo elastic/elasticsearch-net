@@ -137,7 +137,7 @@ public sealed partial class MultiSearchTemplateRequest : PlainRequest<MultiSearc
 /// <summary>
 /// <para>Runs multiple templated searches with a single request.</para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>
+public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchTemplateRequestDescriptor<TDocument>, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
@@ -145,7 +145,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 	{
 	}
 
-	public MultiSearchTemplateRequestDescriptor() : this(typeof(TDocument))
+	public MultiSearchTemplateRequestDescriptor()
 	{
 	}
 
@@ -175,6 +175,28 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 
 	List<Elastic.Clients.Elasticsearch.Serverless.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
 
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
+		}
+	}
+
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+		}
+	}
+
 	public MultiSearchTemplateRequestDescriptor<TDocument> AddSearchTemplates(Elastic.Clients.Elasticsearch.Serverless.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
 	{
 		_items.Add(searchTemplates);
@@ -185,7 +207,7 @@ public sealed partial class MultiSearchTemplateRequestDescriptor<TDocument> : Re
 /// <summary>
 /// <para>Runs multiple templated searches with a single request.</para>
 /// </summary>
-public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>
+public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescriptor<MultiSearchTemplateRequestDescriptor, MultiSearchTemplateRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchTemplateRequestDescriptor(Action<MultiSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
 
@@ -222,6 +244,28 @@ public sealed partial class MultiSearchTemplateRequestDescriptor : RequestDescri
 	}
 
 	List<Elastic.Clients.Elasticsearch.Serverless.Core.MSearchTemplate.SearchTemplateRequestItem> _items = new();
+
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
+		}
+	}
+
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+		}
+	}
 
 	public MultiSearchTemplateRequestDescriptor AddSearchTemplates(Elastic.Clients.Elasticsearch.Serverless.Core.MSearchTemplate.SearchTemplateRequestItem searchTemplates)
 	{

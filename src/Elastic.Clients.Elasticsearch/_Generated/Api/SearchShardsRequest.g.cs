@@ -131,7 +131,7 @@ public sealed partial class SearchShardsRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	public SearchShardsRequestDescriptor() : this(typeof(TDocument))
+	public SearchShardsRequestDescriptor()
 	{
 	}
 
