@@ -142,7 +142,7 @@ public sealed partial class ForcemergeRequestDescriptor<TDocument> : RequestDesc
 	{
 	}
 
-	public ForcemergeRequestDescriptor() : this(typeof(TDocument))
+	public ForcemergeRequestDescriptor()
 	{
 	}
 
