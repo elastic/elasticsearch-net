@@ -225,7 +225,7 @@ public sealed partial class CountRequestDescriptor<TDocument> : RequestDescripto
 	{
 	}
 
-	public CountRequestDescriptor() : this(typeof(TDocument))
+	public CountRequestDescriptor()
 	{
 	}
 

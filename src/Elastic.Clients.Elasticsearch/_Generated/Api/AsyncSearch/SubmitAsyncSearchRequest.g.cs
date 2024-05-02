@@ -958,7 +958,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	{
 	}
 
-	public SubmitAsyncSearchRequestDescriptor() : this(typeof(TDocument))
+	public SubmitAsyncSearchRequestDescriptor()
 	{
 	}
 

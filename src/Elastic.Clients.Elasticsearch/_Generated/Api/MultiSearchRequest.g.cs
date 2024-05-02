@@ -214,7 +214,7 @@ public sealed partial class MultiSearchRequest : PlainRequest<MultiSearchRequest
 /// <summary>
 /// <para>Allows to execute several search operations in one request.</para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>
+public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDescriptor<MultiSearchRequestDescriptor<TDocument>, MultiSearchRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
 
@@ -222,7 +222,7 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 	{
 	}
 
-	public MultiSearchRequestDescriptor() : this(typeof(TDocument))
+	public MultiSearchRequestDescriptor()
 	{
 	}
 
@@ -259,6 +259,28 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 
 	List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> _items = new();
 
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
+		}
+	}
+
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+		}
+	}
+
 	public MultiSearchRequestDescriptor<TDocument> AddSearches(Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem searches)
 	{
 		_items.Add(searches);
@@ -269,7 +291,7 @@ public sealed partial class MultiSearchRequestDescriptor<TDocument> : RequestDes
 /// <summary>
 /// <para>Allows to execute several search operations in one request.</para>
 /// </summary>
-public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>
+public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<MultiSearchRequestDescriptor, MultiSearchRequestParameters>, IStreamSerializable
 {
 	internal MultiSearchRequestDescriptor(Action<MultiSearchRequestDescriptor> configure) => configure.Invoke(this);
 
@@ -313,6 +335,28 @@ public sealed partial class MultiSearchRequestDescriptor : RequestDescriptor<Mul
 	}
 
 	List<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> _items = new();
+
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				serializable.Serialize(stream, settings, formatting);
+		}
+	}
+
+	async Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		if (_items is null)
+			return;
+		foreach (var item in _items)
+		{
+			if (item is IStreamSerializable serializable)
+				await serializable.SerializeAsync(stream, settings, formatting).ConfigureAwait(false);
+		}
+	}
 
 	public MultiSearchRequestDescriptor AddSearches(Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem searches)
 	{
