@@ -117,10 +117,6 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : this(typeof(TDocument), name)
-	{
-	}
-
 	public GetAliasRequestDescriptor()
 	{
 	}

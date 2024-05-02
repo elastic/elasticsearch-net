@@ -98,7 +98,7 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 	{
 	}
 
-	public RefreshRequestDescriptor() : this(typeof(TDocument))
+	public RefreshRequestDescriptor()
 	{
 	}
 

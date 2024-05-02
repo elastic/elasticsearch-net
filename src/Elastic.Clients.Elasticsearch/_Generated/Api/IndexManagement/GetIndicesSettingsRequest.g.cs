@@ -150,10 +150,6 @@ public sealed partial class GetIndicesSettingsRequestDescriptor<TDocument> : Req
 	{
 	}
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : this(typeof(TDocument), name)
-	{
-	}
-
 	public GetIndicesSettingsRequestDescriptor()
 	{
 	}
