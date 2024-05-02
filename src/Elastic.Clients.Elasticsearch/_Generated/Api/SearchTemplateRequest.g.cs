@@ -216,7 +216,7 @@ public sealed partial class SearchTemplateRequestDescriptor<TDocument> : Request
 	{
 	}
 
-	public SearchTemplateRequestDescriptor() : this(typeof(TDocument))
+	public SearchTemplateRequestDescriptor()
 	{
 	}
 

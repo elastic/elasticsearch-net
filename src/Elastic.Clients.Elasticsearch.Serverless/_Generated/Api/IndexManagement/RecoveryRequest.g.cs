@@ -87,7 +87,7 @@ public sealed partial class RecoveryRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public RecoveryRequestDescriptor() : this(typeof(TDocument))
+	public RecoveryRequestDescriptor()
 	{
 	}
 
