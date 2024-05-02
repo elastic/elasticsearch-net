@@ -109,7 +109,7 @@ public sealed partial class SegmentsRequestDescriptor<TDocument> : RequestDescri
 	{
 	}
 
-	public SegmentsRequestDescriptor() : this(typeof(TDocument))
+	public SegmentsRequestDescriptor()
 	{
 	}
 

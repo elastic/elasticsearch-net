@@ -172,10 +172,6 @@ public sealed partial class IndicesStatsRequestDescriptor<TDocument> : RequestDe
 	{
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Serverless.Metrics? metric) : this(typeof(TDocument), metric)
-	{
-	}
-
 	public IndicesStatsRequestDescriptor()
 	{
 	}
