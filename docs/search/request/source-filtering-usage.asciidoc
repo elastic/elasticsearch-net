@@ -49,7 +49,7 @@ new SearchRequest<Project>
     Source = new SourceFilter
     {
         Includes = "*",
-        Excludes = Fields<Project>(p => p.Description)
+        Excludes = new Field[] { "Description" }
     }
 }
 ----
