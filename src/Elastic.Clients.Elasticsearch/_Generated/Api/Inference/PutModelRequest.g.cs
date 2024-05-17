@@ -117,5 +117,6 @@ public sealed partial class PutModelRequestDescriptor : RequestDescriptor<PutMod
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, ModelConfigValue, options);
 	}
 }

@@ -96,6 +96,7 @@ public sealed partial class ValidateDetectorRequestDescriptor<TDocument> : Reque
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, DetectorValue, options);
 	}
 }
 
@@ -145,5 +146,6 @@ public sealed partial class ValidateDetectorRequestDescriptor : RequestDescripto
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, DetectorValue, options);
 	}
 }

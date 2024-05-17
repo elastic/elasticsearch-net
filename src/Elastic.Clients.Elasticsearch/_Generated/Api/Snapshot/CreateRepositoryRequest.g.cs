@@ -121,5 +121,6 @@ public sealed partial class CreateRepositoryRequestDescriptor : RequestDescripto
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, RepositoryValue, options);
 	}
 }

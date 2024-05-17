@@ -194,6 +194,7 @@ public sealed partial class PutIndicesSettingsRequestDescriptor<TDocument> : Req
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, SettingsValue, options);
 	}
 }
 
@@ -258,5 +259,6 @@ public sealed partial class PutIndicesSettingsRequestDescriptor : RequestDescrip
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, SettingsValue, options);
 	}
 }

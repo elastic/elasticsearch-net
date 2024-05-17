@@ -112,6 +112,7 @@ public sealed partial class DownsampleRequestDescriptor<TDocument> : RequestDesc
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, ConfigValue, options);
 	}
 }
 
@@ -173,5 +174,6 @@ public sealed partial class DownsampleRequestDescriptor : RequestDescriptor<Down
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, ConfigValue, options);
 	}
 }

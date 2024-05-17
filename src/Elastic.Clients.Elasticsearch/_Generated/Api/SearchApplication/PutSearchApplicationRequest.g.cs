@@ -117,5 +117,6 @@ public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescr
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, SearchApplicationValue, options);
 	}
 }
