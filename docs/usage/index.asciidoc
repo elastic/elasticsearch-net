@@ -9,9 +9,12 @@ For a full reference, see the {ref}/[Elasticsearch documentation] and in particu
 If you're new to {es}, make sure also to read {ref}/getting-started.html[Elasticsearch's quick start] that provides a good introduction.
 
 * <<recommendations, Usage recommendations>>
+* <<esql>>
 * <<examples, CRUD usage examples>>
+
 
 NOTE: This is still a work in progress, more sections will be added in the near future.
 
 include::recommendations.asciidoc[]
+include::esql.asciidoc[]
 include::examples.asciidoc[]
