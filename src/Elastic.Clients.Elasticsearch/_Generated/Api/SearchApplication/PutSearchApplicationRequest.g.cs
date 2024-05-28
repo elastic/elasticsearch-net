@@ -40,7 +40,7 @@ public sealed partial class PutSearchApplicationRequestParameters : RequestParam
 /// <summary>
 /// <para>Creates or updates a search application.</para>
 /// </summary>
-public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>
+public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearchApplicationRequestParameters>, ISelfSerializable
 {
 	public PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
@@ -61,6 +61,11 @@ public sealed partial class PutSearchApplicationRequest : PlainRequest<PutSearch
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication SearchApplication { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		JsonSerializer.Serialize(writer, SearchApplication, options);
+	}
 }
 
 /// <summary>
@@ -117,5 +122,6 @@ public sealed partial class PutSearchApplicationRequestDescriptor : RequestDescr
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, SearchApplicationValue, options);
 	}
 }
