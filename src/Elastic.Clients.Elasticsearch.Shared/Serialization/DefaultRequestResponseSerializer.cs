@@ -35,7 +35,6 @@ internal class DefaultRequestResponseSerializer : SystemTextJsonSerializer
 					new KeyValuePairConverterFactory(settings),
 					new ObjectToInferredTypesConverter(),
 					new SourceConverterFactory(settings),
-					new CustomJsonWriterConverterFactory(settings),
 					new SelfSerializableConverterFactory(settings),
 					new SelfDeserializableConverterFactory(settings),
 					new SelfTwoWaySerializableConverterFactory(settings),
