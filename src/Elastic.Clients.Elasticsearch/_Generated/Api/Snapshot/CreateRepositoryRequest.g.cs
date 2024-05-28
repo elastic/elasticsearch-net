@@ -50,7 +50,7 @@ public sealed partial class CreateRepositoryRequestParameters : RequestParameter
 /// <summary>
 /// <para>Creates a repository.</para>
 /// </summary>
-public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>
+public sealed partial class CreateRepositoryRequest : PlainRequest<CreateRepositoryRequestParameters>, ISelfSerializable
 {
 	public CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
@@ -83,6 +83,11 @@ public sealed partial class CreateRepositoryRequest : PlainRequest<CreateReposit
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Repository { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		JsonSerializer.Serialize(writer, Repository, options);
+	}
 }
 
 /// <summary>
@@ -121,5 +126,6 @@ public sealed partial class CreateRepositoryRequestDescriptor : RequestDescripto
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, RepositoryValue, options);
 	}
 }
