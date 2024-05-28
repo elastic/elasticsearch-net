@@ -36,7 +36,7 @@ public sealed partial class PutModelRequestParameters : RequestParameters
 /// <summary>
 /// <para>Create an inference service model</para>
 /// </summary>
-public sealed partial class PutModelRequest : PlainRequest<PutModelRequestParameters>
+public sealed partial class PutModelRequest : PlainRequest<PutModelRequestParameters>, ISelfSerializable
 {
 	public PutModelRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
@@ -56,6 +56,11 @@ public sealed partial class PutModelRequest : PlainRequest<PutModelRequestParame
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Inference.ModelConfig ModelConfig { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		JsonSerializer.Serialize(writer, ModelConfig, options);
+	}
 }
 
 /// <summary>
@@ -117,5 +122,6 @@ public sealed partial class PutModelRequestDescriptor : RequestDescriptor<PutMod
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		JsonSerializer.Serialize(writer, ModelConfigValue, options);
 	}
 }
