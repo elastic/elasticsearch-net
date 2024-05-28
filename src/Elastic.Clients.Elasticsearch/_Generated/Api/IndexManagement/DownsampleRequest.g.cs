@@ -36,7 +36,7 @@ public sealed partial class DownsampleRequestParameters : RequestParameters
 /// <summary>
 /// <para>Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (`min`, `max`, `sum`, `value_count` and `avg`) for each metric field grouped by a configured time interval.</para>
 /// </summary>
-public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>
+public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>, ISelfSerializable
 {
 	public DownsampleRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex) : base(r => r.Required("index", index).Required("target_index", targetIndex))
 	{
@@ -52,6 +52,11 @@ public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestPa
 
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		JsonSerializer.Serialize(writer, Config, options);
+	}
 }
 
 /// <summary>

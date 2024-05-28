@@ -70,7 +70,7 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 /// <summary>
 /// <para>Changes a dynamic index setting in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
 /// </summary>
-public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>
+public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfSerializable
 {
 	public PutIndicesSettingsRequest()
 	{
@@ -131,6 +131,11 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		JsonSerializer.Serialize(writer, Settings, options);
+	}
 }
 
 /// <summary>
