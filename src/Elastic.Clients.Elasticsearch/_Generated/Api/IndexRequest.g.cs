@@ -90,7 +90,7 @@ public sealed partial class IndexRequestParameters : RequestParameters
 /// <summary>
 /// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 /// </summary>
-public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>
+public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>, ISelfSerializable
 {
 	public IndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", index).Optional("id", id))
 	{
@@ -175,6 +175,11 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 	[JsonIgnore]
 	public TDocument Document { get; set; }
+
+	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		SourceSerialization.Serialize(Document, writer, settings.SourceSerializer);
+	}
 }
 
 /// <summary>
