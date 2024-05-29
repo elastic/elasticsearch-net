@@ -61,6 +61,13 @@ public sealed partial class RemoveProcessor
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
+	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("keep")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Serverless.Fields? Keep { get; set; }
+
+	/// <summary>
 	/// <para>Handle failures for the processor.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("on_failure")]
@@ -88,6 +95,7 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields? KeepValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
@@ -136,6 +144,15 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 	public RemoveProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// </summary>
+	public RemoveProcessorDescriptor<TDocument> Keep(Elastic.Clients.Elasticsearch.Serverless.Fields? keep)
+	{
+		KeepValue = keep;
 		return Self;
 	}
 
@@ -216,6 +233,12 @@ public sealed partial class RemoveProcessorDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(IgnoreMissingValue.Value);
 		}
 
+		if (KeepValue is not null)
+		{
+			writer.WritePropertyName("keep");
+			JsonSerializer.Serialize(writer, KeepValue, options);
+		}
+
 		if (OnFailureDescriptor is not null)
 		{
 			writer.WritePropertyName("on_failure");
@@ -270,6 +293,7 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
 	private bool? IgnoreMissingValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Fields? KeepValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Ingest.Processor>? OnFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
@@ -318,6 +342,15 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 	public RemoveProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
 	{
 		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>Fields to be kept. When set, all fields other than those specified are removed.</para>
+	/// </summary>
+	public RemoveProcessorDescriptor Keep(Elastic.Clients.Elasticsearch.Serverless.Fields? keep)
+	{
+		KeepValue = keep;
 		return Self;
 	}
 
@@ -396,6 +429,12 @@ public sealed partial class RemoveProcessorDescriptor : SerializableDescriptor<R
 		{
 			writer.WritePropertyName("ignore_missing");
 			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
+		if (KeepValue is not null)
+		{
+			writer.WritePropertyName("keep");
+			JsonSerializer.Serialize(writer, KeepValue, options);
 		}
 
 		if (OnFailureDescriptor is not null)

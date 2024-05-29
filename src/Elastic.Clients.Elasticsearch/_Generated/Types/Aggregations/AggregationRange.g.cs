@@ -33,7 +33,7 @@ public sealed partial class AggregationRange
 	/// <para>Start of the range (inclusive).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("from")]
-	public object? From { get; set; }
+	public double? From { get; set; }
 
 	/// <summary>
 	/// <para>Custom key to return the range with.</para>
@@ -45,7 +45,7 @@ public sealed partial class AggregationRange
 	/// <para>End of the range (exclusive).</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("to")]
-	public object? To { get; set; }
+	public double? To { get; set; }
 }
 
 public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<AggregationRangeDescriptor>
@@ -56,14 +56,14 @@ public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<
 	{
 	}
 
-	private object? FromValue { get; set; }
+	private double? FromValue { get; set; }
 	private string? KeyValue { get; set; }
-	private object? ToValue { get; set; }
+	private double? ToValue { get; set; }
 
 	/// <summary>
 	/// <para>Start of the range (inclusive).</para>
 	/// </summary>
-	public AggregationRangeDescriptor From(object? from)
+	public AggregationRangeDescriptor From(double? from)
 	{
 		FromValue = from;
 		return Self;
@@ -81,7 +81,7 @@ public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<
 	/// <summary>
 	/// <para>End of the range (exclusive).</para>
 	/// </summary>
-	public AggregationRangeDescriptor To(object? to)
+	public AggregationRangeDescriptor To(double? to)
 	{
 		ToValue = to;
 		return Self;
@@ -90,10 +90,10 @@ public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FromValue is not null)
+		if (FromValue.HasValue)
 		{
 			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
+			writer.WriteNumberValue(FromValue.Value);
 		}
 
 		if (!string.IsNullOrEmpty(KeyValue))
@@ -102,10 +102,10 @@ public sealed partial class AggregationRangeDescriptor : SerializableDescriptor<
 			writer.WriteStringValue(KeyValue);
 		}
 
-		if (ToValue is not null)
+		if (ToValue.HasValue)
 		{
 			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
+			writer.WriteNumberValue(ToValue.Value);
 		}
 
 		writer.WriteEndObject();
