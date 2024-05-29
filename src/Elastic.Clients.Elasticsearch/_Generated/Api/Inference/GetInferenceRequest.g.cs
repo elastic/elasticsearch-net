@@ -29,62 +29,66 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class DeleteModelRequestParameters : RequestParameters
+public sealed partial class GetInferenceRequestParameters : RequestParameters
 {
 }
 
 /// <summary>
-/// <para>Delete an inference service model</para>
+/// <para>Get an inference endpoint</para>
 /// </summary>
-public sealed partial class DeleteModelRequest : PlainRequest<DeleteModelRequestParameters>
+public sealed partial class GetInferenceRequest : PlainRequest<GetInferenceRequestParameters>
 {
-	public DeleteModelRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public GetInferenceRequest()
 	{
 	}
 
-	public DeleteModelRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	public GetInferenceRequest(Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("inference_id", inferenceId))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceDeleteModel;
+	public GetInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
+	{
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceGet;
+
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
-	internal override string OperationName => "inference.delete_model";
+	internal override string OperationName => "inference.get";
 }
 
 /// <summary>
-/// <para>Delete an inference service model</para>
+/// <para>Get an inference endpoint</para>
 /// </summary>
-public sealed partial class DeleteModelRequestDescriptor : RequestDescriptor<DeleteModelRequestDescriptor, DeleteModelRequestParameters>
+public sealed partial class GetInferenceRequestDescriptor : RequestDescriptor<GetInferenceRequestDescriptor, GetInferenceRequestParameters>
 {
-	internal DeleteModelRequestDescriptor(Action<DeleteModelRequestDescriptor> configure) => configure.Invoke(this);
+	internal GetInferenceRequestDescriptor(Action<GetInferenceRequestDescriptor> configure) => configure.Invoke(this);
 
-	public DeleteModelRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId) : base(r => r.Optional("task_type", taskType).Optional("inference_id", inferenceId))
 	{
 	}
 
-	public DeleteModelRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public GetInferenceRequestDescriptor()
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceDeleteModel;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceGet;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
-	internal override string OperationName => "inference.delete_model";
+	internal override string OperationName => "inference.get";
 
-	public DeleteModelRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public GetInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
-		RouteValues.Required("inference_id", inferenceId);
+		RouteValues.Optional("inference_id", inferenceId);
 		return Self;
 	}
 
-	public DeleteModelRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
+	public GetInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
 	{
 		RouteValues.Optional("task_type", taskType);
 		return Self;

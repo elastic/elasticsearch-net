@@ -42,7 +42,7 @@ public sealed partial class CreateIndexRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation. <br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
@@ -77,7 +77,7 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>The number of shard copies that must be active before proceeding with the operation. <br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
+	/// <para>The number of shard copies that must be active before proceeding with the operation.<br/>Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).</para>
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.Serverless.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }

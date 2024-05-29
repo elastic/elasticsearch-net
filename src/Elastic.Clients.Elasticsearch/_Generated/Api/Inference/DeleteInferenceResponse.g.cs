@@ -17,51 +17,20 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
+using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Esql;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-[JsonConverter(typeof(VersionConverter))]
-public enum Version
+public sealed partial class DeleteInferenceResponse : ElasticsearchResponse
 {
 	/// <summary>
-	/// <para>Run against the first version of ES|QL.</para>
+	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
 	/// </summary>
-	[EnumMember(Value = "2024.04.01")]
-	V20240401
-}
-
-internal sealed class VersionConverter : JsonConverter<Version>
-{
-	public override Version Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "2024.04.01":
-				return Version.V20240401;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Version value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Version.V20240401:
-				writer.WriteStringValue("2024.04.01");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[JsonInclude, JsonPropertyName("acknowledged")]
+	public bool Acknowledged { get; init; }
 }

@@ -87,6 +87,8 @@ internal sealed class DynamicMappingConverter : JsonConverter<DynamicMapping>
 [JsonConverter(typeof(FieldTypeConverter))]
 public enum FieldType
 {
+	[EnumMember(Value = "version")]
+	Version,
 	[EnumMember(Value = "token_count")]
 	TokenCount,
 	[EnumMember(Value = "text")]
@@ -182,6 +184,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 		var enumString = reader.GetString();
 		switch (enumString)
 		{
+			case "version":
+				return FieldType.Version;
 			case "token_count":
 				return FieldType.TokenCount;
 			case "text":
@@ -278,6 +282,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 	{
 		switch (value)
 		{
+			case FieldType.Version:
+				writer.WriteStringValue("version");
+				return;
 			case FieldType.TokenCount:
 				writer.WriteStringValue("token_count");
 				return;

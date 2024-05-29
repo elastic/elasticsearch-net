@@ -28,9 +28,9 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Inference;
 
 /// <summary>
-/// <para>Configuration options when storing the model config</para>
+/// <para>Configuration options when storing the inference endpoint</para>
 /// </summary>
-public sealed partial class ModelConfig
+public sealed partial class InferenceEndpoint
 {
 	/// <summary>
 	/// <para>The service type</para>
@@ -45,20 +45,20 @@ public sealed partial class ModelConfig
 	public object ServiceSettings { get; set; }
 
 	/// <summary>
-	/// <para>Task settings specific to the service and model</para>
+	/// <para>Task settings specific to the service and task type</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
 	public object TaskSettings { get; set; }
 }
 
 /// <summary>
-/// <para>Configuration options when storing the model config</para>
+/// <para>Configuration options when storing the inference endpoint</para>
 /// </summary>
-public sealed partial class ModelConfigDescriptor : SerializableDescriptor<ModelConfigDescriptor>
+public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor<InferenceEndpointDescriptor>
 {
-	internal ModelConfigDescriptor(Action<ModelConfigDescriptor> configure) => configure.Invoke(this);
+	internal InferenceEndpointDescriptor(Action<InferenceEndpointDescriptor> configure) => configure.Invoke(this);
 
-	public ModelConfigDescriptor() : base()
+	public InferenceEndpointDescriptor() : base()
 	{
 	}
 
@@ -69,7 +69,7 @@ public sealed partial class ModelConfigDescriptor : SerializableDescriptor<Model
 	/// <summary>
 	/// <para>The service type</para>
 	/// </summary>
-	public ModelConfigDescriptor Service(string service)
+	public InferenceEndpointDescriptor Service(string service)
 	{
 		ServiceValue = service;
 		return Self;
@@ -78,16 +78,16 @@ public sealed partial class ModelConfigDescriptor : SerializableDescriptor<Model
 	/// <summary>
 	/// <para>Settings specific to the service</para>
 	/// </summary>
-	public ModelConfigDescriptor ServiceSettings(object serviceSettings)
+	public InferenceEndpointDescriptor ServiceSettings(object serviceSettings)
 	{
 		ServiceSettingsValue = serviceSettings;
 		return Self;
 	}
 
 	/// <summary>
-	/// <para>Task settings specific to the service and model</para>
+	/// <para>Task settings specific to the service and task type</para>
 	/// </summary>
-	public ModelConfigDescriptor TaskSettings(object taskSettings)
+	public InferenceEndpointDescriptor TaskSettings(object taskSettings)
 	{
 		TaskSettingsValue = taskSettings;
 		return Self;

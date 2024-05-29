@@ -31,8 +31,6 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 public sealed partial class PutComponentTemplateRequestParameters : RequestParameters
 {
-	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
-
 	/// <summary>
 	/// <para>If `true`, this request cannot replace or update existing component templates.</para>
 	/// </summary>
@@ -64,9 +62,6 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "cluster.put_component_template";
-
-	[JsonIgnore]
-	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
 	/// <para>If `true`, this request cannot replace or update existing component templates.</para>
@@ -128,7 +123,6 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 
 	internal override string OperationName => "cluster.put_component_template";
 
-	public PutComponentTemplateRequestDescriptor<TDocument> Cause(string? cause) => Qs("cause", cause);
 	public PutComponentTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public PutComponentTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
@@ -263,7 +257,6 @@ public sealed partial class PutComponentTemplateRequestDescriptor : RequestDescr
 
 	internal override string OperationName => "cluster.put_component_template";
 
-	public PutComponentTemplateRequestDescriptor Cause(string? cause) => Qs("cause", cause);
 	public PutComponentTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public PutComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 

@@ -41,8 +41,8 @@ public sealed partial class SpanFieldMaskingQuery
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.FieldMaskingSpan(spanFieldMaskingQuery);
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.FieldMaskingSpan(spanFieldMaskingQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.Query.SpanFieldMasking(spanFieldMaskingQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery(SpanFieldMaskingQuery spanFieldMaskingQuery) => Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.SpanFieldMasking(spanFieldMaskingQuery);
 }
 
 public sealed partial class SpanFieldMaskingQueryDescriptor<TDocument> : SerializableDescriptor<SpanFieldMaskingQueryDescriptor<TDocument>>
