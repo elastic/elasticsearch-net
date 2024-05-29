@@ -33,7 +33,7 @@ public sealed partial class MappingLimitSettingsDimensionFields
 	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release.<br/>Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
-	public int? Limit { get; set; }
+	public long? Limit { get; set; }
 }
 
 public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsDimensionFieldsDescriptor>
@@ -44,12 +44,12 @@ public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : Seri
 	{
 	}
 
-	private int? LimitValue { get; set; }
+	private long? LimitValue { get; set; }
 
 	/// <summary>
 	/// <para>[preview] This functionality is in technical preview and may be changed or removed in a future release.<br/>Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.</para>
 	/// </summary>
-	public MappingLimitSettingsDimensionFieldsDescriptor Limit(int? limit)
+	public MappingLimitSettingsDimensionFieldsDescriptor Limit(long? limit)
 	{
 		LimitValue = limit;
 		return Self;
