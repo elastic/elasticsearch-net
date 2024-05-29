@@ -46,8 +46,8 @@ public sealed partial class SpanQuery
 	internal object Variant { get; }
 	internal string VariantName { get; }
 
-	public static SpanQuery FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("field_masking_span", spanFieldMaskingQuery);
 	public static SpanQuery SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new SpanQuery("span_containing", spanContainingQuery);
+	public static SpanQuery SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new SpanQuery("span_field_masking", spanFieldMaskingQuery);
 	public static SpanQuery SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => new SpanQuery("span_first", spanFirstQuery);
 	public static SpanQuery SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => new SpanQuery("span_gap", integer);
 	public static SpanQuery SpanMulti(Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => new SpanQuery("span_multi", spanMultiTermQuery);
@@ -95,16 +95,16 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 
 			var propertyName = reader.GetString();
 			reader.Read();
-			if (propertyName == "field_masking_span")
+			if (propertyName == "span_containing")
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
 
-			if (propertyName == "span_containing")
+			if (propertyName == "span_field_masking")
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery?>(ref reader, options);
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -180,11 +180,11 @@ internal sealed partial class SpanQueryConverter : JsonConverter<SpanQuery>
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
-				case "field_masking_span":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
-					break;
 				case "span_containing":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery)value.Variant, options);
+					break;
+				case "span_field_masking":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
 					break;
 				case "span_first":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery)value.Variant, options);
@@ -248,10 +248,10 @@ public sealed partial class SpanQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public SpanQueryDescriptor<TDocument> FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public SpanQueryDescriptor<TDocument> FieldMaskingSpan(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
 	public SpanQueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public SpanQueryDescriptor<TDocument> SpanContaining(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
+	public SpanQueryDescriptor<TDocument> SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
+	public SpanQueryDescriptor<TDocument> SpanFieldMasking(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "span_field_masking");
 	public SpanQueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor<TDocument> SpanFirst(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
 	public SpanQueryDescriptor<TDocument> SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => Set(integer, "span_gap");
@@ -319,10 +319,10 @@ public sealed partial class SpanQueryDescriptor : SerializableDescriptor<SpanQue
 		return Self;
 	}
 
-	public SpanQueryDescriptor FieldMaskingSpan(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public SpanQueryDescriptor FieldMaskingSpan<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
 	public SpanQueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public SpanQueryDescriptor SpanContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
+	public SpanQueryDescriptor SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
+	public SpanQueryDescriptor SpanFieldMasking<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "span_field_masking");
 	public SpanQueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public SpanQueryDescriptor SpanFirst<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
 	public SpanQueryDescriptor SpanGap(KeyValuePair<Elastic.Clients.Elasticsearch.Field, int> integer) => Set(integer, "span_gap");

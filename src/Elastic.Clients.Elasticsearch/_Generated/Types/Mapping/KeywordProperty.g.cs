@@ -60,8 +60,12 @@ public sealed partial class KeywordProperty : IProperty
 	public bool? Norms { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
 	public string? NullValue { get; set; }
+	[JsonInclude, JsonPropertyName("on_script_error")]
+	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("similarity")]
 	public string? Similarity { get; set; }
 	[JsonInclude, JsonPropertyName("split_queries_on_whitespace")]
@@ -100,7 +104,9 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 	private string? NormalizerValue { get; set; }
 	private bool? NormsValue { get; set; }
 	private string? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
@@ -201,6 +207,12 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public KeywordPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public KeywordPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
@@ -218,6 +230,12 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public KeywordPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -329,10 +347,22 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteStringValue(NullValueValue);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(SimilarityValue))
@@ -379,7 +409,9 @@ public sealed partial class KeywordPropertyDescriptor<TDocument> : SerializableD
 		Normalizer = NormalizerValue,
 		Norms = NormsValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = ScriptValue,
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
 		Store = StoreValue,
@@ -408,7 +440,9 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 	private string? NormalizerValue { get; set; }
 	private bool? NormsValue { get; set; }
 	private string? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? SplitQueriesOnWhitespaceValue { get; set; }
 	private bool? StoreValue { get; set; }
@@ -509,6 +543,12 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		return Self;
 	}
 
+	public KeywordPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public KeywordPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
@@ -526,6 +566,12 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public KeywordPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptValue = script;
 		return Self;
 	}
 
@@ -637,10 +683,22 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 			writer.WriteStringValue(NullValueValue);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(SimilarityValue))
@@ -687,7 +745,9 @@ public sealed partial class KeywordPropertyDescriptor : SerializableDescriptor<K
 		Normalizer = NormalizerValue,
 		Norms = NormsValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = ScriptValue,
 		Similarity = SimilarityValue,
 		SplitQueriesOnWhitespace = SplitQueriesOnWhitespaceValue,
 		Store = StoreValue,

@@ -58,13 +58,13 @@ public sealed partial class KnnSearch
 	/// <para>The final number of nearest neighbors to return as top hits</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("k")]
-	public long? k { get; set; }
+	public int? k { get; set; }
 
 	/// <summary>
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_candidates")]
-	public long? NumCandidates { get; set; }
+	public int? NumCandidates { get; set; }
 
 	/// <summary>
 	/// <para>The query vector</para>
@@ -102,8 +102,8 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor<TDocument> InnerHitsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor<TDocument>> InnerHitsDescriptorAction { get; set; }
-	private long? kValue { get; set; }
-	private long? NumCandidatesValue { get; set; }
+	private int? kValue { get; set; }
+	private int? NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
@@ -215,7 +215,7 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	/// <summary>
 	/// <para>The final number of nearest neighbors to return as top hits</para>
 	/// </summary>
-	public KnnSearchDescriptor<TDocument> k(long? k)
+	public KnnSearchDescriptor<TDocument> k(int? k)
 	{
 		kValue = k;
 		return Self;
@@ -224,7 +224,7 @@ public sealed partial class KnnSearchDescriptor<TDocument> : SerializableDescrip
 	/// <summary>
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
-	public KnnSearchDescriptor<TDocument> NumCandidates(long? numCandidates)
+	public KnnSearchDescriptor<TDocument> NumCandidates(int? numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;
@@ -392,8 +392,8 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHits? InnerHitsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor InnerHitsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.Core.Search.InnerHitsDescriptor> InnerHitsDescriptorAction { get; set; }
-	private long? kValue { get; set; }
-	private long? NumCandidatesValue { get; set; }
+	private int? kValue { get; set; }
+	private int? NumCandidatesValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
@@ -505,7 +505,7 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	/// <summary>
 	/// <para>The final number of nearest neighbors to return as top hits</para>
 	/// </summary>
-	public KnnSearchDescriptor k(long? k)
+	public KnnSearchDescriptor k(int? k)
 	{
 		kValue = k;
 		return Self;
@@ -514,7 +514,7 @@ public sealed partial class KnnSearchDescriptor : SerializableDescriptor<KnnSear
 	/// <summary>
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
-	public KnnSearchDescriptor NumCandidates(long? numCandidates)
+	public KnnSearchDescriptor NumCandidates(int? numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;

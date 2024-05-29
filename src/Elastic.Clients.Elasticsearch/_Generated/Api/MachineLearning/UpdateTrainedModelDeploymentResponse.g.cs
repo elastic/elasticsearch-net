@@ -24,37 +24,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutModelResponse : ElasticsearchResponse
+public sealed partial class UpdateTrainedModelDeploymentResponse : ElasticsearchResponse
 {
-	/// <summary>
-	/// <para>The model Id</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
-	public string ModelId { get; init; }
-
-	/// <summary>
-	/// <para>The service type</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("service")]
-	public string Service { get; init; }
-
-	/// <summary>
-	/// <para>Settings specific to the service</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("service_settings")]
-	public object ServiceSettings { get; init; }
-
-	/// <summary>
-	/// <para>Task settings specific to the service and model</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("task_settings")]
-	public object TaskSettings { get; init; }
-
-	/// <summary>
-	/// <para>The model's task type</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("task_type")]
-	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }
+	[JsonInclude, JsonPropertyName("assignment")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment Assignment { get; init; }
 }

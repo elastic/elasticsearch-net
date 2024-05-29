@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 public sealed partial class PutSynonymResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("reload_analyzers_details")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails ReloadAnalyzersDetails { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; init; }
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
 }

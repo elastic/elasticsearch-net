@@ -131,10 +131,10 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementStats = new ApiUrls(new[] { "_stats", "_stats/{metric}", "{index}/_stats", "{index}/_stats/{metric}" });
 	internal static ApiUrls IndexManagementUpdateAliases = new ApiUrls(new[] { "_aliases" });
 	internal static ApiUrls IndexManagementValidateQuery = new ApiUrls(new[] { "_validate/query", "{index}/_validate/query" });
-	internal static ApiUrls InferenceDeleteModel = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
-	internal static ApiUrls InferenceGetModel = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
-	internal static ApiUrls InferencePutModel = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls IngestDeletePipeline = new ApiUrls(new[] { "_ingest/pipeline/{id}" });
 	internal static ApiUrls IngestGeoIpStats = new ApiUrls(new[] { "_ingest/geoip/stats" });
 	internal static ApiUrls IngestGetPipeline = new ApiUrls(new[] { "_ingest/pipeline", "_ingest/pipeline/{id}" });
@@ -215,6 +215,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls MachineLearningUpdateFilter = new ApiUrls(new[] { "_ml/filters/{filter_id}/_update" });
 	internal static ApiUrls MachineLearningUpdateJob = new ApiUrls(new[] { "_ml/anomaly_detectors/{job_id}/_update" });
 	internal static ApiUrls MachineLearningUpdateModelSnapshot = new ApiUrls(new[] { "_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_update" });
+	internal static ApiUrls MachineLearningUpdateTrainedModelDeployment = new ApiUrls(new[] { "_ml/trained_models/{model_id}/deployment/_update" });
 	internal static ApiUrls MachineLearningUpgradeJobSnapshot = new ApiUrls(new[] { "_ml/anomaly_detectors/{job_id}/model_snapshots/{snapshot_id}/_upgrade" });
 	internal static ApiUrls MachineLearningValidate = new ApiUrls(new[] { "_ml/anomaly_detectors/_validate" });
 	internal static ApiUrls MachineLearningValidateDetector = new ApiUrls(new[] { "_ml/anomaly_detectors/_validate/detector" });

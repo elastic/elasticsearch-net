@@ -41,7 +41,7 @@ public sealed partial class UpdateResponse<TDocument> : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("result")]
 	public Elastic.Clients.Elasticsearch.Serverless.Result Result { get; init; }
 	[JsonInclude, JsonPropertyName("_seq_no")]
-	public long SeqNo { get; init; }
+	public long? SeqNo { get; init; }
 	[JsonInclude, JsonPropertyName("_shards")]
 	public Elastic.Clients.Elasticsearch.Serverless.ShardStatistics Shards { get; init; }
 	[JsonInclude, JsonPropertyName("_version")]
