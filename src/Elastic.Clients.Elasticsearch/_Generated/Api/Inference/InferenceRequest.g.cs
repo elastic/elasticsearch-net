@@ -65,7 +65,7 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
-	/// <para>Text input to the model.<br/>Either a string or an array of strings.</para>
+	/// <para>Inference input.<br/>Either a string or an array of strings.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input")]
 	[SingleOrManyCollectionConverter(typeof(string))]
@@ -126,7 +126,7 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 	private object? TaskSettingsValue { get; set; }
 
 	/// <summary>
-	/// <para>Text input to the model.<br/>Either a string or an array of strings.</para>
+	/// <para>Inference input.<br/>Either a string or an array of strings.</para>
 	/// </summary>
 	public InferenceRequestDescriptor Input(ICollection<string> input)
 	{

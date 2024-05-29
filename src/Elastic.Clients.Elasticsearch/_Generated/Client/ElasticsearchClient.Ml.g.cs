@@ -8669,6 +8669,96 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(UpdateTrainedModelDeploymentRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<UpdateTrainedModelDeploymentRequest, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(UpdateTrainedModelDeploymentRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateTrainedModelDeploymentRequest, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(UpdateTrainedModelDeploymentRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId)
+	{
+		var descriptor = new UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual UpdateTrainedModelDeploymentResponse UpdateTrainedModelDeployment(Elastic.Clients.Elasticsearch.Id modelId, Action<UpdateTrainedModelDeploymentRequestDescriptor> configureRequest)
+	{
+		var descriptor = new UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(UpdateTrainedModelDeploymentRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>Updates certain properties of trained model deployment.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<UpdateTrainedModelDeploymentResponse> UpdateTrainedModelDeploymentAsync(Elastic.Clients.Elasticsearch.Id modelId, Action<UpdateTrainedModelDeploymentRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new UpdateTrainedModelDeploymentRequestDescriptor(modelId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<UpdateTrainedModelDeploymentRequestDescriptor, UpdateTrainedModelDeploymentResponse, UpdateTrainedModelDeploymentRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
 	/// <para>Upgrades a given job snapshot to the current major version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-upgrade-job-model-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

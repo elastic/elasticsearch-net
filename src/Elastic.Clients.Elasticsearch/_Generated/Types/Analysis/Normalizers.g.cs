@@ -93,8 +93,7 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 			case "lowercase":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(ref reader, options);
 			default:
-				ThrowHelper.ThrowUnknownTaggedUnionVariantJsonException(type, typeof(INormalizer));
-				return null;
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(ref reader, options);
 		}
 	}
 
