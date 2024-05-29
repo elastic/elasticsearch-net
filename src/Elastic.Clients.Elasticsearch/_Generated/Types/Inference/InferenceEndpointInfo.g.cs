@@ -28,15 +28,15 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Inference;
 
 /// <summary>
-/// <para>Represents a model as returned by the GET API</para>
+/// <para>Represents an inference endpoint as returned by the GET API</para>
 /// </summary>
-public sealed partial class ModelConfigContainer
+public sealed partial class InferenceEndpointInfo
 {
 	/// <summary>
-	/// <para>The model Id</para>
+	/// <para>The inference Id</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
-	public string ModelId { get; init; }
+	[JsonInclude, JsonPropertyName("inference_id")]
+	public string InferenceId { get; init; }
 
 	/// <summary>
 	/// <para>The service type</para>
@@ -51,13 +51,13 @@ public sealed partial class ModelConfigContainer
 	public object ServiceSettings { get; init; }
 
 	/// <summary>
-	/// <para>Task settings specific to the service and model</para>
+	/// <para>Task settings specific to the service and task type</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
 	public object TaskSettings { get; init; }
 
 	/// <summary>
-	/// <para>The model's task type</para>
+	/// <para>The task type</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_type")]
 	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }

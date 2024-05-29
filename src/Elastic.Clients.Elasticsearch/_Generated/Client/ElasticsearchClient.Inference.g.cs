@@ -38,283 +38,283 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(DeleteModelRequest request)
+	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteModelRequest, DeleteModelResponse, DeleteModelRequestParameters>(request);
+		return DoRequest<DeleteInferenceRequest, DeleteInferenceResponse, DeleteInferenceRequestParameters>(request);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(DeleteModelRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequest, DeleteModelResponse, DeleteModelRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequest, DeleteInferenceResponse, DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(DeleteModelRequestDescriptor descriptor)
+	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor);
+		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor);
+		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteModelRequestDescriptor> configureRequest)
+	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor);
+		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor);
+		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteModelResponse DeleteModel(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteModelRequestDescriptor> configureRequest)
+	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor);
+		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(DeleteModelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Delete model in the Inference API</para>
+	/// <para>Delete an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<DeleteModelResponse> DeleteModelAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteModelRequestDescriptor(inferenceId);
+		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteModelRequestDescriptor, DeleteModelResponse, DeleteModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(GetModelRequest request)
+	public virtual GetInferenceResponse Get(GetInferenceRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetModelRequest, GetModelResponse, GetModelRequestParameters>(request);
+		return DoRequest<GetInferenceRequest, GetInferenceResponse, GetInferenceRequestParameters>(request);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(GetModelRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetModelRequest, GetModelResponse, GetModelRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<GetInferenceRequest, GetInferenceResponse, GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(GetModelRequestDescriptor descriptor)
+	public virtual GetInferenceResponse Get(GetInferenceRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
+		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
+	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
 	{
-		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
+		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetModelRequestDescriptor> configureRequest)
+	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
+		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel()
+	public virtual GetInferenceResponse Get()
 	{
-		var descriptor = new GetModelRequestDescriptor();
+		var descriptor = new GetInferenceRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
+		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetModelResponse GetModel(Action<GetModelRequestDescriptor> configureRequest)
+	public virtual GetInferenceResponse Get(Action<GetInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new GetModelRequestDescriptor();
+		var descriptor = new GetInferenceRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor);
+		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(GetModelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor(taskType, inferenceId);
+		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor();
+		var descriptor = new GetInferenceRequestDescriptor();
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Get a model in the Inference API</para>
+	/// <para>Get an inference endpoint</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<GetModelResponse> GetModelAsync(Action<GetModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<GetInferenceResponse> GetAsync(Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetModelRequestDescriptor();
+		var descriptor = new GetInferenceRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<GetModelRequestDescriptor, GetModelResponse, GetModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -325,7 +325,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequest request, CancellationToken cancellationToken = default)
@@ -335,7 +335,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -346,7 +346,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -358,7 +358,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -371,7 +371,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -383,7 +383,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -396,7 +396,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -406,7 +406,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -417,7 +417,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -429,7 +429,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
@@ -440,7 +440,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform inference on a model</para>
+	/// <para>Perform inference</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -452,140 +452,140 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(PutModelRequest request)
+	public virtual PutInferenceResponse Put(PutInferenceRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutModelRequest, PutModelResponse, PutModelRequestParameters>(request);
+		return DoRequest<PutInferenceRequest, PutInferenceResponse, PutInferenceRequestParameters>(request);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(PutModelRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutModelRequest, PutModelResponse, PutModelRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<PutInferenceRequest, PutInferenceResponse, PutInferenceRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(PutModelRequestDescriptor descriptor)
+	public virtual PutInferenceResponse Put(PutInferenceRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor);
+		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, taskType, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor);
+		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutModelRequestDescriptor> configureRequest)
+	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, taskType, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor);
+		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor);
+		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutModelResponse PutModel(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutModelRequestDescriptor> configureRequest)
+	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor);
+		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(PutModelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, taskType, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, taskType, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
-	/// <para>Configure a model for use in the Inference API</para>
+	/// <para>Configure an inference endpoint for use in the Inference API</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<PutModelResponse> PutModelAsync(Elastic.Clients.Elasticsearch.Inference.ModelConfig modelConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutModelRequestDescriptor(modelConfig, inferenceId);
+		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<PutModelRequestDescriptor, PutModelResponse, PutModelRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
 	}
 }

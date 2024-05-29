@@ -55,7 +55,6 @@ public sealed partial class Query
 	public static Query ConstantScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery constantScoreQuery) => new Query("constant_score", constantScoreQuery);
 	public static Query DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => new Query("dis_max", disMaxQuery);
 	public static Query Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => new Query("exists", existsQuery);
-	public static Query FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new Query("field_masking_span", spanFieldMaskingQuery);
 	public static Query FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => new Query("function_score", functionScoreQuery);
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
 	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
@@ -89,6 +88,7 @@ public sealed partial class Query
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
 	public static Query SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new Query("simple_query_string", simpleQueryStringQuery);
 	public static Query SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => new Query("span_containing", spanContainingQuery);
+	public static Query SpanFieldMasking(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new Query("span_field_masking", spanFieldMaskingQuery);
 	public static Query SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => new Query("span_first", spanFirstQuery);
 	public static Query SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => new Query("span_multi", spanMultiTermQuery);
 	public static Query SpanNear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanNearQuery spanNearQuery) => new Query("span_near", spanNearQuery);
@@ -180,13 +180,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			if (propertyName == "exists")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "field_masking_span")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -422,6 +415,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "span_field_masking")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "span_first")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery?>(ref reader, options);
@@ -553,9 +553,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "exists":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery)value.Variant, options);
 					break;
-				case "field_masking_span":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
-					break;
 				case "function_score":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery)value.Variant, options);
 					break;
@@ -655,6 +652,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "span_containing":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery)value.Variant, options);
 					break;
+				case "span_field_masking":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery)value.Variant, options);
+					break;
 				case "span_first":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery)value.Variant, options);
 					break;
@@ -747,8 +747,6 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> DisMax(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
 	public QueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
 	public QueryDescriptor<TDocument> Exists(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
-	public QueryDescriptor<TDocument> FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public QueryDescriptor<TDocument> FieldMaskingSpan(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "field_masking_span");
 	public QueryDescriptor<TDocument> FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
 	public QueryDescriptor<TDocument> FunctionScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQueryDescriptor<TDocument>> configure) => Set(configure, "function_score");
 	public QueryDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
@@ -813,6 +811,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public QueryDescriptor<TDocument> SpanContaining(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor<TDocument>> configure) => Set(configure, "span_containing");
+	public QueryDescriptor<TDocument> SpanFieldMasking(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
+	public QueryDescriptor<TDocument> SpanFieldMasking(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>> configure) => Set(configure, "span_field_masking");
 	public QueryDescriptor<TDocument> SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public QueryDescriptor<TDocument> SpanFirst(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor<TDocument>> configure) => Set(configure, "span_first");
 	public QueryDescriptor<TDocument> SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");
@@ -905,8 +905,6 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor DisMax<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
 	public QueryDescriptor Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
 	public QueryDescriptor Exists<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor> configure) => Set(configure, "exists");
-	public QueryDescriptor FieldMaskingSpan(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "field_masking_span");
-	public QueryDescriptor FieldMaskingSpan<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "field_masking_span");
 	public QueryDescriptor FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
 	public QueryDescriptor FunctionScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQueryDescriptor> configure) => Set(configure, "function_score");
 	public QueryDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => Set(fuzzyQuery, "fuzzy");
@@ -971,6 +969,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
 	public QueryDescriptor SpanContaining<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQueryDescriptor> configure) => Set(configure, "span_containing");
+	public QueryDescriptor SpanFieldMasking(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => Set(spanFieldMaskingQuery, "span_field_masking");
+	public QueryDescriptor SpanFieldMasking<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQueryDescriptor> configure) => Set(configure, "span_field_masking");
 	public QueryDescriptor SpanFirst(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQuery spanFirstQuery) => Set(spanFirstQuery, "span_first");
 	public QueryDescriptor SpanFirst<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFirstQueryDescriptor> configure) => Set(configure, "span_first");
 	public QueryDescriptor SpanMulti(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanMultiTermQuery spanMultiTermQuery) => Set(spanMultiTermQuery, "span_multi");

@@ -52,7 +52,7 @@ public sealed partial class KnnQuery
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("num_candidates")]
-	public long? NumCandidates { get; set; }
+	public int? NumCandidates { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
@@ -91,7 +91,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private long? NumCandidatesValue { get; set; }
+	private int? NumCandidatesValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
@@ -177,7 +177,7 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	/// <summary>
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
-	public KnnQueryDescriptor<TDocument> NumCandidates(long? numCandidates)
+	public KnnQueryDescriptor<TDocument> NumCandidates(int? numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;
@@ -332,7 +332,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private long? NumCandidatesValue { get; set; }
+	private int? NumCandidatesValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<float>? QueryVectorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
@@ -418,7 +418,7 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	/// <summary>
 	/// <para>The number of nearest neighbor candidates to consider per shard</para>
 	/// </summary>
-	public KnnQueryDescriptor NumCandidates(long? numCandidates)
+	public KnnQueryDescriptor NumCandidates(int? numCandidates)
 	{
 		NumCandidatesValue = numCandidates;
 		return Self;
