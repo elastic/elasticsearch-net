@@ -33,7 +33,7 @@ public sealed partial class MappingLimitSettingsTotalFields
 	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
-	public int? Limit { get; set; }
+	public long? Limit { get; set; }
 }
 
 public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsTotalFieldsDescriptor>
@@ -44,12 +44,12 @@ public sealed partial class MappingLimitSettingsTotalFieldsDescriptor : Serializ
 	{
 	}
 
-	private int? LimitValue { get; set; }
+	private long? LimitValue { get; set; }
 
 	/// <summary>
 	/// <para>The maximum number of fields in an index. Field and object mappings, as well as field aliases count towards this limit.<br/>The limit is in place to prevent mappings and searches from becoming too large. Higher values can lead to performance<br/>degradations and memory issues, especially in clusters with a high load or few resources.</para>
 	/// </summary>
-	public MappingLimitSettingsTotalFieldsDescriptor Limit(int? limit)
+	public MappingLimitSettingsTotalFieldsDescriptor Limit(long? limit)
 	{
 		LimitValue = limit;
 		return Self;

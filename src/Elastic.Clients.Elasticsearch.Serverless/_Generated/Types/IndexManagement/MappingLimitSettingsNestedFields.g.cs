@@ -33,7 +33,7 @@ public sealed partial class MappingLimitSettingsNestedFields
 	/// <para>The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when<br/>arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this<br/>setting limits the number of unique nested types per index.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("limit")]
-	public int? Limit { get; set; }
+	public long? Limit { get; set; }
 }
 
 public sealed partial class MappingLimitSettingsNestedFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsNestedFieldsDescriptor>
@@ -44,12 +44,12 @@ public sealed partial class MappingLimitSettingsNestedFieldsDescriptor : Seriali
 	{
 	}
 
-	private int? LimitValue { get; set; }
+	private long? LimitValue { get; set; }
 
 	/// <summary>
 	/// <para>The maximum number of distinct nested mappings in an index. The nested type should only be used in special cases, when<br/>arrays of objects need to be queried independently of each other. To safeguard against poorly designed mappings, this<br/>setting limits the number of unique nested types per index.</para>
 	/// </summary>
-	public MappingLimitSettingsNestedFieldsDescriptor Limit(int? limit)
+	public MappingLimitSettingsNestedFieldsDescriptor Limit(long? limit)
 	{
 		LimitValue = limit;
 		return Self;
