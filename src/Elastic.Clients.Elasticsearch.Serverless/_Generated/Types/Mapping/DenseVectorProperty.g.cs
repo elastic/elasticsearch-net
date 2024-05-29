@@ -33,6 +33,8 @@ public sealed partial class DenseVectorProperty : IProperty
 	public int? Dims { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? Dynamic { get; set; }
+	[JsonInclude, JsonPropertyName("element_type")]
+	public string? ElementType { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
@@ -66,6 +68,7 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 
 	private int? DimsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
+	private string? ElementTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -85,6 +88,12 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	public DenseVectorPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
 		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public DenseVectorPropertyDescriptor<TDocument> ElementType(string? elementType)
+	{
+		ElementTypeValue = elementType;
 		return Self;
 	}
 
@@ -194,6 +203,12 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(ElementTypeValue))
+		{
+			writer.WritePropertyName("element_type");
+			writer.WriteStringValue(ElementTypeValue);
+		}
+
 		if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -279,6 +294,7 @@ public sealed partial class DenseVectorPropertyDescriptor<TDocument> : Serializa
 	{
 		Dims = DimsValue,
 		Dynamic = DynamicValue,
+		ElementType = ElementTypeValue,
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Index = IndexValue,
@@ -299,6 +315,7 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 
 	private int? DimsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? DynamicValue { get; set; }
+	private string? ElementTypeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IndexValue { get; set; }
@@ -318,6 +335,12 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	public DenseVectorPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Serverless.Mapping.DynamicMapping? dynamic)
 	{
 		DynamicValue = dynamic;
+		return Self;
+	}
+
+	public DenseVectorPropertyDescriptor ElementType(string? elementType)
+	{
+		ElementTypeValue = elementType;
 		return Self;
 	}
 
@@ -427,6 +450,12 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 			JsonSerializer.Serialize(writer, DynamicValue, options);
 		}
 
+		if (!string.IsNullOrEmpty(ElementTypeValue))
+		{
+			writer.WritePropertyName("element_type");
+			writer.WriteStringValue(ElementTypeValue);
+		}
+
 		if (FieldsValue is not null)
 		{
 			writer.WritePropertyName("fields");
@@ -512,6 +541,7 @@ public sealed partial class DenseVectorPropertyDescriptor : SerializableDescript
 	{
 		Dims = DimsValue,
 		Dynamic = DynamicValue,
+		ElementType = ElementTypeValue,
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
 		Index = IndexValue,

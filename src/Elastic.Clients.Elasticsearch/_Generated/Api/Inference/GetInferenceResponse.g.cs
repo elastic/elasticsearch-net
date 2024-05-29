@@ -26,11 +26,8 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class DeleteModelResponse : ElasticsearchResponse
+public sealed partial class GetInferenceResponse : ElasticsearchResponse
 {
-	/// <summary>
-	/// <para>For a successful response, this value is always true. On failure, an exception is returned instead.</para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("acknowledged")]
-	public bool Acknowledged { get; init; }
+	[JsonInclude, JsonPropertyName("endpoints")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointInfo> Endpoints { get; init; }
 }

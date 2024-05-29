@@ -35,6 +35,12 @@ public sealed partial class AdjacencyMatrixAggregation
 	[JsonInclude, JsonPropertyName("filters")]
 	public IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query>? Filters { get; set; }
 
+	/// <summary>
+	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("separator")]
+	public string? Separator { get; set; }
+
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation(AdjacencyMatrixAggregation adjacencyMatrixAggregation) => Elastic.Clients.Elasticsearch.Serverless.Aggregations.Aggregation.AdjacencyMatrix(adjacencyMatrixAggregation);
 }
 
@@ -47,6 +53,7 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 	}
 
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> FiltersValue { get; set; }
+	private string? SeparatorValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
@@ -57,6 +64,15 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// </summary>
+	public AdjacencyMatrixAggregationDescriptor<TDocument> Separator(string? separator)
+	{
+		SeparatorValue = separator;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -64,6 +80,12 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor<TDocument> : Se
 		{
 			writer.WritePropertyName("filters");
 			JsonSerializer.Serialize(writer, FiltersValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SeparatorValue))
+		{
+			writer.WritePropertyName("separator");
+			writer.WriteStringValue(SeparatorValue);
 		}
 
 		writer.WriteEndObject();
@@ -79,6 +101,7 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 	}
 
 	private IDictionary<string, Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> FiltersValue { get; set; }
+	private string? SeparatorValue { get; set; }
 
 	/// <summary>
 	/// <para>Filters used to create buckets.<br/>At least one filter is required.</para>
@@ -89,6 +112,15 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>Separator used to concatenate filter names. Defaults to &.</para>
+	/// </summary>
+	public AdjacencyMatrixAggregationDescriptor Separator(string? separator)
+	{
+		SeparatorValue = separator;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -96,6 +128,12 @@ public sealed partial class AdjacencyMatrixAggregationDescriptor : SerializableD
 		{
 			writer.WritePropertyName("filters");
 			JsonSerializer.Serialize(writer, FiltersValue, options);
+		}
+
+		if (!string.IsNullOrEmpty(SeparatorValue))
+		{
+			writer.WritePropertyName("separator");
+			writer.WriteStringValue(SeparatorValue);
 		}
 
 		writer.WriteEndObject();

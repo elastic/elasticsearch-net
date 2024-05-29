@@ -32,6 +32,7 @@ public sealed partial class PhoneticTokenFilter : ITokenFilter
 	[JsonInclude, JsonPropertyName("encoder")]
 	public Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Encoder { get; set; }
 	[JsonInclude, JsonPropertyName("languageset")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage))]
 	public ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage> Languageset { get; set; }
 	[JsonInclude, JsonPropertyName("max_code_len")]
 	public int? MaxCodeLen { get; set; }
@@ -113,7 +114,7 @@ public sealed partial class PhoneticTokenFilterDescriptor : SerializableDescript
 		writer.WritePropertyName("encoder");
 		JsonSerializer.Serialize(writer, EncoderValue, options);
 		writer.WritePropertyName("languageset");
-		JsonSerializer.Serialize(writer, LanguagesetValue, options);
+		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(LanguagesetValue, writer, options);
 		if (MaxCodeLenValue.HasValue)
 		{
 			writer.WritePropertyName("max_code_len");
