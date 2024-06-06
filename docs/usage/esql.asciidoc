@@ -13,10 +13,10 @@ There are two ways to use ES|QL in the .NET client:
 is the most flexible approach, but it's also the most complex because you must handle
 results in their raw form. You can choose the precise format of results,
 such as JSON, CSV, or text.
-* Use ES|QL high level helpers: These helpers take care of parsing the raw
+* Use ES|QL high-level helpers: These helpers take care of parsing the raw
 response into something readily usable by the application. Several helpers are
 available for different use cases, such as object mapping, cursor
-traversal of results (WiP), and dataframes (WiP).
+traversal of results (in development), and dataframes (in development).
 
 [discrete]
 [[esql-how-to]]
