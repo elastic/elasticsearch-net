@@ -10,8 +10,10 @@ If you're new to {es}, make sure also to read {ref}/getting-started.html[Elastic
 
 * <<recommendations, Usage recommendations>>
 * <<examples, CRUD usage examples>>
+* <<esql, Using ES|QL>>
 
 NOTE: This is still a work in progress, more sections will be added in the near future.
 
 include::recommendations.asciidoc[]
 include::examples.asciidoc[]
+include::esql.asciidoc[]
