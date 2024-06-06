@@ -171,6 +171,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> Histogram(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, HistogramProperty histogramProperty) => AssignVariant(propertyName, histogramProperty);
 	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Histogram(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.HistogramPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.HistogramPropertyDescriptor<TDocument>, HistogramProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> IcuCollation(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, IcuCollationProperty icuCollationProperty) => AssignVariant(propertyName, icuCollationProperty);
+	public PropertiesDescriptor<TDocument> IcuCollation(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> IcuCollation(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationPropertyDescriptor<TDocument>, IcuCollationProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.IntegerNumberPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.IntegerNumberPropertyDescriptor<TDocument>, IntegerNumberProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> IntegerNumber(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, IntegerNumberProperty integerNumberProperty) => AssignVariant(propertyName, integerNumberProperty);
@@ -359,6 +364,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.HalfFloatNumberProperty>(ref reader, options);
 			case "histogram":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.HistogramProperty>(ref reader, options);
+			case "icu_collation_keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationProperty>(ref reader, options);
 			case "integer":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.IntegerNumberProperty>(ref reader, options);
 			case "integer_range":
@@ -488,6 +495,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "histogram":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.HistogramProperty), options);
+				return;
+			case "icu_collation_keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.IcuCollationProperty), options);
 				return;
 			case "integer":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.IntegerNumberProperty), options);
