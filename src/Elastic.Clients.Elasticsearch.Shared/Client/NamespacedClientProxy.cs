@@ -24,14 +24,14 @@ public abstract class NamespacedClientProxy
 	private const string InvalidOperation = "The client has not been initialised for proper usage as may have been partially mocked. Ensure you are using a " +
 		"new instance of ElasticsearchClient to perform requests over a network to Elasticsearch.";
 
-	private readonly ElasticsearchClient _client;
+	protected ElasticsearchClient Client { get; }
 
 	/// <summary>
 	/// Initializes a new instance for mocking.
 	/// </summary>
 	protected NamespacedClientProxy() { }
 
-	internal NamespacedClientProxy(ElasticsearchClient client) => _client = client;
+	internal NamespacedClientProxy(ElasticsearchClient client) => Client = client;
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
@@ -46,10 +46,10 @@ public abstract class NamespacedClientProxy
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
-		if (_client is null)
+		if (Client is null)
 			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
 
-		return _client.DoRequest<TRequest, TResponse, TRequestParameters>(request, forceConfiguration);
+		return Client.DoRequest<TRequest, TResponse, TRequestParameters>(request, forceConfiguration);
 	}
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
@@ -68,9 +68,9 @@ public abstract class NamespacedClientProxy
 		where TResponse : ElasticsearchResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
-		if (_client is null)
+		if (Client is null)
 			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
 
-		return _client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, forceConfiguration, cancellationToken);
+		return Client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, forceConfiguration, cancellationToken);
 	}
 }
