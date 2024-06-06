@@ -13,13 +13,10 @@ There are two ways to use ES|QL in the .NET client:
 is the most flexible approach, but it's also the most complex because you must handle
 results in their raw form. You can choose the precise format of results,
 such as JSON, CSV, or text.
-* Use ES|QL mapping helpers: These mappers take care of parsing the raw
-response into something readily usable by the application. Several mappers are
+* Use ES|QL high level helpers: These helpers take care of parsing the raw
+response into something readily usable by the application. Several helpers are
 available for different use cases, such as object mapping, cursor
-traversal of results, and dataframes. You can also define your own mapper for specific
-use cases.
-
-
+traversal of results (WiP), and dataframes (WiP).
 
 [discrete]
 [[esql-how-to]]
@@ -31,12 +28,16 @@ results should be returned. You can choose a
 JSON, then fine-tune it with parameters like column separators
 and locale.
 
-// Add any .NET-specific usage notes
-
 The following example gets ES|QL results as CSV and parses them:
 
-// Code example to be written
-
+[source,charp]
+----
+var response = await client.Esql.QueryAsync(r => r
+	.Query("FROM index")
+	.Format("csv")
+);
+var csvContents = Encoding.UTF8.GetString(response.Data);
+----
 
 [discrete]
 [[esql-consume-results]]
@@ -57,23 +58,12 @@ column names. This is similar to database access libraries.
 * **Dataframes**, where results are organized in a column-oriented structure that
 allows efficient processing of column data.
 
-// Code examples to be written for each of them, depending on availability in the language
-
-
-[discrete]
-[[esql-custom-mapping]]
-=== Define your own mapping
-
-Although the mappers provided by the .NET client cover many use cases, your
-application might require a custom mapping.
-You can write your own mapper and use it in a similar way as the
-built-in ones.
-
-Note that mappers are meant to provide a more usable representation of ES|QL
-results—not to process the result data. Data processing should be based on
-the output of a result mapper.
-
-Here's an example mapper that returns a simple column-oriented
-representation of the data:
-
-// Code example to be written
+[source,charp]
+----
+// ObjectAPI example
+var response = await client.Esql.QueryAsObjectsAsync<Person>(x => x.Query("FROM index"));
+foreach (var person in response)
+{
+    // ...
+}
+----
