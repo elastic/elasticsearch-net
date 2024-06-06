@@ -30,5 +30,5 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 public sealed partial class NodeInfoSettingsNetwork
 {
 	[JsonInclude, JsonPropertyName("host")]
-	public string Host { get; init; }
+	public string? Host { get; init; }
 }

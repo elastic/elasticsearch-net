@@ -34,7 +34,7 @@ public sealed partial class NodeInfoSettings
 	[JsonInclude, JsonPropertyName("bootstrap")]
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap? Bootstrap { get; init; }
 	[JsonInclude, JsonPropertyName("client")]
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient Client { get; init; }
+	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient? Client { get; init; }
 	[JsonInclude, JsonPropertyName("cluster")]
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; init; }
 	[JsonInclude, JsonPropertyName("discovery")]

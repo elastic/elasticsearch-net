@@ -36,7 +36,7 @@ public sealed partial class Hit<TDocument>
 	[JsonInclude, JsonPropertyName("highlight")]
 	public IReadOnlyDictionary<string, IReadOnlyCollection<string>>? Highlight { get; init; }
 	[JsonInclude, JsonPropertyName("_id")]
-	public string Id { get; init; }
+	public string? Id { get; init; }
 	[JsonInclude, JsonPropertyName("_ignored")]
 	public IReadOnlyCollection<string>? Ignored { get; init; }
 	[JsonInclude, JsonPropertyName("ignored_field_values")]

@@ -32,5 +32,5 @@ public sealed partial class NodeInfoScript
 	[JsonInclude, JsonPropertyName("allowed_types")]
 	public string AllowedTypes { get; init; }
 	[JsonInclude, JsonPropertyName("disable_max_compilations_rate")]
-	public string DisableMaxCompilationsRate { get; init; }
+	public string? DisableMaxCompilationsRate { get; init; }
 }

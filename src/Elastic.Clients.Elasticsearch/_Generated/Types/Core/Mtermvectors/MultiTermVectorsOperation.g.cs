@@ -58,7 +58,7 @@ public sealed partial class MultiTermVectorsOperation
 	/// <para>The ID of the document.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_id")]
-	public Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
 	/// <para>The index of the document.</para>
@@ -123,7 +123,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
 	private bool? PayloadsValue { get; set; }
@@ -190,7 +190,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 	/// <summary>
 	/// <para>The ID of the document.</para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public MultiTermVectorsOperationDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
@@ -305,8 +305,12 @@ public sealed partial class MultiTermVectorsOperationDescriptor<TDocument> : Ser
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+		}
+
 		if (IndexValue is not null)
 		{
 			writer.WritePropertyName("_index");
@@ -373,7 +377,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id IdValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }
 	private bool? OffsetsValue { get; set; }
 	private bool? PayloadsValue { get; set; }
@@ -440,7 +444,7 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 	/// <summary>
 	/// <para>The ID of the document.</para>
 	/// </summary>
-	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public MultiTermVectorsOperationDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
 		IdValue = id;
 		return Self;
@@ -555,8 +559,12 @@ public sealed partial class MultiTermVectorsOperationDescriptor : SerializableDe
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
-		writer.WritePropertyName("_id");
-		JsonSerializer.Serialize(writer, IdValue, options);
+		if (IdValue is not null)
+		{
+			writer.WritePropertyName("_id");
+			JsonSerializer.Serialize(writer, IdValue, options);
+		}
+
 		if (IndexValue is not null)
 		{
 			writer.WritePropertyName("_index");
