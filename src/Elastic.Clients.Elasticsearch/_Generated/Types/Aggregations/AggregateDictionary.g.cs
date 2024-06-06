@@ -167,7 +167,7 @@ internal sealed partial class AggregateDictionaryConverter : JsonConverter<Aggre
 					break;
 				}
 
-			case "box_plot":
+			case "boxplot":
 				{
 					var item = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(ref reader, options);
 					dictionary.Add(nameParts[1], item);

@@ -34,7 +34,7 @@ internal sealed partial class StringTermsBucketConverter : JsonConverter<StringT
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
-		long? docCountError = default;
+		long? docCountErrorUpperBound = default;
 		Elastic.Clients.Elasticsearch.FieldValue key = default;
 		Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate> additionalProperties = null;
 		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
@@ -48,9 +48,9 @@ internal sealed partial class StringTermsBucketConverter : JsonConverter<StringT
 					continue;
 				}
 
-				if (property == "doc_count_error")
+				if (property == "doc_count_error_upper_bound")
 				{
-					docCountError = JsonSerializer.Deserialize<long?>(ref reader, options);
+					docCountErrorUpperBound = JsonSerializer.Deserialize<long?>(ref reader, options);
 					continue;
 				}
 
@@ -71,7 +71,7 @@ internal sealed partial class StringTermsBucketConverter : JsonConverter<StringT
 			}
 		}
 
-		return new StringTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, DocCountError = docCountError, Key = key };
+		return new StringTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, DocCountErrorUpperBound = docCountErrorUpperBound, Key = key };
 	}
 
 	public override void Write(Utf8JsonWriter writer, StringTermsBucket value, JsonSerializerOptions options)
@@ -88,6 +88,6 @@ public sealed partial class StringTermsBucket
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }
-	public long? DocCountError { get; init; }
+	public long? DocCountErrorUpperBound { get; init; }
 	public Elastic.Clients.Elasticsearch.FieldValue Key { get; init; }
 }

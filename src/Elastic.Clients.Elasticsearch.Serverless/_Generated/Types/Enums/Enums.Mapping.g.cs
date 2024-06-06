@@ -135,6 +135,8 @@ public enum FieldType
 	IntegerRange,
 	[EnumMember(Value = "integer")]
 	Integer,
+	[EnumMember(Value = "icu_collation_keyword")]
+	IcuCollationKeyword,
 	[EnumMember(Value = "histogram")]
 	Histogram,
 	[EnumMember(Value = "half_float")]
@@ -232,6 +234,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.IntegerRange;
 			case "integer":
 				return FieldType.Integer;
+			case "icu_collation_keyword":
+				return FieldType.IcuCollationKeyword;
 			case "histogram":
 				return FieldType.Histogram;
 			case "half_float":
@@ -353,6 +357,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Integer:
 				writer.WriteStringValue("integer");
+				return;
+			case FieldType.IcuCollationKeyword:
+				writer.WriteStringValue("icu_collation_keyword");
 				return;
 			case FieldType.Histogram:
 				writer.WriteStringValue("histogram");

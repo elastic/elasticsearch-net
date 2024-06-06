@@ -34,7 +34,7 @@ internal sealed partial class DoubleTermsBucketConverter : JsonConverter<DoubleT
 		if (reader.TokenType != JsonTokenType.StartObject)
 			throw new JsonException("Unexpected JSON detected.");
 		long docCount = default;
-		long? docCountError = default;
+		long? docCountErrorUpperBound = default;
 		double key = default;
 		string? keyAsString = default;
 		Dictionary<string, Elastic.Clients.Elasticsearch.Serverless.Aggregations.IAggregate> additionalProperties = null;
@@ -49,9 +49,9 @@ internal sealed partial class DoubleTermsBucketConverter : JsonConverter<DoubleT
 					continue;
 				}
 
-				if (property == "doc_count_error")
+				if (property == "doc_count_error_upper_bound")
 				{
-					docCountError = JsonSerializer.Deserialize<long?>(ref reader, options);
+					docCountErrorUpperBound = JsonSerializer.Deserialize<long?>(ref reader, options);
 					continue;
 				}
 
@@ -78,7 +78,7 @@ internal sealed partial class DoubleTermsBucketConverter : JsonConverter<DoubleT
 			}
 		}
 
-		return new DoubleTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, DocCountError = docCountError, Key = key, KeyAsString = keyAsString };
+		return new DoubleTermsBucket { Aggregations = new Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary(additionalProperties), DocCount = docCount, DocCountErrorUpperBound = docCountErrorUpperBound, Key = key, KeyAsString = keyAsString };
 	}
 
 	public override void Write(Utf8JsonWriter writer, DoubleTermsBucket value, JsonSerializerOptions options)
@@ -95,7 +95,7 @@ public sealed partial class DoubleTermsBucket
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.Aggregations.AggregateDictionary Aggregations { get; init; }
 	public long DocCount { get; init; }
-	public long? DocCountError { get; init; }
+	public long? DocCountErrorUpperBound { get; init; }
 	public double Key { get; init; }
 	public string? KeyAsString { get; init; }
 }
