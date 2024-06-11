@@ -58,6 +58,8 @@ public sealed partial class IntervalsQuery
 	/// </summary>
 	[JsonInclude, JsonPropertyName("boost")]
 	public float? Boost { get; set; }
+	[JsonInclude, JsonPropertyName("field")]
+	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
 
@@ -83,6 +85,9 @@ internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQ
 			throw new JsonException("Expected start token.");
 		}
 
+		reader.Read();
+		var fieldName = reader.GetString();
+		reader.Read();
 		object? variantValue = default;
 		string? variantNameValue = default;
 		float? boostValue = default;
@@ -158,14 +163,22 @@ internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQ
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'IntervalsQuery' from the response.");
 		}
 
+		reader.Read();
 		var result = new IntervalsQuery(variantNameValue, variantValue);
 		result.Boost = boostValue;
+		result.Field = fieldName;
 		result.QueryName = queryNameValue;
 		return result;
 	}
 
 	public override void Write(Utf8JsonWriter writer, IntervalsQuery value, JsonSerializerOptions options)
 	{
+		if (value.Field is null)
+			throw new JsonException("Unable to serialize IntervalsQuery because the `Field` property is not set. Field name queries must include a valid field name.");
+		if (!options.TryGetClientSettings(out var settings))
+			throw new JsonException("Unable to retrieve client settings required to infer field.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
 		writer.WriteStartObject();
 		if (value.Boost.HasValue)
 		{
@@ -206,6 +219,7 @@ internal sealed partial class IntervalsQueryConverter : JsonConverter<IntervalsQ
 		}
 
 		writer.WriteEndObject();
+		writer.WriteEndObject();
 	}
 }
 
@@ -241,6 +255,7 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
@@ -249,6 +264,24 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 	public IntervalsQueryDescriptor<TDocument> Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
 		return Self;
 	}
 
@@ -273,6 +306,10 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
 		if (BoostValue.HasValue)
 		{
@@ -299,6 +336,7 @@ public sealed partial class IntervalsQueryDescriptor<TDocument> : SerializableDe
 			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
+		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
@@ -335,6 +373,7 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	}
 
 	private float? BoostValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
 
 	/// <summary>
@@ -343,6 +382,24 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 	public IntervalsQueryDescriptor Boost(float? boost)
 	{
 		BoostValue = boost;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	{
+		FieldValue = field;
+		return Self;
+	}
+
+	public IntervalsQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	{
+		FieldValue = field;
 		return Self;
 	}
 
@@ -367,6 +424,10 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		if (FieldValue is null)
+			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
+		writer.WriteStartObject();
+		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
 		writer.WriteStartObject();
 		if (BoostValue.HasValue)
 		{
@@ -393,6 +454,7 @@ public sealed partial class IntervalsQueryDescriptor : SerializableDescriptor<In
 			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
 		}
 
+		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
