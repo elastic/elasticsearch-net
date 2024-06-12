@@ -51,6 +51,7 @@ public sealed partial class InferenceResponseResult
 	/// <para>If the model is trained for a text classification or zero shot classification task, the response is the<br/>predicted class.<br/>For named entity recognition (NER) tasks, it contains the annotated text output.<br/>For fill mask tasks, it contains the top prediction for replacing the mask token.<br/>For text embedding tasks, it contains the raw numerical text embedding values.<br/>For regression models, its a numerical value<br/>For classification models, it may be an integer, double, boolean or string depending on prediction type</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("predicted_value")]
+	[SingleOrManyCollectionConverter(typeof(object))]
 	public IReadOnlyCollection<object>? PredictedValue { get; init; }
 
 	/// <summary>
