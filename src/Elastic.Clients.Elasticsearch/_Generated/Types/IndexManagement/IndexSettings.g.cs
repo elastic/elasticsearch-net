@@ -300,7 +300,7 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 
 				if (property == "routing_path")
 				{
-					variant.RoutingPath = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+					variant.RoutingPath = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 					continue;
 				}
 
