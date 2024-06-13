@@ -33,4 +33,6 @@ public sealed partial class DeleteInferenceResponse : ElasticsearchResponse
 	/// </summary>
 	[JsonInclude, JsonPropertyName("acknowledged")]
 	public bool Acknowledged { get; init; }
+	[JsonInclude, JsonPropertyName("pipelines")]
+	public IReadOnlyCollection<string> Pipelines { get; init; }
 }

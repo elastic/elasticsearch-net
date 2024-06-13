@@ -95,7 +95,7 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 
 				if (property == "knn")
 				{
-					variant.Knn = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.KnnSearch>?>(ref reader, options);
+					variant.Knn = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.KnnSearch>(ref reader, options);
 					continue;
 				}
 
@@ -131,7 +131,7 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 
 				if (property == "rescore")
 				{
-					variant.Rescore = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?>(ref reader, options);
+					variant.Rescore = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(ref reader, options);
 					continue;
 				}
 
@@ -167,7 +167,7 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 
 				if (property == "sort")
 				{
-					variant.Sort = JsonSerializer.Deserialize<ICollection<Elastic.Clients.Elasticsearch.SortOptions>?>(ref reader, options);
+					variant.Sort = SingleOrManySerializationHelper.Deserialize<Elastic.Clients.Elasticsearch.SortOptions>(ref reader, options);
 					continue;
 				}
 
