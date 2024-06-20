@@ -266,6 +266,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.PropertyName propertyName, SearchAsYouTypeProperty searchAsYouTypeProperty) => AssignVariant(propertyName, searchAsYouTypeProperty);
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.PropertyName propertyName, SemanticTextProperty semanticTextProperty) => AssignVariant(propertyName, semanticTextProperty);
+	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.PropertyName propertyName, ShapeProperty shapeProperty) => AssignVariant(propertyName, shapeProperty);
@@ -402,6 +407,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(ref reader, options);
 			case "search_as_you_type":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(ref reader, options);
+			case "semantic_text":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(ref reader, options);
 			case "shape":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ShapeProperty>(ref reader, options);
 			case "short":
@@ -552,6 +559,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "search_as_you_type":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty), options);
+				return;
+			case "semantic_text":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty), options);
 				return;
 			case "shape":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ShapeProperty), options);

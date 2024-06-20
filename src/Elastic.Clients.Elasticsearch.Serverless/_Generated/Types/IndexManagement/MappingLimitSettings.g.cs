@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
 /// <summary>
 /// <para>Mapping Limit Settings</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class MappingLimitSettings
 {
@@ -53,7 +53,7 @@ public sealed partial class MappingLimitSettings
 
 /// <summary>
 /// <para>Mapping Limit Settings</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class MappingLimitSettingsDescriptor : SerializableDescriptor<MappingLimitSettingsDescriptor>
 {

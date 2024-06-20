@@ -319,7 +319,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequest request, CancellationToken cancellationToken = default)
@@ -329,7 +329,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(PutSynonymRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -339,7 +339,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -350,7 +350,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutSynonymRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -362,7 +362,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -372,7 +372,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -383,7 +383,7 @@ public partial class SynonymsNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a synonyms set</para>
+	/// <para>Creates or updates a synonym set.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutSynonymResponse> PutSynonymAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutSynonymRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

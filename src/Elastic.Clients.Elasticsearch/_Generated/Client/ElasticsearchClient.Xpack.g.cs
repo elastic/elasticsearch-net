@@ -38,7 +38,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +49,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +70,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +82,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +95,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +105,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
@@ -116,7 +116,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about the installed X-Pack features.</para>
+	/// <para>Provides general information about the installed X-Pack features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -128,7 +128,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -139,7 +139,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequest request, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -160,7 +160,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -172,7 +172,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -185,7 +185,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -195,7 +195,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ public partial class XpackNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information about the installed X-Pack features.</para>
+	/// <para>This API provides information about which features are currently enabled and available under the current license and some usage statistics.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<XpackUsageResponse> UsageAsync(Action<XpackUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

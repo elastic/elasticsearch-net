@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
 /// <summary>
 /// <para>Discounted cumulative gain (DCG)</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
@@ -48,7 +48,7 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 
 /// <summary>
 /// <para>Discounted cumulative gain (DCG)</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricDiscountedCumulativeGainDescriptor : SerializableDescriptor<RankEvalMetricDiscountedCumulativeGainDescriptor>
 {

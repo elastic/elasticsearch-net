@@ -128,7 +128,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -139,7 +139,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequest request, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -160,7 +160,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -172,7 +172,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -185,7 +185,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -195,7 +195,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves licensing information for the cluster</para>
+	/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLicenseResponse> GetAsync(Action<GetLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -488,7 +488,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -499,7 +499,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequest request, CancellationToken cancellationToken = default)
@@ -509,7 +509,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -520,7 +520,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -532,7 +532,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -545,7 +545,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -555,7 +555,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(CancellationToken cancellationToken = default)
@@ -566,7 +566,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts an indefinite basic license.</para>
+	/// <para>The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.<br/>To check the status of your basic license, use the following API: [Get basic status](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html).</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(Action<PostStartBasicRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -578,7 +578,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -589,7 +589,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequest request, CancellationToken cancellationToken = default)
@@ -599,7 +599,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -610,7 +610,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -622,7 +622,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -635,7 +635,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -645,7 +645,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
@@ -656,7 +656,7 @@ public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>starts a limited time trial license.</para>
+	/// <para>The start trial API enables you to start a 30-day trial, which gives access to all subscription features.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(Action<PostStartTrialRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

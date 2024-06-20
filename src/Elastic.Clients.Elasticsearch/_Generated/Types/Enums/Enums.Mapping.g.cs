@@ -99,6 +99,8 @@ public enum FieldType
 	Short,
 	[EnumMember(Value = "shape")]
 	Shape,
+	[EnumMember(Value = "semantic_text")]
+	SemanticText,
 	[EnumMember(Value = "search_as_you_type")]
 	SearchAsYouType,
 	[EnumMember(Value = "scaled_float")]
@@ -198,6 +200,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.Short;
 			case "shape":
 				return FieldType.Shape;
+			case "semantic_text":
+				return FieldType.SemanticText;
 			case "search_as_you_type":
 				return FieldType.SearchAsYouType;
 			case "scaled_float":
@@ -303,6 +307,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Shape:
 				writer.WriteStringValue("shape");
+				return;
+			case FieldType.SemanticText:
+				writer.WriteStringValue("semantic_text");
 				return;
 			case FieldType.SearchAsYouType:
 				writer.WriteStringValue("search_as_you_type");

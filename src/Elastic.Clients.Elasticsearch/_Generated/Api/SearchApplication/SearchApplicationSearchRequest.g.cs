@@ -31,6 +31,10 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
 public sealed partial class SearchApplicationSearchRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>Determines whether aggregation names are prefixed by their respective types in the response.</para>
+	/// </summary>
+	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
 /// <summary>
@@ -49,6 +53,12 @@ public sealed partial class SearchApplicationSearchRequest : PlainRequest<Search
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_application.search";
+
+	/// <summary>
+	/// <para>Determines whether aggregation names are prefixed by their respective types in the response.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
 	/// <para>Query parameters specific to this request, which will override any defaults specified in the template.</para>
@@ -75,6 +85,8 @@ public sealed partial class SearchApplicationSearchRequestDescriptor : RequestDe
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "search_application.search";
+
+	public SearchApplicationSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
 
 	public SearchApplicationSearchRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{
