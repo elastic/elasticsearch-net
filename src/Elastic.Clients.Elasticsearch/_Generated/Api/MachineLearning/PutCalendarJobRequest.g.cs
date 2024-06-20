@@ -38,7 +38,7 @@ public sealed partial class PutCalendarJobRequestParameters : RequestParameters
 /// </summary>
 public sealed partial class PutCalendarJobRequest : PlainRequest<PutCalendarJobRequestParameters>
 {
-	public PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
+	public PutCalendarJobRequest(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
 	{
 	}
 
@@ -58,7 +58,7 @@ public sealed partial class PutCalendarJobRequestDescriptor : RequestDescriptor<
 {
 	internal PutCalendarJobRequestDescriptor(Action<PutCalendarJobRequestDescriptor> configure) => configure.Invoke(this);
 
-	public PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
+	public PutCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId) : base(r => r.Required("calendar_id", calendarId).Required("job_id", jobId))
 	{
 	}
 
@@ -76,7 +76,7 @@ public sealed partial class PutCalendarJobRequestDescriptor : RequestDescriptor<
 		return Self;
 	}
 
-	public PutCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public PutCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids jobId)
 	{
 		RouteValues.Required("job_id", jobId);
 		return Self;

@@ -300,7 +300,7 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 
 				if (property == "routing_path")
 				{
-					variant.RoutingPath = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+					variant.RoutingPath = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 					continue;
 				}
 
@@ -739,7 +739,7 @@ internal sealed partial class IndexSettingsConverter : JsonConverter<IndexSettin
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [JsonConverter(typeof(IndexSettingsConverter))]
 public sealed partial class IndexSettings
@@ -828,7 +828,7 @@ public sealed partial class IndexSettings
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDescriptor<IndexSettingsDescriptor<TDocument>>
 {
@@ -2253,7 +2253,7 @@ public sealed partial class IndexSettingsDescriptor<TDocument> : SerializableDes
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class IndexSettingsDescriptor : SerializableDescriptor<IndexSettingsDescriptor>
 {

@@ -29,7 +29,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.RankEval;
 
 /// <summary>
 /// <para>Recall at K (R@k)</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricRecall
 {
@@ -48,7 +48,7 @@ public sealed partial class RankEvalMetricRecall
 
 /// <summary>
 /// <para>Recall at K (R@k)</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class RankEvalMetricRecallDescriptor : SerializableDescriptor<RankEvalMetricRecallDescriptor>
 {

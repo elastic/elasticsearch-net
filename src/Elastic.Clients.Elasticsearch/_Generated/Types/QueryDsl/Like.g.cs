@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
 /// <summary>
 /// <para>Text that we want similar documents for or a lookup to a document's field for the text.</para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {

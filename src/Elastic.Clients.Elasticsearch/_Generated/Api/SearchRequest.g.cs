@@ -296,6 +296,12 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 					continue;
 				}
 
+				if (property == "retriever")
+				{
+					variant.Retriever = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Retriever?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "runtime_mappings")
 				{
 					variant.RuntimeMappings = JsonSerializer.Deserialize<IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?>(ref reader, options);
@@ -500,6 +506,12 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 		{
 			writer.WritePropertyName("rescore");
 			JsonSerializer.Serialize(writer, value.Rescore, options);
+		}
+
+		if (value.Retriever is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, value.Retriever, options);
 		}
 
 		if (value.RuntimeMappings is not null)
@@ -909,6 +921,12 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	public ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
+	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("retriever")]
+	public Elastic.Clients.Elasticsearch.Retriever? Retriever { get; set; }
+
+	/// <summary>
 	/// <para>Defines one or more runtime fields in the search request.<br/>These fields take precedence over mapped fields with the same name.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("runtime_mappings")]
@@ -1108,6 +1126,9 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> RescoreDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>> RescoreDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] RescoreDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Retriever? RetrieverValue { get; set; }
+	private Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> RetrieverDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> RetrieverDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
@@ -1510,6 +1531,33 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
 		RescoreDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// </summary>
+	public SearchRequestDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever? retriever)
+	{
+		RetrieverDescriptor = null;
+		RetrieverDescriptorAction = null;
+		RetrieverValue = retriever;
+		return Self;
+	}
+
+	public SearchRequestDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor)
+	{
+		RetrieverValue = null;
+		RetrieverDescriptorAction = null;
+		RetrieverDescriptor = descriptor;
+		return Self;
+	}
+
+	public SearchRequestDescriptor<TDocument> Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> configure)
+	{
+		RetrieverValue = null;
+		RetrieverDescriptor = null;
+		RetrieverDescriptorAction = configure;
 		return Self;
 	}
 
@@ -1984,6 +2032,22 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
 		}
 
+		if (RetrieverDescriptor is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
+		}
+		else if (RetrieverDescriptorAction is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(RetrieverDescriptorAction), options);
+		}
+		else if (RetrieverValue is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, RetrieverValue, options);
+		}
+
 		if (RuntimeMappingsValue is not null)
 		{
 			writer.WritePropertyName("runtime_mappings");
@@ -2228,6 +2292,9 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	private Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor RescoreDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor> RescoreDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] RescoreDescriptorActions { get; set; }
+	private Elastic.Clients.Elasticsearch.Retriever? RetrieverValue { get; set; }
+	private Elastic.Clients.Elasticsearch.RetrieverDescriptor RetrieverDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> RetrieverDescriptorAction { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
 	private IDictionary<string, Elastic.Clients.Elasticsearch.ScriptFieldDescriptor> ScriptFieldsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfterValue { get; set; }
@@ -2630,6 +2697,33 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		RescoreDescriptor = null;
 		RescoreDescriptorAction = null;
 		RescoreDescriptorActions = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>A retriever is a specification to describe top documents returned from a search. A retriever replaces other elements of the search API that also return top documents such as query and knn.</para>
+	/// </summary>
+	public SearchRequestDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever? retriever)
+	{
+		RetrieverDescriptor = null;
+		RetrieverDescriptorAction = null;
+		RetrieverValue = retriever;
+		return Self;
+	}
+
+	public SearchRequestDescriptor Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor)
+	{
+		RetrieverValue = null;
+		RetrieverDescriptorAction = null;
+		RetrieverDescriptor = descriptor;
+		return Self;
+	}
+
+	public SearchRequestDescriptor Retriever(Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> configure)
+	{
+		RetrieverValue = null;
+		RetrieverDescriptor = null;
+		RetrieverDescriptorAction = configure;
 		return Self;
 	}
 
@@ -3102,6 +3196,22 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 		{
 			writer.WritePropertyName("rescore");
 			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(RescoreValue, writer, options);
+		}
+
+		if (RetrieverDescriptor is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, RetrieverDescriptor, options);
+		}
+		else if (RetrieverDescriptorAction is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RetrieverDescriptor(RetrieverDescriptorAction), options);
+		}
+		else if (RetrieverValue is not null)
+		{
+			writer.WritePropertyName("retriever");
+			JsonSerializer.Serialize(writer, RetrieverValue, options);
 		}
 
 		if (RuntimeMappingsValue is not null)

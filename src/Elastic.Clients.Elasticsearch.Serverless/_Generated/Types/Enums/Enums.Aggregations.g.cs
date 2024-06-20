@@ -57,7 +57,7 @@ internal sealed class CalendarIntervalConverter : JsonConverter<CalendarInterval
 		switch (enumString)
 		{
 			case "year":
-			case "1Y":
+			case "1y":
 				return CalendarInterval.Year;
 			case "week":
 			case "1w":
