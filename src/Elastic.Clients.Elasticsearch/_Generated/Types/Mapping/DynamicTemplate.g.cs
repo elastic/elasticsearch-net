@@ -117,13 +117,13 @@ internal sealed partial class DynamicTemplateConverter : JsonConverter<DynamicTe
 			reader.Read();
 			if (propertyName == "match")
 			{
-				matchValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				matchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 
 			if (propertyName == "match_mapping_type")
 			{
-				matchMappingTypeValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				matchMappingTypeValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 
@@ -135,25 +135,25 @@ internal sealed partial class DynamicTemplateConverter : JsonConverter<DynamicTe
 
 			if (propertyName == "path_match")
 			{
-				pathMatchValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				pathMatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 
 			if (propertyName == "path_unmatch")
 			{
-				pathUnmatchValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				pathUnmatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 
 			if (propertyName == "unmatch")
 			{
-				unmatchValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				unmatchValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 
 			if (propertyName == "unmatch_mapping_type")
 			{
-				unmatchMappingTypeValue = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+				unmatchMappingTypeValue = SingleOrManySerializationHelper.Deserialize<string>(ref reader, options);
 				continue;
 			}
 

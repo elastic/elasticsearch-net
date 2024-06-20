@@ -29,7 +29,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/query-dsl.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [JsonConverter(typeof(QueryConverter))]
 public sealed partial class Query
@@ -86,6 +86,7 @@ public sealed partial class Query
 	public static Query RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => new Query("rule_query", ruleQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
+	public static Query Semantic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery semanticQuery) => new Query("semantic", semanticQuery);
 	public static Query SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new Query("simple_query_string", simpleQueryStringQuery);
 	public static Query SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => new Query("span_containing", spanContainingQuery);
 	public static Query SpanFieldMasking(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new Query("span_field_masking", spanFieldMaskingQuery);
@@ -401,6 +402,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "semantic")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "simple_query_string")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
@@ -646,6 +654,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "script_score":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery)value.Variant, options);
 					break;
+				case "semantic":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery)value.Variant, options);
+					break;
 				case "simple_query_string":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery)value.Variant, options);
 					break;
@@ -807,6 +818,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor<TDocument> ScriptScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
+	public QueryDescriptor<TDocument> Semantic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery semanticQuery) => Set(semanticQuery, "semantic");
+	public QueryDescriptor<TDocument> Semantic(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQueryDescriptor> configure) => Set(configure, "semantic");
 	public QueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
@@ -965,6 +978,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor ScriptScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
+	public QueryDescriptor Semantic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery semanticQuery) => Set(semanticQuery, "semantic");
+	public QueryDescriptor Semantic(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQueryDescriptor> configure) => Set(configure, "semantic");
 	public QueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");

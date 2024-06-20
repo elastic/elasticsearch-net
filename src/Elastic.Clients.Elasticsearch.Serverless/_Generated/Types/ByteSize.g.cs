@@ -31,7 +31,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless;
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/api-conventions.html#byte-units">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/api-conventions.html#byte-units">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class ByteSize : Union<long, string>
 {
