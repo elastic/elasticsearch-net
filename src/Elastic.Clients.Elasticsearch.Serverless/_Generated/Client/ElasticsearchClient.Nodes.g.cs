@@ -38,8 +38,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -48,8 +48,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -58,8 +58,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
@@ -69,8 +69,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -81,8 +81,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
 	{
@@ -92,8 +92,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -104,8 +104,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -114,8 +114,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -124,8 +124,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -135,8 +135,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -147,8 +147,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
 	{
@@ -158,8 +158,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -170,8 +170,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -180,8 +180,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -190,8 +190,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -201,8 +201,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -213,8 +213,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -224,8 +224,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -236,8 +236,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -246,8 +246,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -257,8 +257,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Elastic.Clients.Elasticsearch.Serverless.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -269,8 +269,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -280,8 +280,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -292,8 +292,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequest request, CancellationToken cancellationToken = default)
 	{
@@ -302,8 +302,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -312,8 +312,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -323,8 +323,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Serverless.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Serverless.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -335,8 +335,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
 	{
@@ -346,8 +346,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
