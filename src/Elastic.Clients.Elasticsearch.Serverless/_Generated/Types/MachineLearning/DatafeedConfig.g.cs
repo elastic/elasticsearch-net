@@ -71,7 +71,7 @@ internal sealed partial class DatafeedConfigConverter : JsonConverter<DatafeedCo
 
 				if (property == "indices" || property == "indexes")
 				{
-					variant.Indices = JsonSerializer.Deserialize<ICollection<string>?>(ref reader, options);
+					variant.Indices = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Indices?>(ref reader, options);
 					continue;
 				}
 
@@ -250,7 +250,7 @@ public sealed partial class DatafeedConfig
 	/// <summary>
 	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
 	/// </summary>
-	public ICollection<string>? Indices { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.Indices? Indices { get; set; }
 
 	/// <summary>
 	/// <para>Specifies index expansion options that are used during search.</para>
@@ -306,7 +306,7 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfigDescriptor DelayedDataCheckConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FrequencyValue { get; set; }
-	private ICollection<string>? IndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndicesOptions? IndicesOptionsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndicesOptionsDescriptor IndicesOptionsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndicesOptionsDescriptor> IndicesOptionsDescriptorAction { get; set; }
@@ -404,7 +404,7 @@ public sealed partial class DatafeedConfigDescriptor<TDocument> : SerializableDe
 	/// <summary>
 	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
 	/// </summary>
-	public DatafeedConfigDescriptor<TDocument> Indices(ICollection<string>? indices)
+	public DatafeedConfigDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
 		IndicesValue = indices;
 		return Self;
@@ -663,7 +663,7 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	private Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfigDescriptor DelayedDataCheckConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.MachineLearning.DelayedDataCheckConfigDescriptor> DelayedDataCheckConfigDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Duration? FrequencyValue { get; set; }
-	private ICollection<string>? IndicesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.Indices? IndicesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndicesOptions? IndicesOptionsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndicesOptionsDescriptor IndicesOptionsDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.IndicesOptionsDescriptor> IndicesOptionsDescriptorAction { get; set; }
@@ -761,7 +761,7 @@ public sealed partial class DatafeedConfigDescriptor : SerializableDescriptor<Da
 	/// <summary>
 	/// <para>An array of index names. Wildcards are supported. If any indices are in remote clusters, the machine learning nodes must have the `remote_cluster_client` role.</para>
 	/// </summary>
-	public DatafeedConfigDescriptor Indices(ICollection<string>? indices)
+	public DatafeedConfigDescriptor Indices(Elastic.Clients.Elasticsearch.Serverless.Indices? indices)
 	{
 		IndicesValue = indices;
 		return Self;

@@ -266,6 +266,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, SearchAsYouTypeProperty searchAsYouTypeProperty) => AssignVariant(propertyName, searchAsYouTypeProperty);
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> SearchAsYouType(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SearchAsYouTypePropertyDescriptor<TDocument>, SearchAsYouTypeProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> SemanticText(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, SemanticTextProperty semanticTextProperty) => AssignVariant(propertyName, semanticTextProperty);
+	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> SemanticText(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextPropertyDescriptor, SemanticTextProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Serverless.Mapping.ShapePropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Serverless.Mapping.ShapePropertyDescriptor<TDocument>, ShapeProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.Serverless.PropertyName propertyName, ShapeProperty shapeProperty) => AssignVariant(propertyName, shapeProperty);
@@ -402,6 +407,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.ScaledFloatNumberProperty>(ref reader, options);
 			case "search_as_you_type":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.SearchAsYouTypeProperty>(ref reader, options);
+			case "semantic_text":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextProperty>(ref reader, options);
 			case "shape":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.Mapping.ShapeProperty>(ref reader, options);
 			case "short":
@@ -552,6 +559,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "search_as_you_type":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.SearchAsYouTypeProperty), options);
+				return;
+			case "semantic_text":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.SemanticTextProperty), options);
 				return;
 			case "shape":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Serverless.Mapping.ShapeProperty), options);

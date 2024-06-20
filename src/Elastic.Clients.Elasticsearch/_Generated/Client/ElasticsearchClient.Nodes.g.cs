@@ -38,7 +38,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +49,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +70,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +82,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +95,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +105,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, CancellationToken cancellationToken = default)
@@ -116,7 +116,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes the archived repositories metering information present in the cluster.</para>
+	/// <para>You can use this API to clear the archived repositories metering information in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -128,7 +128,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -139,7 +139,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequest request, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -160,7 +160,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -172,7 +172,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -185,7 +185,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -195,7 +195,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns cluster repositories metering information.</para>
+	/// <para>You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.<br/>This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the<br/>information needed to compute aggregations over a period of time. Additionally, the information exposed by this<br/>API is volatile, meaning that it won’t be present after node restarts.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, Action<GetRepositoriesMeteringInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -218,8 +218,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(HotThreadsRequest request)
@@ -229,8 +229,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -239,8 +239,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(HotThreadsRequestDescriptor descriptor)
@@ -250,8 +250,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
@@ -262,8 +262,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest)
@@ -275,8 +275,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads()
@@ -287,8 +287,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HotThreadsResponse HotThreads(Action<HotThreadsRequestDescriptor> configureRequest)
@@ -300,8 +300,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -310,8 +310,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
@@ -321,8 +321,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -333,8 +333,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
 	{
@@ -344,8 +344,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about hot threads on each node in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>This API yields a breakdown of the hot threads on each selected node in the cluster.<br/>The output is plain text with a breakdown of each node’s top hot threads.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HotThreadsResponse> HotThreadsAsync(Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -356,8 +356,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(NodesInfoRequest request)
@@ -367,8 +367,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -377,8 +377,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(NodesInfoRequestDescriptor descriptor)
@@ -388,8 +388,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -400,8 +400,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest)
@@ -413,8 +413,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info()
@@ -425,8 +425,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesInfoResponse Info(Action<NodesInfoRequestDescriptor> configureRequest)
@@ -438,8 +438,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -448,8 +448,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -459,8 +459,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -471,8 +471,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
 	{
@@ -482,8 +482,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes information.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesInfoResponse> InfoAsync(Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -494,7 +494,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -505,7 +505,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequest request, CancellationToken cancellationToken = default)
@@ -515,7 +515,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -526,7 +526,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -538,7 +538,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -551,7 +551,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -563,7 +563,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -576,7 +576,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -586,7 +586,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
@@ -597,7 +597,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ReloadSecureSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -609,7 +609,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(CancellationToken cancellationToken = default)
@@ -620,7 +620,7 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Reloads secure settings.</para>
+	/// <para>Reloads the keystore on nodes in the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Action<ReloadSecureSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -632,8 +632,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(NodesStatsRequest request)
@@ -643,8 +643,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -653,8 +653,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor)
@@ -664,8 +664,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
@@ -676,8 +676,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -689,8 +689,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>()
@@ -701,8 +701,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -714,8 +714,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(NodesStatsRequestDescriptor descriptor)
@@ -725,8 +725,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
@@ -737,8 +737,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest)
@@ -750,8 +750,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats()
@@ -762,8 +762,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesStatsResponse Stats(Action<NodesStatsRequestDescriptor> configureRequest)
@@ -775,8 +775,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -785,8 +785,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -796,8 +796,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -808,8 +808,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -819,8 +819,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -831,8 +831,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -841,8 +841,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
 	{
@@ -852,8 +852,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -864,8 +864,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -875,8 +875,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns statistical information about nodes in the cluster.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns cluster nodes statistics.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -887,8 +887,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(NodesUsageRequest request)
@@ -898,8 +898,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequest request, CancellationToken cancellationToken = default)
 	{
@@ -908,8 +908,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(NodesUsageRequestDescriptor descriptor)
@@ -919,8 +919,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -931,8 +931,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest)
@@ -944,8 +944,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage()
@@ -956,8 +956,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual NodesUsageResponse Usage(Action<NodesUsageRequestDescriptor> configureRequest)
@@ -969,8 +969,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -979,8 +979,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -990,8 +990,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1002,8 +1002,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
 	{
@@ -1013,8 +1013,8 @@ public partial class NodesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns low-level information about REST actions usage on nodes.</para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>Returns information on the usage of features.</para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<NodesUsageResponse> UsageAsync(Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

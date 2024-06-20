@@ -218,7 +218,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -229,7 +229,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSearchApplicationResponse> GetAsync(GetSearchApplicationRequest request, CancellationToken cancellationToken = default)
@@ -239,7 +239,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -250,7 +250,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -262,7 +262,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -275,7 +275,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSearchApplicationResponse> GetAsync(GetSearchApplicationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -285,7 +285,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
@@ -296,7 +296,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the details about a search application.</para>
+	/// <para>Returns the details about a search application</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, Action<GetSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -716,7 +716,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform a search against a search application</para>
+	/// <para>Perform a search against a search application.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -727,7 +727,7 @@ public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Perform a search against a search application</para>
+	/// <para>Perform a search against a search application.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(SearchApplicationSearchRequest request, CancellationToken cancellationToken = default)
