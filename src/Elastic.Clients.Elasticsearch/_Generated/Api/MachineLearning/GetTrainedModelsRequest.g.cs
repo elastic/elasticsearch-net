@@ -66,7 +66,7 @@ public sealed partial class GetTrainedModelsRequestParameters : RequestParameter
 	/// <summary>
 	/// <para>A comma delimited string of tags. A trained model can have many tags, or<br/>none. When supplied, only trained models that contain all the supplied<br/>tags are returned.</para>
 	/// </summary>
-	public string? Tags { get => Q<string?>("tags"); set => Q("tags", value); }
+	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
 }
 
 /// <summary>
@@ -78,7 +78,7 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	{
 	}
 
-	public GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Id? modelId) : base(r => r.Optional("model_id", modelId))
+	public GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))
 	{
 	}
 
@@ -132,7 +132,7 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// <para>A comma delimited string of tags. A trained model can have many tags, or<br/>none. When supplied, only trained models that contain all the supplied<br/>tags are returned.</para>
 	/// </summary>
 	[JsonIgnore]
-	public string? Tags { get => Q<string?>("tags"); set => Q("tags", value); }
+	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
 }
 
 /// <summary>
@@ -142,7 +142,7 @@ public sealed partial class GetTrainedModelsRequestDescriptor : RequestDescripto
 {
 	internal GetTrainedModelsRequestDescriptor(Action<GetTrainedModelsRequestDescriptor> configure) => configure.Invoke(this);
 
-	public GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? modelId) : base(r => r.Optional("model_id", modelId))
+	public GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))
 	{
 	}
 
@@ -164,9 +164,9 @@ public sealed partial class GetTrainedModelsRequestDescriptor : RequestDescripto
 	public GetTrainedModelsRequestDescriptor From(int? from) => Qs("from", from);
 	public GetTrainedModelsRequestDescriptor Include(Elastic.Clients.Elasticsearch.MachineLearning.Include? include) => Qs("include", include);
 	public GetTrainedModelsRequestDescriptor Size(int? size) => Qs("size", size);
-	public GetTrainedModelsRequestDescriptor Tags(string? tags) => Qs("tags", tags);
+	public GetTrainedModelsRequestDescriptor Tags(ICollection<string>? tags) => Qs("tags", tags);
 
-	public GetTrainedModelsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id? modelId)
+	public GetTrainedModelsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Ids? modelId)
 	{
 		RouteValues.Optional("model_id", modelId);
 		return Self;

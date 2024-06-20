@@ -38,7 +38,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes stale data from repository.</para>
+	/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(CleanupRepositoryRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +48,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes stale data from repository.</para>
+	/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(CleanupRepositoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +58,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes stale data from repository.</para>
+	/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -69,7 +69,7 @@ public partial class SnapshotNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes stale data from repository.</para>
+	/// <para>Triggers the review of a snapshot repository’s contents and deletes any stale data not referenced by existing snapshots.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<CleanupRepositoryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
