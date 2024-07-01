@@ -66,6 +66,9 @@ public sealed class RangeQueryDescriptor<TDocument> : ProxiedDescriptor<RangeQue
 
 	public RangeQueryDescriptor<TDocument> DateRange(Action<DateRangeQueryDescriptor<TDocument>> configure) =>
 		SetResult(configure);
+
+	public RangeQueryDescriptor<TDocument> TermRange(Action<DateRangeQueryDescriptor<TDocument>> configure) =>
+		SetResult(configure);
 }
 
 public sealed class RangeQueryDescriptor : ProxiedDescriptor<RangeQueryDescriptor>
@@ -77,14 +80,23 @@ public sealed class RangeQueryDescriptor : ProxiedDescriptor<RangeQueryDescripto
 	public RangeQueryDescriptor DateRange(Action<DateRangeQueryDescriptor> configure) => SetResult(configure);
 
 	public RangeQueryDescriptor DateRange<TDocument>(Action<DateRangeQueryDescriptor<TDocument>> configure) => SetResult(configure);
+
+	public RangeQueryDescriptor TermRange(Action<TermRangeQueryDescriptor> configure) => SetResult(configure);
+
+	public RangeQueryDescriptor TermRange<TDocument>(Action<TermRangeQueryDescriptor<TDocument>> configure) => SetResult(configure);
 }
 
 public sealed partial class NumberRangeQuery
 {
-	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => Query.Range(new RangeQuery(numberRangeQuery));
+	public static implicit operator Query(NumberRangeQuery numberRangeQuery) => Query.Range(numberRangeQuery);
 }
 
 public sealed partial class DateRangeQuery
 {
-	public static implicit operator Query(DateRangeQuery dateRangeQuery) => Query.Range(new RangeQuery(dateRangeQuery));
+	public static implicit operator Query(DateRangeQuery dateRangeQuery) => Query.Range(dateRangeQuery);
+}
+
+public sealed partial class TermRangeQuery
+{
+	public static implicit operator Query(TermRangeQuery termRangeQuery) => Query.Range(termRangeQuery);
 }

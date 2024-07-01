@@ -40,10 +40,10 @@ public sealed partial class RuleQuery
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query Organic { get; set; }
 	[JsonInclude, JsonPropertyName("_name")]
 	public string? QueryName { get; set; }
-	[JsonInclude, JsonPropertyName("ruleset_id")]
-	public Elastic.Clients.Elasticsearch.Serverless.Id RulesetId { get; set; }
+	[JsonInclude, JsonPropertyName("ruleset_ids")]
+	public ICollection<Elastic.Clients.Elasticsearch.Serverless.Id> RulesetIds { get; set; }
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(RuleQuery ruleQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.RuleQuery(ruleQuery);
+	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(RuleQuery ruleQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Rule(ruleQuery);
 }
 
 public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescriptor<RuleQueryDescriptor<TDocument>>
@@ -60,7 +60,7 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument> OrganicDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor<TDocument>> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id> RulesetIdsValue { get; set; }
 
 	/// <summary>
 	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
@@ -107,9 +107,9 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 		return Self;
 	}
 
-	public RuleQueryDescriptor<TDocument> RulesetId(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId)
+	public RuleQueryDescriptor<TDocument> RulesetIds(ICollection<Elastic.Clients.Elasticsearch.Serverless.Id> rulesetIds)
 	{
-		RulesetIdValue = rulesetId;
+		RulesetIdsValue = rulesetIds;
 		return Self;
 	}
 
@@ -146,8 +146,8 @@ public sealed partial class RuleQueryDescriptor<TDocument> : SerializableDescrip
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		writer.WritePropertyName("ruleset_id");
-		JsonSerializer.Serialize(writer, RulesetIdValue, options);
+		writer.WritePropertyName("ruleset_ids");
+		JsonSerializer.Serialize(writer, RulesetIdsValue, options);
 		writer.WriteEndObject();
 	}
 }
@@ -166,7 +166,7 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor OrganicDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryDescriptor> OrganicDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.Id RulesetIdValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Serverless.Id> RulesetIdsValue { get; set; }
 
 	/// <summary>
 	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
@@ -213,9 +213,9 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 		return Self;
 	}
 
-	public RuleQueryDescriptor RulesetId(Elastic.Clients.Elasticsearch.Serverless.Id rulesetId)
+	public RuleQueryDescriptor RulesetIds(ICollection<Elastic.Clients.Elasticsearch.Serverless.Id> rulesetIds)
 	{
-		RulesetIdValue = rulesetId;
+		RulesetIdsValue = rulesetIds;
 		return Self;
 	}
 
@@ -252,8 +252,8 @@ public sealed partial class RuleQueryDescriptor : SerializableDescriptor<RuleQue
 			writer.WriteStringValue(QueryNameValue);
 		}
 
-		writer.WritePropertyName("ruleset_id");
-		JsonSerializer.Serialize(writer, RulesetIdValue, options);
+		writer.WritePropertyName("ruleset_ids");
+		JsonSerializer.Serialize(writer, RulesetIdsValue, options);
 		writer.WriteEndObject();
 	}
 }

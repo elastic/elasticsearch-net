@@ -54,12 +54,14 @@ public sealed partial class Query
 	public static Query CombinedFields(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.CombinedFieldsQuery combinedFieldsQuery) => new Query("combined_fields", combinedFieldsQuery);
 	public static Query ConstantScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQuery constantScoreQuery) => new Query("constant_score", constantScoreQuery);
 	public static Query DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => new Query("dis_max", disMaxQuery);
+	public static Query DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDistanceFeatureQuery distanceFeatureQuery) => new Query("distance_feature", distanceFeatureQuery);
+	public static Query DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceFeatureQuery distanceFeatureQuery) => new Query("distance_feature", distanceFeatureQuery);
+	public static Query DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDistanceFeatureQuery distanceFeatureQuery) => new Query("distance_feature", distanceFeatureQuery);
 	public static Query Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => new Query("exists", existsQuery);
 	public static Query FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => new Query("function_score", functionScoreQuery);
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
 	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
 	public static Query GeoDistance(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery geoDistanceQuery) => new Query("geo_distance", geoDistanceQuery);
-	public static Query GeoPolygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery geoPolygonQuery) => new Query("geo_polygon", geoPolygonQuery);
 	public static Query HasChild(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery hasChildQuery) => new Query("has_child", hasChildQuery);
 	public static Query HasParent(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
 	public static Query Ids(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.IdsQuery idsQuery) => new Query("ids", idsQuery);
@@ -79,11 +81,14 @@ public sealed partial class Query
 	public static Query Pinned(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PinnedQuery pinnedQuery) => new Query("pinned", pinnedQuery);
 	public static Query Prefix(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQuery prefixQuery) => new Query("prefix", prefixQuery);
 	public static Query QueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery queryStringQuery) => new Query("query_string", queryStringQuery);
-	public static Query Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery rangeQuery) => new Query("range", rangeQuery);
+	public static Query Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedRangeQuery rangeQuery) => new Query("range", rangeQuery);
+	public static Query Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateRangeQuery rangeQuery) => new Query("range", rangeQuery);
+	public static Query Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumberRangeQuery rangeQuery) => new Query("range", rangeQuery);
+	public static Query Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermRangeQuery rangeQuery) => new Query("range", rangeQuery);
 	public static Query RankFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery rankFeatureQuery) => new Query("rank_feature", rankFeatureQuery);
 	public static Query RawJson(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery rawJsonQuery) => new Query("raw_json", rawJsonQuery);
 	public static Query Regexp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery regexpQuery) => new Query("regexp", regexpQuery);
-	public static Query RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => new Query("rule_query", ruleQuery);
+	public static Query Rule(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => new Query("rule", ruleQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
 	public static Query Semantic(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SemanticQuery semanticQuery) => new Query("semantic", semanticQuery);
@@ -97,6 +102,7 @@ public sealed partial class Query
 	public static Query SpanOr(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanOrQuery spanOrQuery) => new Query("span_or", spanOrQuery);
 	public static Query SpanTerm(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQuery spanTermQuery) => new Query("span_term", spanTermQuery);
 	public static Query SpanWithin(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery spanWithinQuery) => new Query("span_within", spanWithinQuery);
+	public static Query SparseVector(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery sparseVectorQuery) => new Query("sparse_vector", sparseVectorQuery);
 	public static Query Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => new Query("term", termQuery);
 	public static Query Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => new Query("terms", termsQuery);
 	public static Query TermsSet(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsSetQuery termsSetQuery) => new Query("terms_set", termsSetQuery);
@@ -178,6 +184,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "distance_feature")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDistanceFeatureQuery>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "exists")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery?>(ref reader, options);
@@ -209,13 +222,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			if (propertyName == "geo_distance")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "geo_polygon")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -355,7 +361,7 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 
 			if (propertyName == "range")
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery?>(ref reader, options);
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedRangeQuery>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -381,7 +387,7 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
-			if (propertyName == "rule_query")
+			if (propertyName == "rule")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery?>(ref reader, options);
 				variantNameValue = propertyName;
@@ -479,6 +485,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "sparse_vector")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "term")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery?>(ref reader, options);
@@ -558,6 +571,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "dis_max":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery)value.Variant, options);
 					break;
+				case "distance_feature":
+					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
+					break;
 				case "exists":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery)value.Variant, options);
 					break;
@@ -572,9 +588,6 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 					break;
 				case "geo_distance":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery)value.Variant, options);
-					break;
-				case "geo_polygon":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery)value.Variant, options);
 					break;
 				case "has_child":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery)value.Variant, options);
@@ -634,7 +647,7 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery)value.Variant, options);
 					break;
 				case "range":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery)value.Variant, options);
+					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
 					break;
 				case "rank_feature":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery)value.Variant, options);
@@ -645,7 +658,7 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "regexp":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery)value.Variant, options);
 					break;
-				case "rule_query":
+				case "rule":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery)value.Variant, options);
 					break;
 				case "script":
@@ -686,6 +699,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 					break;
 				case "span_within":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery)value.Variant, options);
+					break;
+				case "sparse_vector":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery)value.Variant, options);
 					break;
 				case "term":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery)value.Variant, options);
@@ -756,6 +772,9 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> ConstantScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQueryDescriptor<TDocument>> configure) => Set(configure, "constant_score");
 	public QueryDescriptor<TDocument> DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
 	public QueryDescriptor<TDocument> DisMax(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor<TDocument>> configure) => Set(configure, "dis_max");
+	public QueryDescriptor<TDocument> DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
+	public QueryDescriptor<TDocument> DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
+	public QueryDescriptor<TDocument> DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
 	public QueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
 	public QueryDescriptor<TDocument> Exists(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor<TDocument>> configure) => Set(configure, "exists");
 	public QueryDescriptor<TDocument> FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
@@ -766,8 +785,6 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> GeoBoundingBox(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor<TDocument> GeoDistance(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
-	public QueryDescriptor<TDocument> GeoPolygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
-	public QueryDescriptor<TDocument> GeoPolygon(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQueryDescriptor<TDocument>> configure) => Set(configure, "geo_polygon");
 	public QueryDescriptor<TDocument> HasChild(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor<TDocument> HasChild(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
 	public QueryDescriptor<TDocument> HasParent(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -806,14 +823,17 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Prefix(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQueryDescriptor<TDocument>> configure) => Set(configure, "prefix");
 	public QueryDescriptor<TDocument> QueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
 	public QueryDescriptor<TDocument> QueryString(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "query_string");
-	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
 	public QueryDescriptor<TDocument> RankFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor<TDocument> RankFeature(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQueryDescriptor<TDocument>> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor<TDocument> RawJson(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
 	public QueryDescriptor<TDocument> Regexp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor<TDocument> Regexp(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQueryDescriptor<TDocument>> configure) => Set(configure, "regexp");
-	public QueryDescriptor<TDocument> RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
-	public QueryDescriptor<TDocument> RuleQuery(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule_query");
+	public QueryDescriptor<TDocument> Rule(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule");
+	public QueryDescriptor<TDocument> Rule(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor<TDocument>> configure) => Set(configure, "rule");
 	public QueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => Set(scriptQuery, "script");
 	public QueryDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
@@ -840,6 +860,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> SpanTerm(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQueryDescriptor<TDocument>> configure) => Set(configure, "span_term");
 	public QueryDescriptor<TDocument> SpanWithin(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public QueryDescriptor<TDocument> SpanWithin(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQueryDescriptor<TDocument>> configure) => Set(configure, "span_within");
+	public QueryDescriptor<TDocument> SparseVector(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery sparseVectorQuery) => Set(sparseVectorQuery, "sparse_vector");
+	public QueryDescriptor<TDocument> SparseVector(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQueryDescriptor<TDocument>> configure) => Set(configure, "sparse_vector");
 	public QueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
 	public QueryDescriptor<TDocument> Term(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQueryDescriptor<TDocument>> configure) => Set(configure, "term");
 	public QueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
@@ -916,6 +938,9 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor ConstantScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ConstantScoreQueryDescriptor> configure) => Set(configure, "constant_score");
 	public QueryDescriptor DisMax(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQuery disMaxQuery) => Set(disMaxQuery, "dis_max");
 	public QueryDescriptor DisMax<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DisMaxQueryDescriptor> configure) => Set(configure, "dis_max");
+	public QueryDescriptor DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
+	public QueryDescriptor DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
+	public QueryDescriptor DistanceFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDistanceFeatureQuery distanceFeatureQuery) => Set(distanceFeatureQuery, "distance_feature");
 	public QueryDescriptor Exists(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQuery existsQuery) => Set(existsQuery, "exists");
 	public QueryDescriptor Exists<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ExistsQueryDescriptor> configure) => Set(configure, "exists");
 	public QueryDescriptor FunctionScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FunctionScoreQuery functionScoreQuery) => Set(functionScoreQuery, "function_score");
@@ -926,8 +951,6 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor GeoBoundingBox<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor GeoDistance(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor GeoDistance<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
-	public QueryDescriptor GeoPolygon(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQuery geoPolygonQuery) => Set(geoPolygonQuery, "geo_polygon");
-	public QueryDescriptor GeoPolygon<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoPolygonQueryDescriptor> configure) => Set(configure, "geo_polygon");
 	public QueryDescriptor HasChild(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor HasChild<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasChildQueryDescriptor> configure) => Set(configure, "has_child");
 	public QueryDescriptor HasParent(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -966,14 +989,17 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Prefix<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.PrefixQueryDescriptor> configure) => Set(configure, "prefix");
 	public QueryDescriptor QueryString(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQuery queryStringQuery) => Set(queryStringQuery, "query_string");
 	public QueryDescriptor QueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.QueryStringQueryDescriptor> configure) => Set(configure, "query_string");
-	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumberRangeQuery rangeQuery) => Set(rangeQuery, "range");
+	public QueryDescriptor Range(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermRangeQuery rangeQuery) => Set(rangeQuery, "range");
 	public QueryDescriptor RankFeature(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQuery rankFeatureQuery) => Set(rankFeatureQuery, "rank_feature");
 	public QueryDescriptor RankFeature<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RankFeatureQueryDescriptor> configure) => Set(configure, "rank_feature");
 	public QueryDescriptor RawJson(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RawJsonQuery rawJsonQuery) => Set(rawJsonQuery, "raw_json");
 	public QueryDescriptor Regexp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQuery regexpQuery) => Set(regexpQuery, "regexp");
 	public QueryDescriptor Regexp<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RegexpQueryDescriptor> configure) => Set(configure, "regexp");
-	public QueryDescriptor RuleQuery(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule_query");
-	public QueryDescriptor RuleQuery<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor> configure) => Set(configure, "rule_query");
+	public QueryDescriptor Rule(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQuery ruleQuery) => Set(ruleQuery, "rule");
+	public QueryDescriptor Rule<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RuleQueryDescriptor> configure) => Set(configure, "rule");
 	public QueryDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQuery scriptQuery) => Set(scriptQuery, "script");
 	public QueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
@@ -1000,6 +1026,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor SpanTerm<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanTermQueryDescriptor> configure) => Set(configure, "span_term");
 	public QueryDescriptor SpanWithin(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQuery spanWithinQuery) => Set(spanWithinQuery, "span_within");
 	public QueryDescriptor SpanWithin<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SpanWithinQueryDescriptor> configure) => Set(configure, "span_within");
+	public QueryDescriptor SparseVector(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQuery sparseVectorQuery) => Set(sparseVectorQuery, "sparse_vector");
+	public QueryDescriptor SparseVector<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.SparseVectorQueryDescriptor> configure) => Set(configure, "sparse_vector");
 	public QueryDescriptor Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQuery termQuery) => Set(termQuery, "term");
 	public QueryDescriptor Term<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermQueryDescriptor> configure) => Set(configure, "term");
 	public QueryDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQuery termsQuery) => Set(termsQuery, "terms");
