@@ -269,10 +269,10 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "{index}/_update/{id}" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "_update_by_query/{task_id}/_rethrottle" });
-	internal static ApiUrls QueryRulesetDelete = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
-	internal static ApiUrls QueryRulesetGet = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
-	internal static ApiUrls QueryRulesetList = new ApiUrls(new[] { "_query_rules" });
-	internal static ApiUrls QueryRulesetPut = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesDeleteRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesGetRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesListRulesets = new ApiUrls(new[] { "_query_rules" });
+	internal static ApiUrls QueryRulesPutRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
 	internal static ApiUrls RollupDeleteJob = new ApiUrls(new[] { "_rollup/job/{id}" });
 	internal static ApiUrls RollupGetJobs = new ApiUrls(new[] { "_rollup/job/{id}", "_rollup/job" });
 	internal static ApiUrls RollupGetRollupCaps = new ApiUrls(new[] { "_rollup/data/{id}", "_rollup/data" });

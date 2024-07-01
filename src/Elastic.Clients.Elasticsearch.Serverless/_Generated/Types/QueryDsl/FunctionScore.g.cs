@@ -46,7 +46,19 @@ public sealed partial class FunctionScore
 	internal object Variant { get; }
 	internal string VariantName { get; }
 
+	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
+	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
+	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
+	public static FunctionScore Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("exp", decayFunction);
 	public static FunctionScore FieldValueFactor(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => new FunctionScore("field_value_factor", fieldValueFactorScoreFunction);
+	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
+	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
+	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
+	public static FunctionScore Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("gauss", decayFunction);
+	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
+	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
+	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
+	public static FunctionScore Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => new FunctionScore("linear", decayFunction);
 	public static FunctionScore RandomScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunction randomScoreFunction) => new FunctionScore("random_score", randomScoreFunction);
 	public static FunctionScore ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreFunction scriptScoreFunction) => new FunctionScore("script_score", scriptScoreFunction);
 
@@ -107,9 +119,30 @@ internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionSco
 				continue;
 			}
 
+			if (propertyName == "exp")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "field_value_factor")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "gauss")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "linear")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -157,8 +190,17 @@ internal sealed partial class FunctionScoreConverter : JsonConverter<FunctionSco
 			writer.WritePropertyName(value.VariantName);
 			switch (value.VariantName)
 			{
+				case "exp":
+					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
+					break;
 				case "field_value_factor":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction)value.Variant, options);
+					break;
+				case "gauss":
+					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
+					break;
+				case "linear":
+					JsonSerializer.Serialize(writer, value.Variant, value.Variant.GetType(), options);
 					break;
 				case "random_score":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunction>(writer, (Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunction)value.Variant, options);
@@ -219,8 +261,20 @@ public sealed partial class FunctionScoreDescriptor<TDocument> : SerializableDes
 		return Self;
 	}
 
+	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor<TDocument> Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreDescriptor<TDocument> FieldValueFactor(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor<TDocument> Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor<TDocument> RandomScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
 	public FunctionScoreDescriptor<TDocument> RandomScore(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunctionDescriptor<TDocument>> configure) => Set(configure, "random_score");
 	public FunctionScoreDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");
@@ -304,8 +358,20 @@ public sealed partial class FunctionScoreDescriptor : SerializableDescriptor<Fun
 		return Self;
 	}
 
+	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "exp");
+	public FunctionScoreDescriptor Exp(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "exp");
 	public FunctionScoreDescriptor FieldValueFactor(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunction fieldValueFactorScoreFunction) => Set(fieldValueFactorScoreFunction, "field_value_factor");
 	public FunctionScoreDescriptor FieldValueFactor<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.FieldValueFactorScoreFunctionDescriptor> configure) => Set(configure, "field_value_factor");
+	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor Gauss(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "gauss");
+	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.UntypedDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DateDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.NumericDecayFunction decayFunction) => Set(decayFunction, "linear");
+	public FunctionScoreDescriptor Linear(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.GeoDecayFunction decayFunction) => Set(decayFunction, "linear");
 	public FunctionScoreDescriptor RandomScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunction randomScoreFunction) => Set(randomScoreFunction, "random_score");
 	public FunctionScoreDescriptor RandomScore<TDocument>(Action<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.RandomScoreFunctionDescriptor> configure) => Set(configure, "random_score");
 	public FunctionScoreDescriptor ScriptScore(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.ScriptScoreFunction scriptScoreFunction) => Set(scriptScoreFunction, "script_score");

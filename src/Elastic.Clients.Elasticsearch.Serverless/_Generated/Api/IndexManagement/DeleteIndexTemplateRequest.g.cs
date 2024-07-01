@@ -43,7 +43,7 @@ public sealed partial class DeleteIndexTemplateRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 /// </summary>
 public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteIndexTemplateRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class DeleteIndexTemplateRequest : PlainRequest<DeleteInde
 }
 
 /// <summary>
-/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 /// </summary>
 public sealed partial class DeleteIndexTemplateRequestDescriptor : RequestDescriptor<DeleteIndexTemplateRequestDescriptor, DeleteIndexTemplateRequestParameters>
 {
