@@ -42,6 +42,9 @@ public sealed partial class SimulateIndexTemplateRequestParameters : RequestPara
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
+/// </summary>
 public sealed partial class SimulateIndexTemplateRequest : PlainRequest<SimulateIndexTemplateRequestParameters>
 {
 	public SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serverless.Name name) : base(r => r.Required("name", name))
@@ -69,6 +72,9 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	public Elastic.Clients.Elasticsearch.Serverless.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Serverless.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+/// <summary>
+/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
+/// </summary>
 public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDescriptor<SimulateIndexTemplateRequestDescriptor, SimulateIndexTemplateRequestParameters>
 {
 	internal SimulateIndexTemplateRequestDescriptor(Action<SimulateIndexTemplateRequestDescriptor> configure) => configure.Invoke(this);

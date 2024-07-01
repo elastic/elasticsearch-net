@@ -33,7 +33,7 @@ using Elastic.Clients.Elasticsearch.Ingest;
 using Elastic.Clients.Elasticsearch.LicenseManagement;
 using Elastic.Clients.Elasticsearch.MachineLearning;
 using Elastic.Clients.Elasticsearch.Nodes;
-using Elastic.Clients.Elasticsearch.QueryRuleset;
+using Elastic.Clients.Elasticsearch.QueryRules;
 using Elastic.Clients.Elasticsearch.Rollup;
 using Elastic.Clients.Elasticsearch.SearchableSnapshots;
 using Elastic.Clients.Elasticsearch.SearchApplication;
@@ -70,7 +70,7 @@ public partial class ElasticsearchClient
 	public virtual LicenseManagementNamespacedClient LicenseManagement { get; private set; }
 	public virtual MachineLearningNamespacedClient MachineLearning { get; private set; }
 	public virtual NodesNamespacedClient Nodes { get; private set; }
-	public virtual QueryRulesetNamespacedClient QueryRuleset { get; private set; }
+	public virtual QueryRulesNamespacedClient QueryRules { get; private set; }
 	public virtual RollupNamespacedClient Rollup { get; private set; }
 	public virtual SearchableSnapshotsNamespacedClient SearchableSnapshots { get; private set; }
 	public virtual SearchApplicationNamespacedClient SearchApplication { get; private set; }
@@ -101,7 +101,7 @@ public partial class ElasticsearchClient
 		LicenseManagement = new LicenseManagementNamespacedClient(this);
 		MachineLearning = new MachineLearningNamespacedClient(this);
 		Nodes = new NodesNamespacedClient(this);
-		QueryRuleset = new QueryRulesetNamespacedClient(this);
+		QueryRules = new QueryRulesNamespacedClient(this);
 		Rollup = new RollupNamespacedClient(this);
 		SearchableSnapshots = new SearchableSnapshotsNamespacedClient(this);
 		SearchApplication = new SearchApplicationNamespacedClient(this);

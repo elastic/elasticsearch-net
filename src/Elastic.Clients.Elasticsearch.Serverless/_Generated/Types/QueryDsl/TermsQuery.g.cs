@@ -53,7 +53,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 
 				variant.Field = property;
 				reader.Read();
-				variant.Terms = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField>(ref reader, options);
+				variant.Term = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField>(ref reader, options);
 			}
 		}
 
@@ -63,7 +63,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 	public override void Write(Utf8JsonWriter writer, TermsQuery value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Field is not null && value.Terms is not null)
+		if (value.Field is not null && value.Term is not null)
 		{
 			if (!options.TryGetClientSettings(out var settings))
 			{
@@ -72,7 +72,7 @@ internal sealed partial class TermsQueryConverter : JsonConverter<TermsQuery>
 
 			var propertyName = settings.Inferrer.Field(value.Field);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, value.Terms, options);
+			JsonSerializer.Serialize(writer, value.Term, options);
 		}
 
 		if (value.Boost.HasValue)
@@ -100,7 +100,7 @@ public sealed partial class TermsQuery
 	public float? Boost { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.Field Field { get; set; }
 	public string? QueryName { get; set; }
-	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField Terms { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField Term { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query(TermsQuery termsQuery) => Elastic.Clients.Elasticsearch.Serverless.QueryDsl.Query.Terms(termsQuery);
 }
@@ -116,7 +116,7 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermValue { get; set; }
 
 	/// <summary>
 	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
@@ -151,20 +151,20 @@ public sealed partial class TermsQueryDescriptor<TDocument> : SerializableDescri
 		return Self;
 	}
 
-	public TermsQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
+	public TermsQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField term)
 	{
-		TermsValue = terms;
+		TermValue = term;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && TermsValue is not null)
+		if (FieldValue is not null && TermValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, TermsValue, options);
+			JsonSerializer.Serialize(writer, TermValue, options);
 		}
 
 		if (BoostValue.HasValue)
@@ -194,7 +194,7 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 	private float? BoostValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField TermValue { get; set; }
 
 	/// <summary>
 	/// <para>Floating point number used to decrease or increase the relevance scores of the query.<br/>Boost values are relative to the default value of 1.0.<br/>A boost value between 0 and 1.0 decreases the relevance score.<br/>A value greater than 1.0 increases the relevance score.</para>
@@ -229,20 +229,20 @@ public sealed partial class TermsQueryDescriptor : SerializableDescriptor<TermsQ
 		return Self;
 	}
 
-	public TermsQueryDescriptor Terms(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField terms)
+	public TermsQueryDescriptor Term(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.TermsQueryField term)
 	{
-		TermsValue = terms;
+		TermValue = term;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (FieldValue is not null && TermsValue is not null)
+		if (FieldValue is not null && TermValue is not null)
 		{
 			var propertyName = settings.Inferrer.Field(FieldValue);
 			writer.WritePropertyName(propertyName);
-			JsonSerializer.Serialize(writer, TermsValue, options);
+			JsonSerializer.Serialize(writer, TermValue, options);
 		}
 
 		if (BoostValue.HasValue)
