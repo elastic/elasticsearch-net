@@ -27,6 +27,7 @@ using Elastic.Clients.Elasticsearch.Serverless.Ingest;
 using Elastic.Clients.Elasticsearch.Serverless.LicenseManagement;
 using Elastic.Clients.Elasticsearch.Serverless.MachineLearning;
 using Elastic.Clients.Elasticsearch.Serverless.Nodes;
+using Elastic.Clients.Elasticsearch.Serverless.QueryRules;
 using Elastic.Clients.Elasticsearch.Serverless.Snapshot;
 using Elastic.Clients.Elasticsearch.Serverless.SnapshotLifecycleManagement;
 using Elastic.Clients.Elasticsearch.Serverless.Sql;
@@ -53,6 +54,7 @@ public partial class ElasticsearchClient
 	public virtual LicenseManagementNamespacedClient LicenseManagement { get; private set; }
 	public virtual MachineLearningNamespacedClient MachineLearning { get; private set; }
 	public virtual NodesNamespacedClient Nodes { get; private set; }
+	public virtual QueryRulesNamespacedClient QueryRules { get; private set; }
 	public virtual SnapshotNamespacedClient Snapshot { get; private set; }
 	public virtual SnapshotLifecycleManagementNamespacedClient SnapshotLifecycleManagement { get; private set; }
 	public virtual SqlNamespacedClient Sql { get; private set; }
@@ -73,6 +75,7 @@ public partial class ElasticsearchClient
 		LicenseManagement = new LicenseManagementNamespacedClient(this);
 		MachineLearning = new MachineLearningNamespacedClient(this);
 		Nodes = new NodesNamespacedClient(this);
+		QueryRules = new QueryRulesNamespacedClient(this);
 		Snapshot = new SnapshotNamespacedClient(this);
 		SnapshotLifecycleManagement = new SnapshotLifecycleManagementNamespacedClient(this);
 		Sql = new SqlNamespacedClient(this);

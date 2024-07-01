@@ -873,7 +873,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+	/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
@@ -883,7 +883,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+	/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -893,7 +893,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+	/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, CancellationToken cancellationToken = default)
@@ -904,7 +904,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
+	/// <para>Delete an index template.<br/>The provided <index-template> may contain multiple template names separated by a comma. If multiple template<br/>names are specified then there is no wildcard support and the provided names should match completely with<br/>existing templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1853,7 +1853,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(GetIndexTemplateRequest request, CancellationToken cancellationToken = default)
@@ -1863,7 +1863,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(GetIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1873,7 +1873,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, CancellationToken cancellationToken = default)
@@ -1884,7 +1884,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, Action<GetIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1896,7 +1896,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(CancellationToken cancellationToken = default)
@@ -1907,7 +1907,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about one or more index templates.</para>
+	/// <para>Get index templates.<br/>Returns information about one or more index templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Action<GetIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2490,7 +2490,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequest request, CancellationToken cancellationToken = default)
@@ -2500,7 +2500,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(PutIndexTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -2510,7 +2510,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -2521,7 +2521,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutIndexTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2533,7 +2533,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2543,7 +2543,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -2554,7 +2554,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2787,7 +2787,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(PutTemplateRequest request, CancellationToken cancellationToken = default)
@@ -2797,7 +2797,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(PutTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -2807,7 +2807,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -2818,7 +2818,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2830,7 +2830,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(PutTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2840,7 +2840,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -2851,7 +2851,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+	/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3394,6 +3394,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(SimulateIndexTemplateRequest request, CancellationToken cancellationToken = default)
@@ -3403,6 +3404,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(SimulateIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3412,6 +3414,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -3422,6 +3425,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
+	/// <para>Simulate an index.<br/>Returns the index configuration that would be applied to the specified index from an existing index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<SimulateIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3433,7 +3437,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(SimulateTemplateRequest request, CancellationToken cancellationToken = default)
@@ -3443,7 +3447,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(SimulateTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3453,7 +3457,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name? name, CancellationToken cancellationToken = default)
@@ -3464,7 +3468,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name? name, Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3476,7 +3480,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -3487,7 +3491,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3499,7 +3503,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(SimulateTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3509,7 +3513,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, CancellationToken cancellationToken = default)
@@ -3520,7 +3524,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, Action<SimulateTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3532,7 +3536,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(CancellationToken cancellationToken = default)
@@ -3543,7 +3547,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns the index configuration that would be applied by a particular index template.</para>
+	/// <para>Simulate an index template.<br/>Returns the index configuration that would be applied by a particular index template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Action<SimulateTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

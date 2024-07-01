@@ -87,6 +87,12 @@ public sealed partial class TermsAggregation
 	public Elastic.Clients.Elasticsearch.Serverless.Script? Script { get; set; }
 
 	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("shard_min_doc_count")]
+	public long? ShardMinDocCount { get; set; }
+
+	/// <summary>
 	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_size")]
@@ -134,6 +140,7 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -254,6 +261,15 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 	}
 
 	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
+	public TermsAggregationDescriptor<TDocument> ShardMinDocCount(long? shardMinDocCount)
+	{
+		ShardMinDocCountValue = shardMinDocCount;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
 	public TermsAggregationDescriptor<TDocument> ShardSize(int? shardSize)
@@ -364,6 +380,12 @@ public sealed partial class TermsAggregationDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
+		if (ShardMinDocCountValue.HasValue)
+		{
+			writer.WritePropertyName("shard_min_doc_count");
+			writer.WriteNumberValue(ShardMinDocCountValue.Value);
+		}
+
 		if (ShardSizeValue.HasValue)
 		{
 			writer.WritePropertyName("shard_size");
@@ -412,6 +434,7 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.Serverless.Field, Elastic.Clients.Elasticsearch.Serverless.SortOrder>>? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private long? ShardMinDocCountValue { get; set; }
 	private int? ShardSizeValue { get; set; }
 	private bool? ShowTermDocCountErrorValue { get; set; }
 	private int? SizeValue { get; set; }
@@ -532,6 +555,15 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 	}
 
 	/// <summary>
+	/// <para>Regulates the certainty a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`.<br/>Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`.</para>
+	/// </summary>
+	public TermsAggregationDescriptor ShardMinDocCount(long? shardMinDocCount)
+	{
+		ShardMinDocCountValue = shardMinDocCount;
+		return Self;
+	}
+
+	/// <summary>
 	/// <para>The number of candidate terms produced by each shard.<br/>By default, `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.</para>
 	/// </summary>
 	public TermsAggregationDescriptor ShardSize(int? shardSize)
@@ -640,6 +672,12 @@ public sealed partial class TermsAggregationDescriptor : SerializableDescriptor<
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
+		if (ShardMinDocCountValue.HasValue)
+		{
+			writer.WritePropertyName("shard_min_doc_count");
+			writer.WriteNumberValue(ShardMinDocCountValue.Value);
 		}
 
 		if (ShardSizeValue.HasValue)

@@ -48,7 +48,7 @@ public sealed partial class GetTemplateRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves information about one or more index templates.</para>
+/// <para>Get index templates.<br/>Retrieves information about one or more index templates.</para>
 /// </summary>
 public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequestParameters>
 {
@@ -88,7 +88,7 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 }
 
 /// <summary>
-/// <para>Retrieves information about one or more index templates.</para>
+/// <para>Get index templates.<br/>Retrieves information about one or more index templates.</para>
 /// </summary>
 public sealed partial class GetTemplateRequestDescriptor : RequestDescriptor<GetTemplateRequestDescriptor, GetTemplateRequestParameters>
 {

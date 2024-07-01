@@ -540,6 +540,74 @@ internal sealed class GeoValidationMethodConverter : JsonConverter<GeoValidation
 	}
 }
 
+[JsonConverter(typeof(MultiValueModeConverter))]
+public enum MultiValueMode
+{
+	/// <summary>
+	/// <para>Distance is the sum of all distances.</para>
+	/// </summary>
+	[EnumMember(Value = "sum")]
+	Sum,
+	/// <summary>
+	/// <para>Distance is the minimum distance.</para>
+	/// </summary>
+	[EnumMember(Value = "min")]
+	Min,
+	/// <summary>
+	/// <para>Distance is the maximum distance.</para>
+	/// </summary>
+	[EnumMember(Value = "max")]
+	Max,
+	/// <summary>
+	/// <para>Distance is the average distance.</para>
+	/// </summary>
+	[EnumMember(Value = "avg")]
+	Avg
+}
+
+internal sealed class MultiValueModeConverter : JsonConverter<MultiValueMode>
+{
+	public override MultiValueMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "sum":
+				return MultiValueMode.Sum;
+			case "min":
+				return MultiValueMode.Min;
+			case "max":
+				return MultiValueMode.Max;
+			case "avg":
+				return MultiValueMode.Avg;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, MultiValueMode value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case MultiValueMode.Sum:
+				writer.WriteStringValue("sum");
+				return;
+			case MultiValueMode.Min:
+				writer.WriteStringValue("min");
+				return;
+			case MultiValueMode.Max:
+				writer.WriteStringValue("max");
+				return;
+			case MultiValueMode.Avg:
+				writer.WriteStringValue("avg");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(OperatorConverter))]
 public enum Operator
 {
