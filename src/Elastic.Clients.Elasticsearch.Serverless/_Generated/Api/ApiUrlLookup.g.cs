@@ -208,6 +208,13 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "{index}/_update/{id}" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "_update_by_query/{task_id}/_rethrottle" });
+	internal static ApiUrls QueryRulesDeleteRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
+	internal static ApiUrls QueryRulesDeleteRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesGetRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
+	internal static ApiUrls QueryRulesGetRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
+	internal static ApiUrls QueryRulesListRulesets = new ApiUrls(new[] { "_query_rules" });
+	internal static ApiUrls QueryRulesPutRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
+	internal static ApiUrls QueryRulesPutRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
 	internal static ApiUrls SnapshotCleanupRepository = new ApiUrls(new[] { "_snapshot/{repository}/_cleanup" });
 	internal static ApiUrls SnapshotClone = new ApiUrls(new[] { "_snapshot/{repository}/{snapshot}/_clone/{target_snapshot}" });
 	internal static ApiUrls SnapshotCreate = new ApiUrls(new[] { "_snapshot/{repository}/{snapshot}" });

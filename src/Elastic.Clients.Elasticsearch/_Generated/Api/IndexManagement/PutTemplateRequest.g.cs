@@ -45,7 +45,7 @@ public sealed partial class PutTemplateRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 /// </summary>
 public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequestParameters>
 {
@@ -116,7 +116,7 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 }
 
 /// <summary>
-/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 /// </summary>
 public sealed partial class PutTemplateRequestDescriptor<TDocument> : RequestDescriptor<PutTemplateRequestDescriptor<TDocument>, PutTemplateRequestParameters>
 {
@@ -310,7 +310,7 @@ public sealed partial class PutTemplateRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Creates or updates an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
+/// <para>Create or update an index template.<br/>Index templates define settings, mappings, and aliases that can be applied automatically to new indices.</para>
 /// </summary>
 public sealed partial class PutTemplateRequestDescriptor : RequestDescriptor<PutTemplateRequestDescriptor, PutTemplateRequestParameters>
 {
