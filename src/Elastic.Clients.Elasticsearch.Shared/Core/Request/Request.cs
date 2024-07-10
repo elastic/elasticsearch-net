@@ -80,9 +80,9 @@ public abstract class Request<TParameters> : Request
 
 	[JsonIgnore] internal TParameters RequestParameters => _parameters;
 
-	protected TOut Q<TOut>(string name) => RequestParameters.GetQueryStringValue<TOut>(name);
+	protected TOut? Q<TOut>(string name) => RequestParameters.GetQueryStringValue<TOut>(name);
 
-	protected void Q(string name, object value) => RequestParameters.SetQueryString(name, value);
+	protected void Q(string name, object? value) => RequestParameters.SetQueryString(name, value);
 
 	protected void Q(string name, IStringable value) => RequestParameters.SetQueryString(name, value.GetString());
 
