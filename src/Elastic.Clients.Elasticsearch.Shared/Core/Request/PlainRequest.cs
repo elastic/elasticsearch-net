@@ -30,12 +30,12 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 	}
 
 	/// <summary>
-	///     A comma-separated list of filters used to reduce the response.
-	///     <para>
-	///         Use of response filtering can result in a response from Elasticsearch
-	///         that cannot be correctly deserialized to the respective response type for the request.
-	///         In such situations, use the low level client to issue the request and handle response deserialization.
-	///     </para>
+	/// A list of filters used to reduce the response.
+	/// <para>
+	///     Use of response filtering can result in a response from Elasticsearch
+	///     that cannot be correctly deserialized to the respective response type for the request.
+	///     In such situations, use the low level client to issue the request and handle response deserialization.
+	/// </para>
 	/// </summary>
 	[JsonIgnore]
 	public string[] FilterPath
@@ -44,7 +44,7 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 		set => Q("filter_path", value);
 	}
 
-	///<summary>Return human readable values for statistics.</summary>
+	///<summary>Return human-readable values for statistics.</summary>
 	[JsonIgnore]
 	public bool? Human
 	{
