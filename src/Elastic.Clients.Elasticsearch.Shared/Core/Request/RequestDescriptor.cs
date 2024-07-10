@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Text.Json;
+
 #if ELASTICSEARCH_SERVERLESS
 using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 #else
@@ -40,7 +41,7 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 
 	protected TDescriptor Self => _descriptor;
 
-	protected TDescriptor Qs(string name, object value)
+	protected TDescriptor Qs(string name, object? value)
 	{
 		Q(name, value);
 		return _descriptor;
@@ -63,6 +64,22 @@ public abstract partial class RequestDescriptor<TDescriptor, TParameters> : Requ
 			configurationSelector?.Invoke(new RequestConfigurationDescriptor(rc)) ?? rc;
 		return _descriptor;
 	}
+
+	/// <summary>
+	/// A list of filters used to reduce the response.
+	/// <para>
+	///     Use of response filtering can result in a response from Elasticsearch
+	///     that cannot be correctly deserialized to the respective response type for the request.
+	///     In such situations, use the low level client to issue the request and handle response deserialization.
+	/// </para>
+	/// </summary>
+	public TDescriptor FilterPath(params string[] value) => Qs("filter_path", value);
+
+	///<summary>Return human-readable values for statistics.</summary>
+	public TDescriptor Human(bool? value) => Qs("human", value);
+
+	///<summary>Pretty format the returned JSON response.</summary>
+	public TDescriptor Pretty(bool? value) => Qs("pretty", value);
 
 	/// <summary>
 	///     Hides the <see cref="ToString" /> method.
