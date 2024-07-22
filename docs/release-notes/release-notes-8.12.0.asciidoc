@@ -1,0 +1,12 @@
+[[release-notes-8.12.0]]
+== Release notes v8.12.0
+
+[discrete]
+=== Features & Enhancements
+
+- https://github.com/elastic/elasticsearch-net/pull/8027[#8027] Regenerate client for 8.12
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/8018[#8018] Fix serialisation of empty and single item `Fields` instances
