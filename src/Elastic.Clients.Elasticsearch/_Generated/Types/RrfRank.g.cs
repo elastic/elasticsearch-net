@@ -38,8 +38,8 @@ public sealed partial class RrfRank
 	/// <summary>
 	/// <para>Size of the individual result sets per query</para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("window_size")]
-	public long? WindowSize { get; set; }
+	[JsonInclude, JsonPropertyName("rank_window_size")]
+	public long? RankWindowSize { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Rank(RrfRank rrfRank) => Elastic.Clients.Elasticsearch.Rank.Rrf(rrfRank);
 }
@@ -53,7 +53,7 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 	}
 
 	private long? RankConstantValue { get; set; }
-	private long? WindowSizeValue { get; set; }
+	private long? RankWindowSizeValue { get; set; }
 
 	/// <summary>
 	/// <para>How much influence documents in individual result sets per query have over the final ranked result set</para>
@@ -67,9 +67,9 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 	/// <summary>
 	/// <para>Size of the individual result sets per query</para>
 	/// </summary>
-	public RrfRankDescriptor WindowSize(long? windowSize)
+	public RrfRankDescriptor RankWindowSize(long? rankWindowSize)
 	{
-		WindowSizeValue = windowSize;
+		RankWindowSizeValue = rankWindowSize;
 		return Self;
 	}
 
@@ -82,10 +82,10 @@ public sealed partial class RrfRankDescriptor : SerializableDescriptor<RrfRankDe
 			writer.WriteNumberValue(RankConstantValue.Value);
 		}
 
-		if (WindowSizeValue.HasValue)
+		if (RankWindowSizeValue.HasValue)
 		{
-			writer.WritePropertyName("window_size");
-			writer.WriteNumberValue(WindowSizeValue.Value);
+			writer.WritePropertyName("rank_window_size");
+			writer.WriteNumberValue(RankWindowSizeValue.Value);
 		}
 
 		writer.WriteEndObject();

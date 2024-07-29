@@ -31,7 +31,7 @@ public sealed partial class TermVectorsResponse : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("found")]
 	public bool Found { get; init; }
 	[JsonInclude, JsonPropertyName("_id")]
-	public string Id { get; init; }
+	public string? Id { get; init; }
 	[JsonInclude, JsonPropertyName("_index")]
 	public string Index { get; init; }
 	[JsonInclude, JsonPropertyName("term_vectors")]

@@ -55,7 +55,7 @@ public sealed partial class GetTransformStatsRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Retrieves usage information for transforms.</para>
+/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 /// </summary>
 public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransformStatsRequestParameters>
 {
@@ -99,7 +99,7 @@ public sealed partial class GetTransformStatsRequest : PlainRequest<GetTransform
 }
 
 /// <summary>
-/// <para>Retrieves usage information for transforms.</para>
+/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 /// </summary>
 public sealed partial class GetTransformStatsRequestDescriptor : RequestDescriptor<GetTransformStatsRequestDescriptor, GetTransformStatsRequestParameters>
 {

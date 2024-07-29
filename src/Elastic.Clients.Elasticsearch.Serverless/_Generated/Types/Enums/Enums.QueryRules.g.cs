@@ -45,6 +45,8 @@ public enum QueryRuleCriteriaType
 	Gt,
 	[EnumMember(Value = "global")]
 	Global,
+	[EnumMember(Value = "fuzzy")]
+	Fuzzy,
 	[EnumMember(Value = "exact_fuzzy")]
 	ExactFuzzy,
 	[EnumMember(Value = "exact")]
@@ -76,6 +78,8 @@ internal sealed class QueryRuleCriteriaTypeConverter : JsonConverter<QueryRuleCr
 				return QueryRuleCriteriaType.Gt;
 			case "global":
 				return QueryRuleCriteriaType.Global;
+			case "fuzzy":
+				return QueryRuleCriteriaType.Fuzzy;
 			case "exact_fuzzy":
 				return QueryRuleCriteriaType.ExactFuzzy;
 			case "exact":
@@ -114,6 +118,9 @@ internal sealed class QueryRuleCriteriaTypeConverter : JsonConverter<QueryRuleCr
 				return;
 			case QueryRuleCriteriaType.Global:
 				writer.WriteStringValue("global");
+				return;
+			case QueryRuleCriteriaType.Fuzzy:
+				writer.WriteStringValue("fuzzy");
 				return;
 			case QueryRuleCriteriaType.ExactFuzzy:
 				writer.WriteStringValue("exact_fuzzy");

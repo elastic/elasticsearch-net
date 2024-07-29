@@ -90,6 +90,8 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -198,7 +200,25 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 
 	public GeoPointPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -289,7 +309,17 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -312,6 +342,30 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
 	{
 		CopyTo = CopyToValue,
@@ -326,7 +380,7 @@ public sealed partial class GeoPointPropertyDescriptor<TDocument> : Serializable
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
@@ -353,6 +407,8 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -461,7 +517,25 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 
 	public GeoPointPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoPointPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -552,7 +626,17 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -575,6 +659,30 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	GeoPointProperty IBuildableDescriptor<GeoPointProperty>.Build() => new()
 	{
 		CopyTo = CopyToValue,
@@ -589,7 +697,7 @@ public sealed partial class GeoPointPropertyDescriptor : SerializableDescriptor<
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};

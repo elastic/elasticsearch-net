@@ -43,7 +43,7 @@ public sealed partial class DeleteScriptRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes a stored script or search template.</para>
+/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 /// </summary>
 public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class DeleteScriptRequest : PlainRequest<DeleteScriptReque
 }
 
 /// <summary>
-/// <para>Deletes a stored script or search template.</para>
+/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 /// </summary>
 public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDescriptor<DeleteScriptRequestDescriptor<TDocument>, DeleteScriptRequestParameters>
 {
@@ -106,7 +106,7 @@ public sealed partial class DeleteScriptRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Deletes a stored script or search template.</para>
+/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 /// </summary>
 public sealed partial class DeleteScriptRequestDescriptor : RequestDescriptor<DeleteScriptRequestDescriptor, DeleteScriptRequestParameters>
 {

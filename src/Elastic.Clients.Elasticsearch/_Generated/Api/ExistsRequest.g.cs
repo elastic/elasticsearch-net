@@ -83,7 +83,7 @@ public sealed partial class ExistsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Checks if a document in an index exists.</para>
+/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 /// </summary>
 public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters>
 {
@@ -161,7 +161,7 @@ public sealed partial class ExistsRequest : PlainRequest<ExistsRequestParameters
 }
 
 /// <summary>
-/// <para>Checks if a document in an index exists.</para>
+/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescriptor<ExistsRequestDescriptor<TDocument>, ExistsRequestParameters>
 {
@@ -224,7 +224,7 @@ public sealed partial class ExistsRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Checks if a document in an index exists.</para>
+/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 /// </summary>
 public sealed partial class ExistsRequestDescriptor : RequestDescriptor<ExistsRequestDescriptor, ExistsRequestParameters>
 {

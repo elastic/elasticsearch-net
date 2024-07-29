@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class SnowballTokenFilter : ITokenFilter
 {
 	[JsonInclude, JsonPropertyName("language")]
-	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? Language { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "snowball";
@@ -47,10 +47,10 @@ public sealed partial class SnowballTokenFilterDescriptor : SerializableDescript
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? LanguageValue { get; set; }
 	private string? VersionValue { get; set; }
 
-	public SnowballTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage language)
+	public SnowballTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? language)
 	{
 		LanguageValue = language;
 		return Self;
@@ -65,8 +65,12 @@ public sealed partial class SnowballTokenFilterDescriptor : SerializableDescript
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("language");
-		JsonSerializer.Serialize(writer, LanguageValue, options);
+		if (LanguageValue is not null)
+		{
+			writer.WritePropertyName("language");
+			JsonSerializer.Serialize(writer, LanguageValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("snowball");
 		if (!string.IsNullOrEmpty(VersionValue))

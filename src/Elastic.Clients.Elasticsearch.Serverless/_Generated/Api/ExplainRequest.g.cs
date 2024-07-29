@@ -93,7 +93,7 @@ public sealed partial class ExplainRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 /// </summary>
 public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParameters>
 {
@@ -189,7 +189,7 @@ public sealed partial class ExplainRequest : PlainRequest<ExplainRequestParamete
 }
 
 /// <summary>
-/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 /// </summary>
 public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescriptor<ExplainRequestDescriptor<TDocument>, ExplainRequestParameters>
 {
@@ -303,7 +303,7 @@ public sealed partial class ExplainRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 /// </summary>
 public sealed partial class ExplainRequestDescriptor : RequestDescriptor<ExplainRequestDescriptor, ExplainRequestParameters>
 {

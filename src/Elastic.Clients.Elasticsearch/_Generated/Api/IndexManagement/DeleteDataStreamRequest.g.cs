@@ -38,7 +38,7 @@ public sealed partial class DeleteDataStreamRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Deletes one or more data streams and their backing indices.</para>
+/// <para>Delete data streams.<br/>Deletes one or more data streams and their backing indices.</para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStreamRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class DeleteDataStreamRequest : PlainRequest<DeleteDataStr
 }
 
 /// <summary>
-/// <para>Deletes one or more data streams and their backing indices.</para>
+/// <para>Delete data streams.<br/>Deletes one or more data streams and their backing indices.</para>
 /// </summary>
 public sealed partial class DeleteDataStreamRequestDescriptor : RequestDescriptor<DeleteDataStreamRequestDescriptor, DeleteDataStreamRequestParameters>
 {

@@ -43,7 +43,7 @@ public sealed partial class UpdateTransformRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Updates certain properties of a transform.</para>
+/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 /// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 /// </summary>
 public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransformRequestParameters>
@@ -122,7 +122,7 @@ public sealed partial class UpdateTransformRequest : PlainRequest<UpdateTransfor
 }
 
 /// <summary>
-/// <para>Updates certain properties of a transform.</para>
+/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 /// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 /// </summary>
 public sealed partial class UpdateTransformRequestDescriptor<TDocument> : RequestDescriptor<UpdateTransformRequestDescriptor<TDocument>, UpdateTransformRequestParameters>
@@ -437,7 +437,7 @@ public sealed partial class UpdateTransformRequestDescriptor<TDocument> : Reques
 }
 
 /// <summary>
-/// <para>Updates certain properties of a transform.</para>
+/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 /// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 /// </summary>
 public sealed partial class UpdateTransformRequestDescriptor : RequestDescriptor<UpdateTransformRequestDescriptor, UpdateTransformRequestParameters>

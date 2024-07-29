@@ -136,6 +136,8 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
@@ -338,7 +340,25 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 
 	public DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public DynamicPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -535,7 +555,17 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -606,6 +636,30 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		return null;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
 	{
 		Analyzer = AnalyzerValue,
@@ -632,7 +686,7 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 		PositionIncrementGap = PositionIncrementGapValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Similarity = SimilarityValue,
@@ -677,6 +731,8 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SearchAnalyzerValue { get; set; }
 	private string? SearchQuoteAnalyzerValue { get; set; }
 	private string? SimilarityValue { get; set; }
@@ -879,7 +935,25 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 
 	public DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public DynamicPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -1076,7 +1150,17 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -1147,6 +1231,30 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		return null;
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
 	{
 		Analyzer = AnalyzerValue,
@@ -1173,7 +1281,7 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 		PositionIncrementGap = PositionIncrementGapValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		SearchAnalyzer = SearchAnalyzerValue,
 		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
 		Similarity = SimilarityValue,

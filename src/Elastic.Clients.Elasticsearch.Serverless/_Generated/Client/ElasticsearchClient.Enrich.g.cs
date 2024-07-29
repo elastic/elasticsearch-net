@@ -38,7 +38,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing enrich policy and its enrich index.</para>
+	/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePolicyResponse> DeletePolicyAsync(DeletePolicyRequest request, CancellationToken cancellationToken = default)
@@ -48,7 +48,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing enrich policy and its enrich index.</para>
+	/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePolicyResponse> DeletePolicyAsync(DeletePolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -58,7 +58,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing enrich policy and its enrich index.</para>
+	/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -69,7 +69,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing enrich policy and its enrich index.</para>
+	/// <para>Delete an enrich policy.<br/>Deletes an existing enrich policy and its enrich index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePolicyResponse> DeletePolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<DeletePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -124,7 +124,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(GetPolicyRequest request, CancellationToken cancellationToken = default)
@@ -134,7 +134,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(GetPolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -144,7 +144,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Names? name, CancellationToken cancellationToken = default)
@@ -155,7 +155,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Names? name, Action<GetPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -167,7 +167,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(CancellationToken cancellationToken = default)
@@ -178,7 +178,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about an enrich policy.</para>
+	/// <para>Get an enrich policy.<br/>Returns information about an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPolicyResponse> GetPolicyAsync(Action<GetPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -190,7 +190,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync(PutPolicyRequest request, CancellationToken cancellationToken = default)
@@ -200,7 +200,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync<TDocument>(PutPolicyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -210,7 +210,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -221,7 +221,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutPolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -233,7 +233,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync(PutPolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -243,7 +243,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, CancellationToken cancellationToken = default)
@@ -254,7 +254,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates an enrich policy.</para>
+	/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/put-enrich-policy-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPolicyResponse> PutPolicyAsync(Elastic.Clients.Elasticsearch.Serverless.Name name, Action<PutPolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -266,7 +266,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+	/// <para>Get enrich stats.<br/>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrichStatsResponse> StatsAsync(EnrichStatsRequest request, CancellationToken cancellationToken = default)
@@ -276,7 +276,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+	/// <para>Get enrich stats.<br/>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrichStatsResponse> StatsAsync(EnrichStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -286,7 +286,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+	/// <para>Get enrich stats.<br/>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrichStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
@@ -297,7 +297,7 @@ public partial class EnrichNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
+	/// <para>Get enrich stats.<br/>Returns enrich coordinator statistics and information about enrich policies that are currently executing.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrichStatsResponse> StatsAsync(Action<EnrichStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

@@ -33,4 +33,6 @@ public sealed partial class IlmIndicatorDetails
 	public Elastic.Clients.Elasticsearch.LifecycleOperationMode IlmStatus { get; init; }
 	[JsonInclude, JsonPropertyName("policies")]
 	public long Policies { get; init; }
+	[JsonInclude, JsonPropertyName("stagnating_indices")]
+	public int StagnatingIndices { get; init; }
 }

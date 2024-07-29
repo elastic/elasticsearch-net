@@ -66,6 +66,8 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
@@ -124,7 +126,25 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public CompositeHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeHistogramAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -163,7 +183,17 @@ public sealed partial class CompositeHistogramAggregationDescriptor<TDocument> :
 			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -193,6 +223,8 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.MissingOrder? MissingOrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	/// <summary>
@@ -251,7 +283,25 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 	/// </summary>
 	public CompositeHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public CompositeHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeHistogramAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -290,7 +340,17 @@ public sealed partial class CompositeHistogramAggregationDescriptor : Serializab
 			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

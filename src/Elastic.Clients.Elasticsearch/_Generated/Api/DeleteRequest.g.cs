@@ -73,7 +73,7 @@ public sealed partial class DeleteRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Removes a JSON document from the specified index.</para>
+/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 /// </summary>
 public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 {
@@ -139,7 +139,7 @@ public partial class DeleteRequest : PlainRequest<DeleteRequestParameters>
 }
 
 /// <summary>
-/// <para>Removes a JSON document from the specified index.</para>
+/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 /// </summary>
 public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescriptor<DeleteRequestDescriptor<TDocument>, DeleteRequestParameters>
 {
@@ -200,7 +200,7 @@ public sealed partial class DeleteRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Removes a JSON document from the specified index.</para>
+/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 /// </summary>
 public sealed partial class DeleteRequestDescriptor : RequestDescriptor<DeleteRequestDescriptor, DeleteRequestParameters>
 {
