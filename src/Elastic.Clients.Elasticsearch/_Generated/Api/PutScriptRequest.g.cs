@@ -43,7 +43,7 @@ public sealed partial class PutScriptRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates or updates a stored script or search template.</para>
+/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestParameters>
 {
@@ -83,7 +83,7 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 }
 
 /// <summary>
-/// <para>Creates or updates a stored script or search template.</para>
+/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescriptor<PutScriptRequestDescriptor<TDocument>, PutScriptRequestParameters>
 {
@@ -175,7 +175,7 @@ public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Creates or updates a stored script or search template.</para>
+/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 /// </summary>
 public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutScriptRequestDescriptor, PutScriptRequestParameters>
 {

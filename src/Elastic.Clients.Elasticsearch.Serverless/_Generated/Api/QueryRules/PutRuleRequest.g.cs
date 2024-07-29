@@ -53,7 +53,10 @@ public sealed partial class PutRuleRequest : PlainRequest<PutRuleRequestParamete
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleActions Actions { get; set; }
 	[JsonInclude, JsonPropertyName("criteria")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteria))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteria> Criteria { get; set; }
+	[JsonInclude, JsonPropertyName("priority")]
+	public int? Priority { get; set; }
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleType Type { get; set; }
 }
@@ -96,6 +99,7 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 	private Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteriaDescriptor CriteriaDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteriaDescriptor> CriteriaDescriptorAction { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteriaDescriptor>[] CriteriaDescriptorActions { get; set; }
+	private int? PriorityValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleType TypeValue { get; set; }
 
 	public PutRuleRequestDescriptor Actions(Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleActions actions)
@@ -158,6 +162,12 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 		return Self;
 	}
 
+	public PutRuleRequestDescriptor Priority(int? priority)
+	{
+		PriorityValue = priority;
+		return Self;
+	}
+
 	public PutRuleRequestDescriptor Type(Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleType type)
 	{
 		TypeValue = type;
@@ -186,32 +196,36 @@ public sealed partial class PutRuleRequestDescriptor : RequestDescriptor<PutRule
 		if (CriteriaDescriptor is not null)
 		{
 			writer.WritePropertyName("criteria");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, CriteriaDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (CriteriaDescriptorAction is not null)
 		{
 			writer.WritePropertyName("criteria");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteriaDescriptor(CriteriaDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (CriteriaDescriptorActions is not null)
 		{
 			writer.WritePropertyName("criteria");
-			writer.WriteStartArray();
+			if (CriteriaDescriptorActions.Length != 1)
+				writer.WriteStartArray();
 			foreach (var action in CriteriaDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteriaDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (CriteriaDescriptorActions.Length != 1)
+				writer.WriteEndArray();
 		}
 		else
 		{
 			writer.WritePropertyName("criteria");
-			JsonSerializer.Serialize(writer, CriteriaValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteria>(CriteriaValue, writer, options);
+		}
+
+		if (PriorityValue.HasValue)
+		{
+			writer.WritePropertyName("priority");
+			writer.WriteNumberValue(PriorityValue.Value);
 		}
 
 		writer.WritePropertyName("type");

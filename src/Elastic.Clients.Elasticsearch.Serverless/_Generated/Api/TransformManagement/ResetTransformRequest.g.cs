@@ -38,7 +38,7 @@ public sealed partial class ResetTransformRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 /// </summary>
 public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 }
 
 /// <summary>
-/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 /// </summary>
 public sealed partial class ResetTransformRequestDescriptor : RequestDescriptor<ResetTransformRequestDescriptor, ResetTransformRequestParameters>
 {

@@ -57,6 +57,8 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
 	public ScriptSortDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
@@ -97,7 +99,25 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 
 	public ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ScriptSortDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ScriptSortDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -138,8 +158,22 @@ public sealed partial class ScriptSortDescriptor<TDocument> : SerializableDescri
 			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		writer.WritePropertyName("script");
-		JsonSerializer.Serialize(writer, ScriptValue, options);
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		if (TypeValue is not null)
 		{
 			writer.WritePropertyName("type");
@@ -164,6 +198,8 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 	private Action<Elastic.Clients.Elasticsearch.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.ScriptSortType? TypeValue { get; set; }
 
 	public ScriptSortDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? mode)
@@ -204,7 +240,25 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 
 	public ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ScriptSortDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ScriptSortDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -245,8 +299,22 @@ public sealed partial class ScriptSortDescriptor : SerializableDescriptor<Script
 			JsonSerializer.Serialize(writer, OrderValue, options);
 		}
 
-		writer.WritePropertyName("script");
-		JsonSerializer.Serialize(writer, ScriptValue, options);
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		if (TypeValue is not null)
 		{
 			writer.WritePropertyName("type");

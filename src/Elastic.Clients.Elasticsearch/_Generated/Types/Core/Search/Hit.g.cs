@@ -53,6 +53,8 @@ public sealed partial class Hit<TDocument>
 	public string? Node { get; init; }
 	[JsonInclude, JsonPropertyName("_primary_term")]
 	public long? PrimaryTerm { get; init; }
+	[JsonInclude, JsonPropertyName("_rank")]
+	public int? Rank { get; init; }
 	[JsonInclude, JsonPropertyName("_routing")]
 	public string? Routing { get; init; }
 	[JsonInclude, JsonPropertyName("_score")]

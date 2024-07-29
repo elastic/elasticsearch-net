@@ -43,7 +43,7 @@ public sealed partial class PutComponentTemplateRequestParameters : RequestParam
 }
 
 /// <summary>
-/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 /// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 /// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 /// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -101,7 +101,7 @@ public sealed partial class PutComponentTemplateRequest : PlainRequest<PutCompon
 }
 
 /// <summary>
-/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 /// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 /// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 /// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -235,7 +235,7 @@ public sealed partial class PutComponentTemplateRequestDescriptor<TDocument> : R
 }
 
 /// <summary>
-/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 /// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 /// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 /// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>

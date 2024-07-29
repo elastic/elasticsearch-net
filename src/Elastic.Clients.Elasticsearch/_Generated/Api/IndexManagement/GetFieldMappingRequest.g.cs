@@ -58,7 +58,7 @@ public sealed partial class GetFieldMappingRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
+/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappingRequestParameters>
 {
@@ -110,7 +110,7 @@ public sealed partial class GetFieldMappingRequest : PlainRequest<GetFieldMappin
 }
 
 /// <summary>
-/// <para>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
+/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : RequestDescriptor<GetFieldMappingRequestDescriptor<TDocument>, GetFieldMappingRequestParameters>
 {
@@ -156,7 +156,7 @@ public sealed partial class GetFieldMappingRequestDescriptor<TDocument> : Reques
 }
 
 /// <summary>
-/// <para>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
+/// <para>Get mapping definitions.<br/>Retrieves mapping definitions for one or more fields.<br/>For data streams, the API retrieves field mappings for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetFieldMappingRequestDescriptor : RequestDescriptor<GetFieldMappingRequestDescriptor, GetFieldMappingRequestParameters>
 {

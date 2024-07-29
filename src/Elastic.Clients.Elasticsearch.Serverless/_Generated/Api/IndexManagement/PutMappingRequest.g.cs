@@ -63,7 +63,7 @@ public sealed partial class PutMappingRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestParameters>
 {
@@ -185,7 +185,7 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 }
 
 /// <summary>
-/// <para>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDescriptor<PutMappingRequestDescriptor<TDocument>, PutMappingRequestParameters>
 {
@@ -510,7 +510,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 }
 
 /// <summary>
-/// <para>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
+/// <para>Update field mappings.<br/>Adds new fields to an existing data stream or index.<br/>You can also use this API to change the search settings of existing fields.<br/>For data streams, these changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutMappingRequestDescriptor, PutMappingRequestParameters>
 {

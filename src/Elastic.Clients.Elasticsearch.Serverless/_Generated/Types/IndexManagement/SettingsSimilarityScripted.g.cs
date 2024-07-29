@@ -48,28 +48,92 @@ public sealed partial class SettingsSimilarityScriptedDescriptor : SerializableD
 	}
 
 	private Elastic.Clients.Elasticsearch.Serverless.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? WeightScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor WeightScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> WeightScriptDescriptorAction { get; set; }
 
 	public SettingsSimilarityScriptedDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public SettingsSimilarityScriptedDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public SettingsSimilarityScriptedDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
 	public SettingsSimilarityScriptedDescriptor WeightScript(Elastic.Clients.Elasticsearch.Serverless.Script? weightScript)
 	{
+		WeightScriptDescriptor = null;
+		WeightScriptDescriptorAction = null;
 		WeightScriptValue = weightScript;
+		return Self;
+	}
+
+	public SettingsSimilarityScriptedDescriptor WeightScript(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		WeightScriptValue = null;
+		WeightScriptDescriptorAction = null;
+		WeightScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public SettingsSimilarityScriptedDescriptor WeightScript(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		WeightScriptValue = null;
+		WeightScriptDescriptor = null;
+		WeightScriptDescriptorAction = configure;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("script");
-		JsonSerializer.Serialize(writer, ScriptValue, options);
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("scripted");
-		if (WeightScriptValue is not null)
+		if (WeightScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("weight_script");
+			JsonSerializer.Serialize(writer, WeightScriptDescriptor, options);
+		}
+		else if (WeightScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("weight_script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(WeightScriptDescriptorAction), options);
+		}
+		else if (WeightScriptValue is not null)
 		{
 			writer.WritePropertyName("weight_script");
 			JsonSerializer.Serialize(writer, WeightScriptValue, options);
@@ -78,9 +142,57 @@ public sealed partial class SettingsSimilarityScriptedDescriptor : SerializableD
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildWeightScript()
+	{
+		if (WeightScriptValue is not null)
+		{
+			return WeightScriptValue;
+		}
+
+		if ((object)WeightScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (WeightScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(WeightScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	SettingsSimilarityScripted IBuildableDescriptor<SettingsSimilarityScripted>.Build() => new()
 	{
-		Script = ScriptValue,
-		WeightScript = WeightScriptValue
+		Script = BuildScript(),
+		WeightScript = BuildWeightScript()
 	};
 }

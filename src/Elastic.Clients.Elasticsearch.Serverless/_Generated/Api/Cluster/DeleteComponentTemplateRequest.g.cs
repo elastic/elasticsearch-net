@@ -43,7 +43,7 @@ public sealed partial class DeleteComponentTemplateRequestParameters : RequestPa
 }
 
 /// <summary>
-/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 /// </summary>
 public sealed partial class DeleteComponentTemplateRequest : PlainRequest<DeleteComponentTemplateRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class DeleteComponentTemplateRequest : PlainRequest<Delete
 }
 
 /// <summary>
-/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 /// </summary>
 public sealed partial class DeleteComponentTemplateRequestDescriptor : RequestDescriptor<DeleteComponentTemplateRequestDescriptor, DeleteComponentTemplateRequestParameters>
 {

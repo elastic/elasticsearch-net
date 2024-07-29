@@ -38,7 +38,7 @@ public sealed partial class PreviewTransformRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Previews a transform.</para>
+/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 /// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 /// </summary>
 public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransformRequestParameters>
@@ -121,7 +121,7 @@ public sealed partial class PreviewTransformRequest : PlainRequest<PreviewTransf
 }
 
 /// <summary>
-/// <para>Previews a transform.</para>
+/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 /// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 /// </summary>
 public sealed partial class PreviewTransformRequestDescriptor<TDocument> : RequestDescriptor<PreviewTransformRequestDescriptor<TDocument>, PreviewTransformRequestParameters>
@@ -515,7 +515,7 @@ public sealed partial class PreviewTransformRequestDescriptor<TDocument> : Reque
 }
 
 /// <summary>
-/// <para>Previews a transform.</para>
+/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 /// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 /// </summary>
 public sealed partial class PreviewTransformRequestDescriptor : RequestDescriptor<PreviewTransformRequestDescriptor, PreviewTransformRequestParameters>

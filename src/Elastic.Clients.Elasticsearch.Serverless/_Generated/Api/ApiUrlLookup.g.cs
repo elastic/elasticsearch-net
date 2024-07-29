@@ -44,6 +44,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls EqlGet = new ApiUrls(new[] { "_eql/search/{id}" });
 	internal static ApiUrls EqlGetStatus = new ApiUrls(new[] { "_eql/search/status/{id}" });
 	internal static ApiUrls EqlSearch = new ApiUrls(new[] { "{index}/_eql/search" });
+	internal static ApiUrls EsqlQuery = new ApiUrls(new[] { "_query" });
 	internal static ApiUrls GraphExplore = new ApiUrls(new[] { "{index}/_graph/explore" });
 	internal static ApiUrls IndexManagementAnalyze = new ApiUrls(new[] { "_analyze", "{index}/_analyze" });
 	internal static ApiUrls IndexManagementClearCache = new ApiUrls(new[] { "_cache/clear", "{index}/_cache/clear" });

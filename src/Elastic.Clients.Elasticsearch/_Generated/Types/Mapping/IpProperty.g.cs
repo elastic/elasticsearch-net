@@ -96,6 +96,8 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
@@ -205,7 +207,25 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 
 	public IpPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public IpPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public IpPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -305,7 +325,17 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -334,6 +364,30 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -348,7 +402,7 @@ public sealed partial class IpPropertyDescriptor<TDocument> : SerializableDescri
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue
@@ -376,6 +430,8 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 	private bool? TimeSeriesDimensionValue { get; set; }
@@ -485,7 +541,25 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 
 	public IpPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public IpPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public IpPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -585,7 +659,17 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -614,6 +698,30 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	IpProperty IBuildableDescriptor<IpProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -628,7 +736,7 @@ public sealed partial class IpPropertyDescriptor : SerializableDescriptor<IpProp
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue,
 		TimeSeriesDimension = TimeSeriesDimensionValue

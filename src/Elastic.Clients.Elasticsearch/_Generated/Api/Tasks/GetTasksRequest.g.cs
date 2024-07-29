@@ -43,7 +43,7 @@ public sealed partial class GetTasksRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns information about a task.</para>
+/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
 /// </summary>
 public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class GetTasksRequest : PlainRequest<GetTasksRequestParame
 }
 
 /// <summary>
-/// <para>Returns information about a task.</para>
+/// <para>Get task information.<br/>Returns information about the tasks currently executing in the cluster.</para>
 /// </summary>
 public sealed partial class GetTasksRequestDescriptor : RequestDescriptor<GetTasksRequestDescriptor, GetTasksRequestParameters>
 {

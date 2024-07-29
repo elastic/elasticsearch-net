@@ -62,6 +62,7 @@ public sealed partial class Query
 	public static Query Fuzzy(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery fuzzyQuery) => new Query("fuzzy", fuzzyQuery);
 	public static Query GeoBoundingBox(Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery geoBoundingBoxQuery) => new Query("geo_bounding_box", geoBoundingBoxQuery);
 	public static Query GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => new Query("geo_distance", geoDistanceQuery);
+	public static Query GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => new Query("geo_shape", geoShapeQuery);
 	public static Query HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => new Query("has_child", hasChildQuery);
 	public static Query HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => new Query("has_parent", hasParentQuery);
 	public static Query Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery idsQuery) => new Query("ids", idsQuery);
@@ -91,6 +92,7 @@ public sealed partial class Query
 	public static Query Rule(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery ruleQuery) => new Query("rule", ruleQuery);
 	public static Query Script(Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery scriptQuery) => new Query("script", scriptQuery);
 	public static Query ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => new Query("script_score", scriptScoreQuery);
+	public static Query Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => new Query("shape", shapeQuery);
 	public static Query SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => new Query("simple_query_string", simpleQueryStringQuery);
 	public static Query SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => new Query("span_containing", spanContainingQuery);
 	public static Query SpanFieldMasking(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery spanFieldMaskingQuery) => new Query("span_field_masking", spanFieldMaskingQuery);
@@ -220,6 +222,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 			if (propertyName == "geo_distance")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "geo_shape")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -406,6 +415,13 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				continue;
 			}
 
+			if (propertyName == "shape")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			if (propertyName == "simple_query_string")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery?>(ref reader, options);
@@ -573,6 +589,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 				case "geo_distance":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery)value.Variant, options);
 					break;
+				case "geo_shape":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery)value.Variant, options);
+					break;
 				case "has_child":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery)value.Variant, options);
 					break;
@@ -650,6 +669,9 @@ internal sealed partial class QueryConverter : JsonConverter<Query>
 					break;
 				case "script_score":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery)value.Variant, options);
+					break;
+				case "shape":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery)value.Variant, options);
 					break;
 				case "simple_query_string":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>(writer, (Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)value.Variant, options);
@@ -763,6 +785,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> GeoBoundingBox(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor<TDocument>> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor<TDocument> GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor<TDocument> GeoDistance(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor<TDocument>> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor<TDocument> GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => Set(geoShapeQuery, "geo_shape");
+	public QueryDescriptor<TDocument> GeoShape(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor<TDocument>> configure) => Set(configure, "geo_shape");
 	public QueryDescriptor<TDocument> HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor<TDocument> HasChild(Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor<TDocument>> configure) => Set(configure, "has_child");
 	public QueryDescriptor<TDocument> HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -816,6 +840,8 @@ public sealed partial class QueryDescriptor<TDocument> : SerializableDescriptor<
 	public QueryDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor<TDocument> ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor<TDocument> ScriptScore(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>> configure) => Set(configure, "script_score");
+	public QueryDescriptor<TDocument> Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
+	public QueryDescriptor<TDocument> Shape(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor<TDocument>> configure) => Set(configure, "shape");
 	public QueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryDescriptor<TDocument> SimpleQueryString(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor<TDocument> SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");
@@ -925,6 +951,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor GeoBoundingBox<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor> configure) => Set(configure, "geo_bounding_box");
 	public QueryDescriptor GeoDistance(Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery geoDistanceQuery) => Set(geoDistanceQuery, "geo_distance");
 	public QueryDescriptor GeoDistance<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor> configure) => Set(configure, "geo_distance");
+	public QueryDescriptor GeoShape(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery geoShapeQuery) => Set(geoShapeQuery, "geo_shape");
+	public QueryDescriptor GeoShape<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor> configure) => Set(configure, "geo_shape");
 	public QueryDescriptor HasChild(Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery hasChildQuery) => Set(hasChildQuery, "has_child");
 	public QueryDescriptor HasChild<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor> configure) => Set(configure, "has_child");
 	public QueryDescriptor HasParent(Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery hasParentQuery) => Set(hasParentQuery, "has_parent");
@@ -978,6 +1006,8 @@ public sealed partial class QueryDescriptor : SerializableDescriptor<QueryDescri
 	public QueryDescriptor Script(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor> configure) => Set(configure, "script");
 	public QueryDescriptor ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery scriptScoreQuery) => Set(scriptScoreQuery, "script_score");
 	public QueryDescriptor ScriptScore<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor> configure) => Set(configure, "script_score");
+	public QueryDescriptor Shape(Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery shapeQuery) => Set(shapeQuery, "shape");
+	public QueryDescriptor Shape<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor> configure) => Set(configure, "shape");
 	public QueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery simpleQueryStringQuery) => Set(simpleQueryStringQuery, "simple_query_string");
 	public QueryDescriptor SimpleQueryString<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> configure) => Set(configure, "simple_query_string");
 	public QueryDescriptor SpanContaining(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery spanContainingQuery) => Set(spanContainingQuery, "span_containing");

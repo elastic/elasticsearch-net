@@ -34,7 +34,7 @@ public sealed partial class PutJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 /// </summary>
 public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
 {
@@ -142,7 +142,7 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 }
 
 /// <summary>
-/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
 {
@@ -565,7 +565,7 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 }
 
 /// <summary>
-/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 /// </summary>
 public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>
 {

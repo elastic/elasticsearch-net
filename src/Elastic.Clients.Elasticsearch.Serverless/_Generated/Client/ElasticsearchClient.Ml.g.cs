@@ -81,7 +81,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Close anomaly detection jobs<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
+	/// <para>Close anomaly detection jobs.<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(CloseJobRequest request, CancellationToken cancellationToken = default)
@@ -91,7 +91,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Close anomaly detection jobs<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
+	/// <para>Close anomaly detection jobs.<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(CloseJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -101,7 +101,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Close anomaly detection jobs<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
+	/// <para>Close anomaly detection jobs.<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Close anomaly detection jobs<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
+	/// <para>Close anomaly detection jobs.<br/>A job can be opened and closed multiple times throughout its lifecycle. A closed job cannot receive data or perform analysis operations, but you can still explore and navigate results.<br/>When you close a job, it runs housekeeping tasks such as pruning the model history, flushing buffers, calculating final results and persisting the model snapshots. Depending upon the size of the job, it could take several minutes to close and the equivalent time to re-open. After it is closed, the job has a minimal overhead on the cluster except for maintaining its meta data. Therefore it is a best practice to close jobs that are no longer required to process data.<br/>If you close an anomaly detection job whose datafeed is running, the request first tries to stop the datafeed. This behavior is equivalent to calling stop datafeed API with the same timeout and force parameters as the close job request.<br/>When a datafeed that has a specified end date stops, it automatically closes its associated job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-close-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseJobResponse> CloseJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, Action<CloseJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -547,8 +547,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an anomaly detection job.</para>
-	/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+	/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)
@@ -558,8 +557,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an anomaly detection job.</para>
-	/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+	/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -569,8 +567,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an anomaly detection job.</para>
-	/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+	/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, CancellationToken cancellationToken = default)
@@ -581,8 +578,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an anomaly detection job.</para>
-	/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+	/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, Action<DeleteJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2639,7 +2635,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+	/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenJobResponse> OpenJobAsync(OpenJobRequest request, CancellationToken cancellationToken = default)
@@ -2649,7 +2645,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+	/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenJobResponse> OpenJobAsync(OpenJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2659,7 +2655,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+	/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, CancellationToken cancellationToken = default)
@@ -2670,7 +2666,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+	/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenJobResponse> OpenJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, Action<OpenJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3128,7 +3124,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequest request, CancellationToken cancellationToken = default)
@@ -3138,7 +3134,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(PutJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3148,7 +3144,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id jobId, CancellationToken cancellationToken = default)
@@ -3159,7 +3155,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id jobId, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3171,7 +3167,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3181,7 +3177,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, CancellationToken cancellationToken = default)
@@ -3192,7 +3188,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
+	/// <para>Create an anomaly detection job.<br/>If you include a `datafeed_config`, you must have read index privileges on the source index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Serverless.Id jobId, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

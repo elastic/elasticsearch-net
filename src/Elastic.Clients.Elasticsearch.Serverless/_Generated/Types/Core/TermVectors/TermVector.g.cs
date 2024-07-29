@@ -30,7 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors;
 public sealed partial class TermVector
 {
 	[JsonInclude, JsonPropertyName("field_statistics")]
-	public Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors.FieldStatistics FieldStatistics { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors.FieldStatistics? FieldStatistics { get; init; }
 	[JsonInclude, JsonPropertyName("terms")]
 	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Serverless.Core.TermVectors.Term> Terms { get; init; }
 }

@@ -31,6 +31,8 @@ public sealed partial class ShardsAvailabilityIndicatorDetails
 {
 	[JsonInclude, JsonPropertyName("creating_primaries")]
 	public long CreatingPrimaries { get; init; }
+	[JsonInclude, JsonPropertyName("creating_replicas")]
+	public long CreatingReplicas { get; init; }
 	[JsonInclude, JsonPropertyName("initializing_primaries")]
 	public long InitializingPrimaries { get; init; }
 	[JsonInclude, JsonPropertyName("initializing_replicas")]

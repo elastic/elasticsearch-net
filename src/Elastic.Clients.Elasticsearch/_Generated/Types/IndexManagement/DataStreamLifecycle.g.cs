@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 /// <summary>
-/// <para>Data lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.</para>
+/// <para>Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.</para>
 /// </summary>
 public sealed partial class DataStreamLifecycle
 {
@@ -39,7 +39,7 @@ public sealed partial class DataStreamLifecycle
 }
 
 /// <summary>
-/// <para>Data lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.</para>
+/// <para>Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.</para>
 /// </summary>
 public sealed partial class DataStreamLifecycleDescriptor : SerializableDescriptor<DataStreamLifecycleDescriptor>
 {
