@@ -88,7 +88,7 @@ public sealed partial class IndexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 /// </summary>
 public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestParameters>, ISelfSerializable
 {
@@ -183,7 +183,7 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 }
 
 /// <summary>
-/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 /// </summary>
 public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescriptor<IndexRequestDescriptor<TDocument>, IndexRequestParameters>
 {

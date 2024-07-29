@@ -34,9 +34,9 @@ public sealed partial class TransformProgress
 	[JsonInclude, JsonPropertyName("docs_processed")]
 	public long DocsProcessed { get; init; }
 	[JsonInclude, JsonPropertyName("docs_remaining")]
-	public long DocsRemaining { get; init; }
+	public long? DocsRemaining { get; init; }
 	[JsonInclude, JsonPropertyName("percent_complete")]
-	public double PercentComplete { get; init; }
+	public double? PercentComplete { get; init; }
 	[JsonInclude, JsonPropertyName("total_docs")]
-	public long TotalDocs { get; init; }
+	public long? TotalDocs { get; init; }
 }

@@ -43,7 +43,7 @@ public sealed partial class ExistsComponentTemplateRequestParameters : RequestPa
 }
 
 /// <summary>
-/// <para>Returns information about whether a particular component template exist</para>
+/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 /// </summary>
 public sealed partial class ExistsComponentTemplateRequest : PlainRequest<ExistsComponentTemplateRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class ExistsComponentTemplateRequest : PlainRequest<Exists
 }
 
 /// <summary>
-/// <para>Returns information about whether a particular component template exist</para>
+/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 /// </summary>
 public sealed partial class ExistsComponentTemplateRequestDescriptor : RequestDescriptor<ExistsComponentTemplateRequestDescriptor, ExistsComponentTemplateRequestParameters>
 {

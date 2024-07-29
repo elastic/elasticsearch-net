@@ -48,8 +48,7 @@ public sealed partial class DeleteJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an anomaly detection job.</para>
-/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 /// </summary>
 public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestParameters>
 {
@@ -85,8 +84,7 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 }
 
 /// <summary>
-/// <para>Deletes an anomaly detection job.</para>
-/// <para>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
+/// <para>Delete an anomaly detection job.<br/>All job configuration, model state and results are deleted.<br/>It is not currently possible to delete multiple jobs using wildcards or a<br/>comma separated list. If you delete a job that has a datafeed, the request<br/>first tries to delete the datafeed. This behavior is equivalent to calling<br/>the delete datafeed API with the same timeout and force parameters as the<br/>delete job request.</para>
 /// </summary>
 public sealed partial class DeleteJobRequestDescriptor : RequestDescriptor<DeleteJobRequestDescriptor, DeleteJobRequestParameters>
 {

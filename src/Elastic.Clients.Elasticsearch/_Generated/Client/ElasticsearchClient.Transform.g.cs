@@ -38,7 +38,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +49,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +70,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +82,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +95,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +105,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
@@ -116,7 +116,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a transform.</para>
+	/// <para>Delete a transform.<br/>Deletes a transform.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<DeleteTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -128,7 +128,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -139,7 +139,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequest request, CancellationToken cancellationToken = default)
@@ -149,7 +149,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -160,7 +160,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -172,7 +172,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -185,7 +185,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -197,7 +197,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -210,7 +210,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -220,7 +220,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, CancellationToken cancellationToken = default)
@@ -231,7 +231,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -243,7 +243,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(CancellationToken cancellationToken = default)
@@ -254,7 +254,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves configuration information for transforms.</para>
+	/// <para>Get transforms.<br/>Retrieves configuration information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -266,7 +266,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -277,7 +277,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequest request, CancellationToken cancellationToken = default)
@@ -287,7 +287,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -298,7 +298,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -310,7 +310,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -323,7 +323,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -333,7 +333,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, CancellationToken cancellationToken = default)
@@ -344,7 +344,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves usage information for transforms.</para>
+	/// <para>Get transform stats.<br/>Retrieves usage information for transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, Action<GetTransformStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -356,7 +356,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -368,7 +368,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -379,7 +379,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -391,7 +391,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -404,7 +404,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -418,7 +418,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -431,7 +431,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -445,7 +445,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -456,7 +456,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -468,7 +468,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -481,7 +481,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -493,7 +493,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Previews a transform.</para>
+	/// <para>Preview a transform.<br/>Generates a preview of the results that you will get when you create a transform with the same configuration.</para>
 	/// <para>It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also<br/>generates a list of mappings and settings for the destination index. These values are determined based on the field<br/>types of the source index and the transform aggregations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -506,7 +506,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -521,7 +521,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -535,7 +535,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -550,7 +550,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -566,7 +566,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -583,7 +583,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -598,7 +598,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -614,7 +614,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -631,7 +631,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -645,7 +645,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -660,7 +660,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -676,7 +676,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -690,7 +690,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -705,7 +705,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates a transform.</para>
+	/// <para>Create a transform.<br/>Creates a transform.</para>
 	/// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 	/// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 	/// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -721,7 +721,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -732,7 +732,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequest request, CancellationToken cancellationToken = default)
@@ -742,7 +742,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -753,7 +753,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -765,7 +765,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -778,7 +778,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -788,7 +788,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
@@ -799,7 +799,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
+	/// <para>Reset a transform.<br/>Resets a transform.<br/>Before you can reset it, you must stop it; alternatively, use the `force` query parameter.<br/>If the destination index was created by the transform, it is deleted.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<ResetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -811,7 +811,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -823,7 +823,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -834,7 +834,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -846,7 +846,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -859,7 +859,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -873,7 +873,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -884,7 +884,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -896,7 +896,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Schedules now a transform.</para>
+	/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 	/// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -909,7 +909,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -922,7 +922,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -934,7 +934,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -947,7 +947,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -961,7 +961,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -976,7 +976,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -988,7 +988,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -1001,7 +1001,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Starts a transform.</para>
+	/// <para>Start a transform.<br/>Starts a transform.</para>
 	/// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 	/// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
@@ -1015,7 +1015,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1026,7 +1026,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequest request, CancellationToken cancellationToken = default)
@@ -1036,7 +1036,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1047,7 +1047,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1059,7 +1059,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1072,7 +1072,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1082,7 +1082,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, CancellationToken cancellationToken = default)
@@ -1093,7 +1093,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Stops one or more transforms.</para>
+	/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, Action<StopTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1105,7 +1105,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1117,7 +1117,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1128,7 +1128,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1140,7 +1140,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1153,7 +1153,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1167,7 +1167,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1179,7 +1179,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1192,7 +1192,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1206,7 +1206,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1217,7 +1217,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1229,7 +1229,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1242,7 +1242,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1253,7 +1253,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1265,7 +1265,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Updates certain properties of a transform.</para>
+	/// <para>Update a transform.<br/>Updates certain properties of a transform.</para>
 	/// <para>All updated properties except `description` do not take effect until after the transform starts the next checkpoint,<br/>thus there is data consistency in each checkpoint. To use this API, you must have `read` and `view_index_metadata`<br/>privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the<br/>time of update and runs with those privileges.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

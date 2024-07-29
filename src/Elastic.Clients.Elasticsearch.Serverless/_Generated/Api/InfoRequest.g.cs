@@ -34,7 +34,7 @@ public sealed partial class InfoRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns basic information about the cluster.</para>
+/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 /// </summary>
 public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 {
@@ -48,7 +48,7 @@ public sealed partial class InfoRequest : PlainRequest<InfoRequestParameters>
 }
 
 /// <summary>
-/// <para>Returns basic information about the cluster.</para>
+/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 /// </summary>
 public sealed partial class InfoRequestDescriptor : RequestDescriptor<InfoRequestDescriptor, InfoRequestParameters>
 {

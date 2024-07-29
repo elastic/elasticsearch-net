@@ -93,7 +93,7 @@ public sealed partial class ValidateQueryRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Validates a potentially expensive query without executing it.</para>
+/// <para>Validate a query.<br/>Validates a query without running it.</para>
 /// </summary>
 public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryRequestParameters>
 {
@@ -193,7 +193,7 @@ public sealed partial class ValidateQueryRequest : PlainRequest<ValidateQueryReq
 }
 
 /// <summary>
-/// <para>Validates a potentially expensive query without executing it.</para>
+/// <para>Validate a query.<br/>Validates a query without running it.</para>
 /// </summary>
 public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestDescriptor<ValidateQueryRequestDescriptor<TDocument>, ValidateQueryRequestParameters>
 {
@@ -289,7 +289,7 @@ public sealed partial class ValidateQueryRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Validates a potentially expensive query without executing it.</para>
+/// <para>Validate a query.<br/>Validates a query without running it.</para>
 /// </summary>
 public sealed partial class ValidateQueryRequestDescriptor : RequestDescriptor<ValidateQueryRequestDescriptor, ValidateQueryRequestParameters>
 {

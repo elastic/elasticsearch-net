@@ -34,7 +34,7 @@ public sealed partial class ScriptsPainlessExecuteRequestParameters : RequestPar
 }
 
 /// <summary>
-/// <para>Runs a script and returns a result.</para>
+/// <para>Run a script.<br/>Runs a script and returns a result.</para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<ScriptsPainlessExecuteRequestParameters>
 {
@@ -62,11 +62,11 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 	/// <para>The Painless script to execute.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.InlineScript? Script { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
 /// <summary>
-/// <para>Runs a script and returns a result.</para>
+/// <para>Run a script.<br/>Runs a script and returns a result.</para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor<TDocument>, ScriptsPainlessExecuteRequestParameters>
 {
@@ -88,9 +88,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> ContextSetupDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> ContextSetupDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.InlineScript? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.InlineScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> ScriptDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The context that the script should run in.</para>
@@ -131,7 +131,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	/// <summary>
 	/// <para>The Painless script to execute.</para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.InlineScript? script)
+	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptDescriptor = null;
 		ScriptDescriptorAction = null;
@@ -139,7 +139,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 		return Self;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.InlineScriptDescriptor descriptor)
+	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
 	{
 		ScriptValue = null;
 		ScriptDescriptorAction = null;
@@ -147,7 +147,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 		return Self;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> configure)
+	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
 	{
 		ScriptValue = null;
 		ScriptDescriptor = null;
@@ -188,7 +188,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 		else if (ScriptDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.InlineScriptDescriptor(ScriptDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
 		}
 		else if (ScriptValue is not null)
 		{
@@ -201,7 +201,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 }
 
 /// <summary>
-/// <para>Runs a script and returns a result.</para>
+/// <para>Run a script.<br/>Runs a script and returns a result.</para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteRequestParameters>
 {
@@ -223,9 +223,9 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor ContextSetupDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> ContextSetupDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.InlineScript? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.InlineScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> ScriptDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The context that the script should run in.</para>
@@ -266,7 +266,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	/// <summary>
 	/// <para>The Painless script to execute.</para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.InlineScript? script)
+	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
 		ScriptDescriptor = null;
 		ScriptDescriptorAction = null;
@@ -274,7 +274,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 		return Self;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.InlineScriptDescriptor descriptor)
+	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
 	{
 		ScriptValue = null;
 		ScriptDescriptorAction = null;
@@ -282,7 +282,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 		return Self;
 	}
 
-	public ScriptsPainlessExecuteRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> configure)
+	public ScriptsPainlessExecuteRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
 	{
 		ScriptValue = null;
 		ScriptDescriptor = null;
@@ -323,7 +323,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 		else if (ScriptDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.InlineScriptDescriptor(ScriptDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
 		}
 		else if (ScriptValue is not null)
 		{

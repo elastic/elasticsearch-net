@@ -47,7 +47,7 @@ internal sealed partial class UntypedDecayFunctionConverter : JsonConverter<Unty
 
 				variant.Field = property;
 				reader.Read();
-				variant.Placement = JsonSerializer.Deserialize<object>(ref reader, options);
+				variant.Placement = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object>>(ref reader, options);
 			}
 		}
 
@@ -88,7 +88,7 @@ public sealed partial class UntypedDecayFunction
 	/// <para>Determines how the distance is calculated when a field used for computing the decay contains multiple values.</para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
-	public object Placement { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object> Placement { get; set; }
 }
 
 public sealed partial class UntypedDecayFunctionDescriptor<TDocument> : SerializableDescriptor<UntypedDecayFunctionDescriptor<TDocument>>
@@ -101,7 +101,7 @@ public sealed partial class UntypedDecayFunctionDescriptor<TDocument> : Serializ
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private object PlacementValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object> PlacementValue { get; set; }
 
 	public UntypedDecayFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -130,7 +130,7 @@ public sealed partial class UntypedDecayFunctionDescriptor<TDocument> : Serializ
 		return Self;
 	}
 
-	public UntypedDecayFunctionDescriptor<TDocument> Placement(object placement)
+	public UntypedDecayFunctionDescriptor<TDocument> Placement(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object> placement)
 	{
 		PlacementValue = placement;
 		return Self;
@@ -166,7 +166,7 @@ public sealed partial class UntypedDecayFunctionDescriptor : SerializableDescrip
 
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.MultiValueMode? MultiValueModeValue { get; set; }
-	private object PlacementValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object> PlacementValue { get; set; }
 
 	public UntypedDecayFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Serverless.Field field)
 	{
@@ -195,7 +195,7 @@ public sealed partial class UntypedDecayFunctionDescriptor : SerializableDescrip
 		return Self;
 	}
 
-	public UntypedDecayFunctionDescriptor Placement(object placement)
+	public UntypedDecayFunctionDescriptor Placement(Elastic.Clients.Elasticsearch.Serverless.QueryDsl.DecayPlacement<object, object> placement)
 	{
 		PlacementValue = placement;
 		return Self;

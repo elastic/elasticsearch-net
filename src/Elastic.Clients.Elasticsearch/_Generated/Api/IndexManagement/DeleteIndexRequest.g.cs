@@ -58,7 +58,7 @@ public sealed partial class DeleteIndexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes one or more indices.</para>
+/// <para>Delete indices.<br/>Deletes one or more indices.</para>
 /// </summary>
 public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequestParameters>
 {
@@ -106,7 +106,7 @@ public sealed partial class DeleteIndexRequest : PlainRequest<DeleteIndexRequest
 }
 
 /// <summary>
-/// <para>Deletes one or more indices.</para>
+/// <para>Delete indices.<br/>Deletes one or more indices.</para>
 /// </summary>
 public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDescriptor<DeleteIndexRequestDescriptor<TDocument>, DeleteIndexRequestParameters>
 {
@@ -146,7 +146,7 @@ public sealed partial class DeleteIndexRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Deletes one or more indices.</para>
+/// <para>Delete indices.<br/>Deletes one or more indices.</para>
 /// </summary>
 public sealed partial class DeleteIndexRequestDescriptor : RequestDescriptor<DeleteIndexRequestDescriptor, DeleteIndexRequestParameters>
 {

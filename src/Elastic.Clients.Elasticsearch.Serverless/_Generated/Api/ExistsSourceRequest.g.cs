@@ -78,7 +78,7 @@ public sealed partial class ExistsSourceRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Checks if a document's `_source` is stored.</para>
+/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 /// </summary>
 public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceRequestParameters>
 {
@@ -150,7 +150,7 @@ public sealed partial class ExistsSourceRequest : PlainRequest<ExistsSourceReque
 }
 
 /// <summary>
-/// <para>Checks if a document's `_source` is stored.</para>
+/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 /// </summary>
 public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDescriptor<ExistsSourceRequestDescriptor<TDocument>, ExistsSourceRequestParameters>
 {
@@ -212,7 +212,7 @@ public sealed partial class ExistsSourceRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Checks if a document's `_source` is stored.</para>
+/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 /// </summary>
 public sealed partial class ExistsSourceRequestDescriptor : RequestDescriptor<ExistsSourceRequestDescriptor, ExistsSourceRequestParameters>
 {

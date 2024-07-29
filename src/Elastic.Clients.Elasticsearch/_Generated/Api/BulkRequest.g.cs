@@ -78,7 +78,7 @@ public sealed partial class BulkRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 /// </summary>
 public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 {
@@ -154,7 +154,7 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 }
 
 /// <summary>
-/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 /// </summary>
 public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor<BulkRequestDescriptor<TDocument>, BulkRequestParameters>
 {
@@ -200,7 +200,7 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 }
 
 /// <summary>
-/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 /// </summary>
 public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkRequestDescriptor, BulkRequestParameters>
 {

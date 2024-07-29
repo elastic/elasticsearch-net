@@ -21,6 +21,7 @@ using Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
 using Elastic.Clients.Elasticsearch.Serverless.Cluster;
 using Elastic.Clients.Elasticsearch.Serverless.Enrich;
 using Elastic.Clients.Elasticsearch.Serverless.Eql;
+using Elastic.Clients.Elasticsearch.Serverless.Esql;
 using Elastic.Clients.Elasticsearch.Serverless.Graph;
 using Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 using Elastic.Clients.Elasticsearch.Serverless.Ingest;
@@ -48,6 +49,7 @@ public partial class ElasticsearchClient
 	public virtual ClusterNamespacedClient Cluster { get; private set; }
 	public virtual EnrichNamespacedClient Enrich { get; private set; }
 	public virtual EqlNamespacedClient Eql { get; private set; }
+	public virtual EsqlNamespacedClient Esql { get; private set; }
 	public virtual GraphNamespacedClient Graph { get; private set; }
 	public virtual IndicesNamespacedClient Indices { get; private set; }
 	public virtual IngestNamespacedClient Ingest { get; private set; }
@@ -69,6 +71,7 @@ public partial class ElasticsearchClient
 		Cluster = new ClusterNamespacedClient(this);
 		Enrich = new EnrichNamespacedClient(this);
 		Eql = new EqlNamespacedClient(this);
+		Esql = new EsqlNamespacedClient(this);
 		Graph = new GraphNamespacedClient(this);
 		Indices = new IndicesNamespacedClient(this);
 		Ingest = new IngestNamespacedClient(this);
@@ -86,7 +89,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
@@ -96,7 +99,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -106,7 +109,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
@@ -117,7 +120,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -129,7 +132,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -140,7 +143,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -152,7 +155,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -162,7 +165,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, CancellationToken cancellationToken = default)
@@ -173,7 +176,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName? index, Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -185,7 +188,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
@@ -196,7 +199,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
+	/// <para>Bulk index or delete documents.<br/>Performs multiple indexing or delete operations in a single API call.<br/>This reduces overhead and can greatly increase indexing speed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -416,7 +419,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default)
@@ -426,7 +429,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(CreateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -436,7 +439,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -447,7 +450,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -459,7 +462,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -470,7 +473,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -482,7 +485,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -493,7 +496,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -505,7 +508,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -516,7 +519,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -528,7 +531,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
@@ -538,7 +541,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(DeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -548,7 +551,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -559,7 +562,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -571,7 +574,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -582,7 +585,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -594,7 +597,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -605,7 +608,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -617,7 +620,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -628,7 +631,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -640,7 +643,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -651,7 +654,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -663,7 +666,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(DeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -673,7 +676,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -684,7 +687,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Removes a JSON document from the specified index.</para>
+	/// <para>Delete a document.<br/>Removes a JSON document from the specified index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -696,7 +699,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
@@ -706,7 +709,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(DeleteByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -716,7 +719,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
@@ -727,7 +730,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -739,7 +742,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -750,7 +753,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -762,7 +765,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -772,7 +775,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
@@ -783,7 +786,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes documents that match the specified query.</para>
+	/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -838,7 +841,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequest request, CancellationToken cancellationToken = default)
@@ -848,7 +851,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(DeleteScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -858,7 +861,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -869,7 +872,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -881,7 +884,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -891,7 +894,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -902,7 +905,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Deletes a stored script or search template.</para>
+	/// <para>Delete a script or search template.<br/>Deletes a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<DeleteScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -914,7 +917,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
@@ -924,7 +927,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -934,7 +937,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -945,7 +948,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -957,7 +960,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -968,7 +971,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -980,7 +983,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -991,7 +994,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1003,7 +1006,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1014,7 +1017,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1026,7 +1029,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1037,7 +1040,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1049,7 +1052,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1059,7 +1062,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1070,7 +1073,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document in an index exists.</para>
+	/// <para>Check a document.<br/>Checks if a specified document exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1082,7 +1085,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequest request, CancellationToken cancellationToken = default)
@@ -1092,7 +1095,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(ExistsSourceRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1102,7 +1105,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1113,7 +1116,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1125,7 +1128,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -1136,7 +1139,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1148,7 +1151,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -1159,7 +1162,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1171,7 +1174,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1182,7 +1185,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1194,7 +1197,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1205,7 +1208,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1217,7 +1220,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1227,7 +1230,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1238,7 +1241,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Checks if a document's `_source` is stored.</para>
+	/// <para>Check for a document source.<br/>Checks if a document's `_source` is stored.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExistsSourceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1250,7 +1253,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
@@ -1260,7 +1263,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1270,7 +1273,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1281,7 +1284,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1293,7 +1296,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -1304,7 +1307,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1316,7 +1319,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -1327,7 +1330,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1339,7 +1342,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1350,7 +1353,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1362,7 +1365,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1373,7 +1376,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information about why a specific document matches (or doesn’t match) a query.</para>
+	/// <para>Explain a document match result.<br/>Returns information about why a specific document matches, or doesn’t match, a query.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1507,7 +1510,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default)
@@ -1517,7 +1520,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1527,7 +1530,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1538,7 +1541,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1550,7 +1553,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -1561,7 +1564,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1573,7 +1576,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -1584,7 +1587,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1596,7 +1599,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1607,7 +1610,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1619,7 +1622,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1630,7 +1633,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns a document.</para>
+	/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1642,7 +1645,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(GetScriptRequest request, CancellationToken cancellationToken = default)
@@ -1652,7 +1655,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(GetScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1662,7 +1665,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1673,7 +1676,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1685,7 +1688,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(GetScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1695,7 +1698,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1706,7 +1709,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Retrieves a stored script or search template.</para>
+	/// <para>Get a script or search template.<br/>Retrieves a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1718,7 +1721,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequest request, CancellationToken cancellationToken = default)
@@ -1728,7 +1731,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1738,7 +1741,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1749,7 +1752,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1761,7 +1764,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -1772,7 +1775,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1784,7 +1787,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -1795,7 +1798,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1807,7 +1810,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1818,7 +1821,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1830,7 +1833,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -1841,7 +1844,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns the source of a document.</para>
+	/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1919,7 +1922,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default)
@@ -1929,7 +1932,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(IndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1939,7 +1942,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
@@ -1950,7 +1953,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1962,7 +1965,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -1973,7 +1976,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1985,7 +1988,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -1996,7 +1999,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2008,7 +2011,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
@@ -2019,7 +2022,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
+	/// <para>Index a document.<br/>Adds a JSON document to the specified data stream or index and makes it searchable.<br/>If the target is an index and the document already exists, the request updates the document and increments its version.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2031,7 +2034,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
@@ -2041,7 +2044,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(InfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2051,7 +2054,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(CancellationToken cancellationToken = default)
@@ -2062,7 +2065,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns basic information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(Action<InfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2493,7 +2496,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns whether the cluster is running.</para>
+	/// <para>Ping the cluster.<br/>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
@@ -2503,7 +2506,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns whether the cluster is running.</para>
+	/// <para>Ping the cluster.<br/>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(PingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2513,7 +2516,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns whether the cluster is running.</para>
+	/// <para>Ping the cluster.<br/>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(CancellationToken cancellationToken = default)
@@ -2524,7 +2527,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns whether the cluster is running.</para>
+	/// <para>Ping the cluster.<br/>Returns whether the cluster is running.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2536,7 +2539,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(PutScriptRequest request, CancellationToken cancellationToken = default)
@@ -2546,7 +2549,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(PutScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -2556,7 +2559,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Elastic.Clients.Elasticsearch.Serverless.Name? context, CancellationToken cancellationToken = default)
@@ -2567,7 +2570,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Elastic.Clients.Elasticsearch.Serverless.Name? context, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2579,7 +2582,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -2590,7 +2593,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2602,7 +2605,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(PutScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2612,7 +2615,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Elastic.Clients.Elasticsearch.Serverless.Name? context, CancellationToken cancellationToken = default)
@@ -2623,7 +2626,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Elastic.Clients.Elasticsearch.Serverless.Name? context, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2635,7 +2638,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -2646,7 +2649,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a stored script or search template.</para>
+	/// <para>Create or update a script or search template.<br/>Creates or updates a stored script or search template.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2780,7 +2783,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
@@ -2790,7 +2793,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(ReindexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -2800,7 +2803,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -2811,7 +2814,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -2823,7 +2826,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(ReindexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2833,7 +2836,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(CancellationToken cancellationToken = default)
@@ -2844,7 +2847,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+	/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3097,7 +3100,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(SearchMvtRequest request, CancellationToken cancellationToken = default)
@@ -3107,7 +3110,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(SearchMvtRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3117,7 +3120,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
@@ -3128,7 +3131,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3140,7 +3143,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
@@ -3151,7 +3154,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3163,7 +3166,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(SearchMvtRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3173,7 +3176,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
@@ -3184,7 +3187,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+	/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Elastic.Clients.Elasticsearch.Serverless.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3361,7 +3364,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TermVectorsRequest<TDocument> request, CancellationToken cancellationToken = default)
@@ -3371,7 +3374,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TermVectorsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3381,7 +3384,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
@@ -3392,7 +3395,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3404,7 +3407,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -3415,7 +3418,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3427,7 +3430,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -3438,7 +3441,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3450,7 +3453,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -3461,7 +3464,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3473,7 +3476,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
@@ -3484,7 +3487,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3496,7 +3499,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, CancellationToken cancellationToken = default)
@@ -3507,7 +3510,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+	/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3519,7 +3522,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
@@ -3529,7 +3532,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequestDescriptor<TDocument, TPartialDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3539,7 +3542,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -3550,7 +3553,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Serverless.IndexName index, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3562,7 +3565,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, CancellationToken cancellationToken = default)
@@ -3573,7 +3576,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3585,7 +3588,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, CancellationToken cancellationToken = default)
@@ -3596,7 +3599,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.IndexName index, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3608,7 +3611,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -3619,7 +3622,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Serverless.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3631,7 +3634,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, CancellationToken cancellationToken = default)
@@ -3642,7 +3645,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates a document with a script or partial document.</para>
+	/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Serverless.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3654,7 +3657,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequest request, CancellationToken cancellationToken = default)
@@ -3664,7 +3667,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(UpdateByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -3674,7 +3677,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
@@ -3685,7 +3688,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3697,7 +3700,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -3708,7 +3711,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -3720,7 +3723,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3730,7 +3733,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, CancellationToken cancellationToken = default)
@@ -3741,7 +3744,7 @@ public partial class ElasticsearchClient
 	}
 
 	/// <summary>
-	/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+	/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Serverless.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

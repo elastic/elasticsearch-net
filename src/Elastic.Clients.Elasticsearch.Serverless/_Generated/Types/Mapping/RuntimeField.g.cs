@@ -87,6 +87,8 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? InputFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? TargetIndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType TypeValue { get; set; }
@@ -171,7 +173,25 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 	/// </summary>
 	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -266,7 +286,17 @@ public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDesc
 			JsonSerializer.Serialize(writer, InputFieldValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -305,6 +335,8 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	private string? FormatValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? InputFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? TargetFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.IndexName? TargetIndexValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.RuntimeFieldType TypeValue { get; set; }
@@ -389,7 +421,25 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 	/// </summary>
 	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public RuntimeFieldDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -484,7 +534,17 @@ public sealed partial class RuntimeFieldDescriptor : SerializableDescriptor<Runt
 			JsonSerializer.Serialize(writer, InputFieldValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

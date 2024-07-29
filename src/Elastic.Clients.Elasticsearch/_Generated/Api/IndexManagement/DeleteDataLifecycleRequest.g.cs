@@ -48,7 +48,7 @@ public sealed partial class DeleteDataLifecycleRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Removes the data lifecycle from a data stream rendering it not managed by the data stream lifecycle</para>
+/// <para>Delete data stream lifecycles.<br/>Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.</para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteDataLifecycleRequestParameters>
 {
@@ -84,7 +84,7 @@ public sealed partial class DeleteDataLifecycleRequest : PlainRequest<DeleteData
 }
 
 /// <summary>
-/// <para>Removes the data lifecycle from a data stream rendering it not managed by the data stream lifecycle</para>
+/// <para>Delete data stream lifecycles.<br/>Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.</para>
 /// </summary>
 public sealed partial class DeleteDataLifecycleRequestDescriptor : RequestDescriptor<DeleteDataLifecycleRequestDescriptor, DeleteDataLifecycleRequestParameters>
 {

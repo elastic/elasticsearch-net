@@ -43,7 +43,7 @@ public sealed partial class StartTransformRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Starts a transform.</para>
+/// <para>Start a transform.<br/>Starts a transform.</para>
 /// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 /// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 /// </summary>
@@ -75,7 +75,7 @@ public sealed partial class StartTransformRequest : PlainRequest<StartTransformR
 }
 
 /// <summary>
-/// <para>Starts a transform.</para>
+/// <para>Start a transform.<br/>Starts a transform.</para>
 /// <para>When you start a transform, it creates the destination index if it does not already exist. The `number_of_shards` is<br/>set to `1` and the `auto_expand_replicas` is set to `0-1`. If it is a pivot transform, it deduces the mapping<br/>definitions for the destination index from the source indices and the transform aggregations. If fields in the<br/>destination index are derived from scripts (as in the case of `scripted_metric` or `bucket_script` aggregations),<br/>the transform uses dynamic mappings unless an index template exists. If it is a latest transform, it does not deduce<br/>mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you<br/>start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings<br/>in a pivot transform.</para>
 /// <para>When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you<br/>created the transform, they occur when you start the transform—​with the exception of privilege checks. When<br/>Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the<br/>time of creation and uses those same roles. If those roles do not have the required privileges on the source and<br/>destination indices, the transform fails when it attempts unauthorized operations.</para>
 /// </summary>
