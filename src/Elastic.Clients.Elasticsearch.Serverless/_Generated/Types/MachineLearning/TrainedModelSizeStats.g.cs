@@ -39,5 +39,5 @@ public sealed partial class TrainedModelSizeStats
 	/// <para>The amount of memory required to load the model in bytes.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("required_native_memory_bytes")]
-	public int RequiredNativeMemoryBytes { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize RequiredNativeMemoryBytes { get; init; }
 }

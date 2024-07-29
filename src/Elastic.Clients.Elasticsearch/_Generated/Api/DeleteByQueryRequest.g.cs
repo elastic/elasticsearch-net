@@ -173,7 +173,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes documents that match the specified query.</para>
+/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 /// </summary>
 public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryRequestParameters>
 {
@@ -377,7 +377,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 }
 
 /// <summary>
-/// <para>Deletes documents that match the specified query.</para>
+/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 /// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestDescriptor<DeleteByQueryRequestDescriptor<TDocument>, DeleteByQueryRequestParameters>
 {
@@ -551,7 +551,7 @@ public sealed partial class DeleteByQueryRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Deletes documents that match the specified query.</para>
+/// <para>Delete documents.<br/>Deletes documents that match the specified query.</para>
 /// </summary>
 public sealed partial class DeleteByQueryRequestDescriptor : RequestDescriptor<DeleteByQueryRequestDescriptor, DeleteByQueryRequestParameters>
 {

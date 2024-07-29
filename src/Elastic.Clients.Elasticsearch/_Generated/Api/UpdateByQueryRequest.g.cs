@@ -173,7 +173,7 @@ public sealed partial class UpdateByQueryRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 /// </summary>
 public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryRequestParameters>
 {
@@ -389,7 +389,7 @@ public sealed partial class UpdateByQueryRequest : PlainRequest<UpdateByQueryReq
 }
 
 /// <summary>
-/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 /// </summary>
 public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestDescriptor<UpdateByQueryRequestDescriptor<TDocument>, UpdateByQueryRequestParameters>
 {
@@ -452,6 +452,8 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument> SliceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> SliceDescriptorAction { get; set; }
@@ -506,7 +508,25 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 	/// </summary>
 	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public UpdateByQueryRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -568,7 +588,17 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -595,7 +625,7 @@ public sealed partial class UpdateByQueryRequestDescriptor<TDocument> : RequestD
 }
 
 /// <summary>
-/// <para>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
+/// <para>Update documents.<br/>Updates documents that match the specified query.<br/>If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.</para>
 /// </summary>
 public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<UpdateByQueryRequestDescriptor, UpdateByQueryRequestParameters>
 {
@@ -654,6 +684,8 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScroll? SliceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.SlicedScrollDescriptor SliceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> SliceDescriptorAction { get; set; }
@@ -708,7 +740,25 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 	/// </summary>
 	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public UpdateByQueryRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -770,7 +820,17 @@ public sealed partial class UpdateByQueryRequestDescriptor : RequestDescriptor<U
 			JsonSerializer.Serialize(writer, QueryValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

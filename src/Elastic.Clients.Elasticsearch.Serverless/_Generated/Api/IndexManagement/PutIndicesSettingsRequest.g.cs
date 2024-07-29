@@ -68,7 +68,7 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 }
 
 /// <summary>
-/// <para>Changes a dynamic index setting in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
+/// <para>Update index settings.<br/>Changes dynamic index settings in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfSerializable
 {
@@ -139,7 +139,7 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 }
 
 /// <summary>
-/// <para>Changes a dynamic index setting in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
+/// <para>Update index settings.<br/>Changes dynamic index settings in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutIndicesSettingsRequestDescriptor<TDocument> : RequestDescriptor<PutIndicesSettingsRequestDescriptor<TDocument>, PutIndicesSettingsRequestParameters>
 {
@@ -204,7 +204,7 @@ public sealed partial class PutIndicesSettingsRequestDescriptor<TDocument> : Req
 }
 
 /// <summary>
-/// <para>Changes a dynamic index setting in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
+/// <para>Update index settings.<br/>Changes dynamic index settings in real time. For data streams, index setting<br/>changes are applied to all backing indices by default.</para>
 /// </summary>
 public sealed partial class PutIndicesSettingsRequestDescriptor : RequestDescriptor<PutIndicesSettingsRequestDescriptor, PutIndicesSettingsRequestParameters>
 {

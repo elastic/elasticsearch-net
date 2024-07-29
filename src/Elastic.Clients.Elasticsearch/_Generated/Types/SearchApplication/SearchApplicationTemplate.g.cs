@@ -33,7 +33,7 @@ public sealed partial class SearchApplicationTemplate
 	/// <para>The associated mustache template.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.InlineScript Script { get; set; }
+	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
 public sealed partial class SearchApplicationTemplateDescriptor : SerializableDescriptor<SearchApplicationTemplateDescriptor>
@@ -44,14 +44,14 @@ public sealed partial class SearchApplicationTemplateDescriptor : SerializableDe
 	{
 	}
 
-	private Elastic.Clients.Elasticsearch.InlineScript ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.InlineScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> ScriptDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>The associated mustache template.</para>
 	/// </summary>
-	public SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.InlineScript script)
+	public SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptDescriptor = null;
 		ScriptDescriptorAction = null;
@@ -59,7 +59,7 @@ public sealed partial class SearchApplicationTemplateDescriptor : SerializableDe
 		return Self;
 	}
 
-	public SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.InlineScriptDescriptor descriptor)
+	public SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
 	{
 		ScriptValue = null;
 		ScriptDescriptorAction = null;
@@ -67,7 +67,7 @@ public sealed partial class SearchApplicationTemplateDescriptor : SerializableDe
 		return Self;
 	}
 
-	public SearchApplicationTemplateDescriptor Script(Action<Elastic.Clients.Elasticsearch.InlineScriptDescriptor> configure)
+	public SearchApplicationTemplateDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
 	{
 		ScriptValue = null;
 		ScriptDescriptor = null;
@@ -86,7 +86,7 @@ public sealed partial class SearchApplicationTemplateDescriptor : SerializableDe
 		else if (ScriptDescriptorAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.InlineScriptDescriptor(ScriptDescriptorAction), options);
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
 		}
 		else
 		{

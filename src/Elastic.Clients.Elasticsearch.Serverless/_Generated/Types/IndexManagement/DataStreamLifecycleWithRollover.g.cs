@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexManagement;
 
 /// <summary>
-/// <para>Data lifecycle with rollover can be used to display the configuration including the default rollover conditions,<br/>if asked.</para>
+/// <para>Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,<br/>if asked.</para>
 /// </summary>
 public sealed partial class DataStreamLifecycleWithRollover
 {

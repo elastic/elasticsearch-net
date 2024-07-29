@@ -70,6 +70,8 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private int? PrecisionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.Serverless.GeoBounds? bounds)
@@ -134,7 +136,25 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -183,7 +203,17 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor<TDocument>
 			writer.WriteNumberValue(PrecisionValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -214,6 +244,8 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private int? PrecisionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Aggregations.ValueType? ValueTypeValue { get; set; }
 
 	public CompositeGeoTileGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.Serverless.GeoBounds? bounds)
@@ -278,7 +310,25 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 	/// </summary>
 	public CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public CompositeGeoTileGridAggregationDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -327,7 +377,17 @@ public sealed partial class CompositeGeoTileGridAggregationDescriptor : Serializ
 			writer.WriteNumberValue(PrecisionValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

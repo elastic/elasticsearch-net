@@ -43,7 +43,7 @@ public sealed partial class PutTransformRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a transform.</para>
+/// <para>Create a transform.<br/>Creates a transform.</para>
 /// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 /// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 /// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -137,7 +137,7 @@ public sealed partial class PutTransformRequest : PlainRequest<PutTransformReque
 }
 
 /// <summary>
-/// <para>Creates a transform.</para>
+/// <para>Create a transform.<br/>Creates a transform.</para>
 /// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 /// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 /// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>
@@ -547,7 +547,7 @@ public sealed partial class PutTransformRequestDescriptor<TDocument> : RequestDe
 }
 
 /// <summary>
-/// <para>Creates a transform.</para>
+/// <para>Create a transform.<br/>Creates a transform.</para>
 /// <para>A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as<br/>a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a<br/>unique row per entity.</para>
 /// <para>You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If<br/>you choose to use the pivot method for your transform, the entities are defined by the set of `group_by` fields in<br/>the pivot object. If you choose to use the latest method, the entities are defined by the `unique_key` field values<br/>in the latest object.</para>
 /// <para>You must have `create_index`, `index`, and `read` privileges on the destination index and `read` and<br/>`view_index_metadata` privileges on the source indices. When Elasticsearch security features are enabled, the<br/>transform remembers which roles the user that created it had at the time of creation and uses those same roles. If<br/>those roles do not have the required privileges on the source and destination indices, the transform fails when it<br/>attempts unauthorized operations.</para>

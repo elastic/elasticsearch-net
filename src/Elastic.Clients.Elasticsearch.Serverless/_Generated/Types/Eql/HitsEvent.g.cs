@@ -46,6 +46,12 @@ public sealed partial class HitsEvent<TEvent>
 	public string Index { get; init; }
 
 	/// <summary>
+	/// <para>Set to `true` for events in a timespan-constrained sequence that do not meet a given condition.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("missing")]
+	public bool? Missing { get; init; }
+
+	/// <summary>
 	/// <para>Original JSON body passed for the event at index time.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_source")]

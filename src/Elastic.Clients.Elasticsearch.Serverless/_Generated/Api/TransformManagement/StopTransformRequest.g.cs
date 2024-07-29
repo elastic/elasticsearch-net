@@ -60,7 +60,7 @@ public sealed partial class StopTransformRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Stops one or more transforms.</para>
+/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 /// </summary>
 public sealed partial class StopTransformRequest : PlainRequest<StopTransformRequestParameters>
 {
@@ -110,7 +110,7 @@ public sealed partial class StopTransformRequest : PlainRequest<StopTransformReq
 }
 
 /// <summary>
-/// <para>Stops one or more transforms.</para>
+/// <para>Stop transforms.<br/>Stops one or more transforms.</para>
 /// </summary>
 public sealed partial class StopTransformRequestDescriptor : RequestDescriptor<StopTransformRequestDescriptor, StopTransformRequestParameters>
 {

@@ -34,5 +34,5 @@ public sealed partial class SlmIndicatorDetails
 	[JsonInclude, JsonPropertyName("slm_status")]
 	public Elastic.Clients.Elasticsearch.LifecycleOperationMode SlmStatus { get; init; }
 	[JsonInclude, JsonPropertyName("unhealthy_policies")]
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies UnhealthyPolicies { get; init; }
+	public Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies? UnhealthyPolicies { get; init; }
 }

@@ -254,6 +254,7 @@ public sealed partial class IntervalsFilterDescriptor<TDocument> : SerializableD
 	public IntervalsFilterDescriptor<TDocument> Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
 	public IntervalsFilterDescriptor<TDocument> Overlapping(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument>> configure) => Set(configure, "overlapping");
 	public IntervalsFilterDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
+	public IntervalsFilterDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure) => Set(configure, "script");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -323,6 +324,7 @@ public sealed partial class IntervalsFilterDescriptor : SerializableDescriptor<I
 	public IntervalsFilterDescriptor Overlapping(Elastic.Clients.Elasticsearch.QueryDsl.Intervals intervalsContainer) => Set(intervalsContainer, "overlapping");
 	public IntervalsFilterDescriptor Overlapping<TDocument>(Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor> configure) => Set(configure, "overlapping");
 	public IntervalsFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script) => Set(script, "script");
+	public IntervalsFilterDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure) => Set(configure, "script");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

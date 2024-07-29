@@ -96,6 +96,8 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private double? ScalingFactorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -216,7 +218,25 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 
 	public ScaledFloatNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ScaledFloatNumberPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -319,7 +339,17 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 			writer.WriteNumberValue(ScalingFactorValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -342,6 +372,30 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -358,7 +412,7 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor<TDocument> : Ser
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		ScalingFactor = ScalingFactorValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
@@ -387,6 +441,8 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private double? ScalingFactorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -507,7 +563,25 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 
 	public ScaledFloatNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ScaledFloatNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ScaledFloatNumberPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -610,7 +684,17 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 			writer.WriteNumberValue(ScalingFactorValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -633,6 +717,30 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	ScaledFloatNumberProperty IBuildableDescriptor<ScaledFloatNumberProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -649,7 +757,7 @@ public sealed partial class ScaledFloatNumberPropertyDescriptor : SerializableDe
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
 		ScalingFactor = ScalingFactorValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};

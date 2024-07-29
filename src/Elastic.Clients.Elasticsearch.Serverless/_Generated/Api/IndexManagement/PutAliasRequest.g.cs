@@ -43,7 +43,7 @@ public sealed partial class PutAliasRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Adds a data stream or index to an alias.</para>
+/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParameters>
 {
@@ -103,7 +103,7 @@ public sealed partial class PutAliasRequest : PlainRequest<PutAliasRequestParame
 }
 
 /// <summary>
-/// <para>Adds a data stream or index to an alias.</para>
+/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescriptor<PutAliasRequestDescriptor<TDocument>, PutAliasRequestParameters>
 {
@@ -259,7 +259,7 @@ public sealed partial class PutAliasRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Adds a data stream or index to an alias.</para>
+/// <para>Create or update an alias.<br/>Adds a data stream or index to an alias.</para>
 /// </summary>
 public sealed partial class PutAliasRequestDescriptor : RequestDescriptor<PutAliasRequestDescriptor, PutAliasRequestParameters>
 {
