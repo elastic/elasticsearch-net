@@ -31,7 +31,10 @@ public sealed partial class GetRuleResponse : ElasticsearchResponse
 	[JsonInclude, JsonPropertyName("actions")]
 	public Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleActions Actions { get; init; }
 	[JsonInclude, JsonPropertyName("criteria")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteria))]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleCriteria> Criteria { get; init; }
+	[JsonInclude, JsonPropertyName("priority")]
+	public int? Priority { get; init; }
 	[JsonInclude, JsonPropertyName("rule_id")]
 	public string RuleId { get; init; }
 	[JsonInclude, JsonPropertyName("type")]

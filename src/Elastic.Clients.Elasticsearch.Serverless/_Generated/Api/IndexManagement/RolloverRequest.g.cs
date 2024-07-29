@@ -53,7 +53,7 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a new index for a data stream or index alias.</para>
+/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
 /// </summary>
 public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParameters>
 {
@@ -123,7 +123,7 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 }
 
 /// <summary>
-/// <para>Creates a new index for a data stream or index alias.</para>
+/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescriptor<RolloverRequestDescriptor<TDocument>, RolloverRequestParameters>
 {
@@ -295,7 +295,7 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Creates a new index for a data stream or index alias.</para>
+/// <para>Roll over to a new index.<br/>Creates a new index for a data stream or index alias.</para>
 /// </summary>
 public sealed partial class RolloverRequestDescriptor : RequestDescriptor<RolloverRequestDescriptor, RolloverRequestParameters>
 {

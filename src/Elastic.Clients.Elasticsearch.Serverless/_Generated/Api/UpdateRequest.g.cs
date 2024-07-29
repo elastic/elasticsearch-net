@@ -88,7 +88,7 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Updates a document with a script or partial document.</para>
+/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 /// </summary>
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRequest<UpdateRequestParameters>
 {
@@ -216,7 +216,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 }
 
 /// <summary>
-/// <para>Updates a document with a script or partial document.</para>
+/// <para>Update a document.<br/>Updates a document by running a script or passing a partial document.</para>
 /// </summary>
 public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument> : RequestDescriptor<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 {
@@ -278,6 +278,8 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	private TPartialDocument? DocValue { get; set; }
 	private bool? DocAsUpsertValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? ScriptedUpsertValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Core.Search.SourceConfig? SourceValue { get; set; }
 	private TDocument? UpsertValue { get; set; }
@@ -314,7 +316,25 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 	/// </summary>
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -366,7 +386,17 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 			writer.WriteBooleanValue(DocAsUpsertValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

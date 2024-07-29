@@ -88,7 +88,7 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 /// </summary>
 public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVectorsRequestParameters>
 {
@@ -195,7 +195,7 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 }
 
 /// <summary>
-/// <para>Returns information and statistics about terms in the fields of a particular document.</para>
+/// <para>Get term vector information.<br/>Returns information and statistics about terms in the fields of a particular document.</para>
 /// </summary>
 public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDescriptor<TermVectorsRequestDescriptor<TDocument>, TermVectorsRequestParameters>
 {

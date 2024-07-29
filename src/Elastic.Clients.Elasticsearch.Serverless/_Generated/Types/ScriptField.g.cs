@@ -45,6 +45,8 @@ public sealed partial class ScriptFieldDescriptor : SerializableDescriptor<Scrip
 
 	private bool? IgnoreFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	public ScriptFieldDescriptor IgnoreFailure(bool? ignoreFailure = true)
 	{
@@ -54,7 +56,25 @@ public sealed partial class ScriptFieldDescriptor : SerializableDescriptor<Scrip
 
 	public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ScriptFieldDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ScriptFieldDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -67,8 +87,22 @@ public sealed partial class ScriptFieldDescriptor : SerializableDescriptor<Scrip
 			writer.WriteBooleanValue(IgnoreFailureValue.Value);
 		}
 
-		writer.WritePropertyName("script");
-		JsonSerializer.Serialize(writer, ScriptValue, options);
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }

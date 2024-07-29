@@ -165,6 +165,8 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? MinimumShouldMatchScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
 
@@ -227,7 +229,25 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 	/// </summary>
 	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Serverless.Script? minimumShouldMatchScript)
 	{
+		MinimumShouldMatchScriptDescriptor = null;
+		MinimumShouldMatchScriptDescriptorAction = null;
 		MinimumShouldMatchScriptValue = minimumShouldMatchScript;
+		return Self;
+	}
+
+	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		MinimumShouldMatchScriptValue = null;
+		MinimumShouldMatchScriptDescriptorAction = null;
+		MinimumShouldMatchScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		MinimumShouldMatchScriptValue = null;
+		MinimumShouldMatchScriptDescriptor = null;
+		MinimumShouldMatchScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -265,7 +285,17 @@ public sealed partial class TermsSetQueryDescriptor<TDocument> : SerializableDes
 			JsonSerializer.Serialize(writer, MinimumShouldMatchFieldValue, options);
 		}
 
-		if (MinimumShouldMatchScriptValue is not null)
+		if (MinimumShouldMatchScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_script");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptDescriptor, options);
+		}
+		else if (MinimumShouldMatchScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(MinimumShouldMatchScriptDescriptorAction), options);
+		}
+		else if (MinimumShouldMatchScriptValue is not null)
 		{
 			writer.WritePropertyName("minimum_should_match_script");
 			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);
@@ -296,6 +326,8 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	private Elastic.Clients.Elasticsearch.Serverless.Field FieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Field? MinimumShouldMatchFieldValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? MinimumShouldMatchScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor MinimumShouldMatchScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> MinimumShouldMatchScriptDescriptorAction { get; set; }
 	private string? QueryNameValue { get; set; }
 	private ICollection<string> TermsValue { get; set; }
 
@@ -358,7 +390,25 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 	/// </summary>
 	public TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Serverless.Script? minimumShouldMatchScript)
 	{
+		MinimumShouldMatchScriptDescriptor = null;
+		MinimumShouldMatchScriptDescriptorAction = null;
 		MinimumShouldMatchScriptValue = minimumShouldMatchScript;
+		return Self;
+	}
+
+	public TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		MinimumShouldMatchScriptValue = null;
+		MinimumShouldMatchScriptDescriptorAction = null;
+		MinimumShouldMatchScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public TermsSetQueryDescriptor MinimumShouldMatchScript(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		MinimumShouldMatchScriptValue = null;
+		MinimumShouldMatchScriptDescriptor = null;
+		MinimumShouldMatchScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -396,7 +446,17 @@ public sealed partial class TermsSetQueryDescriptor : SerializableDescriptor<Ter
 			JsonSerializer.Serialize(writer, MinimumShouldMatchFieldValue, options);
 		}
 
-		if (MinimumShouldMatchScriptValue is not null)
+		if (MinimumShouldMatchScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_script");
+			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptDescriptor, options);
+		}
+		else if (MinimumShouldMatchScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("minimum_should_match_script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(MinimumShouldMatchScriptDescriptorAction), options);
+		}
+		else if (MinimumShouldMatchScriptValue is not null)
 		{
 			writer.WritePropertyName("minimum_should_match_script");
 			JsonSerializer.Serialize(writer, MinimumShouldMatchScriptValue, options);

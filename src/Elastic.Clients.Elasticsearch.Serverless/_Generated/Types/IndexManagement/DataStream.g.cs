@@ -60,7 +60,7 @@ public sealed partial class DataStream
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamIndex> Indices { get; init; }
 
 	/// <summary>
-	/// <para>Contains the configuration for the data lifecycle management of this data stream.</para>
+	/// <para>Contains the configuration for the data stream lifecycle of this data stream.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("lifecycle")]
 	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; init; }

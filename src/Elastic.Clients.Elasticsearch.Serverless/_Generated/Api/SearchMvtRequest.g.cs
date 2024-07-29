@@ -34,7 +34,7 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 /// </summary>
 public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestParameters>
 {
@@ -139,7 +139,7 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 }
 
 /// <summary>
-/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescriptor<SearchMvtRequestDescriptor<TDocument>, SearchMvtRequestParameters>
 {
@@ -511,7 +511,7 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.</para>
+/// <para>Search a vector tile.<br/>Searches a vector tile for geospatial values.</para>
 /// </summary>
 public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<SearchMvtRequestDescriptor, SearchMvtRequestParameters>
 {

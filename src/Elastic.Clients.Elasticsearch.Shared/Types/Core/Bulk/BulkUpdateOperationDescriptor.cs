@@ -43,8 +43,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	private Script _script;
 	private Union<bool, SourceFilter> _source;
 
-	private Action<InlineScriptDescriptor> _inlineScriptAction;
-	private Action<StoredScriptIdDescriptor> _storedScriptIdAction;
+	private Action<ScriptDescriptor> _scriptAction;
 
 	protected override string Operation => "update";
 
@@ -64,26 +63,16 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> RetriesOnConflict(int? retriesOnConflict) =>
 		Assign(retriesOnConflict, (a, v) => a._retriesOnConflict = v);
 
-	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Action<InlineScriptDescriptor> configure)
+	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Action<ScriptDescriptor> configure)
 	{
 		_script = null;
-		_storedScriptIdAction = null;
 
-		return Assign(configure, (a, v) => a._inlineScriptAction = v);
-	}
-
-	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Action<StoredScriptIdDescriptor> configure)
-	{
-		_script = null;
-		_inlineScriptAction = null;
-
-		return Assign(configure, (a, v) => a._storedScriptIdAction = v);
+		return Assign(configure, (a, v) => a._scriptAction = v);
 	}
 
 	public BulkUpdateOperationDescriptor<TDocument, TPartialDocument> Script(Script script)
 	{
-		_inlineScriptAction = null;
-		_storedScriptIdAction = null;
+		_scriptAction = null;
 
 		return Assign(script, (a, v) => a._script = v);
 	}
@@ -98,7 +87,7 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	protected override object GetBody()
 	{
-		if (_inlineScriptAction is not null || _storedScriptIdAction is not null)
+		if (_scriptAction is not null)
 			return null;
 
 		return new BulkUpdateBody<TDocument, TPartialDocument>
@@ -153,15 +142,10 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 
 	private void WriteBody(IElasticsearchClientSettings settings, Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
-		if (_inlineScriptAction is not null)
+		if (_scriptAction is not null)
 		{
 			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new InlineScriptDescriptor(_inlineScriptAction), options);
-		}
-		else if (_storedScriptIdAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new StoredScriptIdDescriptor(_storedScriptIdAction), options);
+			JsonSerializer.Serialize(writer, new ScriptDescriptor(_scriptAction), options);
 		}
 
 		if (_document is not null)

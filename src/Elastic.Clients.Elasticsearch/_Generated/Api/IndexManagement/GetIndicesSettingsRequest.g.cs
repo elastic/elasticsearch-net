@@ -68,7 +68,7 @@ public sealed partial class GetIndicesSettingsRequestParameters : RequestParamet
 }
 
 /// <summary>
-/// <para>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
+/// <para>Get index settings.<br/>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesSettingsRequestParameters>
 {
@@ -140,7 +140,7 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 }
 
 /// <summary>
-/// <para>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
+/// <para>Get index settings.<br/>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndicesSettingsRequestDescriptor<TDocument> : RequestDescriptor<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsRequestParameters>
 {
@@ -188,7 +188,7 @@ public sealed partial class GetIndicesSettingsRequestDescriptor<TDocument> : Req
 }
 
 /// <summary>
-/// <para>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
+/// <para>Get index settings.<br/>Returns setting information for one or more indices. For data streams,<br/>returns setting information for the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndicesSettingsRequestDescriptor : RequestDescriptor<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsRequestParameters>
 {

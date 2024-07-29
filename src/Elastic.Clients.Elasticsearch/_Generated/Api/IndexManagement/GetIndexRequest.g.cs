@@ -73,7 +73,7 @@ public sealed partial class GetIndexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParameters>
 {
@@ -139,7 +139,7 @@ public sealed partial class GetIndexRequest : PlainRequest<GetIndexRequestParame
 }
 
 /// <summary>
-/// <para>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescriptor<GetIndexRequestDescriptor<TDocument>, GetIndexRequestParameters>
 {
@@ -182,7 +182,7 @@ public sealed partial class GetIndexRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
+/// <para>Get index information.<br/>Returns information about one or more indices. For data streams, the API returns information about the<br/>stream’s backing indices.</para>
 /// </summary>
 public sealed partial class GetIndexRequestDescriptor : RequestDescriptor<GetIndexRequestDescriptor, GetIndexRequestParameters>
 {

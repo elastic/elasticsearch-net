@@ -81,7 +81,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)
@@ -91,7 +91,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -101,7 +101,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Delete component templates.<br/>Deletes component templates.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -124,7 +124,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
@@ -134,7 +134,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -144,7 +144,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, CancellationToken cancellationToken = default)
@@ -155,7 +155,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns information about whether a particular component template exist</para>
+	/// <para>Check component templates.<br/>Returns information about whether a particular component template exists.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -167,7 +167,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequest request, CancellationToken cancellationToken = default)
@@ -177,7 +177,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -187,7 +187,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, CancellationToken cancellationToken = default)
@@ -198,7 +198,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Serverless.Name? name, Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -210,7 +210,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(CancellationToken cancellationToken = default)
@@ -221,7 +221,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Retrieves information about component templates.</para>
+	/// <para>Get component templates.<br/>Retrieves information about component templates.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -398,7 +398,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns different information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)
@@ -408,7 +408,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns different information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -418,7 +418,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns different information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ClusterInfoTarget> target, CancellationToken cancellationToken = default)
@@ -429,7 +429,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Returns different information about the cluster.</para>
+	/// <para>Get cluster info.<br/>Returns basic information about the cluster.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Serverless.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -484,7 +484,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -498,7 +498,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -512,7 +512,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -527,7 +527,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -543,7 +543,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -557,7 +557,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>
@@ -572,7 +572,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
+	/// <para>Create or update a component template.<br/>Creates or updates a component template.<br/>Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.</para>
 	/// <para>An index template can be composed of multiple component templates.<br/>To use a component template, specify it in an index template’s `composed_of` list.<br/>Component templates are only applied to new data streams and indices as part of a matching index template.</para>
 	/// <para>Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.</para>
 	/// <para>Component templates are only used during index creation.<br/>For data streams, this includes data stream creation and the creation of a stream’s backing indices.<br/>Changes to component templates do not affect existing indices, including a stream’s backing indices.</para>

@@ -33,7 +33,7 @@ public sealed partial class QueryRulesetListItem
 	/// <para>A map of criteria type to the number of rules of that type</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("rule_criteria_types_counts")]
-	public IReadOnlyDictionary<string, string> RuleCriteriaTypesCounts { get; init; }
+	public IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; init; }
 
 	/// <summary>
 	/// <para>Ruleset unique identifier</para>

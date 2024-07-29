@@ -34,7 +34,7 @@ public sealed partial class ModifyDataStreamRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Performs one or more data stream modification actions in a single atomic operation.</para>
+/// <para>Update data streams.<br/>Performs one or more data stream modification actions in a single atomic operation.</para>
 /// </summary>
 public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStreamRequestParameters>
 {
@@ -54,7 +54,7 @@ public sealed partial class ModifyDataStreamRequest : PlainRequest<ModifyDataStr
 }
 
 /// <summary>
-/// <para>Performs one or more data stream modification actions in a single atomic operation.</para>
+/// <para>Update data streams.<br/>Performs one or more data stream modification actions in a single atomic operation.</para>
 /// </summary>
 public sealed partial class ModifyDataStreamRequestDescriptor : RequestDescriptor<ModifyDataStreamRequestDescriptor, ModifyDataStreamRequestParameters>
 {

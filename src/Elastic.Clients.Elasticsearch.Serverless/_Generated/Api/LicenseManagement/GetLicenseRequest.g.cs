@@ -38,7 +38,7 @@ public sealed partial class GetLicenseRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
+/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
 /// </summary>
 public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestParameters>
 {
@@ -58,7 +58,7 @@ public sealed partial class GetLicenseRequest : PlainRequest<GetLicenseRequestPa
 }
 
 /// <summary>
-/// <para>This API returns information about the type of license, when it was issued, and when it expires, for example.<br/>For more information about the different types of licenses, see https://www.elastic.co/subscriptions.</para>
+/// <para>Get license information.<br/>Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.<br/>For more information about the different types of licenses, refer to [Elastic Stack subscriptions](https://www.elastic.co/subscriptions).</para>
 /// </summary>
 public sealed partial class GetLicenseRequestDescriptor : RequestDescriptor<GetLicenseRequestDescriptor, GetLicenseRequestParameters>
 {

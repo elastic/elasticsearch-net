@@ -43,7 +43,7 @@ public sealed partial class DeleteAliasRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Removes a data stream or index from an alias.</para>
+/// <para>Delete an alias.<br/>Removes a data stream or index from an alias.</para>
 /// </summary>
 public sealed partial class DeleteAliasRequest : PlainRequest<DeleteAliasRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class DeleteAliasRequest : PlainRequest<DeleteAliasRequest
 }
 
 /// <summary>
-/// <para>Removes a data stream or index from an alias.</para>
+/// <para>Delete an alias.<br/>Removes a data stream or index from an alias.</para>
 /// </summary>
 public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDescriptor<DeleteAliasRequestDescriptor<TDocument>, DeleteAliasRequestParameters>
 {
@@ -116,7 +116,7 @@ public sealed partial class DeleteAliasRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Removes a data stream or index from an alias.</para>
+/// <para>Delete an alias.<br/>Removes a data stream or index from an alias.</para>
 /// </summary>
 public sealed partial class DeleteAliasRequestDescriptor : RequestDescriptor<DeleteAliasRequestDescriptor, DeleteAliasRequestParameters>
 {

@@ -57,6 +57,12 @@ internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistan
 					continue;
 				}
 
+				if (property == "nested")
+				{
+					variant.Nested = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.NestedSortValue?>(ref reader, options);
+					continue;
+				}
+
 				if (property == "order")
 				{
 					variant.Order = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Serverless.SortOrder?>(ref reader, options);
@@ -111,6 +117,12 @@ internal sealed partial class GeoDistanceSortConverter : JsonConverter<GeoDistan
 			JsonSerializer.Serialize(writer, value.Mode, options);
 		}
 
+		if (value.Nested is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, value.Nested, options);
+		}
+
 		if (value.Order is not null)
 		{
 			writer.WritePropertyName("order");
@@ -135,6 +147,7 @@ public sealed partial class GeoDistanceSort
 	public bool? IgnoreUnmapped { get; set; }
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> Location { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.SortMode? Mode { get; set; }
+	public Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? Nested { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.SortOrder? Order { get; set; }
 	public Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? Unit { get; set; }
 
@@ -154,6 +167,9 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 	private bool? IgnoreUnmappedValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortMode? ModeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? NestedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor<TDocument> NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor<TDocument>> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? UnitValue { get; set; }
 
@@ -199,6 +215,30 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public GeoDistanceSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? nested)
+	{
+		NestedDescriptor = null;
+		NestedDescriptorAction = null;
+		NestedValue = nested;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor<TDocument> descriptor)
+	{
+		NestedValue = null;
+		NestedDescriptorAction = null;
+		NestedDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor<TDocument> Nested(Action<Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor<TDocument>> configure)
+	{
+		NestedValue = null;
+		NestedDescriptor = null;
+		NestedDescriptorAction = configure;
+		return Self;
+	}
+
 	public GeoDistanceSortDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.Serverless.SortOrder? order)
 	{
 		OrderValue = order;
@@ -239,6 +279,22 @@ public sealed partial class GeoDistanceSortDescriptor<TDocument> : SerializableD
 			JsonSerializer.Serialize(writer, ModeValue, options);
 		}
 
+		if (NestedDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedDescriptor, options);
+		}
+		else if (NestedDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor<TDocument>(NestedDescriptorAction), options);
+		}
+		else if (NestedValue is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedValue, options);
+		}
+
 		if (OrderValue is not null)
 		{
 			writer.WritePropertyName("order");
@@ -268,6 +324,9 @@ public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<G
 	private bool? IgnoreUnmappedValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Serverless.GeoLocation> LocationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortMode? ModeValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? NestedValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor NestedDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor> NestedDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.SortOrder? OrderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.DistanceUnit? UnitValue { get; set; }
 
@@ -313,6 +372,30 @@ public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<G
 		return Self;
 	}
 
+	public GeoDistanceSortDescriptor Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValue? nested)
+	{
+		NestedDescriptor = null;
+		NestedDescriptorAction = null;
+		NestedValue = nested;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Nested(Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor descriptor)
+	{
+		NestedValue = null;
+		NestedDescriptorAction = null;
+		NestedDescriptor = descriptor;
+		return Self;
+	}
+
+	public GeoDistanceSortDescriptor Nested(Action<Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor> configure)
+	{
+		NestedValue = null;
+		NestedDescriptor = null;
+		NestedDescriptorAction = configure;
+		return Self;
+	}
+
 	public GeoDistanceSortDescriptor Order(Elastic.Clients.Elasticsearch.Serverless.SortOrder? order)
 	{
 		OrderValue = order;
@@ -351,6 +434,22 @@ public sealed partial class GeoDistanceSortDescriptor : SerializableDescriptor<G
 		{
 			writer.WritePropertyName("mode");
 			JsonSerializer.Serialize(writer, ModeValue, options);
+		}
+
+		if (NestedDescriptor is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedDescriptor, options);
+		}
+		else if (NestedDescriptorAction is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.NestedSortValueDescriptor(NestedDescriptorAction), options);
+		}
+		else if (NestedValue is not null)
+		{
+			writer.WritePropertyName("nested");
+			JsonSerializer.Serialize(writer, NestedValue, options);
 		}
 
 		if (OrderValue is not null)

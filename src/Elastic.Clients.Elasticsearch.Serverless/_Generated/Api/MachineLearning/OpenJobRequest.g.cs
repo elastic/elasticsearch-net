@@ -34,7 +34,7 @@ public sealed partial class OpenJobRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 /// </summary>
 public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParameters>
 {
@@ -58,7 +58,7 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 }
 
 /// <summary>
-/// <para>Opens one or more anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
+/// <para>Open anomaly detection jobs.<br/>An anomaly detection job must be opened in order for it to be ready to<br/>receive and analyze data. It can be opened and closed multiple times<br/>throughout its lifecycle.<br/>When you open a new job, it starts with an empty model.<br/>When you open an existing job, the most recent model state is automatically<br/>loaded. The job is ready to resume its analysis from where it left off, once<br/>new data is received.</para>
 /// </summary>
 public sealed partial class OpenJobRequestDescriptor : RequestDescriptor<OpenJobRequestDescriptor, OpenJobRequestParameters>
 {
