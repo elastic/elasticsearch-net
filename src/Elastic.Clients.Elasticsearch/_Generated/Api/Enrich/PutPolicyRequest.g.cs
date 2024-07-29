@@ -34,7 +34,7 @@ public sealed partial class PutPolicyRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates an enrich policy.</para>
+/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 /// </summary>
 public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestParameters>
 {
@@ -70,7 +70,7 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 }
 
 /// <summary>
-/// <para>Creates an enrich policy.</para>
+/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 /// </summary>
 public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescriptor<PutPolicyRequestDescriptor<TDocument>, PutPolicyRequestParameters>
 {
@@ -241,7 +241,7 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Creates an enrich policy.</para>
+/// <para>Create an enrich policy.<br/>Creates an enrich policy.</para>
 /// </summary>
 public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPolicyRequestDescriptor, PutPolicyRequestParameters>
 {

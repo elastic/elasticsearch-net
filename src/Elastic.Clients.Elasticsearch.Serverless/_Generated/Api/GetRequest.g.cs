@@ -83,7 +83,7 @@ public sealed partial class GetRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns a document.</para>
+/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 /// </summary>
 public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 {
@@ -161,7 +161,7 @@ public sealed partial class GetRequest : PlainRequest<GetRequestParameters>
 }
 
 /// <summary>
-/// <para>Returns a document.</para>
+/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 /// </summary>
 public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<GetRequestDescriptor<TDocument>, GetRequestParameters>
 {
@@ -224,7 +224,7 @@ public sealed partial class GetRequestDescriptor<TDocument> : RequestDescriptor<
 }
 
 /// <summary>
-/// <para>Returns a document.</para>
+/// <para>Get a document by its ID.<br/>Retrieves the document with the specified ID from an index.</para>
 /// </summary>
 public sealed partial class GetRequestDescriptor : RequestDescriptor<GetRequestDescriptor, GetRequestParameters>
 {

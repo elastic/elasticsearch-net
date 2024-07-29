@@ -48,7 +48,7 @@ public sealed partial class PutDataLifecycleRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Update the data lifecycle of the specified data streams.</para>
+/// <para>Update data stream lifecycles.<br/>Update the data stream lifecycle of the specified data streams.</para>
 /// </summary>
 public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecycleRequestParameters>
 {
@@ -96,7 +96,7 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 }
 
 /// <summary>
-/// <para>Update the data lifecycle of the specified data streams.</para>
+/// <para>Update data stream lifecycles.<br/>Update the data stream lifecycle of the specified data streams.</para>
 /// </summary>
 public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescriptor<PutDataLifecycleRequestDescriptor, PutDataLifecycleRequestParameters>
 {

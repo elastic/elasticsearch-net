@@ -79,7 +79,7 @@ public sealed partial class GetSourceRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Returns the source of a document.</para>
+/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 /// </summary>
 public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestParameters>
 {
@@ -153,7 +153,7 @@ public sealed partial class GetSourceRequest : PlainRequest<GetSourceRequestPara
 }
 
 /// <summary>
-/// <para>Returns the source of a document.</para>
+/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 /// </summary>
 public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescriptor<GetSourceRequestDescriptor<TDocument>, GetSourceRequestParameters>
 {
@@ -216,7 +216,7 @@ public sealed partial class GetSourceRequestDescriptor<TDocument> : RequestDescr
 }
 
 /// <summary>
-/// <para>Returns the source of a document.</para>
+/// <para>Get a document's source.<br/>Returns the source of a document.</para>
 /// </summary>
 public sealed partial class GetSourceRequestDescriptor : RequestDescriptor<GetSourceRequestDescriptor, GetSourceRequestParameters>
 {

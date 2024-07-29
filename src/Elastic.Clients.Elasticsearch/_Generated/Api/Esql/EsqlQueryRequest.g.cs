@@ -37,6 +37,11 @@ public sealed partial class EsqlQueryRequestParameters : RequestParameters
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
+	/// <para>Should columns that are entirely `null` be removed from the `columns` and `values` portion of the results?<br/>Defaults to `false`. If `true` then the response will include an extra section under the name `all_columns` which has the name of all columns.</para>
+	/// </summary>
+	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
+
+	/// <summary>
 	/// <para>A short version of the Accept header, e.g. json, yaml.</para>
 	/// </summary>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
@@ -62,6 +67,12 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
+	/// <para>Should columns that are entirely `null` be removed from the `columns` and `values` portion of the results?<br/>Defaults to `false`. If `true` then the response will include an extra section under the name `all_columns` which has the name of all columns.</para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
+
+	/// <summary>
 	/// <para>A short version of the Accept header, e.g. json, yaml.</para>
 	/// </summary>
 	[JsonIgnore]
@@ -85,7 +96,13 @@ public sealed partial class EsqlQueryRequest : PlainRequest<EsqlQueryRequestPara
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("params")]
-	public ICollection<object>? Params { get; set; }
+	public ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
+
+	/// <summary>
+	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("profile")]
+	public bool? Profile { get; set; }
 
 	/// <summary>
 	/// <para>The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.</para>
@@ -114,6 +131,7 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	internal override string OperationName => "esql.query";
 
 	public EsqlQueryRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
+	public EsqlQueryRequestDescriptor<TDocument> DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
 	public EsqlQueryRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
 
 	private bool? ColumnarValue { get; set; }
@@ -121,7 +139,8 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
 	private string? LocaleValue { get; set; }
-	private ICollection<object>? ParamsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
+	private bool? ProfileValue { get; set; }
 	private string QueryValue { get; set; }
 
 	/// <summary>
@@ -169,9 +188,18 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 	/// <summary>
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<object>? value)
+	public EsqlQueryRequestDescriptor<TDocument> Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		ParamsValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor<TDocument> Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -221,6 +249,12 @@ public sealed partial class EsqlQueryRequestDescriptor<TDocument> : RequestDescr
 			JsonSerializer.Serialize(writer, ParamsValue, options);
 		}
 
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
+		}
+
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
 		writer.WriteEndObject();
@@ -247,6 +281,7 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	internal override string OperationName => "esql.query";
 
 	public EsqlQueryRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
+	public EsqlQueryRequestDescriptor DropNullColumns(bool? dropNullColumns = true) => Qs("drop_null_columns", dropNullColumns);
 	public EsqlQueryRequestDescriptor Format(string? format) => Qs("format", format);
 
 	private bool? ColumnarValue { get; set; }
@@ -254,7 +289,8 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
 	private string? LocaleValue { get; set; }
-	private ICollection<object>? ParamsValue { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
+	private bool? ProfileValue { get; set; }
 	private string QueryValue { get; set; }
 
 	/// <summary>
@@ -302,9 +338,18 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 	/// <summary>
 	/// <para>To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.</para>
 	/// </summary>
-	public EsqlQueryRequestDescriptor Params(ICollection<object>? value)
+	public EsqlQueryRequestDescriptor Params(ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		ParamsValue = value;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>If provided and `true` the response will include an extra `profile` object<br/>with information on how the query was executed. This information is for human debugging<br/>and its format can change at any time but it can give some insight into the performance<br/>of each part of the query.</para>
+	/// </summary>
+	public EsqlQueryRequestDescriptor Profile(bool? profile = true)
+	{
+		ProfileValue = profile;
 		return Self;
 	}
 
@@ -352,6 +397,12 @@ public sealed partial class EsqlQueryRequestDescriptor : RequestDescriptor<EsqlQ
 		{
 			writer.WritePropertyName("params");
 			JsonSerializer.Serialize(writer, ParamsValue, options);
+		}
+
+		if (ProfileValue.HasValue)
+		{
+			writer.WritePropertyName("profile");
+			writer.WriteBooleanValue(ProfileValue.Value);
 		}
 
 		writer.WritePropertyName("query");

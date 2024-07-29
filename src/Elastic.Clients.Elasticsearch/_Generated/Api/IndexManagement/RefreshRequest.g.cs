@@ -48,7 +48,7 @@ public sealed partial class RefreshRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
+/// <para>Refresh an index.<br/>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParameters>
 {
@@ -88,7 +88,7 @@ public sealed partial class RefreshRequest : PlainRequest<RefreshRequestParamete
 }
 
 /// <summary>
-/// <para>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
+/// <para>Refresh an index.<br/>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescriptor<RefreshRequestDescriptor<TDocument>, RefreshRequestParameters>
 {
@@ -126,7 +126,7 @@ public sealed partial class RefreshRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
+/// <para>Refresh an index.<br/>A refresh makes recent operations performed on one or more indices available for search.<br/>For data streams, the API runs the refresh operation on the stream’s backing indices.</para>
 /// </summary>
 public sealed partial class RefreshRequestDescriptor : RequestDescriptor<RefreshRequestDescriptor, RefreshRequestParameters>
 {

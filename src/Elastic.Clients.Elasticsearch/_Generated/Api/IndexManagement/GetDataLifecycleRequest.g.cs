@@ -43,7 +43,7 @@ public sealed partial class GetDataLifecycleRequestParameters : RequestParameter
 }
 
 /// <summary>
-/// <para>Retrieves the data stream lifecycle configuration of one or more data streams.</para>
+/// <para>Get data stream lifecycles.<br/>Retrieves the data stream lifecycle configuration of one or more data streams.</para>
 /// </summary>
 public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecycleRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class GetDataLifecycleRequest : PlainRequest<GetDataLifecy
 }
 
 /// <summary>
-/// <para>Retrieves the data stream lifecycle configuration of one or more data streams.</para>
+/// <para>Get data stream lifecycles.<br/>Retrieves the data stream lifecycle configuration of one or more data streams.</para>
 /// </summary>
 public sealed partial class GetDataLifecycleRequestDescriptor : RequestDescriptor<GetDataLifecycleRequestDescriptor, GetDataLifecycleRequestParameters>
 {

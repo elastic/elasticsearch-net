@@ -51,6 +51,8 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 
 	private ICollection<string> FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? VersionValue { get; set; }
 
 	public ConditionTokenFilterDescriptor Filter(ICollection<string> filter)
@@ -61,7 +63,25 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 
 	public ConditionTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ConditionTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ConditionTokenFilterDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -76,8 +96,22 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 		writer.WriteStartObject();
 		writer.WritePropertyName("filter");
 		JsonSerializer.Serialize(writer, FilterValue, options);
-		writer.WritePropertyName("script");
-		JsonSerializer.Serialize(writer, ScriptValue, options);
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("condition");
 		if (!string.IsNullOrEmpty(VersionValue))
@@ -89,10 +123,34 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	ConditionTokenFilter IBuildableDescriptor<ConditionTokenFilter>.Build() => new()
 	{
 		Filter = FilterValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Version = VersionValue
 	};
 }

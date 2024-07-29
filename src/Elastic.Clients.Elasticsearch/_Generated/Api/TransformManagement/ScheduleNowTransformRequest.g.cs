@@ -38,7 +38,7 @@ public sealed partial class ScheduleNowTransformRequestParameters : RequestParam
 }
 
 /// <summary>
-/// <para>Schedules now a transform.</para>
+/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 /// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 /// </summary>
 public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleNowTransformRequestParameters>
@@ -63,7 +63,7 @@ public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleN
 }
 
 /// <summary>
-/// <para>Schedules now a transform.</para>
+/// <para>Schedule a transform to start now.<br/>Instantly runs a transform to process data.</para>
 /// <para>If you _schedule_now a transform, it will process the new data instantly,<br/>without waiting for the configured frequency interval. After _schedule_now API is called,<br/>the transform will be processed again at now + frequency unless _schedule_now API<br/>is called again in the meantime.</para>
 /// </summary>
 public sealed partial class ScheduleNowTransformRequestDescriptor : RequestDescriptor<ScheduleNowTransformRequestDescriptor, ScheduleNowTransformRequestParameters>

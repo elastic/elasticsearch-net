@@ -73,7 +73,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 /// </summary>
 public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
 {
@@ -167,7 +167,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 }
 
 /// <summary>
-/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
 {
@@ -200,6 +200,8 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private long? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
@@ -255,7 +257,25 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// </summary>
 	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -323,7 +343,17 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 			writer.WriteNumberValue(MaxDocsValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -356,7 +386,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 }
 
 /// <summary>
-/// <para>Allows to copy documents from one index to another, optionally filtering the source<br/>documents by a query, changing the destination index settings, or fetching the<br/>documents from a remote cluster.</para>
+/// <para>Reindex documents.<br/>Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.</para>
 /// </summary>
 public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
 {
@@ -389,6 +419,8 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
 	private long? MaxDocsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private long? SizeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
@@ -444,7 +476,25 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// </summary>
 	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public ReindexRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -512,7 +562,17 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 			writer.WriteNumberValue(MaxDocsValue.Value);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);

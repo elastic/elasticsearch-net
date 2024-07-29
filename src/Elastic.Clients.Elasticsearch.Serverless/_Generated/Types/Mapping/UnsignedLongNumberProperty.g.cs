@@ -93,6 +93,8 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -207,7 +209,25 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 
 	public UnsignedLongNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public UnsignedLongNumberPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -304,7 +324,17 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -327,6 +357,30 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -342,7 +396,7 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor<TDocument> : Se
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};
@@ -370,6 +424,8 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Mapping.Properties? PropertiesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Serverless.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? SimilarityValue { get; set; }
 	private bool? StoreValue { get; set; }
 
@@ -484,7 +540,25 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 
 	public UnsignedLongNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.Script? script)
 	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
 		ScriptValue = script;
+		return Self;
+	}
+
+	public UnsignedLongNumberPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public UnsignedLongNumberPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -581,7 +655,17 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
 		}
 
-		if (ScriptValue is not null)
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
 		{
 			writer.WritePropertyName("script");
 			JsonSerializer.Serialize(writer, ScriptValue, options);
@@ -604,6 +688,30 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Serverless.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.Serverless.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Serverless.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	UnsignedLongNumberProperty IBuildableDescriptor<UnsignedLongNumberProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -619,7 +727,7 @@ public sealed partial class UnsignedLongNumberPropertyDescriptor : SerializableD
 		NullValue = NullValueValue,
 		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
-		Script = ScriptValue,
+		Script = BuildScript(),
 		Similarity = SimilarityValue,
 		Store = StoreValue
 	};

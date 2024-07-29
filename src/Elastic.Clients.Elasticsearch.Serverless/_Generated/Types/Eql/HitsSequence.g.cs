@@ -39,5 +39,5 @@ public sealed partial class HitsSequence<TEvent>
 	/// <para>Shared field values used to constrain matches in the sequence. These are defined using the by keyword in the EQL query syntax.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("join_keys")]
-	public IReadOnlyCollection<object> JoinKeys { get; init; }
+	public IReadOnlyCollection<object>? JoinKeys { get; init; }
 }

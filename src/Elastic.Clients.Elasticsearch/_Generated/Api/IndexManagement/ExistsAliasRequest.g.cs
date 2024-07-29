@@ -53,7 +53,7 @@ public sealed partial class ExistsAliasRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Checks if an alias exists.</para>
+/// <para>Check aliases.<br/>Checks if one or more data stream or index aliases exist.</para>
 /// </summary>
 public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequestParameters>
 {
@@ -99,7 +99,7 @@ public sealed partial class ExistsAliasRequest : PlainRequest<ExistsAliasRequest
 }
 
 /// <summary>
-/// <para>Checks if an alias exists.</para>
+/// <para>Check aliases.<br/>Checks if one or more data stream or index aliases exist.</para>
 /// </summary>
 public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDescriptor<ExistsAliasRequestDescriptor<TDocument>, ExistsAliasRequestParameters>
 {
@@ -144,7 +144,7 @@ public sealed partial class ExistsAliasRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Checks if an alias exists.</para>
+/// <para>Check aliases.<br/>Checks if one or more data stream or index aliases exist.</para>
 /// </summary>
 public sealed partial class ExistsAliasRequestDescriptor : RequestDescriptor<ExistsAliasRequestDescriptor, ExistsAliasRequestParameters>
 {

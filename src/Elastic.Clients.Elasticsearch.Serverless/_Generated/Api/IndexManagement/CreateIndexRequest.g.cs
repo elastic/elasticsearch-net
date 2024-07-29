@@ -48,7 +48,7 @@ public sealed partial class CreateIndexRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Creates a new index.</para>
+/// <para>Create an index.<br/>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
 {
@@ -102,7 +102,7 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 }
 
 /// <summary>
-/// <para>Creates a new index.</para>
+/// <para>Create an index.<br/>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
 {
@@ -251,7 +251,7 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 }
 
 /// <summary>
-/// <para>Creates a new index.</para>
+/// <para>Create an index.<br/>Creates a new index.</para>
 /// </summary>
 public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
 {

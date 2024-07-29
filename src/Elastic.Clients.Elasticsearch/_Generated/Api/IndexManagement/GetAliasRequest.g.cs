@@ -53,7 +53,7 @@ public sealed partial class GetAliasRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Retrieves information for one or more aliases.</para>
+/// <para>Get aliases.<br/>Retrieves information for one or more data stream or index aliases.</para>
 /// </summary>
 public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParameters>
 {
@@ -107,7 +107,7 @@ public sealed partial class GetAliasRequest : PlainRequest<GetAliasRequestParame
 }
 
 /// <summary>
-/// <para>Retrieves information for one or more aliases.</para>
+/// <para>Get aliases.<br/>Retrieves information for one or more data stream or index aliases.</para>
 /// </summary>
 public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescriptor<GetAliasRequestDescriptor<TDocument>, GetAliasRequestParameters>
 {
@@ -152,7 +152,7 @@ public sealed partial class GetAliasRequestDescriptor<TDocument> : RequestDescri
 }
 
 /// <summary>
-/// <para>Retrieves information for one or more aliases.</para>
+/// <para>Get aliases.<br/>Retrieves information for one or more data stream or index aliases.</para>
 /// </summary>
 public sealed partial class GetAliasRequestDescriptor : RequestDescriptor<GetAliasRequestDescriptor, GetAliasRequestParameters>
 {

@@ -51,6 +51,7 @@ public sealed partial class PutRulesetRequest : PlainRequest<PutRulesetRequestPa
 	internal override string OperationName => "query_rules.put_ruleset";
 
 	[JsonInclude, JsonPropertyName("rules")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRule))]
 	public ICollection<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRule> Rules { get; set; }
 }
 
@@ -126,32 +127,30 @@ public sealed partial class PutRulesetRequestDescriptor : RequestDescriptor<PutR
 		if (RulesDescriptor is not null)
 		{
 			writer.WritePropertyName("rules");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, RulesDescriptor, options);
-			writer.WriteEndArray();
 		}
 		else if (RulesDescriptorAction is not null)
 		{
 			writer.WritePropertyName("rules");
-			writer.WriteStartArray();
 			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleDescriptor(RulesDescriptorAction), options);
-			writer.WriteEndArray();
 		}
 		else if (RulesDescriptorActions is not null)
 		{
 			writer.WritePropertyName("rules");
-			writer.WriteStartArray();
+			if (RulesDescriptorActions.Length != 1)
+				writer.WriteStartArray();
 			foreach (var action in RulesDescriptorActions)
 			{
 				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRuleDescriptor(action), options);
 			}
 
-			writer.WriteEndArray();
+			if (RulesDescriptorActions.Length != 1)
+				writer.WriteEndArray();
 		}
 		else
 		{
 			writer.WritePropertyName("rules");
-			JsonSerializer.Serialize(writer, RulesValue, options);
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Serverless.QueryRules.QueryRule>(RulesValue, writer, options);
 		}
 
 		writer.WriteEndObject();

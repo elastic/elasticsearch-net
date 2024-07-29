@@ -29,10 +29,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 public sealed partial class DenseVectorIndexOptions
 {
+	[JsonInclude, JsonPropertyName("confidence_interval")]
+	public float? ConfidenceInterval { get; set; }
 	[JsonInclude, JsonPropertyName("ef_construction")]
-	public int EfConstruction { get; set; }
+	public int? EfConstruction { get; set; }
 	[JsonInclude, JsonPropertyName("m")]
-	public int m { get; set; }
+	public int? m { get; set; }
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type { get; set; }
 }
@@ -45,17 +47,24 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	{
 	}
 
-	private int EfConstructionValue { get; set; }
-	private int mValue { get; set; }
+	private float? ConfidenceIntervalValue { get; set; }
+	private int? EfConstructionValue { get; set; }
+	private int? mValue { get; set; }
 	private string TypeValue { get; set; }
 
-	public DenseVectorIndexOptionsDescriptor EfConstruction(int efConstruction)
+	public DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? confidenceInterval)
+	{
+		ConfidenceIntervalValue = confidenceInterval;
+		return Self;
+	}
+
+	public DenseVectorIndexOptionsDescriptor EfConstruction(int? efConstruction)
 	{
 		EfConstructionValue = efConstruction;
 		return Self;
 	}
 
-	public DenseVectorIndexOptionsDescriptor m(int m)
+	public DenseVectorIndexOptionsDescriptor m(int? m)
 	{
 		mValue = m;
 		return Self;
@@ -70,10 +79,24 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("ef_construction");
-		writer.WriteNumberValue(EfConstructionValue);
-		writer.WritePropertyName("m");
-		writer.WriteNumberValue(mValue);
+		if (ConfidenceIntervalValue.HasValue)
+		{
+			writer.WritePropertyName("confidence_interval");
+			writer.WriteNumberValue(ConfidenceIntervalValue.Value);
+		}
+
+		if (EfConstructionValue.HasValue)
+		{
+			writer.WritePropertyName("ef_construction");
+			writer.WriteNumberValue(EfConstructionValue.Value);
+		}
+
+		if (mValue.HasValue)
+		{
+			writer.WritePropertyName("m");
+			writer.WriteNumberValue(mValue.Value);
+		}
+
 		writer.WritePropertyName("type");
 		writer.WriteStringValue(TypeValue);
 		writer.WriteEndObject();
