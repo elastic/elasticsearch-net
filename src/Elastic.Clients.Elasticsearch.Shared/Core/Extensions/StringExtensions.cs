@@ -18,10 +18,25 @@ internal static class StringExtensions
 		if (!char.IsUpper(s[0]))
 			return s;
 
-		var camelCase = char.ToLowerInvariant(s[0]).ToString();
-		if (s.Length > 1)
-			camelCase += s.Substring(1);
+		var chars = s.ToCharArray();
 
-		return camelCase;
+		for (var i = 0; i < chars.Length; i++)
+		{
+			var current = chars[i];
+
+			if (char.IsSeparator(current))
+				break;
+
+			if (0 < i && i + 1 < chars.Length)
+			{
+				var next = chars[i + 1];
+				if (!char.IsUpper(next) && !char.IsSeparator(next))
+					break;
+			}
+
+			chars[i] = char.ToLowerInvariant(current);
+		}
+
+		return new string(chars);
 	}
 }
