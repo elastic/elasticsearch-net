@@ -2,8 +2,6 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if !ELASTICSEARCH_SERVERLESS
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +10,10 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Threading;
+using Elastic.Transport;
 
 #if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Esql.Serverless;
+namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
 #else
 
 namespace Elastic.Clients.Elasticsearch.Esql;
@@ -22,6 +21,36 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 
 public partial class EsqlNamespacedClient
 {
+	/// <summary>
+	/// Executes an ES|QL request and returns the response as a stream.
+	/// </summary>
+	/// <returns>The ES|QL query result as a generic stream response.</returns>
+	/// <remarks>The response must be disposed after use.</remarks>
+	public virtual Task<StreamResponse> QueryAsStreamAsync<TDocument>(
+		Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest,
+		CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, StreamResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// Executes an ES|QL request and returns the response as a stream.
+	/// </summary>
+	/// <returns>The ES|QL query result as a generic stream response.</returns>
+	/// <remarks>The response must be disposed after use.</remarks>
+	public virtual Task<StreamResponse> QueryAsStreamAsync(
+		Action<EsqlQueryRequestDescriptor> configureRequest,
+		CancellationToken cancellationToken = default)
+	{
+		var descriptor = new EsqlQueryRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequestDescriptor, StreamResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+	}
+
 	public virtual async Task<IEnumerable<TDocument>> QueryAsObjectsAsync<TDocument>(
 		Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest,
 		CancellationToken cancellationToken = default)
@@ -92,5 +121,3 @@ public partial class EsqlNamespacedClient
 		}
 	}
 }
-
-#endif
