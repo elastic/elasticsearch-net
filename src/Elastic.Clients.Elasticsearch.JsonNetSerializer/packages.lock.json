@@ -37,8 +37,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ==",
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -185,7 +185,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       }
     },
@@ -234,8 +234,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ==",
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -381,7 +381,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       }
     },
@@ -421,8 +421,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ==",
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw==",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Buffers": "4.5.1",
@@ -560,7 +560,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       }
     },
@@ -600,8 +600,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ==",
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw==",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.Text.Json": "8.0.4"
@@ -691,7 +691,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       }
     },
@@ -731,8 +731,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ=="
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw=="
       },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
@@ -788,7 +788,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       }
     }
