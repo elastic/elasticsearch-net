@@ -27,10 +27,26 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class RolloverAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
+	[JsonInclude, JsonPropertyName("max_age")]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MaxAge { get; init; }
+	[JsonInclude, JsonPropertyName("max_docs")]
+	public long? MaxDocs { get; init; }
+	[JsonInclude, JsonPropertyName("max_primary_shard_docs")]
+	public long? MaxPrimaryShardDocs { get; init; }
+	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? MaxPrimaryShardSize { get; init; }
+	[JsonInclude, JsonPropertyName("max_size")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? MaxSize { get; init; }
 	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("min_docs")]
+	public long? MinDocs { get; init; }
+	[JsonInclude, JsonPropertyName("min_primary_shard_docs")]
+	public long? MinPrimaryShardDocs { get; init; }
+	[JsonInclude, JsonPropertyName("min_primary_shard_size")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? MinPrimaryShardSize { get; init; }
+	[JsonInclude, JsonPropertyName("min_size")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? MinSize { get; init; }
 }

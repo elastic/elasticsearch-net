@@ -65,7 +65,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// <para>The deployment stats for each node that currently has the model allocated.<br/>In serverless, stats are reported for a single unnamed virtual node.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("nodes")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats Nodes { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> Nodes { get; init; }
 
 	/// <summary>
 	/// <para>The number of allocations requested.</para>

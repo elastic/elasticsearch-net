@@ -30,9 +30,7 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 public sealed partial class Phase
 {
 	[JsonInclude, JsonPropertyName("actions")]
-	public object? Actions { get; set; }
-	[JsonInclude, JsonPropertyName("configurations")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Configurations? Configurations { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? Actions { get; set; }
 	[JsonInclude, JsonPropertyName("min_age")]
 	public Union<Elastic.Clients.Elasticsearch.Duration, long>? MinAge { get; set; }
 }
@@ -45,39 +43,32 @@ public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescri
 	{
 	}
 
-	private object? ActionsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Configurations? ConfigurationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ConfigurationsDescriptor ConfigurationsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ConfigurationsDescriptor> ConfigurationsDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? ActionsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor ActionsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor> ActionsDescriptorAction { get; set; }
 	private Union<Elastic.Clients.Elasticsearch.Duration, long>? MinAgeValue { get; set; }
 
-	public PhaseDescriptor Actions(object? actions)
+	public PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions? actions)
 	{
+		ActionsDescriptor = null;
+		ActionsDescriptorAction = null;
 		ActionsValue = actions;
 		return Self;
 	}
 
-	public PhaseDescriptor Configurations(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Configurations? configurations)
+	public PhaseDescriptor Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor descriptor)
 	{
-		ConfigurationsDescriptor = null;
-		ConfigurationsDescriptorAction = null;
-		ConfigurationsValue = configurations;
+		ActionsValue = null;
+		ActionsDescriptorAction = null;
+		ActionsDescriptor = descriptor;
 		return Self;
 	}
 
-	public PhaseDescriptor Configurations(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ConfigurationsDescriptor descriptor)
+	public PhaseDescriptor Actions(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor> configure)
 	{
-		ConfigurationsValue = null;
-		ConfigurationsDescriptorAction = null;
-		ConfigurationsDescriptor = descriptor;
-		return Self;
-	}
-
-	public PhaseDescriptor Configurations(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ConfigurationsDescriptor> configure)
-	{
-		ConfigurationsValue = null;
-		ConfigurationsDescriptor = null;
-		ConfigurationsDescriptorAction = configure;
+		ActionsValue = null;
+		ActionsDescriptor = null;
+		ActionsDescriptorAction = configure;
 		return Self;
 	}
 
@@ -90,26 +81,20 @@ public sealed partial class PhaseDescriptor : SerializableDescriptor<PhaseDescri
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (ActionsValue is not null)
+		if (ActionsDescriptor is not null)
+		{
+			writer.WritePropertyName("actions");
+			JsonSerializer.Serialize(writer, ActionsDescriptor, options);
+		}
+		else if (ActionsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("actions");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(ActionsDescriptorAction), options);
+		}
+		else if (ActionsValue is not null)
 		{
 			writer.WritePropertyName("actions");
 			JsonSerializer.Serialize(writer, ActionsValue, options);
-		}
-
-		if (ConfigurationsDescriptor is not null)
-		{
-			writer.WritePropertyName("configurations");
-			JsonSerializer.Serialize(writer, ConfigurationsDescriptor, options);
-		}
-		else if (ConfigurationsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("configurations");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ConfigurationsDescriptor(ConfigurationsDescriptorAction), options);
-		}
-		else if (ConfigurationsValue is not null)
-		{
-			writer.WritePropertyName("configurations");
-			JsonSerializer.Serialize(writer, ConfigurationsValue, options);
 		}
 
 		if (MinAgeValue is not null)

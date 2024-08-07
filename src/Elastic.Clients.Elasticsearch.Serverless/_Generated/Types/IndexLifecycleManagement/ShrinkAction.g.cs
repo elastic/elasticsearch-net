@@ -27,10 +27,12 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class ShrinkAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
-	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("allow_write_after_shrink")]
+	public bool? AllowWriteAfterShrink { get; init; }
+	[JsonInclude, JsonPropertyName("max_primary_shard_size")]
+	public Elastic.Clients.Elasticsearch.Serverless.ByteSize? MaxPrimaryShardSize { get; init; }
+	[JsonInclude, JsonPropertyName("number_of_shards")]
+	public int? NumberOfShards { get; init; }
 }

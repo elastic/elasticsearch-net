@@ -27,33 +27,37 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class ForceMergeConfiguration
+public sealed partial class DeleteAction
 {
-	[JsonInclude, JsonPropertyName("max_num_segments")]
-	public int MaxNumSegments { get; set; }
+	[JsonInclude, JsonPropertyName("delete_searchable_snapshot")]
+	public bool? DeleteSearchableSnapshot { get; set; }
 }
 
-public sealed partial class ForceMergeConfigurationDescriptor : SerializableDescriptor<ForceMergeConfigurationDescriptor>
+public sealed partial class DeleteActionDescriptor : SerializableDescriptor<DeleteActionDescriptor>
 {
-	internal ForceMergeConfigurationDescriptor(Action<ForceMergeConfigurationDescriptor> configure) => configure.Invoke(this);
+	internal DeleteActionDescriptor(Action<DeleteActionDescriptor> configure) => configure.Invoke(this);
 
-	public ForceMergeConfigurationDescriptor() : base()
+	public DeleteActionDescriptor() : base()
 	{
 	}
 
-	private int MaxNumSegmentsValue { get; set; }
+	private bool? DeleteSearchableSnapshotValue { get; set; }
 
-	public ForceMergeConfigurationDescriptor MaxNumSegments(int maxNumSegments)
+	public DeleteActionDescriptor DeleteSearchableSnapshot(bool? deleteSearchableSnapshot = true)
 	{
-		MaxNumSegmentsValue = maxNumSegments;
+		DeleteSearchableSnapshotValue = deleteSearchableSnapshot;
 		return Self;
 	}
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("max_num_segments");
-		writer.WriteNumberValue(MaxNumSegmentsValue);
+		if (DeleteSearchableSnapshotValue.HasValue)
+		{
+			writer.WritePropertyName("delete_searchable_snapshot");
+			writer.WriteBooleanValue(DeleteSearchableSnapshotValue.Value);
+		}
+
 		writer.WriteEndObject();
 	}
 }
