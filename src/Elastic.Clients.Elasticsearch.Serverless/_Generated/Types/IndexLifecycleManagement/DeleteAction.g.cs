@@ -27,10 +27,8 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class DeleteAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
-	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("delete_searchable_snapshot")]
+	public bool? DeleteSearchableSnapshot { get; init; }
 }

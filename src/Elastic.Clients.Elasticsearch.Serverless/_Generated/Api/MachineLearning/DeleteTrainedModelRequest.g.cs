@@ -38,7 +38,7 @@ public sealed partial class DeleteTrainedModelRequestParameters : RequestParamet
 }
 
 /// <summary>
-/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 /// </summary>
 public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrainedModelRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrain
 }
 
 /// <summary>
-/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 /// </summary>
 public sealed partial class DeleteTrainedModelRequestDescriptor : RequestDescriptor<DeleteTrainedModelRequestDescriptor, DeleteTrainedModelRequestParameters>
 {

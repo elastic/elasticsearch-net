@@ -43,7 +43,7 @@ public sealed partial class DeleteDataFrameAnalyticsRequestParameters : RequestP
 }
 
 /// <summary>
-/// <para>Deletes a data frame analytics job.</para>
+/// <para>Delete a data frame analytics job.</para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<DeleteDataFrameAnalyticsRequestParameters>
 {
@@ -73,7 +73,7 @@ public sealed partial class DeleteDataFrameAnalyticsRequest : PlainRequest<Delet
 }
 
 /// <summary>
-/// <para>Deletes a data frame analytics job.</para>
+/// <para>Delete a data frame analytics job.</para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>, DeleteDataFrameAnalyticsRequestParameters>
 {
@@ -106,7 +106,7 @@ public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor<TDocument>
 }
 
 /// <summary>
-/// <para>Deletes a data frame analytics job.</para>
+/// <para>Delete a data frame analytics job.</para>
 /// </summary>
 public sealed partial class DeleteDataFrameAnalyticsRequestDescriptor : RequestDescriptor<DeleteDataFrameAnalyticsRequestDescriptor, DeleteDataFrameAnalyticsRequestParameters>
 {
