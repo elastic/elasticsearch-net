@@ -17,43 +17,26 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Clients.Elasticsearch.Serverless.Fluent;
+using Elastic.Clients.Elasticsearch.Serverless.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
+namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class ShrinkConfiguration
+public sealed partial class AllocateAction
 {
-	[JsonInclude, JsonPropertyName("number_of_shards")]
-	public int NumberOfShards { get; set; }
-}
-
-public sealed partial class ShrinkConfigurationDescriptor : SerializableDescriptor<ShrinkConfigurationDescriptor>
-{
-	internal ShrinkConfigurationDescriptor(Action<ShrinkConfigurationDescriptor> configure) => configure.Invoke(this);
-
-	public ShrinkConfigurationDescriptor() : base()
-	{
-	}
-
-	private int NumberOfShardsValue { get; set; }
-
-	public ShrinkConfigurationDescriptor NumberOfShards(int numberOfShards)
-	{
-		NumberOfShardsValue = numberOfShards;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("number_of_shards");
-		writer.WriteNumberValue(NumberOfShardsValue);
-		writer.WriteEndObject();
-	}
+	[JsonInclude, JsonPropertyName("exclude")]
+	public IReadOnlyDictionary<string, string>? Exclude { get; init; }
+	[JsonInclude, JsonPropertyName("include")]
+	public IReadOnlyDictionary<string, string>? Include { get; init; }
+	[JsonInclude, JsonPropertyName("number_of_replicas")]
+	public int? NumberOfReplicas { get; init; }
+	[JsonInclude, JsonPropertyName("require")]
+	public IReadOnlyDictionary<string, string>? Require { get; init; }
+	[JsonInclude, JsonPropertyName("total_shards_per_node")]
+	public int? TotalShardsPerNode { get; init; }
 }

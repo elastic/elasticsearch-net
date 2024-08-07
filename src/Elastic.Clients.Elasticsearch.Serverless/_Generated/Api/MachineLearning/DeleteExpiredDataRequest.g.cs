@@ -34,7 +34,7 @@ public sealed partial class DeleteExpiredDataRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpiredDataRequestParameters>
 {
@@ -68,7 +68,7 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 }
 
 /// <summary>
-/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescriptor<DeleteExpiredDataRequestDescriptor, DeleteExpiredDataRequestParameters>
 {

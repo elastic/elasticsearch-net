@@ -27,10 +27,10 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class SearchableSnapshotAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
-	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("force_merge_index")]
+	public bool? ForceMergeIndex { get; init; }
+	[JsonInclude, JsonPropertyName("snapshot_repository")]
+	public string SnapshotRepository { get; init; }
 }
