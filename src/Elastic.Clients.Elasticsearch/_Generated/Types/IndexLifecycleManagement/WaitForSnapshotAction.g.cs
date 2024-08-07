@@ -17,22 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
+namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class Configurations
+public sealed partial class WaitForSnapshotAction
 {
-	[JsonInclude, JsonPropertyName("forcemerge")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.ForceMergeConfiguration? Forcemerge { get; init; }
-	[JsonInclude, JsonPropertyName("rollover")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexManagement.RolloverConditions? Rollover { get; init; }
-	[JsonInclude, JsonPropertyName("shrink")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.ShrinkConfiguration? Shrink { get; init; }
+	[JsonInclude, JsonPropertyName("policy")]
+	public string Policy { get; set; }
+}
+
+public sealed partial class WaitForSnapshotActionDescriptor : SerializableDescriptor<WaitForSnapshotActionDescriptor>
+{
+	internal WaitForSnapshotActionDescriptor(Action<WaitForSnapshotActionDescriptor> configure) => configure.Invoke(this);
+
+	public WaitForSnapshotActionDescriptor() : base()
+	{
+	}
+
+	private string PolicyValue { get; set; }
+
+	public WaitForSnapshotActionDescriptor Policy(string policy)
+	{
+		PolicyValue = policy;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("policy");
+		writer.WriteStringValue(PolicyValue);
+		writer.WriteEndObject();
+	}
 }

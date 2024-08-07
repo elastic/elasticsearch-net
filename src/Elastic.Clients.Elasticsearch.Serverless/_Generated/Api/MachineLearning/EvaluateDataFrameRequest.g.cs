@@ -34,7 +34,7 @@ public sealed partial class EvaluateDataFrameRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateDataFrameRequestParameters>
 {
@@ -66,7 +66,7 @@ public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateData
 }
 
 /// <summary>
-/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : RequestDescriptor<EvaluateDataFrameRequestDescriptor<TDocument>, EvaluateDataFrameRequestParameters>
 {
@@ -197,7 +197,7 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 }
 
 /// <summary>
-/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 /// </summary>
 public sealed partial class EvaluateDataFrameRequestDescriptor : RequestDescriptor<EvaluateDataFrameRequestDescriptor, EvaluateDataFrameRequestParameters>
 {

@@ -57,5 +57,5 @@ public sealed partial class TrainedModelInferenceStats
 	/// <para>The time when the statistics were last updated.</para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("timestamp")]
-	public DateTimeOffset Timestamp { get; init; }
+	public long Timestamp { get; init; }
 }

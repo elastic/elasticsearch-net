@@ -38,7 +38,7 @@ public sealed partial class DeleteDatafeedRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes an existing datafeed.</para>
+/// <para>Delete a datafeed.</para>
 /// </summary>
 public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedRequestParameters>
 {
@@ -62,7 +62,7 @@ public sealed partial class DeleteDatafeedRequest : PlainRequest<DeleteDatafeedR
 }
 
 /// <summary>
-/// <para>Deletes an existing datafeed.</para>
+/// <para>Delete a datafeed.</para>
 /// </summary>
 public sealed partial class DeleteDatafeedRequestDescriptor : RequestDescriptor<DeleteDatafeedRequestDescriptor, DeleteDatafeedRequestParameters>
 {
