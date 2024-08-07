@@ -95,7 +95,7 @@ public partial class ElasticsearchClient
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new() =>
 			DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
@@ -103,7 +103,7 @@ public partial class ElasticsearchClient
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 			=> DoRequestCoreAsync<TRequest, TResponse, TRequestParameters>(false, request, forceConfiguration).EnsureCompleted();
 
@@ -111,7 +111,7 @@ public partial class ElasticsearchClient
 		TRequest request,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 			=> DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, null, cancellationToken);
 
@@ -120,7 +120,7 @@ public partial class ElasticsearchClient
 		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 			=> DoRequestCoreAsync<TRequest, TResponse, TRequestParameters>(true, request, forceConfiguration, cancellationToken).AsTask();
 
@@ -130,7 +130,7 @@ public partial class ElasticsearchClient
 		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
 		if (_productCheckStatus == ProductCheckStatus.Failed)
@@ -280,7 +280,7 @@ public partial class ElasticsearchClient
 
 		private void PostRequestProductCheck<TRequest, TResponse>(TRequest request, TResponse response)
 		where TRequest : Request
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 	{
 		if (response.ApiCallDetails.HttpStatusCode.HasValue && response.ApiCallDetails.HttpStatusCode.Value >= 200 && response.ApiCallDetails.HttpStatusCode.Value <= 299 && _productCheckStatus == ProductCheckStatus.NotChecked)
 		{

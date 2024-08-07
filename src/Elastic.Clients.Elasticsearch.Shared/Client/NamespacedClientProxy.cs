@@ -35,7 +35,7 @@ public abstract class NamespacedClientProxy
 
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 			=> DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
 
@@ -43,7 +43,7 @@ public abstract class NamespacedClientProxy
 		TRequest request,
 		Action<IRequestConfiguration>? forceConfiguration)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
 		if (Client is null)
@@ -56,7 +56,7 @@ public abstract class NamespacedClientProxy
 		TRequest request,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 			=> DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, null, cancellationToken);
 
@@ -65,7 +65,7 @@ public abstract class NamespacedClientProxy
 		Action<IRequestConfiguration>? forceConfiguration,
 		CancellationToken cancellationToken = default)
 		where TRequest : Request<TRequestParameters>
-		where TResponse : ElasticsearchResponse, new()
+		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
 		if (Client is null)

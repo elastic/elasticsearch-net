@@ -31,11 +31,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.4.20, )",
-        "resolved": "0.4.20",
-        "contentHash": "uzCMq6uAqqX3Do6+8bPHTq8g1y5tViHuAZG+rXJgbhEsaDwJHqRNl/gNcACSZXaOr0RZjijcUFB3/XA+HFuWPw==",
+        "requested": "[0.4.22, )",
+        "resolved": "0.4.22",
+        "contentHash": "r8iOvUkTNWVsjW/1t/QkcUhH1r5LlzntT50nDW1oyEoTqRQS81JtYLvvyFrViPEbMiTh02wMUF7GIFVyQgl/Og==",
         "dependencies": {
-          "Elastic.Transport": "0.4.20"
+          "Elastic.Transport": "0.4.22"
         }
       },
       "FSharp.Core": {
@@ -195,8 +195,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ==",
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw==",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.Text.Json": "8.0.4"
@@ -1495,7 +1495,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
@@ -1574,11 +1574,11 @@
       },
       "Elastic.Transport.VirtualizedCluster": {
         "type": "Direct",
-        "requested": "[0.4.20, )",
-        "resolved": "0.4.20",
-        "contentHash": "uzCMq6uAqqX3Do6+8bPHTq8g1y5tViHuAZG+rXJgbhEsaDwJHqRNl/gNcACSZXaOr0RZjijcUFB3/XA+HFuWPw==",
+        "requested": "[0.4.22, )",
+        "resolved": "0.4.22",
+        "contentHash": "r8iOvUkTNWVsjW/1t/QkcUhH1r5LlzntT50nDW1oyEoTqRQS81JtYLvvyFrViPEbMiTh02wMUF7GIFVyQgl/Og==",
         "dependencies": {
-          "Elastic.Transport": "0.4.20"
+          "Elastic.Transport": "0.4.22"
         }
       },
       "FSharp.Core": {
@@ -1738,8 +1738,8 @@
       },
       "Elastic.Transport": {
         "type": "Transitive",
-        "resolved": "0.4.20",
-        "contentHash": "/Msl7KoUk0Stg28+g64AujlnR2+1jyR8OkQKcWYPpOy/H1EGpJAvlnVDgF0xJxHIG+MUrejn52uzmJVkWPNjpQ=="
+        "resolved": "0.4.22",
+        "contentHash": "9J5GPHJcT8sewn2zVfWTrsCQvfQYgUiY/jx+IRjWUk7XNPd837qfEL42I5baH69cyW/e4RoDy8v76yxqz95tDw=="
       },
       "EmptyFiles": {
         "type": "Transitive",
@@ -3021,7 +3021,7 @@
       "elastic.clients.elasticsearch": {
         "type": "Project",
         "dependencies": {
-          "Elastic.Transport": "[0.4.20, )"
+          "Elastic.Transport": "[0.4.22, )"
         }
       },
       "elastic.clients.elasticsearch.jsonnetserializer": {
