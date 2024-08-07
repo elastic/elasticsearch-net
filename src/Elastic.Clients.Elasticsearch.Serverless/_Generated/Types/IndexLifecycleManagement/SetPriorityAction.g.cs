@@ -27,8 +27,8 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class ForceMergeConfiguration
+public sealed partial class SetPriorityAction
 {
-	[JsonInclude, JsonPropertyName("max_num_segments")]
-	public int MaxNumSegments { get; init; }
+	[JsonInclude, JsonPropertyName("priority")]
+	public int? Priority { get; init; }
 }

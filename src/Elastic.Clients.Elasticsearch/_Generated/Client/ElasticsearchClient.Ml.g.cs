@@ -38,7 +38,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -49,7 +49,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(ClearTrainedModelDeploymentCacheRequest request, CancellationToken cancellationToken = default)
@@ -59,7 +59,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -70,7 +70,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -82,7 +82,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -95,7 +95,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(ClearTrainedModelDeploymentCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -105,7 +105,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.Id modelId, CancellationToken cancellationToken = default)
@@ -116,7 +116,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Clears a trained model deployment cache on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
+	/// <para>Clear trained model deployment cache.<br/>Cache will be cleared on all nodes where the trained model is assigned.<br/>A trained model deployment may have an inference cache enabled.<br/>As requests are handled by each allocated node, their responses may be cached on that individual node.<br/>Calling this API clears the caches without restarting the deployment.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/clear-trained-model-deployment-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearTrainedModelDeploymentCacheResponse> ClearTrainedModelDeploymentCacheAsync(Elastic.Clients.Elasticsearch.Id modelId, Action<ClearTrainedModelDeploymentCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -218,7 +218,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -229,7 +229,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(DeleteCalendarRequest request, CancellationToken cancellationToken = default)
@@ -239,7 +239,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -250,7 +250,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -262,7 +262,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -275,7 +275,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(DeleteCalendarRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -285,7 +285,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, CancellationToken cancellationToken = default)
@@ -296,7 +296,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Removes all scheduled events from a calendar, then deletes it.</para>
+	/// <para>Delete a calendar.<br/>Removes all scheduled events from a calendar, then deletes it.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarResponse> DeleteCalendarAsync(Elastic.Clients.Elasticsearch.Id calendarId, Action<DeleteCalendarRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -308,7 +308,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -319,7 +319,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(DeleteCalendarEventRequest request, CancellationToken cancellationToken = default)
@@ -329,7 +329,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -340,7 +340,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -352,7 +352,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -365,7 +365,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(DeleteCalendarEventRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -375,7 +375,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, CancellationToken cancellationToken = default)
@@ -386,7 +386,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes scheduled events from a calendar.</para>
+	/// <para>Delete events from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-event.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarEventResponse> DeleteCalendarEventAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId, Action<DeleteCalendarEventRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -398,7 +398,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -409,7 +409,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(DeleteCalendarJobRequest request, CancellationToken cancellationToken = default)
@@ -419,7 +419,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -430,7 +430,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -442,7 +442,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -455,7 +455,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(DeleteCalendarJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -465,7 +465,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, CancellationToken cancellationToken = default)
@@ -476,7 +476,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes anomaly detection jobs from a calendar.</para>
+	/// <para>Delete anomaly jobs from a calendar.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-calendar-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteCalendarJobResponse> DeleteCalendarJobAsync(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Ids jobId, Action<DeleteCalendarJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -488,7 +488,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -499,7 +499,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(DeleteDatafeedRequest request, CancellationToken cancellationToken = default)
@@ -509,7 +509,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -520,7 +520,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -532,7 +532,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -545,7 +545,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(DeleteDatafeedRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -555,7 +555,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, CancellationToken cancellationToken = default)
@@ -566,7 +566,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing datafeed.</para>
+	/// <para>Delete a datafeed.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/ml-delete-datafeed.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDatafeedResponse> DeleteDatafeedAsync(Elastic.Clients.Elasticsearch.Id datafeedId, Action<DeleteDatafeedRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -578,7 +578,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -589,7 +589,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(DeleteDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
@@ -599,7 +599,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -610,7 +610,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -622,7 +622,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -635,7 +635,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -646,7 +646,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -658,7 +658,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -671,7 +671,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(DeleteDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -681,7 +681,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
@@ -692,7 +692,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -704,7 +704,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(DeleteDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -714,7 +714,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
@@ -725,7 +725,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a data frame analytics job.</para>
+	/// <para>Delete a data frame analytics job.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.14/delete-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataFrameAnalyticsResponse> DeleteDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -737,7 +737,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -748,7 +748,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(DeleteExpiredDataRequest request, CancellationToken cancellationToken = default)
@@ -758,7 +758,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -769,7 +769,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -781,7 +781,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -794,7 +794,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -806,7 +806,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -819,7 +819,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(DeleteExpiredDataRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -829,7 +829,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Elastic.Clients.Elasticsearch.Id? jobId, CancellationToken cancellationToken = default)
@@ -840,7 +840,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Elastic.Clients.Elasticsearch.Id? jobId, Action<DeleteExpiredDataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -852,7 +852,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(CancellationToken cancellationToken = default)
@@ -863,7 +863,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes expired and unused machine learning data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
+	/// <para>Delete expired ML data.<br/>Deletes all job results, model snapshots and forecast data that have exceeded<br/>their retention days period. Machine learning state documents that are not<br/>associated with any job are also deleted.<br/>You can limit the request to a single or set of anomaly detection jobs by<br/>using a job identifier, a group name, a comma-separated list of jobs, or a<br/>wildcard expression. You can delete expired data for all anomaly detection<br/>jobs by using _all, by specifying * as the <job_id>, or by omitting the<br/><job_id>.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-expired-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteExpiredDataResponse> DeleteExpiredDataAsync(Action<DeleteExpiredDataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -875,7 +875,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -886,7 +886,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteFilterResponse> DeleteFilterAsync(DeleteFilterRequest request, CancellationToken cancellationToken = default)
@@ -896,7 +896,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -907,7 +907,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -919,7 +919,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -932,7 +932,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteFilterResponse> DeleteFilterAsync(DeleteFilterRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -942,7 +942,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, CancellationToken cancellationToken = default)
@@ -953,7 +953,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
+	/// <para>Delete a filter.<br/>If an anomaly detection job references the filter, you cannot delete the<br/>filter. You must update or delete the job before you can delete the filter.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteFilterResponse> DeleteFilterAsync(Elastic.Clients.Elasticsearch.Id filterId, Action<DeleteFilterRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -965,7 +965,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -976,7 +976,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(DeleteForecastRequest request, CancellationToken cancellationToken = default)
@@ -986,7 +986,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -997,7 +997,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1009,7 +1009,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1022,7 +1022,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1034,7 +1034,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1047,7 +1047,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(DeleteForecastRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1057,7 +1057,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId, CancellationToken cancellationToken = default)
@@ -1068,7 +1068,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId, Action<DeleteForecastRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1080,7 +1080,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, CancellationToken cancellationToken = default)
@@ -1091,7 +1091,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+	/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-forecast.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteForecastResponse> DeleteForecastAsync(Elastic.Clients.Elasticsearch.Id jobId, Action<DeleteForecastRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1193,7 +1193,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1204,7 +1204,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(DeleteModelSnapshotRequest request, CancellationToken cancellationToken = default)
@@ -1214,7 +1214,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1225,7 +1225,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1237,7 +1237,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1250,7 +1250,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(DeleteModelSnapshotRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1260,7 +1260,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, CancellationToken cancellationToken = default)
@@ -1271,7 +1271,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+	/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-snapshot.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteModelSnapshotResponse> DeleteModelSnapshotAsync(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId, Action<DeleteModelSnapshotRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1283,7 +1283,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1294,7 +1294,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(DeleteTrainedModelRequest request, CancellationToken cancellationToken = default)
@@ -1304,7 +1304,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1315,7 +1315,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1327,7 +1327,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1340,7 +1340,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(DeleteTrainedModelRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1350,7 +1350,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, CancellationToken cancellationToken = default)
@@ -1361,7 +1361,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes an existing trained inference model that is currently not referenced<br/>by an ingest pipeline.</para>
+	/// <para>Delete an unreferenced trained model.<br/>The request deletes a trained inference model that is not referenced by an ingest pipeline.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelResponse> DeleteTrainedModelAsync(Elastic.Clients.Elasticsearch.Id modelId, Action<DeleteTrainedModelRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1373,7 +1373,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1384,7 +1384,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(DeleteTrainedModelAliasRequest request, CancellationToken cancellationToken = default)
@@ -1394,7 +1394,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1405,7 +1405,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1417,7 +1417,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1430,7 +1430,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(DeleteTrainedModelAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1440,7 +1440,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, CancellationToken cancellationToken = default)
@@ -1451,7 +1451,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Deletes a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
+	/// <para>Delete a trained model alias.<br/>This API deletes an existing model alias that refers to a trained model. If<br/>the model alias is missing or refers to a model other than the one identified<br/>by the `model_id`, this API returns an error.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTrainedModelAliasResponse> DeleteTrainedModelAliasAsync(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias, Action<DeleteTrainedModelAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1463,7 +1463,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1474,7 +1474,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(EstimateModelMemoryRequest request, CancellationToken cancellationToken = default)
@@ -1484,7 +1484,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1495,7 +1495,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1507,7 +1507,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1520,7 +1520,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1531,7 +1531,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1543,7 +1543,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1556,7 +1556,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(EstimateModelMemoryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1566,7 +1566,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -1577,7 +1577,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync<TDocument>(Action<EstimateModelMemoryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1589,7 +1589,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(EstimateModelMemoryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1599,7 +1599,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(CancellationToken cancellationToken = default)
@@ -1610,7 +1610,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+	/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EstimateModelMemoryResponse> EstimateModelMemoryAsync(Action<EstimateModelMemoryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1622,7 +1622,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1633,7 +1633,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(EvaluateDataFrameRequest request, CancellationToken cancellationToken = default)
@@ -1643,7 +1643,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1654,7 +1654,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1666,7 +1666,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1679,7 +1679,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1690,7 +1690,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1702,7 +1702,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1715,7 +1715,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync<TDocument>(EvaluateDataFrameRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1725,7 +1725,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -1736,7 +1736,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync<TDocument>(Action<EvaluateDataFrameRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1748,7 +1748,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(EvaluateDataFrameRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1758,7 +1758,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(CancellationToken cancellationToken = default)
@@ -1769,7 +1769,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Evaluates the data frame analytics for an annotated index.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
+	/// <para>Evaluate data frame analytics.<br/>The API packages together commonly used evaluation metrics for various types<br/>of machine learning features. This has been designed for use on indexes<br/>created by data frame analytics. Evaluation requires both a ground truth<br/>field and an analytics result field to be present.</para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EvaluateDataFrameResponse> EvaluateDataFrameAsync(Action<EvaluateDataFrameRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1781,7 +1781,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1792,7 +1792,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(ExplainDataFrameAnalyticsRequest request, CancellationToken cancellationToken = default)
@@ -1802,7 +1802,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1813,7 +1813,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1825,7 +1825,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1838,7 +1838,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1850,7 +1850,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1863,7 +1863,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1874,7 +1874,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1886,7 +1886,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1899,7 +1899,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1911,7 +1911,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1924,7 +1924,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(ExplainDataFrameAnalyticsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
@@ -1934,7 +1934,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
@@ -1945,7 +1945,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1957,7 +1957,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(CancellationToken cancellationToken = default)
@@ -1968,7 +1968,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync<TDocument>(Action<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -1980,7 +1980,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(ExplainDataFrameAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1990,7 +1990,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
@@ -2001,7 +2001,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<ExplainDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2013,7 +2013,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(CancellationToken cancellationToken = default)
@@ -2024,7 +2024,7 @@ public partial class MachineLearningNamespacedClient : NamespacedClientProxy
 	}
 
 	/// <summary>
-	/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+	/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 	/// <para><see href="http://www.elastic.co/guide/en/elasticsearch/reference/current/explain-dfanalytics.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataFrameAnalyticsResponse> ExplainDataFrameAnalyticsAsync(Action<ExplainDataFrameAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)

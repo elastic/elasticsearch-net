@@ -43,7 +43,7 @@ public sealed partial class DeleteForecastRequestParameters : RequestParameters
 }
 
 /// <summary>
-/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 /// </summary>
 public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastRequestParameters>
 {
@@ -77,7 +77,7 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 }
 
 /// <summary>
-/// <para>Deletes forecasts from a machine learning job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
+/// <para>Delete forecasts from a job.<br/>By default, forecasts are retained for 14 days. You can specify a<br/>different retention period with the `expires_in` parameter in the forecast<br/>jobs API. The delete forecast API enables you to delete one or more<br/>forecasts before they expire.</para>
 /// </summary>
 public sealed partial class DeleteForecastRequestDescriptor : RequestDescriptor<DeleteForecastRequestDescriptor, DeleteForecastRequestParameters>
 {

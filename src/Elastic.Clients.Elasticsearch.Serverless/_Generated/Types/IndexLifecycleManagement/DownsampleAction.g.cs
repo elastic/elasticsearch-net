@@ -27,10 +27,10 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class DownsampleAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
-	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("fixed_interval")]
+	public string FixedInterval { get; init; }
+	[JsonInclude, JsonPropertyName("wait_timeout")]
+	public Elastic.Clients.Elasticsearch.Serverless.Duration? WaitTimeout { get; init; }
 }
