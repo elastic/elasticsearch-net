@@ -34,7 +34,7 @@ public sealed partial class EstimateModelMemoryRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateModelMemoryRequestParameters>
 {
@@ -66,7 +66,7 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 }
 
 /// <summary>
-/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : RequestDescriptor<EstimateModelMemoryRequestDescriptor<TDocument>, EstimateModelMemoryRequestParameters>
 {
@@ -171,7 +171,7 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 }
 
 /// <summary>
-/// <para>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
+/// <para>Estimate job model memory usage.<br/>Makes an estimation of the memory usage for an anomaly detection job model.<br/>It is based on analysis configuration details for the job and cardinality<br/>estimates for the fields it references.</para>
 /// </summary>
 public sealed partial class EstimateModelMemoryRequestDescriptor : RequestDescriptor<EstimateModelMemoryRequestDescriptor, EstimateModelMemoryRequestParameters>
 {

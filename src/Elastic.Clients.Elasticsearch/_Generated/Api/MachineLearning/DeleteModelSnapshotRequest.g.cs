@@ -34,7 +34,7 @@ public sealed partial class DeleteModelSnapshotRequestParameters : RequestParame
 }
 
 /// <summary>
-/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 /// </summary>
 public sealed partial class DeleteModelSnapshotRequest : PlainRequest<DeleteModelSnapshotRequestParameters>
 {
@@ -52,7 +52,7 @@ public sealed partial class DeleteModelSnapshotRequest : PlainRequest<DeleteMode
 }
 
 /// <summary>
-/// <para>Deletes an existing model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
+/// <para>Delete a model snapshot.<br/>You cannot delete the active model snapshot. To delete that snapshot, first<br/>revert to a different one. To identify the active model snapshot, refer to<br/>the `model_snapshot_id` in the results from the get jobs API.</para>
 /// </summary>
 public sealed partial class DeleteModelSnapshotRequestDescriptor : RequestDescriptor<DeleteModelSnapshotRequestDescriptor, DeleteModelSnapshotRequestParameters>
 {

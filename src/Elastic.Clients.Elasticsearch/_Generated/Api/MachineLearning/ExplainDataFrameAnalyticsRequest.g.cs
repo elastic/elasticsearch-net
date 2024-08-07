@@ -34,7 +34,7 @@ public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Request
 }
 
 /// <summary>
-/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<ExplainDataFrameAnalyticsRequestParameters>
 {
@@ -104,7 +104,7 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 }
 
 /// <summary>
-/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument> : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor<TDocument>, ExplainDataFrameAnalyticsRequestParameters>
 {
@@ -389,7 +389,7 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 }
 
 /// <summary>
-/// <para>Explains a data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
+/// <para>Explain data frame analytics config.<br/>This API provides explanations for a data frame analytics config that either<br/>exists already or one that has not been created yet. The following<br/>explanations are provided:<br/>* which fields are included or not in the analysis and why,<br/>* how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.<br/>If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.</para>
 /// </summary>
 public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor : RequestDescriptor<ExplainDataFrameAnalyticsRequestDescriptor, ExplainDataFrameAnalyticsRequestParameters>
 {

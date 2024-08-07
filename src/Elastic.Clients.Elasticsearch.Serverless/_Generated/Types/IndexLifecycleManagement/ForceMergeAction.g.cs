@@ -27,8 +27,10 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
 
-public sealed partial class ShrinkConfiguration
+public sealed partial class ForceMergeAction
 {
-	[JsonInclude, JsonPropertyName("number_of_shards")]
-	public int NumberOfShards { get; init; }
+	[JsonInclude, JsonPropertyName("index_codec")]
+	public string? IndexCodec { get; init; }
+	[JsonInclude, JsonPropertyName("max_num_segments")]
+	public int MaxNumSegments { get; init; }
 }

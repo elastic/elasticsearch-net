@@ -34,7 +34,7 @@ public sealed partial class DeleteCalendarJobRequestParameters : RequestParamete
 }
 
 /// <summary>
-/// <para>Deletes anomaly detection jobs from a calendar.</para>
+/// <para>Delete anomaly jobs from a calendar.</para>
 /// </summary>
 public sealed partial class DeleteCalendarJobRequest : PlainRequest<DeleteCalendarJobRequestParameters>
 {
@@ -52,7 +52,7 @@ public sealed partial class DeleteCalendarJobRequest : PlainRequest<DeleteCalend
 }
 
 /// <summary>
-/// <para>Deletes anomaly detection jobs from a calendar.</para>
+/// <para>Delete anomaly jobs from a calendar.</para>
 /// </summary>
 public sealed partial class DeleteCalendarJobRequestDescriptor : RequestDescriptor<DeleteCalendarJobRequestDescriptor, DeleteCalendarJobRequestParameters>
 {

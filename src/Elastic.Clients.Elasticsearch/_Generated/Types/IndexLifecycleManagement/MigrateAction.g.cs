@@ -17,20 +17,47 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Serverless.Fluent;
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
+using Elastic.Clients.Elasticsearch.Fluent;
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement;
+namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class Phase
+public sealed partial class MigrateAction
 {
-	[JsonInclude, JsonPropertyName("actions")]
-	public Elastic.Clients.Elasticsearch.Serverless.IndexLifecycleManagement.Actions? Actions { get; init; }
-	[JsonInclude, JsonPropertyName("min_age")]
-	public Union<Elastic.Clients.Elasticsearch.Serverless.Duration, long>? MinAge { get; init; }
+	[JsonInclude, JsonPropertyName("enabled")]
+	public bool? Enabled { get; set; }
+}
+
+public sealed partial class MigrateActionDescriptor : SerializableDescriptor<MigrateActionDescriptor>
+{
+	internal MigrateActionDescriptor(Action<MigrateActionDescriptor> configure) => configure.Invoke(this);
+
+	public MigrateActionDescriptor() : base()
+	{
+	}
+
+	private bool? EnabledValue { get; set; }
+
+	public MigrateActionDescriptor Enabled(bool? enabled = true)
+	{
+		EnabledValue = enabled;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		if (EnabledValue.HasValue)
+		{
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }
