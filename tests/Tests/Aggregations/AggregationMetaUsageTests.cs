@@ -12,9 +12,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 public class AggregationMetaUsageTests : AggregationUsageTestBase<ReadOnlyCluster>
-#pragma warning restore CS0618 // Type or member is obsolete
 {
 	public AggregationMetaUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

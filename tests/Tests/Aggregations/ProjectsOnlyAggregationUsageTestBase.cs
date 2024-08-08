@@ -8,9 +8,7 @@ using Tests.Framework.EndpointTests.TestState;
 
 namespace Tests.Aggregations;
 
-#pragma warning disable CS0618 // Type or member is obsolete
 public abstract class ProjectsOnlyAggregationUsageTestBase : AggregationUsageTestBase<ReadOnlyCluster>
-#pragma warning restore CS0618 // Type or member is obsolete
 {
 	protected ProjectsOnlyAggregationUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
